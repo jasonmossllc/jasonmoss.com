@@ -633,12 +633,22 @@ h1, h2, h3, h4 {
   gap: 0;
   line-height: 0;
   font-size: 0;
+  overflow: hidden;
+}
+
+.lifestyle-img {
+  overflow: hidden;
 }
 
 .lifestyle-strip img {
   width: 100%;
   height: clamp(200px, 20vw, 300px);
   object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.lifestyle-strip img:hover {
+  transform: scale(1.06);
 }
 
 /* ============================================
@@ -1293,10 +1303,10 @@ h1, h2, h3, h4 {
      SECTION 5: LIFESTYLE IMAGES
      ========================================== -->
 <section class="lifestyle-strip" aria-label="Lifestyle photos of Jason Moss">
-  <img src="assets/images/lifestyle-3.jpg" alt="Jason sitting on a rock in the mountains" loading="lazy">
-  <img src="assets/images/lifestyle-1.jpg" alt="Jason standing by a serene lake" loading="lazy">
-  <img src="assets/images/lifestyle-4.jpg" alt="Jason sitting in a dark sweater at golden hour" loading="lazy">
-  <img src="assets/images/lifestyle-2.jpg" alt="Jason sitting in a golden field" loading="lazy">
+  <div class="lifestyle-img"><img src="assets/images/lifestyle-3.jpg" alt="Jason sitting on a rock in the mountains" loading="lazy"></div>
+  <div class="lifestyle-img"><img src="assets/images/lifestyle-1.jpg" alt="Jason standing by a serene lake" loading="lazy"></div>
+  <div class="lifestyle-img"><img src="assets/images/lifestyle-4.jpg" alt="Jason sitting in a dark sweater at golden hour" loading="lazy"></div>
+  <div class="lifestyle-img"><img src="assets/images/lifestyle-2.jpg" alt="Jason sitting in a golden field" loading="lazy"></div>
 </section>
 
 <!-- ==========================================
