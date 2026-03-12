@@ -31,6 +31,7 @@
   --font-sans: 'Raleway', 'Helvetica Neue', sans-serif;
   --font-script: 'Dancing Script', cursive;
   --max-width: 1200px;
+  --max-width-wide: 1400px;
   --header-height: 80px;
 }
 
@@ -43,7 +44,7 @@ html {
 body {
   font-family: var(--font-sans);
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(15px, 1vw, 17px);
   line-height: 1.75;
   color: var(--charcoal);
   background: var(--white);
@@ -71,7 +72,7 @@ button {
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 clamp(20px, 4vw, 40px);
 }
 
 /* ============================================
@@ -135,9 +136,9 @@ h1, h2, h3, h4 {
 }
 
 .header-inner {
-  max-width: var(--max-width);
+  max-width: var(--max-width-wide);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 clamp(20px, 4vw, 48px);
   width: 100%;
   display: flex;
   align-items: center;
@@ -529,6 +530,14 @@ h1, h2, h3, h4 {
   .btn-primary {
     padding: 14px 28px;
     font-size: 13px;
+  }
+}
+
+/* Ultrawide */
+@media (min-width: 2200px) {
+  :root {
+    --max-width: 1400px;
+    --max-width-wide: 1600px;
   }
 }
 </style>

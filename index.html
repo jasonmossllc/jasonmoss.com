@@ -31,6 +31,7 @@
   --font-sans: 'Raleway', 'Helvetica Neue', sans-serif;
   --font-script: 'Caveat', cursive;
   --max-width: 1200px;
+  --max-width-wide: 1400px;
   --header-height: 80px;
 }
 
@@ -43,7 +44,7 @@ html {
 body {
   font-family: var(--font-sans);
   font-weight: 400;
-  font-size: 16px;
+  font-size: clamp(15px, 1vw, 17px);
   line-height: 1.75;
   color: var(--charcoal);
   background: var(--white);
@@ -71,7 +72,7 @@ button {
 .container {
   max-width: var(--max-width);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 clamp(20px, 4vw, 40px);
 }
 
 /* ============================================
@@ -139,9 +140,9 @@ h1, h2, h3, h4 {
 }
 
 .header-inner {
-  max-width: var(--max-width);
+  max-width: var(--max-width-wide);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 clamp(20px, 4vw, 48px);
   width: 100%;
   display: flex;
   align-items: center;
@@ -327,9 +328,9 @@ h1, h2, h3, h4 {
 }
 
 .hero-content-inner {
-  max-width: var(--max-width);
+  max-width: var(--max-width-wide);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0 clamp(20px, 4vw, 48px);
   padding-top: var(--header-height);
   width: 100%;
 }
@@ -360,7 +361,7 @@ h1, h2, h3, h4 {
 .intro {
   position: relative;
   background: var(--sand);
-  padding: 120px 0;
+  padding: clamp(72px, 10vw, 120px) 0;
   overflow: hidden;
 }
 
@@ -391,7 +392,7 @@ h1, h2, h3, h4 {
 
 .intro-body p {
   font-family: var(--font-sans);
-  font-size: 17px;
+  font-size: clamp(15px, 1.1vw, 17px);
   font-weight: 400;
   line-height: 1.85;
   color: var(--charcoal);
@@ -414,7 +415,7 @@ h1, h2, h3, h4 {
 .philosophy {
   position: relative;
   background: var(--forest);
-  padding: 120px 0;
+  padding: clamp(72px, 10vw, 120px) 0;
   overflow: hidden;
 }
 
@@ -502,7 +503,7 @@ h1, h2, h3, h4 {
 
 .philosophy-text p {
   font-family: var(--font-sans);
-  font-size: 17px;
+  font-size: clamp(15px, 1.1vw, 17px);
   line-height: 1.85;
   color: var(--bone);
   margin-bottom: 24px;
@@ -524,7 +525,7 @@ h1, h2, h3, h4 {
 .breakthroughs {
   position: relative;
   background: var(--sand);
-  padding: 120px 0;
+  padding: clamp(72px, 10vw, 120px) 0;
   overflow: hidden;
 }
 
@@ -625,7 +626,7 @@ h1, h2, h3, h4 {
 
 .lifestyle-strip img {
   width: 100%;
-  height: 260px;
+  height: clamp(200px, 20vw, 300px);
   object-fit: cover;
 }
 
@@ -634,7 +635,7 @@ h1, h2, h3, h4 {
    ============================================ */
 .story {
   background: var(--sand);
-  padding: 120px 0;
+  padding: clamp(72px, 10vw, 120px) 0;
 }
 
 .story h2 {
@@ -655,7 +656,7 @@ h1, h2, h3, h4 {
 
 .story-col p {
   font-family: var(--font-sans);
-  font-size: 17px;
+  font-size: clamp(15px, 1.1vw, 17px);
   line-height: 1.85;
   color: var(--charcoal);
   margin-bottom: 24px;
@@ -689,7 +690,7 @@ h1, h2, h3, h4 {
    ============================================ */
 .final-cta {
   position: relative;
-  padding: 200px 0;
+  padding: clamp(100px, 14vw, 200px) 0;
   text-align: center;
   overflow: hidden;
 }
@@ -906,8 +907,8 @@ h1, h2, h3, h4 {
   }
 
   .pillar-circle {
-    width: 120px;
-    height: 120px;
+    width: clamp(100px, 14vw, 130px);
+    height: clamp(100px, 14vw, 130px);
   }
 
   .testimonial-grid {
@@ -973,16 +974,8 @@ h1, h2, h3, h4 {
     font-size: clamp(26px, 7vw, 36px);
   }
 
-  .intro {
-    padding: 80px 0;
-  }
-
   .intro-lead {
     font-size: 20px;
-  }
-
-  .philosophy {
-    padding: 80px 0;
   }
 
   .philosophy-pillars {
@@ -1011,28 +1004,16 @@ h1, h2, h3, h4 {
     line-height: 1.25;
   }
 
-  .breakthroughs {
-    padding: 80px 0;
-  }
-
   .lifestyle-strip {
     grid-template-columns: 1fr 1fr;
   }
 
   .lifestyle-strip img {
-    height: 180px;
-  }
-
-  .story {
-    padding: 80px 0;
+    height: 160px;
   }
 
   .story h2 {
     margin-bottom: 40px;
-  }
-
-  .final-cta {
-    padding: 120px 0;
   }
 
   .btn-primary {
@@ -1054,10 +1035,26 @@ h1, h2, h3, h4 {
   }
 }
 
-/* Wide screens */
+/* Large desktop */
 @media (min-width: 1600px) {
   .hero-bg picture img {
     max-height: 88vh;
+  }
+}
+
+/* Ultrawide */
+@media (min-width: 2200px) {
+  :root {
+    --max-width: 1400px;
+    --max-width-wide: 1600px;
+  }
+
+  .hero-bg picture img {
+    max-height: 95vh;
+  }
+
+  .hero h1 {
+    font-size: 60px;
   }
 }
 </style>
