@@ -5,16 +5,20 @@
 //   ZB_API_KEY  - your ZeroBounce API key
 //
 // Called on form submit to validate email in real-time.
-// Returns { valid: true/false, reason: string }
+// Returns { valid: true/false, reason: string, did_you_mean: string|null }
 //
-// ZeroBounce statuses:
-//   valid      → accept
-//   catch-all  → accept (real mailbox, just can't confirm individual)
-//   unknown    → accept (temporary DNS issue, don't block real users)
-//   invalid    → reject
-//   spamtrap   → reject
-//   abuse      → reject
-//   do_not_mail → reject (disposable, etc.) EXCEPT role_based which is accepted
+// Block policy (minimal, low false-positive):
+//   BLOCK:  status "invalid" — mailbox does not exist
+//   BLOCK:  sub_status "disposable" or "toxic" — throwaway/harmful addresses
+//   ACCEPT: everything else (valid, catch-all, unknown, spamtrap, abuse,
+//           role_based, mailbox_not_found, etc.)
+//
+// Rationale: on opt-in pages, the priority is not losing real leads.
+// Spamtrap/abuse are vanishingly rare on voluntary opt-ins and ZB's
+// classification isn't perfect — better to let AC handle edge cases
+// through normal list hygiene than to false-positive a real person.
+
+const HARD_BLOCK_SUB_STATUSES = new Set(['disposable', 'toxic']);
 
 exports.handler = async (event) => {
   // Only allow POST
@@ -41,11 +45,11 @@ exports.handler = async (event) => {
       return {
         statusCode: 400,
         headers,
-        body: JSON.stringify({ valid: false, reason: 'Email is required' }),
+        body: JSON.stringify({ valid: false, reason: 'Email is required', did_you_mean: null }),
       };
     }
 
-    // Quick client-side format check (belt & suspenders)
+    // Quick format check before burning an API call
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(data.email)) {
       return {
@@ -54,6 +58,7 @@ exports.handler = async (event) => {
         body: JSON.stringify({
           valid: false,
           reason: 'Please enter a valid email address.',
+          did_you_mean: null,
         }),
       };
     }
@@ -66,7 +71,7 @@ exports.handler = async (event) => {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ valid: true, reason: 'Verification unavailable' }),
+        body: JSON.stringify({ valid: true, reason: '', did_you_mean: null }),
       };
     }
 
@@ -80,58 +85,42 @@ exports.handler = async (event) => {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ valid: true, reason: 'Verification temporarily unavailable' }),
+        body: JSON.stringify({ valid: true, reason: '', did_you_mean: null }),
       };
     }
 
     const result = await zbResponse.json();
 
-    // Determine accept/reject based on status
-    const acceptStatuses = ['valid', 'catch-all', 'unknown'];
-    let isValid = acceptStatuses.includes(result.status);
+    // Decision logic
+    const isInvalid = result.status === 'invalid';
+    const isHardBlockSub = HARD_BLOCK_SUB_STATUSES.has(result.sub_status);
+    const isBlocked = isInvalid || isHardBlockSub;
 
-    // Build user-friendly rejection reason
     let reason = '';
-    if (!isValid) {
-      switch (result.status) {
-        case 'invalid':
-          reason = 'This email address does not exist. Please check for typos and try again.';
-          break;
-        case 'spamtrap':
-        case 'abuse':
-          reason = 'This email address cannot be used. Please enter a different email.';
-          break;
-        case 'do_not_mail':
-          if (result.sub_status === 'role_based') {
-            // Role-based addresses (info@, support@) are accepted
-            isValid = true;
-            reason = '';
-          } else if (result.sub_status === 'disposable') {
-            reason = 'Disposable email addresses are not allowed. Please use your real email.';
-          } else {
-            reason = 'This email address cannot receive mail. Please enter a different email.';
-          }
-          break;
-        default:
-          reason = 'We could not verify this email. Please check and try again.';
+    if (isBlocked) {
+      if (isInvalid) {
+        reason = 'This email address doesn\u2019t appear to exist. Please check for typos and try again.';
+      } else {
+        // disposable or toxic
+        reason = 'Please enter a real, non-temporary email address.';
       }
     }
 
+    // Pass through did_you_mean for typo correction (e.g. gmial.com → gmail.com)
+    const didYouMean = result.did_you_mean || null;
+
     // Log for debugging (visible in Netlify function logs)
-    console.log(`Email verification: ${data.email} → ${result.status} (${result.sub_status || 'none'}) → ${isValid ? 'ACCEPT' : 'REJECT'}`);
+    console.log(
+      `Email verification: ${data.email} → ${result.status}/${result.sub_status || 'none'} → ${isBlocked ? 'BLOCK' : 'ACCEPT'}${didYouMean ? ` (suggest: ${didYouMean})` : ''}`
+    );
 
     return {
       statusCode: 200,
       headers,
       body: JSON.stringify({
-        valid: isValid,
+        valid: !isBlocked,
         reason,
-        // Include status for debugging (not shown to end user)
-        _debug: {
-          status: result.status,
-          sub_status: result.sub_status || null,
-          did_you_mean: result.did_you_mean || null,
-        },
+        did_you_mean: didYouMean,
       }),
     };
   } catch (error) {
@@ -140,7 +129,7 @@ exports.handler = async (event) => {
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ valid: true, reason: 'Verification error' }),
+      body: JSON.stringify({ valid: true, reason: '', did_you_mean: null }),
     };
   }
 };
