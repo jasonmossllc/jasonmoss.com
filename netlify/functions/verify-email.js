@@ -14,7 +14,7 @@
 //   invalid    → reject
 //   spamtrap   → reject
 //   abuse      → reject
-//   do_not_mail → reject (includes role-based, disposable, etc.)
+//   do_not_mail → reject (disposable, etc.) EXCEPT role_based which is accepted
 
 exports.handler = async (event) => {
   // Only allow POST
@@ -88,7 +88,7 @@ exports.handler = async (event) => {
 
     // Determine accept/reject based on status
     const acceptStatuses = ['valid', 'catch-all', 'unknown'];
-    const isValid = acceptStatuses.includes(result.status);
+    let isValid = acceptStatuses.includes(result.status);
 
     // Build user-friendly rejection reason
     let reason = '';
@@ -102,10 +102,12 @@ exports.handler = async (event) => {
           reason = 'This email address cannot be used. Please enter a different email.';
           break;
         case 'do_not_mail':
-          if (result.sub_status === 'disposable') {
+          if (result.sub_status === 'role_based') {
+            // Role-based addresses (info@, support@) are accepted
+            isValid = true;
+            reason = '';
+          } else if (result.sub_status === 'disposable') {
             reason = 'Disposable email addresses are not allowed. Please use your real email.';
-          } else if (result.sub_status === 'role_based') {
-            reason = 'Role-based emails (info@, support@, etc.) are not allowed. Please use a personal email.';
           } else {
             reason = 'This email address cannot receive mail. Please enter a different email.';
           }
