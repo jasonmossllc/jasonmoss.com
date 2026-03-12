@@ -411,6 +411,47 @@ h1, h2, h3, h4 {
 }
 
 /* ============================================
+   TRUST LOGOS BAR (between Intro & Philosophy)
+   ============================================ */
+.trust-bar {
+  background: var(--sand);
+  padding: 0 0 clamp(48px, 6vw, 72px);
+  position: relative;
+}
+
+.trust-bar .divider {
+  width: 60px;
+  height: 1px;
+  background: var(--taupe);
+  opacity: 0.2;
+  margin: 0 auto 24px;
+}
+
+.trust-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 28px clamp(24px, 3.5vw, 36px);
+  flex-wrap: wrap;
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.trust-logos img {
+  height: auto;
+  opacity: 0.3;
+  filter: sepia(0.2) saturate(0.6) brightness(0.85);
+  transition: opacity 0.3s ease;
+}
+
+.trust-logos img.logo-forbes { width: 90px; }
+.trust-logos img.logo-bi { width: 155px; }
+.trust-logos img.logo-obo { width: 78px; }
+.trust-logos img.logo-entrepreneur { width: 115px; }
+.trust-logos img.logo-fc { width: 115px; }
+
+/* ============================================
    SECTION 3: GROWTH PHILOSOPHY
    ============================================ */
 .philosophy {
@@ -1009,6 +1050,12 @@ h1, h2, h3, h4 {
     font-size: 20px;
   }
 
+  .trust-logos img.logo-forbes { width: 75px; }
+  .trust-logos img.logo-bi { width: 130px; }
+  .trust-logos img.logo-obo { width: 65px; }
+  .trust-logos img.logo-entrepreneur { width: 95px; }
+  .trust-logos img.logo-fc { width: 95px; }
+
   .philosophy h2 {
     margin-bottom: 40px;
   }
@@ -1210,6 +1257,20 @@ h1, h2, h3, h4 {
     </div>
   </div>
 </section>
+
+<!-- ==========================================
+     TRUST LOGOS BAR
+     ========================================== -->
+<div class="trust-bar">
+  <div class="divider"></div>
+  <div class="trust-logos fade-in">
+    <img src="assets/logo-forbes-scotland.png" alt="Forbes Scotland" class="logo-forbes">
+    <img src="assets/logo-business-insider.png" alt="Business Insider" class="logo-bi">
+    <img src="assets/logo-obo.png" alt="OBO - Online Business Owner" class="logo-obo">
+    <img src="assets/logo-entrepreneur.png" alt="Entrepreneur" class="logo-entrepreneur">
+    <img src="assets/logo-fast-company-sa.png" alt="Fast Company South Africa" class="logo-fc">
+  </div>
+</div>
 
 <!-- ==========================================
      SECTION 3: GROWTH PHILOSOPHY
