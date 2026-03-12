@@ -465,20 +465,25 @@ h1, h2, h3, h4 {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
-  background: var(--gold);
-  transition: background 0.3s ease;
+  width: 36px;
+  height: 36px;
+  transition: opacity 0.3s ease;
 }
 
 .footer-social a:hover {
-  background: #b89a5e;
+  opacity: 1;
 }
 
 .footer-social a svg {
   width: 18px;
   height: 18px;
-  fill: var(--charcoal);
+  fill: var(--bone);
+  opacity: 0.6;
+  transition: opacity 0.3s ease;
+}
+
+.footer-social a:hover svg {
+  opacity: 0.8;
 }
 
 /* ============================================
