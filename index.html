@@ -44,8 +44,8 @@ html {
 body {
   font-family: var(--font-sans);
   font-weight: 400;
-  font-size: clamp(15px, 1vw, 17px);
-  line-height: 1.75;
+  font-size: clamp(16px, 1.25vw, 19px);
+  line-height: 1.7;
   color: var(--charcoal);
   background: var(--white);
   overflow-x: hidden;
@@ -88,12 +88,12 @@ h1, h2, h3, h4 {
   display: inline-block;
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.08em;
+  font-size: 15px;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   background: var(--gold);
   color: var(--charcoal);
-  padding: 16px 36px;
+  padding: 18px 40px;
   border-radius: 0;
   transition: background 0.3s ease, transform 0.2s ease;
   text-align: center;
@@ -162,9 +162,9 @@ h1, h2, h3, h4 {
 
 .nav-desktop a {
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
-  letter-spacing: 0.04em;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   color: var(--charcoal);
   transition: color 0.2s ease;
@@ -193,8 +193,8 @@ h1, h2, h3, h4 {
 .nav-cta {
   font-family: var(--font-sans);
   font-weight: 600;
-  font-size: 12px;
-  letter-spacing: 0.08em;
+  font-size: 14px;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
   background: var(--gold);
   color: var(--charcoal);
@@ -361,7 +361,7 @@ h1, h2, h3, h4 {
 .intro {
   position: relative;
   background: var(--sand);
-  padding: clamp(72px, 10vw, 120px) 0;
+  padding: clamp(80px, 10vw, 130px) 0;
   overflow: hidden;
 }
 
@@ -378,23 +378,23 @@ h1, h2, h3, h4 {
   position: relative;
   z-index: 1;
   text-align: center;
-  max-width: 740px;
+  max-width: 780px;
 }
 
 .intro-lead {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: clamp(20px, 2.5vw, 26px);
-  line-height: 1.6;
+  font-size: clamp(22px, 2.75vw, 28px);
+  line-height: 1.55;
   color: var(--mocha);
   margin-bottom: 48px;
 }
 
 .intro-body p {
   font-family: var(--font-sans);
-  font-size: clamp(15px, 1.1vw, 17px);
+  font-size: clamp(17px, 1.3vw, 19px);
   font-weight: 400;
-  line-height: 1.85;
+  line-height: 1.75;
   color: var(--charcoal);
   margin-bottom: 24px;
 }
@@ -415,7 +415,7 @@ h1, h2, h3, h4 {
 .philosophy {
   position: relative;
   background: var(--forest);
-  padding: clamp(72px, 10vw, 120px) 0;
+  padding: clamp(80px, 10vw, 130px) 0;
   overflow: hidden;
 }
 
@@ -446,7 +446,8 @@ h1, h2, h3, h4 {
 
 .philosophy h2 {
   font-family: var(--font-serif);
-  font-size: clamp(28px, 3.5vw, 44px);
+  font-size: clamp(30px, 3.5vw, 46px);
+  line-height: 1.25;
   color: var(--bone);
   text-align: center;
   margin-bottom: 64px;
@@ -465,32 +466,32 @@ h1, h2, h3, h4 {
 }
 
 .pillar-circle {
-  width: 140px;
-  height: 140px;
+  width: 160px;
+  height: 160px;
   border-radius: 50%;
   border: 1.5px solid var(--gold);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 16px;
+  padding: 18px;
   margin: 0 auto 0;
   gap: 4px;
 }
 
 .pillar-number {
   font-family: var(--font-serif);
-  font-size: 13px;
+  font-size: 14px;
   color: var(--gold);
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   line-height: 1;
 }
 
 .pillar-circle span {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 14px;
-  line-height: 1.3;
+  font-size: 15px;
+  line-height: 1.35;
   color: var(--bone);
   text-align: center;
 }
@@ -503,8 +504,8 @@ h1, h2, h3, h4 {
 
 .philosophy-text p {
   font-family: var(--font-sans);
-  font-size: clamp(15px, 1.1vw, 17px);
-  line-height: 1.85;
+  font-size: clamp(17px, 1.3vw, 19px);
+  line-height: 1.75;
   color: var(--bone);
   margin-bottom: 24px;
 }
@@ -525,7 +526,7 @@ h1, h2, h3, h4 {
 .breakthroughs {
   position: relative;
   background: var(--sand);
-  padding: clamp(72px, 10vw, 120px) 0;
+  padding: clamp(80px, 10vw, 130px) 0;
   overflow: hidden;
 }
 
@@ -549,7 +550,8 @@ h1, h2, h3, h4 {
 
 .breakthroughs h2 {
   font-family: var(--font-serif);
-  font-size: clamp(28px, 3.5vw, 44px);
+  font-size: clamp(30px, 3.5vw, 46px);
+  line-height: 1.25;
   color: var(--taupe);
   text-align: center;
   margin-bottom: 64px;
@@ -587,16 +589,17 @@ h1, h2, h3, h4 {
 
 .testimonial-name {
   font-family: var(--font-serif);
-  font-size: 15px;
+  font-size: 16px;
   font-weight: 700;
   color: var(--charcoal);
   padding: 20px 24px 4px;
+  letter-spacing: 0.02em;
 }
 
 .testimonial-desc {
   font-family: var(--font-sans);
-  font-size: 14px;
-  line-height: 1.7;
+  font-size: 15px;
+  line-height: 1.65;
   color: var(--taupe);
   padding: 8px 24px 24px;
 }
@@ -608,7 +611,7 @@ h1, h2, h3, h4 {
 .breakthroughs-footer p {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 18px;
+  font-size: 20px;
   color: var(--mocha);
   margin-bottom: 32px;
 }
@@ -635,7 +638,7 @@ h1, h2, h3, h4 {
    ============================================ */
 .story {
   background: var(--sand);
-  padding: clamp(72px, 10vw, 120px) 0;
+  padding: clamp(80px, 10vw, 130px) 0;
 }
 
 .story h2 {
@@ -644,20 +647,21 @@ h1, h2, h3, h4 {
   color: var(--taupe);
   text-align: center;
   margin-bottom: 64px;
+  line-height: 1.2;
 }
 
 .story-columns {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 64px;
-  max-width: 960px;
+  gap: 60px;
+  max-width: 1020px;
   margin: 0 auto;
 }
 
 .story-col p {
   font-family: var(--font-sans);
-  font-size: clamp(15px, 1.1vw, 17px);
-  line-height: 1.85;
+  font-size: clamp(17px, 1.3vw, 19px);
+  line-height: 1.75;
   color: var(--charcoal);
   margin-bottom: 24px;
 }
@@ -678,7 +682,7 @@ h1, h2, h3, h4 {
 
 .story-col p.story-signature {
   font-family: var(--font-script);
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 600;
   color: var(--mocha);
   margin-top: 16px;
@@ -721,7 +725,8 @@ h1, h2, h3, h4 {
 
 .final-cta h2 {
   font-family: var(--font-serif);
-  font-size: clamp(28px, 3.5vw, 44px);
+  font-size: clamp(30px, 3.5vw, 46px);
+  line-height: 1.25;
   color: var(--taupe);
   margin-bottom: 40px;
   max-width: 600px;
@@ -756,7 +761,7 @@ h1, h2, h3, h4 {
 
 .footer-nav a {
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 14px;
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
