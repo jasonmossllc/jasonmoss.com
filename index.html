@@ -3,13 +3,1330 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Jason Moss</title>
+<title>Jason Moss — Helping Entrepreneurs Grow with Intuition and Ease</title>
+<meta name="description" content="Jason Moss helps entrepreneurs grow with more revenue, clarity, and peace through intuitive leadership, aligned profitability, and resonance marketing.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
-  body { font-family: 'Helvetica Neue', sans-serif; display: flex; align-items: center; justify-content: center; min-height: 100vh; margin: 0; background: #F8F6F2; color: #1D1F1E; }
-  h1 { font-size: 1.5rem; font-weight: 400; }
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --charcoal: #1D1F1E;
+  --forest: #2C3F36;
+  --mocha: #5B4B3F;
+  --taupe: #8C837A;
+  --gold: #C2A86C;
+  --bone: #E9E2D3;
+  --sand: #F8F6F2;
+  --white: #FFFFFF;
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+  --font-sans: 'Raleway', 'Helvetica Neue', sans-serif;
+  --font-script: 'Dancing Script', cursive;
+  --max-width: 1200px;
+  --header-height: 80px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--charcoal);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.btn-primary {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 16px 36px;
+  border-radius: 0;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background: #b89a5e;
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo img {
+  height: 36px;
+  width: auto;
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-desktop a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.nav-desktop a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-desktop a:hover::after {
+  width: 100%;
+}
+
+.nav-desktop a:hover {
+  color: var(--mocha);
+}
+
+.nav-cta {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 12px 24px;
+  transition: background 0.3s ease;
+}
+
+.nav-cta:hover {
+  background: #b89a5e;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--charcoal);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--sand);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu a {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+}
+
+.mobile-menu a:hover {
+  color: var(--gold);
+}
+
+.mobile-menu .nav-cta {
+  margin-top: 12px;
+  font-size: 13px;
+  padding: 14px 32px;
+}
+
+/* ============================================
+   HERO
+   ============================================ */
+.hero {
+  position: relative;
+  min-height: 88vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.hero-bg picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    rgba(29, 31, 30, 0.55) 0%,
+    rgba(29, 31, 30, 0.3) 40%,
+    rgba(29, 31, 30, 0.05) 70%,
+    transparent 100%
+  );
+  z-index: 1;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+  padding-top: var(--header-height);
+  width: 100%;
+}
+
+.hero h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4.5vw, 56px);
+  font-weight: 400;
+  line-height: 1.25;
+  color: var(--white);
+  max-width: 580px;
+  margin-bottom: 36px;
+}
+
+.hero h1 span {
+  color: var(--gold);
+  display: block;
+}
+
+.hero .btn-primary {
+  margin-top: 8px;
+}
+
+/* ============================================
+   SECTION 2: INTRODUCTION
+   ============================================ */
+.intro {
+  position: relative;
+  background: var(--sand);
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.intro-texture {
+  position: absolute;
+  inset: 0;
+  background-image: url('assets/images/decorative.png');
+  background-repeat: repeat;
+  opacity: 0.04;
+  pointer-events: none;
+}
+
+.intro .container {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  max-width: 740px;
+}
+
+.intro-lead {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: clamp(20px, 2.5vw, 26px);
+  line-height: 1.6;
+  color: var(--mocha);
+  margin-bottom: 48px;
+}
+
+.intro-body p {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  font-weight: 400;
+  line-height: 1.85;
+  color: var(--charcoal);
+  margin-bottom: 24px;
+}
+
+.intro-body p strong {
+  font-weight: 600;
+}
+
+.intro-body p em strong,
+.intro-body p strong em {
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ============================================
+   SECTION 3: GROWTH PHILOSOPHY
+   ============================================ */
+.philosophy {
+  position: relative;
+  background: var(--forest);
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.philosophy-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.philosophy-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.2;
+}
+
+.philosophy-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(44, 63, 54, 0.88);
+  z-index: 1;
+}
+
+.philosophy .container {
+  position: relative;
+  z-index: 2;
+}
+
+.philosophy h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  color: var(--bone);
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.philosophy-pillars {
+  display: flex;
+  justify-content: center;
+  gap: 56px;
+  margin-bottom: 64px;
+}
+
+.pillar {
+  text-align: center;
+  flex: 0 0 auto;
+}
+
+.pillar-number {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  color: var(--gold);
+  margin-bottom: 16px;
+  letter-spacing: 0.1em;
+}
+
+.pillar-circle {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  border: 1.5px solid var(--gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  margin: 0 auto 0;
+}
+
+.pillar-circle span {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.4;
+  color: var(--bone);
+  text-align: center;
+}
+
+.philosophy-text {
+  text-align: center;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.philosophy-text p {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--bone);
+  margin-bottom: 24px;
+}
+
+.philosophy-text p strong {
+  font-weight: 600;
+}
+
+.philosophy-text p em strong,
+.philosophy-text p strong em {
+  font-weight: 600;
+  font-style: italic;
+}
+
+/* ============================================
+   SECTION 4: CLIENT BREAKTHROUGHS
+   ============================================ */
+.breakthroughs {
+  position: relative;
+  background: var(--sand);
+  padding: 120px 0;
+  overflow: hidden;
+}
+
+.breakthroughs-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.breakthroughs-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.12;
+}
+
+.breakthroughs .container {
+  position: relative;
+  z-index: 1;
+}
+
+.breakthroughs h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  color: var(--taupe);
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 56px;
+}
+
+.testimonial-card {
+  background: var(--white);
+  border-radius: 4px;
+  overflow: hidden;
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
+}
+
+.testimonial-video {
+  position: relative;
+  width: 100%;
+  padding-top: 56.25%;
+  background: var(--charcoal);
+}
+
+.testimonial-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.testimonial-name {
+  font-family: var(--font-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--charcoal);
+  padding: 20px 24px 4px;
+}
+
+.testimonial-desc {
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.7;
+  color: var(--taupe);
+  padding: 8px 24px 24px;
+}
+
+.breakthroughs-footer {
+  text-align: center;
+}
+
+.breakthroughs-footer p {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 18px;
+  color: var(--mocha);
+  margin-bottom: 32px;
+}
+
+/* ============================================
+   SECTION 5: LIFESTYLE IMAGES
+   ============================================ */
+.lifestyle-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  line-height: 0;
+  font-size: 0;
+}
+
+.lifestyle-strip img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+/* ============================================
+   SECTION 6: MY STORY
+   ============================================ */
+.story {
+  background: var(--sand);
+  padding: 120px 0;
+}
+
+.story h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(36px, 4vw, 56px);
+  color: var(--taupe);
+  text-align: center;
+  margin-bottom: 64px;
+}
+
+.story-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  max-width: 960px;
+  margin: 0 auto;
+}
+
+.story-col p {
+  font-family: var(--font-sans);
+  font-size: 17px;
+  line-height: 1.85;
+  color: var(--charcoal);
+  margin-bottom: 24px;
+}
+
+.story-col p strong {
+  font-weight: 600;
+}
+
+.story-col p em strong,
+.story-col p strong em {
+  font-weight: 600;
+  font-style: italic;
+}
+
+.story-col p em {
+  font-style: italic;
+}
+
+.story-col p.story-signature {
+  font-family: var(--font-script);
+  font-size: 32px;
+  color: var(--mocha);
+  margin-top: 16px;
+  line-height: 1.3;
+}
+
+/* ============================================
+   SECTION 7: FINAL CTA
+   ============================================ */
+.final-cta {
+  position: relative;
+  padding: 200px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.final-cta-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.final-cta-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.final-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(248, 246, 242, 0.75);
+  z-index: 1;
+}
+
+.final-cta .container {
+  position: relative;
+  z-index: 2;
+}
+
+.final-cta h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  color: var(--taupe);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer-upper {
+  background: var(--sand);
+  padding: 48px 0;
+  border-top: 1px solid var(--bone);
+}
+
+.footer-upper-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo img {
+  height: 30px;
+  width: auto;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.footer-nav a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--gold);
+}
+
+.footer-lower {
+  background: var(--forest);
+  padding: 36px 0;
+}
+
+.footer-lower-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer-legal p {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--bone);
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+.footer-legal a {
+  color: var(--bone);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.footer-legal a:hover {
+  color: var(--gold);
+}
+
+.footer-legal-links {
+  margin-top: 8px;
+}
+
+.footer-legal-links a {
+  margin-right: 16px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  transition: background 0.3s ease;
+}
+
+.footer-social a:hover {
+  background: #b89a5e;
+}
+
+.footer-social a svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--charcoal);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1023px) {
+  .container {
+    padding: 0 28px;
+  }
+
+  .header-inner {
+    padding: 0 28px;
+  }
+
+  .nav-desktop {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .hero-content {
+    padding: 0 28px;
+    padding-top: var(--header-height);
+  }
+
+  .philosophy-pillars {
+    gap: 32px;
+  }
+
+  .pillar-circle {
+    width: 120px;
+    height: 120px;
+  }
+
+  .testimonial-grid {
+    grid-template-columns: 1fr;
+    max-width: 520px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .story-columns {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .footer-upper-inner {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-lower-inner {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-social {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 68px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .header-inner {
+    padding: 0 20px;
+  }
+
+  .header-logo img {
+    height: 28px;
+  }
+
+  .hero {
+    min-height: 80vh;
+  }
+
+  .hero-content {
+    padding: 0 20px;
+    padding-top: var(--header-height);
+  }
+
+  .hero h1 {
+    font-size: 28px;
+    max-width: 300px;
+  }
+
+  .hero-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(29, 31, 30, 0.65) 0%,
+      rgba(29, 31, 30, 0.35) 50%,
+      rgba(29, 31, 30, 0.1) 100%
+    );
+  }
+
+  .hero-content {
+    align-self: flex-end;
+    padding-bottom: 64px;
+  }
+
+  .hero {
+    align-items: flex-end;
+  }
+
+  .intro {
+    padding: 80px 0;
+  }
+
+  .intro-lead {
+    font-size: 20px;
+  }
+
+  .philosophy {
+    padding: 80px 0;
+  }
+
+  .philosophy-pillars {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .breakthroughs {
+    padding: 80px 0;
+  }
+
+  .lifestyle-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .lifestyle-strip img {
+    height: 220px;
+  }
+
+  .story {
+    padding: 80px 0;
+  }
+
+  .story h2 {
+    margin-bottom: 40px;
+  }
+
+  .final-cta {
+    padding: 120px 0;
+  }
+
+  .btn-primary {
+    padding: 14px 28px;
+    font-size: 13px;
+  }
+}
 </style>
 </head>
 <body>
-  <h1>Site migration in progress.</h1>
+
+<!-- ==========================================
+     HEADER
+     ========================================== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="/" class="header-logo" aria-label="Jason Moss — Home">
+      <img src="assets/images/logo-black.png" alt="Jason Moss" width="400" height="89">
+    </a>
+    <nav class="nav-desktop">
+      <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+      <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+      <a href="/testimonials/">Breakthroughs</a>
+      <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+      <a href="https://go.jasonmoss.com/apply/" class="nav-cta">Work Together</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+  <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+  <a href="/testimonials/">Breakthroughs</a>
+  <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+  <a href="https://go.jasonmoss.com/apply/" class="nav-cta">Work Together</a>
+</div>
+
+<!-- ==========================================
+     SECTION 1: HERO
+     ========================================== -->
+<section class="hero" id="hero">
+  <div class="hero-bg">
+    <picture>
+      <source media="(max-width: 767px)" srcset="assets/images/hero-mountain-mobile.png">
+      <img src="assets/images/hero-mountain.jpg" alt="Jason Moss standing in mountain landscape at golden hour" loading="eager">
+    </picture>
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="fade-in">Helping entrepreneurs grow with<span>intuition and ease.</span></h1>
+    <a href="https://go.jasonmoss.com/apply" class="btn-primary fade-in">Explore Working Together</a>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 2: INTRODUCTION
+     ========================================== -->
+<section class="intro">
+  <div class="intro-texture"></div>
+  <div class="container">
+    <p class="intro-lead fade-in">You're a deeper kind of entrepreneur&hellip;<br>Ready for a truer kind of business.</p>
+    <div class="intro-body">
+      <p class="fade-in">You're not just here to scale.<br>
+      You want alignment.<br>
+      Ease.<br>
+      A business that actually feels like you.</p>
+
+      <p class="fade-in">You've outgrown the hustle.<br>
+      You're tired of building in ways that don't feel true.</p>
+
+      <p class="fade-in"><strong>You're ready for a new chapter.</strong></p>
+
+      <p class="fade-in">One that honors your intuition, respects your nervous system, and allows your business to grow&hellip;</p>
+
+      <p class="fade-in"><strong><em>Without losing yourself along the way.</em></strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 3: GROWTH PHILOSOPHY
+     ========================================== -->
+<section class="philosophy">
+  <div class="philosophy-bg">
+    <img src="assets/images/cta-trees.jpg" alt="" loading="lazy" aria-hidden="true">
+  </div>
+  <div class="philosophy-overlay"></div>
+  <div class="container">
+    <h2 class="fade-in">Growth begins where effort ends</h2>
+
+    <div class="philosophy-pillars fade-in">
+      <div class="pillar">
+        <div class="pillar-number">1</div>
+        <div class="pillar-circle">
+          <span>Intuitive<br>Leadership</span>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">2</div>
+        <div class="pillar-circle">
+          <span>Aligned<br>Profitability</span>
+        </div>
+      </div>
+      <div class="pillar">
+        <div class="pillar-number">3</div>
+        <div class="pillar-circle">
+          <span>Resonance<br>Marketing</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="philosophy-text">
+      <p class="fade-in">After 20 years of growing businesses&hellip;<br>
+      Supporting 1,000+ entrepreneurs&hellip;</p>
+
+      <p class="fade-in"><strong>I've learned that sustainable growth begins on the inside.</strong></p>
+
+      <p class="fade-in">My mentorship, programs, and teaching help you release the pressure, overthinking, and patterns that pull you out of yourself&hellip;</p>
+
+      <p class="fade-in"><strong><em>So you can lead with clearer intuition, build with grounded strategy, and experience more freedom, revenue, and ease.</em></strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 4: CLIENT BREAKTHROUGHS
+     ========================================== -->
+<section class="breakthroughs">
+  <div class="breakthroughs-bg">
+    <img src="assets/images/cta-light.jpg" alt="" loading="lazy" aria-hidden="true">
+  </div>
+  <div class="container">
+    <h2 class="fade-in">Client Breakthroughs</h2>
+
+    <div class="testimonial-grid">
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-video">
+          <iframe src="https://embed-v2.testimonial.to/v/386321d6-0a00-4dcd-a879-707db74d99a3/" title="Meaghan Long testimonial video" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="testimonial-name">Meaghan Long</div>
+        <p class="testimonial-desc">Meaghan refined her offer, cut her hours in half, and now brings in $20k+ months with space to exhale.</p>
+      </div>
+
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-video">
+          <iframe src="https://embed-v2.testimonial.to/v/4f9e9e7c-5269-45a7-b445-a3789b0e5347/" title="Zach Bloom testimonial video" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="testimonial-name">Zach Bloom</div>
+        <p class="testimonial-desc">Zach simplified his model and had his most spacious and profitable year ever — with more clarity, less noise.</p>
+      </div>
+
+      <div class="testimonial-card fade-in">
+        <div class="testimonial-video">
+          <iframe src="https://embed-v2.testimonial.to/v/a89aa735-1860-4735-a43a-cab257f17d2c/" title="Federica Prayer testimonial video" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+        </div>
+        <div class="testimonial-name">Federica Prayer</div>
+        <p class="testimonial-desc">Federica raised her rates and hit her highest month ever with more ease.</p>
+      </div>
+    </div>
+
+    <div class="breakthroughs-footer fade-in">
+      <p>Explore what sustainable growth looks like</p>
+      <a href="/testimonials/" class="btn-primary">See More Stories</a>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 5: LIFESTYLE IMAGES
+     ========================================== -->
+<section class="lifestyle-strip" aria-label="Lifestyle photos of Jason Moss">
+  <img src="assets/images/lifestyle-3.jpg" alt="Jason sitting on a rock in the mountains" loading="lazy">
+  <img src="assets/images/lifestyle-1.jpg" alt="Jason standing by a serene lake" loading="lazy">
+  <img src="assets/images/lifestyle-4.jpg" alt="Jason sitting in a dark sweater at golden hour" loading="lazy">
+  <img src="assets/images/lifestyle-2.jpg" alt="Jason sitting in a golden field" loading="lazy">
+</section>
+
+<!-- ==========================================
+     SECTION 6: MY STORY
+     ========================================== -->
+<section class="story">
+  <div class="container">
+    <h2 class="fade-in">My Story</h2>
+
+    <div class="story-columns">
+      <div class="story-col">
+        <p class="fade-in">I'm Jason Moss&hellip; and I help entrepreneurs grow with more revenue, clarity, and peace.</p>
+
+        <p class="fade-in">I do this work because business, at its deepest level&hellip;</p>
+
+        <p class="fade-in"><strong>is one of the most honest mirrors we have.</strong></p>
+
+        <p class="fade-in">It shows us where we're forcing.<br>
+        Where we're overworking.<br>
+        Where we're out of alignment with ourselves.</p>
+
+        <p class="fade-in">My mission isn't just to help people make more money.</p>
+
+        <p class="fade-in"><strong><em>It's to help them build in a way their nervous system — and their life — can actually hold.</em></strong></p>
+
+        <p class="fade-in">Because when you learn to trust your intuition, and let strategy support it instead of control it&hellip;</p>
+      </div>
+
+      <div class="story-col">
+        <p class="fade-in">Your business begins to expand in a way that feels natural again.</p>
+
+        <p class="fade-in">I run a multi-six-figure business today&hellip;</p>
+
+        <p class="fade-in">A community of intentional, purpose-driven entrepreneurs and leaders&hellip;</p>
+
+        <p class="fade-in">And this work isn't just something I do.<br>
+        <em>It's a mission and calling.</em></p>
+
+        <p class="fade-in">If this resonates&hellip;<br>
+        and you're feeling called to grow without sacrificing yourself&hellip;</p>
+
+        <p class="fade-in">I'm so glad you're here.<br>
+        <strong>And I'm with you.</strong></p>
+
+        <p class="story-signature fade-in">— Jason Moss</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ==========================================
+     SECTION 7: FINAL CTA
+     ========================================== -->
+<section class="final-cta">
+  <div class="final-cta-bg">
+    <img src="assets/images/cta-light.jpg" alt="" loading="lazy" aria-hidden="true">
+  </div>
+  <div class="final-cta-overlay"></div>
+  <div class="container">
+    <h2 class="fade-in">Discover the path to scaling with ease.</h2>
+    <a href="https://go.jasonmoss.com/apply" class="btn-primary fade-in">Explore Working Together</a>
+  </div>
+</section>
+
+<!-- ==========================================
+     FOOTER
+     ========================================== -->
+<footer>
+  <div class="footer-upper">
+    <div class="container">
+      <div class="footer-upper-inner">
+        <a href="/" class="footer-logo" aria-label="Jason Moss — Home">
+          <img src="assets/images/logo-black.png" alt="Jason Moss" width="400" height="89">
+        </a>
+        <nav class="footer-nav">
+          <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+          <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+          <a href="/testimonials/">Breakthroughs</a>
+          <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-lower">
+    <div class="container">
+      <div class="footer-lower-inner">
+        <div class="footer-legal">
+          <p>&copy; Jason Moss LLC. All rights reserved. Original design by <a href="https://brandthrive.co/" target="_blank" rel="noopener noreferrer">BrandThrive</a>.</p>
+          <div class="footer-legal-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms &amp; Conditions</a>
+            <a href="/earnings-disclaimer/">Earnings Disclaimer</a>
+          </div>
+        </div>
+        <div class="footer-social">
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/jasonmossofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:jason@jasonmoss.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================
+     SCRIPTS
+     ========================================== -->
+<script>
+// Sticky header scroll effect
+const header = document.getElementById('siteHeader');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (scrollY > 40) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+  lastScroll = scrollY;
+}, { passive: true });
+
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('active');
+  hamburger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+
+// Scroll-triggered fade-in animations
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+document.querySelectorAll('.fade-in').forEach(el => {
+  fadeObserver.observe(el);
+});
+</script>
+
 </body>
 </html>

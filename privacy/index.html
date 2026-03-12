@@ -1,0 +1,800 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — Jason Moss</title>
+<meta name="description" content="Privacy Policy for jasonmoss.com. Learn how Jason Moss LLC collects, uses, and protects your personal information.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --charcoal: #1D1F1E;
+  --forest: #2C3F36;
+  --mocha: #5B4B3F;
+  --taupe: #8C837A;
+  --gold: #C2A86C;
+  --bone: #E9E2D3;
+  --sand: #F8F6F2;
+  --white: #FFFFFF;
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+  --font-sans: 'Raleway', 'Helvetica Neue', sans-serif;
+  --font-script: 'Dancing Script', cursive;
+  --max-width: 1200px;
+  --header-height: 80px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--charcoal);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.btn-primary {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 16px 36px;
+  border-radius: 0;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background: #b89a5e;
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo img {
+  height: 36px;
+  width: auto;
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-desktop a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.nav-desktop a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-desktop a:hover::after {
+  width: 100%;
+}
+
+.nav-desktop a:hover {
+  color: var(--mocha);
+}
+
+.nav-cta {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 12px 24px;
+  transition: background 0.3s ease;
+}
+
+.nav-cta:hover {
+  background: #b89a5e;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--charcoal);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--sand);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu a {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+}
+
+.mobile-menu a:hover {
+  color: var(--gold);
+}
+
+.mobile-menu .nav-cta {
+  margin-top: 12px;
+  font-size: 13px;
+  padding: 14px 32px;
+}
+
+/* ============================================
+   LEGAL PAGE CONTENT
+   ============================================ */
+.legal-page {
+  background: var(--sand);
+  padding-top: calc(var(--header-height) + 80px);
+  padding-bottom: 100px;
+}
+
+.legal-page .legal-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.legal-page h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 400;
+  color: var(--taupe);
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.legal-page h2 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--mocha);
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+.legal-page h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--mocha);
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.legal-page p {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--charcoal);
+  margin-bottom: 20px;
+}
+
+.legal-page a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.legal-page a:hover {
+  color: #b89a5e;
+}
+
+.legal-page ul {
+  list-style: disc;
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+.legal-page ul li {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+
+.legal-page strong {
+  font-weight: 600;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer-upper {
+  background: var(--sand);
+  padding: 48px 0;
+  border-top: 1px solid var(--bone);
+}
+
+.footer-upper-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo img {
+  height: 30px;
+  width: auto;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.footer-nav a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--gold);
+}
+
+.footer-lower {
+  background: var(--forest);
+  padding: 36px 0;
+}
+
+.footer-lower-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer-legal p {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--bone);
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+.footer-legal a {
+  color: var(--bone);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.footer-legal a:hover {
+  color: var(--gold);
+}
+
+.footer-legal-links {
+  margin-top: 8px;
+}
+
+.footer-legal-links a {
+  margin-right: 16px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  transition: background 0.3s ease;
+}
+
+.footer-social a:hover {
+  background: #b89a5e;
+}
+
+.footer-social a svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--charcoal);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1023px) {
+  .container {
+    padding: 0 28px;
+  }
+
+  .header-inner {
+    padding: 0 28px;
+  }
+
+  .nav-desktop {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .footer-upper-inner {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-lower-inner {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-social {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 68px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .header-inner {
+    padding: 0 20px;
+  }
+
+  .header-logo img {
+    height: 28px;
+  }
+
+  .legal-page .legal-inner {
+    padding: 0 20px;
+  }
+
+  .legal-page {
+    padding-top: calc(var(--header-height) + 48px);
+    padding-bottom: 64px;
+  }
+
+  .legal-page h1 {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+
+  .legal-page h2 {
+    font-size: 20px;
+    margin-top: 36px;
+  }
+
+  .btn-primary {
+    padding: 14px 28px;
+    font-size: 13px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     HEADER
+     ========================================== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="/" class="header-logo" aria-label="Jason Moss — Home">
+      <img src="../assets/images/logo-black.png" alt="Jason Moss" width="400" height="89">
+    </a>
+    <nav class="nav-desktop">
+      <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+      <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+      <a href="/testimonials/">Breakthroughs</a>
+      <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+      <a href="https://go.jasonmoss.com/apply/" class="nav-cta">Work Together</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+  <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+  <a href="/testimonials/">Breakthroughs</a>
+  <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+  <a href="https://go.jasonmoss.com/apply/" class="nav-cta">Work Together</a>
+</div>
+
+<!-- ==========================================
+     PRIVACY POLICY CONTENT
+     ========================================== -->
+<main class="legal-page">
+  <div class="legal-inner">
+    <h1>Privacy Policy</h1>
+
+    <p>Jason Moss LLC ("Company", "we", or "us") respects your privacy and is committed to protecting it through this Privacy Policy.</p>
+
+    <p>This Privacy Policy governs your access to and use of jasonmoss.com, including any content, functionality and services offered on or through jasonmoss.com (the "Website"), whether as a guest or a registered user.</p>
+
+    <p>When accessing the Website, the Company will learn certain information about you, both automatically and through voluntary actions you may take, during your visit. This policy applies to information we collect on the Website and in email, text, or other electronic messages between you and the Website.</p>
+
+    <p>Please read the Privacy Policy carefully before you start to use the Website. By using the Website or by clicking to accept or agree to the Terms of Use when this option is made available to you, you accept and agree to be bound and abide by the Privacy Policy. If you do not want to agree to the Privacy Policy, you must not access or use the Website.</p>
+
+    <h2>Children Under the Age of 13</h2>
+
+    <p>Our Website is not intended for children under 13 years of age. No one under age 13 may provide any information to or on the Website. We do not knowingly collect personal information from children under 13. If you are under 13, do not use or provide any information on this Website or on or through any of its features/register on the Website, make any purchases through the Website, use any of the interactive or public comment features of this Website or provide any information about yourself to us, including your name, address, telephone number, email address, or any screen name or user name you may use.</p>
+
+    <p>If we learn we have collected or received personal information from a child under 13 without verification of parental consent, we will delete that information. If you believe we might have any information from or about a child under 13, please contact us at <a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a>.</p>
+
+    <h2>Information We Collect About You</h2>
+
+    <p>When you access the Website, the Company will learn certain information about you during your visit.</p>
+
+    <p><strong>Information You Provide To Us.</strong> The Website provides various places for users to provide information. We collect information that users provide by filling out forms on the Website, communicating with us via contact forms, responding to surveys, search queries on our search feature, providing comments or other feedback, and providing information when requesting a product or service via the Website.</p>
+
+    <p>We use information you provide to us to deliver the requested product and/or service, to improve our overall performance, and to provide you with offers, promotions, and information.</p>
+
+    <p><strong>Information We Collect Through Automatic Data Collection Technology.</strong> As you navigate through our Website, we may use automatic data collection technologies including Google Analytics to collect certain information about your equipment, browsing actions, and patterns. This will generally include information about your location, your traffic pattern through our website, and any communications between your computer and our Website. Among other things, we will collect data about the type of computer you use, your Internet connection, your IP address, your operating system, and your browser type.</p>
+
+    <p>The information we collect automatically is used for statistical data and will not include personal information. We use this data to improve our Website and our service offerings. To the extent that you voluntarily provide personal information to us, our systems will associate the automatically collected information with your personal information.</p>
+
+    <h2>Use of Cookies and Pixels</h2>
+
+    <p>Similar to other commercial websites, our website utilizes a standard technology called "cookies" and server logs to collect information about how our site is used. Information gathered through cookies and server logs may include the date and time of visits, the pages viewed, time spent at our site, and the websites visited just before and just after our own, as well as your IP address.</p>
+
+    <p>A cookie is a very small text document, which often includes an anonymous unique identifier. When you visit a website, that site's computer asks your computer for permission to store this file in a part of your hard drive specifically designated for cookies. Each website can send its own cookie to your browser if your browser's preferences allow it, but (to protect your privacy) your browser only permits a website to access the cookies it has already sent to you, not the cookies sent to you by other sites.</p>
+
+    <p>The Company reserves the right to use technological equivalents of cookies, including social media pixels. These pixels allow social media sites to track visitors to outside websites so as to tailor advertising messages users see while visiting that social media website. The Company reserves the right to use these pixels in compliance with the policies of the various social media sites.</p>
+
+    <h2>Third Party Use of Cookies</h2>
+
+    <p>Some content or applications, including advertisements, on the Website are served by third-parties, including advertisers, ad networks and servers, content providers, and application providers. These third parties may use cookies alone or in conjunction with web beacons or other tracking technologies to collect information about you when you use our website. The information they collect may be associated with your personal information or they may collect information, including personal information, about your online activities over time and across different websites and other online services. They may use this information to provide you with interest-based (behavioral) advertising or other targeted content.</p>
+
+    <p>We do not control these third parties' tracking technologies or how they may be used. If you have any questions about an advertisement or other targeted content, you should contact the responsible provider directly.</p>
+
+    <h2>Advertising &amp; Analytics</h2>
+
+    <p>We may use certain personal information, including email addresses, to support our advertising, analytics, and marketing efforts across third-party platforms.</p>
+
+    <p>We do not sell or rent your personal information. Any data shared with advertising partners is used in accordance with their respective policies and applicable privacy laws.</p>
+
+    <p>You may opt out of certain forms of targeted advertising at any time by adjusting your browser settings, using advertising preference tools (such as Google Ad Settings), or by contacting us directly. Where required by law, we will obtain your consent for this processing and honor withdrawal of consent at any time.</p>
+
+    <h2>Email Information</h2>
+
+    <p>If you choose to correspond with us through email, we may retain the content of your email messages together with your email address and our responses. We provide the same protections for these electronic communications that we employ in the maintenance of information received online, mail, and telephone. This also applies when you register for our website, sign up through any of our forms using your email address or make a purchase on this site. For further information see the email policies below.</p>
+
+    <h2>Email Policies</h2>
+
+    <p>We are committed to keeping your e-mail address confidential. We do not sell, rent, or lease our subscription lists to third parties, and will not disclose your email address to any third parties except as allowed in the section titled Disclosure of Your Information.</p>
+
+    <p>We will maintain the information you send via e-mail in accordance with applicable federal law.</p>
+
+    <p>In compliance with the CAN-SPAM Act, all e-mails sent from our organization will clearly state who the e-mail is from and provide clear information on how to contact the sender. In addition, all e-mail messages will also contain concise information on how to remove yourself from our mailing list so that you receive no further e-mail communication from us.</p>
+
+    <p>Our emails provide users the opportunity to opt-out of receiving communications from us and our partners by reading the unsubscribe instructions located at the bottom of any e-mail they receive from us at anytime.</p>
+
+    <p>Users who no longer wish to receive our newsletter or promotional materials may opt-out of receiving these communications by clicking on the unsubscribe link in the e-mail.</p>
+
+    <h2>How and Why We Collect Information</h2>
+
+    <p>The Company collects your information in order to record and support your participation in the activities you select. If you register to download a book or resources, sign up for our newsletter, and/or purchase a product from us, we collect your information. We use this information to track your preferences and to keep you informed about the products and services you have selected to receive and any related products and/or services. As a visitor to this Website, you can engage in many activities without providing any personal information. It is only when you seek to download resources and/or register for services that you are required to provide information.</p>
+
+    <p>If you are outside the European Union and opt to receive any free resources, participate in any free training programs, register for a webinar, register for a live event, register for a seminar, or purchase any products sold by the Company on this Website, we will automatically enroll you to receive our free email newsletter. If you do not wish to receive this newsletter, you can unsubscribe anytime. We include an "unsubscribe" link at the bottom of every email we send. If you ever have trouble unsubscribing, you can send an email to <a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a> requesting to unsubscribe from future emails.</p>
+
+    <p>If you are in the European Union and opt to receive any free resources, participate in any free training programs, register for a webinar, register for a live event, register for a seminar, or purchase any products sold by the Company on this Website, we will only enroll you to receive our free email newsletter if you affirmatively consent to it. If you do not wish to receive this newsletter, you can unsubscribe anytime. We include an "unsubscribe" link at the bottom of every email we send. If you ever have trouble unsubscribing, you can send an email to <a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a> requesting to unsubscribe from future emails.</p>
+
+    <h2>How Do We Use the Information That You Provide to Us?</h2>
+
+    <p>We use personal information for purposes of presenting our Website and its contents to you, providing you with information, providing you with offers for products and services, providing you with information about your subscriptions and products, carrying out any contract between you and the Company, administering our business activities, providing customer service, and making available other items and services to our customers and prospective customers.</p>
+
+    <p>From time-to-time, we may use the information you provide to us to make you offers to purchase products and services provided by third parties in exchange for a commission to be paid to us by such third parties. Should you opt to take part in such promotions, the third parties will receive your information.</p>
+
+    <p>From time-to-time, we may use the information you provide to us to display advertisements to you that are tailored to your personal characteristics, interests, and activities.</p>
+
+    <h2>Disclosure of Your Information</h2>
+
+    <p>As a general rule, we do not sell, rent, lease or otherwise transfer any information collected whether automatically or through your voluntary action.</p>
+
+    <p>We may disclose your personal information to our subsidiaries, affiliates, and service providers for the purpose of providing services to you.</p>
+
+    <p>We may disclose your personal information to a third party, including a lawyer or collection agency, when necessary to enforce our terms of service or any other agreement between you and the Company.</p>
+
+    <p>We may provide your information to any successor in interest in the event of a merger, divestiture, restructuring, reorganization, dissolution, or other sale or transfer of some or all of the Company's asserts and/or business.</p>
+
+    <p>We may disclose information when legally compelled to do so, in other words, when we, in good faith, believe that the law requires it or for the protection of our legal rights or when compelled by a court or other governmental entity.</p>
+
+    <h2>How Do We Protect Your Information and Secure Information Transmissions?</h2>
+
+    <p>We employ commercially reasonable methods to ensure the security of the information you provide to us and the information we collect automatically. This includes using standard security protocols and working only with reputable third-party vendors.</p>
+
+    <p>Email is not recognized as a secure medium of communication. For this reason, we request that you do not send private information to us by email. However, doing so is allowed, but at your own risk. Some of the information you may enter on our website may be transmitted securely via a secure medium known as Secure Sockets Layer, or SSL. Credit card information and other sensitive information is never transmitted via email.</p>
+
+    <p>The Company may use software programs to create summary statistics, which are used for such purposes as assessing the number of visitors to the different sections of our site, what information is of most and least interest, determining technical design specifications, and identifying system performance or problem areas.</p>
+
+    <p>For site security purposes and to ensure that this service remains available to all users, the Company uses software programs to monitor network traffic to identify unauthorized attempts to upload or change information, or otherwise cause damage.</p>
+
+    <h2>Policy Changes</h2>
+
+    <p>It is our policy to post any changes we make to our privacy policy on this page. If we make material changes to how we treat our users' personal information, we will notify you by email to the email address specified in your account and/or through a notice on the Website home page. The date the privacy policy was last revised is identified at the bottom of the page. You are responsible for ensuring we have an up-to-date active and deliverable email address for you, and for periodically visiting our Website and this privacy policy to check for any changes.</p>
+
+    <h2>Visitors' GDPR Rights</h2>
+
+    <p>If you are within the European Union, you are entitled to certain information and have certain rights under the General Data Protection Regulation. Those rights include:</p>
+
+    <p>We will retain the any information you choose to provide to us until the earlier of: (a) you asking that the information be deleted, (b) our decision to cease using our existing data providers, or (c) the Company decides that the value in retaining the data is outweighed by the costs of retaining it.</p>
+
+    <p>You have the right to request access to your data that the Company stores and the rights to either rectify or erase your personal data.</p>
+
+    <p>You have the right to seek restrictions on the processing of your data.</p>
+
+    <p>You have the right to object to the processing of your data and the right to the portability of your data.</p>
+
+    <p>To the extent that you provided consent to the Company's processing of your personal data, you have the right to withdraw that consent at any time, without affecting the lawfulness of processing based upon consent that occurred prior to your withdrawal of consent.</p>
+
+    <p>You have the right to lodge a complaint with a supervisory authority that has jurisdiction over issues related to the General Data Protection Regulation.</p>
+
+    <p>We require only the information that is reasonably required to enter into a contract with you. We will not require you to provide consent for any unnecessary processing as a condition of entering into a contract with us.</p>
+
+    <h2>Contact Us</h2>
+
+    <p>Jason Moss LLC welcomes your questions or comments regarding the Privacy Policy:</p>
+
+    <p>Email Address: <a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a></p>
+
+    <p>Effective as of May 9, 2022</p>
+  </div>
+</main>
+
+<!-- ==========================================
+     FOOTER
+     ========================================== -->
+<footer>
+  <div class="footer-upper">
+    <div class="container">
+      <div class="footer-upper-inner">
+        <a href="/" class="footer-logo" aria-label="Jason Moss — Home">
+          <img src="../assets/images/logo-black.png" alt="Jason Moss" width="400" height="89">
+        </a>
+        <nav class="footer-nav">
+          <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+          <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+          <a href="/testimonials/">Breakthroughs</a>
+          <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-lower">
+    <div class="container">
+      <div class="footer-lower-inner">
+        <div class="footer-legal">
+          <p>&copy; Jason Moss LLC. All rights reserved. Original design by <a href="https://brandthrive.co/" target="_blank" rel="noopener noreferrer">BrandThrive</a>.</p>
+          <div class="footer-legal-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms &amp; Conditions</a>
+            <a href="/earnings-disclaimer/">Earnings Disclaimer</a>
+          </div>
+        </div>
+        <div class="footer-social">
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/jasonmossofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:jason@jasonmoss.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================
+     SCRIPTS
+     ========================================== -->
+<script>
+// Sticky header scroll effect
+const header = document.getElementById('siteHeader');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (scrollY > 40) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+  lastScroll = scrollY;
+}, { passive: true });
+
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('active');
+  hamburger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+</script>
+
+</body>
+</html>

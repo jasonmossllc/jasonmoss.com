@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Breakthroughs — Jason Moss</title>
+<meta name="description" content="Hear from entrepreneurs who've grown with more revenue, clarity, and ease through working with Jason Moss.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --charcoal: #1D1F1E;
+  --forest: #2C3F36;
+  --mocha: #5B4B3F;
+  --taupe: #8C837A;
+  --gold: #C2A86C;
+  --bone: #E9E2D3;
+  --sand: #F8F6F2;
+  --white: #FFFFFF;
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+  --font-sans: 'Raleway', 'Helvetica Neue', sans-serif;
+  --font-script: 'Dancing Script', cursive;
+  --max-width: 1200px;
+  --header-height: 80px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--charcoal);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.btn-primary {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 16px 36px;
+  border-radius: 0;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background: #b89a5e;
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   SCROLL ANIMATIONS
+   ============================================ */
+.fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo img {
+  height: 36px;
+  width: auto;
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-desktop a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.nav-desktop a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-desktop a:hover::after {
+  width: 100%;
+}
+
+.nav-desktop a:hover {
+  color: var(--mocha);
+}
+
+.nav-cta {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 12px 24px;
+  transition: background 0.3s ease;
+}
+
+.nav-cta:hover {
+  background: #b89a5e;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--charcoal);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--sand);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu a {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+}
+
+.mobile-menu a:hover {
+  color: var(--gold);
+}
+
+.mobile-menu .nav-cta {
+  margin-top: 12px;
+  font-size: 13px;
+  padding: 14px 32px;
+}
+
+/* ============================================
+   PAGE HEADLINE
+   ============================================ */
+.page-headline {
+  background: var(--sand);
+  padding-top: calc(var(--header-height) + 80px);
+  padding-bottom: 64px;
+  text-align: center;
+}
+
+.page-headline h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 400;
+  color: var(--taupe);
+}
+
+/* ============================================
+   TESTIMONIALS WIDGET
+   ============================================ */
+.testimonials-widget {
+  background: var(--sand);
+  padding: 0 0 120px;
+}
+
+.testimonials-widget .container {
+  max-width: 1200px;
+}
+
+.testimonials-widget iframe {
+  border-radius: 4px;
+}
+
+/* ============================================
+   BOTTOM CTA
+   ============================================ */
+.bottom-cta {
+  position: relative;
+  padding: 200px 0;
+  text-align: center;
+  overflow: hidden;
+}
+
+.bottom-cta-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.bottom-cta-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bottom-cta-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(248, 246, 242, 0.75);
+  z-index: 1;
+}
+
+.bottom-cta .container {
+  position: relative;
+  z-index: 2;
+}
+
+.bottom-cta h2 {
+  font-family: var(--font-serif);
+  font-size: clamp(28px, 3.5vw, 44px);
+  color: var(--taupe);
+  margin-bottom: 40px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer-upper {
+  background: var(--sand);
+  padding: 48px 0;
+  border-top: 1px solid var(--bone);
+}
+
+.footer-upper-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo img {
+  height: 30px;
+  width: auto;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.footer-nav a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--gold);
+}
+
+.footer-lower {
+  background: var(--forest);
+  padding: 36px 0;
+}
+
+.footer-lower-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer-legal p {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--bone);
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+.footer-legal a {
+  color: var(--bone);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.footer-legal a:hover {
+  color: var(--gold);
+}
+
+.footer-legal-links {
+  margin-top: 8px;
+}
+
+.footer-legal-links a {
+  margin-right: 16px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  transition: background 0.3s ease;
+}
+
+.footer-social a:hover {
+  background: #b89a5e;
+}
+
+.footer-social a svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--charcoal);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1023px) {
+  .container {
+    padding: 0 28px;
+  }
+
+  .header-inner {
+    padding: 0 28px;
+  }
+
+  .nav-desktop {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .footer-upper-inner {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-lower-inner {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-social {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 68px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .header-inner {
+    padding: 0 20px;
+  }
+
+  .header-logo img {
+    height: 28px;
+  }
+
+  .page-headline {
+    padding-top: calc(var(--header-height) + 56px);
+    padding-bottom: 48px;
+  }
+
+  .testimonials-widget {
+    padding: 0 0 80px;
+  }
+
+  .bottom-cta {
+    padding: 120px 0;
+  }
+
+  .btn-primary {
+    padding: 14px 28px;
+    font-size: 13px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     HEADER
+     ========================================== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="/" class="header-logo" aria-label="Jason Moss — Home">
+      <img src="../assets/images/logo-black.png" alt="Jason Moss" width="400" height="89">
+    </a>
+    <nav class="nav-desktop">
+      <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+      <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+      <a href="/testimonials/">Breakthroughs</a>
+      <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+      <a href="https://go.jasonmoss.com/apply/" class="nav-cta">Work Together</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+  <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+  <a href="/testimonials/">Breakthroughs</a>
+  <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+  <a href="https://go.jasonmoss.com/apply/" class="nav-cta">Work Together</a>
+</div>
+
+<!-- ==========================================
+     PAGE HEADLINE
+     ========================================== -->
+<section class="page-headline">
+  <div class="container">
+    <h1 class="fade-in">Client Breakthroughs</h1>
+  </div>
+</section>
+
+<!-- ==========================================
+     TESTIMONIALS WIDGET
+     ========================================== -->
+<section class="testimonials-widget">
+  <div class="container">
+    <iframe
+      id="testimonialto-jason-moss-testimonials-tag-all-light"
+      src="https://embed-v2.testimonial.to/w/jason-moss-testimonials/?theme=light&card=base&loadMore=on&initialCount=20&tag=all"
+      frameborder="0"
+      scrolling="no"
+      width="100%"
+      style="min-height: 800px;"
+    ></iframe>
+  </div>
+</section>
+
+<!-- ==========================================
+     BOTTOM CTA
+     ========================================== -->
+<section class="bottom-cta">
+  <div class="bottom-cta-bg">
+    <img src="../assets/images/cta-light.jpg" alt="" loading="lazy" aria-hidden="true">
+  </div>
+  <div class="bottom-cta-overlay"></div>
+  <div class="container">
+    <h2 class="fade-in">Ready to scale with more spaciousness and ease?</h2>
+    <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website" class="btn-primary fade-in">Resonance Masterclass</a>
+  </div>
+</section>
+
+<!-- ==========================================
+     FOOTER
+     ========================================== -->
+<footer>
+  <div class="footer-upper">
+    <div class="container">
+      <div class="footer-upper-inner">
+        <a href="/" class="footer-logo" aria-label="Jason Moss — Home">
+          <img src="../assets/images/logo-black.png" alt="Jason Moss" width="400" height="89">
+        </a>
+        <nav class="footer-nav">
+          <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+          <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+          <a href="/testimonials/">Breakthroughs</a>
+          <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-lower">
+    <div class="container">
+      <div class="footer-lower-inner">
+        <div class="footer-legal">
+          <p>&copy; Jason Moss LLC. All rights reserved. Original design by <a href="https://brandthrive.co/" target="_blank" rel="noopener noreferrer">BrandThrive</a>.</p>
+          <div class="footer-legal-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms &amp; Conditions</a>
+            <a href="/earnings-disclaimer/">Earnings Disclaimer</a>
+          </div>
+        </div>
+        <div class="footer-social">
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/jasonmossofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:jason@jasonmoss.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================
+     SCRIPTS
+     ========================================== -->
+<script type="text/javascript" src="https://embed-v2.testimonial.to/js/iframeResizer.min.js"></script>
+<script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, '#testimonialto-jason-moss-testimonials-tag-all-light');</script>
+
+<script>
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('active');
+  hamburger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+
+// Scroll-triggered fade-in animations
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.12,
+  rootMargin: '0px 0px -40px 0px'
+});
+
+document.querySelectorAll('.fade-in').forEach(el => {
+  fadeObserver.observe(el);
+});
+</script>
+
+</body>
+</html>

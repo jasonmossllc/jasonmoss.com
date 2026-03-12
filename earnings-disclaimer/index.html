@@ -1,0 +1,758 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Earnings Disclaimer — Jason Moss</title>
+<meta name="description" content="Earnings Disclaimer for jasonmoss.com. Understand the limitations and disclaimers regarding earnings and results from Jason Moss LLC's programs and services.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   RESET & BASE
+   ============================================ */
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --charcoal: #1D1F1E;
+  --forest: #2C3F36;
+  --mocha: #5B4B3F;
+  --taupe: #8C837A;
+  --gold: #C2A86C;
+  --bone: #E9E2D3;
+  --sand: #F8F6F2;
+  --white: #FFFFFF;
+  --font-serif: 'Libre Baskerville', Georgia, serif;
+  --font-sans: 'Raleway', 'Helvetica Neue', sans-serif;
+  --font-script: 'Dancing Script', cursive;
+  --max-width: 1200px;
+  --header-height: 80px;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.75;
+  color: var(--charcoal);
+  background: var(--white);
+  overflow-x: hidden;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+/* ============================================
+   TYPOGRAPHY
+   ============================================ */
+h1, h2, h3, h4 {
+  font-family: var(--font-serif);
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.btn-primary {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 14px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 16px 36px;
+  border-radius: 0;
+  transition: background 0.3s ease, transform 0.2s ease;
+  text-align: center;
+}
+
+.btn-primary:hover {
+  background: #b89a5e;
+  transform: translateY(-1px);
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1100;
+  height: var(--header-height);
+  display: flex;
+  align-items: center;
+  background: rgba(255, 255, 255, 0);
+  transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.site-header.scrolled {
+  background: rgba(255, 255, 255, 0.97);
+  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
+}
+
+.header-inner {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 40px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.header-logo img {
+  height: 36px;
+  width: auto;
+}
+
+.nav-desktop {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.nav-desktop a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+  position: relative;
+}
+
+.nav-desktop a::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--gold);
+  transition: width 0.3s ease;
+}
+
+.nav-desktop a:hover::after {
+  width: 100%;
+}
+
+.nav-desktop a:hover {
+  color: var(--mocha);
+}
+
+.nav-cta {
+  font-family: var(--font-sans);
+  font-weight: 600;
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: var(--gold);
+  color: var(--charcoal);
+  padding: 12px 24px;
+  transition: background 0.3s ease;
+}
+
+.nav-cta:hover {
+  background: #b89a5e;
+}
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 6px;
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.hamburger span {
+  display: block;
+  width: 28px;
+  height: 2px;
+  background: var(--charcoal);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile Menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--sand);
+  z-index: 1050;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 28px;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+}
+
+.mobile-menu.open {
+  opacity: 1;
+  visibility: visible;
+}
+
+.mobile-menu a {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+}
+
+.mobile-menu a:hover {
+  color: var(--gold);
+}
+
+.mobile-menu .nav-cta {
+  margin-top: 12px;
+  font-size: 13px;
+  padding: 14px 32px;
+}
+
+/* ============================================
+   LEGAL PAGE CONTENT
+   ============================================ */
+.legal-page {
+  background: var(--sand);
+  padding-top: calc(var(--header-height) + 80px);
+  padding-bottom: 100px;
+}
+
+.legal-page .legal-inner {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.legal-page h1 {
+  font-family: var(--font-serif);
+  font-size: clamp(32px, 4vw, 48px);
+  font-weight: 400;
+  color: var(--taupe);
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.legal-page h2 {
+  font-family: var(--font-serif);
+  font-size: 22px;
+  font-weight: 400;
+  color: var(--mocha);
+  margin-top: 48px;
+  margin-bottom: 16px;
+}
+
+.legal-page h3 {
+  font-family: var(--font-serif);
+  font-size: 18px;
+  font-weight: 400;
+  color: var(--mocha);
+  margin-top: 32px;
+  margin-bottom: 12px;
+}
+
+.legal-page p {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.8;
+  color: var(--charcoal);
+  margin-bottom: 20px;
+}
+
+.legal-page a {
+  color: var(--gold);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.legal-page a:hover {
+  color: #b89a5e;
+}
+
+.legal-page ul {
+  list-style: disc;
+  padding-left: 24px;
+  margin-bottom: 20px;
+}
+
+.legal-page ul li {
+  font-family: var(--font-sans);
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--charcoal);
+  margin-bottom: 8px;
+}
+
+.legal-page strong {
+  font-weight: 600;
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer-upper {
+  background: var(--sand);
+  padding: 48px 0;
+  border-top: 1px solid var(--bone);
+}
+
+.footer-upper-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.footer-logo img {
+  height: 30px;
+  width: auto;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 28px;
+}
+
+.footer-nav a {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--charcoal);
+  transition: color 0.2s ease;
+}
+
+.footer-nav a:hover {
+  color: var(--gold);
+}
+
+.footer-lower {
+  background: var(--forest);
+  padding: 36px 0;
+}
+
+.footer-lower-inner {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.footer-legal p {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  color: var(--bone);
+  line-height: 1.7;
+  opacity: 0.8;
+}
+
+.footer-legal a {
+  color: var(--bone);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+  transition: color 0.2s ease;
+}
+
+.footer-legal a:hover {
+  color: var(--gold);
+}
+
+.footer-legal-links {
+  margin-top: 8px;
+}
+
+.footer-legal-links a {
+  margin-right: 16px;
+}
+
+.footer-social {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.footer-social a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--gold);
+  transition: background 0.3s ease;
+}
+
+.footer-social a:hover {
+  background: #b89a5e;
+}
+
+.footer-social a svg {
+  width: 18px;
+  height: 18px;
+  fill: var(--charcoal);
+}
+
+/* ============================================
+   RESPONSIVE
+   ============================================ */
+@media (max-width: 1023px) {
+  .container {
+    padding: 0 28px;
+  }
+
+  .header-inner {
+    padding: 0 28px;
+  }
+
+  .nav-desktop {
+    display: none;
+  }
+
+  .hamburger {
+    display: flex;
+  }
+
+  .footer-upper-inner {
+    flex-direction: column;
+    gap: 24px;
+    align-items: flex-start;
+  }
+
+  .footer-nav {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-lower-inner {
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .footer-social {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 767px) {
+  :root {
+    --header-height: 68px;
+  }
+
+  .container {
+    padding: 0 20px;
+  }
+
+  .header-inner {
+    padding: 0 20px;
+  }
+
+  .header-logo img {
+    height: 28px;
+  }
+
+  .legal-page .legal-inner {
+    padding: 0 20px;
+  }
+
+  .legal-page {
+    padding-top: calc(var(--header-height) + 48px);
+    padding-bottom: 64px;
+  }
+
+  .legal-page h1 {
+    font-size: 28px;
+    margin-bottom: 32px;
+  }
+
+  .legal-page h2 {
+    font-size: 20px;
+    margin-top: 36px;
+  }
+
+  .btn-primary {
+    padding: 14px 28px;
+    font-size: 13px;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- ==========================================
+     HEADER
+     ========================================== -->
+<header class="site-header" id="siteHeader">
+  <div class="header-inner">
+    <a href="/" class="header-logo" aria-label="Jason Moss — Home">
+      <img src="../assets/images/logo-black.png" alt="Jason Moss" width="400" height="89">
+    </a>
+    <nav class="nav-desktop">
+      <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+      <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+      <a href="/testimonials/">Breakthroughs</a>
+      <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+      <a href="https://go.jasonmoss.com/apply/" class="nav-cta">Work Together</a>
+    </nav>
+    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+</header>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+  <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+  <a href="/testimonials/">Breakthroughs</a>
+  <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+  <a href="https://go.jasonmoss.com/apply/" class="nav-cta">Work Together</a>
+</div>
+
+<!-- ==========================================
+     EARNINGS DISCLAIMER CONTENT
+     ========================================== -->
+<main class="legal-page">
+  <div class="legal-inner">
+    <h1>Earnings Disclaimer</h1>
+
+    <p>This website is owned and operated by Jason Moss LLC ("Company," "we," or "us").</p>
+
+    <p>This Disclaimer, along with the Terms of Use and Privacy Policy, governs your access to and use of jasonmoss.com.com, including any content, functionality and services offered on or through jasonmoss.com (the "Website"), whether as a guest or a registered user.</p>
+
+    <p>Please read the Disclaimer carefully before you start to use the Website. By using the Website or by clicking to accept or agree to the Terms of Use when this option is made available to you, you accept and agree to be bound and abide by the Disclaimer. If you do not want to agree to the Privacy Policy, you must not access or use the Website.</p>
+
+    <h2>For Educational and Informational Purposes Only</h2>
+
+    <p>The information contained on this Website and the resources available for download through this website are for educational and informational purposes only.</p>
+
+    <h2>Not Professional Advice</h2>
+
+    <p>The information contained on this Website and the resources available for download through this website is not intended as, and shall not be understood or construed as, professional advice. While the employees and/or owners of the Company are professionals and the information provided on this Website relates to issues within the Company's area of professionalism, the information contained on this Website is not a substitute for advice from a professional who is aware of the facts and circumstances of your individual situation.</p>
+
+    <p>We have done our best to ensure that the information provided on this Website and the resources available for download are accurate and provide valuable information. Regardless of anything to the contrary, nothing available on or through this Website should be understood as a recommendation that you should not consult with a professional to address your particular information. The Company expressly recommends that you seek advice from a professional.</p>
+
+    <p>Neither the Company nor any of its employees or owners shall be held liable or responsible for any errors or omissions on this website or for any damage you may suffer as a result of failing to seek competent advice from a professional who is familiar with your situation.</p>
+
+    <h2>No Professional-Client Relationship</h2>
+
+    <p>Your use of this Website – including implementation of any suggestions set out in this Website and/or use of any resources available on this Website – does not create a professional-client relationship between you and the Company or any of its professionals.</p>
+
+    <p>The Company cannot accept you as a client unless and until we determine that there is a fit and until all other potential conflicts are resolved. Thus, you recognize and agree that we have not created any professional-client relationship by using this website.</p>
+
+    <h2>User's Personal Responsibility</h2>
+
+    <p>By using this Website, you accept personal responsibility for the results of your actions. You agree to take full responsibility for any harm or damage you suffer as a result of the use, or non-use, of the information available on this Website or the resources available for download. You agree to use judgment and conduct due diligence before taking any action or implementing any plan or policy suggested or recommended on this Website.</p>
+
+    <h2>No Guarantees</h2>
+
+    <p>You agree that the Company has not made any guarantees about the results of taking any action, whether recommended on this Website or not. The Company provides educational and informational resources that are intended to help users of this website succeed in business and in life. You nevertheless recognize that your ultimate success or failure will be the result of your own efforts, your particular situation, and innumerable other circumstances beyond the control and/or knowledge of the Company.</p>
+
+    <p>You also recognize that prior results do not guarantee a similar outcome. Thus, the results obtained by others – whether clients of the Company or otherwise – applying the principles set out in this Website are no guarantee that you or any other person or entity will be able to obtain similar results.</p>
+
+    <h2>Errors and Omissions</h2>
+
+    <p>This World Wide Web Site is a public resource of general information that is intended, but not promised or guaranteed, to be correct, complete, and up-to-date. We have taken reasonable steps to ensure that the information contained in this Website is accurate, but we cannot represent that this Website is free of errors. You accept that the information contained on this Website may be erroneous and agree to conduct due diligence to verify any information obtained from this Website and/or resources available on it prior to taking any action. You expressly agree not to rely upon any information contained in this website.</p>
+
+    <h2>Reviews</h2>
+
+    <p>At various times, we may provide reviews of products, services, or other resources. This may include, but is not limited to, reviews of books, services, and software applications. Any such reviews will represent the good-faith opinions of the author of such review. The products and services reviewed may be provided to the Company for free or at a reduced price as an incentive to provide a review.</p>
+
+    <p>Regardless of any such discounts, we will provide honest reviews of these products and/or services. You should, however, conduct your own due diligence and should not rely solely upon any reviews provided on this website.</p>
+
+    <p>We will disclose the existence of any discounts or incentives received in exchange for providing a review. If you have any questions regarding any such information about any such discounts and incentives, send an email to <a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a> that includes the name of the reviewed item in the email subject line. We will respond via email and disclose any incentives or discounts we received in association with any such reviewed item.</p>
+
+    <h2>Affiliate Links</h2>
+
+    <p>From time to time, the Company participates in affiliate marketing and may allow affiliate links to be encoded on some of our pages. This means we may earn a commission if/when you click on or make purchases via affiliate links.</p>
+
+    <p>As a policy, the Company will only affiliate with products, services, coaches, consultants, and other experts that we believe will provide value to our customers and followers.</p>
+
+    <p>The Company will inform you when one of the links constitutes an affiliate link.</p>
+
+    <p>You recognize that it remains your personal responsibility to investigate whether any affiliate offer is appropriate for your needs. You agree that you will not rely on any recommendation, reference, or information provided by the Company but will instead conduct your own independent investigation upon your investigation to decide whether to purchase the affiliate product or service.</p>
+
+    <h2>No Endorsements</h2>
+
+    <p>From time to time, the Company will refer to other products, services, coaches, consultants, and/or other experts on this Website. This does not constitute an endorsement or statement that the information provided by the other party is accurate. The Company makes no representation about these third parties. It is your responsibility to conduct your own investigation and make your own determination about any product, service, coach, consultant, and/or other expert.</p>
+
+    <h2>Testimonials</h2>
+
+    <p>At various places on this Website, you may find testimonials from clients and customers of the products and/or services offered by the Company. The testimonials are actual statements made by clients and/or customers and have been truthfully conveyed on this Website.</p>
+
+    <p>Although these testimonials are truthful statements about results obtained by these clients and/or customers who have provided them, the results experienced by these clients and/or customers are not necessarily typical. You specifically recognize and agree that the testimonials are not a guarantee that you or anyone else will obtain by using any products or services offered on this Website or by the Company.</p>
+
+    <h2>Earnings Disclaimer</h2>
+
+    <p>Every effort has been made to accurately represent our programs and the educational value they provide. However, there is no guarantee that you will earn any money using the techniques and ideas in these materials. When we present revenue and sales figures (including testimonials) on this website, we are showcasing exceptional results, which do not reflect the average experience. You should not rely on or construe any statements we present as any kind of promise, guarantee, or expectation of any level of success or earnings. Your results will be determined by several factors over which we have no control, such as your financial condition, experiences, skills, level of effort, education, and changes in the marketplace. Running an online business carries risks, and your use of any information contained on this website is as at your own risk. We assume no responsibility for any content without any express or implied warranties. By continuing to use our site and access our content/products, you agree that we are not responsible for any decision you may make regarding any information presented or as a result of purchasing any of our products or services. You understand that all claims of actual earnings or examples of actual results can be verified upon request.</p>
+
+    <h2>No Warranties</h2>
+
+    <p>THE COMPANY MAKES NO WARRANTIES REGARDING THE PERFORMANCE OR OPERATION OF THIS WEBSITE. THE COMPANY FURTHER MAKES NO REPRESENTATIONS OR WARRANTIES OF ANY KIND, EXPRESS OR IMPLIED, AS TO THE INFORMATION, CONTENTS, MATERIALS, DOCUMENTS, PROGRAMS, PRODUCTS, BOOKS, OR SERVICES INCLUDED ON OR THROUGH THIS WEBSITE. TO THE FULLEST EXTENT PERMISSIBLE UNDER THE LAW, THE COMPANY DISCLAIMS ALL WARRANTIES, EXPRESS OR IMPLIED, INCLUDING IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE.</p>
+
+    <h2>Limitation of Liability</h2>
+
+    <p>YOU AGREE TO ABSOLVE THE COMPANY OF ANY AND ALL LIABILITY OR LOSS THAT YOU OR ANY PERSON OR ENTITY ASSOCIATED WITH YOU MAY SUFFER OR INCUR AS A RESULT OF USE OF THE INFORMATION CONTAINED ON THIS WEBSITE AND/OR THE RESOURCES YOU MAY DOWNLOAD FROM THIS WEBSITE. YOU AGREE THAT THE COMPANY SHALL NOT BE LIABLE TO YOU FOR ANY TYPE OF DAMAGES, INCLUDING DIRECT, INDIRECT, SPECIAL, INCIDENTAL, EQUITABLE, OR CONSEQUENTIAL LOSS OR DAMAGES FOR USE OF THIS WEBSITE.</p>
+
+    <p>THE INFORMATION, SOFTWARE, PRODUCTS, AND SERVICES INCLUDED IN OR AVAILABLE THROUGH THE WEBSITE MAY INCLUDE INACCURACIES OR TYPOGRAPHICAL ERRORS. CHANGES ARE PERIODICALLY ADDED TO THE INFORMATION HEREIN. THE COMPANY AND/OR ITS SUPPLIERS MAY MAKE IMPROVEMENTS AND/OR CHANGES IN THE WEBSITE AT ANY TIME.</p>
+
+    <p>THE COMPANY AND/OR ITS SUPPLIERS MAKE NO REPRESENTATIONS ABOUT THE SUITABILITY, RELIABILITY, AVAILABILITY, TIMELINESS, AND ACCURACY OF THE INFORMATION, SOFTWARE, PRODUCTS, SERVICES AND RELATED GRAPHICS CONTAINED ON THE WEBSITE FOR ANY PURPOSE. TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, ALL SUCH INFORMATION, SOFTWARE, PRODUCTS, SERVICES AND RELATED GRAPHICS ARE PROVIDED "AS IS" WITHOUT WARRANTY OR CONDITION OF ANY KIND. THE COMPANY AND/OR ITS SUPPLIERS HEREBY DISCLAIM ALL WARRANTIES AND CONDITIONS WITH REGARD TO THIS INFORMATION, SOFTWARE, PRODUCTS, SERVICES AND RELATED GRAPHICS, INCLUDING ALL IMPLIED WARRANTIES OR CONDITIONS OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT.</p>
+
+    <p>TO THE MAXIMUM EXTENT PERMITTED BY APPLICABLE LAW, IN NO EVENT SHALL THE COMPANY AND/OR ITS SUPPLIERS BE LIABLE FOR ANY DIRECT, INDIRECT, PUNITIVE, INCIDENTAL, SPECIAL, CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER INCLUDING, WITHOUT LIMITATION, DAMAGES FOR LOSS OF USE, DATA OR PROFITS, ARISING OUT OF OR IN ANY WAY CONNECTED WITH THE USE OR PERFORMANCE OF THE WEBSITE, WITH THE DELAY OR INABILITY TO USE THE WEBSITE OR RELATED SERVICES, THE PROVISION OF OR FAILURE TO PROVIDE SERVICES, OR FOR ANY INFORMATION, SOFTWARE, PRODUCTS, SERVICES AND RELATED GRAPHICS OBTAINED THROUGH THE WEBSITE, OR OTHERWISE ARISING OUT OF THE USE OF THE WEBSITE, WHETHER BASED ON CONTRACT, TORT, NEGLIGENCE, STRICT LIABILITY OR OTHERWISE, EVEN IF THE COMPANY OR ANY OF ITS SUPPLIERS HAS BEEN ADVISED OF THE POSSIBILITY OF DAMAGES. BECAUSE SOME STATES/JURISDICTIONS DO NOT ALLOW THE EXCLUSION OR LIMITATION OF LIABILITY FOR CONSEQUENTIAL OR INCIDENTAL DAMAGES, THE ABOVE LIMITATION MAY NOT APPLY TO YOU. IF YOU ARE DISSATISFIED WITH ANY PORTION OF THE WEBSITE, OR WITH ANY OF THESE TERMS OF USE, YOUR SOLE AND EXCLUSIVE REMEDY IS TO DISCONTINUE USING THE WEBSITE.</p>
+
+    <h2>Contact Us</h2>
+
+    <p>Jason Moss LLC welcomes your questions or comments regarding the Disclaimer:</p>
+
+    <p>Email Address: <a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a></p>
+  </div>
+</main>
+
+<!-- ==========================================
+     FOOTER
+     ========================================== -->
+<footer>
+  <div class="footer-upper">
+    <div class="container">
+      <div class="footer-upper-inner">
+        <a href="/" class="footer-logo" aria-label="Jason Moss — Home">
+          <img src="../assets/images/logo-black.png" alt="Jason Moss" width="400" height="89">
+        </a>
+        <nav class="footer-nav">
+          <a href="https://go.jasonmoss.com/resonance-masterclass-optin?source=Website">Masterclass</a>
+          <a href="https://go.jasonmoss.com/transmission">Podcast</a>
+          <a href="/testimonials/">Breakthroughs</a>
+          <a href="https://go.jasonmoss.com/expansion">Expansion 2026</a>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-lower">
+    <div class="container">
+      <div class="footer-lower-inner">
+        <div class="footer-legal">
+          <p>&copy; Jason Moss LLC. All rights reserved. Original design by <a href="https://brandthrive.co/" target="_blank" rel="noopener noreferrer">BrandThrive</a>.</p>
+          <div class="footer-legal-links">
+            <a href="/privacy/">Privacy Policy</a>
+            <a href="/terms/">Terms &amp; Conditions</a>
+            <a href="/earnings-disclaimer/">Earnings Disclaimer</a>
+          </div>
+        </div>
+        <div class="footer-social">
+          <!-- YouTube -->
+          <a href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+          </a>
+          <!-- Instagram -->
+          <a href="https://www.instagram.com/jasonmossofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
+          </a>
+          <!-- Email -->
+          <a href="mailto:jason@jasonmoss.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ==========================================
+     SCRIPTS
+     ========================================== -->
+<script>
+// Sticky header scroll effect
+const header = document.getElementById('siteHeader');
+let lastScroll = 0;
+
+window.addEventListener('scroll', () => {
+  const scrollY = window.scrollY;
+  if (scrollY > 40) {
+    header.classList.add('scrolled');
+  } else {
+    header.classList.remove('scrolled');
+  }
+  lastScroll = scrollY;
+}, { passive: true });
+
+// Hamburger menu toggle
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+hamburger.addEventListener('click', () => {
+  const isOpen = mobileMenu.classList.toggle('open');
+  hamburger.classList.toggle('active');
+  hamburger.setAttribute('aria-expanded', isOpen);
+  document.body.style.overflow = isOpen ? 'hidden' : '';
+});
+
+// Close mobile menu on link click
+mobileMenu.querySelectorAll('a').forEach(link => {
+  link.addEventListener('click', () => {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('active');
+    hamburger.setAttribute('aria-expanded', 'false');
+    document.body.style.overflow = '';
+  });
+});
+</script>
+
+</body>
+</html>
