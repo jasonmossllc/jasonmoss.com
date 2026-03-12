@@ -7,7 +7,7 @@
 <meta name="description" content="Jason Moss helps entrepreneurs grow with more revenue, clarity, and peace through intuitive leadership, aligned profitability, and resonance marketing.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* ============================================
    RESET & BASE
@@ -29,7 +29,7 @@
   --white: #FFFFFF;
   --font-serif: 'Libre Baskerville', Georgia, serif;
   --font-sans: 'Raleway', 'Helvetica Neue', sans-serif;
-  --font-script: 'Dancing Script', cursive;
+  --font-script: 'Caveat', cursive;
   --max-width: 1200px;
   --header-height: 80px;
 }
@@ -285,7 +285,7 @@ h1, h2, h3, h4 {
    ============================================ */
 .hero {
   position: relative;
-  min-height: 88vh;
+  min-height: 92vh;
   display: flex;
   align-items: center;
   overflow: hidden;
@@ -301,7 +301,7 @@ h1, h2, h3, h4 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% center;
+  object-position: center 45%;
 }
 
 .hero-overlay {
@@ -420,13 +420,13 @@ h1, h2, h3, h4 {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  opacity: 0.2;
+  opacity: 1;
 }
 
 .philosophy-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(44, 63, 54, 0.88);
+  background: rgba(44, 63, 54, 0.55);
   z-index: 1;
 }
 
@@ -455,31 +455,33 @@ h1, h2, h3, h4 {
   flex: 0 0 auto;
 }
 
-.pillar-number {
-  font-family: var(--font-serif);
-  font-size: 14px;
-  color: var(--gold);
-  margin-bottom: 16px;
-  letter-spacing: 0.1em;
-}
-
 .pillar-circle {
   width: 140px;
   height: 140px;
   border-radius: 50%;
   border: 1.5px solid var(--gold);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 16px;
   margin: 0 auto 0;
+  gap: 4px;
+}
+
+.pillar-number {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  color: var(--gold);
+  letter-spacing: 0.1em;
+  line-height: 1;
 }
 
 .pillar-circle span {
   font-family: var(--font-serif);
   font-style: italic;
-  font-size: 15px;
-  line-height: 1.4;
+  font-size: 14px;
+  line-height: 1.3;
   color: var(--bone);
   text-align: center;
 }
@@ -553,7 +555,7 @@ h1, h2, h3, h4 {
 
 .testimonial-card {
   background: var(--white);
-  border-radius: 4px;
+  border-radius: 12px;
   overflow: hidden;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.04);
 }
@@ -562,7 +564,7 @@ h1, h2, h3, h4 {
   position: relative;
   width: 100%;
   padding-top: 56.25%;
-  background: var(--charcoal);
+  background: var(--white);
 }
 
 .testimonial-video iframe {
@@ -615,7 +617,7 @@ h1, h2, h3, h4 {
 
 .lifestyle-strip img {
   width: 100%;
-  height: 420px;
+  height: 260px;
   object-fit: cover;
 }
 
@@ -667,7 +669,8 @@ h1, h2, h3, h4 {
 
 .story-col p.story-signature {
   font-family: var(--font-script);
-  font-size: 32px;
+  font-size: 34px;
+  font-weight: 600;
   color: var(--mocha);
   margin-top: 16px;
   line-height: 1.3;
@@ -777,8 +780,7 @@ h1, h2, h3, h4 {
 
 .footer-legal a {
   color: var(--bone);
-  text-decoration: underline;
-  text-underline-offset: 2px;
+  text-decoration: none;
   transition: color 0.2s ease;
 }
 
@@ -845,6 +847,10 @@ h1, h2, h3, h4 {
     padding-top: var(--header-height);
   }
 
+  .hero-bg picture img {
+    object-position: 55% center;
+  }
+
   .philosophy-pillars {
     gap: 32px;
   }
@@ -908,32 +914,28 @@ h1, h2, h3, h4 {
     min-height: 80vh;
   }
 
+  .hero-bg picture img {
+    object-position: 60% center;
+  }
+
   .hero-content {
     padding: 0 20px;
-    padding-top: var(--header-height);
+    padding-top: calc(var(--header-height) + 24px);
+    padding-bottom: 48px;
   }
 
   .hero h1 {
     font-size: 28px;
-    max-width: 300px;
+    max-width: 280px;
   }
 
   .hero-overlay {
     background: linear-gradient(
-      to top,
-      rgba(29, 31, 30, 0.65) 0%,
-      rgba(29, 31, 30, 0.35) 50%,
-      rgba(29, 31, 30, 0.1) 100%
+      to right,
+      rgba(29, 31, 30, 0.7) 0%,
+      rgba(29, 31, 30, 0.4) 50%,
+      rgba(29, 31, 30, 0.05) 100%
     );
-  }
-
-  .hero-content {
-    align-self: flex-end;
-    padding-bottom: 64px;
-  }
-
-  .hero {
-    align-items: flex-end;
   }
 
   .intro {
@@ -949,9 +951,29 @@ h1, h2, h3, h4 {
   }
 
   .philosophy-pillars {
-    flex-direction: column;
-    align-items: center;
-    gap: 40px;
+    flex-direction: row;
+    gap: 0;
+    justify-content: center;
+  }
+
+  .pillar {
+    flex: 1;
+    max-width: 120px;
+  }
+
+  .pillar-circle {
+    width: 96px;
+    height: 96px;
+    padding: 10px;
+  }
+
+  .pillar-number {
+    font-size: 11px;
+  }
+
+  .pillar-circle span {
+    font-size: 12px;
+    line-height: 1.25;
   }
 
   .breakthroughs {
@@ -963,7 +985,7 @@ h1, h2, h3, h4 {
   }
 
   .lifestyle-strip img {
-    height: 220px;
+    height: 180px;
   }
 
   .story {
@@ -981,6 +1003,17 @@ h1, h2, h3, h4 {
   .btn-primary {
     padding: 14px 28px;
     font-size: 13px;
+  }
+}
+
+/* Wide screens: ensure hero shows full body */
+@media (min-width: 1600px) {
+  .hero {
+    min-height: 95vh;
+  }
+
+  .hero-bg picture img {
+    object-position: center 50%;
   }
 }
 </style>
@@ -1026,6 +1059,7 @@ h1, h2, h3, h4 {
   <div class="hero-bg">
     <picture>
       <source media="(max-width: 767px)" srcset="assets/images/hero-mountain-mobile.png">
+      <source media="(max-width: 1023px)" srcset="assets/images/hero-mountain-mobile.png">
       <img src="assets/images/hero-mountain.jpg" alt="Jason Moss standing in mountain landscape at golden hour" loading="eager">
     </picture>
   </div>
@@ -1066,7 +1100,7 @@ h1, h2, h3, h4 {
      ========================================== -->
 <section class="philosophy">
   <div class="philosophy-bg">
-    <img src="assets/images/cta-trees.jpg" alt="" loading="lazy" aria-hidden="true">
+    <img src="assets/images/forest-bg.jpg" alt="" loading="lazy" aria-hidden="true">
   </div>
   <div class="philosophy-overlay"></div>
   <div class="container">
@@ -1074,20 +1108,20 @@ h1, h2, h3, h4 {
 
     <div class="philosophy-pillars fade-in">
       <div class="pillar">
-        <div class="pillar-number">1</div>
         <div class="pillar-circle">
+          <div class="pillar-number">1</div>
           <span>Intuitive<br>Leadership</span>
         </div>
       </div>
       <div class="pillar">
-        <div class="pillar-number">2</div>
         <div class="pillar-circle">
+          <div class="pillar-number">2</div>
           <span>Aligned<br>Profitability</span>
         </div>
       </div>
       <div class="pillar">
-        <div class="pillar-number">3</div>
         <div class="pillar-circle">
+          <div class="pillar-number">3</div>
           <span>Resonance<br>Marketing</span>
         </div>
       </div>
@@ -1245,7 +1279,7 @@ h1, h2, h3, h4 {
     <div class="container">
       <div class="footer-lower-inner">
         <div class="footer-legal">
-          <p>&copy; Jason Moss LLC. All rights reserved. Original design by <a href="https://brandthrive.co/" target="_blank" rel="noopener noreferrer">BrandThrive</a>.</p>
+          <p>&copy; Jason Moss LLC. All rights reserved.</p>
           <div class="footer-legal-links">
             <a href="/privacy/">Privacy Policy</a>
             <a href="/terms/">Terms &amp; Conditions</a>
