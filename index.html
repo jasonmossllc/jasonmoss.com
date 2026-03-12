@@ -850,9 +850,55 @@ h1, h2, h3, h4 {
     display: flex;
   }
 
+  .hero {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .hero-bg {
+    order: 2;
+  }
+
+  .hero-bg picture img {
+    max-height: none;
+    object-fit: cover;
+    object-position: center 55%;
+    aspect-ratio: 16 / 9;
+  }
+
+  .hero-overlay {
+    display: none;
+  }
+
+  .hero-content {
+    position: relative;
+    order: 1;
+    background: var(--sand);
+    padding: 0;
+    inset: auto;
+    display: block;
+  }
+
   .hero-content-inner {
-    padding: 0 28px;
-    padding-top: var(--header-height);
+    padding: 28px 28px 32px;
+    padding-top: calc(var(--header-height) + 12px);
+  }
+
+  .hero h1 {
+    color: var(--charcoal);
+    font-size: clamp(28px, 4vw, 40px);
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .hero h1 span {
+    color: var(--gold);
+    text-shadow: none;
+  }
+
+  .hero .btn-primary {
+    font-size: 12px;
+    padding: 14px 28px;
   }
 
   .philosophy-pillars {
@@ -915,38 +961,16 @@ h1, h2, h3, h4 {
   }
 
   .hero-bg picture img {
-    max-height: 75vh;
-    object-position: center top;
+    aspect-ratio: 3 / 2.8;
   }
 
   .hero-content-inner {
-    padding: 0 20px;
-    padding-top: calc(var(--header-height) + 12px);
-  }
-
-  .hero-content {
-    align-items: flex-start;
+    padding: 28px 20px 32px;
+    padding-top: calc(var(--header-height) + 16px);
   }
 
   .hero h1 {
-    font-size: clamp(24px, 7vw, 32px);
-    max-width: 55%;
-    margin-bottom: 24px;
-  }
-
-  .hero .btn-primary {
-    font-size: 12px;
-    padding: 12px 24px;
-  }
-
-  .hero-overlay {
-    background: linear-gradient(
-      to bottom,
-      rgba(29, 31, 30, 0.6) 0%,
-      rgba(29, 31, 30, 0.4) 30%,
-      rgba(29, 31, 30, 0.15) 55%,
-      transparent 100%
-    );
+    font-size: clamp(26px, 7vw, 36px);
   }
 
   .intro {
@@ -1020,14 +1044,13 @@ h1, h2, h3, h4 {
 /* Small mobile fine-tune */
 @media (max-width: 374px) {
   .hero h1 {
-    font-size: 22px;
-    max-width: 60%;
+    font-size: 24px;
     margin-bottom: 20px;
   }
 
   .hero .btn-primary {
     font-size: 11px;
-    padding: 10px 20px;
+    padding: 12px 22px;
   }
 }
 
@@ -1079,7 +1102,7 @@ h1, h2, h3, h4 {
 <section class="hero" id="hero">
   <div class="hero-bg">
     <picture>
-      <source media="(max-width: 767px)" srcset="assets/images/hero-mountain-mobile.png">
+      <source media="(max-width: 1023px)" srcset="assets/images/hero-mountain-mobile.png">
       <img src="assets/images/hero-mountain.jpg" alt="Jason Moss standing in mountain landscape at golden hour" loading="eager">
     </picture>
   </div>
