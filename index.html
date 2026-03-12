@@ -22,7 +22,7 @@
   --charcoal: #1D1F1E;
   --forest: #2C3F36;
   --mocha: #5B4B3F;
-  --mocha-light: #6e6156;
+  --mocha-light: #695b50;
   --taupe: #8C837A;
   --gold: #C2A86C;
   --bone: #E9E2D3;
@@ -917,22 +917,12 @@ h1, h2, h3, h4 {
   }
 
   .philosophy-pillars {
-    flex-wrap: wrap;
-    column-gap: 18px;
-    row-gap: 8px;
-    max-width: 340px;
-    margin-left: auto;
-    margin-right: auto;
-    justify-content: center;
-  }
-
-  .pillar {
-    flex: 0 0 auto;
+    gap: 32px;
   }
 
   .pillar-circle {
-    width: 140px;
-    height: 140px;
+    width: clamp(100px, 14vw, 130px);
+    height: clamp(100px, 14vw, 130px);
   }
 
   .testimonial-grid {
