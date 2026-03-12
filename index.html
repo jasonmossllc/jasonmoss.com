@@ -5,6 +5,32 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Jason Moss — Helping Entrepreneurs Grow with Intuition and Ease</title>
 <meta name="description" content="Jason Moss helps entrepreneurs grow with more revenue, clarity, and peace through intuitive leadership, aligned profitability, and resonance marketing.">
+
+<!-- Canonical -->
+<link rel="canonical" href="https://jasonmoss.com/">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://jasonmoss.com/">
+<meta property="og:title" content="Jason Moss — Helping Entrepreneurs Grow with Intuition and Ease">
+<meta property="og:description" content="Jason Moss helps entrepreneurs grow with more revenue, clarity, and peace through intuitive leadership, aligned profitability, and resonance marketing.">
+<meta property="og:image" content="https://jasonmoss.com/assets/images/featured.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:site_name" content="Jason Moss">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Jason Moss — Helping Entrepreneurs Grow with Intuition and Ease">
+<meta name="twitter:description" content="Jason Moss helps entrepreneurs grow with more revenue, clarity, and peace through intuitive leadership, aligned profitability, and resonance marketing.">
+<meta name="twitter:image" content="https://jasonmoss.com/assets/images/featured.jpg">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@400;500;600;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
@@ -634,6 +660,12 @@ h1, h2, h3, h4 {
   width: 100%;
   height: 100%;
   border: none;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+.testimonial-video iframe.loaded {
+  opacity: 1;
 }
 
 .testimonial-name {
@@ -1179,6 +1211,47 @@ h1, h2, h3, h4 {
   }
 }
 </style>
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "name": "Jason Moss",
+      "url": "https://jasonmoss.com",
+      "image": "https://jasonmoss.com/assets/images/featured.jpg",
+      "jobTitle": "Business Coach & Mentor",
+      "description": "Jason Moss helps entrepreneurs grow with more revenue, clarity, and peace through intuitive leadership, aligned profitability, and resonance marketing.",
+      "sameAs": [
+        "https://www.youtube.com/@jasonmossofficial",
+        "https://www.instagram.com/jasonmossofficial/"
+      ]
+    },
+    {
+      "@type": "ProfessionalService",
+      "name": "Jason Moss",
+      "url": "https://jasonmoss.com",
+      "logo": "https://jasonmoss.com/assets/images/logo-black.png",
+      "image": "https://jasonmoss.com/assets/images/featured.jpg",
+      "description": "Mentorship, programs, and teaching to help entrepreneurs release pressure and overthinking so they can lead with clearer intuition and experience more freedom, revenue, and ease.",
+      "founder": {
+        "@type": "Person",
+        "name": "Jason Moss"
+      },
+      "areaServed": "Worldwide",
+      "serviceType": ["Business Coaching", "Mentorship", "Entrepreneurship Programs"]
+    },
+    {
+      "@type": "WebSite",
+      "name": "Jason Moss",
+      "url": "https://jasonmoss.com"
+    }
+  ]
+}
+</script>
+
 </head>
 <body>
 
@@ -1330,7 +1403,7 @@ h1, h2, h3, h4 {
     <div class="testimonial-grid">
       <div class="testimonial-card fade-in">
         <div class="testimonial-video">
-          <iframe src="https://embed-v2.testimonial.to/v/386321d6-0a00-4dcd-a879-707db74d99a3/" title="Meaghan Long testimonial video" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe src="https://embed-v2.testimonial.to/v/386321d6-0a00-4dcd-a879-707db74d99a3/" title="Meaghan Long testimonial video" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen onload="this.classList.add('loaded')"></iframe>
         </div>
         <div class="testimonial-name">Meaghan Long</div>
         <p class="testimonial-desc">Meaghan refined her offer, cut her hours in half, and now brings in $20k+ months with space to exhale.</p>
@@ -1338,7 +1411,7 @@ h1, h2, h3, h4 {
 
       <div class="testimonial-card fade-in">
         <div class="testimonial-video">
-          <iframe src="https://embed-v2.testimonial.to/v/4f9e9e7c-5269-45a7-b445-a3789b0e5347/" title="Zach Bloom testimonial video" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe src="https://embed-v2.testimonial.to/v/4f9e9e7c-5269-45a7-b445-a3789b0e5347/" title="Zach Bloom testimonial video" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen onload="this.classList.add('loaded')"></iframe>
         </div>
         <div class="testimonial-name">Zach Bloom</div>
         <p class="testimonial-desc">Zach simplified his model and had his most spacious and profitable year ever — with more clarity, less noise.</p>
@@ -1346,7 +1419,7 @@ h1, h2, h3, h4 {
 
       <div class="testimonial-card fade-in">
         <div class="testimonial-video">
-          <iframe src="https://embed-v2.testimonial.to/v/a89aa735-1860-4735-a43a-cab257f17d2c/" title="Federica Prayer testimonial video" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          <iframe src="https://embed-v2.testimonial.to/v/a89aa735-1860-4735-a43a-cab257f17d2c/" title="Federica Prayer testimonial video" loading="lazy" allow="autoplay; encrypted-media" allowfullscreen onload="this.classList.add('loaded')"></iframe>
         </div>
         <div class="testimonial-name">Federica Prayer</div>
         <p class="testimonial-desc">Federica raised her rates and hit her highest month ever with more ease.</p>
