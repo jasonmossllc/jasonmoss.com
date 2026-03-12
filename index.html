@@ -297,9 +297,9 @@ h1, h2, h3, h4 {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 85vh;
+  max-height: 92vh;
   object-fit: cover;
-  object-position: center 55%;
+  object-position: center bottom;
 }
 
 .hero-overlay {
@@ -861,9 +861,9 @@ h1, h2, h3, h4 {
 
   .hero-bg picture img {
     max-height: none;
-    object-fit: cover;
-    object-position: center 55%;
-    aspect-ratio: 16 / 9;
+    object-fit: contain;
+    object-position: center center;
+    aspect-ratio: auto;
   }
 
   .hero-overlay {
@@ -961,7 +961,7 @@ h1, h2, h3, h4 {
   }
 
   .hero-bg picture img {
-    aspect-ratio: 3 / 2.8;
+    /* phone: same as tablet — show full image */
   }
 
   .hero-content-inner {
@@ -1057,7 +1057,7 @@ h1, h2, h3, h4 {
 /* Wide screens */
 @media (min-width: 1600px) {
   .hero-bg picture img {
-    object-position: center 60%;
+    max-height: 88vh;
   }
 }
 </style>
