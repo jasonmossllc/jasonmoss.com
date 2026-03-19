@@ -70,9 +70,10 @@ body::before {
 .hero {
   min-height: calc(100svh - 80px);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 40px 0 clamp(50px, 6vw, 80px);
+  padding: 40px 0 0;
   text-align: center;
   position: relative;
 }
@@ -153,6 +154,7 @@ body::before {
 /* Stone background for problem section */
 .section-sand-lg.problem-section {
   background: var(--stone);
+  padding-top: clamp(48px, 6vw, 80px);
 }
 
 /* White cards on stone background */
@@ -169,9 +171,10 @@ body::before {
 
 /* --- Trust logos bar --- */
 .trust-bar {
-  padding: clamp(32px, 4vw, 48px) 0;
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-bottom: 0;
+  width: 100%;
   text-align: center;
-  background: var(--sand);
 }
 
 .trust-logos {
@@ -1150,7 +1153,8 @@ body::before {
 
 /* --- Responsive fine-tuning --- */
 @media (max-width: 768px) {
-  .hero { min-height: auto; padding: clamp(70px, 10vw, 120px) 0 clamp(70px, 10vw, 100px); }
+  .hero { min-height: auto; padding: clamp(70px, 10vw, 120px) 0 0; }
+  .trust-bar { margin-top: clamp(28px, 5vw, 40px); padding-bottom: clamp(48px, 6vw, 64px); }
   .hero::after { height: 40px; }
   .jason-image-wrap::before { display: none; }
   .compare-col { padding: 24px; }
@@ -1180,24 +1184,16 @@ body::before {
     <p class="subtitle-small fade-in">Built by me. Delivered in 7 days.</p>
     <a href="https://checkout.jasonmoss.com/checkout/business-clarity-plan" class="btn-primary fade-in">GET YOUR PLAN</a>
   </div>
-</section>
-
-<!-- Hero image (hidden for mockup)
-<div class="hero-image-wrap fade-in">
-  <img src="./assets/images/hero-mountain.jpg" alt="Mountain landscape at golden hour" class="image-break" loading="eager">
-</div>
--->
-
-<!-- Trust logos bar -->
-<div class="trust-bar fade-in">
-  <div class="trust-logos">
-    <img src="./assets/images/logo-forbes-scotland.png" alt="Forbes Scotland" class="logo-forbes">
-    <img src="./assets/images/logo-business-insider.png" alt="Business Insider" class="logo-bi">
-    <img src="./assets/images/logo-obo.png" alt="Online Business Owner" class="logo-obo">
-    <img src="./assets/images/logo-entrepreneur.png" alt="Entrepreneur" class="logo-entrepreneur">
-    <img src="./assets/images/logo-fast-company-sa.png" alt="Fast Company South Africa" class="logo-fc">
+  <div class="trust-bar fade-in">
+    <div class="trust-logos">
+      <img src="./assets/images/logo-forbes-scotland.png" alt="Forbes Scotland" class="logo-forbes">
+      <img src="./assets/images/logo-business-insider.png" alt="Business Insider" class="logo-bi">
+      <img src="./assets/images/logo-obo.png" alt="Online Business Owner" class="logo-obo">
+      <img src="./assets/images/logo-entrepreneur.png" alt="Entrepreneur" class="logo-entrepreneur">
+      <img src="./assets/images/logo-fast-company-sa.png" alt="Fast Company South Africa" class="logo-fc">
+    </div>
   </div>
-</div>
+</section>
 
 <!-- Problem + Agitation (unified section) -->
 <section class="section-sand-lg problem-section">
