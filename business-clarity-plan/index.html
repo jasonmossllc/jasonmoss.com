@@ -150,11 +150,6 @@ body::before {
   display: block;
 }
 
-/* --- Hero divider --- */
-#hero-divider {
-  display: none;
-}
-
 /* Stone background for problem section */
 .section-sand-lg.problem-section {
   background: var(--stone);
@@ -174,8 +169,9 @@ body::before {
 
 /* --- Trust logos bar --- */
 .trust-bar {
-  margin-top: clamp(48px, 6vw, 72px);
+  padding: clamp(32px, 4vw, 48px) 0;
   text-align: center;
+  background: var(--sand);
 }
 
 .trust-logos {
@@ -1192,8 +1188,16 @@ body::before {
 </div>
 -->
 
-<!-- Hero divider -->
-<div id="hero-divider"></div>
+<!-- Trust logos bar -->
+<div class="trust-bar fade-in">
+  <div class="trust-logos">
+    <img src="./assets/images/logo-forbes-scotland.png" alt="Forbes Scotland" class="logo-forbes">
+    <img src="./assets/images/logo-business-insider.png" alt="Business Insider" class="logo-bi">
+    <img src="./assets/images/logo-obo.png" alt="Online Business Owner" class="logo-obo">
+    <img src="./assets/images/logo-entrepreneur.png" alt="Entrepreneur" class="logo-entrepreneur">
+    <img src="./assets/images/logo-fast-company-sa.png" alt="Fast Company South Africa" class="logo-fc">
+  </div>
+</div>
 
 <!-- Problem + Agitation (unified section) -->
 <section class="section-sand-lg problem-section">
@@ -1329,15 +1333,6 @@ body::before {
     </div>
     <div style="margin-top: 48px; text-align: center;">
       <a href="https://checkout.jasonmoss.com/checkout/business-clarity-plan" class="btn-primary fade-in">GET YOUR PLAN</a>
-    </div>
-    <div class="trust-bar fade-in">
-      <div class="trust-logos">
-        <img src="./assets/images/logo-forbes-scotland.png" alt="Forbes Scotland" class="logo-forbes">
-        <img src="./assets/images/logo-business-insider.png" alt="Business Insider" class="logo-bi">
-        <img src="./assets/images/logo-obo.png" alt="Online Business Owner" class="logo-obo">
-        <img src="./assets/images/logo-entrepreneur.png" alt="Entrepreneur" class="logo-entrepreneur">
-        <img src="./assets/images/logo-fast-company-sa.png" alt="Fast Company South Africa" class="logo-fc">
-      </div>
     </div>
   </div>
 </section>
