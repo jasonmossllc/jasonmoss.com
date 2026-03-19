@@ -172,6 +172,37 @@ body::before {
   color: var(--charcoal);
 }
 
+/* --- Trust logos bar --- */
+.trust-bar {
+  margin-top: clamp(48px, 6vw, 72px);
+  text-align: center;
+}
+
+.trust-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(28px, 4vw, 48px);
+  flex-wrap: wrap;
+}
+
+.trust-logos img {
+  height: auto;
+  opacity: 0.45;
+  filter: grayscale(100%);
+  transition: opacity 0.3s ease;
+}
+
+.trust-logos img:hover {
+  opacity: 0.7;
+}
+
+.trust-logos img.logo-forbes { width: 90px; }
+.trust-logos img.logo-bi { width: 155px; }
+.trust-logos img.logo-obo { width: 78px; }
+.trust-logos img.logo-entrepreneur { width: 115px; }
+.trust-logos img.logo-fc { width: 115px; transform: translateY(2px); }
+
 /* --- Content sections --- */
 .section-sand {
   background: var(--sand);
@@ -1127,6 +1158,11 @@ body::before {
   .hero::after { height: 40px; }
   .jason-image-wrap::before { display: none; }
   .compare-col { padding: 24px; }
+  .trust-logos img.logo-forbes { width: 75px; }
+  .trust-logos img.logo-bi { width: 130px; }
+  .trust-logos img.logo-obo { width: 65px; }
+  .trust-logos img.logo-entrepreneur { width: 95px; }
+  .trust-logos img.logo-fc { width: 95px; }
 }
 </style>
 </head>
@@ -1293,6 +1329,15 @@ body::before {
     </div>
     <div style="margin-top: 48px; text-align: center;">
       <a href="https://checkout.jasonmoss.com/checkout/business-clarity-plan" class="btn-primary fade-in">GET YOUR PLAN</a>
+    </div>
+    <div class="trust-bar fade-in">
+      <div class="trust-logos">
+        <img src="./assets/images/logo-forbes-scotland.png" alt="Forbes Scotland" class="logo-forbes">
+        <img src="./assets/images/logo-business-insider.png" alt="Business Insider" class="logo-bi">
+        <img src="./assets/images/logo-obo.png" alt="Online Business Owner" class="logo-obo">
+        <img src="./assets/images/logo-entrepreneur.png" alt="Entrepreneur" class="logo-entrepreneur">
+        <img src="./assets/images/logo-fast-company-sa.png" alt="Fast Company South Africa" class="logo-fc">
+      </div>
     </div>
   </div>
 </section>
