@@ -64,18 +64,6 @@ body::before {
 .header {
   padding: 28px 0;
   background: var(--sand);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  transition: box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.header.scrolled {
-  box-shadow: 0 1px 0 rgba(29,31,30,0.05);
-  background: rgba(248,246,242,0.95);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
 }
 
 /* --- Hero --- */
@@ -1558,7 +1546,7 @@ body::before {
 // Sticky header effect
 const header = document.getElementById('header');
 window.addEventListener('scroll', () => {
-  header.classList.toggle('scrolled', window.scrollY > 10);
+  // header scroll class removed (no longer sticky)
 });
 
 // Scroll-triggered fade-in animations (matching jasonmoss.com)
