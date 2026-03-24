@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jason Moss — Links</title>
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgb(39, 41, 40);
+    color: #F8F6F2;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+    min-height: 100vh;
+  }
+
+  .container {
+    max-width: 60rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 1.6875rem 1.5rem 3rem;
+    text-align: center;
+  }
+
+  /* Headshot */
+  .headshot {
+    width: 8.375rem;
+    height: 8.375rem;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: 0 auto 1rem;
+    display: block;
+  }
+
+  /* Heading */
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    font-size: 1.8125rem;
+    line-height: 2.175rem;
+    text-align: center;
+    max-width: 32.9375rem;
+    margin: 0 auto 1rem;
+  }
+
+  h1 .gold {
+    color: #c2a86c;
+    font-style: italic;
+  }
+
+  /* Subheading */
+  .subheading {
+    font-size: 1.125rem;
+    line-height: 1.575rem;
+    text-align: center;
+    max-width: 30.4375rem;
+    margin: 0 auto 0.8rem;
+  }
+
+  /* Form */
+  .email-form {
+    max-width: 34.25rem;
+    margin: 0 auto 2rem;
+  }
+
+  .form-input {
+    width: 100%;
+    height: 2.6875em;
+    padding: 0.5rem 0.625rem;
+    margin: 0.5rem 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1rem;
+    color: #000;
+    background: #fff;
+    border: 1px solid #BDBDBD;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.28);
+  }
+
+  .form-input::placeholder {
+    color: #000;
+    opacity: 1;
+  }
+
+  .form-input:focus {
+    outline: none;
+    border: 1px solid #C2A86C;
+  }
+
+  .form-btn {
+    width: 100%;
+    height: 3.9375rem;
+    background: #C2A86C;
+    color: #000;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: 0.75rem;
+  }
+
+  .form-btn:hover {
+    background: #A7915D;
+  }
+
+  /* Divider */
+  .divider {
+    border: none;
+    border-bottom: 1px solid #8C837A;
+    max-width: 34.25rem;
+    margin: 1rem auto 1.5rem;
+  }
+
+  /* Dive Deeper heading */
+  h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    font-size: 1.5rem;
+    line-height: 1.8rem;
+    text-align: center;
+    max-width: 41.25rem;
+    margin: 0 auto 1.5rem;
+  }
+
+  /* Link buttons */
+  .link-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 34.1875rem;
+    width: 100%;
+    height: 4.25rem;
+    margin-left: auto;
+    margin-right: auto;
+    background: #2C3F36;
+    color: #F8F6F2;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 6px;
+    margin-bottom: 1.375rem;
+    transition: background 0.3s ease;
+  }
+
+  .link-btn:hover {
+    background: #2C3F36;
+    text-decoration: none;
+  }
+
+  /* Footer spacer */
+  .footer-bar {
+    height: 2.125rem;
+    background: rgb(39, 41, 40);
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 767px) {
+    .container {
+      max-width: calc(400px + 2.5rem);
+      padding: 1.625rem 1.25rem 3rem;
+    }
+
+    .headshot {
+      width: 8.25rem;
+      height: 8.25rem;
+    }
+
+    h1 {
+      font-size: 1.625rem;
+      line-height: 1.95rem;
+      max-width: 22.25rem;
+    }
+
+    .subheading {
+      font-size: 1.125rem;
+      line-height: 1.35rem;
+      max-width: 21.0625rem;
+    }
+
+    h2 {
+      font-size: 1.3125rem;
+      line-height: 1.3125rem;
+    }
+
+    .form-btn {
+      height: 4.125rem;
+    }
+
+    .link-btn {
+      height: 4.375rem;
+      font-size: 1.125rem;
+    }
+  }
+</style>
+</head>
+<body>
+<main class="container">
+  <!-- Headshot -->
+  <img src="/assets/images/jm-headshot.png" alt="Jason Moss" class="headshot" width="134" height="134">
+
+  <!-- Heading -->
+  <h1>Discover a way to market your business that actually <span class="gold">feels like you.</span></h1>
+
+  <!-- Subheading -->
+  <p class="subheading">Join me for a powerful free training that's&nbsp;helped hundreds of entrepreneurs show up with more <strong>authenticity, alignment, and ease.</strong></p>
+
+  <!-- Opt-in Form -->
+  <form class="email-form" novalidate>
+    <input type="hidden" name="Source" value="Organic">
+    <input type="text" name="First name" class="form-input" placeholder="First name" required aria-required="true">
+    <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
+    <button type="submit" class="form-btn">Experience The Shift</button>
+  </form>
+
+  <!-- Divider -->
+  <hr class="divider">
+
+  <!-- Dive Deeper -->
+  <h2>Dive deeper</h2>
+
+  <!-- Link Buttons -->
+  <a href="/apply" class="link-btn">Explore Working Together</a>
+  <a href="/expansion" class="link-btn">Expansion 2026 Retreat</a>
+  <a href="/transmission" class="link-btn">Listen To The Podcast</a>
+</main>
+
+<!-- Form JS: ZeroBounce validation + submit to ActiveCampaign + email passthrough -->
+<script>
+(function() {
+  'use strict';
+
+  var form = document.querySelector('.email-form');
+  if (!form) return;
+
+  var emailInput = form.querySelector('input[type="email"]');
+  var nameInput = form.querySelector('input[name="First name"]');
+  var sourceInput = form.querySelector('input[name="Source"]');
+  var submitBtn = form.querySelector('.form-btn');
+  if (!emailInput || !submitBtn) return;
+
+  var originalText = submitBtn.textContent.trim();
+  var submitting = false;
+
+  form.addEventListener('submit', async function(e) {
+    e.preventDefault();
+    if (submitting) return;
+
+    var firstName = nameInput ? nameInput.value.trim() : '';
+    var email = emailInput.value.trim();
+    var source = sourceInput ? sourceInput.value : 'Organic';
+
+    // Basic validation
+    if (!firstName) { alert('Please enter your first name.'); return; }
+    if (!email) { alert('Please enter your email address.'); return; }
+    if (!emailInput.checkValidity()) {
+      alert('Please enter a valid email address format.');
+      return;
+    }
+
+    submitting = true;
+    submitBtn.textContent = 'Validating…';
+
+    // Step 1: ZeroBounce email validation
+    var emailValid = true;
+    var controller = new AbortController();
+    var timeout = setTimeout(function() { controller.abort(); }, 4000);
+
+    try {
+      var res = await fetch('/.netlify/functions/verify-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: email }),
+        signal: controller.signal
+      });
+      var data = await res.json();
+
+      if (!data.valid) {
+        alert(data.reason || 'Please enter a real, non-temporary email address.');
+        emailValid = false;
+      }
+    } catch (err) {
+      console.error('ZeroBounce error or timeout:', err);
+      // Soft-fail: allow submission on error/timeout
+    } finally {
+      clearTimeout(timeout);
+    }
+
+    if (!emailValid) {
+      submitting = false;
+      submitBtn.textContent = originalText;
+      return;
+    }
+
+    // Step 2: Submit to ActiveCampaign
+    submitBtn.textContent = 'Submitting…';
+
+    try {
+      var submitRes = await fetch('/.netlify/functions/submit-contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          email: email,
+          first_name: firstName,
+          latest_source: source,
+          tag: 'Resonance Masterclass (Cold Traffic)'
+        })
+      });
+
+      if (!submitRes.ok) {
+        throw new Error('Submit failed');
+      }
+
+      // Step 3: Redirect with email passthrough
+      var redirectUrl = '/optin-thank-you?redirect=resonance-masterclass-replay&email=' + encodeURIComponent(email);
+      window.location.href = redirectUrl;
+
+    } catch (err) {
+      console.error('Form submission error:', err);
+      alert('Something went wrong. Please try again.');
+      submitting = false;
+      submitBtn.textContent = originalText;
+    }
+  });
+})();
+</script>
+</body>
+</html>
