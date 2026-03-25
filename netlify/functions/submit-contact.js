@@ -7,8 +7,8 @@
 //
 // Custom field IDs (update these with your actual IDs from ActiveCampaign):
 const CUSTOM_FIELDS = {
-  latest_ad: '97',     // Latest Ad
-  latest_source: '45', // Latest Source
+  latest_ad: '18',     // Latest Ad (Field ID 18)
+  latest_source: '15', // Latest Source (Field ID 15)
   // Add more custom fields as needed
 };
 
