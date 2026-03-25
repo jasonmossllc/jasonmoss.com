@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Opt-In Redirect</title>
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+</head>
+<body>
+<script>
+(function() {
+
+  function buildRedirectUrl() {
+    var params = new URLSearchParams(window.location.search);
+    var target = params.get("redirect");
+
+    if (!target) return "https://jasonmoss.com";
+
+    var base = "https://jasonmoss.com/" + encodeURIComponent(target);
+
+    var newParams = new URLSearchParams();
+
+    params.forEach(function(value, key) {
+      if (key !== "redirect" && key !== "debug") {
+        newParams.append(key, value);
+      }
+    });
+
+    var query = newParams.toString();
+
+    return query ? base + "?" + query : base;
+  }
+
+  var params = new URLSearchParams(window.location.search);
+  var isDebug = params.get("debug") === "1";
+
+  window.addEventListener("load", function() {
+
+    if (isDebug) {
+      console.log("Debug mode: redirect paused");
+      console.log("Would redirect to:", buildRedirectUrl());
+      return;
+    }
+
+    window.location.replace(buildRedirectUrl());
+  });
+
+})();
+</script>
+</body>
+</html>
