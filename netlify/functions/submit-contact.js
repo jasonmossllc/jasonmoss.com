@@ -7,8 +7,8 @@
 //
 // Custom field IDs (update these with your actual IDs from ActiveCampaign):
 const CUSTOM_FIELDS = {
-  latest_ad: '97',     // Latest Ad
-  latest_source: '45', // Latest Source
+  latest_ad: '18',     // Latest Ad (Field ID 18)
+  latest_source: '15', // Latest Source (Field ID 15)
   // Add more custom fields as needed
 };
 
@@ -89,7 +89,29 @@ exports.handler = async (event) => {
     const contactResult = await contactResponse.json();
     const contactId = contactResult.contact.id;
 
-    // Step 2: Apply tag if provided
+    // Step 2: Subscribe contact to Main List (List ID 1)
+    const listResponse = await fetch(`${process.env.AC_API_URL}/api/3/contactLists`, {
+      method: 'POST',
+      headers: {
+        'Api-Token': process.env.AC_API_KEY,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        contactList: { list: 1, contact: contactId, status: 1 },
+      }),
+    });
+
+    if (!listResponse.ok) {
+      const errorText = await listResponse.text();
+      console.error('ActiveCampaign list subscription failed:', errorText);
+      return {
+        statusCode: 500,
+        headers,
+        body: JSON.stringify({ error: 'Failed to subscribe contact to list' }),
+      };
+    }
+
+    // Step 3: Apply tag if provided
     if (data.tag) {
       // First, find or create the tag
       const tagSearchResponse = await fetch(
