@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In</title>
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: #f8f6f2;
+    color: #1D1F1E;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 400;
+  }
+
+  .container {
+    max-width: 60rem;
+    width: 100%;
+    margin: 0 auto;
+    padding: 2.9375rem 1.5rem 3rem;
+    text-align: center;
+  }
+
+  .card {
+    max-width: 48rem;
+    margin: 0 auto;
+    padding: 1.3125rem 1.875rem 2rem;
+  }
+
+  h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 700;
+    font-style: italic;
+    font-size: 2.75rem;
+    line-height: 3.3rem;
+    color: #C2A86C;
+    text-align: center;
+    max-width: 40.0625rem;
+    margin: 0 auto 0.75rem;
+  }
+
+  h3 {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    font-size: 1.125rem;
+    line-height: 2.025rem;
+    color: #1D1F1E;
+    text-align: center;
+    max-width: 36.25rem;
+    margin: 0 auto 1.5rem;
+  }
+
+  .video-wrapper {
+    max-width: 44.125rem;
+    margin: 0 auto;
+  }
+
+  wistia-player:not(:defined) {
+    background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/pwgrduvffm/swatch');
+    display: block;
+    filter: blur(5px);
+    padding-top: 56.25%;
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 767px) {
+    .container {
+      max-width: 400px;
+      padding: 4.125rem 1.25rem 3rem;
+    }
+
+    .card {
+      max-width: 22.5rem;
+      padding: 1.25rem 1.25rem 2rem;
+    }
+
+    h1 {
+      font-size: 2rem;
+      line-height: 2.4rem;
+      max-width: 20rem;
+    }
+
+    h3 {
+      font-size: 1.125rem;
+      line-height: 1.6875rem;
+      max-width: 19.3125rem;
+    }
+
+    .video-wrapper {
+      max-width: 20rem;
+    }
+  }
+</style>
+</head>
+<body>
+<main class="container">
+  <div class="card">
+    <h1>you're in.</h1>
+    <h3>congratulations. you've successfully enrolled.<br>watch the video below for your next steps.</h3>
+    <div class="video-wrapper">
+      <script src="https://fast.wistia.com/player.js" async></script>
+      <script src="https://fast.wistia.com/embed/pwgrduvffm.js" async type="module"></script>
+      <wistia-player media-id="pwgrduvffm" aspect="1.7777777777777777"></wistia-player>
+    </div>
+  </div>
+</main>
+</body>
+</html>
