@@ -20,9 +20,9 @@
     var params = new URLSearchParams(window.location.search);
     var target = params.get("redirect");
 
-    if (!target) return "https://jasonmoss.com";
+    if (!target) return "/";
 
-    var base = "https://jasonmoss.com/" + encodeURIComponent(target);
+    var base = "/" + encodeURIComponent(target);
 
     var newParams = new URLSearchParams();
 
