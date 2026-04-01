@@ -78,21 +78,6 @@
     line-height: 1.7;
   }
 
-  /* ========================================
-     Scroll Reveal Animations (JS-driven)
-     ======================================== */
-  .reveal {
-    opacity: 0;
-    transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-  .reveal.is-visible {
-    opacity: 1;
-  }
-
-  /* Staggered children */
-  .reveal-stagger > .reveal:nth-child(2) { transition-delay: 0.1s; }
-  .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.2s; }
-
   /* Buttons */
   .btn-primary {
     display: inline-block;
@@ -694,10 +679,6 @@
 
     .sticky-cta { display: block; }
 
-    /* Simpler reveal on mobile */
-    .reveal { transition-duration: 0.5s; }
-    .reveal-stagger > .reveal:nth-child(2) { transition-delay: 0.05s; }
-    .reveal-stagger > .reveal:nth-child(3) { transition-delay: 0.1s; }
   }
 </style>
 </head>
@@ -749,7 +730,7 @@
   <!-- Section 2: Who This Is For -->
   <section class="who-for" id="who-for">
     <div class="who-for__header">
-      <h2 class="reveal">This is for you if...</h2>
+      <h2>This is for you if...</h2>
     </div>
 
     <div class="who-for__items reveal-stagger">
@@ -780,7 +761,7 @@
   <!-- Section 3: What This Is -->
   <section class="what-this-is" id="what-this-is">
     <div class="container">
-      <h2 class="reveal">What working together looks like</h2>
+      <h2>What working together looks like</h2>
 
       <div class="what-this-is__paths">
         <div class="what-this-is__path reveal">
@@ -826,7 +807,7 @@
   <!-- Section 4: How It Works -->
   <section class="how-it-works" id="how-it-works">
     <div class="how-it-works__header">
-      <h2 class="reveal">The process is simple</h2>
+      <h2>The process is simple</h2>
     </div>
 
     <div class="how-it-works__steps">
@@ -867,7 +848,7 @@
   <!-- Section 5: Testimonials -->
   <section class="testimonials" id="testimonials">
     <div class="testimonials__header">
-      <h2 class="reveal">Stories from entrepreneurs like you</h2>
+      <h2>Stories from entrepreneurs like you</h2>
     </div>
 
     <div class="testimonials__grid">
@@ -925,7 +906,7 @@
   <!-- Section 6: Final CTA — Elevated -->
   <section class="final-cta" id="apply">
     <div class="container">
-      <h2 class="reveal">You don't have to figure this out alone.</h2>
+      <h2>You don't have to figure this out alone.</h2>
       <p class="final-cta__subtext">Five minutes is all it takes. Share where you are, what you're building, and what's next — and I'll take it from there.</p>
       <a href="https://jasonmoss449611.typeform.com/to/a3G8k2AA?typeform-welcome=0" class="btn-primary btn-primary--final">See If Mentorship Is the Right Fit</a>
       <p class="final-cta__microcopy">No hard sell. No pressure. Just a simple application.</p>
@@ -976,21 +957,7 @@
       window.addEventListener('scroll', checkScroll, { passive: true });
       checkScroll();
 
-      /* Scroll reveal */
-      var reveals = document.querySelectorAll('.reveal');
-      if ('IntersectionObserver' in window) {
-        var observer = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('is-visible');
-              observer.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.15 });
-        reveals.forEach(function(el) { observer.observe(el); });
-      } else {
-        reveals.forEach(function(el) { el.classList.add('is-visible'); });
-      }
+
     })();
   </script>
 
