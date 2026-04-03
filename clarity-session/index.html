@@ -1,0 +1,1529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<!--
+   ______                            __
+  / ____/___  ____ ___  ____  __  __/ /____  _____
+ / /   / __ \/ __ `__ \/ __ \/ / / / __/ _ \/ ___/
+/ /___/ /_/ / / / / / / /_/ / /_/ / /_/  __/ /
+\____/\____/_/ /_/ /_/ .___/\__,_/\__/\___/_/
+                    /_/
+        Created with Perplexity Computer
+        https://www.perplexity.ai/computer
+-->
+
+<!-- Perplexity Computer Attribution — SEO Meta Tags -->
+<meta name="generator" content="Perplexity Computer">
+<meta name="author" content="Perplexity Computer">
+<meta property="og:see_also" content="https://www.perplexity.ai/computer">
+<link rel="author" href="https://www.perplexity.ai/computer">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clarity Session — Jason Moss</title>
+<meta name="description" content="There's a clear path to more clients and revenue inside your business. In a private Clarity Session, Jason Moss will find it with you — and give you a clear roadmap to act on.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./shared.css">
+<style>
+/* ===== EDITORIAL ELEVATION ===== */
+/* Premium, editorial, spacious — subtle grain, refined typography, layered depth */
+
+/* --- Grain texture overlay (global) --- */
+body {
+  background: var(--sand);
+  color: var(--charcoal);
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 9999;
+  opacity: 0.022;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  background-size: 256px 256px;
+}
+
+/* --- Scroll fade-in animations --- */
+.fade-in {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1), transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* --- Header --- */
+.header {
+  padding: 32px 0;
+  background: var(--sand);
+}
+
+/* --- Hero --- */
+.hero {
+  min-height: calc(100svh - 90px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 0 clamp(50px, 6vw, 80px);
+  text-align: center;
+  position: relative;
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 1px;
+  height: 56px;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+  opacity: 0.35;
+}
+
+.hero h1 {
+  color: var(--charcoal);
+  margin-bottom: clamp(22px, 2.5vw, 30px);
+  max-width: 720px;
+  margin-left: auto;
+  margin-right: auto;
+  font-size: clamp(34px, 4.5vw, 46px);
+  line-height: 1.22;
+  letter-spacing: -0.02em;
+}
+
+.hero h1 em {
+  font-style: italic;
+  color: inherit;
+}
+
+.hero .subtitle {
+  color: var(--mocha);
+  font-family: var(--font-body);
+  font-size: clamp(16px, 1.6vw, 17px);
+  max-width: 600px;
+  margin: 0 auto clamp(36px, 4vw, 48px);
+  line-height: 1.75;
+  font-weight: 400;
+  letter-spacing: 0.015em;
+}
+
+.hero .subtitle-small {
+  color: var(--taupe);
+  font-size: 14px;
+  margin-bottom: clamp(32px, 4vw, 40px);
+  letter-spacing: 0.01em;
+  font-weight: 400;
+}
+
+/* --- Hero image with overlay --- */
+.hero-image-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-image-wrap::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(248,246,242,0.15) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(248,246,242,0.15) 100%
+  );
+  pointer-events: none;
+}
+
+.image-break {
+  width: 100%;
+  height: clamp(400px, 48vw, 640px);
+  object-fit: cover;
+  object-position: center 58%;
+  display: block;
+}
+
+/* Stone background for problem section */
+.section-sand-lg.problem-section {
+  background: var(--stone);
+}
+
+/* White cards on stone background */
+.problem-section .pain-block {
+  background: rgba(255,255,255,0.75);
+  border-top-color: rgba(194,168,108,0.12);
+  border-right-color: rgba(194,168,108,0.12);
+  border-bottom-color: rgba(194,168,108,0.12);
+}
+
+.problem-section .cost-bridge p {
+  color: var(--charcoal);
+}
+
+/* --- Trust logos bar --- */
+.trust-bar {
+  padding: clamp(28px, 3.5vw, 40px) 0;
+  text-align: center;
+  background: var(--sand);
+  border-top: 1px solid rgba(194,168,108,0.1);
+  border-bottom: 1px solid rgba(194,168,108,0.1);
+}
+
+.trust-logos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(32px, 4.5vw, 56px);
+  flex-wrap: wrap;
+}
+
+.trust-logos img {
+  height: auto;
+  opacity: 0.38;
+  filter: grayscale(100%);
+  transition: opacity 0.3s ease;
+}
+
+.trust-logos img:hover {
+  opacity: 0.6;
+}
+
+.trust-logos img.logo-forbes { width: 90px; }
+.trust-logos img.logo-bi { width: 155px; }
+.trust-logos img.logo-obo { width: 78px; }
+.trust-logos img.logo-entrepreneur { width: 115px; }
+.trust-logos img.logo-fc { width: 115px; transform: translateY(2px); }
+
+/* --- Content sections --- */
+.section-sand {
+  background: var(--sand);
+  padding: var(--section-pad) 0;
+}
+
+.section-sand-lg {
+  background: var(--sand);
+  padding: clamp(80px, 9vw, 130px) 0;
+}
+
+/* --- Forest sections with gradient depth --- */
+.section-forest {
+  background: var(--forest);
+  color: var(--sand);
+  padding: var(--section-pad) 0;
+  position: relative;
+}
+
+.section-forest::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 80% 60% at 20% 0%,
+    rgba(194,168,108,0.04) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.section-forest h2 { color: var(--sand); }
+.section-forest .label { color: var(--gold); }
+.section-forest .divider { background: var(--gold); }
+.section-forest .btn-primary { background: var(--gold); color: var(--charcoal); }
+
+/* --- Stone sections --- */
+.section-stone {
+  background: var(--stone);
+  padding: var(--section-pad) 0;
+}
+
+/* --- Labels --- */
+.label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 20px;
+  display: block;
+}
+
+/* --- Gold accent line (used after labels) --- */
+.accent-line {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  margin-bottom: 28px;
+  opacity: 0.6;
+}
+
+/* --- Divider on sand --- */
+.divider-sand {
+  background: var(--taupe);
+  opacity: 0.2;
+}
+
+/* --- Problem/agitation — editorial prose --- */
+.prose-section {
+  max-width: var(--content-max);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.prose-section p {
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.85;
+  color: var(--charcoal);
+  margin-bottom: 1.4em;
+}
+
+.prose-section p:last-child {
+  margin-bottom: 0;
+}
+
+/* --- Problem section --- */
+.problem-intro {
+  text-align: center;
+  margin-bottom: clamp(36px, 5vw, 56px);
+}
+
+.problem-headline {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 34px);
+  line-height: 1.3;
+  color: var(--charcoal);
+  margin: 0 0 clamp(24px, 3vw, 32px);
+  letter-spacing: -0.01em;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.problem-intro p {
+  font-size: clamp(15px, 1.5vw, 16px);
+  line-height: 1.85;
+  color: var(--mocha);
+  margin-bottom: 1.5em;
+  max-width: 620px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.problem-intro p:last-child { margin-bottom: 0; }
+
+.pain-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.5vw, 16px);
+  margin: 0 auto clamp(36px, 5vw, 56px);
+  max-width: 620px;
+}
+
+.pain-block {
+  background: rgba(255,255,255,0.6);
+  border: 1px solid rgba(194,168,108,0.12);
+  border-left: 3px solid var(--gold);
+  padding: clamp(22px, 2.5vw, 28px) clamp(24px, 3vw, 32px);
+  font-size: clamp(15px, 1.4vw, 16px);
+  line-height: 1.75;
+  color: var(--mocha);
+}
+
+.cost-bridge {
+  max-width: 520px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.cost-bridge p {
+  font-size: clamp(15px, 1.5vw, 16px);
+  line-height: 1.85;
+  color: var(--mocha);
+}
+
+/* --- Clarity section --- */
+.clarity-section-inner {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.clarity-dismiss-group {
+  margin-bottom: clamp(40px, 5vw, 56px);
+}
+
+.clarity-dismiss {
+  font-size: clamp(15px, 1.4vw, 16px);
+  line-height: 1.85;
+  color: var(--taupe);
+  margin-bottom: 0.5em;
+}
+
+.clarity-dismiss:last-child { margin-bottom: 0; }
+
+.clarity-pivot {
+  margin-bottom: clamp(12px, 2vw, 16px);
+}
+
+.clarity-pivot .accent-line {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clarity-heading {
+  font-size: clamp(26px, 3.2vw, 35px);
+  color: var(--forest);
+  letter-spacing: -0.015em;
+  margin-bottom: clamp(32px, 3.5vw, 44px);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.clarity-blocks {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(12px, 1.5vw, 16px);
+  text-align: left;
+}
+
+.clarity-block {
+  background: rgba(233,226,211,0.4);
+  border: 1px solid rgba(194,168,108,0.12);
+  border-left: 3px solid var(--gold);
+  padding: clamp(20px, 2.5vw, 26px) clamp(24px, 3vw, 32px);
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.4vw, 15px);
+  line-height: 1.75;
+  color: var(--mocha);
+}
+
+.clarity-block strong {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: clamp(15px, 1.5vw, 16px);
+  display: block;
+  margin-bottom: 4px;
+  color: var(--charcoal);
+}
+
+.clarity-emphasis {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(16px, 1.6vw, 18px);
+  color: var(--forest);
+  margin-top: clamp(28px, 3vw, 36px);
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* --- Before/After Card Layout --- */
+.ba-section {
+  position: relative;
+  z-index: 1;
+}
+
+.ba-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(24px, 3vw, 40px);
+}
+
+.ba-card {
+  background: var(--sand);
+  padding: clamp(36px, 5vw, 56px) clamp(32px, 4.5vw, 52px);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.ba-card-before {
+  background: rgba(248,246,242,0.5);
+}
+
+.ba-card-after {
+  background: var(--white);
+  border: 2px solid var(--gold);
+}
+
+.ba-heading {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 3vw, 32px);
+  line-height: 1.25;
+  margin-bottom: 0;
+}
+
+.ba-heading-before {
+  color: var(--taupe);
+}
+
+.ba-heading-after {
+  color: var(--charcoal);
+}
+
+.ba-rule {
+  height: 1px;
+  margin: 20px 0 28px;
+}
+
+.ba-rule-before {
+  background: var(--taupe);
+  opacity: 0.25;
+}
+
+.ba-rule-after {
+  background: var(--gold);
+  opacity: 0.45;
+}
+
+.ba-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ba-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 14px 0;
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--taupe);
+}
+
+.ba-list-after li {
+  color: var(--charcoal);
+  font-weight: 600;
+}
+
+.ba-icon {
+  flex-shrink: 0;
+  font-size: 18px;
+  line-height: 1.65;
+  display: inline-block;
+  width: 22px;
+  text-align: center;
+}
+
+.ba-icon-x {
+  color: var(--taupe);
+  font-weight: 400;
+  opacity: 0.6;
+}
+
+.ba-icon-check {
+  color: var(--gold);
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .ba-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  .ba-card {
+    padding: 32px 28px;
+  }
+  .ba-card-after {
+    border: 2px solid var(--gold);
+  }
+}
+
+/* --- Personal guidance — editorial asymmetric layout --- */
+.jason-section {
+  display: grid;
+  grid-template-columns: 1fr 0.8fr;
+  gap: clamp(48px, 7vw, 88px);
+  align-items: center;
+}
+
+.jason-text {
+  padding-right: clamp(0px, 2vw, 16px);
+}
+
+.jason-text p {
+  font-size: clamp(15px, 1.4vw, 16px);
+  line-height: 1.85;
+  color: var(--mocha);
+  margin-bottom: 1.4em;
+}
+
+.jason-text p:last-child {
+  margin-bottom: 0;
+}
+
+.jason-image-wrap {
+  position: relative;
+}
+
+.jason-image-wrap img {
+  width: 100%;
+  aspect-ratio: 2/3;
+  object-fit: cover;
+  object-position: center top;
+  position: relative;
+  z-index: 1;
+}
+
+.jason-image-wrap::before {
+  content: '';
+  position: absolute;
+  top: 12px;
+  right: -12px;
+  bottom: -12px;
+  left: 12px;
+  border: 1px solid var(--gold);
+  opacity: 0.3;
+  z-index: 0;
+}
+
+@media (max-width: 768px) {
+  .jason-section {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .jason-image-wrap::before { display: none; }
+  .jason-text { padding-right: 0; }
+}
+
+/* --- Testimonials — editorial cards --- */
+.testimonial-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+}
+
+.testimonial {
+  background: transparent;
+  border-left: 2px solid var(--gold);
+  padding: clamp(28px, 4vw, 40px) clamp(28px, 4vw, 40px);
+  margin-bottom: 0;
+  border-bottom: 1px solid rgba(29,31,30,0.06);
+}
+
+.testimonial:last-child {
+  border-bottom: none;
+}
+
+.testimonial blockquote {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(16px, 1.8vw, 18px);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  color: var(--charcoal);
+}
+
+.testimonial cite {
+  font-family: var(--font-body);
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: var(--taupe);
+}
+
+/* --- Steps — numbered with gold accent --- */
+.steps-grid {
+  display: grid;
+  gap: 0;
+  counter-reset: step-counter;
+  max-width: 620px;
+}
+
+.step-card {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 0;
+  padding: clamp(28px, 3.5vw, 36px) 0;
+  border-bottom: 1px solid rgba(194,168,108,0.15);
+  counter-increment: step-counter;
+}
+
+.step-card:last-child {
+  border-bottom: none;
+}
+
+.step-num {
+  font-family: var(--font-display);
+  font-size: clamp(28px, 3vw, 36px);
+  color: var(--gold);
+  opacity: 0.45;
+  line-height: 1;
+  padding-top: 4px;
+}
+
+.step-content h3 {
+  margin-bottom: 10px;
+  font-size: clamp(17px, 1.8vw, 19px);
+}
+
+.step-content p {
+  color: var(--mocha);
+  font-size: clamp(14px, 1.4vw, 15px);
+  line-height: 1.8;
+}
+
+@media (max-width: 600px) {
+  .step-card {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+  .step-num {
+    font-size: 28px;
+    opacity: 0.35;
+  }
+}
+
+/* --- Who For — on forest --- */
+.section-forest .who-list.for li::before { color: var(--gold); }
+.section-forest .who-list.not-for li::before { color: var(--taupe); }
+
+.who-list li {
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+/* --- Guarantee — refined card --- */
+.guarantee-card {
+  border: 1px solid rgba(29,31,30,0.06);
+  padding: clamp(48px, 6vw, 72px);
+  text-align: center;
+  position: relative;
+  background: var(--white);
+}
+
+.guarantee-card::before {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 2px;
+  background: var(--gold);
+}
+
+.guarantee-card h3 {
+  margin-bottom: 20px;
+  color: var(--charcoal);
+}
+
+.guarantee-card p {
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.8;
+  max-width: 520px;
+  margin: 0 auto;
+  color: var(--mocha);
+}
+
+.guarantee-card .strong-line {
+  font-weight: 600;
+  color: var(--forest);
+  margin-top: 16px;
+  font-size: clamp(16px, 1.6vw, 18px);
+}
+
+/* --- Price / Enroll section — elevated --- */
+.enroll-section {
+  text-align: center;
+  padding: clamp(80px, 10vw, 130px) 0;
+  position: relative;
+  background: var(--forest);
+  color: var(--sand);
+}
+
+.enroll-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse 70% 50% at 50% 100%,
+    rgba(194,168,108,0.05) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+}
+
+.enroll-card {
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 56px 48px 48px;
+  background: rgba(248,246,242,0.05);
+  border: 1px solid rgba(248,246,242,0.1);
+}
+
+.enroll-card .label {
+  color: var(--gold);
+  margin-bottom: 28px;
+}
+
+.enroll-price {
+  font-family: var(--font-display);
+  font-size: clamp(44px, 6vw, 56px);
+  color: var(--sand);
+  letter-spacing: -0.02em;
+  line-height: 1;
+  margin-bottom: 16px;
+}
+
+.enroll-note {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  color: rgba(248,246,242,0.55);
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+.enroll-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+  margin: 0 auto 32px;
+}
+
+.enroll-roi {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(16px, 1.8vw, 19px);
+  color: rgba(248,246,242,0.75);
+  line-height: 1.6;
+  margin-bottom: 40px;
+}
+
+.enroll-spots {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  text-transform: none;
+  color: rgba(248,246,242,0.5);
+  margin-bottom: 28px;
+  font-style: italic;
+  max-width: 360px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.6;
+}
+
+.btn-enroll-cta {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 15px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 22px 64px;
+  border-radius: 0;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.btn-enroll-cta:hover {
+  background: var(--gold-hover);
+  transform: translateY(-1px);
+}
+
+.enroll-guarantee {
+  margin-top: 24px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  color: rgba(248,246,242,0.4);
+  letter-spacing: 0.02em;
+}
+
+@media (max-width: 768px) {
+  .enroll-card {
+    padding: 40px 28px 36px;
+  }
+  .btn-enroll-cta {
+    width: 100%;
+    padding: 18px 28px;
+    font-size: 14px;
+  }
+}
+
+/* --- Cost of staying unclear --- */
+.cost-section {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+
+.cost-section p {
+  font-size: clamp(15px, 1.5vw, 16px);
+  line-height: 1.85;
+  color: var(--charcoal);
+  margin-bottom: 1.3em;
+}
+
+.cost-section p:last-child {
+  margin-bottom: 0;
+}
+
+.cost-section .good-news {
+  font-weight: 600;
+  color: var(--forest);
+  font-size: clamp(16px, 1.6vw, 18px);
+}
+
+/* --- FAQ --- */
+.faq-item { border-color: rgba(194,168,108,0.18); }
+.faq-question { color: var(--charcoal); font-size: 17px; }
+.faq-answer { color: var(--mocha); font-size: 15px; line-height: 1.8; }
+
+/* --- Video Testimonial Grid --- */
+.video-testimonial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.video-testimonial-card {
+  text-align: center;
+}
+
+.video-wrap {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 aspect ratio */
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 20px;
+  background: var(--stone);
+  border-radius: 0;
+  box-shadow: 0 2px 16px rgba(29,31,30,0.06);
+}
+
+.video-wrap.wistia-wrap {
+  padding-top: 0;
+  background: transparent;
+}
+
+.video-wrap iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 0;
+  opacity: 0;
+  transition: opacity 0.6s ease-out;
+}
+
+.video-wrap iframe.loaded {
+  opacity: 1;
+}
+
+.vt-name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(17px, 1.8vw, 19px);
+  color: var(--charcoal);
+  margin-bottom: 6px;
+}
+
+.vt-result {
+  font-size: 14px;
+  line-height: 1.65;
+  color: var(--mocha);
+  max-width: 260px;
+  margin: 0 auto;
+}
+
+.testimonial-context {
+  font-family: var(--font-body);
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  color: var(--taupe);
+  margin: 8px 0 0;
+  font-weight: 400;
+}
+
+.testimonial-heading {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 34px);
+  font-weight: 400;
+  color: var(--charcoal);
+  line-height: 1.3;
+  margin-bottom: 8px;
+}
+
+@media (max-width: 768px) {
+  .video-testimonial-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+}
+
+/* --- Example Plan Card --- */
+.example-plan-card {
+  margin-top: 56px;
+  padding: clamp(32px, 4vw, 48px);
+  border: 1px solid rgba(29,31,30,0.06);
+  background: rgba(233,226,211,0.4);
+  display: flex;
+  align-items: center;
+  gap: clamp(24px, 4vw, 48px);
+}
+
+.example-plan-preview {
+  flex: 0 0 auto;
+  width: clamp(120px, 15vw, 180px);
+  box-shadow: 0 4px 24px rgba(29,31,30,0.12), 0 1px 4px rgba(29,31,30,0.08);
+  border: 1px solid rgba(29,31,30,0.06);
+}
+
+.example-plan-preview img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.example-plan-content {
+  flex: 1;
+  text-align: left;
+}
+
+.example-plan-text {
+  font-size: 15px;
+  color: var(--mocha);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+
+@media (max-width: 600px) {
+  .example-plan-card {
+    flex-direction: column;
+    text-align: center;
+  }
+  .example-plan-preview {
+    width: 140px;
+  }
+  .example-plan-content {
+    text-align: center;
+  }
+}
+
+/* --- Cost divider --- */
+.cost-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.4;
+  margin: clamp(24px, 3vw, 36px) auto;
+}
+
+/* --- Example link --- */
+.example-link {
+  color: var(--gold);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(194,168,108,0.4);
+  padding-bottom: 2px;
+  transition: border-color 0.3s ease, opacity 0.3s ease;
+}
+
+.example-link:hover {
+  border-color: var(--gold);
+  opacity: 0.8;
+}
+
+/* --- Final CTA --- */
+.final-cta {
+  text-align: center;
+  padding: clamp(72px, 9vw, 120px) 0;
+  background: var(--sand);
+  position: relative;
+}
+
+.final-cta h2 {
+  font-size: clamp(24px, 3vw, 34px);
+  margin-bottom: 14px;
+  color: var(--charcoal);
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+  line-height: 1.35;
+}
+
+.final-cta .final-sub {
+  font-size: 15px;
+  color: var(--taupe);
+  margin-bottom: 40px;
+  letter-spacing: 0.02em;
+}
+
+/* --- Testimonials Wall (embed) --- */
+.testimonials-wall {
+  padding: clamp(60px, 8vw, 100px) 0 clamp(24px, 4vw, 40px);
+  background: var(--sand);
+}
+
+
+/* --- Footer --- */
+.footer {
+  background: var(--charcoal);
+  color: rgba(248,246,242,0.5);
+  border-top: none;
+  padding: 40px 0;
+}
+
+.footer a {
+  color: rgba(248,246,242,0.4);
+}
+
+.footer a:hover {
+  color: rgba(248,246,242,0.7);
+}
+
+/* --- Image break with parallax-like depth --- */
+.image-section {
+  position: relative;
+  overflow: hidden;
+}
+
+.image-section img {
+  width: 100%;
+  height: clamp(280px, 32vw, 420px);
+  object-fit: cover;
+  object-position: center 30%;
+  display: block;
+}
+
+.image-section::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(248,246,242,0.08) 0%,
+    transparent 30%,
+    transparent 70%,
+    rgba(248,246,242,0.08) 100%
+  );
+  pointer-events: none;
+}
+
+/* --- Spacer utility --- */
+.spacer-sm { height: clamp(20px, 3vw, 40px); }
+.spacer-md { height: clamp(40px, 5vw, 60px); }
+
+/* --- Horizontal rule utility --- */
+.hr-gold {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  border: none;
+  opacity: 0.5;
+  margin: 0 auto;
+}
+
+/* --- Section transition strips --- */
+.strip-forest-to-sand {
+  height: 6px;
+  background: linear-gradient(to right, var(--forest), var(--gold), var(--sand));
+  opacity: 0.15;
+}
+
+/* --- Button enhancements --- */
+.btn-primary {
+  position: relative;
+  overflow: hidden;
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-primary:active {
+  transform: translateY(0);
+}
+
+.btn-forest {
+  position: relative;
+  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.btn-forest:hover {
+  box-shadow: 0 2px 20px rgba(44,63,54,0.15);
+}
+
+.btn-forest:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+
+/* --- Responsive fine-tuning --- */
+@media (max-width: 768px) {
+  .hero { min-height: auto; padding: clamp(60px, 10vw, 100px) 0 clamp(60px, 10vw, 90px); }
+  .hero::after { height: 40px; }
+  .jason-image-wrap::before { display: none; }
+  .compare-col { padding: 24px; }
+  .trust-logos img.logo-forbes { width: 75px; }
+  .trust-logos img.logo-bi { width: 130px; }
+  .trust-logos img.logo-obo { width: 65px; }
+  .trust-logos img.logo-entrepreneur { width: 95px; }
+  .trust-logos img.logo-fc { width: 95px; }
+}
+</style>
+
+<!-- ROI / Investment Note Styles -->
+<style>
+.roi-note {
+  max-width: 620px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+}
+.roi-note p {
+  font-size: clamp(15px, 1.5vw, 16px);
+  line-height: 1.85;
+  color: var(--charcoal);
+  margin-bottom: 1.3em;
+}
+.roi-note p:last-child { margin-bottom: 0; }
+</style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="header" id="header">
+  <div class="container-wide" style="text-align: center;">
+    <img src="./assets/logo.svg" alt="Jason Moss" class="logo" style="margin: 0 auto;">
+  </div>
+</header>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <span class="label fade-in" style="margin-bottom: 24px;">The Clarity Session</span>
+    <h1 class="fade-in">There's a Clear Path to <em>More Clients and Revenue</em> in Your Business. We'll Find It Together.</h1>
+    <p class="subtitle fade-in">A private 1:1 conversation where we'll uncover what's been holding your business back — and exactly what to do about it.</p>
+    <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION</a>
+  </div>
+</section>
+
+<!-- Trust logos bar -->
+<div class="trust-bar fade-in">
+  <div class="trust-logos">
+    <img src="./assets/images/logo-forbes-scotland.png" alt="Forbes Scotland" class="logo-forbes">
+    <img src="./assets/images/logo-business-insider.png" alt="Business Insider" class="logo-bi">
+    <img src="./assets/images/logo-obo.png" alt="Online Business Owner" class="logo-obo">
+    <img src="./assets/images/logo-entrepreneur.png" alt="Entrepreneur" class="logo-entrepreneur">
+    <img src="./assets/images/logo-fast-company-sa.png" alt="Fast Company South Africa" class="logo-fc">
+  </div>
+</div>
+
+<!-- Problem Section -->
+<section class="section-sand-lg problem-section">
+  <h2 class="problem-headline fade-in">You're closer than you think.</h2>
+  <div class="container">
+    <div class="problem-intro">
+      <p class="fade-in">You've built something real. But the growth you know is possible hasn't fully shown up yet — and the gap can feel hard to close when you can't see what's in the way.</p>
+      <p class="fade-in" style="font-family: var(--font-display); font-style: italic; font-size: clamp(17px, 1.8vw, 20px); color: var(--charcoal); line-height: 1.5; margin-bottom: 1.5em;">The answer is usually simpler than you'd expect.</p>
+      <p class="fade-in">In most cases, it's one or two specific things — in your positioning, your pricing, your offers, or how you're reaching people — that, once shifted, change who finds you, who says yes, and how much they pay.</p>
+    </div>
+
+    <div class="pain-blocks">
+      <div class="pain-block fade-in">Maybe your positioning is almost right — but not quite specific enough to attract the clients who would happily pay your full rate.</div>
+      <div class="pain-block fade-in">Maybe your pricing is leaving money on the table — not because you're undercharging, but because your offer isn't communicating its full value.</div>
+      <div class="pain-block fade-in">Maybe the clients are closer than you realize — but the path from "interested" to "enrolled" has a gap you haven't noticed yet.</div>
+    </div>
+
+    <div class="cost-bridge-hook fade-in" style="text-align: center; max-width: 540px; margin: 0 auto clamp(36px, 5vw, 56px);">
+      <p style="font-family: var(--font-display); font-size: clamp(18px, 2.2vw, 22px); line-height: 1.5; color: var(--charcoal); font-weight: 400;">The problem is, you can't see these things from the inside.</p>
+    </div>
+
+    <div class="cost-bridge">
+      <p class="fade-in">Not because you're not smart enough. Because you're too close to it. That's exactly why an outside perspective changes everything.</p>
+    </div>
+  </div>
+</section>
+
+<!-- Image break -->
+<div class="image-section">
+  <img src="./assets/images/lifestyle-3.jpg" alt="Mountain trail at golden hour" loading="lazy" class="fade-in" style="object-position: center 25%;">
+</div>
+
+<!-- Solution Section -->
+<section class="section-sand-lg">
+  <div class="container">
+    <div class="clarity-section-inner">
+
+      <div class="clarity-dismiss-group fade-in">
+        <p class="clarity-dismiss">You don't need another course packed with videos you'll never finish.</p>
+        <p class="clarity-dismiss">Or another hour-long ChatGPT session that leaves you with more ideas but no clear direction.</p>
+      </div>
+
+      <div class="clarity-pivot fade-in">
+        <span class="label">What You Actually Need</span>
+        <div class="accent-line"></div>
+      </div>
+
+      <h2 class="clarity-heading fade-in">Someone who can see what you can't.</h2>
+
+      <div class="clarity-blocks">
+        <div class="clarity-block fade-in"><strong>Where your next clients are coming from</strong><br>The specific channels, messaging, or positioning shifts that will bring in more of the right people.</div>
+        <div class="clarity-block fade-in"><strong>What's quietly costing you money</strong><br>The gaps in your pricing, offers, or enrollment process that are leaving revenue on the table.</div>
+        <div class="clarity-block fade-in"><strong>The exact changes to make — in order</strong><br>A clear sequence of what to do first, what to do next, and why each one matters.</div>
+      </div>
+
+      <p class="clarity-emphasis fade-in">This is what we'll uncover together in your Clarity Session.</p>
+
+    </div>
+  </div>
+</section>
+
+<!-- Why This Is Different -->
+<section class="section-stone">
+  <div class="container">
+    <div style="max-width: 640px; margin: 0 auto; text-align: center;">
+      <span class="label fade-in">Why This Is Different</span>
+      <div class="accent-line" style="margin-left: auto; margin-right: auto;"></div>
+      <h2 class="fade-in" style="margin-bottom: 28px; font-size: clamp(24px, 3vw, 32px);">This isn't an online course. Or a group program. This is you and me, sitting down together.</h2>
+      <p class="fade-in" style="font-size: clamp(15px, 1.4vw, 16px); line-height: 1.85; color: var(--mocha); margin-bottom: 1.3em;">For one hour, I'm looking at your business with you — in real time. I can see what you're describing, ask the right questions, and go deeper exactly where it matters. Nothing gets assumed. Nothing gets lost.</p>
+      <p class="fade-in" style="font-size: clamp(15px, 1.4vw, 16px); line-height: 1.85; color: var(--mocha); margin-bottom: 0;">That's where the clarity comes from.</p>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section-sand-lg">
+  <div class="container">
+    <span class="label fade-in">How It Works</span>
+    <div class="accent-line"></div>
+    <h2 class="fade-in" style="margin-bottom: 40px; font-size: clamp(24px, 3vw, 32px); text-wrap: balance;">Three steps. One hour. A clear path forward.</h2>
+    <div class="steps-grid">
+      <div class="step-card fade-in">
+        <div class="step-num">01</div>
+        <div class="step-content">
+          <h3>Book your session.</h3>
+          <p>Once you enroll, you'll get a short intake form covering the key areas of your business — your niche, your offers, your marketing, your pricing, your enrollment process. This gives me a head start so we can make the most of our time together.</p>
+        </div>
+      </div>
+      <div class="step-card fade-in">
+        <div class="step-num">02</div>
+        <div class="step-content">
+          <h3>We sit down together and I show you what I see.</h3>
+          <p>For one hour, it's just you and me. We'll walk through your business together — where your next clients are most likely to come from, what's currently in the way, and the specific shifts that will make the biggest difference. You can ask questions, push back, and go deeper on anything. This is a real conversation, not a presentation.</p>
+        </div>
+      </div>
+      <div class="step-card fade-in">
+        <div class="step-num">03</div>
+        <div class="step-content">
+          <h3>Leave with a clear roadmap in hand.</h3>
+          <p>After our conversation, you'll receive a written summary with everything we covered — your prioritized next steps, the specific shifts we identified, and a clear roadmap. Nothing gets lost. You can start moving immediately.</p>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top: 48px; text-align: center;">
+      <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Personal Guidance -->
+<section class="section-stone">
+  <div class="container-wide">
+    <div class="jason-section">
+      <div class="jason-text">
+        <span class="label fade-in">Personal Guidance From Jason</span>
+        <div class="accent-line"></div>
+        <h2 class="fade-in" style="margin-bottom: 24px; font-size: clamp(24px, 2.8vw, 30px);">I've looked inside hundreds of businesses. I'll see what's possible in yours.</h2>
+        <p class="fade-in">I've spent years inside the businesses of coaches, consultants, and service providers — not from the outside looking in, but sitting with them, the way we'll sit together. After hundreds of those conversations, I've started to see the same patterns: the pricing that undersells the work, the positioning that's almost right but not quite, the enrollment process with a gap no one noticed.</p>
+        <p class="fade-in">I can usually spot what someone has been missing for months within the first few minutes.</p>
+      </div>
+      <div class="jason-image-wrap fade-in">
+        <img src="./assets/images/jason-headshot-close.jpg" alt="Jason Moss">
+      </div>
+    </div>
+    <div style="margin-top: 48px; text-align: center;">
+      <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION</a>
+    </div>
+  </div>
+</section>
+
+<!-- Client Breakthroughs -->
+<section class="section-sand-lg">
+  <div class="container-wide">
+    <div style="text-align: center; margin-bottom: clamp(40px, 5vw, 64px);">
+      <span class="label fade-in">Client Breakthroughs</span>
+      <div class="accent-line" style="margin-left: auto; margin-right: auto;"></div>
+      <h2 class="testimonial-heading fade-in">What becomes possible when the path is clear</h2>
+      <p class="testimonial-context fade-in">From entrepreneurs I've worked with across my programs</p>
+    </div>
+    <div class="video-testimonial-grid">
+      <div class="video-testimonial-card fade-in">
+        <div class="video-wrap wistia-wrap">
+          <script src="https://fast.wistia.com/embed/medias/g8055phors.jsonp" async></script>
+          <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+          <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+            <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+              <div class="wistia_embed wistia_async_g8055phors seo=true videoFoam=true" style="height:100%;position:relative;width:100%">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+        <h3 class="vt-name">Meaghan Long</h3>
+        <p class="vt-result">Refined her offer, cut her hours in half, and now brings in $20k+ months with space to exhale.</p>
+      </div>
+      <div class="video-testimonial-card fade-in">
+        <div class="video-wrap wistia-wrap">
+          <script src="https://fast.wistia.com/embed/medias/hlntpnigew.jsonp" async></script>
+          <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+            <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+              <div class="wistia_embed wistia_async_hlntpnigew seo=true videoFoam=true" style="height:100%;position:relative;width:100%">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+        <h3 class="vt-name">Zach Bloom</h3>
+        <p class="vt-result">Simplified his model and had his most spacious and profitable year ever — with more clarity, less noise.</p>
+      </div>
+      <div class="video-testimonial-card fade-in">
+        <div class="video-wrap wistia-wrap">
+          <script src="https://fast.wistia.com/embed/medias/x0tlj5qthd.jsonp" async></script>
+          <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+            <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+              <div class="wistia_embed wistia_async_x0tlj5qthd seo=true videoFoam=true" style="height:100%;position:relative;width:100%">&nbsp;</div>
+            </div>
+          </div>
+        </div>
+        <h3 class="vt-name">Federica Prayer</h3>
+        <p class="vt-result">Raised her rates and hit her highest month ever with more ease.</p>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: clamp(40px, 5vw, 56px);">
+      <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- Why This Pays for Itself -->
+<section class="section-stone">
+  <div class="roi-note">
+    <span class="label fade-in">Why This Pays for Itself</span>
+    <div class="accent-line" style="margin-left: auto; margin-right: auto;"></div>
+    <p class="fade-in">Every month those gaps stay invisible, they cost you. Not dramatically — but steadily. A slightly off message, a pricing structure that undersells your value, an enrollment process with a leak you haven't noticed. These things compound.</p>
+    <p class="fade-in">Most people who sit down with me don't find just one thing. They typically uncover two or three specific shifts that directly lead to more clients, higher prices, or both. Even one of those shifts can more than pay for the session many times over.</p>
+  </div>
+</section>
+
+<!-- Enroll -->
+<section class="enroll-section" id="enroll">
+  <div class="container" style="position: relative; z-index: 1;">
+    <div class="enroll-card fade-in">
+      <span class="label">The Clarity Session</span>
+      <div class="enroll-price">$997</div>
+      <p class="enroll-note">One hour together. A written roadmap you can start on immediately.</p>
+      <div class="enroll-divider"></div>
+      <p class="enroll-spots">I only open a small number of these at a time — because this is real, focused work and I want to be fully present for each one.</p>
+      <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-enroll-cta">BOOK YOUR SESSION</a>
+      <p class="enroll-guarantee">Full money-back guarantee. Zero risk.</p>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-stone">
+  <div class="container">
+    <span class="label fade-in">Frequently Asked Questions</span>
+    <div class="accent-line"></div>
+    <h2 class="fade-in" style="margin-bottom: 40px;">Common questions</h2>
+
+    <div class="faq-item fade-in">
+      <div class="faq-question">What exactly do I get?</div>
+      <div class="faq-answer">Two things: the session itself — one hour of my full attention on your business, where we talk through everything together — and a written summary afterward with your prioritized next steps and roadmap. You leave the call with clarity, and you have the document to refer back to as you execute.</div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <div class="faq-question">How does it work if we've never talked before?</div>
+      <div class="faq-answer">Before our session, you'll fill out a short intake form covering every key area of your business. That gives me a head start. Then on the call, we go deeper together. You'll be surprised how quickly the picture comes into focus.</div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <div class="faq-question">What if I'm not sure my business is far enough along?</div>
+      <div class="faq-answer">If you have a general idea of who you serve and what you offer — even if it's rough — you're far enough along. That's the beauty of doing this as a conversation: we meet you exactly where you are.</div>
+    </div>
+
+    <div class="faq-item fade-in">
+      <div class="faq-question">Is there really no risk?</div>
+      <div class="faq-answer">None. If we finish our session and you feel it wasn't worth the investment, email me and I'll refund you in full. No questions asked.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Final CTA -->
+<section class="final-cta">
+  <div class="container">
+    <h2 class="fade-in" style="text-wrap: balance;">Your next clients are closer than you think. Let's find them.</h2>
+    <p class="final-sub fade-in">One hour together. A clear roadmap forward.</p>
+    <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION — $997</a>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="footer">
+  <div class="container">
+    <p>&copy; 2026 Jason Moss LLC. All rights reserved.</p>
+    <p style="margin-top: 8px;">
+      <a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+      <span style="margin: 0 8px; opacity: 0.4;">|</span>
+      <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>
+      <span style="margin: 0 8px; opacity: 0.4;">|</span>
+      <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener noreferrer">Earnings Disclaimer</a>
+    </p>
+  </div>
+</footer>
+
+<script>
+const header = document.getElementById('header');
+window.addEventListener('scroll', () => {});
+
+const fadeObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      fadeObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+document.querySelectorAll('.fade-in').forEach(el => fadeObserver.observe(el));
+
+document.querySelectorAll('.faq-question').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+</script>
+
+
+</body>
+</html>
