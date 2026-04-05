@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Transmission Podcast</title>
+<meta name="description" content="A high-frequency podcast for visionaries, creators and soul-led entrepreneurs who are here to do business differently.">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+<style>
+  *, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    background: rgb(248, 246, 242);
+    color: #1D1F1E;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 500;
+    min-height: 100vh;
+  }
+
+  .section-hero {
+    background: url('/assets/images/mask-group.png') repeat rgb(248, 246, 242) 50% 42% / cover;
+    padding-top: 2.4375rem;
+    padding-bottom: 12rem;
+    position: relative;
+  }
+
+  .section-hero::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #F8F6F2;
+    opacity: 0.92;
+  }
+
+  .section-hero > * {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-heading {
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    font-size: 1.75rem;
+    line-height: 2.45rem;
+    color: #1D1F1E;
+    text-align: center;
+    max-width: 39.9375rem;
+    margin: 0 auto;
+    padding-top: 2.999rem;
+  }
+
+  .hero-heading .gold {
+    color: #c2a86c;
+    font-weight: 700;
+  }
+
+  .content-border {
+    border: 0.125rem solid #E9E2D3;
+    border-radius: 0.625rem;
+    width: 51.875rem;
+    margin: 0 auto;
+    padding: 0 2.5rem 12.3156rem;
+  }
+
+  /* Cover + description row */
+  .podcast-row {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    margin-top: 2.75rem;
+    padding: 0 2rem;
+  }
+
+  .podcast-cover {
+    width: 17.875rem;
+    height: 17.5rem;
+    min-width: 17.875rem;
+    border: 0.1875rem solid #C2A86C;
+    border-radius: 1.25rem;
+    background: url('/assets/images/transmission-cover.jpg') no-repeat 50% 50% / cover;
+    box-shadow: rgba(93,93,93,0.25) 2px 0 5px 0;
+  }
+
+  .podcast-desc {
+    color: #5B4B3F;
+    font-size: 1.125rem;
+    line-height: 2.025rem;
+    text-align: left;
+    font-weight: 400;
+    max-width: 22.0625rem;
+  }
+
+  .podcast-desc .desc-second {
+    margin-top: 1.5rem;
+  }
+
+  .podcast-desc strong {
+    font-weight: 700;
+  }
+
+  .podcast-desc-mobile {
+    display: none;
+  }
+
+  /* Start Listening */
+  .listen-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0;
+    margin-top: 2.3941rem;
+  }
+
+  .listen-divider .line {
+    flex: 1;
+    max-width: 17.125rem;
+    border-bottom: 2px solid #E9E2D3;
+  }
+
+  .listen-divider .label {
+    color: #5B4B3F;
+    font-size: 1.125rem;
+    line-height: 2.025rem;
+    font-weight: 600;
+    text-align: center;
+    padding: 0 1rem;
+    white-space: nowrap;
+  }
+
+  /* YouTube embed */
+  .youtube-wrapper {
+    max-width: 42.9375rem;
+    margin: 1.5rem auto 0;
+  }
+
+  .youtube-wrapper iframe {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+  }
+
+  /* Listen Elsewhere */
+  .listen-elsewhere-divider {
+    border: none;
+    border-bottom: 2px solid #E9E2D3;
+    max-width: 46.75rem;
+    margin: 2rem auto 0.5rem;
+  }
+
+  .listen-elsewhere-label {
+    color: #8C837A;
+    font-size: 1.125rem;
+    line-height: 2.025rem;
+    font-weight: 600;
+    text-align: center;
+    margin-bottom: 0.75rem;
+  }
+
+  .platform-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+  }
+
+  .platform-links a {
+    display: block;
+    width: 14.8125rem;
+    height: 3.8125rem;
+  }
+
+  .platform-links img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .platform-link-mobile {
+    display: none;
+  }
+
+  /* CTA Section */
+  .cta-label {
+    color: #5B4B3F;
+    font-size: 1.5rem;
+    line-height: 2.7rem;
+    font-weight: 600;
+    text-align: center;
+    margin-top: 2rem;
+  }
+
+  .cta-desc {
+    color: #5B4B3F;
+    font-size: 1.125rem;
+    line-height: 2.025rem;
+    text-align: center;
+    max-width: 33.5625rem;
+    margin: 1rem auto 0;
+  }
+
+  .cta-desc strong {
+    font-weight: 700;
+  }
+
+  .cta-desc .cta-desc-second {
+    margin-top: 1.5rem;
+  }
+
+  .cta-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #C2A86C;
+    background: #F4EFE4;
+    color: #1D1F1E;
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 1rem;
+    text-decoration: none;
+    border-radius: 10px;
+    width: 24.5625rem;
+    height: 3.75rem;
+    margin: 1.5rem auto 0;
+    transition: background 0.3s ease;
+  }
+
+  .cta-btn:hover {
+    background: #E9E2D3;
+    text-decoration: none;
+  }
+
+  /* Mobile */
+  @media screen and (max-width: 767px) {
+    .section-hero {
+      padding-top: 0;
+      padding-bottom: 4rem;
+    }
+
+    .hero-heading {
+      font-size: 1.4375rem;
+      line-height: 2.0125rem;
+      max-width: 18.5625rem;
+      padding-top: 1.5rem;
+    }
+
+    .content-border {
+      width: 23rem;
+      border: none;
+      border-radius: 0;
+      padding: 0;
+    }
+
+    .podcast-row {
+      gap: 0.9rem;
+      margin-top: 1.5rem;
+      padding: 0;
+      justify-content: flex-start;
+      align-items: center;
+    }
+
+    .podcast-cover {
+      width: 9.6875rem;
+      height: 9.875rem;
+      min-width: 9.6875rem;
+    }
+
+    .podcast-desc {
+      display: none;
+    }
+
+    .podcast-desc-mobile {
+      display: block;
+      color: #5B4B3F;
+      font-size: 0.9375rem;
+      line-height: 1.5rem;
+      text-align: left;
+      font-weight: 400;
+      max-width: 12.1875rem;
+    }
+
+    .podcast-desc-mobile strong {
+      font-weight: 700;
+    }
+
+    .listen-divider {
+      margin-top: 1.5rem;
+    }
+
+    .listen-divider .line {
+      max-width: 7.3125rem;
+    }
+
+    .listen-divider .label {
+      font-size: 0.9375rem;
+      line-height: 1.6875rem;
+    }
+
+    .youtube-wrapper {
+      max-width: 22.6875rem;
+    }
+
+    .listen-elsewhere-divider {
+      display: none;
+    }
+
+    .listen-elsewhere-label {
+      display: none;
+    }
+
+    .platform-links {
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.5rem;
+      margin-top: 2rem;
+    }
+
+    .platform-links a {
+      width: 11.25rem;
+      height: 2.875rem;
+    }
+
+    .platform-links .apple-desktop {
+      display: none;
+    }
+
+    .platform-link-mobile {
+      display: block;
+      width: 100%;
+      height: 2.875rem;
+      margin: 0.5rem 0 0;
+    }
+
+    .platform-link-mobile img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    .cta-label {
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+    }
+
+    .cta-desc {
+      font-size: 0.9375rem;
+      line-height: 1.5rem;
+      max-width: 21.9375rem;
+    }
+
+    .cta-btn {
+      width: 19.625rem;
+      height: 3.6875rem;
+    }
+  }
+</style>
+</head>
+<body>
+<main>
+  <section class="section-hero">
+    <div class="content-border">
+      <h1 class="hero-heading">if my content has been <strong class="gold">resonating with you</strong>, this is where to go deeper.</h1>
+
+      <div class="podcast-row">
+        <div class="podcast-cover"></div>
+        <div class="podcast-desc">
+          <p><strong>the transmission</strong> is a podcast for entrepreneurs who've outgrown the hustle and are ready to lead from intuition, alignment and grounded strategy.</p>
+          <p class="desc-second">tune in for deep, aligned guidance that helps you <strong>let go of force, make clearer decisions, attract more clients and scale with more ease.</strong></p>
+        </div>
+        <div class="podcast-desc-mobile">
+          <p><strong>the transmission</strong> is a podcast for entrepreneurs who've outgrown the hustle and are ready to lead from intuition, alignment and grounded strategy.</p>
+        </div>
+      </div>
+
+      <!-- Start Listening -->
+      <div class="listen-divider">
+        <span class="line"></span>
+        <span class="label">start listening</span>
+        <span class="line"></span>
+      </div>
+
+      <!-- YouTube Playlist -->
+      <div class="youtube-wrapper">
+        <iframe src="https://www.youtube.com/embed/videoseries?si=pkYs3enO2uCN-mU2&list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+      </div>
+
+      <!-- Listen Elsewhere -->
+      <hr class="listen-elsewhere-divider">
+      <p class="listen-elsewhere-label">prefer to listen elsewhere?</p>
+
+      <div class="platform-links">
+        <a href="https://open.spotify.com/show/4U5tYLtgiANaEBOXqEbn9W" target="_blank"><img src="/assets/images/spotify-logo.png" alt="Spotify"></a>
+        <a href="https://www.youtube.com/playlist?list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank"><img src="/assets/images/youtube-logo.png" alt="YouTube"></a>
+        <a href="https://podcasts.apple.com/us/podcast/the-transmission/id1840278805" target="_blank" class="apple-desktop"><img src="/assets/images/apple-podcasts-logo.png" alt="Apple Podcasts"></a>
+      </div>
+      <a href="https://podcasts.apple.com/us/podcast/the-transmission/id1840278805" target="_blank" class="platform-link-mobile"><img src="/assets/images/apple-podcasts-long.png" alt="Apple Podcasts"></a>
+
+      <!-- CTA Section -->
+      <p class="cta-label">if this work has been resonating</p>
+      <div class="cta-desc">
+        <p>and you feel&nbsp;ready for real, personalized support,<br><strong>apply for an in-depth conversation</strong> with me.</p>
+        <p class="cta-desc-second">we'll explore where you are, what you're building,<br>and whether working together feels aligned for both of us.</p>
+      </div>
+      <a href="/apply" class="cta-btn" data-pass-params>Explore Working Together</a>
+    </div>
+  </section>
+</main>
+<!-- URL Params → CTA Link -->
+<script>
+(function() {
+  var currentParams = window.location.search;
+  if (!currentParams) return;
+  var links = document.querySelectorAll('[data-pass-params]');
+  links.forEach(function(link) {
+    var href = link.getAttribute('href');
+    if (!href) return;
+    var separator = href.indexOf('?') !== -1 ? '&' : '?';
+    link.href = href + separator + currentParams.substring(1);
+  });
+})();
+</script>
+</body>
+</html>
