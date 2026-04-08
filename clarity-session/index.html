@@ -1194,20 +1194,292 @@ body::before {
 <!-- ROI / Investment Note Styles -->
 <style>
 .roi-note {
-  max-width: 620px;
+  max-width: 540px;
   margin: 0 auto;
   padding: 0 24px;
   text-align: center;
 }
 .roi-note p {
-  font-size: clamp(15px, 1.5vw, 16px);
-  line-height: 1.85;
+  font-size: clamp(16px, 1.6vw, 18px);
+  line-height: 1.8;
   color: var(--charcoal);
-  margin-bottom: 1.3em;
+  margin-bottom: 1em;
 }
 .roi-note p:last-child { margin-bottom: 0; }
 </style>
+
+<style>
+/* ===== V2 — EDITORIAL DESIGN PASS ===== */
+
+/* Hero subtitle tighter */
+.hero .subtitle { max-width: 520px; }
+
+/* ---- AGITATION A: Recognition (sand) ---- */
+.agit-section { padding: clamp(72px, 9vw, 112px) 0; }
+
+.agit-open {
+  text-align: center;
+  max-width: 560px;
+  margin: 0 auto;
+}
+.agit-lead {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3vw, 34px);
+  color: var(--charcoal);
+  line-height: 1.3;
+  letter-spacing: -0.015em;
+  margin-bottom: clamp(24px, 3vw, 36px);
+}
+.agit-whisper {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(16px, 1.7vw, 19px);
+  color: var(--taupe);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.6em;
+}
+.agit-hook {
+  font-family: var(--font-display);
+  font-size: clamp(19px, 2.1vw, 24px);
+  color: var(--charcoal);
+  line-height: 1.4;
+  letter-spacing: -0.01em;
+  display: block;
+  margin-top: clamp(24px, 3vw, 36px);
+}
+.agit-bridge {
+  text-align: center;
+  max-width: 480px;
+  margin: clamp(20px, 2vw, 28px) auto 0;
+}
+.agit-bridge p {
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.9;
+  color: var(--mocha);
+  margin-bottom: 0.4em;
+}
+.agit-bridge p:last-child { margin-bottom: 0; }
+.agit-almost {
+  font-family: var(--font-display);
+  font-style: italic;
+  color: var(--charcoal);
+}
+
+/* ---- AGITATION B: Pain (stone) ---- */
+.truth-moment {
+  text-align: center;
+  max-width: 640px;
+  margin: 0 auto;
+  padding: clamp(44px, 5.5vw, 64px) 24px;
+  border-bottom: 1px solid rgba(194,168,108,0.2);
+}
+.truth-pre {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(13px, 1.3vw, 14px);
+  color: var(--taupe);
+  letter-spacing: 0.08em;
+  margin-bottom: clamp(18px, 2vw, 24px);
+  display: block;
+}
+.truth-statement {
+  font-family: var(--font-display);
+  font-size: clamp(26px, 3.2vw, 40px);
+  color: var(--charcoal);
+  line-height: 1.22;
+  letter-spacing: -0.025em;
+  display: block;
+}
+.stuck-intro {
+  text-align: center;
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(15px, 1.5vw, 17px);
+  color: var(--mocha);
+  margin: clamp(32px, 4vw, 48px) auto clamp(16px, 2vw, 22px);
+  display: block;
+}
+.pain-blocks-sm {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 auto;
+  max-width: 480px;
+}
+.pain-block-sm {
+  background: rgba(255,255,255,0.45);
+  border-left: 2px solid rgba(194,168,108,0.6);
+  padding: clamp(12px, 1.4vw, 16px) clamp(20px, 2.5vw, 28px);
+  font-size: clamp(14px, 1.4vw, 15px);
+  line-height: 1.65;
+  color: var(--mocha);
+}
+.pivot-wrap {
+  text-align: center;
+  max-width: 500px;
+  margin: clamp(32px, 3.5vw, 44px) auto 0;
+}
+.pivot-wrap p {
+  font-size: clamp(15px, 1.5vw, 17px);
+  line-height: 1.85;
+  color: var(--mocha);
+  margin-bottom: 0.3em;
+}
+.pivot-wrap p:last-child { margin-bottom: 0; }
+.pivot-key {
+  font-family: var(--font-display) !important;
+  font-style: normal !important;
+  font-size: clamp(19px, 2.2vw, 24px) !important;
+  color: var(--charcoal) !important;
+  line-height: 1.4 !important;
+  margin-top: clamp(18px, 2vw, 24px) !important;
+}
+
+/* ---- CLARITY BLOCKS — confident, grounded ---- */
+.clarity-block {
+  background: rgba(255,255,255,0.85) !important;
+  border: 1px solid rgba(194,168,108,0.15) !important;
+  border-left: 4px solid var(--gold) !important;
+  padding: clamp(22px, 2.8vw, 30px) clamp(28px, 3.5vw, 40px) !important;
+  font-size: clamp(16px, 1.7vw, 17px) !important;
+  line-height: 1.6 !important;
+  color: var(--charcoal) !important;
+}
+
+/* ---- SOLUTION ---- */
+.solution-body {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: clamp(16px, 1.7vw, 19px);
+  color: var(--mocha);
+  line-height: 1.75;
+  text-align: center;
+  margin-bottom: clamp(36px, 4.5vw, 52px);
+}
+.you-leave-label {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--forest);
+  opacity: 0.6;
+  display: block;
+  text-align: left;
+  margin-bottom: 16px;
+}
+
+/* ---- WHY THIS WORKS ---- */
+.jason-opener {
+  font-family: var(--font-display);
+  font-size: clamp(17px, 1.8vw, 20px);
+  color: var(--charcoal);
+  line-height: 1.6;
+  margin-bottom: 1.4em;
+}
+.consequence-list {
+  list-style: none;
+  padding: 0;
+  margin: clamp(10px, 1.2vw, 14px) 0 clamp(24px, 3vw, 36px);
+}
+.consequence-list li {
+  font-family: var(--font-body);
+  font-size: clamp(14px, 1.4vw, 15px);
+  color: var(--taupe);
+  padding: 5px 0 5px 16px;
+  position: relative;
+  margin-bottom: 2px;
+}
+.consequence-list li::before {
+  content: "—";
+  position: absolute;
+  left: 0;
+  color: var(--gold);
+  opacity: 0.7;
+}
+.insight-line {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(19px, 2.2vw, 24px);
+  color: var(--charcoal);
+  line-height: 1.45;
+  display: block;
+  margin-top: clamp(6px, 1vw, 10px);
+  margin-bottom: 0.4em;
+}
+.payoff-line {
+  font-family: var(--font-body);
+  font-style: italic;
+  font-size: clamp(14px, 1.4vw, 15px);
+  color: var(--forest);
+  display: block;
+}
+
+/* ---- WHY THIS PAYS ---- */
+.pays-section p { margin-bottom: 1em; }
+.choice-line {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: clamp(24px, 2.8vw, 34px);
+  color: var(--charcoal);
+  letter-spacing: -0.015em;
+  line-height: 1.3;
+  margin-top: clamp(36px, 4.5vw, 56px);
+  display: block;
+}
+
+/* ---- ENROLL ---- */
+.enroll-guarantee-detail {
+  font-size: 13px;
+  color: rgba(248,246,242,0.38);
+  line-height: 1.65;
+  max-width: 340px;
+  margin: 8px auto 0;
+}
+
+/* ---- FINAL CTA — now carries the closing emotional arc ---- */
+.final-cta { padding: clamp(80px, 10vw, 130px) 0; }
+.final-cta-open {
+  font-size: clamp(15px, 1.5vw, 17px);
+  color: var(--mocha);
+  line-height: 1.7;
+  margin-bottom: clamp(20px, 2.5vw, 28px);
+  max-width: 480px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.final-cta-open em { font-style: italic; }
+.final-cta-moment {
+  font-family: var(--font-display);
+  font-size: clamp(30px, 3.8vw, 46px);
+  color: var(--charcoal);
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  margin-bottom: clamp(16px, 2vw, 24px);
+  display: block;
+}
+.final-cta-body {
+  font-size: clamp(15px, 1.5vw, 16px);
+  color: var(--mocha);
+  line-height: 1.7;
+  margin-bottom: 0;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.final-cta-divider {
+  width: 40px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.45;
+  margin: clamp(32px, 4vw, 48px) auto clamp(32px, 4vw, 48px);
+  border: none;
+}
+</style>
+
 </head>
+
 <body>
 
 <!-- Header -->
@@ -1221,13 +1493,13 @@ body::before {
 <section class="hero">
   <div class="container">
     <span class="label fade-in" style="margin-bottom: 24px;">The Clarity Session</span>
-    <h1 class="fade-in">There's a Clear Path to <em>More Clients and Revenue</em> in Your Business. We'll Find It Together.</h1>
-    <p class="subtitle fade-in">A private 1:1 conversation where we'll uncover what's been holding your business back — and exactly what to do about it.</p>
+    <h1 class="fade-in">There&#8217;s a Reason Your Business Isn&#8217;t Growing The Way It Should&#8230; <em>Yet.</em></h1>
+    <p class="subtitle fade-in">Uncover what&#8217;s really holding your business back &#8212; and exactly what to do about it.</p>
     <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION</a>
   </div>
 </section>
 
-<!-- Trust logos bar -->
+<!-- Trust logos -->
 <div class="trust-bar fade-in">
   <div class="trust-logos">
     <img src="./assets/images/logo-forbes-scotland.png" alt="Forbes Scotland" class="logo-forbes">
@@ -1238,143 +1510,154 @@ body::before {
   </div>
 </div>
 
-<!-- Problem Section -->
-<section class="section-sand-lg problem-section">
-  <h2 class="problem-headline fade-in">You're closer than you think.</h2>
+<!-- AGITATION A: Recognition — you're seen (sand) -->
+<section class="section-sand-lg agit-section">
   <div class="container">
-    <div class="problem-intro">
-      <p class="fade-in">You've built something real. But the growth you know is possible hasn't fully shown up yet — and the gap can feel hard to close when you can't see what's in the way.</p>
-      <p class="fade-in" style="font-family: var(--font-display); font-style: italic; font-size: clamp(17px, 1.8vw, 20px); color: var(--charcoal); line-height: 1.5; margin-bottom: 1.5em;">The answer is usually simpler than you'd expect.</p>
-      <p class="fade-in">In most cases, it's one or two specific things — in your positioning, your pricing, your offers, or how you're reaching people — that, once shifted, change who finds you, who says yes, and how much they pay.</p>
+    <div class="agit-open fade-in">
+      <p class="agit-lead">You&#8217;ve built something real.</p>
+      <span class="agit-whisper">You&#8217;re showing up.</span>
+      <span class="agit-whisper">You&#8217;re putting your work out there.</span>
+      <span class="agit-whisper">People are interested.</span>
+      <span class="agit-hook">But they&#8217;re not consistently becoming clients&#8230; <em>yet.</em></span>
+    </div>
+    <div class="agit-bridge fade-in">
+      <p>And that&#8217;s the hard part.</p>
+      <p>It&#8217;s not that things aren&#8217;t working.<br>It&#8217;s that they&#8217;re <span class="agit-almost">almost</span> working.</p>
+      <p>And that &#8220;almost&#8221; is what keeps <em>everything you want just out of reach.</em></p>
     </div>
 
-    <div class="pain-blocks">
-      <div class="pain-block fade-in">Maybe your positioning is almost right — but not quite specific enough to attract the clients who would happily pay your full rate.</div>
-      <div class="pain-block fade-in">Maybe your pricing is leaving money on the table — not because you're undercharging, but because your offer isn't communicating its full value.</div>
-      <div class="pain-block fade-in">Maybe the clients are closer than you realize — but the path from "interested" to "enrolled" has a gap you haven't noticed yet.</div>
-    </div>
-
-    <div class="cost-bridge-hook fade-in" style="text-align: center; max-width: 540px; margin: 0 auto clamp(36px, 5vw, 56px);">
-      <p style="font-family: var(--font-display); font-size: clamp(18px, 2.2vw, 22px); line-height: 1.5; color: var(--charcoal); font-weight: 400;">The problem is, you can't see these things from the inside.</p>
-    </div>
-
-    <div class="cost-bridge">
-      <p class="fade-in">Not because you're not smart enough. Because you're too close to it. That's exactly why an outside perspective changes everything.</p>
+    <!-- Specific frustrations -->
+    <div class="pain-blocks fade-in" style="max-width: 580px; margin: clamp(36px, 4.5vw, 52px) auto 0;">
+      <div class="pain-block">You post&#8230; but it doesn&#8217;t quite convert.</div>
+      <div class="pain-block">People show interest&#8230; but don&#8217;t follow through.</div>
+      <div class="pain-block">So you keep tweaking&#8230; adjusting&#8230; refining&#8230; but it all feels like guessing.</div>
     </div>
   </div>
 </section>
 
-<!-- Image break -->
+<!-- AGITATION B: The pain deepens (stone) -->
+<section class="section-sand-lg problem-section agit-section">
+  <div class="container">
+
+    <!-- The uncomfortable truth — maximum weight -->
+    <div class="truth-moment fade-in">
+      <span class="truth-pre">The uncomfortable truth?</span>
+      <span class="truth-statement">You don&#8217;t actually know what&#8217;s really holding you back.</span>
+    </div>
+
+    <!-- Stuck states -->
+    <span class="stuck-intro fade-in">So you end up stuck in-between&#8230;</span>
+    <div class="pain-blocks-sm fade-in">
+      <div class="pain-block-sm">Working hard, but not seeing results.</div>
+      <div class="pain-block-sm">Second-guessing instead of selling.</div>
+      <div class="pain-block-sm">Knowing something&#8217;s off&#8230; but not knowing what to do about it.</div>
+    </div>
+
+    <!-- Pivot: the turn toward solution -->
+    <div class="pivot-wrap fade-in">
+      <p>What you need isn&#8217;t more effort.</p>
+      <p>Or more waiting.</p>
+      <p class="pivot-key">You need to know what&#8217;s actually standing in the way of more clients and income&#8230; and how to shift it.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- Image break — visual breath before the solution -->
 <div class="image-section">
-  <img src="./assets/images/lifestyle-3.jpg" alt="Mountain trail at golden hour" loading="lazy" class="fade-in" style="object-position: center 25%;">
+  <img src="./assets/images/lifestyle-4.jpg" alt="Mountain trail" loading="lazy" class="fade-in" style="object-position: center 25%;">
 </div>
 
-<!-- Solution Section -->
+<!-- SOLUTION — The Clarity Session is where we do this work -->
 <section class="section-sand-lg">
   <div class="container">
     <div class="clarity-section-inner">
-
-      <div class="clarity-dismiss-group fade-in">
-        <p class="clarity-dismiss">You don't need another course packed with videos you'll never finish.</p>
-        <p class="clarity-dismiss">Or another hour-long ChatGPT session that leaves you with more ideas but no clear direction.</p>
-      </div>
-
-      <div class="clarity-pivot fade-in">
-        <span class="label">What You Actually Need</span>
-        <div class="accent-line"></div>
-      </div>
-
-      <h2 class="clarity-heading fade-in">Someone who can see what you can't.</h2>
-
+      <div class="accent-line fade-in" style="margin: 0 auto clamp(28px, 3.5vw, 40px);"></div>
+      <h2 class="clarity-heading fade-in" style="font-size: clamp(26px, 3.2vw, 36px); margin-bottom: clamp(24px, 3vw, 36px);">The Clarity Session is where this changes.</h2>
+      <p class="solution-body fade-in">We&#8217;ll meet for a focused 1:1 deep dive,<br>look at every aspect of your business together&#8230;<br>identify exactly what&#8217;s slowing it down<br>and what to do to change it.</p>
+      <span class="you-leave-label fade-in">You&#8217;ll leave with:</span>
       <div class="clarity-blocks">
-        <div class="clarity-block fade-in"><strong>Where your next clients are coming from</strong><br>The specific channels, messaging, or positioning shifts that will bring in more of the right people.</div>
-        <div class="clarity-block fade-in"><strong>What's quietly costing you money</strong><br>The gaps in your pricing, offers, or enrollment process that are leaving revenue on the table.</div>
-        <div class="clarity-block fade-in"><strong>The exact changes to make — in order</strong><br>A clear sequence of what to do first, what to do next, and why each one matters.</div>
+        <div class="clarity-block fade-in">clarity on why things aren&#8217;t yet clicking</div>
+        <div class="clarity-block fade-in">visibility on the bottlenecks blocking your momentum</div>
+        <div class="clarity-block fade-in">a clear, tangible plan to attract more clients and income</div>
       </div>
-
-      <p class="clarity-emphasis fade-in">This is what we'll uncover together in your Clarity Session.</p>
-
+      <div style="margin-top: clamp(44px, 5.5vw, 64px); text-align: center;">
+        <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION</a>
+      </div>
     </div>
   </div>
 </section>
 
-<!-- Why This Is Different -->
+<!-- HOW IT WORKS -->
 <section class="section-stone">
-  <div class="container">
-    <div style="max-width: 640px; margin: 0 auto; text-align: center;">
-      <span class="label fade-in">Why This Is Different</span>
-      <div class="accent-line" style="margin-left: auto; margin-right: auto;"></div>
-      <h2 class="fade-in" style="margin-bottom: 28px; font-size: clamp(24px, 3vw, 32px);">This isn't an online course. Or a group program. This is you and me, sitting down together.</h2>
-      <p class="fade-in" style="font-size: clamp(15px, 1.4vw, 16px); line-height: 1.85; color: var(--mocha); margin-bottom: 0;">For one hour, I'm looking at your business with you — in real time. I can see what you're describing, ask the right questions, and go deeper exactly where it matters.</p>
-    </div>
-  </div>
-</section>
-
-<!-- How It Works -->
-<section class="section-sand-lg">
   <div class="container">
     <span class="label fade-in">How It Works</span>
     <div class="accent-line"></div>
-    <h2 class="fade-in" style="margin-bottom: 40px; font-size: clamp(24px, 3vw, 32px); text-wrap: balance;">Three steps. One hour. A clear path forward.</h2>
     <div class="steps-grid">
       <div class="step-card fade-in">
         <div class="step-num">01</div>
         <div class="step-content">
-          <h3>Book your session.</h3>
-          <p>Once you enroll, you'll get a short intake form covering the key areas of your business — your niche, your offers, your marketing, your pricing, your enrollment process. This gives me a head start so we can make the most of our time together.</p>
+          <h3>Book your session</h3>
+          <p>You&#8217;ll fill out a short intake form so I can see your business clearly.</p>
         </div>
       </div>
       <div class="step-card fade-in">
         <div class="step-num">02</div>
         <div class="step-content">
-          <h3>We sit down together and I show you what I see.</h3>
-          <p>For one hour, it's just you and me. We'll walk through your business together — where your next clients are most likely to come from, what's currently in the way, and the specific shifts that will make the biggest difference. You can ask questions, push back, and go deeper on anything. This is a real conversation, not a presentation.</p>
+          <h3>We sit down together</h3>
+          <p>For one hour, we go deep into your business and map out a clear path to growth.</p>
         </div>
       </div>
       <div class="step-card fade-in">
         <div class="step-num">03</div>
         <div class="step-content">
-          <h3>Leave with a clear roadmap in hand.</h3>
-          <p>After our conversation, you'll receive a written summary with everything we covered — your prioritized next steps, the specific shifts we identified, and a clear roadmap. Nothing gets lost. You can start moving immediately.</p>
+          <h3>You leave with a plan</h3>
+          <p>You get a written summary from me with the exact next steps to unlock more clients and income.</p>
         </div>
       </div>
     </div>
-    <div style="margin-top: 48px; text-align: center;">
+    <div style="margin-top: 52px; text-align: center;">
       <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION</a>
     </div>
   </div>
 </section>
 
-
-<!-- Personal Guidance -->
-<section class="section-stone">
+<!-- WHY THIS WORKS -->
+<section class="section-sand-lg">
   <div class="container-wide">
     <div class="jason-section">
       <div class="jason-text">
-        <span class="label fade-in">Personal Guidance From Jason</span>
+        <span class="label fade-in">Why This Works</span>
         <div class="accent-line"></div>
-        <h2 class="fade-in" style="margin-bottom: 24px; font-size: clamp(24px, 2.8vw, 30px);">I've looked inside hundreds of businesses. I'll see what's possible in yours.</h2>
-        <p class="fade-in">I've spent years inside the businesses of coaches, consultants, and service providers — not from the outside looking in, but sitting with them, the way we'll sit together. After hundreds of those conversations, I've started to see the same patterns: the pricing that undersells the work, the positioning that's almost right but not quite, the enrollment process with a gap no one noticed.</p>
-        <p class="fade-in">I can usually spot what someone has been missing for months within the first few minutes.</p>
+        <p class="jason-opener fade-in">I&#8217;ve sat inside hundreds of businesses like yours. And the pattern is almost always the same:</p>
+        <p class="fade-in" style="margin-bottom: 1.2em;">Things are close. But one or two pieces aren&#8217;t yet clicking.</p>
+        <p class="fade-in">Those small misalignments add up, and create:</p>
+        <ul class="consequence-list fade-in">
+          <li>inconsistent clients</li>
+          <li>unclear messaging</li>
+          <li>stalled growth</li>
+        </ul>
+        <span class="insight-line fade-in">It usually takes us a few minutes to see what&#8217;s been missing for months.</span>
+        <span class="payoff-line fade-in">And once you see it, things move.</span>
       </div>
       <div class="jason-image-wrap fade-in">
         <img src="./assets/images/jason-headshot-close.jpg" alt="Jason Moss">
       </div>
     </div>
-    <div style="margin-top: 48px; text-align: center;">
+    <div style="margin-top: 56px; text-align: center;">
       <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION</a>
     </div>
   </div>
 </section>
 
-<!-- Client Breakthroughs -->
-<section class="section-sand-lg">
+<!-- CLIENT RESULTS -->
+<section class="section-stone">
   <div class="container-wide">
     <div style="text-align: center; margin-bottom: clamp(40px, 5vw, 64px);">
-      <span class="label fade-in">Client Breakthroughs</span>
+      <span class="label fade-in">Client Results</span>
       <div class="accent-line" style="margin-left: auto; margin-right: auto;"></div>
       <h2 class="testimonial-heading fade-in">What becomes possible when the path is clear</h2>
-      <p class="testimonial-context fade-in">From entrepreneurs I've worked with across my programs</p>
+      <p class="testimonial-context fade-in">From entrepreneurs I&#8217;ve worked with across my programs</p>
     </div>
     <div class="video-testimonial-grid">
       <div class="video-testimonial-card fade-in">
@@ -1400,7 +1683,7 @@ body::before {
           </div>
         </div>
         <h3 class="vt-name">Zach Bloom</h3>
-        <p class="vt-result">Simplified his model and had his most spacious and profitable year ever — with more clarity, less noise.</p>
+        <p class="vt-result">Simplified his model and had his most spacious and profitable year ever &#8212; with more clarity, less noise.</p>
       </div>
       <div class="video-testimonial-card fade-in">
         <div class="video-wrap wistia-wrap">
@@ -1415,34 +1698,39 @@ body::before {
         <p class="vt-result">Raised her rates and hit her highest month ever with more ease.</p>
       </div>
     </div>
-    <div style="text-align: center; margin-top: clamp(40px, 5vw, 56px);">
+    <div style="text-align: center; margin-top: clamp(48px, 6vw, 64px);">
       <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION</a>
     </div>
   </div>
 </section>
 
-
-<!-- Why This Pays for Itself -->
-<section class="section-stone">
+<!-- WHY THIS PAYS FOR ITSELF -->
+<section class="section-sand-lg pays-section">
   <div class="roi-note">
     <span class="label fade-in">Why This Pays for Itself</span>
     <div class="accent-line" style="margin-left: auto; margin-right: auto;"></div>
-    <p class="fade-in">Every month those gaps stay invisible, they cost you. A slightly off message, a pricing structure that undersells your value, an enrollment process with a leak you haven't noticed. These things compound.</p>
-    <p class="fade-in">Most people who sit down with me don't find just one thing. They typically uncover two or three specific shifts that directly lead to more clients and revenue. Even one of those shifts will more than pay for the session many times over.</p>
+    <p class="fade-in">Every month things stay unclear in your business, there&#8217;s a cost.</p>
+    <p class="fade-in">A slightly off message, a pricing structure that undersells your value, an enrollment process with a leak you haven&#8217;t noticed.</p>
+    <p class="fade-in">These things compound.</p>
+    <p class="fade-in"><strong>They cost you clients. Income. And momentum.</strong></p>
+    <p class="fade-in">Far more than the investment you&#8217;ll make here to solve them.</p>
+    <p class="fade-in">You could spend years spinning your wheels in this cycle.</p>
+    <p class="fade-in">Or you could get in the room with someone who can help you unlock the path forward in an hour.</p>
+    <span class="choice-line fade-in">The choice is yours.</span>
   </div>
 </section>
 
-<!-- Enroll -->
+<!-- ENROLL — clean, direct -->
 <section class="enroll-section" id="enroll">
   <div class="container" style="position: relative; z-index: 1;">
     <div class="enroll-card fade-in">
       <span class="label">The Clarity Session</span>
       <div class="enroll-price">$997</div>
-      <p class="enroll-note">One hour together. A written roadmap you can start on immediately.</p>
+      <p class="enroll-note" style="max-width: 320px; margin-left: auto; margin-right: auto;">One hour together.<br>A clear path to revenue and clients.</p>
       <div class="enroll-divider"></div>
-      <p class="enroll-spots">I only open a small number of these at a time — because this is real, focused work and I want to be fully present for each one.</p>
       <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-enroll-cta">BOOK YOUR SESSION</a>
-      <p class="enroll-guarantee">Full money-back guarantee. Zero risk.</p>
+      <p class="enroll-guarantee" style="margin-top: 20px;">Full money-back guarantee.</p>
+      <p class="enroll-guarantee-detail">If you don&#8217;t feel this gives you clear direction and real value after our call, let me know and I&#8217;ll give you a full refund.</p>
     </div>
   </div>
 </section>
@@ -1476,12 +1764,14 @@ body::before {
   </div>
 </section>
 
-<!-- Final CTA -->
+<!-- Final CTA — the emotional close -->
 <section class="final-cta">
   <div class="container">
-    <h2 class="fade-in" style="text-wrap: balance; max-width: 560px; margin-left: auto; margin-right: auto;">More clients are closer than you think. Let's find them.</h2>
-    <p class="final-sub fade-in">One hour together. A clear roadmap forward.</p>
-    <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION — $997</a>
+    <p class="final-cta-open fade-in">You&#8217;re close&#8230; And you&#8217;re ready for things to finally click.</p>
+    <span class="final-cta-moment fade-in">This is the moment that happens.</span>
+    <p class="final-cta-body fade-in">Our conversation will be one of the most valuable you have this year.</p>
+    <hr class="final-cta-divider fade-in">
+    <a href="https://checkout.jasonmoss.com/checkout/clarity-session" class="btn-primary fade-in">BOOK YOUR SESSION &#8212; $997</a>
   </div>
 </section>
 
