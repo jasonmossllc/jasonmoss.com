@@ -1,0 +1,1805 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>The Collective Mastermind — Jason Moss</title>
+  <meta name="description"
+    content="A mastermind for entrepreneurs evolving beyond hustle — and learning to lead from the inside out. More revenue, impact, and freedom — without sacrificing your peace.">
+  <meta name="robots" content="noindex, nofollow">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+    rel="stylesheet">
+
+  <style>
+    /* ============================================
+    RESET & BASE
+    ============================================ */
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #1D1F1E;
+      background: rgb(233, 226, 211);
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    /* ============================================
+    SECTION 1: HERO
+    ============================================ */
+    .hero {
+      position: relative;
+      background: url('./assets/images/hero-bg.png') repeat rgb(39, 41, 40) 50% 50% / cover;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #0F1A14;
+      opacity: 0.32;
+      z-index: 1;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 14.3125rem 1.25rem 12rem;
+    }
+
+    .hero-title {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.625rem;
+      line-height: 1.95rem;
+      color: #C2A86C;
+      margin-bottom: 1rem;
+    }
+
+    .hero-subtitle {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #EAE2D4;
+      max-width: 22rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .hero-description {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.1875rem;
+      line-height: 1.6625rem;
+      color: #EAE2D4;
+      max-width: 22.125rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1D1F1E;
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      width: 18.6875rem;
+      height: 4.0625rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta:hover {
+      background: #2C3F36;
+    }
+
+    .hero-chevron {
+      width: 2.1875rem;
+      height: auto;
+    }
+
+    /* ============================================
+    SECTION 2: PAIN POINTS
+    ============================================ */
+    .pain {
+      position: relative;
+      background: url('./assets/images/pain-bg.jpg') repeat rgb(234, 226, 213) 76% 4% / cover;
+      overflow: hidden;
+    }
+
+    .pain::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #F8F6F2;
+      opacity: 0.86;
+      z-index: 1;
+    }
+
+    .pain-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 5rem 1.25rem 4rem;
+    }
+
+    .pain-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #1D1F1E;
+      max-width: 20.3125rem;
+      margin-bottom: 1.375rem;
+    }
+
+    .pain-heading strong {
+      font-weight: 700;
+    }
+
+    .pain-divider {
+      border: none;
+      border-bottom: 1px solid #C2A86C;
+      width: 17.875rem;
+      margin-bottom: 3rem;
+    }
+
+    .pain-body {
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #1D1F1E;
+      max-width: 21.5rem;
+    }
+
+    .pain-body em {
+      font-style: italic;
+    }
+
+    .pain-body strong {
+      font-weight: 700;
+    }
+
+    /* ============================================
+    SECTION 3: THE OLD WAY
+    ============================================ */
+    .old-way {
+      position: relative;
+      background: url('./assets/images/old-way-bg.png') repeat rgb(202, 209, 208) 50% 50% / cover;
+      overflow: hidden;
+    }
+
+    .old-way::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #1D1F1E;
+      opacity: 0.45;
+      z-index: 1;
+    }
+
+    .old-way-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 4.9375rem 1.25rem 6rem;
+    }
+
+    .old-way-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #C2A86C;
+      max-width: 22.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .old-way-heading strong {
+      font-weight: 700;
+    }
+
+    .old-way-body {
+      font-size: 1.125rem;
+      line-height: 2.025rem;
+      font-weight: 400;
+      color: #EAE2D4;
+      max-width: 20.25rem;
+    }
+
+    .old-way-body em {
+      font-style: italic;
+    }
+
+    .old-way-body strong {
+      font-weight: 600;
+    }
+
+    /* ============================================
+    SECTION 4: WELCOME
+    ============================================ */
+    .welcome {
+      position: relative;
+      background: url('./assets/images/welcome-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      overflow: hidden;
+    }
+
+    .welcome::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #CFBC91;
+      opacity: 0.68;
+      z-index: 1;
+    }
+
+    .welcome-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 4.6875rem 1.25rem 4rem;
+    }
+
+    .welcome-icon {
+      width: 4.0625rem;
+      height: 4.0625rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .welcome-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 2.4375rem;
+      line-height: 3.4125rem;
+      color: #1D1F1E;
+      max-width: 18.625rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .welcome-heading strong {
+      font-weight: 700;
+    }
+
+    .welcome-heading em {
+      font-style: italic;
+    }
+
+    .welcome-divider {
+      border: none;
+      border-bottom: 1px solid #1D1F1E;
+      width: 17.375rem;
+      margin-bottom: 3rem;
+    }
+
+    .welcome-body {
+      font-size: 1.125rem;
+      line-height: 2.025rem;
+      font-weight: 500;
+      color: #1D1F1E;
+      max-width: 21.6875rem;
+      margin-bottom: 3.25rem;
+    }
+
+    .welcome-body strong {
+      font-weight: 600;
+    }
+
+    .welcome-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1D1F1E;
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 21.8125rem;
+      height: 4.375rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .welcome-cta:hover {
+      background: #2C3F36;
+    }
+
+    /* ============================================
+    SECTION 5: SOCIAL PROOF / TESTIMONIALS
+    ============================================ */
+    .social-proof {
+      position: relative;
+      background: url('./assets/images/dark-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover;
+      overflow: hidden;
+    }
+
+    .social-proof::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #000000;
+      opacity: 0.21;
+      z-index: 1;
+    }
+
+    .social-proof-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.9375rem 1.25rem 4rem;
+    }
+
+    .social-proof-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.9375rem;
+      line-height: 2.7125rem;
+      color: #E9E2D3;
+      max-width: 18.3125rem;
+      margin-bottom: 2rem;
+    }
+
+    .social-proof-heading .gold {
+      color: #C2A86C;
+    }
+
+    .social-proof-body {
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #E9E2D3;
+      max-width: 21.625rem;
+      margin-bottom: 3rem;
+    }
+
+    .social-proof-body em {
+      font-style: italic;
+    }
+
+    .social-proof-body strong {
+      font-weight: 700;
+    }
+
+    .social-proof-cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+    }
+
+    .social-proof-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 22.5rem;
+    }
+
+    .social-proof-card iframe {
+      width: 18.75rem;
+      height: 10.75rem;
+      border: none;
+      margin-bottom: 1.25rem;
+    }
+
+    .social-proof-card-quote {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: #E9E2D3;
+    }
+
+    /* ============================================
+    SECTION 6: STRATEGY + INNER WORK
+    ============================================ */
+    .strategy {
+      background: url('./assets/images/strategy-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+    }
+
+    .strategy-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 4.8125rem 1.25rem 4.5rem;
+    }
+
+    .strategy-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 2rem;
+      line-height: 2.4rem;
+      color: #C2A86C;
+      max-width: 21.0625rem;
+      margin-bottom: 2rem;
+    }
+
+    .strategy-circles {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 0.625rem;
+      margin-bottom: 2rem;
+    }
+
+    .strategy-circle {
+      width: 9.125rem;
+      height: 9.125rem;
+      border-radius: 50%;
+    }
+
+    .strategy-body {
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #EAE2D4;
+      max-width: 21.25rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .strategy-body em {
+      font-style: italic;
+    }
+
+    .strategy-body strong {
+      font-weight: 600;
+    }
+
+    .strategy-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#3B3D3C, #1D1F1E 50%);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 19.625rem;
+      height: 4.0625rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .strategy-cta:hover {
+      background: #2C3F36;
+    }
+
+    /* ============================================
+    SECTION 11: PROOF / TESTIMONIAL.TO
+    ============================================ */
+    .proof {
+      background: url('./assets/images/proof-bg.png') repeat rgb(248, 246, 242) 50% 50% / cover;
+    }
+
+    .proof-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.625rem 1.25rem 4rem;
+    }
+
+    .proof-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #000000;
+      max-width: 22.75rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .proof-heading em {
+      font-style: italic;
+    }
+
+    .proof-iframe {
+      width: 22.5rem;
+      max-width: 100%;
+      height: 50rem;
+      border: none;
+    }
+
+    /* ============================================
+    SECTION 13: FOOTER
+    ============================================ */
+    .footer {
+      background: rgb(234, 226, 212);
+    }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 2.25rem 1.25rem 2.5rem;
+    }
+
+    .footer-logo {
+      width: 8.75rem;
+      height: auto;
+      margin-bottom: 1.125rem;
+    }
+
+    .footer-copy {
+      font-size: 0.875rem;
+      line-height: 1.225rem;
+      font-weight: 400;
+      color: #1D1F1E;
+    }
+
+    /* ============================================
+    SECTION 12: ABOUT JASON
+    ============================================ */
+    .about {
+      position: relative;
+      background: url('./assets/images/about-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      overflow: hidden;
+    }
+
+    .about::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #1D1F1E;
+      z-index: 1;
+    }
+
+    .about-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 4.3125rem 1.25rem 4rem;
+    }
+
+    .about-image {
+      width: 22.5rem;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+
+    .about-content {
+      text-align: left;
+    }
+
+    .about-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #C2A86C;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-body {
+      font-size: 1.125rem;
+      line-height: 1.575rem;
+      font-weight: 500;
+      color: #EAE2D4;
+      margin-bottom: 2.5rem;
+    }
+
+    .about-body em {
+      font-style: italic;
+    }
+
+    .about-body strong {
+      font-weight: 600;
+    }
+
+    .about-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#4A5D54, #2C3F36 50%);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 20.9375rem;
+      height: 4.875rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .about-cta:hover {
+      background: #3E594C;
+    }
+
+    /* ============================================
+    SECTION 10: EMOTIONAL CLOSE
+    ============================================ */
+    .emotional-close {
+      position: relative;
+      background: url('./assets/images/pain-bg.jpg') repeat rgb(234, 226, 213) 76% 4% / cover;
+      overflow: hidden;
+    }
+
+    .emotional-close::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #F8F6F2;
+      opacity: 0.69;
+      z-index: 1;
+    }
+
+    .emotional-close-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 4.125rem 1.25rem 4rem;
+    }
+
+    .emotional-close-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #1D1F1E;
+      margin-bottom: 1.5rem;
+    }
+
+    .emotional-close-heading strong {
+      font-weight: 700;
+    }
+
+    .emotional-close-heading em {
+      font-style: italic;
+    }
+
+    .emotional-close-body {
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #1D1F1E;
+      max-width: 21.5rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .emotional-close-body em {
+      font-style: italic;
+    }
+
+    .emotional-close-body strong {
+      font-weight: 600;
+    }
+
+    .emotional-close-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #2C3F36;
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.375rem;
+      width: 21.125rem;
+      height: 5.0625rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .emotional-close-cta:hover {
+      background: #3B574A;
+    }
+
+    /* ============================================
+    SECTION 9: PRICING
+    ============================================ */
+    .pricing {
+      position: relative;
+      background: url('./assets/images/strategy-bg.png') repeat rgb(29, 31, 30) 50% 50% / cover;
+      overflow: hidden;
+    }
+
+    .pricing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #1D1F1E;
+      z-index: 1;
+    }
+
+    .pricing-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.0625rem 1.25rem 4rem;
+    }
+
+    .pricing-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 2.125rem;
+      line-height: 2.55rem;
+      color: #C2A86C;
+      max-width: 22.875rem;
+      margin-bottom: 2.5rem;
+    }
+
+    .pricing-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      width: 100%;
+      margin-bottom: 2rem;
+    }
+
+    .pricing-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      background: rgb(233, 226, 211);
+      border: 0.1875rem solid #C2A86C;
+      border-radius: 0.625rem;
+      box-shadow: rgba(29, 31, 30, 0.5) 2px 0 10px 0;
+      padding: 2rem 1.25rem 2rem;
+      text-align: center;
+    }
+
+    .pricing-card-label {
+      font-size: 1rem;
+      line-height: 1.8rem;
+      font-weight: 700;
+      color: #1D1F1E;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-card-price {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 3.125rem;
+      line-height: 3.125rem;
+      color: #C2A86C;
+      margin-bottom: 0.5rem;
+    }
+
+    .pricing-card-flex {
+      font-size: 1rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #BBB0A7;
+      margin-bottom: 1.25rem;
+    }
+
+    .pricing-card-features {
+      flex: 1;
+      font-size: 1rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #1D1F1E;
+      margin-bottom: 1.5rem;
+    }
+
+    .pricing-card-features strong {
+      font-weight: 700;
+    }
+
+    .pricing-card-features em {
+      font-style: italic;
+    }
+
+    .pricing-card-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#E0C68A, #C2A86C 50%);
+      color: #1D1F1E;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.375rem;
+      width: 19.75rem;
+      height: 5.75rem;
+      border-radius: 6px;
+      transition: background 0.3s ease;
+    }
+
+    .pricing-card-cta:hover {
+      background: #A7915D;
+    }
+
+    .pricing-note {
+      font-size: 1.0625rem;
+      line-height: 1.4875rem;
+      font-weight: 400;
+      font-style: italic;
+      color: #F8F6F2;
+    }
+
+    /* ============================================
+    SECTION 8: MORE CLIENT STORIES
+    ============================================ */
+    .more-stories {
+      position: relative;
+      background: url('./assets/images/dark-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover;
+      overflow: hidden;
+    }
+
+    .more-stories::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #000000;
+      opacity: 0.19;
+      z-index: 1;
+    }
+
+    .more-stories-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 4.1875rem 1.25rem 4rem;
+    }
+
+    .more-stories-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.875rem;
+      line-height: 2.625rem;
+      color: #E9E2D3;
+      max-width: 22.4375rem;
+      margin-bottom: 3rem;
+    }
+
+    /* ============================================
+    SECTION 7: WHAT YOU'LL EXPERIENCE
+    ============================================ */
+    .experience {
+      position: relative;
+      background: url('./assets/images/experience-bg.png') repeat rgb(248, 246, 242) 26% 48% / cover;
+      overflow: hidden;
+    }
+
+    .experience::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #E9E2D3;
+      opacity: 0.75;
+      z-index: 1;
+    }
+
+    .experience-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.875rem 1.25rem 4rem;
+    }
+
+    .experience-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.875rem;
+      line-height: 2.625rem;
+      color: #1D1F1E;
+      margin-bottom: 2.5rem;
+    }
+
+    .experience-heading .gold {
+      color: #C2A86C;
+      font-style: italic;
+    }
+
+    .experience-feature {
+      margin-bottom: 3rem;
+    }
+
+    .experience-feature:last-child {
+      margin-bottom: 0;
+    }
+
+    .experience-feature-title {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      color: #1D1F1E;
+      margin-bottom: 1rem;
+    }
+
+    .experience-feature-title .gold {
+      color: #C2A86C;
+    }
+
+    .experience-feature-title strong {
+      font-weight: 700;
+    }
+
+    .experience-feature-desc {
+      font-size: 1.1875rem;
+      line-height: 1.6625rem;
+      font-weight: 400;
+      color: #1D1F1E;
+      max-width: 22.5rem;
+    }
+
+    .experience-feature-desc em {
+      font-style: italic;
+    }
+
+    .experience-feature-desc strong {
+      font-weight: 600;
+    }
+
+    /* ============================================
+    DESKTOP (768px+)
+    ============================================ */
+    @media screen and (min-width: 768px) {
+      .hero {
+        background: url('./assets/images/hero-bg-desktop.png') repeat rgb(39, 41, 40) 50% 50% / cover fixed;
+      }
+
+      .hero::before {
+        background: #0F1411;
+        opacity: 0.3;
+      }
+
+      .hero-inner {
+        max-width: 60rem;
+        padding: 13.75rem 0 15rem;
+      }
+
+      .hero-title {
+        font-size: 1.75rem;
+        line-height: 2.1rem;
+        max-width: 53.125rem;
+      }
+
+      .hero-subtitle {
+        font-size: 2.5625rem;
+        line-height: 3.5875rem;
+        max-width: 51.0625rem;
+      }
+
+      .hero-description {
+        font-size: 1.3125rem;
+        line-height: 1.8375rem;
+        max-width: 52.3125rem;
+      }
+
+      .hero-cta {
+        font-size: 1.125rem;
+        width: 26.1875rem;
+        height: 3.8125rem;
+      }
+
+      /* Section 2: Pain Points */
+      .pain {
+        background: url('./assets/images/pain-bg.jpg') repeat rgb(234, 226, 213) 76% 4% / cover fixed;
+      }
+
+      .pain-inner {
+        max-width: 60rem;
+        padding: 6.5rem 0 4rem;
+      }
+
+      .pain-heading {
+        font-size: 2.1875rem;
+        line-height: 3.0625rem;
+        max-width: 36.1875rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .pain-divider {
+        width: 32.875rem;
+      }
+
+      .pain-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 32.875rem;
+      }
+
+      /* Section 3: The Old Way */
+      .old-way-inner {
+        max-width: 60rem;
+        padding: 5.5rem 0 6rem;
+      }
+
+      .old-way-heading {
+        font-size: 2.1875rem;
+        line-height: 3.0625rem;
+        max-width: 32.9375rem;
+      }
+
+      .old-way-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 37.0625rem;
+      }
+
+      /* Section 13: Footer */
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        max-width: 60rem;
+        padding: 1.25rem 0 2.5rem;
+      }
+
+      .footer-logo {
+        width: 10.9375rem;
+        margin-bottom: 0;
+      }
+
+      .footer-copy {
+        font-size: 0.875rem;
+        line-height: 1.4rem;
+        text-align: right;
+      }
+
+      /* Section 12: About Jason */
+      .about-inner {
+        max-width: 60rem;
+        padding: 5.3125rem 0 8rem;
+      }
+
+      .about-row {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.75rem;
+        margin-bottom: 3rem;
+      }
+
+      .about-image {
+        width: 25rem;
+        flex-shrink: 0;
+        margin-bottom: 0;
+      }
+
+      .about-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+      }
+
+      .about-body {
+        font-size: 1.125rem;
+        line-height: 2.025rem;
+        max-width: 32rem;
+        margin-bottom: 0;
+      }
+
+      .about-cta {
+        width: 57.5625rem;
+        max-width: 100%;
+        height: 4.9375rem;
+      }
+
+      /* Section 11: Proof */
+      .proof {
+        background: url('./assets/images/proof-bg.png') repeat rgb(248, 246, 242) 50% 50% / cover fixed;
+      }
+
+      .proof-inner {
+        max-width: 60rem;
+        padding: 6.375rem 0 5rem;
+      }
+
+      .proof-heading {
+        font-size: 2.375rem;
+        line-height: 3.325rem;
+        max-width: 47.1875rem;
+        margin-bottom: 3.5rem;
+      }
+
+      .proof-iframe {
+        width: 60rem;
+        height: 50rem;
+      }
+
+      /* Section 10: Emotional Close */
+      .emotional-close {
+        background: url('./assets/images/pain-bg.jpg') repeat rgb(234, 226, 213) 76% 4% / cover fixed;
+      }
+
+      .emotional-close-inner {
+        max-width: 60rem;
+        padding: 6.375rem 0 5rem;
+      }
+
+      .emotional-close-heading {
+        font-size: 2.3125rem;
+        line-height: 3.2375rem;
+        max-width: 36.1875rem;
+        margin-bottom: 2.5rem;
+      }
+
+      .emotional-close-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 33.8125rem;
+        margin-bottom: 3.75rem;
+      }
+
+      .emotional-close-cta {
+        font-size: 1.25rem;
+        width: 30.6875rem;
+        height: 4.5rem;
+      }
+
+      /* Section 9: Pricing */
+      .pricing {
+        background: url('./assets/images/pricing-bg-desktop.png') repeat rgb(29, 31, 30) 50% 50% / cover;
+      }
+
+      .pricing-inner {
+        max-width: 60rem;
+        padding: 4.75rem 0 5rem;
+      }
+
+      .pricing-heading {
+        font-size: 2.625rem;
+        line-height: 4.2rem;
+        max-width: 60rem;
+        margin-bottom: 3rem;
+      }
+
+      .pricing-cards {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.25rem;
+      }
+
+      .pricing-card {
+        width: 26.5rem;
+        min-height: 33.375rem;
+        padding: 2rem 2.25rem;
+      }
+
+      .pricing-card-price {
+        font-size: 4.25rem;
+        line-height: 5.1rem;
+      }
+
+      .pricing-card-flex {
+        font-size: 1.125rem;
+        line-height: 2.25rem;
+      }
+
+      .pricing-card-features {
+        font-size: 1.125rem;
+        line-height: 2.25rem;
+      }
+
+      .pricing-card-cta {
+        width: 23.75rem;
+        height: 5rem;
+      }
+
+      .pricing-note {
+        font-size: 1.25rem;
+        line-height: 2rem;
+      }
+
+      /* Section 8: More Stories */
+      .more-stories {
+        background: url('./assets/images/dark-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover fixed;
+      }
+
+      .more-stories::before {
+        background: #1D1F1E;
+        opacity: 0.25;
+      }
+
+      .more-stories-inner {
+        max-width: 60rem;
+        padding: 6.3125rem 0 8rem;
+      }
+
+      .more-stories-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 54.625rem;
+        margin-bottom: 4rem;
+      }
+
+      /* Section 7: Experience */
+      .experience {
+        background: url('./assets/images/experience-bg-desktop.png') repeat rgb(248, 246, 242) 48% 29% / cover fixed;
+      }
+
+      .experience::before {
+        background: #F8F6F2;
+        opacity: 0.85;
+      }
+
+      .experience-inner {
+        max-width: 60rem;
+        padding: 6rem 0 5rem;
+      }
+
+      .experience-heading {
+        font-size: 2.625rem;
+        line-height: 4.2rem;
+        margin-bottom: 4rem;
+      }
+
+      .experience-feature {
+        margin-bottom: 4rem;
+      }
+
+      .experience-feature-title {
+        font-size: 1.5625rem;
+        line-height: 2.5rem;
+        margin-bottom: 1.25rem;
+      }
+
+      .experience-feature-desc {
+        font-size: 1.375rem;
+        line-height: 2.2rem;
+        max-width: 41.1875rem;
+      }
+
+      /* Section 6: Strategy */
+      .strategy {
+        background: url('./assets/images/strategy-bg-desktop.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      }
+
+      .strategy-inner {
+        max-width: 60rem;
+        padding: 6.8125rem 0 6rem;
+      }
+
+      .strategy-heading {
+        font-size: 2.25rem;
+        line-height: 2.7rem;
+        max-width: 46.25rem;
+        margin-bottom: 4rem;
+      }
+
+      .strategy-circle {
+        width: 12.6875rem;
+        height: 12.6875rem;
+      }
+
+      .strategy-circles {
+        gap: 1.5rem;
+        margin-bottom: 3rem;
+      }
+
+      .strategy-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 40.0625rem;
+        margin-bottom: 4.5rem;
+      }
+
+      .strategy-cta {
+        font-size: 1.125rem;
+        width: 37.5rem;
+        height: 4.4375rem;
+      }
+
+      /* Section 5: Social Proof */
+      .social-proof {
+        background: url('./assets/images/dark-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover fixed;
+      }
+
+      .social-proof::before {
+        opacity: 0.2;
+      }
+
+      .social-proof-inner {
+        max-width: 60rem;
+        padding: 6.8125rem 0 8rem;
+      }
+
+      .social-proof-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 54.625rem;
+        margin-bottom: 2.75rem;
+      }
+
+      .social-proof-body {
+        font-size: 1.25rem;
+        line-height: 2rem;
+        max-width: 47.625rem;
+        margin-bottom: 5rem;
+      }
+
+      .social-proof-cards {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+      }
+
+      .social-proof-card {
+        max-width: 18.75rem;
+      }
+
+      .social-proof-card-quote {
+        line-height: 1.6rem;
+        max-width: 17.5rem;
+      }
+
+      /* Section 4: Welcome */
+      .welcome::before {
+        opacity: 0.69;
+      }
+
+      .welcome-inner {
+        max-width: 60rem;
+        padding: 4.5rem 0 5rem;
+      }
+
+      .welcome-heading {
+        font-size: 2.75rem;
+        line-height: 4.4rem;
+        max-width: 60rem;
+      }
+
+      .welcome-divider {
+        width: 32.875rem;
+      }
+
+      .welcome-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 30.1875rem;
+      }
+
+      .welcome-cta {
+        width: 34.5rem;
+        height: 4.875rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ============================================
+      SECTION 1: HERO
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title">the collective mastermind</h1>
+
+      <p class="hero-subtitle">where growth meets ease.</p>
+
+      <p class="hero-description">more revenue, impact, and freedom — without sacrificing your&nbsp;peace</p>
+
+      <a href="#pricing" class="hero-cta">apply now</a>
+
+      <img src="./assets/images/chevron-down.png" alt="" class="hero-chevron">
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: PAIN POINTS
+      ============================================ -->
+  <section class="pain">
+    <div class="pain-inner">
+      <h4 class="pain-heading"><strong>You didn't come here just to build a business.</strong></h4>
+
+      <hr class="pain-divider">
+
+      <div class="pain-body">
+        <p>You came to build something meaningful.</p>
+        <p>Something honest.</p>
+        <p><em>Something that feels like you.</em></p>
+        <br>
+        <p>You've signed clients.</p>
+        <p>Done the work.</p>
+        <p>Carried the weight.</p>
+        <br>
+        <p>But lately…<br><strong>business has started to feel heavier than it should.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 3: THE OLD WAY
+      ============================================ -->
+  <section class="old-way">
+    <div class="old-way-inner">
+      <h2 class="old-way-heading"><strong>The old way of growing doesn't fit anymore.</strong></h2>
+
+      <div class="old-way-body">
+        <p>The grind.</p>
+        <p>The hustle.</p>
+        <p>The constant push.</p>
+        <br>
+        <p>You're done with force —<br><em>and ready for flow.</em></p>
+        <br>
+        <p>You're choosing a new path —</p>
+        <p>that honors <strong>both your inner&nbsp;rhythms&nbsp;<em>and</em> revenue goals.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 4: WELCOME
+      ============================================ -->
+  <section class="welcome">
+    <div class="welcome-inner">
+      <img src="./assets/images/jm-circle-icon.png" alt="" class="welcome-icon" width="65" height="65">
+
+      <h2 class="welcome-heading"><strong><em>Welcome to The Collective.</em></strong></h2>
+
+      <hr class="welcome-divider">
+
+      <div class="welcome-body">
+        <p><strong>A mastermind for entrepreneurs evolving beyond hustle —&nbsp;and learning to lead from the inside
+            out.</strong></p>
+        <br>
+        <p>Where you slow the internal pressure...<br>Reconnect with intuition and clarity...</p>
+        <p>Build strategy that supports your life...</p>
+        <br>
+        <p><em>And attract more clients and&nbsp;income without sacrificing&nbsp;yourself.</em></p>
+      </div>
+
+      <a href="#pricing" class="welcome-cta">Experience The Shift</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 5: SOCIAL PROOF / TESTIMONIALS
+      ============================================ -->
+  <section class="social-proof">
+    <div class="social-proof-inner">
+      <h2 class="social-proof-heading"><em>Growth begins <span class="gold">where effort ends</span>.</em></h2>
+
+      <p class="social-proof-body">The work behind <em>The Collective</em>&nbsp;has transformed<strong>&nbsp;1000+
+          entrepreneurs</strong>&nbsp;through&nbsp;my past containers and coaching experiences.&nbsp;<em>Here's what
+          they've shared...</em></p>
+
+      <div class="social-proof-cards">
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/g8055phors" title="Testimonial video"
+            allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">"From&nbsp;$2k&nbsp;to $260k in sales, while cutting my hours in half."
+          </h4>
+        </div>
+
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/hlntpnigew" title="Testimonial video"
+            allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">"Never experienced financial success like this in my life."</h4>
+        </div>
+
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/x0tlj5qthd" title="Testimonial video"
+            allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">"Tripled my rates and started hitting 10k+ months."</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 6: STRATEGY + INNER WORK
+      ============================================ -->
+  <section class="strategy">
+    <div class="strategy-inner">
+      <h1 class="strategy-heading"><em>Where strategy meets inner work</em></h1>
+
+      <div class="strategy-circles">
+        <img src="./assets/images/circle-1.png" alt="" class="strategy-circle" width="203" height="203">
+        <img src="./assets/images/circle-2.png" alt="" class="strategy-circle" width="203" height="203">
+        <img src="./assets/images/circle-3.png" alt="" class="strategy-circle" width="203" height="203">
+      </div>
+
+      <div class="strategy-body">
+        <p>Most business programs teach one side.</p>
+        <br>
+        <p>Either tactics, funnels, and optimization…</p>
+        <p>Or mindset and energetics, with no structure to ground it.</p>
+        <br>
+        <p><strong>The Collective brings both together.</strong></p>
+        <br>
+        <p><em>The result is growth that lasts — because you become the kind of leader who can hold it.</em></p>
+        <br>
+        <p>Rooted in <strong>two decades of entrepreneurship and work with 1,000+ founders</strong>,&nbsp;this is the
+          space where&nbsp;you build in a way your nervous system can trust.</p>
+      </div>
+
+      <a href="#pricing" class="strategy-cta">Apply To Join Us</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 7: WHAT YOU'LL EXPERIENCE
+      ============================================ -->
+  <section class="experience">
+    <div class="experience-inner">
+      <h1 class="experience-heading">What you'll <span class="gold">experience</span></h1>
+
+      <div class="experience-feature">
+        <h1 class="experience-feature-title"><span class="gold">—</span><strong>&nbsp;Weekly Calibration Calls
+          </strong><span class="gold">—</span></h1>
+        <p class="experience-feature-desc">Grounded coaching that blends intuitive leadership with practical strategy —
+          <em>to simplify decisions, reduce overwhelm, and help you move forward&nbsp;with clarity.</em>
+        </p>
+      </div>
+
+      <div class="experience-feature">
+        <h1 class="experience-feature-title"><span class="gold">—</span><strong> Personalized&nbsp;Growth
+            Plan&nbsp;</strong><span class="gold">—</span></h1>
+        <p class="experience-feature-desc">A custom roadmap created for you&nbsp;that translates&nbsp;your strengths and
+          values&nbsp;into a <strong>clear, strategic path to growth</strong>.</p>
+      </div>
+
+      <div class="experience-feature">
+        <h1 class="experience-feature-title"><span class="gold">—</span><strong>&nbsp;Private Community
+            Access&nbsp;</strong><span class="gold">—</span></h1>
+        <p class="experience-feature-desc">An intimate, supportive group walking the same path as you — <em>so you're
+            never alone.</em></p>
+      </div>
+
+      <div class="experience-feature">
+        <h1 class="experience-feature-title"><span class="gold">—</span><strong>&nbsp;Quarterly In-Person
+            Gatherings&nbsp;</strong><span class="gold">—</span></h1>
+        <p class="experience-feature-desc">Intentional mastermind-style experiences designed to <em>deepen connection,
+            clarity, and embodiment.</em></p>
+      </div>
+
+      <div class="experience-feature">
+        <h1 class="experience-feature-title"><span class="gold">—</span><strong>&nbsp;Instant Access to the Resonance
+            Vault&nbsp;</strong><span class="gold">—</span></h1>
+        <p class="experience-feature-desc">Curated trainings and frameworks to help you <strong>attract&nbsp;more
+            clients, cash flow, and expand sustainably</strong>&nbsp;— without flooding you with noise.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 8: MORE CLIENT STORIES
+      ============================================ -->
+  <section class="more-stories">
+    <div class="more-stories-inner">
+      <h2 class="more-stories-heading"><em>More stories from&nbsp;clients I've walked with...</em></h2>
+
+      <div class="social-proof-cards">
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/ufmx6s8p7w" title="Testimonial video"
+            allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">"From&nbsp;corporate 9 - 5 to full-time entrepreneur and $10k months."
+          </h4>
+        </div>
+
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/catuo8tlk0" title="Testimonial video"
+            allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">"$60,000 launch...&nbsp;made more than my investment&nbsp;in
+            37&nbsp;days."</h4>
+        </div>
+
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/ef8xvmcqvf" title="Testimonial video"
+            allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">"The growth is exponential... my life has taken a total turn."</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 9: PRICING
+      ============================================ -->
+  <section class="pricing" id="pricing">
+    <div class="pricing-inner">
+      <h1 class="pricing-heading"><em>Where business starts to feel like you again.</em></h1>
+
+      <div class="pricing-cards">
+        <div class="pricing-card">
+          <p class="pricing-card-label"><strong>6 MONTH JOURNEY</strong></p>
+          <h1 class="pricing-card-price">$12K</h1>
+          <p class="pricing-card-flex"><em>flexible payment options available</em></p>
+          <div class="pricing-card-features">
+            <p><strong>Weekly calibration calls</strong></p>
+            <p>Personalized business growth plan</p>
+            <p>Private community access</p>
+            <p>Quarterly in-person gatherings</p>
+            <p>Instant access to the Resonance Vault</p>
+          </div>
+          <a href="https://jasonmoss449611.typeform.com/to/a3G8k2AA#source=collective_sales_page"
+            class="pricing-card-cta" target="_blank" rel="noopener">Apply Now</a>
+        </div>
+
+        <div class="pricing-card">
+          <p class="pricing-card-label"><strong>12 MONTH JOURNEY</strong></p>
+          <h1 class="pricing-card-price">$20K</h1>
+          <p class="pricing-card-flex"><em>flexible payment options available</em></p>
+          <div class="pricing-card-features">
+            <p>Includes everything from 6-month plan</p>
+            <p><strong><em>plus a private 1:1 mentorship call with Jason.</em></strong></p>
+          </div>
+          <a href="https://jasonmoss449611.typeform.com/to/a3G8k2AA#source=collective_sales_page"
+            class="pricing-card-cta" target="_blank" rel="noopener">Apply Now</a>
+        </div>
+      </div>
+
+      <p class="pricing-note"><em>Enrollment is by application and invitation only.</em></p>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 10: EMOTIONAL CLOSE
+      ============================================ -->
+  <section class="emotional-close">
+    <div class="emotional-close-inner">
+      <h4 class="emotional-close-heading"><strong>Something in you <em>knows</em>…</strong></h4>
+
+      <div class="emotional-close-body">
+        <p>You can't keep building in ways that cost you your peace.</p>
+        <br>
+        <p><em>Your business is not separate from your inner life.</em></p>
+        <br>
+        <p>And when the two come into alignment,</p>
+        <p><strong>&nbsp;things begin to flow in ways they never have before.</strong></p>
+        <br>
+        <p>Inside <em>The Collective</em>,<br>you'll grow your revenue...<br>simplify your business...</p>
+        <p>deepen your leadership</p>
+        <p><strong>and feel like yourself again.</strong></p>
+        <br>
+        <p>It's where strategy meets spirit.</p>
+        <p>Where business feels like you.</p>
+        <br>
+        <p>And you rise to build a business that supports your life — <em>and the truth you're here to live.</em></p>
+      </div>
+
+      <a href="#pricing" class="emotional-close-cta">Claim your seat</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+        SECTION 11: PROOF / TESTIMONIAL.TO
+        ============================================ -->
+  <section class="proof">
+    <div class="proof-inner">
+      <h1 class="proof-heading">Proof of what's possible...<br>even before <em>The Collective</em>.</h1>
+
+      <iframe class="proof-iframe"
+        src="https://embed-v2.testimonial.to/w/jason-moss-testimonials?animated=on&theme=light&shadowColor=e7d8ac&speed=1&tag=all"
+        title="Client Testimonials" scrolling="no"></iframe>
+    </div>
+  </section>
+
+  <!-- ============================================
+        SECTION 12: ABOUT JASON
+        ============================================ -->
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-row">
+        <img src="./assets/images/jason-about.png" alt="Jason Moss" class="about-image" width="400" height="596">
+
+        <div class="about-content">
+          <h1 class="about-heading">About Jason</h1>
+
+          <div class="about-body">
+            <p>I've spent <strong>20 years building businesses online</strong> — and learning, often the hard way, what
+              happens when growth is driven by pressure instead of alignment.</p>
+            <br>
+            <p>Over time, my work evolved into supporting entrepreneurs <em>who sensed their business was part of a
+                deeper path</em> — while still wanting structure, clarity, and results.</p>
+            <br>
+            <p>I've had the privilege of supporting <strong>more than 1,000 founders</strong>, helping them simplify,
+              recalibrate, and grow in ways that feel sustainable and true.</p>
+            <br>
+            <p>This mastermind is the container I wish I had when I realized:</p>
+            <br>
+            <p>The next level wasn't about doing more.</p>
+            <p><strong>It was about learning to build differently.</strong></p>
+          </div>
+        </div>
+      </div>
+
+      <a href="#pricing" class="about-cta">Join Us Inside The Collective</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+        SECTION 13: FOOTER
+        ============================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <img src="./assets/images/logo-dark.png" alt="Jason Moss" class="footer-logo" width="175" height="40">
+      <p class="footer-copy">Jason Moss LLC 2025. All Rights Reserved.</p>
+    </div>
+  </footer>
+</body>
+
+</html>
