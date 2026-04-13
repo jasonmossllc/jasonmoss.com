@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Sold Out Challenge — Jason Moss</title>
+  <meta name="description" content="A 3-week live challenge where you'll fall in love with sales, break through your biggest roadblocks, and create an abundance of clients, opportunities, and income." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    ::selection { background: #C2A86C; color: #1D1F1E; }
+
+    .fade-in {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98), transform 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-right {
+      opacity: 0;
+      transform: translateX(-40px);
+      transition: opacity 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98), transform 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+    }
+    .fade-in-right.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .fade-in-left {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98), transform 0.8s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+    }
+    .fade-in-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .stagger-child { transition-delay: var(--delay, 0s); }
+  </style>
+</head>
+<body class="bg-[#1D1F1E] text-[#1D1F1E] font-['Raleway'] font-normal text-lg leading-[1.7] overflow-x-hidden">
+
+  <!-- HERO -->
+  <section
+    class="relative min-h-[100svh] bg-[#1D1F1E] text-[#F8F6F2] flex items-center justify-center pt-20 overflow-hidden"
+    style="padding-bottom: calc(2rem + 4vw); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%)"
+  >
+    <div class="absolute inset-0 z-0 opacity-40 mix-blend-overlay">
+      <img src="images/mountain-sunrise-bold.png" alt="" class="w-full h-full object-cover" />
+      <div class="absolute inset-0 bg-gradient-to-t from-[#1D1F1E] via-[#1D1F1E]/50 to-transparent"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 md:px-12 flex flex-col items-center text-center max-w-5xl">
+      <div class="fade-in">
+        <h1 class="font-['Libre_Baskerville'] font-bold text-[12vw] sm:text-[10rem] md:text-[14rem] leading-[0.8] text-[#C2A86C] tracking-tighter mb-8 transform -rotate-2">
+          SOLD<br />OUT
+        </h1>
+      </div>
+      <div class="fade-in" style="transition-delay: 0.2s">
+        <p class="text-sm sm:text-base uppercase tracking-[0.2em] text-[#C2A86C] font-semibold mb-6">
+          April 22 – May 6
+        </p>
+        <p class="text-xl sm:text-2xl md:text-3xl max-w-3xl text-[#E9E2D3] font-light leading-snug mb-12">
+          A 3-week live challenge where you'll fall in love with sales, break through your biggest roadblocks, and create an abundance of clients, opportunities, and&nbsp;income.
+        </p>
+      </div>
+      <div class="fade-in" style="transition-delay: 0.4s">
+        <a href="https://checkout.jasonmoss.com/checkout/sold-out" target="_blank" rel="noopener noreferrer"
+          class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-12 py-6 text-lg md:text-xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline">
+          JOIN THE CHALLENGE — $22
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- VISION / INTRO -->
+  <section
+    class="relative bg-[#F8F6F2]"
+    style="margin-top: calc(-1 * 4vw); padding-top: calc(5rem + 4vw); padding-bottom: calc(5rem + 4vw); clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 calc(100% - 4vw))"
+  >
+    <div class="container mx-auto px-6 md:px-12 max-w-4xl text-center">
+      <div class="fade-in">
+        <div class="font-['Libre_Baskerville'] text-2xl md:text-4xl font-bold text-[#1D1F1E] leading-[1.35]">
+          <p class="mb-4">
+            You love the work. You're great at the work.
+          </p>
+          <p class="mb-20">
+            But when it's time to sell... <em class="text-[#2C3F36]">something tightens.</em>
+          </p>
+          <p class="mb-20">
+            What if that feeling was the only thing standing between you...<br/>
+            <em>and a roster full of clients?</em>
+          </p>
+          <p>
+            That's about to change.
+            <span class="block text-[#C2A86C] mt-3 text-3xl md:text-5xl underline decoration-2 underline-offset-8">Starting now.</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DETAILS -->
+  <section
+    class="relative bg-[#2C3F36] text-[#F8F6F2]"
+    style="margin-top: calc(-1 * 4vw); padding-top: calc(5rem + 4vw); padding-bottom: calc(5rem + 4vw); clip-path: polygon(0 0, 100% 4vw, 100% calc(100% - 4vw), 0 100%)"
+  >
+    <div class="absolute inset-0 z-0 opacity-20 mix-blend-luminosity pointer-events-none">
+      <img src="images/dynamic-nature-texture.png" alt="" class="w-full h-full object-cover" />
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 md:px-12 max-w-5xl">
+      <div class="fade-in-right">
+        <h2 class="text-5xl md:text-7xl font-['Libre_Baskerville'] font-bold text-[#C2A86C] mb-4 leading-none">
+          The Sold Out Challenge
+        </h2>
+        <p class="text-2xl font-semibold mb-16 text-[#E9E2D3]">
+          3 weeks that change your relationship with sales... forever.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mb-16">
+        <div class="flex flex-col gap-8">
+          <div class="fade-in flex gap-4">
+            <div class="w-12 h-12 shrink-0 bg-[#C2A86C] flex items-center justify-center mt-1">
+              <div class="w-4 h-4 border-2 border-[#1D1F1E]"></div>
+            </div>
+            <p class="text-xl">Hundreds of entrepreneurs. Live Zoom calls. A private community. A leaderboard with prizes.</p>
+          </div>
+          <div class="fade-in flex gap-4" style="transition-delay: 0.15s">
+            <div class="w-12 h-12 shrink-0 bg-[#C2A86C] flex items-center justify-center mt-1">
+              <div class="w-4 h-4 border-2 border-[#1D1F1E] rotate-45"></div>
+            </div>
+            <p class="text-xl">And underneath it all... a shift. Something most entrepreneurs have completely backwards about sales — and once you see it, everything clicks.</p>
+          </div>
+        </div>
+        <div class="flex items-center justify-center md:justify-end">
+          <div class="fade-in-left">
+            <a href="https://checkout.jasonmoss.com/checkout/sold-out" target="_blank" rel="noopener noreferrer"
+              class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-14 py-7 text-xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline">
+              JOIN THE CHALLENGE — $22
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WEEKLY BREAKDOWN -->
+  <section
+    class="relative bg-[#E9E2D3]"
+    style="margin-top: calc(-1 * 4vw); padding-top: calc(5rem + 4vw); padding-bottom: calc(5rem + 4vw); clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 calc(100% - 4vw))"
+  >
+    <div class="container mx-auto px-6 md:px-12 max-w-4xl">
+      <div class="fade-in">
+        <h2 class="text-3xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#1D1F1E] mb-20 text-center leading-tight">
+          What you'll discover
+        </h2>
+      </div>
+
+      <div class="flex flex-col gap-10">
+        <div class="fade-in">
+          <div class="bg-[#F8F6F2] p-8 md:p-12 border-l-8 border-[#C2A86C] shadow-lg">
+            <div class="text-[#8C837A] font-bold tracking-widest uppercase mb-4 text-sm">Session 1: April 22, 10am – 12pm MT</div>
+            <h3 class="text-3xl md:text-4xl font-['Libre_Baskerville'] font-bold text-[#1D1F1E] mb-4">
+              Sell without the heaviness
+            </h3>
+            <p class="text-[#5B4B3F] text-lg md:text-xl">
+              Uncover what's actually making selling feel heavy — it's not what you think. And once you see it... the pressure melts away.
+            </p>
+          </div>
+        </div>
+
+        <div class="fade-in" style="transition-delay: 0.1s">
+          <div class="bg-[#F8F6F2] p-8 md:p-12 border-l-8 border-[#C2A86C] shadow-lg">
+            <div class="text-[#8C837A] font-bold tracking-widest uppercase mb-4 text-sm">Session 2: April 29, 10am – 12pm MT</div>
+            <h3 class="text-3xl md:text-4xl font-['Libre_Baskerville'] font-bold text-[#1D1F1E] mb-4">
+              The secret behind every yes
+            </h3>
+            <p class="text-[#5B4B3F] text-lg md:text-xl">
+              The one dynamic behind every successful sale. Not pressure. Not persuasion. A simple shift that makes selling feel easy — and makes people want to say yes.
+            </p>
+          </div>
+        </div>
+
+        <div class="fade-in" style="transition-delay: 0.2s">
+          <div class="bg-[#1D1F1E] text-[#F8F6F2] p-8 md:p-14 border-l-8 border-[#C2A86C] shadow-xl relative overflow-hidden">
+            <div class="absolute top-0 right-0 w-64 h-64 bg-[#C2A86C] opacity-5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2 pointer-events-none"></div>
+            <div class="text-[#C2A86C] font-bold tracking-widest uppercase mb-4 text-sm">Session 3: May 6, 10am – 12pm MT</div>
+            <h3 class="text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C] mb-6">
+              Fully booked
+            </h3>
+            <p class="text-[#E9E2D3] text-lg md:text-xl">
+              This is where it all comes together. You'll start showing up differently. Speaking differently. Selling differently. And leave with everything you need to keep going — long after the challenge ends.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY ME -->
+  <section
+    class="relative bg-[#1D1F1E] text-[#F8F6F2]"
+    style="margin-top: calc(-1 * 4vw); padding-top: calc(5rem + 4vw); padding-bottom: calc(5rem + 4vw); clip-path: polygon(0 0, 100% 4vw, 100% calc(100% - 4vw), 0 100%)"
+  >
+    <div class="absolute inset-0 z-0 pointer-events-none">
+      <div class="absolute inset-0 bg-gradient-to-br from-[#C2A86C]/[0.08] via-transparent to-[#2C3F36]/[0.15]"></div>
+      <div class="absolute top-0 right-0 w-[40%] h-[60%] bg-[#C2A86C] opacity-[0.04] blur-[120px] rounded-full"></div>
+      <div class="absolute bottom-0 left-0 w-[30%] h-[40%] bg-[#2C3F36] opacity-[0.08] blur-[100px] rounded-full"></div>
+    </div>
+
+    <div class="relative z-10 container mx-auto px-6 md:px-12 max-w-6xl">
+      <div class="grid grid-cols-1 lg:grid-cols-5 gap-16 items-center">
+        <div class="lg:col-span-2">
+          <div class="fade-in-right">
+            <div class="w-full aspect-[3/4] bg-[#2C3F36] relative border-4 border-[#C2A86C]/30 p-4">
+              <div class="w-full h-full relative overflow-hidden">
+                <img src="images/jason-moss-headshot.jpg" alt="Jason Moss" class="w-full h-full object-cover object-top" />
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="lg:col-span-3">
+          <div class="flex flex-col gap-8">
+            <div class="fade-in">
+              <div class="grid grid-cols-3 gap-6 mb-4 pb-8 border-b border-[#5B4B3F]">
+                <div>
+                  <div class="text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C]">1k+</div>
+                  <div class="text-sm uppercase tracking-wider text-[#8C837A] mt-2">Entrepreneurs Supported</div>
+                </div>
+                <div>
+                  <div class="text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C]">2k+</div>
+                  <div class="text-sm uppercase tracking-wider text-[#8C837A] mt-2">Clients Signed</div>
+                </div>
+                <div>
+                  <div class="text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C]">$1.7M</div>
+                  <div class="text-sm uppercase tracking-wider text-[#8C837A] mt-2">Sales Generated</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="fade-in" style="transition-delay: 0.15s">
+              <p class="text-2xl md:text-3xl font-['Libre_Baskerville'] text-[#E9E2D3] leading-relaxed">
+                I'm Jason Moss. And I started as a computer nerd who had no business being good at sales.
+              </p>
+            </div>
+
+            <div class="fade-in" style="transition-delay: 0.3s">
+              <p class="text-lg md:text-xl text-[#E9E2D3]/80 leading-relaxed">
+                What changed? I discovered something about selling that nobody had ever told me. Not a tactic. Not a script. Something deeper.
+              </p>
+            </div>
+
+            <div class="fade-in" style="transition-delay: 0.45s">
+              <p class="text-xl md:text-2xl text-[#C2A86C] font-['Libre_Baskerville'] font-bold border-l-4 border-[#C2A86C] pl-6 py-2">
+                That discovery is what this entire challenge is built on.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOCIAL PROOF -->
+  <section
+    class="relative bg-[#E9E2D3] text-[#1D1F1E]"
+    style="margin-top: calc(-1 * 4vw); padding-top: calc(5rem + 4vw); padding-bottom: calc(5rem + 4vw); clip-path: polygon(0 4vw, 100% 0, 100% 100%, 0 calc(100% - 4vw))"
+  >
+    <div class="container mx-auto px-6 md:px-12 max-w-7xl">
+      <div class="fade-in">
+        <div class="text-center mb-20">
+          <p class="text-[#C2A86C] font-['Raleway'] font-semibold uppercase tracking-[0.2em] text-sm mb-6">Real results. Real entrepreneurs.</p>
+          <h2 class="text-4xl md:text-6xl font-['Libre_Baskerville'] font-bold text-[#1D1F1E] leading-tight">
+            This is what happens<br/>when the shift clicks.
+          </h2>
+        </div>
+      </div>
+
+      <div class="columns-1 sm:columns-2 lg:columns-3 gap-5" id="proof-grid">
+      </div>
+
+      <div class="fade-in text-center mt-20">
+        <a href="https://checkout.jasonmoss.com/checkout/sold-out" target="_blank" rel="noopener noreferrer"
+          class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-14 py-7 text-xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline">
+          JOIN THE CHALLENGE — $22
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CLOSING CTA -->
+  <section
+    class="relative bg-[#1D1F1E] text-[#F8F6F2]"
+    style="margin-top: calc(-1 * 4vw); padding-top: calc(5rem + 4vw); padding-bottom: 5rem; clip-path: polygon(0 0, 100% 4vw, 100% 100%, 0 100%)"
+  >
+    <div class="container mx-auto px-6 md:px-12 flex flex-col items-center text-center max-w-4xl">
+      <div class="fade-in">
+        <p class="text-2xl md:text-3xl font-['Libre_Baskerville'] leading-relaxed text-[#E9E2D3] mb-16">
+          3 weeks from now...<br/><strong>you'll wonder why you ever held&nbsp;back.</strong>
+        </p>
+      </div>
+
+      <div class="fade-in" style="transition-delay: 0.2s">
+        <h2 class="text-5xl md:text-8xl lg:text-[9rem] font-['Libre_Baskerville'] font-bold leading-none mb-6 tracking-tighter text-[#C2A86C]">
+          SOLD OUT.
+        </h2>
+      </div>
+
+      <div class="fade-in" style="transition-delay: 0.3s">
+        <p class="text-xl md:text-2xl font-['Libre_Baskerville'] italic text-[#E9E2D3] mb-16">
+          Your next chapter starts here.
+        </p>
+      </div>
+
+      <div class="fade-in" style="transition-delay: 0.4s">
+        <a href="https://checkout.jasonmoss.com/checkout/sold-out" target="_blank" rel="noopener noreferrer"
+          class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-16 py-8 text-xl md:text-2xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline">
+          JOIN THE CHALLENGE — $22
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const proofImages = [
+      { src: "images/proof-19.png", alt: "Zach Bloom — $160k year, 4X growth" },
+      { src: "images/proof-20.webp", alt: "Emily Hill — $50k launch" },
+      { src: "images/proof-18.jpg", alt: "Marine Lacoste — 17k month" },
+      { src: "images/proof-1.jpg", alt: "Meaghan Long — 26K in sales" },
+      { src: "images/proof-6.jpg", alt: "Nadja Haldimann — 22k in 30 days" },
+      { src: "images/proof-2.png", alt: "Dana Hunter Fradella — $10K+ months" },
+      { src: "images/proof-9.jpg", alt: "Kristina Rasmussen — 14,000 euros in 3 months" },
+      { src: "images/proof-12.jpg", alt: "Andrew Tanner — sold $4800 coaching package" },
+      { src: "images/proof-3.jpg", alt: "Federica Prayer — 16,700 Euros" },
+      { src: "images/proof-5.jpg", alt: "Karuna May — 15k biggest month" },
+      { src: "images/proof-15.jpg", alt: "Emily Dini — $5k day" },
+      { src: "images/proof-4.jpg", alt: "Andrea Horvath — $12,400 best month" },
+      { src: "images/proof-13.jpg", alt: "Bianca Hurst — inbound leads" },
+      { src: "images/proof-10.jpg", alt: "Nadine Valk — $35,000 first quarter" },
+      { src: "images/proof-11.jpg", alt: "Mercedes Barba — signed clients" },
+      { src: "images/proof-16.jpg", alt: "Renee Pollins — first sale" },
+      { src: "images/proof-14.jpg", alt: "Jason — She paid, I have a client" },
+      { src: "images/proof-17.jpg", alt: "Karuna May — signed 3 clients in a week" },
+      { src: "images/proof-7.jpg", alt: "Andrew Tanner — 2 10K months" },
+      { src: "images/proof-8.jpg", alt: "Marc J Wagner — Jason is the real deal" },
+    ];
+
+    const grid = document.getElementById('proof-grid');
+    proofImages.forEach((img, i) => {
+      const wrapper = document.createElement('div');
+      wrapper.className = 'fade-in break-inside-avoid mb-5';
+      wrapper.style.transitionDelay = Math.min(i * 0.05, 0.3) + 's';
+      const image = document.createElement('img');
+      image.src = img.src;
+      image.alt = img.alt;
+      image.className = 'w-full h-auto block';
+      image.loading = 'lazy';
+      wrapper.appendChild(image);
+      grid.appendChild(wrapper);
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '-50px' });
+
+    document.querySelectorAll('.fade-in, .fade-in-right, .fade-in-left').forEach(el => {
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
