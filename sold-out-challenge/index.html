@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>The Sold Out Challenge — Jason Moss</title>
-  <meta name="description" content="A 3-week live challenge where you'll fall in love with sales, break through your biggest roadblocks, and create an abundance of clients, opportunities, and income." />
+  <meta name="description" content="A 3-week live challenge where you'll fall in love with sales, break through your biggest selling roadblocks, and create an abundance of clients, opportunities, and income." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;600;700&display=swap" rel="stylesheet" />
@@ -42,6 +42,15 @@
       transform: translateX(0);
     }
     .stagger-child { transition-delay: var(--delay, 0s); }
+
+    @media (max-width: 767px) {
+      .mobile-line-break { display: block; }
+      .desktop-space { display: none; }
+    }
+    @media (min-width: 768px) {
+      .mobile-line-break { display: none; }
+      .desktop-space { display: inline; }
+    }
   </style>
 </head>
 <body class="bg-[#1D1F1E] text-[#1D1F1E] font-['Raleway'] font-normal text-lg leading-[1.7] overflow-x-hidden">
@@ -58,7 +67,7 @@
 
     <div class="relative z-10 container mx-auto px-6 md:px-12 flex flex-col items-center text-center max-w-5xl">
       <div class="fade-in">
-        <h1 class="font-['Libre_Baskerville'] font-bold text-[12vw] sm:text-[10rem] md:text-[14rem] leading-[0.8] text-[#C2A86C] tracking-tighter mb-8 transform -rotate-2">
+        <h1 class="font-['Libre_Baskerville'] font-bold text-[16vw] sm:text-[10rem] md:text-[14rem] leading-[0.8] text-[#C2A86C] tracking-tighter mb-8 transform -rotate-2">
           SOLD<br />OUT
         </h1>
       </div>
@@ -67,12 +76,12 @@
           April 22 – May 6
         </p>
         <p class="text-xl sm:text-2xl md:text-3xl max-w-3xl text-[#E9E2D3] font-light leading-snug mb-12">
-          A 3-week live challenge where you'll fall in love with sales, break through your biggest roadblocks, and create an abundance of clients, opportunities, and&nbsp;income.
+          A 3-week live challenge where you'll fall in love with sales, break through your biggest selling roadblocks, and create an abundance of clients, opportunities, and&nbsp;income.
         </p>
       </div>
       <div class="fade-in" style="transition-delay: 0.4s">
         <a href="https://checkout.jasonmoss.com/checkout/sold-out" target="_blank" rel="noopener noreferrer"
-          class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-12 py-6 text-lg md:text-xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline">
+          class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-8 py-5 md:px-12 md:py-6 text-base md:text-xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline whitespace-nowrap">
           JOIN THE CHALLENGE — $22
         </a>
       </div>
@@ -90,10 +99,10 @@
           <p class="mb-4">
             You love the work. You're great at the work.
           </p>
-          <p class="mb-20">
+          <p class="mb-10 md:mb-20">
             But when it's time to sell... <em class="text-[#2C3F36]">something tightens.</em>
           </p>
-          <p class="mb-20">
+          <p class="mb-10 md:mb-20">
             What if that feeling was the only thing standing between you...<br/>
             <em>and a roster full of clients?</em>
           </p>
@@ -111,7 +120,7 @@
     class="relative bg-[#2C3F36] text-[#F8F6F2]"
     style="margin-top: calc(-1 * 4vw); padding-top: calc(5rem + 4vw); padding-bottom: calc(5rem + 4vw); clip-path: polygon(0 0, 100% 4vw, 100% calc(100% - 4vw), 0 100%)"
   >
-    <div class="absolute inset-0 z-0 opacity-20 mix-blend-luminosity pointer-events-none">
+    <div class="absolute inset-0 z-0 opacity-[0.08] md:opacity-[0.15] mix-blend-luminosity pointer-events-none">
       <img src="images/dynamic-nature-texture.png" alt="" class="w-full h-full object-cover" />
     </div>
 
@@ -120,7 +129,7 @@
         <h2 class="text-5xl md:text-7xl font-['Libre_Baskerville'] font-bold text-[#C2A86C] mb-4 leading-none">
           The Sold Out Challenge
         </h2>
-        <p class="text-2xl font-semibold mb-16 text-[#E9E2D3]">
+        <p class="text-2xl font-semibold mb-8 md:mb-16 text-[#E9E2D3]">
           3 weeks to change your relationship with sales... forever.
         </p>
       </div>
@@ -143,7 +152,7 @@
         <div class="flex items-center justify-center md:justify-end">
           <div class="fade-in-left">
             <a href="https://checkout.jasonmoss.com/checkout/sold-out" target="_blank" rel="noopener noreferrer"
-              class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-14 py-7 text-xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline">
+              class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-8 py-5 md:px-14 md:py-7 text-base md:text-xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline whitespace-nowrap">
               JOIN THE CHALLENGE — $22
             </a>
           </div>
@@ -159,7 +168,7 @@
   >
     <div class="container mx-auto px-6 md:px-12 max-w-4xl">
       <div class="fade-in">
-        <h2 class="text-3xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#1D1F1E] mb-20 text-center leading-tight">
+        <h2 class="text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#1D1F1E] mb-20 text-center leading-tight">
           What you'll discover
         </h2>
       </div>
@@ -202,6 +211,15 @@
           </div>
         </div>
       </div>
+
+      <div class="fade-in" style="transition-delay: 0.3s">
+        <div class="mt-16">
+          <a href="https://checkout.jasonmoss.com/checkout/sold-out" target="_blank" rel="noopener noreferrer"
+            class="block w-full bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] text-center text-lg md:text-xl px-12 py-6 transition-colors duration-300 hover:bg-[#b89a5e] no-underline whitespace-nowrap">
+            JOIN THE CHALLENGE — $22
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -231,25 +249,25 @@
         <div class="lg:col-span-3">
           <div class="flex flex-col gap-8">
             <div class="fade-in">
-              <div class="grid grid-cols-3 gap-6 mb-4 pb-8 border-b border-[#5B4B3F]">
+              <div class="grid grid-cols-3 gap-3 sm:gap-6 mb-4 pb-8 border-b border-[#5B4B3F]">
                 <div>
-                  <div class="text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C]">1k+</div>
-                  <div class="text-sm uppercase tracking-wider text-[#8C837A] mt-2">Entrepreneurs Supported</div>
+                  <div class="text-3xl sm:text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C]">1k+</div>
+                  <div class="text-xs sm:text-sm uppercase tracking-wider text-[#8C837A] mt-2">Entrepreneurs Supported</div>
                 </div>
                 <div>
-                  <div class="text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C]">2k+</div>
-                  <div class="text-sm uppercase tracking-wider text-[#8C837A] mt-2">Clients Signed</div>
+                  <div class="text-3xl sm:text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C]">2k+</div>
+                  <div class="text-xs sm:text-sm uppercase tracking-wider text-[#8C837A] mt-2">Clients Signed</div>
                 </div>
                 <div>
-                  <div class="text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C]">$1.7M</div>
-                  <div class="text-sm uppercase tracking-wider text-[#8C837A] mt-2">Sales Generated</div>
+                  <div class="text-3xl sm:text-4xl md:text-5xl font-['Libre_Baskerville'] font-bold text-[#C2A86C]">$1.7M</div>
+                  <div class="text-xs sm:text-sm uppercase tracking-wider text-[#8C837A] mt-2">Sales Generated</div>
                 </div>
               </div>
             </div>
 
             <div class="fade-in" style="transition-delay: 0.15s">
               <p class="text-2xl md:text-3xl font-['Libre_Baskerville'] text-[#E9E2D3] leading-relaxed">
-                I'm Jason Moss. And I started as a computer nerd who had no business being good at sales.
+                I'm Jason Moss.<br class="mobile-line-break" /><span class="desktop-space"> </span>And I started as a computer nerd who had no business being good at sales.
               </p>
             </div>
 
@@ -290,7 +308,7 @@
 
       <div class="fade-in text-center mt-20">
         <a href="https://checkout.jasonmoss.com/checkout/sold-out" target="_blank" rel="noopener noreferrer"
-          class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-14 py-7 text-xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline">
+          class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-8 py-5 md:px-14 md:py-7 text-base md:text-xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline whitespace-nowrap">
           JOIN THE CHALLENGE — $22
         </a>
       </div>
@@ -304,7 +322,7 @@
   >
     <div class="container mx-auto px-6 md:px-12 flex flex-col items-center text-center max-w-4xl">
       <div class="fade-in">
-        <p class="text-2xl md:text-3xl font-['Libre_Baskerville'] leading-relaxed text-[#E9E2D3] mb-16">
+        <p class="text-2xl md:text-3xl font-['Libre_Baskerville'] leading-relaxed text-[#E9E2D3] mb-8 md:mb-16">
           3 weeks from now...<br/><strong>you'll wonder why you ever held&nbsp;back.</strong>
         </p>
       </div>
@@ -323,7 +341,7 @@
 
       <div class="fade-in" style="transition-delay: 0.4s">
         <a href="https://checkout.jasonmoss.com/checkout/sold-out" target="_blank" rel="noopener noreferrer"
-          class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-16 py-8 text-xl md:text-2xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline">
+          class="inline-block bg-[#C2A86C] text-[#1D1F1E] font-['Raleway'] font-semibold uppercase tracking-[0.08em] px-12 py-6 md:px-16 md:py-8 text-lg md:text-2xl transition-colors duration-300 hover:bg-[#b89a5e] no-underline whitespace-nowrap">
           JOIN THE CHALLENGE — $22
         </a>
       </div>
