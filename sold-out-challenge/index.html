@@ -54,8 +54,18 @@
   </style>
 </head>
 <body class="bg-[#1D1F1E] text-[#1D1F1E] font-['Raleway'] font-normal text-lg leading-[1.7] overflow-x-hidden">
+    <script>
+      (function() {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          if (params.get('c') === 'affiliate') {
+            document.documentElement.setAttribute('data-affiliate', 'true');
+          }
+        } catch(e) {}
+      })();
+    </script>
 
-  <!-- HERO -->
+    <!-- HERO -->
   <section
     class="relative min-h-[100svh] bg-[#1D1F1E] text-[#F8F6F2] flex items-center justify-center pt-20 overflow-hidden"
     style="padding-bottom: calc(2rem + 4vw); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 4vw), 0 100%)"
@@ -404,6 +414,22 @@
     document.querySelectorAll('.fade-in, .fade-in-right, .fade-in-left').forEach(el => {
       observer.observe(el);
     });
+
+
+      // Affiliate link handling
+      (function() {
+        try {
+          var params = new URLSearchParams(window.location.search);
+          if (params.get('c') === 'affiliate') {
+            document.querySelectorAll('a').forEach(function(link) {
+              if (link.href && link.href.indexOf('checkout.jasonmoss.com/checkout/sold-out') !== -1) {
+                link.href = 'https://checkout.jasonmoss.com/checkout/sold-out?c=affiliate';
+                link.textContent = 'JOIN THE CHALLENGE \u2014 FREE';
+              }
+            });
+          }
+        } catch(e) {}
+      })();
   </script>
 </body>
 </html>
