@@ -1,0 +1,1743 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Launchpad with Jason Moss</title>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:700,400,900|Raleway:300,400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #1D1F1E;
+      background: rgb(233, 226, 211);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       HERO SECTION
+       ===================================== */
+    .hero {
+      background: rgb(39, 41, 40);
+      color: #F8F6F2;
+      height: 33.4375rem;
+      overflow: hidden;
+    }
+    .hero-inner {
+      position: relative;
+      height: 100%;
+      max-width: 25rem;
+      margin: 0 auto;
+    }
+    .hero-logo {
+      position: absolute;
+      top: 2.625rem;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 10.375rem;
+      height: auto;
+    }
+    .hero-heading {
+      position: absolute;
+      top: 8.25rem;
+      left: 0;
+      right: 0;
+      margin: 0;
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.5625rem;
+      line-height: 1.875rem;
+      color: #F8F6F2;
+      text-align: center;
+    }
+    .hero-heading .gold {
+      color: rgb(194, 168, 108);
+      font-style: italic;
+    }
+    .hero-desc {
+      position: absolute;
+      top: 11.5rem;
+      left: 0;
+      right: 0;
+      margin: 0 auto;
+      max-width: 24.75rem;
+      font-size: 1.125rem;
+      line-height: 1.575rem;
+      color: #F8F6F2;
+      text-align: center;
+    }
+    .hero-cta {
+      position: absolute;
+      top: 18.3125rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #C2A86C;
+      color: #000000;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 120%;
+      width: 14rem;
+      height: 3.4375rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      overflow: hidden;
+    }
+    .hero-cta::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+    .hero-cta:hover { background: #A7915D; }
+
+    @media (min-width: 768px) {
+      .hero {
+        height: 53.5rem;
+      }
+      .hero-inner {
+        max-width: 60rem;
+      }
+      .hero-logo {
+        top: 1.875rem;
+        left: 1.8125rem;
+        transform: none;
+        width: 11.75rem;
+      }
+      .hero-heading {
+        top: 11.4375rem;
+        font-size: 2.625rem;
+        line-height: 3.15rem;
+      }
+      .hero-desc {
+        top: 16.0625rem;
+        max-width: 40.125rem;
+        font-size: 1.25rem;
+        line-height: 2rem;
+      }
+      .hero-cta {
+        top: 22.375rem;
+        font-size: 1rem;
+      }
+    }
+
+    /* =====================================
+       PAIN POINTS SECTION
+       ===================================== */
+    .pain {
+      background: rgb(29, 31, 30);
+      color: #FFFFFF;
+      padding: 0 1.5rem 4rem;
+    }
+    .pain-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+    .pain-photo {
+      width: 100%;
+      max-width: 58.75rem;
+      height: auto;
+      margin: 0 auto;
+      display: block;
+      transform: translateY(-9.5625rem);
+      margin-bottom: -9.5625rem;
+    }
+    .pain-trust-logos {
+      display: flex;
+      justify-content: center;
+      margin: 1.5rem auto 0;
+    }
+    .pain-trust-logos img {
+      width: 100%;
+      max-width: 20.375rem;
+      height: auto;
+      display: block;
+    }
+    @media (min-width: 768px) {
+      .pain-trust-logos {
+        margin-top: 3rem;
+      }
+      .pain-trust-logos img {
+        max-width: 50.8125rem;
+      }
+    }
+    .pain-intro {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      text-align: center;
+      color: #FFFFFF;
+      margin: 1.5rem 0 0;
+      padding: 0 1rem;
+    }
+    .pain-intro + .pain-intro {
+      margin-top: 0.5625rem;
+    }
+    .pain-line {
+      border: 0;
+      height: 2px;
+      background: #474948;
+      margin: 1.375rem 0 1.5rem;
+    }
+    .pain-getclients {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    .pain-getclients-left {
+      display: contents;
+    }
+    .pain-headline { order: 1; }
+    .pain-questions { order: 2; }
+    .pain-subheadline { order: 3; }
+    .pain-headline {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #FFFFFF;
+      margin: 0;
+      text-align: left;
+    }
+    .pain-headline strong { font-weight: 700; }
+    .pain-subheadline {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: #FFFFFF;
+      margin: 0;
+      text-align: center;
+    }
+    .pain-subheadline span { display: block; }
+    .pain-questions {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .pain-questions li {
+      position: relative;
+      padding-left: 1.375rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      font-weight: 600;
+      color: #F8F6F2;
+    }
+    .pain-questions li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.375rem;
+      width: 0.625rem;
+      height: 0.8125rem;
+      background: url('assets/images/polygon.png') no-repeat center/contain;
+    }
+    .pain-result-card {
+      margin-top: 2.5rem;
+      padding: 1.5rem 1.5rem 2rem;
+      border: 1px solid #474948;
+      border-radius: 0.625rem;
+      background: rgb(33, 35, 34);
+    }
+    .pain-result-headline {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.375rem;
+      line-height: 1.925rem;
+      color: #FFFFFF;
+      margin: 0 0 1.25rem;
+    }
+    .pain-results {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+    .pain-results li {
+      position: relative;
+      padding-left: 1.875rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      font-weight: 600;
+      font-style: italic;
+      color: #F8F6F2;
+    }
+    .pain-results li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.25rem;
+      width: 1.125rem;
+      height: 1.125rem;
+      background: url('assets/images/icon-result.png') no-repeat center/contain;
+    }
+    .pain-results .gold { color: #c2a86c; }
+    .pain-cta-wrap {
+      display: flex;
+      justify-content: center;
+      margin-top: 2.5rem;
+    }
+    .pain-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #C2A86C;
+      color: #000000;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 14rem;
+      height: 3.4375rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pain-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+    .pain-cta:hover { background: #A7915D; }
+
+    /* =====================================
+       ORIGIN STORY SECTION
+       ===================================== */
+    .origin {
+      position: relative;
+      background: url('assets/images/see-section-bg.png') repeat rgb(202, 209, 208) 62% 0 / cover;
+      color: #FFFFFF;
+      padding: 3.25rem 2rem 2rem;
+    }
+    .origin::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-color: #1D1F1E;
+      opacity: 0.49;
+      pointer-events: none;
+    }
+    .origin-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+    .origin-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 2.8rem;
+      color: #efeeea;
+      margin: 0 0 1.5rem;
+      text-align: left;
+    }
+    .origin-heading strong { font-weight: 700; }
+    .origin-story {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8125rem;
+      margin: 0;
+      max-width: 22.5rem;
+    }
+    @media (min-width: 768px) {
+      .origin-story { max-width: 38.75rem; }
+    }
+    .origin-story p {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.575rem;
+      color: #FFFFFF;
+      font-weight: 600;
+      margin: 0;
+    }
+    .origin-story p strong { font-weight: 700; }
+    .origin-accomplishments-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.4375rem;
+      line-height: 1.4375rem;
+      color: #efeeea;
+      margin: 1.5625rem 0 1rem;
+      text-align: left;
+    }
+    .origin-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      max-width: 31rem;
+    }
+    .origin-list li {
+      position: relative;
+      padding-left: 1.375rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      font-weight: 700;
+      color: #F8F6F2;
+    }
+    .origin-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.375rem;
+      width: 0.625rem;
+      height: 0.8125rem;
+      background: url('assets/images/polygon.png') no-repeat center/contain;
+    }
+    .origin-list li strong { font-weight: 700; }
+
+    @media (min-width: 768px) {
+      .pain {
+        padding: 0 1.8125rem 5rem;
+      }
+      .pain-photo {
+        transform: translateY(-22.5625rem);
+        margin-bottom: -22.5625rem;
+      }
+      .pain-intro {
+        font-size: 1.125rem;
+        line-height: 1.8rem;
+        margin-top: 5rem;
+      }
+      .pain-line {
+        margin: 1.75rem 0 2.75rem;
+      }
+      .pain-getclients {
+        flex-direction: row;
+        gap: 4rem;
+        align-items: flex-start;
+        max-width: 58rem;
+        margin: 0 auto;
+      }
+      .pain-getclients-left {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        flex: 1;
+      }
+      .pain-headline, .pain-questions, .pain-subheadline {
+        order: 0;
+      }
+      .pain-headline {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+      }
+      .pain-subheadline {
+        font-size: 1rem;
+        line-height: 1.6rem;
+        text-align: left;
+      }
+      .pain-questions {
+        flex: 1;
+        gap: 1rem;
+        padding-top: 1.5rem;
+      }
+      .pain-questions li {
+        font-size: 1rem;
+        line-height: 1.6rem;
+      }
+      .pain-result-card {
+        margin-top: 2.5rem;
+        padding: 1.5rem 2rem 2.5rem;
+        max-width: 58rem;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .pain-result-headline {
+        font-size: 1.625rem;
+        line-height: 2.6rem;
+        margin-bottom: 1rem;
+      }
+      .pain-results li {
+        font-size: 1.125rem;
+        line-height: 1.8rem;
+      }
+      .pain-cta-wrap {
+        margin-top: 2.5rem;
+      }
+    }
+
+    /* =====================================
+       VISION / IMAGINE SECTION
+       ===================================== */
+    .vision {
+      background: rgb(39, 41, 40);
+      color: #F8F6F2;
+      padding: 3.5rem 1.25rem 0;
+      border-top: 0.1875rem solid #5B4B3F;
+      border-bottom: 0.1875rem solid #5B4B3F;
+    }
+    .vision-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column-reverse;
+    }
+    .vision-photo {
+      width: 100%;
+      max-width: 27rem;
+      height: auto;
+      margin: 3rem auto 0;
+    }
+    .vision-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 2.8rem;
+      color: #F8F6F2;
+      margin: 0 0 1.5rem;
+    }
+    .vision-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0 0 1.5rem;
+      padding: 0;
+      list-style: none;
+    }
+    .vision-list li {
+      position: relative;
+      padding-left: 1.875rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      font-weight: 600;
+      color: #BFBFBF;
+    }
+    .vision-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.125rem;
+      width: 1.125rem;
+      height: 1.125rem;
+      background: url('assets/images/check-gold.png') no-repeat center/contain;
+    }
+    .vision-closing {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      font-weight: 600;
+      color: #F8F6F2;
+      margin: 0 0 2rem;
+    }
+    .vision-content { text-align: center; }
+    .vision-heading, .vision-list, .vision-closing { text-align: left; }
+    .vision-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #C2A86C;
+      color: #000000;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 16.3125rem;
+      height: 3.4375rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .vision-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+    .vision-cta:hover { background: #A7915D; }
+
+    /* =====================================
+       ROADMAP SECTION
+       ===================================== */
+    .roadmap {
+      background: rgb(29, 31, 30);
+      color: #FFFFFF;
+      padding: 2rem 1.25rem 4rem;
+    }
+    .roadmap-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .roadmap-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.75rem;
+      line-height: 2.45rem;
+      color: #FFFFFF;
+      margin: 0 0 1rem;
+      max-width: 19rem;
+    }
+    .roadmap-desc {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 0 0 3.75rem;
+      max-width: 22.5rem;
+    }
+    .roadmap-desc p { margin: 0; }
+    .roadmap-desc em { font-style: italic; }
+    .roadmap-steps {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+      margin-bottom: 2.5625rem;
+    }
+    .roadmap-step {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      width: 13.8125rem;
+      height: 11.5625rem;
+      padding: 1.5rem 2rem 0;
+      border: 1px solid #474948;
+      border-radius: 0.625rem;
+      background: rgb(33, 35, 34);
+    }
+    .roadmap-step-icon {
+      width: 3.5rem;
+      height: 3.5rem;
+      margin-bottom: 1.625rem;
+    }
+    .roadmap-step-title {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.6rem;
+      color: #FFFFFF;
+      margin: 0;
+    }
+    .roadmap-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #C2A86C;
+      color: #000000;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 14rem;
+      height: 3.4375rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .roadmap-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+    .roadmap-cta:hover { background: #A7915D; }
+
+    /* =====================================
+       SOCIAL PROOF SECTION
+       ===================================== */
+    .social-proof {
+      background: rgb(44, 63, 54);
+      color: #FFFFFF;
+      padding: 2.625rem 1.25rem 4rem;
+      border-top: 0.3125rem solid #5B4B3F;
+      border-bottom: 0.3125rem solid #5B4B3F;
+    }
+    .social-proof-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .social-proof-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.5625rem;
+      line-height: 2.1875rem;
+      color: #F8F6F2;
+      margin: 0 0 2rem;
+      max-width: 22.5rem;
+    }
+    .social-proof-heading .gold { color: #C2A86C; }
+    .social-proof-cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+      width: 100%;
+    }
+    .social-proof-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 22.5rem;
+    }
+    .social-proof-card iframe {
+      width: 17.5rem;
+      height: 10rem;
+      border: 0;
+      margin-bottom: 1rem;
+    }
+    .social-proof-card-quote {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: #FFFFFF;
+      margin: 0;
+      max-width: 16.6875rem;
+    }
+
+    @media (min-width: 768px) {
+      /* origin desktop */
+      .origin {
+        padding: 5.625rem 1.8125rem 3rem;
+      }
+      .origin::before {
+        background-color: #3B414F;
+        opacity: 0;
+      }
+      .origin-heading {
+        font-size: 3.125rem;
+        line-height: 3.75rem;
+        margin-bottom: 2rem;
+      }
+      .origin-story p {
+        font-size: 1.125rem;
+        line-height: 1.8rem;
+      }
+      .origin-accomplishments-heading {
+        font-size: 1.875rem;
+        line-height: 2.25rem;
+        margin: 1.5625rem 0 1rem;
+      }
+      .origin-list li {
+        font-size: 1.25rem;
+        line-height: 2rem;
+      }
+
+      /* vision desktop */
+      .vision {
+        padding: 5.625rem 1.8125rem 5rem;
+      }
+      .vision-inner {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+        gap: 8.125rem;
+      }
+      .vision-photo {
+        flex: 0 0 27rem;
+        margin: -5.625rem 0 -5rem -3.375rem;
+        align-self: stretch;
+        object-fit: cover;
+      }
+      .vision-content {
+        flex: 1;
+      }
+      .vision-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        margin-bottom: 2rem;
+        max-width: 28.125rem;
+      }
+      .vision-list {
+        gap: 1rem;
+        max-width: 25.625rem;
+        margin-bottom: 1.875rem;
+      }
+      .vision-list li {
+        font-size: 1rem;
+        line-height: 1.6rem;
+      }
+      .vision-closing {
+        font-size: 1rem;
+        line-height: 1.6rem;
+        max-width: 25.625rem;
+      }
+      .vision-cta {
+        font-size: 1rem;
+        width: 14rem;
+      }
+    }
+
+    /* =====================================
+       PROGRAM OVERVIEW SECTION
+       ===================================== */
+    .program {
+      background: rgb(29, 31, 30);
+      color: #FFFFFF;
+      padding: 2.875rem 1.25rem 3.3125rem;
+    }
+    .program-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .program-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.5625rem;
+      line-height: 2.1875rem;
+      color: #F8F6F2;
+      margin: 0 0 1.875rem;
+      max-width: 22.5rem;
+    }
+    .program-image {
+      width: 100%;
+      max-width: 58.75rem;
+      height: auto;
+      margin-bottom: 1.75rem;
+    }
+    .program-desc {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      line-height: 1.6rem;
+      font-weight: 600;
+      color: #FFFFFF;
+      margin: 0 0 1.5625rem;
+      max-width: 22.5rem;
+    }
+    .program-desc + .program-desc {
+      margin-top: 0;
+    }
+    .program-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #C2A86C;
+      color: #000000;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      width: 14rem;
+      height: 3.4375rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+      margin-top: 2.0625rem;
+    }
+    .program-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+    .program-cta:hover { background: #A7915D; }
+
+    /* =====================================
+       MODULE BREAKDOWN SECTION
+       ===================================== */
+    .modules {
+      background: rgb(39, 41, 40);
+      color: #FFFFFF;
+      padding: 3.1875rem 1.25rem 4rem;
+      border-top: 0.3125rem solid #5B4B3F;
+      border-bottom: 0.3125rem solid #5B4B3F;
+    }
+    .modules-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+    .module {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .module-separator {
+      border: 0;
+      border-bottom: 1px solid #3D3E3E;
+      width: 22.5rem;
+      margin: 2.4rem auto;
+    }
+    .module-icon {
+      width: 4.75rem;
+      height: 4.75rem;
+      flex-shrink: 0;
+    }
+    .module-content {
+      flex: 1;
+    }
+    .module-label {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 0.875rem;
+      line-height: 1.225rem;
+      color: #C2A86C;
+      margin: 0 0 0.5rem;
+    }
+    .module-title {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.25rem;
+      line-height: 2rem;
+      color: #FFFFFF;
+      margin: 0 0 0.75rem;
+    }
+    .module-desc {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      font-weight: 600;
+      color: #BFBFBF;
+      margin: 0;
+      max-width: 22.5rem;
+    }
+    .module-desc + .module-desc {
+      margin-top: 1rem;
+    }
+
+    /* =====================================
+       MORE TESTIMONIALS SECTION
+       ===================================== */
+    .more-testimonials {
+      background: rgb(29, 31, 30);
+      color: #FFFFFF;
+      padding: 3.125rem 1.25rem 4rem;
+    }
+    .more-testimonials-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .more-testimonials-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.5625rem;
+      line-height: 2.1875rem;
+      color: #FFFFFF;
+      margin: 0 0 2rem;
+      max-width: 22.5rem;
+    }
+    .more-testimonials-cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2.5rem;
+      width: 100%;
+    }
+    .more-testimonials-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 22.5rem;
+    }
+    .more-testimonials-card iframe {
+      width: 17.625rem;
+      height: 10.0625rem;
+      border: 0;
+      margin-bottom: 1rem;
+    }
+    .more-testimonials-card-quote {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: #FFFFFF;
+      margin: 0;
+      max-width: 16.3125rem;
+    }
+
+    /* =====================================
+       TESTIMONIAL.TO SECTION
+       ===================================== */
+    .testimonial-to {
+      background: rgb(233, 226, 211);
+      padding: 1.9375rem 1.25rem 4rem;
+    }
+    .testimonial-to-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+    .testimonial-to iframe {
+      width: 100%;
+      max-width: 57.75rem;
+      height: 50rem;
+      border: 0;
+      display: block;
+      margin: 0 auto;
+    }
+    @media (min-width: 768px) {
+      .testimonial-to {
+        padding: 2.8125rem 1.8125rem 5rem;
+      }
+    }
+
+    /* =====================================
+       FAQ SECTION
+       ===================================== */
+    .faq {
+      background: rgb(29, 31, 30);
+      color: #FFFFFF;
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    .faq-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+    }
+    .faq-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.5625rem;
+      line-height: 2.1875rem;
+      color: #F8F6F2;
+      text-align: center;
+      margin: 0 0 1.875rem;
+    }
+    .faq-accordion {
+      max-width: 22.5rem;
+      margin: 0 auto;
+    }
+    .faq-item {
+      position: relative;
+      border-bottom: 1px solid #ffffff;
+      text-align: left;
+    }
+    .faq-item input[type="radio"] {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 30px;
+      opacity: 0;
+      z-index: 9;
+      cursor: pointer;
+    }
+    .faq-item h4 {
+      color: #ffffff;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      line-height: 1.5em;
+      font-weight: 700;
+      padding: 1rem 1.5625rem 1rem 0;
+      margin: 0;
+      cursor: pointer;
+      position: relative;
+    }
+    .faq-item h4::after {
+      content: "";
+      position: absolute;
+      top: 0.625rem;
+      right: 0.625rem;
+      width: 1rem;
+      height: 1rem;
+      background: url('assets/images/acc-closed.png') no-repeat center/contain;
+    }
+    .faq-item input[type="radio"]:checked + h4::after {
+      background-image: url('assets/images/acc-open.png');
+    }
+    .faq-item input[type="radio"] + h4 + div {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.15s ease-out;
+    }
+    .faq-item input[type="radio"]:checked + h4 + div {
+      max-height: 62.5rem;
+      transition: max-height 0.3s ease-in;
+      margin: 1rem 0 1.5rem;
+    }
+    .faq-item-answer {
+      color: #ffffff;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.4;
+      font-weight: 400;
+    }
+    .faq-item-answer p {
+      margin: 0 0 0.5em;
+    }
+    .faq-item-answer a {
+      color: #C2A86C;
+      text-decoration: none;
+    }
+    .faq-item-answer a:hover {
+      text-decoration: underline;
+    }
+
+    /* =====================================
+       FINAL CTA SECTION
+       ===================================== */
+    .final-cta {
+      background: rgb(233, 226, 211);
+      padding: 4rem 1.25rem;
+    }
+    .final-cta-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .final-cta-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.5rem;
+      line-height: 2.1rem;
+      color: #1D1F1E;
+      margin: 0 0 2.25rem;
+      max-width: 22.5rem;
+    }
+    .final-cta-heading strong { font-weight: 700; }
+    .final-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #2C3F36;
+      color: #FFFFFF;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.25rem;
+      width: 14rem;
+      height: 3.4375rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      position: relative;
+      overflow: hidden;
+    }
+    .final-cta-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to bottom, rgba(255, 255, 255, 0.35), rgba(255, 255, 255, 0));
+      pointer-events: none;
+    }
+    .final-cta-btn:hover { background: #222F29; }
+
+    /* =====================================
+       FOOTER SECTION
+       ===================================== */
+    .footer {
+      background: rgb(23, 25, 24);
+      color: #FFFFFF;
+      padding: 3rem 1.25rem;
+    }
+    .footer-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.225rem;
+      font-weight: 400;
+      color: #FFFFFF;
+    }
+    .footer-inner p {
+      margin: 0;
+    }
+    .footer-inner p + p {
+      margin-top: 0;
+    }
+    .footer-inner a {
+      color: #FFFFFF;
+      text-decoration: none;
+    }
+    .footer-inner a:hover {
+      text-decoration: underline;
+    }
+    .footer-disclaimer {
+      margin-top: 1.25rem !important;
+    }
+
+    @media (min-width: 768px) {
+      /* social proof desktop */
+      .social-proof {
+        padding: 3.5rem 1.8125rem 5rem;
+      }
+      .social-proof-heading {
+        font-size: 2.25rem;
+        line-height: 3.6rem;
+        max-width: 60rem;
+        margin-bottom: 3.625rem;
+      }
+      .social-proof-cards {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0;
+      }
+      .social-proof-card {
+        max-width: 19.6875rem;
+      }
+      .social-proof-card iframe {
+        width: 18.75rem;
+        height: 10.75rem;
+      }
+      .social-proof-card-quote {
+        line-height: 1.6rem;
+        max-width: 18.25rem;
+      }
+      .social-proof-card:last-child .social-proof-card-quote {
+        max-width: 14.6875rem;
+      }
+
+      /* footer desktop */
+      .footer {
+        padding: 3.125rem 1.8125rem;
+      }
+      .footer-inner {
+        line-height: 1.4rem;
+      }
+
+      /* final cta desktop */
+      .final-cta {
+        padding: 5.125rem 1.8125rem;
+      }
+      .final-cta-heading {
+        font-size: 2.25rem;
+        line-height: 3.6rem;
+        max-width: 58.3125rem;
+        margin-bottom: 2.375rem;
+      }
+      .final-cta-btn {
+        font-size: 1rem;
+      }
+
+      /* faq desktop */
+      .faq {
+        padding: 5.625rem 1.8125rem 5rem;
+      }
+      .faq-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        margin-bottom: 2.4375rem;
+      }
+      .faq-accordion {
+        max-width: 50rem;
+      }
+      .faq-item h4 {
+        font-size: 1.125rem;
+      }
+
+      /* more testimonials desktop */
+      .more-testimonials {
+        padding: 5.625rem 1.8125rem 5.5rem;
+      }
+      .more-testimonials-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 60rem;
+        margin-bottom: 2.5625rem;
+      }
+      .more-testimonials-cards {
+        flex-direction: row;
+        justify-content: center;
+        align-items: flex-start;
+        gap: 0;
+      }
+      .more-testimonials-card {
+        max-width: 19.6875rem;
+      }
+      .more-testimonials-card iframe {
+        width: 18.75rem;
+        height: 10.625rem;
+      }
+      .more-testimonials-card-quote {
+        line-height: 1.6rem;
+        max-width: 17.9375rem;
+      }
+      .more-testimonials-card:nth-child(2) .more-testimonials-card-quote {
+        max-width: 18.75rem;
+      }
+      .more-testimonials-card:last-child .more-testimonials-card-quote {
+        max-width: 13.75rem;
+      }
+
+      /* modules desktop */
+      .modules {
+        padding: 3.9375rem 1.8125rem 4rem;
+      }
+      .module-separator {
+        width: 52.5rem;
+        margin-left: 3.75rem;
+      }
+      .module {
+        flex-direction: row;
+        gap: 2.8125rem;
+      }
+      .module-icon {
+        width: 8.5rem;
+        height: 8.5rem;
+        margin-left: 4.5rem;
+      }
+      .module-label {
+        font-size: 1rem;
+        line-height: 1.6rem;
+      }
+      .module-title {
+        font-size: 1.5rem;
+        line-height: 2.4rem;
+      }
+      .module-desc {
+        font-size: 1.125rem;
+        line-height: 1.575rem;
+        max-width: 39.6875rem;
+      }
+
+      /* program desktop */
+      .program {
+        padding: 3.5rem 1.8125rem 4.375rem;
+      }
+      .program-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 49.6875rem;
+        margin-bottom: 1.875rem;
+      }
+      .program-image {
+        margin-bottom: 3.1875rem;
+      }
+      .program-desc {
+        font-size: 1.25rem;
+        line-height: 2rem;
+        max-width: 60rem;
+      }
+      .program-desc + .program-desc {
+        max-width: 53.0625rem;
+      }
+      .program-desc:first-of-type {
+        margin-bottom: 1.125rem;
+      }
+      .program-desc:nth-of-type(2) {
+        margin-bottom: 1.5rem;
+      }
+      .program-desc:nth-of-type(3) {
+        margin-bottom: 0;
+      }
+
+      /* roadmap desktop */
+      .roadmap {
+        padding: 5.625rem 1.8125rem 5rem;
+      }
+      .roadmap-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: none;
+      }
+      .roadmap-desc {
+        font-size: 1.125rem;
+        line-height: 2.025rem;
+        max-width: 60rem;
+      }
+      .roadmap-steps {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.25rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+      SECTION 1: HERO
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <img class="hero-logo" src="assets/images/logo-wht.png" srcset="assets/images/logo-wht.png 1x, assets/images/logo-wht@2x.png 2x" alt="Jason Moss">
+      <h1 class="hero-heading">A Clear Path To<span class="gold">&nbsp;More Clients</span></h1>
+      <p class="hero-desc">Launchpad is a self-paced program for early-stage entrepreneurs who want help finding clients and gaining traction in their business.</p>
+      <a class="hero-cta" href="https://checkout.jasonmoss.com/checkout/launchpad">Enroll Now</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: PAIN POINTS
+      ============================================ -->
+  <section class="pain">
+    <div class="pain-inner">
+      <img class="pain-photo" src="assets/images/photo-jason-dock.jpg" srcset="assets/images/photo-jason-dock.jpg 1x, assets/images/photo-jason-dock@2x.jpg 2x" alt="Launchpad course">
+
+      <picture class="pain-trust-logos">
+        <source media="(min-width: 768px)" srcset="assets/images/trust-logos-sm.png 1x, assets/images/trust-logos-sm@2x.png 2x">
+        <img src="assets/images/trust-logos.png" srcset="assets/images/trust-logos.png 1x, assets/images/trust-logos@2x.png 2x" alt="As seen in Forbes, Business Insider, OBD, Entrepreneur, Fast Company">
+      </picture>
+
+      <h4 class="pain-intro">You&rsquo;re an entrepreneur&nbsp;who&nbsp;knows&nbsp;you can help people.</h4>
+      <h4 class="pain-intro">But when it comes to growing your business, one challenge keeps getting in the way.</h4>
+
+      <hr class="pain-line">
+
+      <div class="pain-getclients">
+        <div class="pain-getclients-left">
+          <h4 class="pain-headline">Getting clients.</h4>
+          <h4 class="pain-subheadline"><span>You&rsquo;re not sure the right next steps to take.</span><span>You&rsquo;ve got lots of unanswered questions&hellip;</span></h4>
+        </div>
+        <ul class="pain-questions">
+          <li>What's my niche?</li>
+          <li>What should I charge, and what should I offer clients?</li>
+          <li>How do I find people who want to work with me?</li>
+        </ul>
+      </div>
+
+      <div class="pain-result-card">
+        <h3 class="pain-result-headline">And as a result...</h3>
+        <ul class="pain-results">
+          <li><em>You feel&nbsp;stuck in &ldquo;starter limbo&rdquo; and&nbsp;<span class="gold">unsure of your next steps</span></em></li>
+          <li><em><span class="gold">You&rsquo;re not yet attracting the clients</span> you know you&rsquo;re capable of supporting</em></li>
+          <li><em>Your deeper work is still <span class="gold">on the sidelines</span> while something else pays the bills</em></li>
+        </ul>
+      </div>
+
+      <div class="pain-cta-wrap">
+        <a class="pain-cta" href="https://checkout.jasonmoss.com/checkout/launchpad">Enroll Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 3: ORIGIN STORY
+      ============================================ -->
+  <section class="origin">
+    <div class="origin-inner">
+      <h2 class="origin-heading">I see you.</h2>
+
+      <div class="origin-story">
+        <p>Despite launching my own online&nbsp;business in 2016 with a ton of enthusiasm&hellip;</p>
+        <p>I only made <strong>$4728</strong> my first year.</p>
+        <p>I knew I could help people, but when it came to marketing, I didn&rsquo;t really know what I was doing.</p>
+        <p>It took me years to figure out what worked&hellip;</p>
+        <p>But once I began to understand what it took&nbsp;to attract the clients I wanted, <strong>everything changed.</strong></p>
+      </div>
+
+      <h4 class="origin-accomplishments-heading">I was able to&hellip;</h4>
+
+      <ul class="origin-list">
+        <li>Sign over <strong>2000&nbsp;clients</strong></li>
+        <li>Make my first&nbsp;<strong>$1 million</strong>&nbsp;as a coach</li>
+        <li>Go full-time and experience the freedom of getting to wake up each&nbsp;day and do work I love</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 4: VISION / IMAGINE
+      ============================================ -->
+  <section class="vision">
+    <div class="vision-inner">
+      <img class="vision-photo" src="assets/images/jason-pic.png" srcset="assets/images/jason-pic.png 1x, assets/images/jason-pic@2x.png 2x" alt="Jason Moss">
+
+      <div class="vision-content">
+        <h2 class="vision-heading">Imagine...</h2>
+
+        <ul class="vision-list">
+          <li>Feeling clear about your niche, your offer, and who your work is really for</li>
+          <li>Knowing the next steps to take to start attracting clients</li>
+          <li>Sharing your work online in a way that resonates and brings the right people to you</li>
+          <li>Having a simple process for guiding someone from interest to becoming a client</li>
+          <li>Waking up to messages from people asking about working with you</li>
+          <li>Finally gaining traction&nbsp;instead of feeling stuck or scattered</li>
+        </ul>
+
+        <p class="vision-closing">These are the kinds of shifts that start to happen when you have a clear path forward.</p>
+
+        <a class="vision-cta" href="https://checkout.jasonmoss.com/checkout/launchpad">Enroll Now</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 5: FOUR-STEP ROADMAP
+      ============================================ -->
+  <section class="roadmap">
+    <div class="roadmap-inner">
+      <h2 class="roadmap-heading">The roadmap to&nbsp;more clients</h2>
+
+      <div class="roadmap-desc">
+        <p>After building my own business and supporting thousands of entrepreneurs,<br>I discovered a simple four-step process for attracting clients online.</p>
+        <p><em>This is the&nbsp;roadmap you&rsquo;ll learn&nbsp;inside Launchpad.</em></p>
+      </div>
+
+      <div class="roadmap-steps">
+        <div class="roadmap-step">
+          <img class="roadmap-step-icon" src="assets/images/step-1.png" srcset="assets/images/step-1.png 1x, assets/images/step-1@2x.png 2x" alt="">
+          <h4 class="roadmap-step-title">1. Get clear on your niche</h4>
+        </div>
+        <div class="roadmap-step">
+          <img class="roadmap-step-icon" src="assets/images/step-2.png" srcset="assets/images/step-2.png 1x, assets/images/step-2@2x.png 2x" alt="">
+          <h4 class="roadmap-step-title">2. Build an irresistible offer</h4>
+        </div>
+        <div class="roadmap-step">
+          <img class="roadmap-step-icon" src="assets/images/step-3.png" srcset="assets/images/step-3.png 1x, assets/images/step-3@2x.png 2x" alt="">
+          <h4 class="roadmap-step-title">3. Grow an audience online</h4>
+        </div>
+        <div class="roadmap-step">
+          <img class="roadmap-step-icon" src="assets/images/step-4.png" srcset="assets/images/step-4.png 1x, assets/images/step-4@2x.png 2x" alt="">
+          <h4 class="roadmap-step-title">4. Master the art of enrollment</h4>
+        </div>
+      </div>
+
+      <a class="roadmap-cta" href="https://checkout.jasonmoss.com/checkout/launchpad">Enroll Now</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 6: SOCIAL PROOF
+      ============================================ -->
+  <section class="social-proof">
+    <div class="social-proof-inner">
+      <h2 class="social-proof-heading">These four steps have supported <span class="gold">real results</span> for many&nbsp;entrepreneurs I&rsquo;ve worked with across different programs.</h2>
+
+      <div class="social-proof-cards">
+        <div class="social-proof-card">
+          <iframe src="https://www.youtube.com/embed/21AU3tuxTQo?showinfo=0" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">&ldquo;I went from making $2k over 6 months to $260k in&nbsp;one year.&rdquo;</h4>
+        </div>
+        <div class="social-proof-card">
+          <iframe src="https://www.youtube.com/embed/KKC6FdicVs0?showinfo=0" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">&ldquo;I tripled my rates and started hitting 10k+ months.&rdquo;</h4>
+        </div>
+        <div class="social-proof-card">
+          <iframe src="https://www.youtube.com/embed/0I_iBZlUvRY?showinfo=0" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">&ldquo;I made $59,000 in six months.&rdquo;</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 7: PROGRAM OVERVIEW
+      ============================================ -->
+  <section class="program">
+    <div class="program-inner">
+      <h2 class="program-heading">Inside Launchpad</h2>
+
+      <img class="program-image" src="assets/images/photo-jason-dock.jpg" srcset="assets/images/photo-jason-dock.jpg 1x, assets/images/photo-jason-dock@2x.jpg 2x" alt="Launchpad course overview">
+
+      <p class="program-desc">Inside LAUNCHPAD, you&rsquo;ll get lifetime access to my signature client attraction roadmap&hellip;</p>
+      <p class="program-desc">With clear, focused training designed to help you attract clients and gain traction in your business...</p>
+      <p class="program-desc">In an easy-to-digest, self-directed format that you can go through at your own pace.</p>
+
+      <a class="program-cta" href="https://checkout.jasonmoss.com/checkout/launchpad">Enroll Now</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 8: MODULE BREAKDOWN
+      ============================================ -->
+  <section class="modules">
+    <div class="modules-inner">
+
+      <div class="module">
+        <img class="module-icon" src="assets/images/module-1.png" srcset="assets/images/module-1.png 1x, assets/images/module-1@2x.png 2x" alt="">
+        <div class="module-content">
+          <p class="module-label">Module 1:</p>
+          <h4 class="module-title">Six Figure Mindset</h4>
+          <p class="module-desc">Build the confidence and clarity you need to show up consistently, communicate your value, and start attracting clients.</p>
+        </div>
+      </div>
+
+      <hr class="module-separator">
+
+      <div class="module">
+        <img class="module-icon" src="assets/images/module-2.png" srcset="assets/images/module-2.png 1x, assets/images/module-2@2x.png 2x" alt="">
+        <div class="module-content">
+          <p class="module-label">Module 2:</p>
+          <h4 class="module-title">Nail Your Niche</h4>
+          <p class="module-desc">Get clear on the right&nbsp;niche for you&nbsp;and discover how to refine&nbsp;your messaging and offers so they&nbsp;resonate with your ideal clients.</p>
+        </div>
+      </div>
+
+      <hr class="module-separator">
+
+      <div class="module">
+        <img class="module-icon" src="assets/images/module-3.png" srcset="assets/images/module-3.png 1x, assets/images/module-3@2x.png 2x" alt="">
+        <div class="module-content">
+          <p class="module-label">Module 3:</p>
+          <h4 class="module-title">Irresistible Offer</h4>
+          <p class="module-desc">Build the foundations for a premium offer that delivers real results for your clients and gives you a clear path to enrollment.</p>
+        </div>
+      </div>
+
+      <hr class="module-separator">
+
+      <div class="module">
+        <img class="module-icon" src="assets/images/module-4.png" srcset="assets/images/module-4.png 1x, assets/images/module-4@2x.png 2x" alt="">
+        <div class="module-content">
+          <p class="module-label">Module 4:</p>
+          <h4 class="module-title">Grow Your Audience</h4>
+          <p class="module-desc">Discover the tactics and strategies you can use to grow an audience online of people who follow you, engage with your content, and reach out, asking about working with you.</p>
+          <p class="module-desc">Includes my&nbsp;Belief-Based Messaging framework to help you clarify the words to use in your social media posts and emails to attract people who you&rsquo;ll love working with and are deeply aligned with your offers and the work you do.</p>
+        </div>
+      </div>
+
+      <hr class="module-separator">
+
+      <div class="module">
+        <img class="module-icon" src="assets/images/module-5.png" srcset="assets/images/module-5.png 1x, assets/images/module-5@2x.png 2x" alt="">
+        <div class="module-content">
+          <p class="module-label">Module 5:</p>
+          <h4 class="module-title">Effortless Enrollment</h4>
+          <p class="module-desc">Get the heart-centered sales framework I&rsquo;ve&nbsp;used to enroll over $1 million of&nbsp;clients, without using pushy or salesy tactics.</p>
+          <p class="module-desc">This gives you everything you need to guide someone from initial interest to a clear, confident yes in a way that feels honest, authentic, and grounded in integrity.</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 9: MORE TESTIMONIALS
+      ============================================ -->
+  <section class="more-testimonials">
+    <div class="more-testimonials-inner">
+      <h2 class="more-testimonials-heading">More results from clients&nbsp;I&rsquo;ve&nbsp;supported...</h2>
+
+      <div class="more-testimonials-cards">
+        <div class="more-testimonials-card">
+          <iframe src="https://www.youtube.com/embed/OV61sRBvdfA?showinfo=0" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="more-testimonials-card-quote">&ldquo;I went from inconsistent clients to a $19k month.&rdquo;</h4>
+        </div>
+        <div class="more-testimonials-card">
+          <iframe src="https://www.youtube.com/embed/ocwJPajLU18?showinfo=0" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="more-testimonials-card-quote">&ldquo;I made $8200 in 30 days.&rdquo;</h4>
+        </div>
+        <div class="more-testimonials-card">
+          <iframe src="https://www.youtube.com/embed/Lzwsf1G6IQs?showinfo=0" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="more-testimonials-card-quote">&ldquo;I started hitting $6 - 9k months.&rdquo;</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 10: TESTIMONIAL.TO (written testimonials)
+      ============================================ -->
+  <section class="testimonial-to">
+    <div class="testimonial-to-inner">
+      <iframe src="https://embed-v2.testimonial.to/w/jason-moss-testimonials?animated=on&theme=light&shadowColor=e9e2d3&speed=1&tag=all" title="Client Testimonials" scrolling="no"></iframe>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 11: FAQ
+      ============================================ -->
+  <section class="faq">
+    <div class="faq-inner">
+      <h2 class="faq-heading">Frequently asked questions</h2>
+
+      <div class="faq-accordion">
+        <div class="faq-item">
+          <input type="radio" name="accordion" checked>
+          <h4>Who is Launchpad for?</h4>
+          <div class="faq-item-answer">
+            <p>Coaches, mentors, consultants, healers, and other service-based online business owners who&hellip;</p>
+            <p>Haven&rsquo;t yet launched their business, and are looking for help attracting their first few clients and getting their business off the ground...</p>
+            <p>Or have already launched their business and want help attracting more clients and increasing their income.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <input type="radio" name="accordion">
+          <h4>What will I find inside?</h4>
+          <div class="faq-item-answer">
+            <p>Deep-dive focused video trainings that walk through my client attraction roadmap in detail, with plenty of worksheets and downloadable materials to help you implement.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <input type="radio" name="accordion">
+          <h4>Will I have 1-to-1 access or support from Jason inside Launchpad?</h4>
+          <div class="faq-item-answer">
+            <p>We don&rsquo;t provide 1-to-1 support, group calls or live trainings inside this program. If you&rsquo;d like access to higher-touch mentorship with Jason, <a href="https://jasonmoss.com/apply/" target="_blank" rel="noopener">apply to work together</a> here.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <input type="radio" name="accordion">
+          <h4>Are there refunds or guarantees?</h4>
+          <div class="faq-item-answer">
+            <p>We don&rsquo;t offer specific income guarantees, as everyone&rsquo;s results will depend on their own effort and how they apply what they learn. Because of the nature of this program, all purchases are final. We encourage you to take your time and make sure this feels like the right fit for you before enrolling. Testimonials shared are real client experiences and reflect what&rsquo;s possible, though individual outcomes will vary.</p>
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <input type="radio" name="accordion">
+          <h4>Have more questions?</h4>
+          <div class="faq-item-answer">
+            <p>Reach out to me at jason@jasonmoss.com with questions &mdash; I&rsquo;m happy to reply personally and provide you with any additional info you need to come to clarity on the most aligned next step for you.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 12: FINAL CTA
+      ============================================ -->
+  <section class="final-cta">
+    <div class="final-cta-inner">
+      <h2 class="final-cta-heading">If you&rsquo;re ready to gain clarity, start attracting clients, and build real momentum in your business, you can join Launchpad below.</h2>
+      <a class="final-cta-btn" href="https://checkout.jasonmoss.com/checkout/launchpad">Enroll Now</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 13: FOOTER
+      ============================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>Jason Moss LLC.</p>
+      <p><a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+      <p class="footer-disclaimer"><em>Testimonials featured on this page are from entrepreneurs&nbsp;we&rsquo;ve helped&nbsp;in various capacities via different&nbsp;programs we&rsquo;ve offered. Many&nbsp;had access to additional support beyond that which we provide&nbsp;inside Launchpad. These&nbsp;testimonials showcase what&rsquo;s possible and are real stories from clients we&rsquo;ve worked with, but we offer no guarantees you will see similar results. Launching and growing a business involves risk and uncertainty, and your results may vary.</em></p>
+      <p class="footer-disclaimer"><em>This website is not a part of Facebook or Meta Platforms, Inc.</em></p>
+      <p><em>Additionally, this site is NOT endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</em></p>
+    </div>
+  </footer>
+
+</body>
+</html>
