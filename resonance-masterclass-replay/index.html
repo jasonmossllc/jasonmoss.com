@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Resonance Masterclass Replay</title>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:400,500,600,700,900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: rgb(48, 59, 51);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       MAIN SECTION
+       ===================================== */
+    .page {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 1.75rem 1.25rem 3rem;
+      color: #F8F6F2;
+      overflow: visible;
+    }
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgb(40, 54, 47);
+      opacity: 0.64;
+      pointer-events: none;
+    }
+    .page-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* -- Heading "You're In." -- */
+    .page-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+      color: #F8F6F2;
+      margin: 0 0 1rem;
+    }
+    .page-heading em { font-style: italic; }
+    .page-heading .gold { color: #C2A86C; }
+
+    /* -- Description -- */
+    .page-desc {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.5938rem;
+      color: #E9E2D3;
+      margin: 0 0 2rem;
+      max-width: 18.75rem;
+    }
+    .page-desc strong { font-weight: 700; }
+    .page-desc span { display: block; }
+
+    /* -- Training list (mobile card / desktop row) -- */
+    .training-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      color: #C2A86C;
+      margin: 0 0 0.75rem;
+      text-align: left;
+    }
+    .training {
+      width: 100%;
+      max-width: 21.5rem;
+      margin: -0.5rem 0 2rem;
+      padding: 1.25rem 2rem 1.5rem 1.75rem;
+      border: 1px solid rgb(78, 92, 78);
+      border-radius: 0.75rem;
+      background: rgb(56, 71, 62);
+    }
+    .training-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: left;
+    }
+    .training-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.225rem;
+      font-weight: 400;
+      color: #E9E2D3;
+    }
+    .training-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.25rem;
+      width: 0.75rem;
+      height: 0.75rem;
+      background-color: #C2A86C;
+      -webkit-mask: url('assets/images/arrow-gold.svg') no-repeat center/contain;
+              mask: url('assets/images/arrow-gold.svg') no-repeat center/contain;
+    }
+
+    /* -- Video -- */
+    .page-video {
+      width: 100%;
+      max-width: 22.5rem;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.35);
+      position: relative;
+      z-index: 2;
+      margin-top: 1rem;
+    }
+
+    /* -- Sub-headline below video -- */
+    .page-sub {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9125rem;
+      line-height: 1.4625rem;
+      color: #E9E2D3;
+      margin: 2.5rem 0 2rem;
+      max-width: 21.8rem;
+    }
+    .page-sub em { font-style: italic; }
+
+    /* -- CTA -- */
+    .page-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #C2A86C;
+      color: #000000;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.975rem;
+      line-height: 120%;
+      width: 19.5rem;
+      height: 3.78rem;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.25s ease;
+      box-shadow: 0 4px 18px rgba(194, 168, 108, 0.35);
+      margin-bottom: 5rem;
+    }
+    .page-cta:hover {
+      background: #A7915D;
+      box-shadow: 0 6px 22px rgba(194, 168, 108, 0.45);
+    }
+
+    /* -- Footer -- */
+    .page-footer {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.6875rem;
+      line-height: 0.9625rem;
+      color: rgb(61, 75, 68);
+      text-align: center;
+    }
+    .page-footer p { margin: 0; }
+    .page-footer a {
+      color: rgb(61, 75, 68);
+      text-decoration: none;
+    }
+    .page-footer a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .page {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 2.375rem 1.8125rem 4rem;
+      }
+      .page-heading {
+        font-size: 2.1875rem;
+        line-height: 2.625rem;
+        margin-bottom: 1.25rem;
+      }
+      .page-desc {
+        font-size: 1.0625rem;
+        line-height: 1.8063rem;
+        max-width: 23.9375rem;
+        margin-bottom: 2rem;
+      }
+      .training-label { display: none; }
+      .training {
+        width: 100%;
+        max-width: 44.5625rem;
+        padding: 1rem 0 1rem;
+        border: 0;
+        background: transparent;
+        margin: 0 auto 2rem;
+        border-top: 1px solid rgb(77, 88, 77);
+        border-bottom: 1px solid rgb(77, 88, 77);
+        border-radius: 0;
+      }
+      .training-list {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 2rem;
+        text-align: center;
+        counter-reset: training-item;
+      }
+      .training-list li {
+        flex: 1;
+        padding-left: 0;
+        padding-top: 1.5rem;
+        font-size: 0.8125rem;
+        line-height: 1.2rem;
+        color: #E9E2D3;
+        position: relative;
+      }
+      .training-list li + li::after {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        top: 0.5rem;
+        width: 1px;
+        height: 5.8125rem;
+        background: rgb(77, 88, 77);
+      }
+      .training-list li::before {
+        content: counter(training-item, lower-roman);
+        counter-increment: training-item;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        height: auto;
+        background: none;
+        background-color: transparent;
+        -webkit-mask: none;
+                mask: none;
+        font-family: 'Libre Baskerville', serif;
+        font-style: italic;
+        font-weight: 400;
+        color: #C2A86C;
+        font-size: 0.6875rem;
+        line-height: 1.1rem;
+      }
+      .page-video {
+        max-width: 42.9375rem;
+        aspect-ratio: auto;
+        height: 23.8125rem;
+      }
+      .page-sub {
+        font-size: 1rem;
+        line-height: 1.7rem;
+        max-width: 28.875rem;
+        margin: 2rem 0 1.5rem;
+      }
+      .page-cta {
+        font-size: 1rem;
+        width: 25.3125rem;
+        margin-bottom: 6rem;
+      }
+      .page-footer {
+        max-width: 40.1875rem;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page">
+    <div class="page-inner">
+      <h1 class="page-heading"><em><span class="gold">You're In.</span></em></h1>
+      <p class="page-desc"><span>You're about to see why marketing has felt so heavy &mdash; and how to shift it.</span><span><strong>Tap for sound to begin.</strong></span></p>
+
+      <div class="training">
+        <p class="training-label">INSIDE THIS TRAINING</p>
+        <ul class="training-list">
+          <li>Why marketing feels heavy &mdash; and why strategy isn&rsquo;t the problem</li>
+          <li>The analogy that reframes every marketing decision you make</li>
+          <li>Why repelling 99% of your audience is how you attract the right 1%</li>
+          <li>Two real marketing examples &mdash; before and after the shift</li>
+          <li>A closing that reframes what your business is actually for</li>
+        </ul>
+      </div>
+
+      <iframe class="page-video" src="https://fast.wistia.net/embed/iframe/zosvj2ru1y" title="Resonance Masterclass Replay" allow="autoplay; fullscreen" allowfullscreen></iframe>
+
+      <p class="page-sub">If you&rsquo;re resonating with my message and know you&rsquo;re ready for real support, apply for an <em>in-depth conversation</em> with me to explore whether working together is aligned.</p>
+
+      <a class="page-cta" href="https://jasonmoss.com/apply/" target="_blank" rel="noopener">Explore Working Together</a>
+
+      <div class="page-footer">
+        <p>&copy; Jason Moss LLC. All rights reserved</p>
+        <p><a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+        <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+        <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+        <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wistia video script + 75% tracking -->
+  <script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
+  <script src="/js/wistia-tracking.js" defer></script>
+
+  <!-- URL param passthrough for CTA -->
+  <script>
+    (function () {
+      const params = window.location.search;
+      if (!params) return;
+      document.querySelectorAll('a[href*="jasonmoss.com/apply"]').forEach(a => {
+        try {
+          const url = new URL(a.href);
+          const existing = new URLSearchParams(url.search);
+          const incoming = new URLSearchParams(params);
+          incoming.forEach((v, k) => { if (!existing.has(k)) existing.set(k, v); });
+          url.search = existing.toString();
+          a.href = url.toString();
+        } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>
