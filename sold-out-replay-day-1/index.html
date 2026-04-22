@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Live Training Replay</title>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: rgb(44, 63, 54);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       HERO SECTION
+       ===================================== */
+    .hero {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 2rem 0.5rem 3rem;
+      color: #F8F6F2;
+      overflow: visible;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.6875rem;
+      line-height: 2.025rem;
+      color: #F8F6F2;
+      margin: 0;
+      max-width: 24rem;
+    }
+    .hero-heading em { color: #c2a86c; font-style: italic; }
+    .hero-desc {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.35rem;
+      color: #F8F6F2;
+      margin: 0 0 2rem;
+      max-width: 22.3125rem;
+      margin-top: 0;
+    }
+    .hero-inner { gap: 0; }
+    .hero-video {
+      width: 100%;
+      max-width: 23.875rem;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      box-shadow: 2px 0 60px 0 rgb(194, 168, 108);
+      position: relative;
+      z-index: 3;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 2.375rem 1.8125rem 1.5rem;
+      }
+      .hero-heading {
+        font-size: 2.1875rem;
+        line-height: 2.625rem;
+        max-width: 52.8125rem;
+        margin-bottom: 1.25rem;
+      }
+      .hero-desc {
+        font-size: 1.375rem;
+        line-height: 1.65rem;
+        max-width: 31.375rem;
+        margin-bottom: 2.5rem;
+      }
+      .hero-video {
+        max-width: 41.25rem;
+        height: 23.1875rem;
+        aspect-ratio: auto;
+      }
+    }
+
+    /* =====================================
+       CTA SECTION
+       ===================================== */
+    .cta {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 3rem 1.25rem 4rem;
+      color: #F8F6F2;
+    }
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .cta-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.1875rem;
+      line-height: 1.6625rem;
+      color: #F8F6F2;
+      margin: 0 0 2rem;
+      max-width: 20.875rem;
+    }
+    .cta-heading p { margin: 0 0 1.6625rem; }
+    .cta-heading p:last-child { margin-bottom: 0; }
+    .cta-heading em { font-style: italic; }
+    .cta-heading .gold { color: #c2a86c; }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#E0C68A, #C2A86C 50%);
+      color: #1D1F1E;
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 120%;
+      width: 21.375rem;
+      max-width: 100%;
+      height: 3.875rem;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .cta-btn:hover { background: #E3C98C; }
+    .cta-logo {
+      width: 2.625rem;
+      height: 2.625rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .cta {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 1.25rem 1.8125rem 5rem;
+      }
+      .cta-heading {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        max-width: 36.4375rem;
+        margin-bottom: 1.8125rem;
+      }
+      .cta-btn {
+        width: 39rem;
+        height: 3.6875rem;
+      }
+      .cta-logo {
+        width: 3.25rem;
+        height: 3.25rem;
+        margin-top: 2rem;
+      }
+    }
+
+    /* =====================================
+       FOOTER
+       ===================================== */
+    .footer {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 3rem 1.25rem;
+    }
+    .footer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .footer-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8125rem;
+      line-height: 1.1375rem;
+      font-weight: 400;
+      color: #545454;
+    }
+    .footer-inner p { margin: 0; }
+    .footer-inner a {
+      color: #545454;
+      text-decoration: none;
+    }
+    .footer-inner a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .footer {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+      SECTION 1: HERO (heading + desc + video)
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-heading">This Is Where<br><em>Everything Comes Together.</em></h1>
+      <p class="hero-desc">Inside&nbsp;Day 3,&nbsp;you&rsquo;ll uncover the patterns holding you back, integrate the intuitive shifts, and choose&nbsp;the path that leads to aligned growth.</p>
+      <iframe class="hero-video" src="https://fast.wistia.net/embed/iframe/birsm04zwz" title="Day 3 Replay" allow="autoplay; fullscreen" allowfullscreen></iframe>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: CTA
+      ============================================ -->
+  <section class="cta">
+    <div class="cta-inner">
+      <div class="cta-heading">
+        <p>This experience is <em>just the beginning</em> of who you&rsquo;re becoming.</p>
+        <p>If something awakened in you this week&hellip;<br><em><span class="gold">The Collective Mastermind</span>&nbsp;</em>is where that identity fully comes alive.</p>
+        <p>Join us&nbsp;through Sunday and receive 6 months of access for $10k. Apply below.</p>
+      </div>
+      <a class="cta-btn" href="https://jasonmoss.com/the-collective" target="_blank" rel="noopener">Step Inside The Collective</a>
+      <img class="cta-logo" src="assets/images/jm-logo-gold.png" srcset="assets/images/jm-logo-gold.png 1x, assets/images/jm-logo-gold@2x.png 2x" alt="">
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 3: FOOTER
+      ============================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>&copy; Jason Moss LLC. All rights reserved</p>
+      <p><a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+      <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+      <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+      <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+
+  <!-- Wistia video script + 75% tracking -->
+  <script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
+  <script src="/js/wistia-tracking.js" defer></script>
+
+  <!-- URL param passthrough for CTA -->
+  <script>
+    (function () {
+      const params = window.location.search;
+      if (!params) return;
+      document.querySelectorAll('a[href*="jasonmoss.com/the-collective"]').forEach(a => {
+        try {
+          const url = new URL(a.href);
+          const existing = new URLSearchParams(url.search);
+          const incoming = new URLSearchParams(params);
+          incoming.forEach((v, k) => { if (!existing.has(k)) existing.set(k, v); });
+          url.search = existing.toString();
+          a.href = url.toString();
+        } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>
