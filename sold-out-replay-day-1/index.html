@@ -69,11 +69,14 @@
     .hero-video {
       width: 100%;
       max-width: 23.875rem;
-      aspect-ratio: 16 / 9;
       border: 0;
       box-shadow: 2px 0 60px 0 rgb(194, 168, 108);
       position: relative;
       z-index: 3;
+    }
+    .hero-video .wistia_embed {
+      width: 100%;
+      aspect-ratio: 16 / 9;
     }
 
     @media (min-width: 768px) {
@@ -95,8 +98,6 @@
       }
       .hero-video {
         max-width: 41.25rem;
-        height: 23.1875rem;
-        aspect-ratio: auto;
       }
     }
 
@@ -238,7 +239,13 @@
     <div class="hero-inner">
       <h1 class="hero-heading">Day 1: Where<br><em>Sold Out Begins.</em></h1>
       <p class="hero-desc">Inside&nbsp;Day 1,&nbsp;you&rsquo;ll shift how you think about selling, spot the mindset blocks quietly costing you deals, and start the daily practice of making invitations that turn conversations into clients.</p>
-      <iframe class="hero-video" src="https://fast.wistia.net/embed/iframe/birsm04zwz" title="Sold Out — Day 1 Replay" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <div class="hero-video">
+        <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+          <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+            <div class="wistia_embed wistia_async_ncvrwu0082 seo=true videoFoam=true" style="height:100%;position:relative;width:100%;">&nbsp;</div>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
@@ -271,7 +278,8 @@
   </footer>
 
   <!-- Wistia video script + 75% tracking -->
-  <script src="https://fast.wistia.net/assets/external/E-v1.js" async></script>
+  <script src="https://fast.wistia.com/embed/medias/ncvrwu0082.jsonp" async></script>
+  <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
   <script src="/js/wistia-tracking.js" defer></script>
 
   <!-- URL param passthrough for CTA -->
