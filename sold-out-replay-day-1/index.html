@@ -26,7 +26,7 @@
     .hero {
       position: relative;
       background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
-      padding: 2rem 0.5rem 3rem;
+      padding: 2rem 1rem 2rem;
       color: #F8F6F2;
       overflow: visible;
     }
@@ -60,11 +60,10 @@
     .hero-desc {
       font-family: 'Raleway', sans-serif;
       font-size: 1.125rem;
-      line-height: 1.35rem;
+      line-height: 1.4;
       color: #F8F6F2;
-      margin: 0 0 2rem;
+      margin: 0.75rem 0 1.5rem;
       max-width: 22.3125rem;
-      margin-top: 0;
     }
     .hero-inner { gap: 0; }
     .hero-video {
@@ -107,7 +106,7 @@
     .cta {
       position: relative;
       background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
-      padding: 3rem 1.25rem 4rem;
+      padding: 2rem 1.25rem 2.5rem;
       color: #F8F6F2;
     }
     .cta::before {
@@ -130,13 +129,13 @@
     .cta-heading {
       font-family: 'Libre Baskerville', serif;
       font-weight: 400;
-      font-size: 1.1875rem;
-      line-height: 1.6625rem;
+      font-size: 1.125rem;
+      line-height: 1.55;
       color: #F8F6F2;
-      margin: 0 0 2rem;
+      margin: 0 0 1.5rem;
       max-width: 20.875rem;
     }
-    .cta-heading p { margin: 0 0 1.6625rem; }
+    .cta-heading p { margin: 0 0 1rem; }
     .cta-heading p:last-child { margin-bottom: 0; }
     .cta-heading em { font-style: italic; }
     .cta-heading .gold { color: #c2a86c; }
@@ -161,7 +160,7 @@
     .cta-logo {
       width: 2.625rem;
       height: 2.625rem;
-      margin-top: 1.25rem;
+      margin-top: 1rem;
     }
 
     @media (min-width: 768px) {
@@ -192,7 +191,7 @@
     .footer {
       position: relative;
       background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
-      padding: 3rem 1.25rem;
+      padding: 1.75rem 1.25rem;
     }
     .footer::before {
       content: "";
@@ -213,7 +212,8 @@
       font-weight: 400;
       color: #545454;
     }
-    .footer-inner p { margin: 0; }
+    .footer-inner p { margin: 0 0 0.25rem; }
+    .footer-inner p:last-child { margin-bottom: 0; }
     .footer-inner a {
       color: #545454;
       text-decoration: none;
@@ -223,7 +223,9 @@
     @media (min-width: 768px) {
       .footer {
         background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 3rem 1.25rem;
       }
+      .footer-inner p { margin: 0; }
     }
   </style>
 </head>
