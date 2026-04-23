@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Apply to Work With Jason Moss</title>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #1D1F1E;
+      background: rgb(233, 226, 211);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       HERO SECTION
+       ===================================== */
+    .hero {
+      position: relative;
+      background: url('assets/images/hero-bg.png') repeat rgb(248, 246, 242) 50% 50% / cover;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #F8F6F2;
+      opacity: 0.59;
+      z-index: 1;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 2rem 1.25rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* Desktop heading (single) — hidden on mobile */
+    .hero-heading-desktop {
+      display: none;
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 2.3125rem;
+      line-height: 3.0063rem;
+      color: #1D1F1E;
+      margin: 0 0 1.25rem;
+      max-width: 58.5rem;
+    }
+    .hero-heading-desktop > span { display: block; }
+    .hero-heading-desktop em { font-style: italic; }
+    .hero-heading-desktop .gold { color: #C2A86C; }
+    .hero-heading-desktop .bold-gold { color: #C2A86C; font-weight: 700; }
+
+    /* Mobile heading parts */
+    .hero-heading-top {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.3125rem;
+      line-height: 1.575rem;
+      color: #1D1F1E;
+      margin: 0 0 1rem;
+      max-width: 22.875rem;
+    }
+    .hero-heading-bottom {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.75rem;
+      line-height: 2.1rem;
+      color: #1D1F1E;
+      margin: 1.25rem 0 1.25rem;
+      max-width: 20.9375rem;
+    }
+    .hero-heading-bottom em { font-style: italic; }
+    .hero-heading-bottom .gold { color: #C2A86C; }
+    .hero-heading-bottom .bold-gold { color: #C2A86C; font-weight: 700; }
+
+    /* Subheading below video (mobile order) / above video (desktop) */
+    .hero-sub {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: #5B4B3F;
+      margin: 0 0 1.5rem;
+      max-width: 19.875rem;
+    }
+
+    /* Wistia embed wrapper */
+    .hero-video {
+      width: 100%;
+      max-width: 23.5625rem;
+      aspect-ratio: 16 / 9;
+      margin: 0 0 1.25rem;
+    }
+    .hero-video wistia-player { display: block; }
+
+    /* CTA button */
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #C2A86C;
+      color: #FFFFFF;
+      border: 2px solid #AA9462;
+      border-radius: 4px;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 120%;
+      width: 100%;
+      max-width: 23.375rem;
+      height: 3.25rem;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 0.5rem;
+    }
+    .hero-cta:hover { background: #B69F69; color: #FFFFFF; }
+
+    .hero-cta-sub {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: #1D1F1E;
+      margin: 1rem 0 2rem;
+      max-width: 23.5625rem;
+    }
+
+    /* Horizontal divider before "As seen in" */
+    .hero-divider {
+      width: 22.5rem;
+      max-width: 100%;
+      border: 0;
+      border-top: 1px solid #DFDBD9;
+      margin: 0.5rem 0 1.5rem;
+    }
+
+    .hero-seen-in {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 0.9375rem;
+      color: #977F6D;
+      margin: 0 0 1.25rem;
+    }
+
+    .hero-trust-desktop { display: none; width: 39.4375rem; max-width: 100%; height: auto; }
+    .hero-trust-mobile { display: block; width: 21.0625rem; max-width: 100%; height: auto; margin: 0 auto 2rem; }
+
+    /* Hero footer copyright + legal */
+    .hero-footer {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.8125rem;
+      line-height: 1.1375rem;
+      color: #B9B7B6;
+      margin: 2.5rem 0 0;
+      max-width: 25rem;
+    }
+    .hero-footer p { margin: 0; }
+    .hero-footer a { color: #B9B7B6; text-decoration: underline; }
+    .hero-footer a:hover { color: #977F6D; }
+
+    @media (min-width: 768px) {
+      .hero-inner {
+        max-width: 60rem;
+        padding: 2.1875rem 1.8125rem 4rem;
+      }
+      .hero-heading-top, .hero-heading-bottom { display: none; }
+      .hero-heading-desktop { display: block; order: 1; margin-bottom: 1.25rem; }
+      .hero-sub {
+        order: 2;
+        font-size: 1.125rem;
+        line-height: 1.6875rem;
+        max-width: 40.5rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero-video { order: 3; max-width: 40.6875rem; aspect-ratio: auto; height: 22.25rem; margin-bottom: 1rem; }
+      .hero-cta { order: 4; }
+      .hero-cta-sub { order: 5; }
+      .hero-divider { order: 6; }
+      .hero-seen-in { order: 7; }
+      .hero-trust-desktop { order: 8; }
+      .hero-footer { order: 9; }
+      .hero-cta {
+        font-size: 1.375rem;
+        max-width: 40.3125rem;
+        height: 4rem;
+      }
+      .hero-cta-sub {
+        font-size: 1.125rem;
+        line-height: 1.8rem;
+        max-width: 40.6875rem;
+        margin-bottom: 0.75rem;
+      }
+      .hero-divider {
+        width: 39.9375rem;
+        margin: 2rem 0 2rem;
+      }
+      .hero-seen-in {
+        font-size: 1rem;
+        line-height: 1.2rem;
+      }
+      .hero-trust-desktop { display: block; width: 39.4375rem; margin: 0 auto 3rem; }
+      .hero-trust-mobile { display: none; }
+      .hero-footer {
+        max-width: 34.25rem;
+        font-size: 0.8125rem;
+        line-height: 1.3rem;
+      }
+    }
+
+    /* =====================================
+       TESTIMONIALS SECTION
+       ===================================== */
+    .testimonials {
+      background: rgb(233, 226, 211);
+      padding: 2.5rem 1.25rem 4rem;
+    }
+    .testimonials-inner {
+      max-width: 75rem;
+      margin: 0 auto;
+    }
+    .testimonials iframe {
+      width: 100%;
+      border: 0;
+      display: block;
+    }
+
+    @media (min-width: 768px) {
+      .testimonials {
+        padding: 3.5rem 1.8125rem 5rem;
+      }
+    }
+
+    /* =====================================
+       STICKY CTA BAR
+       ===================================== */
+    .jm-sticky-cta {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      z-index: 999999;
+      transform: translateY(100%);
+      opacity: 0;
+      pointer-events: none;
+      transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: transform, opacity;
+    }
+    .jm-sticky-cta.is-visible {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+    .jm-sticky-cta__inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.875rem 1rem 0.9375rem;
+      background: rgba(248, 246, 242, 0.92);
+      -webkit-backdrop-filter: blur(24px) saturate(1.2);
+      backdrop-filter: blur(24px) saturate(1.2);
+      border-top: 1px solid rgba(194, 168, 108, 0.18);
+      box-shadow: 0 -4px 24px rgba(29, 31, 30, 0.06),
+                  0 -1px 6px rgba(29, 31, 30, 0.03);
+    }
+    .jm-sticky-cta__text {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.8125rem;
+      color: #5B4B3F;
+      line-height: 1.3;
+      text-align: center;
+    }
+    .jm-sticky-cta__btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      width: 100%;
+      background: #C2A86C;
+      color: #FFFFFF;
+      border: 2px solid #AA9462;
+      border-radius: 4px;
+      padding: 0.8rem 1.5rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.9375rem;
+      min-height: 48px;
+      letter-spacing: 0.015em;
+      text-decoration: none;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.3s ease, transform 0.15s ease;
+    }
+    .jm-sticky-cta__btn:hover { background: #B69F69; transform: translateY(-1px); }
+    .jm-sticky-cta__btn:active { transform: translateY(0); }
+    .jm-sticky-cta__btn svg { width: 14px; height: 14px; flex-shrink: 0; transition: transform 0.2s ease; }
+    .jm-sticky-cta__btn:hover svg { transform: translateX(2px); }
+
+    @media (min-width: 768px) {
+      .jm-sticky-cta__inner {
+        flex-direction: row;
+        gap: 1rem;
+        max-width: 680px;
+        margin: 0 auto 1rem;
+        border-radius: 100px;
+        border: 1px solid rgba(194, 168, 108, 0.22);
+        padding: 0.625rem 1.25rem;
+        background: rgba(248, 246, 242, 0.96);
+        box-shadow: 0 8px 32px rgba(29, 31, 30, 0.10),
+                    0 2px 8px rgba(29, 31, 30, 0.05);
+      }
+      .jm-sticky-cta__text {
+        font-size: 0.875rem;
+        white-space: nowrap;
+        text-align: left;
+      }
+      .jm-sticky-cta__btn {
+        width: auto;
+        padding: 0.65rem 1.5rem;
+        font-size: 0.875rem;
+        min-height: 0;
+        flex-shrink: 0;
+      }
+    }
+
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      @media (max-width: 767px) {
+        .jm-sticky-cta__inner {
+          padding-bottom: calc(0.9375rem + env(safe-area-inset-bottom));
+        }
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+      HERO SECTION
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <!-- Mobile heading top -->
+      <h1 class="hero-heading-top">You Didn&rsquo;t Come Here To Hustle.</h1>
+
+      <!-- Desktop single heading -->
+      <h1 class="hero-heading-desktop"><span>You Didn&rsquo;t Come Here To Hustle.</span><span><em>You Came Here To Create With <span class="bold-gold">Purpose &amp; Ease</span><span class="gold">.</span></em></span></h1>
+
+      <!-- Wistia video -->
+      <div class="hero-video">
+        <script src="https://fast.wistia.com/player.js" async></script>
+        <script src="https://fast.wistia.com/embed/2ietmqwkan.js" async type="module"></script>
+        <style>wistia-player[media-id='2ietmqwkan']:not(:defined) { background: center / contain no-repeat url('https://fast.wistia.com/embed/medias/2ietmqwkan/swatch'); display: block; filter: blur(5px); padding-top:56.25%; }</style>
+        <wistia-player media-id="2ietmqwkan" aspect="1.7777777777777777"></wistia-player>
+      </div>
+
+      <!-- Mobile heading bottom (after video) -->
+      <h2 class="hero-heading-bottom"><em>You Came Here To Create With <span class="bold-gold">Purpose &amp; Ease</span><span class="gold">.</span></em></h2>
+
+      <!-- Subheading -->
+      <p class="hero-sub">This short video reveals how I help&nbsp;entrepreneurs grow&nbsp;with clarity,&nbsp;alignment, and a way of operating that finally&nbsp;feels sustainable.</p>
+
+      <!-- CTA -->
+      <a class="hero-cta" id="heroCta" href="https://jasonmoss449611.typeform.com/to/a3G8k2AA" target="_blank" rel="noopener">Let&rsquo;s Explore Working Together</a>
+
+      <p class="hero-cta-sub">Or scroll down for&nbsp;stories from past clients...</p>
+
+      <hr class="hero-divider">
+
+      <p class="hero-seen-in">As seen in</p>
+
+      <img class="hero-trust-desktop" src="assets/images/trust-logos-desktop.png" srcset="assets/images/trust-logos-desktop.png 1x, assets/images/trust-logos-desktop@2x.png 2x" alt="Featured in" width="631" height="35">
+      <img class="hero-trust-mobile" src="assets/images/trust-logos-mobile.png" srcset="assets/images/trust-logos-mobile.png 1x, assets/images/trust-logos-mobile@2x.png 2x" alt="Featured in" width="631" height="110">
+
+      <div class="hero-footer">
+        <p>&copy; Jason Moss LLC. All rights reserved.</p>
+        <p><a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+        <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+        <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+        <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      TESTIMONIALS SECTION
+      ============================================ -->
+  <section class="testimonials" id="testimonials">
+    <div class="testimonials-inner">
+      <script type="text/javascript" src="https://testimonial.to/js/iframeResizer.min.js"></script>
+      <iframe id="testimonialto-jason-moss-testimonials-light" src="https://embed-v2.testimonial.to/w/jason-moss-testimonials?theme=light&amp;card=base&amp;loadMore=on&amp;initialCount=100&amp;autoLoadMore" frameborder="0" scrolling="no" width="100%"></iframe>
+      <script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, "#testimonialto-jason-moss-testimonials-light");</script>
+    </div>
+  </section>
+
+  <!-- ============================================
+      STICKY CTA BAR
+      ============================================ -->
+  <div class="jm-sticky-cta" id="jmStickyCta" aria-label="Apply to work together">
+    <div class="jm-sticky-cta__inner">
+      <span class="jm-sticky-cta__text">If this resonates, the next step is simple.</span>
+      <a href="https://jasonmoss449611.typeform.com/to/a3G8k2AA" target="_blank" rel="noopener" class="jm-sticky-cta__btn" id="jmStickyCtaBtn">
+        Let&rsquo;s Explore Working Together
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M3 10a.75.75 0 0 1 .75-.75h10.638l-3.96-3.722a.75.75 0 1 1 1.024-1.056l5.25 4.94a.75.75 0 0 1 0 1.056l-5.25 4.94a.75.75 0 0 1-1.024-1.056l3.96-3.722H3.75A.75.75 0 0 1 3 10Z" clip-rule="evenodd"/></svg>
+      </a>
+    </div>
+  </div>
+
+  <!-- Sticky CTA visibility + URL param passthrough for both CTAs -->
+  <script>
+  (function() {
+    'use strict';
+    var TYPEFORM_URL = 'https://jasonmoss449611.typeform.com/to/a3G8k2AA';
+
+    // Pass URL params to both CTAs
+    var params = window.location.search;
+    if (params) {
+      document.querySelectorAll('a[href*="typeform.com/to/a3G8k2AA"]').forEach(function(a) {
+        try {
+          var url = new URL(a.href);
+          var existing = new URLSearchParams(url.search);
+          var incoming = new URLSearchParams(params);
+          incoming.forEach(function(v, k) { if (!existing.has(k)) existing.set(k, v); });
+          url.search = existing.toString();
+          a.href = url.toString();
+        } catch (e) {}
+      });
+    }
+
+    // Sticky bar visibility
+    var stickyBar = document.getElementById('jmStickyCta');
+    if (!stickyBar) return;
+    var triggerSection = document.getElementById('testimonials');
+    if (!triggerSection) return;
+
+    var isVisible = false;
+    var ticking = false;
+
+    function updateVisibility() {
+      var rect = triggerSection.getBoundingClientRect();
+      var shouldShow = rect.top <= window.innerHeight * 0.65;
+      if (shouldShow && !isVisible) {
+        stickyBar.classList.add('is-visible');
+        isVisible = true;
+      } else if (!shouldShow && isVisible) {
+        stickyBar.classList.remove('is-visible');
+        isVisible = false;
+      }
+    }
+
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(function() {
+          updateVisibility();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    }
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll, { passive: true });
+    updateVisibility();
+  })();
+  </script>
+
+</body>
+</html>
