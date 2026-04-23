@@ -1,0 +1,1346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Sacred Profit — Live Training</title>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700,700italic,900|Raleway:400,400italic,500,500italic,600,700,700italic,900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #EAE2D4;
+      background: rgb(39, 41, 40);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       HERO SECTION
+       ===================================== */
+    .hero {
+      position: relative;
+      background: url('assets/images/hero-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover;
+      padding: 8.6875rem 1.25rem 8rem;
+      color: #EAE2D4;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #0F1A14;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-title {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 2.1875rem;
+      line-height: 2.625rem;
+      color: #EAE2D4;
+      margin: 0 0 2.4375rem;
+    }
+    .hero-subtitle {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 1.625rem;
+      color: #C2A86C;
+      margin: 0 0 2.25rem;
+    }
+    .hero-desc {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 1.575rem;
+      color: #EAE2D4;
+      margin: 0 0 2.75rem;
+      max-width: 22rem;
+    }
+    .hero-meta {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.2rem;
+      color: #EAE2D4;
+      margin: 0 0 2.25rem;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1D1F1E;
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 120%;
+      width: 19.625rem;
+      height: 4.625rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      box-shadow: 0 1px 3px rgba(1, 1, 1, 0.5);
+      margin: 1rem 0 2.5rem;
+    }
+    .hero-cta:hover { background: #2C3F36; }
+    .hero-chevron {
+      width: 2.1875rem;
+      height: auto;
+      margin-top: 2rem;
+    }
+
+    /* =====================================
+       SECTION 2: PROBLEM INTRO
+       ===================================== */
+    .problem {
+      position: relative;
+      background: url('assets/images/light-bg.jpg') repeat rgb(248, 246, 242) 50% 50% / cover;
+      padding: 5rem 1.25rem 5rem;
+      color: #1D1F1E;
+    }
+    .problem::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #F8F6F2;
+      opacity: 0.86;
+      pointer-events: none;
+    }
+    .problem-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .problem-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #1D1F1E;
+      margin: 0 0 1.5rem;
+      max-width: 20.3125rem;
+    }
+    .problem-divider {
+      border: 0;
+      border-bottom: 1px solid #C2A86C;
+      width: 17.875rem;
+      margin: 0 auto 2.75rem;
+    }
+    .problem-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+      color: #1D1F1E;
+      max-width: 21.5rem;
+      text-align: center;
+      margin-top: 0.5rem;
+    }
+    .problem-body p { margin: 0 0 1rem; }
+    .problem-body p:nth-child(2) { margin-top: 2.25rem; }
+    .problem-body p:nth-child(3) { margin-top: 2.25rem; }
+    .problem-body p:nth-child(4) { margin-top: 2.25rem; }
+    .problem-body p:nth-child(5) { margin-top: 2.25rem; }
+    .problem-body p:nth-child(6) { margin-top: 2.25rem; margin-bottom: 0; }
+    .problem-body p:nth-child(7) { margin-top: 0; }
+    .problem-body p:last-child { margin-bottom: 0; }
+    .problem-body em { font-style: italic; }
+
+    @media (min-width: 768px) {
+      .problem {
+        background: url('assets/images/light-bg.jpg') repeat rgb(248, 246, 242) 50% 50% / cover fixed;
+        padding: 6.5rem 1.8125rem 6.5rem;
+      }
+      .problem-heading {
+        font-size: 2.375rem;
+        line-height: 3.325rem;
+        max-width: 41.1875rem;
+      }
+      .problem-divider {
+        width: 32.875rem;
+      }
+      .problem-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 32.875rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 3: OUTGROWN OLD GAME
+       ===================================== */
+    .outgrown {
+      position: relative;
+      background: url('assets/images/outgrown-bg.jpg') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 4.375rem 1.25rem 5rem;
+      color: #EAE2D4;
+    }
+    .outgrown::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.91;
+      pointer-events: none;
+    }
+    .outgrown-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .outgrown-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #C2A86C;
+      margin: 0 0 3rem;
+      max-width: 18.3125rem;
+    }
+    .outgrown-heading strong { font-weight: 700; }
+    .outgrown-heading em { font-style: italic; }
+    .outgrown-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 2.025rem;
+      color: #EAE2D4;
+      max-width: 20.25rem;
+      text-align: center;
+    }
+    .outgrown-body p { margin: 0 0 1rem; }
+    .outgrown-body p:first-child { margin-bottom: 0; }
+    .outgrown-body p:nth-child(3) { margin-top: 2rem; }
+    .outgrown-body p:nth-child(4) { margin-top: 2rem; margin-bottom: 0; }
+    .outgrown-body p:last-child { margin-bottom: 0; }
+    .outgrown-body em { font-style: italic; }
+
+    @media (min-width: 768px) {
+      .outgrown {
+        padding: 6.9375rem 1.8125rem 6rem;
+      }
+      .outgrown-heading {
+        font-size: 2.375rem;
+        line-height: 3.325rem;
+        max-width: 39.8125rem;
+      }
+      .outgrown-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 37.0625rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 4: IMAGINE THIS INSTEAD
+       ===================================== */
+    .imagine {
+      position: relative;
+      background: url('assets/images/imagine-bg-mobile.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 4.6875rem 1.25rem 5rem;
+      color: #1D1F1E;
+    }
+    .imagine::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #CFBC91;
+      opacity: 0.68;
+      pointer-events: none;
+    }
+    .imagine-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .imagine-icon {
+      width: 4.0625rem;
+      height: 4.0625rem;
+      margin: 0 0 1.25rem;
+    }
+    .imagine-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 2.4375rem;
+      line-height: 3.4125rem;
+      color: #1D1F1E;
+      margin: 0 0 1.25rem;
+      max-width: 21.25rem;
+    }
+    .imagine-divider {
+      border: 0;
+      border-bottom: 1px solid #1D1F1E;
+      width: 17.375rem;
+      margin: 0 auto 2.75rem;
+    }
+    .imagine-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1.125rem;
+      line-height: 2.025rem;
+      color: #1D1F1E;
+      max-width: 21.6875rem;
+      text-align: center;
+    }
+    .imagine-body p { margin: 0 0 1.5rem; }
+    .imagine-body p:first-child { margin-top: 0.5rem; }
+    .imagine-body p:nth-child(2) { margin-top: 2rem; }
+    .imagine-body p:nth-child(3) { margin-top: 2.25rem; }
+    .imagine-body p:nth-child(4) { margin-top: 2.25rem; }
+    .imagine-body p:nth-child(5) { margin-top: 2.25rem; }
+    .imagine-body p:nth-child(6) { margin-top: 2.25rem; }
+    .imagine-body p:last-child { margin-bottom: 0; }
+    .imagine-body em { font-style: italic; }
+    .imagine-body strong { font-weight: 600; }
+    .imagine-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #1D1F1E;
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 120%;
+      width: 21.8125rem;
+      height: 4.6875rem;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 4rem;
+    }
+    .imagine-cta:hover { background: #2C3F36; }
+
+    /* =====================================
+       SECTION 5: 3-DAY BREAKDOWN
+       ===================================== */
+    .days {
+      position: relative;
+      background: url('assets/images/3days-bg.jpg') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 4.9375rem 1.25rem 5rem;
+      color: #EAE2D4;
+    }
+    .days::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.85;
+      pointer-events: none;
+    }
+    .days-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .days-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 2.4rem;
+      color: #C2A86C;
+      margin: 0 0 0.625rem;
+      max-width: 21.0625rem;
+    }
+    .days-heading strong { font-weight: 700; }
+    .days-heading em { font-style: italic; }
+    .days-subtext {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+      color: #EAE2D4;
+      margin: 0 0 3.5rem;
+      max-width: 21.25rem;
+    }
+    .days-subtext em { font-style: italic; }
+    .days-cards {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      width: 100%;
+      align-items: center;
+      margin-bottom: 3rem;
+    }
+    .day-card {
+      width: 100%;
+      max-width: 18.75rem;
+      background: rgb(233, 226, 211);
+      border: 0.1875rem solid #C2A86C;
+      border-radius: 0.375rem;
+      padding: 1.75rem 1.25rem 1.5rem;
+      text-align: left;
+    }
+    .day-label {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.2rem;
+      color: #C2A86C;
+      margin: 0 0 0.75rem;
+    }
+    .day-label em { font-style: italic; }
+    .day-label strong { font-weight: 700; }
+    .day-title {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 2.025rem;
+      color: #1D1F1E;
+      margin: 0 0 1rem;
+    }
+    .day-title em { font-style: italic; }
+    .day-title strong { font-weight: 700; }
+    .day-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.8rem;
+      color: #1D1F1E;
+    }
+    .day-body p { margin: 0 0 1rem; }
+    .day-body p:last-child { margin-bottom: 0; }
+    .day-body em { font-style: italic; }
+    .days-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#3B3D3C, #1D1F1E 50%);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 120%;
+      width: 20.3125rem;
+      height: 5.125rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .days-cta:hover { background: #2C3F36; }
+
+    @media (min-width: 768px) {
+      .days {
+        padding: 6.8125rem 1.8125rem 6rem;
+      }
+      .days-heading {
+        font-size: 2.375rem;
+        line-height: 2.85rem;
+        max-width: 60rem;
+      }
+      .days-subtext {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 40.0625rem;
+        margin-bottom: 3rem;
+      }
+      .days-cards {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1.875rem;
+        align-items: stretch;
+        margin-bottom: 3rem;
+      }
+      .day-card {
+        max-width: 18.75rem;
+        padding: 2rem 1.375rem 1.75rem;
+      }
+      .day-label {
+        margin-bottom: 0.5rem;
+      }
+      .day-body p { margin-bottom: 2rem; }
+      .day-body p:last-child { margin-bottom: 0; }
+      .days-cta {
+        font-size: 1.125rem;
+        width: 38.4375rem;
+        height: 4.4375rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .imagine {
+        background: url('assets/images/imagine-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+        padding: 4.5rem 1.8125rem 8rem;
+      }
+      .imagine::before {
+        opacity: 0.69;
+      }
+      .imagine-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 60rem;
+      }
+      .imagine-divider {
+        width: 32.875rem;
+      }
+      .imagine-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 37.0625rem;
+      }
+      .imagine-cta {
+        font-size: 1.125rem;
+        width: 34.5rem;
+        height: 4.875rem;
+      }
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        background: url('assets/images/hero-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover fixed;
+        padding: 8.875rem 1.8125rem 8rem;
+      }
+      .hero::before {
+        background: #0F1411;
+      }
+      .hero-title {
+        font-size: 2.9375rem;
+        line-height: 3.525rem;
+        max-width: 53.125rem;
+        margin-bottom: 2.4375rem;
+      }
+      .hero-subtitle {
+        font-size: 2.1875rem;
+        line-height: 2.625rem;
+        max-width: 53.125rem;
+        margin-bottom: 2.625rem;
+      }
+      .hero-desc {
+        font-size: 1.375rem;
+        line-height: 1.925rem;
+        max-width: 56.625rem;
+        margin-bottom: 2.75rem;
+      }
+      .hero-meta {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        max-width: 56.625rem;
+        margin-bottom: 1.8125rem;
+      }
+      .hero-cta {
+        font-size: 1.125rem;
+        width: 27.3125rem;
+        height: 3.8125rem;
+        margin-bottom: 2rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 6: SOCIAL PROOF VIDEOS
+       ===================================== */
+    .social-proof {
+      position: relative;
+      background: url('assets/images/dark-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover;
+      overflow: hidden;
+    }
+    .social-proof::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #000000;
+      opacity: 0.21;
+      z-index: 1;
+    }
+    .social-proof-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.9375rem 1.25rem 4rem;
+    }
+    .social-proof-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.9375rem;
+      line-height: 2.7125rem;
+      color: #E9E2D3;
+      max-width: 22.4375rem;
+      margin: 0 0 2rem;
+    }
+    .social-proof-heading .gold { color: #C2A86C; }
+    .social-proof-body {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #E9E2D3;
+      max-width: 21.625rem;
+      margin: 0 0 3rem;
+    }
+    .social-proof-body em { font-style: italic; }
+    .social-proof-body strong { font-weight: 700; }
+    .social-proof-cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+    }
+    .social-proof-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 22.5rem;
+    }
+    .social-proof-card iframe {
+      width: 18.75rem;
+      height: 10.75rem;
+      border: none;
+      margin-bottom: 1.25rem;
+    }
+    .social-proof-card-quote {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: #E9E2D3;
+      margin: 0;
+    }
+
+    @media (min-width: 768px) {
+      .social-proof {
+        background: url('assets/images/dark-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover fixed;
+      }
+      .social-proof::before { opacity: 0.2; }
+      .social-proof-inner {
+        max-width: 60rem;
+        padding: 6.8125rem 0 8rem;
+      }
+      .social-proof-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 54.625rem;
+        margin-bottom: 2.75rem;
+      }
+      .social-proof-body {
+        font-size: 1.25rem;
+        line-height: 2rem;
+        max-width: 47.625rem;
+        margin-bottom: 5rem;
+      }
+      .social-proof-cards {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .social-proof-card { max-width: 18.75rem; }
+      .social-proof-card-quote {
+        line-height: 1.6rem;
+        max-width: 17.5rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 7: THIS EXPERIENCE IS FOR YOU IF
+       ===================================== */
+    .foryou {
+      position: relative;
+      background: url('assets/images/foryou-bg-mobile.png') repeat rgb(248, 246, 242) 26% 48% / cover;
+      overflow: hidden;
+    }
+    .foryou::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #E9E2D3;
+      opacity: 0.75;
+      z-index: 1;
+    }
+    .foryou-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.875rem 1.25rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .foryou-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.875rem;
+      line-height: 2.625rem;
+      color: #C2A86C;
+      text-align: center;
+      margin: 0 0 2.25rem;
+      max-width: 22.5rem;
+    }
+    .foryou-heading em { font-style: italic; }
+    .foryou-heading .dark { color: #1D1F1E; }
+    .foryou-list {
+      list-style: disc;
+      padding-left: 1.5rem;
+      margin: 0;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1875rem;
+      line-height: 1.9rem;
+      color: #1D1F1E;
+      text-align: left;
+    }
+    .foryou-list li { margin-bottom: 1rem; }
+    .foryou-list li:last-child { margin-bottom: 0; }
+    .foryou-list li::marker { font-size: 1.1875rem; color: #1D1F1E; }
+
+    @media (min-width: 768px) {
+      .foryou {
+        background: url('assets/images/foryou-bg.png') repeat rgb(248, 246, 242) 48% 29% / cover fixed;
+      }
+      .foryou::before {
+        background: #F8F6F2;
+        opacity: 0.85;
+      }
+      .foryou-inner {
+        max-width: 60rem;
+        padding: 6rem 1.8125rem 6rem;
+      }
+      .foryou-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        margin-bottom: 2.5rem;
+        max-width: 60rem;
+      }
+      .foryou-list {
+        font-size: 1.25rem;
+        line-height: 2rem;
+        max-width: 35.0625rem;
+        padding-left: 2.5rem;
+      }
+      .foryou-list li { margin-bottom: 1.75rem; }
+      .foryou-list li:last-child { margin-bottom: 0; }
+      .foryou-list li::marker { font-size: 1.25rem; }
+    }
+
+    /* =====================================
+       SECTION 8: WHAT'S WAITING ON THE OTHER SIDE
+       ===================================== */
+    .otherside {
+      position: relative;
+      background: url('assets/images/otherside-bg.jpg') repeat rgb(44, 63, 54) 50% 97% / cover;
+      overflow: hidden;
+    }
+    .otherside::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #1D1F1E;
+      opacity: 0.85;
+      z-index: 1;
+    }
+    .otherside-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.75rem 1.25rem 4.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .otherside-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 2rem;
+      line-height: 2.8rem;
+      color: #C2A86C;
+      margin: 0 0 2rem;
+      max-width: 19.6875rem;
+    }
+    .otherside-heading em { font-style: italic; }
+    .otherside-body {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1875rem;
+      line-height: 1.9rem;
+      color: #E9E2D3;
+      margin: 0;
+      max-width: 22.5rem;
+    }
+    .otherside-body p { margin: 0 0 1rem; }
+    .otherside-body p:last-child { margin-bottom: 0; }
+    .otherside-body em { font-style: italic; }
+    .otherside-body strong { font-weight: 700; }
+
+    @media (min-width: 768px) {
+      .otherside-inner {
+        max-width: 60rem;
+        padding: 6rem 1.8125rem 7rem;
+      }
+      .otherside-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 60rem;
+        margin-bottom: 2.5rem;
+      }
+      .otherside-body {
+        font-size: 1.25rem;
+        line-height: 2rem;
+        max-width: 41.125rem;
+      }
+      .otherside-body p { margin-bottom: 2.5rem; }
+      .otherside-body p:nth-last-child(2) { margin-bottom: 0; }
+      .otherside-body p:last-child { margin-bottom: 0; }
+    }
+
+    /* =====================================
+       SECTION 9: JOIN THE 3-DAY EXPERIENCE (PRICING)
+       ===================================== */
+    .pricing {
+      background: rgb(44, 63, 54);
+    }
+    .pricing-inner {
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.875rem 1.25rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .pricing-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.875rem;
+      line-height: 2.625rem;
+      color: #C2A86C;
+      margin: 0 0 2rem;
+      max-width: 22.5rem;
+    }
+    .pricing-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1.1875rem;
+      line-height: 1.9rem;
+      color: #E9E2D3;
+      margin: 0 0 2.25rem;
+      max-width: 22.5rem;
+    }
+    .pricing-body p { margin: 0 0 1rem; }
+    .pricing-body p:last-child { margin-bottom: 0; }
+    .pricing-body strong { font-weight: 700; }
+    .pricing-body em { font-style: italic; }
+    .pricing-body .gold { color: #C2A86C; }
+    .pricing-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#3B3D3C, #1D1F1E 50%);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 120%;
+      width: 22.0625rem;
+      max-width: 100%;
+      height: 4.6875rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .pricing-cta:hover { background: #2C3F36; color: #F8F6F2; }
+
+    @media (min-width: 768px) {
+      .pricing-inner {
+        max-width: 60rem;
+        padding: 6rem 1.8125rem 6.5rem;
+      }
+      .pricing-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 60rem;
+        margin-bottom: 2.25rem;
+      }
+      .pricing-body {
+        font-size: 1.25rem;
+        line-height: 2rem;
+        max-width: 41.125rem;
+        margin-bottom: 2.75rem;
+      }
+      .pricing-cta {
+        width: 38.4375rem;
+        height: 4.4375rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 10: PROOF OF WHAT'S POSSIBLE (TESTIMONIAL.TO)
+       ===================================== */
+    .proof {
+      background: url('assets/images/proof-bg.png') repeat rgb(248, 246, 242) 50% 50% / cover;
+    }
+    .proof-inner {
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .proof-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 2rem;
+      line-height: 2.8rem;
+      color: #000000;
+      margin: 0 0 2rem;
+      max-width: 17.4375rem;
+    }
+    .proof iframe {
+      width: 100%;
+      max-width: 22.5rem;
+      height: 50rem;
+      border: 0;
+      display: block;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .proof {
+        background: url('assets/images/proof-bg.png') repeat rgb(248, 246, 242) 50% 50% / cover fixed;
+      }
+      .proof-inner {
+        max-width: 60rem;
+        padding: 3.8125rem 1.8125rem 5rem;
+      }
+      .proof-heading {
+        font-size: 2.375rem;
+        line-height: 3.325rem;
+        max-width: 47.1875rem;
+        margin-bottom: 3rem;
+      }
+      .proof iframe {
+        max-width: 60rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 11: ABOUT JASON
+       ===================================== */
+    .about {
+      position: relative;
+      background: url('assets/images/about-bg.png') repeat rgb(44, 63, 54) 50% 11% / cover;
+      overflow: hidden;
+    }
+    .about::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #1D1F1E;
+      opacity: 0.56;
+      z-index: 1;
+    }
+    .about-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 2.1875rem 1.25rem 4rem;
+    }
+    .about-image {
+      width: 22.5rem;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+    .about-content { text-align: left; width: 100%; }
+    .about-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #C2A86C;
+      margin: 0 0 1.5rem;
+    }
+    .about-body {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.575rem;
+      font-weight: 500;
+      color: #EAE2D4;
+      margin: 0 0 2rem;
+    }
+    .about-body p { margin: 0 0 1rem; }
+    .about-body p:last-child { margin-bottom: 0; }
+    .about-body em { font-style: italic; }
+    .about-body strong { font-weight: 700; }
+    .about-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#4A5D54, #2C3F36 50%);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 120%;
+      width: 21.75rem;
+      max-width: 100%;
+      height: 4.375rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+    }
+    .about-cta:hover { background: #3E594C; color: #F8F6F2; }
+
+    @media (min-width: 768px) {
+      .about-inner {
+        max-width: 60rem;
+        padding: 2rem 0;
+      }
+      .about-row {
+        display: flex;
+        align-items: center;
+        gap: 3.625rem;
+        margin-bottom: 0;
+        width: 100%;
+      }
+      .about-image {
+        width: 25rem;
+        flex-shrink: 0;
+        margin-bottom: 0;
+      }
+      .about-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        margin-bottom: 1.5rem;
+      }
+      .about-body {
+        font-size: 1.125rem;
+        line-height: 1.8rem;
+        max-width: 28.125rem;
+        margin-bottom: 2rem;
+      }
+      .about-cta {
+        width: 26.1875rem;
+        height: 4.9375rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 12: FOOTER
+       ===================================== */
+    .footer {
+      background: rgb(234, 226, 212);
+      padding: 2.25rem 1.25rem;
+    }
+    .footer-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.125rem;
+    }
+    .footer-logo {
+      width: 8.75rem;
+      height: auto;
+      display: block;
+    }
+    .footer-copy {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.225rem;
+      color: #1D1F1E;
+      margin: 0;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer {
+        padding: 1.25rem 1.8125rem;
+      }
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+      }
+      .footer-logo {
+        width: 10.9375rem;
+      }
+      .footer-copy {
+        line-height: 1.4rem;
+        text-align: right;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+      SECTION 1: HERO
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-title">Sacred Profit</h1>
+      <h2 class="hero-subtitle"><em>The new paradigm of aligned business growth</em></h2>
+      <p class="hero-desc">A 3-day live experience to grow your business in harmony with your spirit &mdash; and attract clients, income, and clarity through the power of alignment.</p>
+      <p class="hero-meta"><em>$11 to join &middot; November 17&ndash;19 &middot; Includes replays</em></p>
+      <a class="hero-cta" href="https://checkout.jasonmoss.com/checkout/sacred-profit">Reserve Your Spot</a>
+      <img class="hero-chevron" src="assets/images/chevron-down.png" srcset="assets/images/chevron-down.png 1x, assets/images/chevron-down@2x.png 2x" alt="">
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: PROBLEM INTRO
+      ============================================ -->
+  <section class="problem">
+    <div class="problem-inner">
+      <h2 class="problem-heading"><strong>You&rsquo;ve been doing everything you&rsquo;re &ldquo;supposed&rdquo; to.</strong></h2>
+      <hr class="problem-divider">
+      <div class="problem-body">
+        <p>Studied the strategies.</p>
+        <p>Followed the formulas.</p>
+        <p>Worked harder, thought smarter, pushed longer than most ever will.</p>
+        <p><em>Maybe it worked &mdash; you created success on paper.</em></p>
+        <p>Or maybe you&rsquo;re still trying to make it click.</p>
+        <p>Either way, something feels off&hellip;</p>
+        <p>like the way you&rsquo;ve been building...<br>isn&rsquo;t <em>fully you</em>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 3: OUTGROWN OLD GAME
+      ============================================ -->
+  <section class="outgrown">
+    <div class="outgrown-inner">
+      <h2 class="outgrown-heading"><strong>You&rsquo;ve outgrown the old game.</strong> <em>And your soul knows it.</em></h2>
+      <div class="outgrown-body">
+        <p>You can feel the misalignment &mdash;</p>
+        <p>in your body, schedule, marketing, and results.</p>
+        <p>What used to work no longer fits.</p>
+        <p>You&rsquo;re being called to grow in a new way &mdash; not through control, force, or hustle&hellip;</p>
+        <p>but <em>alignment</em>, <em>resonance</em>, and <em>trust</em>.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 4: IMAGINE THIS INSTEAD
+      ============================================ -->
+  <section class="imagine">
+    <div class="imagine-inner">
+      <img class="imagine-icon" src="assets/images/jm-circle-icon.png" srcset="assets/images/jm-circle-icon.png 1x, assets/images/jm-circle-icon@2x.png 2x" alt="">
+      <h2 class="imagine-heading"><strong><em>Imagine this instead&hellip;</em></strong></h2>
+      <hr class="imagine-divider">
+      <div class="imagine-body">
+        <p><strong>You wake up clear, inspired, and on purpose &mdash; no dread, no overthinking, no guessing what to do.</strong></p>
+        <p>Instead of chasing leads, you naturally attract opportunities, collaborations, and clients that are a full-body yes.</p>
+        <p>Money flows abundantly &mdash; and it stays, because you&rsquo;re running your business in a way that feels joyful and sustainable.</p>
+        <p>You experience growth and spaciousness. Impact and ease. Profit and peace.</p>
+        <p><em>This is what it feels like to let your business grow through you.</em></p>
+        <p>This is the path of <strong>Sacred Profit</strong>.</p>
+      </div>
+      <a class="imagine-cta" href="https://checkout.jasonmoss.com/checkout/sacred-profit">Reserve Your Spot</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 5: 3-DAY BREAKDOWN
+      ============================================ -->
+  <section class="days">
+    <div class="days-inner">
+      <h2 class="days-heading"><em>Over 3 Days, We&rsquo;ll Make This Shift Together.</em></h2>
+      <p class="days-subtext"><em>Join live each day at 10am MT &mdash; or catch the replay anytime.</em></p>
+
+      <div class="days-cards">
+        <div class="day-card">
+          <p class="day-label"><em><strong>Day 1</strong></em></p>
+          <h3 class="day-title"><strong><em>The Old Game of Business</em></strong></h3>
+          <div class="day-body">
+            <p><em>See how mind-led, effort-based growth keeps you disconnected from your power.</em></p>
+            <p><em>Release the patterns that create pressure, burnout, and stagnation &mdash; and step into a new chapter where your business expands with ease and flow.</em></p>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <p class="day-label"><em><strong>Day 2</strong></em></p>
+          <h3 class="day-title"><strong><em>The Sacred Shift</em></strong></h3>
+          <div class="day-body">
+            <p><em>Discover a new way to lead &mdash; where intuition guides your strategy, alignment fuels your business model, and profit becomes a natural result of showing up as who you really are.</em></p>
+          </div>
+        </div>
+
+        <div class="day-card">
+          <p class="day-label"><em><strong>Day 3</strong></em></p>
+          <h3 class="day-title"><strong><em>The Integration</em></strong></h3>
+          <div class="day-body">
+            <p><em>Integrate the principles of aligned growth into practical, day-to-day actions you can rely on long-term.</em></p>
+            <p><em>Learn to operate from presence, not pressure &mdash; and open fully to the business, impact, and abundance already waiting for you.</em></p>
+          </div>
+        </div>
+      </div>
+
+      <a class="days-cta" href="https://checkout.jasonmoss.com/checkout/sacred-profit">Reserve Your Spot</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 6: SOCIAL PROOF VIDEOS
+      ============================================ -->
+  <section class="social-proof">
+    <div class="social-proof-inner">
+      <h2 class="social-proof-heading"><em><span class="gold">Magic happens</span> when strategy meets spirit.</em></h2>
+
+      <p class="social-proof-body">The work behind <em>Sacred Profit</em>&nbsp;has transformed<strong>&nbsp;1000+ entrepreneurs</strong>&nbsp;through&nbsp;my past containers and coaching experiences.&nbsp;<em>Here&rsquo;s what they&rsquo;ve shared...</em></p>
+
+      <div class="social-proof-cards">
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/g8055phors" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">&ldquo;From&nbsp;$2k over 6 months to $260k in&nbsp;one year.&rdquo;</h4>
+        </div>
+
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/hlntpnigew" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">&ldquo;Never experienced financial success like this in my life.&rdquo;</h4>
+        </div>
+
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/x0tlj5qthd" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">&ldquo;Tripled my rates and started hitting 10k+ months.&rdquo;</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 7: THIS EXPERIENCE IS FOR YOU IF
+      ============================================ -->
+  <section class="foryou">
+    <div class="foryou-inner">
+      <h3 class="foryou-heading"><strong><em>This Experience </em><span class="dark">Is for You If &hellip;</span></strong></h3>
+
+      <ul class="foryou-list">
+        <li>Your business is growing, but it feels misaligned.</li>
+        <li>You&rsquo;ve followed strategies that work on paper but don&rsquo;t feel like you.</li>
+        <li>You&rsquo;re ready for a new path to business growth that honors both your soul and your revenue goals.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 8: WHAT'S WAITING ON THE OTHER SIDE
+      ============================================ -->
+  <section class="otherside">
+    <div class="otherside-inner">
+      <h2 class="otherside-heading"><em>What&rsquo;s Waiting on the Other Side</em></h2>
+
+      <div class="otherside-body">
+        <p>Clients who come because they <em>feel</em> you.</p>
+        <p>Money that flows with ease and freedom.</p>
+        <p>Impact that expands because you&rsquo;re finally leading from truth.</p>
+        <p>And a business that doesn&rsquo;t just grow &mdash;</p>
+        <p><strong>it comes alive.</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 9: PRICING CTA
+      ============================================ -->
+  <section class="pricing">
+    <div class="pricing-inner">
+      <h2 class="pricing-heading"><strong>Join the 3-Day Sacred Profit Experience</strong></h2>
+
+      <div class="pricing-body">
+        <p><strong>November 17 &ndash; 19 &middot; Live on Zoom + Replay Access</strong></p>
+        <p><span class="gold"><strong><em>Join for just $11.</em></strong></span></p>
+      </div>
+
+      <a class="pricing-cta" href="https://checkout.jasonmoss.com/checkout/sacred-profit">Reserve Your Spot</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 10: PROOF OF WHAT'S POSSIBLE (TESTIMONIAL.TO)
+      ============================================ -->
+  <section class="proof">
+    <div class="proof-inner">
+      <h2 class="proof-heading"><strong>Proof of what&rsquo;s possible</strong></h2>
+      <iframe src="https://embed-v2.testimonial.to/w/jason-moss-testimonials?animated=on&amp;theme=light&amp;shadowColor=e7d8ac&amp;speed=1&amp;tag=all" title="Client Testimonials" scrolling="no"></iframe>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 11: ABOUT JASON
+      ============================================ -->
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-row">
+        <img src="assets/images/jason-about.png" srcset="assets/images/jason-about.png 1x, assets/images/jason-about@2x.png 2x" alt="Jason Moss" class="about-image" width="400" height="596">
+
+        <div class="about-content">
+          <h2 class="about-heading">About Jason</h2>
+
+          <div class="about-body">
+            <p>Entrepreneur, mentor, founder of The Collective.</p>
+            <p>After scaling past $1.5 million in sales and serving 2,000+ clients, I learned that the deepest growth doesn&rsquo;t come from more strategy &mdash; it comes from alignment with spirit.</p>
+            <p>Now I help conscious entrepreneurs build businesses that thrive from the inside out.</p>
+          </div>
+
+          <a class="about-cta" href="https://checkout.jasonmoss.com/checkout/sacred-profit">Reserve Your Spot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 12: FOOTER
+      ============================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <img src="assets/images/logo-dark.png" srcset="assets/images/logo-dark.png 1x, assets/images/logo-dark@2x.png 2x" alt="Jason Moss" class="footer-logo" width="175" height="40">
+      <p class="footer-copy">&copy; Jason Moss LLC. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
