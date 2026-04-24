@@ -1,0 +1,1363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Why Great Entrepreneurs Still Experience Inconsistent Clients</title>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:300,400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #EAE2D4;
+      background: #1D1F1E;
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       HERO SECTION
+       ===================================== */
+    .hero {
+      position: relative;
+      background: url('assets/images/hero-bg.jpg') repeat 45% 2% / cover;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #000;
+      opacity: 0.64;
+      z-index: 1;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 2.375rem;
+      line-height: 2.85rem;
+      color: #EAE2D4;
+      margin: 0 0 0.5rem;
+    }
+    .hero-tagline {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.25rem;
+      line-height: 1.75rem;
+      color: #EAE2D4;
+      margin: 0 0 1.25rem;
+    }
+    .hero-sub {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.3125rem;
+      line-height: 1.8375rem;
+      color: #C2A86C;
+      margin: 0 0 1.25rem;
+      max-width: 23.125rem;
+    }
+    .hero-meta {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.3125rem;
+      color: #EAE2D4;
+      margin: 0 0 1.5rem;
+      max-width: 22.5rem;
+    }
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#3B3D3C, #1D1F1E 50%);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 120%;
+      width: 21.5rem;
+      max-width: 100%;
+      height: 4rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .hero-cta:hover { background: #2C3F36; color: #F8F6F2; }
+
+    @media (min-width: 768px) {
+      .hero {
+        background: url('assets/images/hero-bg.jpg') repeat 47% 97% / cover;
+      }
+      .hero-inner {
+        max-width: 60rem;
+        padding: 6.3125rem 1.8125rem 6rem;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .hero-heading {
+        font-size: 2.9375rem;
+        line-height: 3.525rem;
+        max-width: 35.8125rem;
+        margin-bottom: 0.75rem;
+      }
+      .hero-tagline {
+        font-size: 1.375rem;
+        line-height: 1.925rem;
+        max-width: 31.3125rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero-sub {
+        font-size: 1.875rem;
+        line-height: 2.625rem;
+        max-width: 33.4375rem;
+        margin-bottom: 1.5rem;
+      }
+      .hero-meta {
+        font-size: 1.375rem;
+        line-height: 1.925rem;
+        max-width: 31.3125rem;
+        margin-bottom: 2rem;
+      }
+      .hero-cta {
+        height: 4.4375rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 2: BELOW FOLD
+       ===================================== */
+    .below-fold {
+      position: relative;
+      background: url('assets/images/below-fold-bg.png') repeat 50% 50% / cover;
+      overflow: hidden;
+    }
+    .below-fold::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #CFBC91;
+      opacity: 0.7;
+      z-index: 1;
+    }
+    .below-fold-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.125rem 1.25rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #1D1F1E;
+    }
+    .below-fold-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 1.95rem;
+      margin: 0 0 1.5rem;
+      max-width: 23.75rem;
+    }
+    .below-fold-intro {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.1875rem;
+      line-height: 1.9rem;
+      margin: 0 0 1.5rem;
+      max-width: 22rem;
+    }
+    .below-fold-body {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1875rem;
+      line-height: 1.9rem;
+      font-weight: 500;
+      color: #1D1F1E;
+      max-width: 25rem;
+    }
+    .below-fold-body p { margin: 0; }
+    .below-fold-body .gap { height: 1.125rem; }
+    .below-fold-body .bold { font-weight: 700; }
+    .below-fold-body .italic { font-style: italic; }
+    .below-fold-body strong { font-weight: 700; }
+    .below-fold-body em { font-style: italic; }
+
+    @media (min-width: 768px) {
+      .below-fold-inner {
+        max-width: 60rem;
+        padding: 6.25rem 1.8125rem 6rem;
+      }
+      .below-fold-heading {
+        font-size: 2.375rem;
+        line-height: 3.325rem;
+        margin-bottom: 1.5rem;
+        max-width: 58.5rem;
+      }
+      .below-fold-intro {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 60rem;
+        margin-bottom: 1.5rem;
+      }
+      .below-fold-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 37.0625rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 3: DEEPER PATTERN
+       ===================================== */
+    .pattern {
+      position: relative;
+      background: url('assets/images/pattern-bg.png') repeat 85% 44% / cover;
+      overflow: hidden;
+    }
+    .pattern::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #F8F6F2;
+      opacity: 0.85;
+      z-index: 1;
+    }
+    .pattern-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.125rem 1.25rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #1D1F1E;
+    }
+    .pattern-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 1.95rem;
+      margin: 0 0 1.75rem;
+      max-width: 23.75rem;
+    }
+    .pattern-body {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1875rem;
+      line-height: 1.9rem;
+      font-weight: 500;
+      max-width: 22.5rem;
+    }
+    .pattern-body p { margin: 0; }
+    .pattern-body .gap { height: 1.125rem; }
+    .pattern-body strong { font-weight: 700; }
+
+    @media (min-width: 768px) {
+      .pattern {
+        background: url('assets/images/pattern-bg.png') repeat 50% 50% / cover fixed;
+      }
+      .pattern::before { opacity: 0; }
+      .pattern-inner {
+        max-width: 60rem;
+        padding: 6.25rem 1.8125rem 7rem;
+        align-items: flex-start;
+        text-align: left;
+      }
+      .pattern-heading {
+        font-size: 2.375rem;
+        line-height: 3.325rem;
+        max-width: 45.4375rem;
+        margin-bottom: 1.5rem;
+      }
+      .pattern-body {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 39.375rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 4: BOTTLENECK
+       ===================================== */
+    .bottleneck {
+      position: relative;
+      background: url('assets/images/bottleneck-bg.jpg') repeat 50% 50% / cover;
+      overflow: hidden;
+    }
+    .bottleneck::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #1D1F1E;
+      opacity: 0.83;
+      z-index: 1;
+    }
+    .bottleneck-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.75rem 1.25rem 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .bottleneck-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 1.95rem;
+      color: #C2A86C;
+      margin: 0 0 2rem;
+      max-width: 23.75rem;
+    }
+    .bottleneck-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 2rem;
+      width: 100%;
+      max-width: 22rem;
+      text-align: left;
+    }
+    .bottleneck-list li {
+      position: relative;
+      padding-left: 2rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1875rem;
+      line-height: 1.9rem;
+      font-weight: 500;
+      color: #F8F6F2;
+      margin-bottom: 1rem;
+    }
+    .bottleneck-list li:last-child { margin-bottom: 0; }
+    .bottleneck-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 1.125rem;
+      height: 1.125rem;
+      background: url('assets/images/bullet-icon.png') no-repeat center / contain;
+    }
+    .bottleneck-list li strong { font-weight: 700; }
+    .bottleneck-closing {
+      font-family: 'Raleway', sans-serif;
+      font-style: italic;
+      font-weight: 500;
+      font-size: 1.1875rem;
+      line-height: 1.9rem;
+      color: #F8F6F2;
+      margin: 0;
+      max-width: 21.0625rem;
+    }
+    .bottleneck-closing p { margin: 0; }
+    .bottleneck-closing p + p { margin-top: 0.75rem; }
+
+    @media (min-width: 768px) {
+      .bottleneck {
+        background: url('assets/images/bottleneck-bg.jpg') repeat 50% 50% / cover fixed;
+      }
+      .bottleneck-inner {
+        max-width: 60rem;
+        padding: 6.25rem 1.8125rem 5rem;
+      }
+      .bottleneck-heading {
+        font-size: 2.375rem;
+        line-height: 3.325rem;
+        max-width: 58.5rem;
+        margin-bottom: 2rem;
+      }
+      .bottleneck-list {
+        max-width: 37.0625rem;
+      }
+      .bottleneck-list li {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        margin-bottom: 0.5rem;
+      }
+      .bottleneck-list li::before {
+        top: 0.75rem;
+      }
+      .bottleneck-closing {
+        font-size: 1.25rem;
+        line-height: 2.25rem;
+        max-width: 45.1875rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 5: WHAT YOU'LL DISCOVER
+       ===================================== */
+    .discover {
+      position: relative;
+      background: url('assets/images/discover-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      overflow: hidden;
+    }
+    .discover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #CFBC91;
+      opacity: 0.7;
+      z-index: 1;
+    }
+    .discover-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.75rem 1.25rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      color: #1D1F1E;
+    }
+    .discover-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      margin: 0 0 1.5rem;
+      max-width: 18.875rem;
+    }
+    .discover-list {
+      list-style: disc;
+      padding-left: 1.5rem;
+      margin: 0 0 2rem;
+      width: 100%;
+      max-width: 22.5rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.1875rem;
+      line-height: 1.9rem;
+      font-weight: 500;
+      color: #1D1F1E;
+      text-align: left;
+    }
+    .discover-list li { margin-bottom: 1rem; }
+    .discover-list li:last-child { margin-bottom: 0; }
+    .discover-list li::marker { font-size: 1.1875rem; }
+    .discover-list li strong { font-weight: 700; }
+    .discover-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#3B3D3C, #1D1F1E 50%);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 120%;
+      width: 21.9375rem;
+      max-width: 100%;
+      height: 5.0625rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .discover-cta:hover { background: #2C3F36; color: #F8F6F2; }
+
+    @media (min-width: 768px) {
+      .discover-inner {
+        max-width: 60rem;
+        padding: 6.25rem 1.8125rem 5rem;
+      }
+      .discover-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 53.625rem;
+        margin-bottom: 1.5rem;
+      }
+      .discover-list {
+        font-size: 1.375rem;
+        line-height: 1.925rem;
+        max-width: 49.1875rem;
+        padding-left: 2rem;
+      }
+      .discover-list li { margin-bottom: 1.25rem; }
+      .discover-list li::marker { font-size: 1.375rem; }
+      .discover-cta {
+        width: 38.0625rem;
+        height: 4.4375rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 6: SOCIAL PROOF VIDEOS
+       ===================================== */
+    .social-proof {
+      position: relative;
+      background: url('assets/images/dark-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover;
+      overflow: hidden;
+    }
+    .social-proof::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #000000;
+      opacity: 0.21;
+      z-index: 1;
+    }
+    .social-proof-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.9375rem 1.25rem 4rem;
+    }
+    .social-proof-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: 1.9375rem;
+      line-height: 2.7125rem;
+      color: #E9E2D3;
+      max-width: 22.4375rem;
+      margin: 0 0 2rem;
+    }
+    .social-proof-heading .gold { color: #C2A86C; }
+    .social-proof-body {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.8rem;
+      font-weight: 400;
+      color: #E9E2D3;
+      max-width: 21.625rem;
+      margin: 0 0 3rem;
+    }
+    .social-proof-body em { font-style: italic; }
+    .social-proof-body strong { font-weight: 700; }
+    .social-proof-cards {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 2rem;
+      width: 100%;
+    }
+    .social-proof-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 100%;
+      max-width: 22.5rem;
+    }
+    .social-proof-card iframe {
+      width: 18.75rem;
+      height: 10.75rem;
+      border: none;
+      margin-bottom: 1.25rem;
+    }
+    .social-proof-card-quote {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.4rem;
+      color: #E9E2D3;
+      margin: 0;
+    }
+
+    @media (min-width: 768px) {
+      .social-proof {
+        background: url('assets/images/dark-bg.jpg') repeat rgb(39, 41, 40) 50% 50% / cover fixed;
+      }
+      .social-proof::before { opacity: 0.2; }
+      .social-proof-inner {
+        max-width: 60rem;
+        padding: 6.8125rem 0 8rem;
+      }
+      .social-proof-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 54.625rem;
+        margin-bottom: 2.75rem;
+      }
+      .social-proof-body {
+        font-size: 1.25rem;
+        line-height: 2rem;
+        max-width: 47.625rem;
+        margin-bottom: 5rem;
+      }
+      .social-proof-cards {
+        flex-direction: row;
+        justify-content: center;
+        gap: 1rem;
+      }
+      .social-proof-card { max-width: 18.75rem; }
+      .social-proof-card-quote {
+        line-height: 1.6rem;
+        max-width: 17.5rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 7: DISCOVER YOUR BOTTLENECK (CTA)
+       ===================================== */
+    .cta-section {
+      background: rgb(44, 63, 54);
+    }
+    .cta-section-inner {
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.75rem 1.25rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .cta-section-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #C2A86C;
+      margin: 0 0 2rem;
+      max-width: 22.5rem;
+    }
+    .cta-section-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1.1875rem;
+      line-height: 1.6625rem;
+      color: #E9E2D3;
+      margin: 0 0 2.25rem;
+      max-width: 22.5rem;
+    }
+    .cta-section-body p { margin: 0; }
+    .cta-section-body p + p { margin-top: 1.25rem; }
+    .cta-section-body strong { font-weight: 700; }
+    .cta-section-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#3B3D3C, #1D1F1E 50%);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 120%;
+      width: 21.9375rem;
+      max-width: 100%;
+      height: 5.0625rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+    .cta-section-btn:hover { background: #2C3F36; color: #F8F6F2; }
+
+    @media (min-width: 768px) {
+      .cta-section-inner {
+        max-width: 60rem;
+        padding: 6.25rem 1.8125rem 5rem;
+      }
+      .cta-section-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        max-width: 53.625rem;
+        margin-bottom: 2rem;
+      }
+      .cta-section-body {
+        font-size: 1.25rem;
+        line-height: 2rem;
+        max-width: 47.375rem;
+        margin-bottom: 2.75rem;
+      }
+      .cta-section-btn {
+        width: 38.0625rem;
+        height: 4.4375rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 8: PROOF OF WHAT'S POSSIBLE (TESTIMONIAL.TO)
+       ===================================== */
+    .proof {
+      background: url('assets/images/proof-bg.png') repeat rgb(248, 246, 242) 50% 50% / cover;
+    }
+    .proof-inner {
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .proof-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 2rem;
+      line-height: 2.8rem;
+      color: #000000;
+      margin: 0 0 2rem;
+      max-width: 17.4375rem;
+    }
+    .proof iframe {
+      width: 100%;
+      max-width: 22.5rem;
+      height: 50rem;
+      border: 0;
+      display: block;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .proof {
+        background: url('assets/images/proof-bg.png') repeat rgb(248, 246, 242) 50% 50% / cover fixed;
+      }
+      .proof-inner {
+        max-width: 75rem;
+        padding: 3.8125rem 1.8125rem 5rem;
+      }
+      .proof-heading {
+        font-size: 2.375rem;
+        line-height: 3.325rem;
+        max-width: 47.1875rem;
+        margin-bottom: 3rem;
+      }
+      .proof iframe {
+        max-width: 60rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 9: ABOUT JASON
+       ===================================== */
+    .about {
+      position: relative;
+      background: url('assets/images/about-bg.png') repeat rgb(44, 63, 54) 50% 11% / cover;
+      overflow: hidden;
+    }
+    .about::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #1D1F1E;
+      opacity: 0.56;
+      z-index: 1;
+    }
+    .about-inner {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 2.1875rem 1.25rem 4rem;
+    }
+    .about-image {
+      width: 22.5rem;
+      max-width: 100%;
+      height: auto;
+      margin-bottom: 2rem;
+    }
+    .about-content { text-align: left; width: 100%; }
+    .about-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #C2A86C;
+      margin: 0 0 1.5rem;
+    }
+    .about-body {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.575rem;
+      font-weight: 500;
+      color: #EAE2D4;
+      margin: 0 0 2rem;
+    }
+    .about-body p { margin: 0 0 1rem; }
+    .about-body p:last-child { margin-bottom: 0; }
+    .about-body em { font-style: italic; }
+    .about-body strong { font-weight: 700; }
+    .about-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#3B3D3C, #1D1F1E 50%);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 120%;
+      width: 21.75rem;
+      max-width: 100%;
+      height: 4.375rem;
+      border: 2px solid #C2A86C;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: background 0.3s ease;
+      cursor: pointer;
+    }
+    .about-cta:hover { background: #2C3F36; color: #F8F6F2; }
+
+    @media (min-width: 768px) {
+      .about-inner {
+        max-width: 60rem;
+        padding: 2rem 0;
+      }
+      .about-row {
+        display: flex;
+        align-items: center;
+        gap: 3.625rem;
+        margin-bottom: 0;
+        width: 100%;
+      }
+      .about-image {
+        width: 25rem;
+        flex-shrink: 0;
+        margin-bottom: 0;
+      }
+      .about-heading {
+        font-size: 2.375rem;
+        line-height: 3.8rem;
+        margin-bottom: 1.5rem;
+      }
+      .about-body {
+        font-size: 1.125rem;
+        line-height: 1.8rem;
+        max-width: 28.125rem;
+        margin-bottom: 2rem;
+      }
+      .about-cta {
+        width: 26.1875rem;
+        height: 4.9375rem;
+      }
+    }
+
+    /* =====================================
+       SECTION 10: FOOTER
+       ===================================== */
+    .footer {
+      background: rgb(234, 226, 212);
+      padding: 2.5rem 1.25rem;
+    }
+    .footer-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.125rem;
+    }
+    .footer-logo {
+      width: 8.75rem;
+      height: auto;
+      display: block;
+    }
+    .footer-copy {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.4rem;
+      color: #1D1F1E;
+      margin: 0;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      .footer {
+        padding: 1.25rem 1.8125rem;
+      }
+      .footer-inner {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        gap: 0;
+      }
+      .footer-logo {
+        width: 10.9375rem;
+      }
+      .footer-copy {
+        text-align: right;
+      }
+    }
+
+    /* =====================================
+       OPT-IN POPUP MODAL
+       ===================================== */
+    .optin-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(29, 31, 30, 0.78);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      align-items: center;
+      justify-content: center;
+      padding: 1.25rem;
+    }
+    .optin-modal.is-open { display: flex; }
+    .optin-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 25rem;
+      background: #FEFEFE;
+      border-radius: 3px;
+      padding: 1.5rem 1.25rem 1.5rem;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+    .optin-modal-close {
+      position: absolute;
+      top: -0.75rem;
+      right: -0.75rem;
+      width: 2rem;
+      height: 2rem;
+      border: 0;
+      background: #1D1F1E;
+      color: #FFFFFF;
+      font-size: 1.25rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .optin-modal-close:hover { background: #3B3D3C; }
+    .optin-modal-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1.625rem;
+      line-height: 2.275rem;
+      color: #1D1F1E;
+      text-align: center;
+      margin: 0 0 1.25rem;
+    }
+    .optin-form { display: flex; flex-direction: column; gap: 0.625rem; }
+    .optin-form .form-input {
+      width: 100%;
+      border: 1px solid #8C837A;
+      border-radius: 4px;
+      background: #FFFFFF;
+      padding: 0.8125rem 0.875rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #1D1F1E;
+      outline: none;
+      transition: border-color 0.3s ease;
+    }
+    .optin-form .form-input::placeholder {
+      color: #8C837A;
+      font-family: 'Raleway', sans-serif;
+      opacity: 1;
+    }
+    .optin-form .form-input:focus { border-color: #C2A86C; }
+    .optin-form .form-btn {
+      margin-top: 0.5rem;
+      width: 100%;
+      background: #C2A86C;
+      border: 2px solid #B29B67;
+      border-radius: 8px;
+      color: #FFFFFF;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1.375rem;
+      line-height: 1.2;
+      height: 3.9375rem;
+      cursor: pointer;
+      transition: background-color 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .optin-form .form-btn:hover { background: #B69F69; transform: translateY(-1px); }
+    .optin-modal-subtext {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.3125rem;
+      color: #8C837A;
+      text-align: center;
+      margin: 1rem 0 0.875rem;
+    }
+    .optin-modal-disclaimer {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.8125rem;
+      line-height: 0.975rem;
+      color: #BEB9B3;
+      text-align: center;
+      margin: 0;
+    }
+    .optin-modal-disclaimer a { color: #BEB9B3; text-decoration: underline; }
+    .optin-modal-disclaimer a:hover { color: #8C837A; }
+
+    @media (min-width: 768px) {
+      .optin-modal-content {
+        max-width: 34.1875rem;
+        padding: 1.8125rem 3.5rem 1.5rem;
+      }
+      .optin-modal-heading {
+        font-size: 1.5rem;
+        line-height: 2.4rem;
+        margin-bottom: 1rem;
+      }
+      .optin-form .form-btn {
+        height: 3.25rem;
+      }
+      .optin-modal-subtext {
+        font-size: 0.875rem;
+        line-height: 1.4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+      SECTION 1: HERO
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-heading"><em>Why Great Entrepreneurs Still Experience Inconsistent Clients</em></h1>
+      <h4 class="hero-tagline">(and the 3 shifts that change it)</h4>
+      <h2 class="hero-sub">A free live masterclass on the hidden reasons clients come in waves &mdash; and what to do about it.</h2>
+      <h4 class="hero-meta">March 23 at 10am MT &bull; Free to join</h4>
+      <a class="hero-cta" href="#optin">Save Your Spot</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: BELOW FOLD
+      ============================================ -->
+  <section class="below-fold">
+    <div class="below-fold-inner">
+      <h2 class="below-fold-heading">You know your work helps people.</h2>
+
+      <p class="below-fold-intro">Clients have thanked you.<br>People have told you how much it changed things.</p>
+
+      <div class="below-fold-body">
+        <p>And yet&hellip;</p>
+        <p>clients come in waves.</p>
+        <div class="gap"></div>
+        <p><strong>Some months everything flows.</strong></p>
+        <p>People reach out.</p>
+        <p>Sales happen naturally.</p>
+        <div class="gap"></div>
+        <p class="bold">Then it slows down.</p>
+        <div class="gap"></div>
+        <p>And the same business that felt easy last month&hellip;</p>
+        <p>now feels unpredictable.</p>
+        <div class="gap"></div>
+        <p>You might assume it&rsquo;s marketing.</p>
+        <div class="gap"></div>
+        <p class="bold">So you try to fix it.</p>
+        <div class="gap"></div>
+        <p>More content.</p>
+        <p>Different platforms.</p>
+        <p>New strategies.</p>
+        <div class="gap"></div>
+        <p><em>But what if the issue&hellip;</em></p>
+        <p><em>isn&rsquo;t your strategy at all?</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 3: DEEPER PATTERN
+      ============================================ -->
+  <section class="pattern">
+    <div class="pattern-inner">
+      <h2 class="pattern-heading">The deeper pattern most entrepreneurs miss</h2>
+
+      <div class="pattern-body">
+        <p>When clients come in waves, it&rsquo;s rarely because of tactics.</p>
+        <div class="gap"></div>
+        <p>It&rsquo;s almost always because <strong>something deeper in the business is out of balance.</strong></p>
+        <div class="gap"></div>
+        <p>After signing over 2,000 clients and supporting hundreds of entrepreneurs,</p>
+        <p>I&rsquo;ve learned that inconsistent client flow almost always traces back to three specific areas.</p>
+        <div class="gap"></div>
+        <p>Most entrepreneurs are strong in one&hellip;</p>
+        <p><strong>but quietly overlook another.</strong></p>
+        <div class="gap"></div>
+        <p>And until you discover where your gap is, clients will keep coming in waves.</p>
+        <p>Even if they love your work.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 4: WHEN YOU FIND THE BOTTLENECK
+      ============================================ -->
+  <section class="bottleneck">
+    <div class="bottleneck-inner">
+      <h2 class="bottleneck-heading">When you find the bottleneck, things shift</h2>
+
+      <ul class="bottleneck-list">
+        <li>More people start discovering you.</li>
+        <li>Your audience starts trusting you.</li>
+        <li><strong>And the right people start reaching out far more often.</strong></li>
+      </ul>
+
+      <div class="bottleneck-closing">
+        <p><em>In this free masterclass, I&rsquo;ll show you where that bottleneck tends to hide&hellip;</em></p>
+        <p><em>and the simple shifts that begin to open it up.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 5: WHAT YOU'LL DISCOVER
+      ============================================ -->
+  <section class="discover">
+    <div class="discover-inner">
+      <h3 class="discover-heading">What you&rsquo;ll discover</h3>
+
+      <ul class="discover-list">
+        <li><strong>Why entrepreneurs with the most to offer are often the hardest to find</strong> &mdash; and the internal pattern that keeps them that way</li>
+        <li><strong>What builds genuine trust with your audience</strong> &mdash; and why most entrepreneurs unknowingly avoid it</li>
+        <li><strong>Why people can follow your work for months and still never reach out</strong> &mdash; and how to change that</li>
+        <li><strong>How to uncover exactly where client flow is breaking in your business</strong> &mdash; and what to focus on to resolve it</li>
+      </ul>
+
+      <a class="discover-cta" href="#optin">Save Your Spot</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 6: SOCIAL PROOF VIDEOS
+      ============================================ -->
+  <section class="social-proof">
+    <div class="social-proof-inner">
+      <h2 class="social-proof-heading"><em><span class="gold">Magic happens</span> with Entrepreneurs.</em></h2>
+
+      <p class="social-proof-body">This work has transformed<strong>&nbsp;1000+ entrepreneurs</strong>&nbsp;through&nbsp;my past containers and coaching experiences.&nbsp;<em>Here&rsquo;s what they&rsquo;ve shared&hellip;</em></p>
+
+      <div class="social-proof-cards">
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/g8055phors" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">&ldquo;From&nbsp;$2k over 6 months to $260k in&nbsp;one year.&rdquo;</h4>
+        </div>
+
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/hlntpnigew" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">&ldquo;Never experienced financial success like this in my life.&rdquo;</h4>
+        </div>
+
+        <div class="social-proof-card">
+          <iframe src="https://fast.wistia.net/embed/iframe/x0tlj5qthd" title="Testimonial video" allowfullscreen></iframe>
+          <h4 class="social-proof-card-quote">&ldquo;Tripled my rates and started hitting 10k+ months.&rdquo;</h4>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 7: DISCOVER YOUR BOTTLENECK (CTA)
+      ============================================ -->
+  <section class="cta-section">
+    <div class="cta-section-inner">
+      <h2 class="cta-section-heading">Discover your bottleneck</h2>
+      <div class="cta-section-body">
+        <p>If clients have felt inconsistent, this masterclass will help you understand why, and what to do about it.</p>
+        <p>Join me and uncover the gap that&rsquo;s stopping great clients from finding you &mdash; and the simple shifts to change it.</p>
+      </div>
+      <a class="cta-section-btn" href="#optin">Save Your Spot</a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 8: PROOF OF WHAT'S POSSIBLE (TESTIMONIAL.TO)
+      ============================================ -->
+  <section class="proof">
+    <div class="proof-inner">
+      <h2 class="proof-heading"><strong>Proof of what&rsquo;s possible</strong></h2>
+      <iframe src="https://embed-v2.testimonial.to/w/jason-moss-testimonials?animated=on&amp;theme=light&amp;shadowColor=e7d8ac&amp;speed=1&amp;tag=all" title="Client Testimonials" scrolling="no"></iframe>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 9: ABOUT JASON
+      ============================================ -->
+  <section class="about">
+    <div class="about-inner">
+      <div class="about-row">
+        <img src="assets/images/jason-about.png" srcset="assets/images/jason-about.png 1x, assets/images/jason-about@2x.png 2x" alt="Jason Moss" class="about-image" width="400" height="596">
+
+        <div class="about-content">
+          <h2 class="about-heading">About Jason</h2>
+
+          <div class="about-body">
+            <p>Entrepreneur, mentor, founder of The Collective.</p>
+            <p>After scaling past $1.5 million in sales and serving 2,000+ clients, I learned that the deepest growth comes from more than just strategy.</p>
+            <p>Now I help conscious entrepreneurs build businesses that thrive from the inside out.</p>
+          </div>
+
+          <a class="about-cta" href="#optin">Save Your Spot</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 10: FOOTER
+      ============================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <img src="assets/images/logo-dark.png" srcset="assets/images/logo-dark.png 1x, assets/images/logo-dark@2x.png 2x" alt="Jason Moss" class="footer-logo" width="175" height="40">
+      <p class="footer-copy">&copy; Jason Moss LLC. All Rights Reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ============================================
+      OPT-IN POPUP MODAL (single variation, triggered by any #optin link)
+      ============================================ -->
+  <div class="optin-modal" id="optinModal" role="dialog" aria-modal="true" aria-labelledby="optinModalHeading">
+    <div class="optin-modal-content">
+      <button type="button" class="optin-modal-close" aria-label="Close" id="optinModalClose">&times;</button>
+      <h3 class="optin-modal-heading" id="optinModalHeading">Enter your info&nbsp;to save&nbsp;your spot:</h3>
+      <form class="optin-form email-form" novalidate>
+        <input type="text" name="First Name" class="form-input" placeholder="First Name" required aria-required="true">
+        <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
+        <input type="tel" name="Phone Number" class="form-input" placeholder="Phone Number" inputmode="numeric" pattern="[0-9]+" required aria-required="true">
+        <input type="hidden" name="Source" value="">
+        <input type="hidden" name="Ad" value="">
+        <button type="submit" class="form-btn">Save My Spot</button>
+      </form>
+      <p class="optin-modal-subtext">No spam. Unsubscribe anytime.</p>
+      <p class="optin-modal-disclaimer">By providing your phone number, you agree to receive automated promotional messages from Jason Moss LLC. Message &amp; Data Rates May Apply. Message frequency varies. Text HELP for help. Text STOP to stop. You also agree to allow Jason Moss LLC to contact you. You also agree to Jason Moss LLC <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">terms of service</a> and <a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">privacy policy</a>.</p>
+    </div>
+  </div>
+
+  <!-- Popup trigger + form submission + URL param injection -->
+  <script>
+  (function() {
+    'use strict';
+
+    var modal = document.getElementById('optinModal');
+    var modalClose = document.getElementById('optinModalClose');
+    var form = document.querySelector('.optin-form');
+    if (!modal || !form) return;
+
+    // Inject Source and Ad from URL params
+    var params = new URLSearchParams(window.location.search);
+    var sourceParam = params.get('source');
+    var adParam = params.get('ad');
+    var sourceField = form.querySelector('input[name="Source"]');
+    var adField = form.querySelector('input[name="Ad"]');
+    if (sourceField) sourceField.value = sourceParam || 'Organic';
+    if (adField) adField.value = adParam || '';
+
+    // Open modal when any Save Your Spot CTA clicked
+    document.querySelectorAll('a[href="#optin"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    function openModal() {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      var first = form.querySelector('input[type="text"]');
+      if (first) setTimeout(function(){ first.focus(); }, 50);
+    }
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
+
+    // Form submission — ZeroBounce → submit-contact → redirect
+    var submitBtn = form.querySelector('.form-btn');
+    var originalText = submitBtn.textContent.trim();
+    var submitting = false;
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (submitting) return;
+
+      var firstName = form.querySelector('input[name="First Name"]').value.trim();
+      var email = form.querySelector('input[name="E-mail"]').value.trim();
+      var phoneRaw = form.querySelector('input[name="Phone Number"]').value.trim();
+      var phone = phoneRaw.replace(/\D/g, '');
+
+      if (!firstName) { alert('Please enter your first name.'); return; }
+      if (!email) { alert('Please enter your email address.'); return; }
+      if (!form.querySelector('input[name="E-mail"]').checkValidity()) { alert('Please enter a valid email address.'); return; }
+      if (!phone) { alert('Please enter a valid phone number (digits only).'); return; }
+
+      submitting = true;
+      submitBtn.textContent = 'Validating…';
+
+      var emailValid = true;
+      var controller = new AbortController();
+      var timeout = setTimeout(function(){ controller.abort(); }, 4000);
+      try {
+        var res = await fetch('/.netlify/functions/verify-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email }),
+          signal: controller.signal
+        });
+        var data = await res.json();
+        if (!data.valid) { alert(data.reason || 'Please enter a real, non-temporary email address.'); emailValid = false; }
+      } catch (err) { console.error('ZeroBounce error or timeout:', err); }
+      finally { clearTimeout(timeout); }
+
+      if (!emailValid) { submitting = false; submitBtn.textContent = originalText; return; }
+
+      submitBtn.textContent = 'Submitting…';
+      try {
+        var submitRes = await fetch('/.netlify/functions/submit-contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            email: email,
+            first_name: firstName,
+            phone: phone,
+            latest_source: sourceField ? sourceField.value : 'Organic',
+            latest_ad: adField ? adField.value : '',
+            tag: 'Why Great Entrepreneurs Still Experience Inconsistent Clients'
+          })
+        });
+        if (!submitRes.ok) throw new Error('Submit failed');
+
+        var redirectUrl = '/post-purchase-thank-you?registered=whygreatentrepreneursstillexperienceinconsistentclients&email=' + encodeURIComponent(email);
+        window.location.href = redirectUrl;
+      } catch (err) {
+        console.error('Form submission error:', err);
+        alert('Something went wrong. Please try again.');
+        submitting = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+  })();
+  </script>
+
+</body>
+</html>
