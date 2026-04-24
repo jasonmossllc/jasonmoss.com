@@ -343,9 +343,6 @@ h1, h2, h3, h4 {
   width: 100%;
   height: auto;
   max-height: 92vh;
-  /* Reserve space before the image loads so the intro section below
-     doesn't flash above the fold. Matches the desktop image ratio (1920x1280). */
-  aspect-ratio: 1920 / 1280;
   object-fit: cover;
   object-position: center bottom;
 }
@@ -1316,8 +1313,8 @@ h1, h2, h3, h4 {
 <section class="hero" id="hero">
   <div class="hero-bg">
     <picture>
-      <source media="(max-width: 1023px)" srcset="assets/images/hero-mountain-mobile.png" width="1024" height="950">
-      <img src="assets/images/hero-mountain.jpg" alt="Jason Moss standing in mountain landscape at golden hour" loading="eager" fetchpriority="high" width="1920" height="1280">
+      <source media="(max-width: 1023px)" srcset="assets/images/hero-mountain-mobile.png">
+      <img src="assets/images/hero-mountain.jpg" alt="Jason Moss standing in mountain landscape at golden hour" loading="eager">
     </picture>
   </div>
   <div class="hero-overlay"></div>
