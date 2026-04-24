@@ -2,7 +2,7 @@
 # Format: /source    destination    status-code
 
 /zoom         https://us02web.zoom.us/j/5239082694                                            301
-/resonance    https://go.jasonmoss.com/resonance-masterclass-optin?source=YouTube_Organic      301
-/collective   https://go.jasonmoss.com/the-collective                                         301
-/transmission https://go.jasonmoss.com/transmission                                           301
-/expansion    https://go.jasonmoss.com/expansion                                              301
+/resonance    /resonance-masterclass-optin?source=YouTube_Organic                            301
+/collective   /the-collective                                                                 301
+/transmission /transmission                                                                   301
+/expansion    /expansion                                                                      301
