@@ -28,6 +28,13 @@
       background: url('assets/images/hero-bg.jpg') repeat 45% 2% / cover;
       overflow: hidden;
     }
+    @media (max-width: 767px) {
+      .hero {
+        background-repeat: no-repeat;
+        background-position: 66% 0;
+        min-height: 72.5rem;
+      }
+    }
     .hero::before {
       content: '';
       position: absolute;
