@@ -66,7 +66,7 @@
       elapsed += WISTIA_POLL_INTERVAL;
 
       // Instapage lazy iframe or normal iframe
-      var iframe = document.querySelector('iframe[name="wistia_embed"]');
+      var iframe = document.querySelector('iframe[name="wistia_embed"], iframe[src*="wistia"]');
       var iframeReady =
         iframe && iframe.src && iframe.src.indexOf('wistia') > -1;
 
