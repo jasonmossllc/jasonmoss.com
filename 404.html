@@ -50,10 +50,9 @@
     }
 
     .mark {
-      width: 3rem;
-      height: 3rem;
+      width: 3.25rem;
+      height: 3.25rem;
       margin-bottom: 2.5rem;
-      opacity: 0.85;
     }
 
     .kicker {
@@ -74,11 +73,13 @@
       color: #F8F6F2;
       margin: 0 0 1.5rem;
       letter-spacing: -0.01em;
+      max-width: 22ch;
     }
 
     h1 em {
       font-style: italic;
       color: #C2A86C;
+      white-space: nowrap;
     }
 
     .lede {
@@ -93,10 +94,8 @@
 
     .actions {
       display: flex;
-      flex-direction: column;
-      gap: 0.875rem;
+      justify-content: center;
       width: 100%;
-      max-width: 20rem;
     }
 
     .btn-primary {
@@ -109,30 +108,12 @@
       letter-spacing: 0.08em;
       text-transform: uppercase;
       text-decoration: none;
-      padding: 1.125rem 2rem;
+      padding: 1.125rem 2.5rem;
       transition: background 0.2s ease, transform 0.2s ease;
     }
     .btn-primary:hover {
       background: #B89A5E;
       transform: translateY(-1px);
-    }
-
-    .btn-secondary {
-      display: inline-block;
-      color: #E9E2D3;
-      font-family: 'Raleway', sans-serif;
-      font-weight: 400;
-      font-size: 0.875rem;
-      letter-spacing: 0.04em;
-      text-decoration: none;
-      padding: 0.625rem 1rem;
-      border-bottom: 1px solid rgba(233, 226, 211, 0.25);
-      transition: color 0.2s ease, border-color 0.2s ease;
-      align-self: center;
-    }
-    .btn-secondary:hover {
-      color: #C2A86C;
-      border-bottom-color: #C2A86C;
     }
 
     .footer-note {
@@ -148,37 +129,32 @@
     @media (min-width: 768px) {
       h1 { font-size: 2.75rem; }
       .lede { font-size: 1.125rem; }
-      .actions {
-        flex-direction: row;
-        max-width: none;
-        align-items: center;
-        justify-content: center;
-        gap: 1.5rem;
-      }
     }
   </style>
 </head>
 <body>
   <main class="page">
     <div class="inner">
-      <!-- Mountain mark from logo, in muted gold -->
-      <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <circle cx="32" cy="32" r="30" fill="none" stroke="#C2A86C" stroke-width="1.5"/>
-        <path d="M14 42 L26 24 L34 34 L42 22 L50 42 Z" fill="none" stroke="#C2A86C" stroke-width="1.5" stroke-linejoin="round"/>
-      </svg>
+      <img
+        class="mark"
+        src="/assets/images/jm-logo-gold.png"
+        srcset="/assets/images/jm-logo-gold.png 1x, /assets/images/jm-logo-gold@2x.png 2x"
+        alt="Jason Moss"
+        width="52"
+        height="52"
+      >
 
-      <p class="kicker">404 &middot; Page Not Found</p>
+      <p class="kicker">404 &middot; Page not found</p>
 
-      <h1>this page has <em>moved on</em>.</h1>
+      <h1>This page has <em>moved on</em>.</h1>
 
       <p class="lede">
-        the page you're looking for isn't here anymore.<br>
-        let's get you back to where you were headed.
+        The page you're looking for isn't here anymore.<br>
+        Let's get you back to where you were headed.
       </p>
 
       <div class="actions">
         <a href="/" class="btn-primary">Return Home</a>
-        <a href="/the-collective" class="btn-secondary">Explore The Collective</a>
       </div>
     </div>
   </main>
