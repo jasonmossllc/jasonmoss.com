@@ -408,7 +408,6 @@
         <form class="optin-form email-form" novalidate>
           <input type="text" name="First name" class="form-input" placeholder="First name" required aria-required="true">
           <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
-          <input type="hidden" name="Source" value="Organic">
           <button type="submit" class="form-btn">Watch the Masterclass Now</button>
         </form>
 
@@ -435,9 +434,13 @@
 
     var emailInput = form.querySelector('input[type="email"]');
     var nameInput = form.querySelector('input[name="First name"]');
-    var sourceInput = form.querySelector('input[name="Source"]');
     var submitBtn = form.querySelector('.form-btn');
     if (!emailInput || !submitBtn) return;
+
+    // Read ad/source UTM params from URL on page load (only used if present)
+    var urlParams = new URLSearchParams(window.location.search);
+    var latestAd = (urlParams.get('ad') || '').trim();
+    var latestSource = (urlParams.get('source') || '').trim();
 
     var originalText = submitBtn.textContent.trim();
     var submitting = false;
@@ -448,7 +451,6 @@
 
       var firstName = nameInput ? nameInput.value.trim() : '';
       var email = emailInput.value.trim();
-      var source = sourceInput ? sourceInput.value : 'Organic';
 
       if (!firstName) { alert('Please enter your first name.'); return; }
       if (!email) { alert('Please enter your email address.'); return; }
@@ -492,16 +494,20 @@
       submitBtn.textContent = 'Submitting…';
 
       try {
+        // Build payload — only include latest_ad / latest_source when present in URL
+        var payload = {
+          email: email,
+          first_name: firstName,
+          tag: 'Resonance Masterclass (Cold Traffic)'
+        };
+        if (latestAd) payload.latest_ad = latestAd;
+        if (latestSource) payload.latest_source = latestSource;
+
         // Fire AC submit non-blocking via keepalive, then redirect immediately
         fetch('/.netlify/functions/submit-contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: email,
-            first_name: firstName,
-            latest_source: source,
-            tag: 'Resonance Masterclass (Cold Traffic)'
-          }),
+          body: JSON.stringify(payload),
           keepalive: true
         }).catch(function(err) { console.error('AC submit error:', err); });
 
