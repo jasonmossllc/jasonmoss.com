@@ -26,11 +26,29 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: rgb(44, 63, 54);
+    background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 0;
+    background-size: 780px auto;
     color: #F8F6F2;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
     min-height: 100vh;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: #2C3F36;
+    opacity: 0.3;
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  main { position: relative; z-index: 1; }
+
+  @media (max-width: 767px) {
+    body { background-size: 100vw auto; }
   }
 
   .container {
@@ -50,7 +68,7 @@
 
   h1 {
     font-family: 'Libre Baskerville', serif;
-    font-weight: 700;
+    font-weight: 400;
     font-size: 2rem;
     line-height: 2.8rem;
     color: #F8F6F2;
@@ -84,7 +102,6 @@
     font-weight: 600;
     font-size: 1.25rem;
     letter-spacing: 0.08em;
-    text-transform: uppercase;
     text-decoration: none;
     border-radius: 0;
     width: 24.375rem;

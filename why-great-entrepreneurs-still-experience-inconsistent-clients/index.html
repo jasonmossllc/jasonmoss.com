@@ -90,6 +90,7 @@
       max-width: 22.5rem;
     }
     .hero-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -108,9 +109,19 @@
       border-radius: 0;
       text-decoration: none;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .hero-cta:hover { background: #2C3F36; color: #F8F6F2; }
+    .hero-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .hero-cta:hover::before { opacity: 1; }
 
     @media (min-width: 768px) {
       .hero {
@@ -469,6 +480,7 @@
     .discover-list li::marker { font-size: 1.1875rem; }
     .discover-list li strong { font-weight: 700; }
     .discover-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -487,9 +499,19 @@
       border-radius: 0;
       text-decoration: none;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .discover-cta:hover { background: #2C3F36; color: #F8F6F2; }
+    .discover-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .discover-cta:hover::before { opacity: 1; }
 
     @media (min-width: 768px) {
       .discover-inner {
@@ -664,6 +686,7 @@
     .cta-section-body p + p { margin-top: 1.25rem; }
     .cta-section-body strong { font-weight: 700; }
     .cta-section-btn {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -682,9 +705,19 @@
       border-radius: 0;
       text-decoration: none;
       cursor: pointer;
-      transition: background 0.2s, color 0.2s;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .cta-section-btn:hover { background: #2C3F36; color: #F8F6F2; }
+    .cta-section-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .cta-section-btn:hover::before { opacity: 1; }
 
     @media (min-width: 768px) {
       .cta-section-inner {
@@ -815,6 +848,7 @@
     .about-body em { font-style: italic; }
     .about-body strong { font-weight: 700; }
     .about-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -832,10 +866,20 @@
       border: 2px solid #C2A86C;
       border-radius: 0;
       text-decoration: none;
-      transition: background 0.3s ease;
       cursor: pointer;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .about-cta:hover { background: #2C3F36; color: #F8F6F2; }
+    .about-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+    .about-cta:hover::before { opacity: 1; }
 
     @media (min-width: 768px) {
       .about-inner {
@@ -1259,7 +1303,6 @@
         <input type="text" name="First Name" class="form-input" placeholder="First Name" required aria-required="true">
         <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
         <input type="tel" name="Phone Number" class="form-input" placeholder="Phone Number" inputmode="numeric" pattern="[0-9]+" required aria-required="true">
-        <input type="hidden" name="Source" value="">
         <input type="hidden" name="Ad" value="">
         <button type="submit" class="form-btn">Save My Spot</button>
       </form>
@@ -1278,13 +1321,10 @@
     var form = document.querySelector('.optin-form');
     if (!modal || !form) return;
 
-    // Inject Source and Ad from URL params
+    // Inject Ad from URL params
     var params = new URLSearchParams(window.location.search);
-    var sourceParam = params.get('source');
     var adParam = params.get('ad');
-    var sourceField = form.querySelector('input[name="Source"]');
     var adField = form.querySelector('input[name="Ad"]');
-    if (sourceField) sourceField.value = sourceParam || 'Organic';
     if (adField) adField.value = adParam || '';
 
     // Open modal when any Save Your Spot CTA clicked
@@ -1357,7 +1397,6 @@
             email: email,
             first_name: firstName,
             phone: phone,
-            latest_source: sourceField ? sourceField.value : 'Organic',
             latest_ad: adField ? adField.value : '',
             tag: 'Why Great Entrepreneurs Still Experience Inconsistent Clients'
           })

@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:300,300italic,400,500,600,700&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
     body {
       font-family: 'Raleway', sans-serif;
@@ -274,10 +275,11 @@
       color: #F7F4ED;
       font-family: 'Raleway', sans-serif;
       font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: 0.08em;
+      font-size: 0.875rem;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
-      padding: 1rem 1rem;
+      white-space: nowrap;
+      padding: 1.125rem 0.75rem;
       cursor: pointer;
       transition: background-color 0.25s ease-out, transform 0.25s ease-out;
     }
@@ -297,13 +299,13 @@
     .optin-footer {
       font-family: 'Raleway', sans-serif;
       font-weight: 400;
-      font-size: 0.8125rem;
-      line-height: 1.3rem;
+      font-size: 0.6875rem;
+      line-height: 1.1rem;
       color: #ACACAC;
       margin: 3rem 0 0;
       max-width: 23.75rem;
     }
-    .optin-footer p { margin: 0; }
+    .optin-footer p { margin: 0; white-space: nowrap; }
     .optin-footer a { color: #ACACAC; text-decoration: none; }
     .optin-footer a:hover { text-decoration: underline; }
 

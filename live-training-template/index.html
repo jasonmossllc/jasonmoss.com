@@ -81,6 +81,7 @@
       margin: 0 0 2.25rem;
     }
     .hero-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -97,10 +98,20 @@
       border: 2px solid #C2A86C;
       border-radius: 0;
       text-decoration: none;
-      transition: background 0.2s;
+      overflow: hidden;
+      isolation: isolate;
       margin: 1rem 0 2.5rem;
     }
-    .hero-cta:hover { background: #2C3F36; }
+    .hero-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .hero-cta:hover::before { opacity: 1; }
     .hero-chevron {
       width: 2.1875rem;
       height: auto;
@@ -324,6 +335,7 @@
     .imagine-body em { font-style: italic; }
     .imagine-body strong { font-weight: 600; }
     .imagine-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -339,10 +351,20 @@
       height: 4.6875rem;
       border-radius: 0;
       text-decoration: none;
-      transition: background 0.2s;
+      overflow: hidden;
+      isolation: isolate;
       margin-top: 4rem;
     }
-    .imagine-cta:hover { background: #2C3F36; }
+    .imagine-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .imagine-cta:hover::before { opacity: 1; }
 
     /* =====================================
        SECTION 5: 3-DAY BREAKDOWN
@@ -439,6 +461,7 @@
     .day-body p:last-child { margin-bottom: 0; }
     .day-body em { font-style: italic; }
     .days-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -455,9 +478,19 @@
       border: 2px solid #C2A86C;
       border-radius: 0;
       text-decoration: none;
-      transition: background 0.2s;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .days-cta:hover { background: #2C3F36; }
+    .days-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .days-cta:hover::before { opacity: 1; }
 
     @media (min-width: 768px) {
       .days {
@@ -867,6 +900,7 @@
     .pricing-body em { font-style: italic; }
     .pricing-body .gold { color: #C2A86C; }
     .pricing-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -884,9 +918,19 @@
       border: 2px solid #C2A86C;
       border-radius: 0;
       text-decoration: none;
-      transition: background 0.2s;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .pricing-cta:hover { background: #2C3F36; color: #F8F6F2; }
+    .pricing-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .pricing-cta:hover::before { opacity: 1; }
 
     @media (min-width: 768px) {
       .pricing-inner {
@@ -1017,6 +1061,7 @@
     .about-body em { font-style: italic; }
     .about-body strong { font-weight: 700; }
     .about-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -1034,9 +1079,19 @@
       border: 2px solid #C2A86C;
       border-radius: 0;
       text-decoration: none;
-      transition: background 0.3s ease;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .about-cta:hover { background: #3E594C; color: #F8F6F2; }
+    .about-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #3E594C;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
+    }
+    .about-cta:hover::before { opacity: 1; }
 
     @media (min-width: 768px) {
       .about-inner {

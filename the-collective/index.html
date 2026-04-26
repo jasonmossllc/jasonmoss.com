@@ -34,6 +34,8 @@
       padding: 0;
     }
 
+    html { scroll-behavior: smooth; }
+
     body {
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
@@ -517,6 +519,7 @@
     }
 
     .strategy-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -531,12 +534,19 @@
       height: 4.0625rem;
       border: 2px solid #C2A86C;
       border-radius: 0;
-      transition: background 0.3s ease;
+      overflow: hidden;
+      isolation: isolate;
     }
-
-    .strategy-cta:hover {
+    .strategy-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
       background: #2C3F36;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
     }
+    .strategy-cta:hover::before { opacity: 1; }
 
     /* ============================================
     SECTION 11: PROOF / TESTIMONIAL.TO
@@ -671,6 +681,7 @@
     }
 
     .about-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -685,12 +696,19 @@
       height: 4.875rem;
       border: 2px solid #C2A86C;
       border-radius: 0;
-      transition: background 0.3s ease;
+      overflow: hidden;
+      isolation: isolate;
     }
-
-    .about-cta:hover {
+    .about-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
       background: #3E594C;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
     }
+    .about-cta:hover::before { opacity: 1; }
 
     /* ============================================
     SECTION 10: EMOTIONAL CLOSE
@@ -881,6 +899,7 @@
     }
 
     .pricing-card-cta {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -894,12 +913,19 @@
       width: 19.75rem;
       height: 5.75rem;
       border-radius: 0;
-      transition: background 0.3s ease;
+      overflow: hidden;
+      isolation: isolate;
     }
-
-    .pricing-card-cta:hover {
+    .pricing-card-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
       background: #A7915D;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      z-index: -1;
     }
+    .pricing-card-cta:hover::before { opacity: 1; }
 
     .pricing-note {
       font-size: 1.0625rem;

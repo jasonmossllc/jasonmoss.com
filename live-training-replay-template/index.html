@@ -16,9 +16,16 @@
       font-family: 'Raleway', sans-serif;
       font-weight: 400;
       color: #F8F6F2;
-      background: rgb(44, 63, 54);
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 0;
+      background-size: 780px auto;
     }
     img { max-width: 100%; display: block; }
+
+    /* Mobile: continuous body background, transparent sections (prevents seam) */
+    @media (max-width: 767px) {
+      .hero, .cta, .footer { background: transparent !important; }
+      body { background-size: 100vw auto; }
+    }
 
     /* =====================================
        HERO SECTION
@@ -53,7 +60,7 @@
       font-size: 1.6875rem;
       line-height: 2.025rem;
       color: #F8F6F2;
-      margin: 0;
+      margin: 0 0 0.75rem;
       max-width: 24rem;
     }
     .hero-heading em { color: #c2a86c; font-style: italic; }
@@ -64,7 +71,6 @@
       color: #F8F6F2;
       margin: 0 0 2rem;
       max-width: 22.3125rem;
-      margin-top: 0;
     }
     .hero-inner { gap: 0; }
     .hero-video {
@@ -107,7 +113,7 @@
     .cta {
       position: relative;
       background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
-      padding: 3rem 1.25rem 4rem;
+      padding: 1.25rem 1.25rem 4rem;
       color: #F8F6F2;
     }
     .cta::before {
@@ -141,6 +147,7 @@
     .cta-heading em { font-style: italic; }
     .cta-heading .gold { color: #c2a86c; }
     .cta-btn {
+      position: relative;
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -157,9 +164,19 @@
       height: 3.875rem;
       border-radius: 0;
       text-decoration: none;
-      transition: background 0.2s;
+      overflow: hidden;
+      isolation: isolate;
     }
-    .cta-btn:hover { background: #E3C98C; }
+    .cta-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(#E8CE92, #E3C98C 50%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .cta-btn:hover::before { opacity: 1; }
     .cta-logo {
       width: 2.625rem;
       height: 2.625rem;
