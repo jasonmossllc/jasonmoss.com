@@ -26,8 +26,8 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 0;
-    background-size: 780px auto;
+    background: url('assets/images/section-bg.png') no-repeat center top fixed rgb(44, 63, 54);
+    background-size: cover;
     color: #F8F6F2;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
@@ -48,7 +48,10 @@
   main { position: relative; z-index: 1; }
 
   @media (max-width: 767px) {
-    body { background-size: 100vw auto; }
+    body {
+      background: url('assets/images/section-bg.png') no-repeat center top rgb(44, 63, 54);
+      background-size: 100vw auto;
+    }
   }
 
   .container {
