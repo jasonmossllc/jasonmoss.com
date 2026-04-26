@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Page Not Found — Jason Moss</title>
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:300,400,500,600&display=swap" rel="stylesheet">
+
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: #2C3F36;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .page {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 3rem 1.5rem;
+      text-align: center;
+    }
+
+    .inner {
+      max-width: 32rem;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .mark {
+      width: 3rem;
+      height: 3rem;
+      margin-bottom: 2.5rem;
+      opacity: 0.85;
+    }
+
+    .kicker {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #C2A86C;
+      margin: 0 0 1.75rem;
+    }
+
+    h1 {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 2.25rem;
+      line-height: 1.25;
+      color: #F8F6F2;
+      margin: 0 0 1.5rem;
+      letter-spacing: -0.01em;
+    }
+
+    h1 em {
+      font-style: italic;
+      color: #C2A86C;
+    }
+
+    .lede {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: #E9E2D3;
+      margin: 0 0 2.75rem;
+      max-width: 28rem;
+    }
+
+    .actions {
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+      width: 100%;
+      max-width: 20rem;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: #C2A86C;
+      color: #1D1F1E;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 1.125rem 2rem;
+      transition: background 0.2s ease, transform 0.2s ease;
+    }
+    .btn-primary:hover {
+      background: #B89A5E;
+      transform: translateY(-1px);
+    }
+
+    .btn-secondary {
+      display: inline-block;
+      color: #E9E2D3;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.875rem;
+      letter-spacing: 0.04em;
+      text-decoration: none;
+      padding: 0.625rem 1rem;
+      border-bottom: 1px solid rgba(233, 226, 211, 0.25);
+      transition: color 0.2s ease, border-color 0.2s ease;
+      align-self: center;
+    }
+    .btn-secondary:hover {
+      color: #C2A86C;
+      border-bottom-color: #C2A86C;
+    }
+
+    .footer-note {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.75rem;
+      line-height: 1.6;
+      color: rgba(248, 246, 242, 0.5);
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    @media (min-width: 768px) {
+      h1 { font-size: 2.75rem; }
+      .lede { font-size: 1.125rem; }
+      .actions {
+        flex-direction: row;
+        max-width: none;
+        align-items: center;
+        justify-content: center;
+        gap: 1.5rem;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="page">
+    <div class="inner">
+      <!-- Mountain mark from logo, in muted gold -->
+      <svg class="mark" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <circle cx="32" cy="32" r="30" fill="none" stroke="#C2A86C" stroke-width="1.5"/>
+        <path d="M14 42 L26 24 L34 34 L42 22 L50 42 Z" fill="none" stroke="#C2A86C" stroke-width="1.5" stroke-linejoin="round"/>
+      </svg>
+
+      <p class="kicker">404 &middot; Page Not Found</p>
+
+      <h1>this page has <em>moved on</em>.</h1>
+
+      <p class="lede">
+        the page you're looking for isn't here anymore.<br>
+        let's get you back to where you were headed.
+      </p>
+
+      <div class="actions">
+        <a href="/" class="btn-primary">Return Home</a>
+        <a href="/the-collective" class="btn-secondary">Explore The Collective</a>
+      </div>
+    </div>
+  </main>
+
+  <p class="footer-note">
+    &copy; Jason Moss LLC. All rights reserved.
+  </p>
+</body>
+</html>
