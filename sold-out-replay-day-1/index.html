@@ -259,7 +259,7 @@
         <p>And that&rsquo;s the moment most deals quietly die &mdash; one wrong sentence, one missed question, and a&nbsp;<em><span class="gold">$5K client</span>&nbsp;</em>becomes &ldquo;let me think about it.&rdquo;</p>
         <p>The&nbsp;<em><span class="gold">VIP Sales Intensive</span>&nbsp;</em>is me in your corner for the next three weeks &mdash; so when a live conversation is on the line, you know exactly what to say. <em>Only 1 spot left.</em></p>
       </div>
-      <a class="cta-btn" href="https://jasonmoss.com/vip" target="_blank" rel="noopener">Claim Your VIP Spot</a>
+      <a class="cta-btn" href="/vip" target="_blank" rel="noopener">Claim Your VIP Spot</a>
       <img class="cta-logo" src="assets/images/jm-logo-gold.png" srcset="assets/images/jm-logo-gold.png 1x, assets/images/jm-logo-gold@2x.png 2x" alt="">
     </div>
   </section>
@@ -270,7 +270,7 @@
   <footer class="footer">
     <div class="footer-inner">
       <p>&copy; Jason Moss LLC. All rights reserved</p>
-      <p><a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+      <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
       <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
       <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
       <p>Facebook is a trademark of Meta Platforms, Inc.</p>
@@ -287,7 +287,7 @@
     (function () {
       const params = window.location.search;
       if (!params) return;
-      document.querySelectorAll('a[href*="jasonmoss.com/the-collective"]').forEach(a => {
+      document.querySelectorAll('a.cta-btn').forEach(a => {
         try {
           const url = new URL(a.href);
           const existing = new URLSearchParams(url.search);

@@ -142,15 +142,18 @@
     .optin {
       background: rgb(248, 246, 242);
       color: #1D1F1E;
+      display: flex;
     }
     .optin-inner {
       max-width: 25rem;
+      width: 100%;
       margin: 0 auto;
-      padding: 2.25rem 1.25rem 3rem;
+      padding: 2.25rem 1.25rem 1.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
+      flex: 1;
     }
     .optin-kicker {
       font-family: 'Raleway', sans-serif;
@@ -308,6 +311,8 @@
       color: #ACACAC;
       margin: 3rem 0 0;
       max-width: 23.75rem;
+      margin-top: auto;
+      padding-top: 3rem;
     }
     .optin-footer p { margin: 0; white-space: nowrap; }
     .optin-footer a { color: #ACACAC; text-decoration: none; }
@@ -316,7 +321,7 @@
     @media (min-width: 768px) {
       .optin-inner {
         max-width: 50rem;
-        padding: 3rem 1.8125rem 4rem;
+        padding: 3rem 1.8125rem 2rem;
       }
       .optin-kicker {
         font-size: 1.125rem;
@@ -358,7 +363,8 @@
         font-size: 0.8125rem;
         line-height: 1.1375rem;
         max-width: 40.1875rem;
-        margin-top: 7rem;
+        margin-top: auto;
+        padding-top: 4rem;
       }
     }
   </style>
@@ -420,7 +426,7 @@
 
       <div class="optin-footer">
         <p>&copy; Jason Moss LLC. All rights reserved</p>
-        <p><a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+        <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
         <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
         <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
         <p>Facebook is a trademark of Meta Platforms, Inc.</p>
