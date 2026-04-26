@@ -1390,7 +1390,8 @@
 
       submitBtn.textContent = 'Submitting…';
       try {
-        var submitRes = await fetch('/.netlify/functions/submit-contact', {
+        // Fire AC submit non-blocking via keepalive, then redirect immediately
+        fetch('/.netlify/functions/submit-contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -1399,9 +1400,9 @@
             phone: phone,
             latest_ad: adField ? adField.value : '',
             tag: 'Why Great Entrepreneurs Still Experience Inconsistent Clients'
-          })
-        });
-        if (!submitRes.ok) throw new Error('Submit failed');
+          }),
+          keepalive: true
+        }).catch(function(err) { console.error('AC submit error:', err); });
 
         var redirectUrl = '/post-purchase-thank-you?registered=whygreatentrepreneursstillexperienceinconsistentclients&email=' + encodeURIComponent(email);
         window.location.href = redirectUrl;

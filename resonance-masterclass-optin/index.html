@@ -492,7 +492,8 @@
       submitBtn.textContent = 'Submitting…';
 
       try {
-        var submitRes = await fetch('/.netlify/functions/submit-contact', {
+        // Fire AC submit non-blocking via keepalive, then redirect immediately
+        fetch('/.netlify/functions/submit-contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
@@ -500,12 +501,9 @@
             first_name: firstName,
             latest_source: source,
             tag: 'Resonance Masterclass (Cold Traffic)'
-          })
-        });
-
-        if (!submitRes.ok) {
-          throw new Error('Submit failed');
-        }
+          }),
+          keepalive: true
+        }).catch(function(err) { console.error('AC submit error:', err); });
 
         var redirectUrl = '/optin-thank-you?redirect=resonance-masterclass-replay&email=' + encodeURIComponent(email);
         window.location.href = redirectUrl;
