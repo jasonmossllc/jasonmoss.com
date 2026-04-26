@@ -1,6 +1,11 @@
 # Redirects for jasonmoss.com
 # Format: /source    destination    status-code
 
+# Migrate all traffic from go.jasonmoss.com (Instapage) -> jasonmoss.com
+# :splat preserves the path AND query string (UTMs, fbclid, gclid, etc.)
+https://go.jasonmoss.com/*  https://jasonmoss.com/:splat                                     301!
+http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                                     301!
+
 /zoom         https://us02web.zoom.us/j/5239082694                                            301
 /resonance    /resonance-masterclass-optin?source=YouTube_Organic                             301
 /collective   /the-collective                                                                 301
