@@ -202,30 +202,47 @@
         // ==============================
         // VIDEO EVENTS
         // ==============================
+        // We only count watch time when the video is playing AND NOT in
+        // silent playback mode (i.e., the user actively unmuted = real
+        // engagement). Wistia's silent autoplay should not count.
+
+        function isActivelyEngaged() {
+          try {
+            if (video.state() !== 'playing') return false;
+            // inSilentPlaybackMode() returns true while autoplay-muted
+            if (typeof video.inSilentPlaybackMode === 'function' &&
+                video.inSilentPlaybackMode()) return false;
+            return true;
+          } catch (e) {
+            return false;
+          }
+        }
+
         video.bind('play', function () {
           updateAccumulated(); // capture any untracked time if play fires twice
-          playStart = Date.now();
-          console.log('[Engagement] play');
+          if (isActivelyEngaged()) {
+            playStart = Date.now();
+            console.log('[Engagement] play (engaged)');
+          } else {
+            console.log('[Engagement] play ignored (silent mode)');
+          }
         });
 
-        // Catch the case where video is already playing when onReady fires
-        // (silent playback mode, autoplay-muted, fast init, etc.) — Wistia
-        // won't re-fire 'play' for the current state, so we check ourselves.
-        try {
-          if (video.state && video.state() === 'playing' && !playStart) {
-            playStart = Date.now();
-            console.log('[Engagement] play (initial state)');
-          }
-        } catch (e) {}
-
-        // When the user exits silent playback mode (taps to unmute), Wistia
-        // does NOT fire 'play' because it was already playing silently.
-        // Treat the unmute as the real engagement start.
+        // Track silent playback mode transitions:
+        // - Exiting silent mode (user tapped to unmute) = engagement start
+        // - Entering silent mode (re-muted) = pause the engagement clock
         try {
           video.bind('silentplaybackmodechange', function (isSilent) {
             if (!isSilent && !playStart && video.state() === 'playing') {
               playStart = Date.now();
               console.log('[Engagement] play (unmuted)');
+            } else if (isSilent && playStart) {
+              updateAccumulated();
+              playStart = null;
+              console.log(
+                '[Engagement] pause (re-muted) | watched:',
+                Math.round(accumulated)
+              );
             }
           });
         } catch (e) {}
