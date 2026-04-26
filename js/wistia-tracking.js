@@ -208,6 +208,28 @@
           console.log('[Engagement] play');
         });
 
+        // Catch the case where video is already playing when onReady fires
+        // (silent playback mode, autoplay-muted, fast init, etc.) — Wistia
+        // won't re-fire 'play' for the current state, so we check ourselves.
+        try {
+          if (video.state && video.state() === 'playing' && !playStart) {
+            playStart = Date.now();
+            console.log('[Engagement] play (initial state)');
+          }
+        } catch (e) {}
+
+        // When the user exits silent playback mode (taps to unmute), Wistia
+        // does NOT fire 'play' because it was already playing silently.
+        // Treat the unmute as the real engagement start.
+        try {
+          video.bind('silentplaybackmodechange', function (isSilent) {
+            if (!isSilent && !playStart && video.state() === 'playing') {
+              playStart = Date.now();
+              console.log('[Engagement] play (unmuted)');
+            }
+          });
+        } catch (e) {}
+
         video.bind('pause', function () {
           updateAccumulated();
           playStart = null;
