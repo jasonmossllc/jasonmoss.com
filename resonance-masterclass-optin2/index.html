@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Resonance Masterclass</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:300,300italic,400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: rgb(44, 63, 54);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       SECTION 1: HERO
+       ===================================== */
+    .hero {
+      position: relative;
+      background: url('assets/images/hero-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: #2A2424;
+      opacity: 0.29;
+      z-index: 1;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 5.4375rem 1.25rem 4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-kicker {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 1.225rem;
+      color: #9A9791;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: 0 0 3rem;
+    }
+    .hero-kicker .nowrap { white-space: nowrap; }
+    .hero-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.875rem;
+      line-height: 2.4375rem;
+      color: #F8F6F2;
+      margin: 0 0 0.5rem;
+      max-width: 23.75rem;
+    }
+    .hero-heading em { font-style: italic; }
+    .hero-heading .gold { color: #C2A86C; }
+    .hero-subheading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.375rem;
+      line-height: 2.0625rem;
+      color: #F8F6F2;
+      margin: 0 0 2.25rem;
+      max-width: 21.125rem;
+    }
+    .hero-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 1.5188rem;
+      color: #D5D4D3;
+      margin: 0 0 2.5rem;
+      max-width: 21.9375rem;
+    }
+    .hero-chevron {
+      width: 2.625rem;
+      height: auto;
+      display: inline-block;
+      animation: chevron-breathe 3.5s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+    @keyframes chevron-breathe {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(0.5rem); opacity: 0.6; }
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        background: url('assets/images/hero-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+      }
+      .hero-inner {
+        max-width: 60rem;
+        padding: 6.875rem 1.8125rem 5rem;
+      }
+      .hero-kicker {
+        font-size: 1.0625rem;
+        line-height: 1.7rem;
+        margin-bottom: 3.5rem;
+      }
+      .hero-heading {
+        font-size: 2.8125rem;
+        line-height: 3.375rem;
+        max-width: 42.875rem;
+        margin-bottom: 0.25rem;
+      }
+      .hero-subheading {
+        font-size: 1.875rem;
+        line-height: 2.4375rem;
+        max-width: 42.875rem;
+        margin-bottom: 3.75rem;
+      }
+      .hero-body {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        max-width: 36.8125rem;
+        margin-bottom: 3rem;
+      }
+      .hero-chevron { width: 3.625rem; }
+    }
+
+    /* =====================================
+       SECTION 2: OPT-IN (BENEFITS + TESTIMONIAL + FORM + FOOTER)
+       ===================================== */
+    .optin {
+      background: rgb(248, 246, 242);
+      color: #1D1F1E;
+      display: flex;
+    }
+    .optin-inner {
+      max-width: 25rem;
+      width: 100%;
+      margin: 0 auto;
+      padding: 2.25rem 1.25rem 1.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+    .optin-kicker {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.6rem;
+      color: #907740;
+      margin: 0 0 1.75rem;
+    }
+
+    /* Benefits list */
+    .benefits {
+      width: 100%;
+      max-width: 22.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .benefit {
+      background: #F0EDE4;
+      border-radius: 0.375rem;
+      padding: 1.375rem 1.25rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1.1875rem;
+      line-height: 1.6625rem;
+      color: #1D1F1E;
+      text-align: left;
+    }
+    .benefit strong { font-weight: 500; }
+    .benefit-divider {
+      width: 10.1875rem;
+      max-width: 100%;
+      border: 0;
+      border-top: 1px solid #E9E2D3;
+      margin: 0 auto;
+    }
+    .benefit-divider--outer {
+      width: 22.5rem;
+      margin-top: 1.75rem;
+    }
+
+    /* Testimonial card */
+    .testimonial {
+      width: 100%;
+      max-width: 22.5rem;
+      margin-top: 1.75rem;
+      padding: 1.1875rem 1.25rem 1.0625rem;
+      border: 1px solid #DDDBD3;
+      border-radius: 0.75rem;
+      background: #F0EDE4;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-align: left;
+    }
+    .testimonial-avatar {
+      width: 3.5rem;
+      height: 3.5rem;
+      flex-shrink: 0;
+      border-radius: 50%;
+    }
+    .testimonial-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+    }
+    .testimonial-quote {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 1.4rem;
+      color: #4F5050;
+      margin: 0;
+    }
+    .testimonial-quote em { font-style: italic; }
+    .testimonial-author {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      line-height: 1.05rem;
+      color: #7E8381;
+      margin: 0;
+    }
+
+    /* Form card */
+    .optin-form-wrap {
+      width: 100%;
+      max-width: 22.5rem;
+      margin-top: 1.5rem;
+      background: rgba(255, 255, 255, 0.95);
+      border-radius: 0.375rem;
+      box-shadow: 2px 0 10px 0 rgba(93, 93, 93, 0.1);
+      padding: 1.75rem 1.5rem 2rem;
+    }
+    .optin-form { display: flex; flex-direction: column; gap: 0.5rem; }
+    .optin-form .form-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #C4B99A;
+      border-radius: 0;
+      background: transparent;
+      padding: 1rem 0 0.875rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: #2E3A2E;
+      outline: none;
+      box-shadow: none;
+      transition: border-color 0.3s ease;
+    }
+    .optin-form .form-input::placeholder {
+      color: #8A917E;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1rem;
+      opacity: 1;
+    }
+    .optin-form .form-input:focus { border-bottom-color: #B8962E; }
+    .optin-form .form-btn {
+      margin-top: 1.25rem;
+      width: 100%;
+      background: #2C3E2D;
+      border: none;
+      border-radius: 0.25rem;
+      color: #F7F4ED;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.8125rem, 4vw, 1.0625rem);
+      letter-spacing: 0.02em;
+      text-transform: none;
+      white-space: nowrap;
+      padding: 1.375rem 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .optin-form .form-btn:hover { background: #1E2B24; transform: translateY(-1px); }
+    .optin-subtext {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 300;
+      font-size: 0.9375rem;
+      line-height: 1.3125rem;
+      font-style: italic;
+      color: #1D1F1E;
+      margin: 1.25rem 0 0;
+      max-width: 20rem;
+    }
+
+    /* Footer */
+    .optin-footer {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.6875rem;
+      line-height: 1.1rem;
+      color: #ACACAC;
+      margin: 3rem 0 0;
+      max-width: 23.75rem;
+      margin-top: auto;
+      padding-top: 3rem;
+    }
+    .optin-footer p { margin: 0; white-space: nowrap; }
+    .optin-footer a { color: #ACACAC; text-decoration: none; }
+    .optin-footer a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .optin-inner {
+        max-width: 50rem;
+        padding: 3rem 1.8125rem 2rem;
+      }
+      .optin-kicker {
+        font-size: 1.125rem;
+        line-height: 1.8rem;
+        margin-bottom: 2rem;
+      }
+      .benefits { max-width: 41rem; gap: 1.5rem; }
+      .benefit-divider { width: 18.6875rem; }
+      .benefit-divider--outer { width: 40.9375rem; margin-top: 2rem; }
+      .benefit {
+        padding: 1.25rem 1.1875rem;
+        font-size: 1.3125rem;
+        line-height: 2.1rem;
+      }
+      .testimonial {
+        max-width: 41rem;
+        margin-top: 2rem;
+        padding: 1.5rem 2rem;
+        gap: 1.75rem;
+      }
+      .testimonial-avatar { width: 4.8125rem; height: 4.8125rem; }
+      .testimonial-quote { font-size: 1.1875rem; line-height: 2.0188rem; }
+      .testimonial-author { font-size: 1rem; line-height: 1.6rem; }
+      .optin-form-wrap {
+        max-width: 41rem;
+        margin-top: 2rem;
+        padding: 1.25rem 2rem 1.25rem;
+      }
+      .optin-form .form-btn {
+        font-size: 1.125rem;
+        padding: 1.25rem 3rem;
+      }
+      .optin-subtext {
+        font-size: 1rem;
+        line-height: 1.4rem;
+        max-width: 35.625rem;
+      }
+      .optin-footer {
+        font-size: 0.8125rem;
+        line-height: 1.1375rem;
+        max-width: 40.1875rem;
+        margin-top: auto;
+        padding-top: 4rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+      SECTION 1: HERO
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">Coaches, Consultants <span class="nowrap">&amp;&nbsp;Service Providers</span></p>
+
+      <h1 class="hero-heading">There&rsquo;s a reason<br>marketing feels <span class="gold"><em>heavy.</em></span></h1>
+
+      <h2 class="hero-subheading">You&rsquo;re about to find out why.</h2>
+
+      <p class="hero-body">For entrepreneurs whose marketing is working &mdash; but it&rsquo;s costing them who they are.</p>
+
+      <a href="#optin" aria-label="Scroll to opt-in">
+        <img class="hero-chevron" src="assets/images/chevron-down.png" srcset="assets/images/chevron-down.png 1x, assets/images/chevron-down@2x.png 2x" alt="" width="58" height="33">
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: OPT-IN
+      ============================================ -->
+  <section class="optin" id="optin">
+    <div class="optin-inner">
+      <p class="optin-kicker">INSIDE THIS MASTERCLASS</p>
+
+      <div class="benefits">
+        <div class="benefit"><strong>Attract more of the clients you actually want</strong> &mdash; without performing, pretending, or burning out</div>
+        <div class="benefit"><strong>Feel creatively free again</strong> &mdash; no more agonizing over every post, email, or caption wondering if it&rsquo;s going to &ldquo;land&rdquo;</div>
+        <div class="benefit"><strong>Make marketing feel sustainable</strong>&nbsp;&mdash; something you&nbsp;enjoy showing up for, instead&nbsp;of a performance you&rsquo;re tired of giving</div>
+      </div>
+
+      <hr class="benefit-divider benefit-divider--outer">
+
+
+      <div class="testimonial">
+        <img class="testimonial-avatar" src="assets/images/testimonial-avatar.png" srcset="assets/images/testimonial-avatar.png 1x, assets/images/testimonial-avatar@2x.png 2x" alt="Emily H." width="77" height="77">
+        <div class="testimonial-content">
+          <p class="testimonial-quote"><em>&ldquo;I created a multi-seven-figure business that wasn&rsquo;t in alignment&hellip; Jason is helping me build something that feels aligned and feels good.&rdquo;</em></p>
+          <p class="testimonial-author">Emily H.</p>
+        </div>
+      </div>
+
+      <div class="optin-form-wrap">
+        <form class="optin-form email-form" novalidate>
+          <input type="text" name="First name" class="form-input" placeholder="First name" required aria-required="true">
+          <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
+          <button type="submit" class="form-btn">Watch the Masterclass Now</button>
+        </form>
+
+        <p class="optin-subtext"><em>For coaches, consultants, and service providers with paying clients and a real business.</em></p>
+      </div>
+
+      <div class="optin-footer">
+        <p>&copy; Jason Moss LLC. All rights reserved</p>
+        <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+        <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+        <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+        <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Form JS: ZeroBounce validation + submit to ActiveCampaign + email passthrough -->
+  <script>
+  (function() {
+    'use strict';
+
+    var form = document.querySelector('.email-form');
+    if (!form) return;
+
+    var emailInput = form.querySelector('input[type="email"]');
+    var nameInput = form.querySelector('input[name="First name"]');
+    var submitBtn = form.querySelector('.form-btn');
+    if (!emailInput || !submitBtn) return;
+
+    // Read ad/source UTM params from URL on page load (only used if present)
+    var urlParams = new URLSearchParams(window.location.search);
+    var latestAd = (urlParams.get('ad') || '').trim();
+    var latestSource = (urlParams.get('source') || '').trim();
+
+    var originalText = submitBtn.textContent.trim();
+    var submitting = false;
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (submitting) return;
+
+      var firstName = nameInput ? nameInput.value.trim() : '';
+      var email = emailInput.value.trim();
+
+      if (!firstName) { alert('Please enter your first name.'); return; }
+      if (!email) { alert('Please enter your email address.'); return; }
+      if (!emailInput.checkValidity()) {
+        alert('Please enter a valid email address format.');
+        return;
+      }
+
+      submitting = true;
+      submitBtn.textContent = 'Validating…';
+
+      var emailValid = true;
+      var controller = new AbortController();
+      var timeout = setTimeout(function() { controller.abort(); }, 4000);
+
+      try {
+        var res = await fetch('/.netlify/functions/verify-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email }),
+          signal: controller.signal
+        });
+        var data = await res.json();
+
+        if (!data.valid) {
+          alert(data.reason || 'Please enter a real, non-temporary email address.');
+          emailValid = false;
+        }
+      } catch (err) {
+        console.error('ZeroBounce error or timeout:', err);
+      } finally {
+        clearTimeout(timeout);
+      }
+
+      if (!emailValid) {
+        submitting = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
+      submitBtn.textContent = 'Submitting…';
+
+      try {
+        // Build payload — only include latest_ad / latest_source when present in URL
+        var payload = {
+          email: email,
+          first_name: firstName,
+          tag: 'Resonance Masterclass (Cold Traffic)'
+        };
+        if (latestAd) payload.latest_ad = latestAd;
+        if (latestSource) payload.latest_source = latestSource;
+
+        // Fire AC submit non-blocking via keepalive, then redirect immediately
+        fetch('/.netlify/functions/submit-contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(payload),
+          keepalive: true
+        }).catch(function(err) { console.error('AC submit error:', err); });
+
+        var redirectUrl = '/optin-thank-you?redirect=resonance-masterclass-replay&email=' + encodeURIComponent(email);
+        window.location.href = redirectUrl;
+
+      } catch (err) {
+        console.error('Form submission error:', err);
+        alert('Something went wrong. Please try again.');
+        submitting = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+  })();
+  </script>
+
+</body>
+</html>
