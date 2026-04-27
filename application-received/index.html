@@ -30,13 +30,18 @@
     color: #1D1F1E;
     font-family: 'Raleway', sans-serif;
     font-weight: 400;
+    min-height: 100vh;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .container {
     max-width: 60rem;
     width: 100%;
-    margin: 2.25rem auto 3rem;
-    padding: 0 1.5rem;
+    margin: 0 auto;
+    padding: 2.25rem 1.5rem 3rem;
   }
 
   h1 {
@@ -75,8 +80,7 @@
   @media screen and (max-width: 767px) {
     .container {
       max-width: 400px;
-      margin-top: 3.3rem;
-      padding: 0 1.25rem;
+      padding: 3.3rem 1.25rem;
     }
 
     h1 {
