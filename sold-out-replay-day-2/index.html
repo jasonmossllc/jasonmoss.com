@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Sold Out — Day 2 Replay</title>
+  <link rel="icon" type="image/png" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: rgb(44, 63, 54);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       HERO SECTION
+       ===================================== */
+    .hero {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 2rem 1rem 2rem;
+      color: #F8F6F2;
+      overflow: visible;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.6875rem;
+      line-height: 2.025rem;
+      color: #F8F6F2;
+      margin: 0;
+      max-width: 24rem;
+    }
+    .hero-heading em { color: #c2a86c; font-style: italic; }
+    .hero-desc {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.4;
+      color: #F8F6F2;
+      margin: 0.75rem 0 1.5rem;
+      max-width: 22.3125rem;
+    }
+    .hero-inner { gap: 0; }
+    .hero-video {
+      width: 100%;
+      max-width: 23.875rem;
+      border: 0;
+      box-shadow: 2px 0 60px 0 rgb(194, 168, 108);
+      position: relative;
+      z-index: 3;
+    }
+    .hero-video .wistia_embed {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 2.375rem 1.8125rem 1.5rem;
+      }
+      .hero-heading {
+        font-size: 2.1875rem;
+        line-height: 2.625rem;
+        max-width: 52.8125rem;
+        margin-bottom: 1.25rem;
+      }
+      .hero-desc {
+        font-size: 1.375rem;
+        line-height: 1.65rem;
+        max-width: 31.375rem;
+        margin-bottom: 2.5rem;
+      }
+      .hero-video {
+        max-width: 41.25rem;
+      }
+    }
+
+    /* =====================================
+       CTA SECTION
+       ===================================== */
+    .cta {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 2rem 1.25rem 2.5rem;
+      color: #F8F6F2;
+    }
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .cta-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 1.55;
+      color: #F8F6F2;
+      margin: 0 0 1.5rem;
+      max-width: 20.875rem;
+    }
+    .cta-heading p { margin: 0 0 1rem; }
+    .cta-heading p:last-child { margin-bottom: 0; }
+    .cta-heading em { font-style: italic; }
+    .cta-heading .gold { color: #c2a86c; }
+    .cta-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#E0C68A, #C2A86C 50%);
+      color: #1D1F1E;
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 700;
+      font-size: 1rem;
+      line-height: 120%;
+      width: 21.375rem;
+      max-width: 100%;
+      height: 3.875rem;
+      border-radius: 7px;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .cta-btn:hover { background: linear-gradient(#E9D29A, #D1B878 50%); }
+    .cta-logo {
+      width: 2.625rem;
+      height: 2.625rem;
+      margin-top: 1rem;
+    }
+
+    @media (min-width: 768px) {
+      .cta {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 1.25rem 1.8125rem 5rem;
+      }
+      .cta-heading {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        max-width: 36.4375rem;
+        margin-bottom: 1.8125rem;
+      }
+      .cta-btn {
+        width: 39rem;
+        height: 3.6875rem;
+      }
+      .cta-logo {
+        width: 3.25rem;
+        height: 3.25rem;
+        margin-top: 2rem;
+      }
+    }
+
+    /* =====================================
+       FOOTER
+       ===================================== */
+    .footer {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 1.75rem 1.25rem;
+    }
+    .footer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .footer-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8125rem;
+      line-height: 1.1375rem;
+      font-weight: 400;
+      color: #545454;
+    }
+    .footer-inner p { margin: 0 0 0.25rem; }
+    .footer-inner p:last-child { margin-bottom: 0; }
+    .footer-inner a {
+      color: #545454;
+      text-decoration: none;
+    }
+    .footer-inner a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .footer {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 3rem 1.25rem;
+      }
+      .footer-inner p { margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+      SECTION 1: HERO (heading + desc + video)
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-heading">Day 2: The<br><em>Sold Out Conversation.</em></h1>
+      <p class="hero-desc">Inside&nbsp;Day 2,&nbsp;you&rsquo;ll learn the four pillars of every sold-out sales conversation &mdash; problem, impact, desire, and cost &mdash; and the questions that turn an honest reply into a paying client.</p>
+      <div class="hero-video">
+        <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
+          <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+            <div class="wistia_embed wistia_async_qyyys9a53h seo=true videoFoam=true" style="height:100%;position:relative;width:100%;">&nbsp;</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: CTA
+      ============================================ -->
+  <section class="cta">
+    <div class="cta-inner">
+      <div class="cta-heading">
+        <p>The four pillars look simple on a slide. Live, on a real call, they&rsquo;re a different game.</p>
+        <p>You&rsquo;ll feel the pull to fill the silence, skip the question that matters, and rescue them before they sit with the cost &mdash; and a&nbsp;<em><span class="gold">$5K client</span>&nbsp;</em>becomes &ldquo;let me think about it.&rdquo;</p>
+        <p>The&nbsp;<em><span class="gold">VIP Sales Intensive</span>&nbsp;</em>is me in your corner for the next three weeks &mdash; so when you&rsquo;re holding the conversation, you hold it well. <em>Only 1 spot left.</em></p>
+      </div>
+      <a class="cta-btn" href="/vip" target="_blank" rel="noopener">Claim Your VIP Spot</a>
+      <img class="cta-logo" src="assets/images/jm-logo-gold.png" srcset="assets/images/jm-logo-gold.png 1x, assets/images/jm-logo-gold@2x.png 2x" alt="">
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 3: FOOTER
+      ============================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>&copy; Jason Moss LLC. All rights reserved</p>
+      <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+      <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+      <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+      <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+
+  <!-- Wistia video script + 75% tracking -->
+  <script src="https://fast.wistia.com/embed/medias/qyyys9a53h.jsonp" async></script>
+  <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
+  <script src="/js/wistia-tracking.js" defer></script>
+
+  <!-- URL param passthrough for CTA -->
+  <script>
+    (function () {
+      const params = window.location.search;
+      if (!params) return;
+      document.querySelectorAll('a.cta-btn').forEach(a => {
+        try {
+          const url = new URL(a.href);
+          const existing = new URLSearchParams(url.search);
+          const incoming = new URLSearchParams(params);
+          incoming.forEach((v, k) => { if (!existing.has(k)) existing.set(k, v); });
+          url.search = existing.toString();
+          a.href = url.toString();
+        } catch (e) {}
+      });
+    })();
+  </script>
+</body>
+</html>
