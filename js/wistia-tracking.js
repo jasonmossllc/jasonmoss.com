@@ -1,6 +1,6 @@
 // Wistia Video Engagement Tracking
 // Include on pages with Wistia embeds where you want watch-time tracking.
-// Fires a Zapier webhook when a viewer watches 75%+ of the video.
+// Fires the Automation Hub webhook when a viewer watches 75%+ of the video.
 //
 // Requirements:
 //   - Email must be in the URL as ?email=someone@example.com
@@ -19,8 +19,8 @@
   // CONFIG
   // ==============================
   var WATCH_THRESHOLD = 0.75; // 75% watch time
-  var ZAPIER_WEBHOOK_URL =
-    'https://hooks.zapier.com/hooks/catch/1992870/ug3nc28/';
+  var AUTOMATION_HUB_WEBHOOK_URL =
+    'https://automation.jasonmoss.com/webhooks/wistia/75';
   var WISTIA_POLL_INTERVAL = 500; // ms between checks for Wistia embed
   var WISTIA_POLL_TIMEOUT = 30000; // stop polling after 30s if no embed found
 
@@ -138,19 +138,19 @@
           }
         }
 
-        function sendToZapier() {
+        function sendToAutomationHub() {
           var payload = {
             email: email,
             video_id: video.hashedId(),
             duration_seconds: Math.round(duration),
             watched_seconds: Math.round(accumulated),
             threshold: WATCH_THRESHOLD,
-            page: window.location.pathname,
+            page: window.location.origin + window.location.pathname,
             timestamp: new Date().toISOString(),
           };
 
-          // Build Zapier URL with query params
-          var url = new URL(ZAPIER_WEBHOOK_URL);
+          // Build Automation Hub URL with query params
+          var url = new URL(AUTOMATION_HUB_WEBHOOK_URL);
           Object.keys(payload).forEach(function (key) {
             url.searchParams.append(key, payload[key]);
           });
@@ -196,7 +196,7 @@
             'sec'
           );
 
-          sendToZapier();
+          sendToAutomationHub();
         }
 
         // ==============================
