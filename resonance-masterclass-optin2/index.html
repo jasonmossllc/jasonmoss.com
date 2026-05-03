@@ -617,23 +617,16 @@
     var sticky = document.querySelector('.mobile-sticky-cta');
     var stickyLink = sticky ? sticky.querySelector('a') : null;
     var formWrap = document.querySelector('.optin-form-wrap');
-    var firstBenefit = document.querySelector('.benefit');
     if (!sticky) return;
 
     var formVisible = false;
-    var benefitsReached = false;
 
     function isMobile() {
       return window.matchMedia('(max-width: 767px)').matches;
     }
 
     function updateSticky() {
-      if (!benefitsReached && firstBenefit) {
-        var benefitTop = firstBenefit.getBoundingClientRect().top;
-        benefitsReached = window.scrollY > 220 && benefitTop < window.innerHeight * 0.5;
-      }
-
-      var shouldShow = isMobile() && benefitsReached && !formVisible;
+      var shouldShow = isMobile() && window.scrollY > 160 && !formVisible;
       sticky.classList.toggle('is-visible', shouldShow);
       sticky.setAttribute('aria-hidden', shouldShow ? 'false' : 'true');
       if (stickyLink) stickyLink.tabIndex = shouldShow ? 0 : -1;
