@@ -37,8 +37,13 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: #2A2424;
-      opacity: 0.29;
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 26, 22, 0.50) 0%,
+        rgba(18, 26, 22, 0.68) 38%,
+        rgba(18, 26, 22, 0.62) 78%,
+        rgba(18, 26, 22, 0.45) 100%
+      );
       z-index: 1;
     }
     .hero-inner {
@@ -91,6 +96,15 @@
       color: #D5D4D3;
       margin: 0 0 3.25rem;
       max-width: 21.9375rem;
+      position: relative;
+    }
+    .hero-body::before {
+      content: '';
+      display: block;
+      width: 3rem;
+      height: 1px;
+      background: rgba(194, 168, 108, 0.7);
+      margin: 0 auto 1.75rem;
     }
     .hero-body br.desktop-only { display: none; }
     .hero-scroll-cue {
@@ -146,6 +160,10 @@
         line-height: 1.75rem;
         max-width: 36.8125rem;
         margin-bottom: 3.75rem;
+      }
+      .hero-body::before {
+        width: 4rem;
+        margin-bottom: 2.25rem;
       }
       .hero-body br.desktop-only { display: inline; }
       .hero-chevron { width: 3.875rem; }
