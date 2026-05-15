@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<title>{{BUSINESS_NAME}} — Strategy Plan</title>
+
+<!--
+  ============================================================================
+  BUSINESS STRATEGY PLAN — PAGE TEMPLATE
+  ============================================================================
+  This is the canonical on-brand scaffold for pages produced by the
+  business-strategy-plan-generator skill. The <style> block, structure, and
+  class names are the design system — do NOT redesign them. Fill the prose,
+  keep the shell.
+
+  HOW TO USE
+  - Copy this whole directory to client-plans/<name-slug>-<10+ random digits>/
+  - Replace every {{TOKEN}} with real content (search the file for "{{").
+  - The page must stay noindex (kept above) and unlinked from the site.
+  - Keep "Prepared for {{CLIENT_NAME}}" — that is the confidential framing.
+
+  PLACEHOLDER TOKENS
+  {{BUSINESS_NAME}}      client's business / brand name (cover h1 + <title>)
+  {{CLIENT_NAME}}        client's full name (cover footer)
+  {{CLIENT_FIRST_NAME}}  client's first name (personal note greeting)
+  {{MONTH_YEAR}}         e.g. "May 2026" (cover footer)
+  {{...}}                every other token = a content slot, see comments
+
+  STRUCTURAL VOCABULARY (reuse these, don't invent new ones)
+  - .lead            italic one-line thesis under a section heading
+  - <h3>             sub-heading inside a section
+  - <ul> / <ol>      diamond-bullet / numbered lists
+  - .callout         emphasized pull-quote box (use sparingly, 0–1 per section)
+  - .phase           the three 90-day phase cards (keep all three)
+  Repeat <h3>+<p> blocks as the content needs; delete optional ones you don't use.
+  ============================================================================
+-->
+
+<style>
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+
+  :root{
+    --obsidian:#1D1F1E;
+    --forest:#2C3F36;
+    --mocha:#5B4B3F;
+    --taupe:#8C837A;
+    --gold:#C2A86C;
+    --stone:#E9E2D3;
+    --sand:#F8F6F2;
+    --paper:#FBF9F4;
+    --bg:#E7E1D4;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--obsidian);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(1rem,0.94rem + 0.3vw,1.15rem);
+    line-height:1.78;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  ::selection{background:var(--gold);color:var(--obsidian);}
+
+  p{margin:0 0 1.15em 0;text-wrap:pretty;}
+  strong{font-weight:600;color:var(--obsidian);}
+  em{font-style:italic;}
+
+  /* ---------- COVER / HERO ---------- */
+  .cover{
+    position:relative;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    min-height:100vh;
+    min-height:100svh;
+    padding:clamp(28px,4vw,56px) clamp(24px,6vw,84px);
+    color:var(--sand);
+    background:
+      radial-gradient(120% 80% at 82% 12%,rgba(194,168,108,.14),transparent 52%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    overflow:hidden;
+  }
+  .cover .logo{
+    width:clamp(150px,16vw,196px);
+    display:block;
+    align-self:start;
+  }
+  .cover .cover-mid{
+    align-self:center;
+    max-width:780px;
+    padding:clamp(24px,5vw,40px) 0;
+  }
+  .cover .eyebrow{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(.7rem,.66rem + .15vw,.82rem);
+    line-height:1.4;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:clamp(18px,2.5vw,26px);
+  }
+  .cover h1{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(2.6rem,1.7rem + 4.4vw,5rem);
+    line-height:1.06;
+    letter-spacing:-.01em;
+    color:var(--sand);
+    margin-bottom:clamp(22px,3vw,32px);
+    text-wrap:balance;
+  }
+  .cover .rule{
+    width:68px;height:2px;
+    background:var(--gold);
+    margin-bottom:clamp(22px,3vw,32px);
+  }
+  .cover .sub{
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:clamp(1.05rem,1rem + .45vw,1.4rem);
+    line-height:1.7;
+    color:var(--stone);
+    max-width:620px;
+  }
+  .cover .foot{
+    align-self:end;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:18px;
+    padding-top:22px;
+    border-top:1px solid rgba(233,226,211,.18);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(.78rem,.74rem + .12vw,.9rem);
+    letter-spacing:.05em;
+    color:var(--stone);
+  }
+  .cover .foot .r{color:var(--gold);white-space:nowrap;}
+  .cover .foot .who{font-weight:600;color:var(--sand);}
+
+  /* ---------- BODY CONTENT (floating paper) ---------- */
+  main.doc{
+    position:relative;
+    z-index:2;
+    max-width:920px;
+    margin:clamp(-96px,-7vw,-52px) auto clamp(56px,8vw,104px);
+    padding:clamp(44px,6vw,92px) clamp(26px,5.5vw,84px);
+    background:var(--paper);
+    border-radius:clamp(10px,1.4vw,18px);
+    box-shadow:
+      0 40px 80px -40px rgba(29,31,30,.5),
+      0 2px 10px rgba(29,31,30,.05);
+  }
+
+  .section{margin-top:clamp(44px,6vw,80px);}
+  main.doc > .section:first-child{margin-top:0;}
+  .section + .section{
+    padding-top:clamp(44px,6vw,80px);
+    border-top:1px solid rgba(29,31,30,.09);
+  }
+  main.doc > .section:first-child{margin-top:0;}
+
+  .sechead{margin-bottom:6px;}
+  .sec-num,.note-head{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.74rem;
+    line-height:1.4;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h2{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(1.7rem,1.25rem + 1.9vw,2.55rem);
+    line-height:1.18;
+    letter-spacing:-.01em;
+    color:var(--obsidian);
+    margin-bottom:6px;
+    text-wrap:balance;
+  }
+  .h2-rule{
+    width:54px;height:3px;
+    background:var(--gold);
+    margin:18px 0 22px 0;
+  }
+
+  h3{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(1.1rem,1rem + .4vw,1.32rem);
+    line-height:1.4;
+    color:var(--forest);
+    margin:clamp(28px,3.5vw,40px) 0 10px 0;
+  }
+  h3:first-of-type{margin-top:clamp(18px,2.5vw,26px);}
+
+  .lead{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:clamp(1.18rem,1.05rem + .55vw,1.5rem);
+    line-height:1.6;
+    color:var(--mocha);
+    margin-bottom:4px;
+  }
+
+  ul,ol{margin:14px 0 22px 0;padding-left:0;list-style:none;}
+  li{
+    position:relative;
+    padding-left:26px;
+    margin-bottom:12px;
+  }
+  ul li::before{
+    content:"";
+    position:absolute;
+    left:3px;top:.62em;
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+  ol{counter-reset:ol;}
+  ol li{padding-left:34px;counter-increment:ol;}
+  ol li::before{
+    content:counter(ol);
+    position:absolute;
+    left:0;top:.02em;
+    font-family:'Raleway',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    line-height:1.55;
+    color:var(--gold);
+  }
+
+  .callout{
+    background:linear-gradient(180deg,#EFEADC 0%,var(--stone) 100%);
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:clamp(20px,3vw,30px) clamp(22px,3.4vw,34px);
+    margin:26px 0 28px 0;
+    box-shadow:0 14px 30px -22px rgba(29,31,30,.45);
+  }
+  .callout p{
+    font-family:'Libre Baskerville',serif;
+    font-style:italic;
+    font-size:clamp(1.08rem,1rem + .4vw,1.28rem);
+    line-height:1.62;
+    color:var(--obsidian);
+    margin:0;
+  }
+  .callout p + p{margin-top:12px;}
+
+  /* ---------- 90 DAY PLAN ---------- */
+  .phase{
+    margin-bottom:24px;
+    border:1px solid rgba(29,31,30,.08);
+    border-radius:12px;
+    background:#fff;
+    overflow:hidden;
+    box-shadow:0 20px 44px -32px rgba(29,31,30,.4);
+  }
+  .phase:last-child{margin-bottom:0;}
+  .phase-head{
+    background:linear-gradient(135deg,#33473C,#283831);
+    color:var(--sand);
+    padding:clamp(16px,2.4vw,22px) clamp(22px,3.2vw,30px);
+  }
+  .phase-head .tag{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.72rem;
+    line-height:1.3;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:7px;
+  }
+  .phase-head .ttl{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.2rem,1.05rem + .55vw,1.5rem);
+    line-height:1.3;
+    color:var(--sand);
+  }
+  .phase-body{padding:clamp(22px,3vw,30px) clamp(22px,3.2vw,32px) clamp(14px,2vw,20px);}
+  .phase-body ol{margin:0;}
+  .phase-body ol li{margin-bottom:16px;}
+  .phase-body ol li strong{color:var(--forest);}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:left;
+    color:var(--sand);
+    background:
+      radial-gradient(120% 70% at 18% 88%,rgba(194,168,108,.13),transparent 55%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    padding:clamp(72px,11vw,150px) clamp(24px,6vw,84px);
+    overflow:hidden;
+  }
+  .closing > *{width:100%;max-width:680px;}
+  .closing .note-head{color:var(--gold);margin-bottom:14px;}
+  .closing h2{color:var(--sand);}
+  .closing .h2-rule{background:var(--gold);}
+  .closing p{
+    color:var(--stone);
+    font-size:clamp(1.02rem,.96rem + .35vw,1.18rem);
+    line-height:1.75;
+    margin-bottom:15px;
+  }
+  .closing strong{color:var(--sand);}
+  .closing .sign{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.15rem,1.05rem + .4vw,1.35rem);
+    line-height:1.5;
+    color:var(--sand);
+    margin-top:34px;
+  }
+  .closing .sign span{
+    display:block;
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:.86rem;
+    line-height:1.5;
+    letter-spacing:.05em;
+    color:var(--gold);
+    margin-top:12px;
+  }
+
+  /* ---------- SMALL SCREENS ---------- */
+  @media (max-width:600px){
+    body{line-height:1.7;}
+    .cover{min-height:100svh;}
+    .cover .foot{flex-direction:column;gap:6px;align-items:flex-start;}
+    main.doc{
+      margin:-44px 14px clamp(40px,8vw,64px);
+      border-radius:14px;
+      padding:40px 22px;
+    }
+  }
+
+  /* ---------- PRINT (retain clean PDF export) ---------- */
+  @media print{
+    body{background:#fff;}
+    .cover,.closing{min-height:auto;}
+    main.doc{
+      max-width:none;margin:0;padding:14mm 16mm;
+      box-shadow:none;border-radius:0;background:#fff;
+    }
+    .section + .section{border-top:0;}
+    .phase,.callout{box-shadow:none;break-inside:avoid;}
+    .sechead{break-after:avoid;}
+    h3{break-after:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section class="cover">
+  <img class="logo" src="assets/logo-light.svg" alt="Jason Moss">
+  <div class="cover-mid">
+    <div class="eyebrow">Business Strategy Plan</div>
+    <h1>{{BUSINESS_NAME}}</h1>
+    <div class="rule"></div>
+    <div class="sub">A clear-eyed look at where your business is, the biggest opportunities I see, and a 90-day plan to act on them — built from my review of your business, your assessment, and the notes I recorded going through everything.</div>
+  </div>
+  <div class="foot">
+    <span class="l">Prepared for <span class="who">{{CLIENT_NAME}}</span></span>
+    <span class="r">{{MONTH_YEAR}}</span>
+  </div>
+</section>
+
+<main class="doc">
+
+<!-- ===================== 1. PERSONAL NOTE ===================== -->
+<!-- Required structure item 1: the AI-disclaimer note, rewritten in Jason's
+     voice per the skill (warm, direct, I-to-you). Keep it short. Replace the
+     paragraphs below — they are a voice reference, not copy to ship verbatim. -->
+<section class="section">
+  <div class="sechead">
+    <div class="note-head">A note before we begin</div>
+    <h2>{{PERSONAL_NOTE_HEADLINE}}</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Hey {{CLIENT_FIRST_NAME}} —</p>
+  <p>{{PERSONAL_NOTE_BODY — 3–5 short paragraphs: how the plan was made (AI helped organize/format), that the strategy itself is entirely Jason's from his review of their business + assessment + voice notes, that this is his thinking made readable, and an invitation to read it slowly. Rewrite in Jason's voice; do not reuse another client's wording.}}</p>
+</section>
+
+<!-- ===================== 2. WHERE YOU ARE NOW ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 02</div>
+    <h2>Where you are right now</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">{{SECTION_2_LEAD — one-line italic thesis for this section}}</p>
+  </div>
+
+  <h3>What's working</h3>
+  <p>{{SECTION_2_STRENGTHS — honest read on what's genuinely strong, grounded in their actual offers/site/words. One or more paragraphs.}}</p>
+
+  <h3>What's holding you back</h3>
+  <p>{{SECTION_2_CONSTRAINTS — the honest read on what's capping growth. One or more paragraphs.}}</p>
+  <ul>
+    <li>{{Constraint / cost point — repeat <li> as needed, delete the list if not useful here}}</li>
+  </ul>
+
+  <!-- Optional emphasis box. Use 0–1 callouts per section, only for the single
+       most important sentence. Delete if not needed. -->
+  <div class="callout">
+    <p>{{SECTION_2_CALLOUT — the one sentence that is most of this section}}</p>
+  </div>
+</section>
+
+<!-- ===================== 3. BIGGEST OPPORTUNITIES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 03</div>
+    <h2>The biggest opportunities I see</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">{{SECTION_3_LEAD — "if you only focus on a few things, focus on these"}}</p>
+  </div>
+
+  <!-- Repeat this h3 + p block per opportunity (typically 3–5). Number them
+       in the heading text as in "1. ..." if order matters. -->
+  <h3>{{OPPORTUNITY_HEADING}}</h3>
+  <p>{{OPPORTUNITY_BODY — why it's an opportunity and what it unlocks}}</p>
+</section>
+
+<!-- ===================== 4. WHAT NEEDS TO SHIFT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 04</div>
+    <h2>What needs to shift first</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">{{SECTION_4_LEAD — "before any tactic works, these have to change"}}</p>
+  </div>
+
+  <!-- Repeat per shift. These are foundations (mindset/positioning/operating),
+       not to-dos. -->
+  <h3>{{SHIFT_HEADING}}</h3>
+  <p>{{SHIFT_BODY}}</p>
+
+  <!-- Optional callout for a hard-truth / timeline reality. Delete if unused. -->
+  <div class="callout">
+    <p>{{SECTION_4_CALLOUT — optional emphasis, e.g. a timeline reality}}</p>
+  </div>
+</section>
+
+<!-- ===================== 5. POSITIONING & MESSAGING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 05</div>
+    <h2>Positioning &amp; messaging</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">{{SECTION_5_LEAD}}</p>
+  </div>
+
+  <h3>{{POSITIONING_HEADING}}</h3>
+  <p>{{POSITIONING_BODY — grounded in their actual live copy; repeat h3+p as needed}}</p>
+
+  <!-- Optional: a recommended message frame stated as a pull-quote. -->
+  <div class="callout">
+    <p>{{SECTION_5_CALLOUT — optional recommended message frame}}</p>
+  </div>
+</section>
+
+<!-- ===================== 6. OFFERS & PRICING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 06</div>
+    <h2>Offers &amp; pricing</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">{{SECTION_6_LEAD}}</p>
+  </div>
+
+  <h3>{{OFFERS_HEADING}}</h3>
+  <p>{{OFFERS_BODY — read on offer suite, pricing structure, recommended changes; repeat h3+p as needed}}</p>
+</section>
+
+<!-- ===================== 7. MARKETING & CONTENT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 07</div>
+    <h2>Marketing &amp; content strategy</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">{{SECTION_7_LEAD}}</p>
+  </div>
+
+  <h3>{{MARKETING_HEADING}}</h3>
+  <p>{{MARKETING_BODY — how/where they should show up and what to create; repeat h3+p as needed}}</p>
+  <ul>
+    <li>{{Tactical point — optional list, delete if unused}}</li>
+  </ul>
+</section>
+
+<!-- ===================== 8. SYSTEMS & OPERATIONS ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 08</div>
+    <h2>Systems &amp; operations</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">{{SECTION_8_LEAD}}</p>
+  </div>
+
+  <h3>{{SYSTEMS_HEADING}}</h3>
+  <p>{{SYSTEMS_BODY — what to build, automate, delegate, or simplify; repeat h3+p as needed}}</p>
+</section>
+
+<!-- ===================== 9. PORTAL RESOURCES ===================== -->
+<!-- Include ONLY if Jason flagged specific portal resources for this client.
+     If none were flagged, delete this entire <section> and renumber 10 → 09. -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 09</div>
+    <h2>Resources from the portal</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">{{SECTION_9_LEAD — order matters; say why}}</p>
+  </div>
+
+  <!-- Repeat per recommended resource. Explain WHY it matters for this client
+       and WHEN in the 90 days to engage it. -->
+  <h3>{{RESOURCE_HEADING}}</h3>
+  <p>{{RESOURCE_BODY}}</p>
+</section>
+
+<!-- ===================== 10. 90-DAY PLAN ===================== -->
+<section class="section break">
+  <div class="sechead">
+    <div class="sec-num">Section 10</div>
+    <h2>Your 90-day action plan</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">{{SECTION_10_LEAD — the payoff; concrete, sequenced, start-Monday}}</p>
+  </div>
+
+  <!-- Keep all three phase cards. 3–5 concrete actions each. Each <li> starts
+       with a bold imperative, then the specifics. -->
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 1–30</span>
+      <span class="ttl">{{PHASE_1_TITLE — e.g. "Foundation — clarify and rebuild the front end"}}</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>{{PHASE_1_ACTION}}</strong> {{PHASE_1_ACTION_DETAIL}}</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 31–60</span>
+      <span class="ttl">{{PHASE_2_TITLE — e.g. "Implementation — build the back end and fix the sale"}}</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>{{PHASE_2_ACTION}}</strong> {{PHASE_2_ACTION_DETAIL}}</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 61–90</span>
+      <span class="ttl">{{PHASE_3_TITLE — e.g. "Momentum — recurring revenue, live presence, scale"}}</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>{{PHASE_3_ACTION}}</strong> {{PHASE_3_ACTION_DETAIL}}</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== CLOSING ===================== -->
+<section class="closing">
+  <div class="sechead">
+    <div class="note-head">Before you go</div>
+    <h2>{{CLOSING_HEADLINE — short, e.g. "One last thing"}}</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>{{CLOSING_BODY — encouraging, direct: this is a roadmap not a rulebook, restate the single core idea, set realistic expectations, and that Jason is in it with them as they implement. 2–4 short paragraphs.}}</p>
+  <div class="sign">— Jason
+  <span>Telegram @jasonmossofficial &nbsp;·&nbsp; jason@jasonmoss.com</span>
+  </div>
+</section>
+
+</body>
+</html>
