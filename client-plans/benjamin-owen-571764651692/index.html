@@ -2,582 +2,637 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
 <meta name="googlebot" content="noindex, nofollow">
 <meta name="referrer" content="no-referrer">
 <title>Private Strategy Plan — Benjamin Owen</title>
 <meta name="description" content="Confidential strategy plan prepared for Benjamin Owen by Jason Moss.">
-
 <link rel="icon" href="/favicon.ico" sizes="48x48">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./base.css">
-<link rel="stylesheet" href="./shared.css">
-
-<script>document.documentElement.className = 'js';</script>
 <style>
-/* ===== Benjamin Owen — Private Strategy Plan ===== */
-/* Elevated editorial edition, matched to the Jason Moss brand system */
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
 
-body {
-  background: var(--sand);
-  color: var(--charcoal);
-  position: relative;
-}
+  :root{
+    --obsidian:#1D1F1E;
+    --forest:#2C3F36;
+    --mocha:#5B4B3F;
+    --taupe:#8C837A;
+    --gold:#C2A86C;
+    --stone:#E9E2D3;
+    --sand:#F8F6F2;
+    --paper:#FBF9F4;
+    --bg:#E7E1D4;
+  }
 
-/* subtle grain, consistent with the brand site */
-body::before {
-  content: '';
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 9999;
-  opacity: 0.028;
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-repeat: repeat;
-  background-size: 256px 256px;
-}
+  *{box-sizing:border-box;margin:0;padding:0;}
 
-/* fade-in only when JS is present (no-JS shows everything) */
-html.js .reveal { opacity: 0; transform: translateY(18px); transition: opacity 0.8s ease, transform 0.8s ease; }
-html.js .reveal.visible { opacity: 1; transform: translateY(0); }
-@media (prefers-reduced-motion: reduce) {
-  html.js .reveal { opacity: 1; transform: none; transition: none; }
-}
-@media print {
-  html.js .reveal { opacity: 1 !important; transform: none !important; }
-  body::before { display: none; }
-}
+  html{
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
 
-/* --- Header --- */
-.site-header {
-  padding: 30px 0;
-  background: var(--sand);
-  border-bottom: 1px solid rgba(140,131,122,0.16);
-}
-.site-header .logo { width: 150px; margin: 0 auto; }
+  body{
+    background:var(--bg);
+    color:var(--obsidian);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(1rem,0.94rem + 0.3vw,1.15rem);
+    line-height:1.78;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
 
-/* --- Reading width --- */
-.reading { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+  ::selection{background:var(--gold);color:var(--obsidian);}
 
-/* --- Hero --- */
-.hero {
-  padding: clamp(70px, 11vw, 130px) 0 clamp(56px, 8vw, 96px);
-  text-align: center;
-}
-.eyebrow {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 12px;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 26px;
-}
-.hero h1 {
-  color: var(--charcoal);
-  font-size: clamp(34px, 5.2vw, 54px);
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-  max-width: 14ch;
-  margin: 0 auto 28px;
-}
-.hero h1 .soft { color: var(--mocha); font-style: italic; }
-.hero .divider { background: var(--gold); width: 56px; height: 2px; margin: 0 auto 28px; }
-.hero .sub {
-  color: var(--mocha);
-  font-size: clamp(16px, 1.9vw, 19px);
-  line-height: 1.7;
-  max-width: 540px;
-  margin: 0 auto;
-}
-.hero .meta {
-  margin-top: 40px;
-  font-family: var(--font-body);
-  font-size: 12.5px;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--taupe);
-}
-.hero .meta strong { color: var(--mocha); font-weight: 600; }
+  p{margin:0 0 1.15em 0;text-wrap:pretty;}
+  strong{font-weight:600;color:var(--obsidian);}
+  em{font-style:italic;}
 
-/* --- Sections --- */
-.sec { padding: clamp(52px, 7.5vw, 96px) 0; }
-.sec + .sec { border-top: 1px solid rgba(140,131,122,0.16); }
-.sec-num {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 11.5px;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 14px;
-}
-.sec h2 {
-  color: var(--charcoal);
-  font-size: clamp(26px, 3.4vw, 38px);
-  line-height: 1.24;
-  margin-bottom: 18px;
-}
-.sec .rule { width: 100%; height: 1px; background: rgba(194,168,108,0.55); margin-bottom: 34px; }
-.sec h3 {
-  color: var(--forest);
-  margin: 38px 0 12px;
-  font-size: clamp(17px, 2vw, 20px);
-}
-.sec h3:first-of-type { margin-top: 6px; }
-.sec p { color: var(--charcoal); margin-bottom: 1.15em; }
-.sec p.lead {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: clamp(18px, 2.3vw, 23px);
-  line-height: 1.5;
-  color: var(--mocha);
-  margin: 30px 0;
-}
+  /* ---------- COVER / HERO ---------- */
+  .cover{
+    position:relative;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    min-height:100vh;
+    min-height:100svh;
+    padding:clamp(28px,4vw,56px) clamp(24px,6vw,84px);
+    color:var(--sand);
+    background:
+      radial-gradient(120% 80% at 82% 12%,rgba(194,168,108,.14),transparent 52%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    overflow:hidden;
+  }
+  .cover .logo{
+    width:clamp(150px,16vw,196px);
+    display:block;
+    align-self:start;
+  }
+  .cover .cover-mid{
+    align-self:center;
+    max-width:780px;
+    padding:clamp(24px,5vw,40px) 0;
+  }
+  .cover .eyebrow{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(.7rem,.66rem + .15vw,.82rem);
+    line-height:1.4;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:clamp(18px,2.5vw,26px);
+  }
+  .cover h1{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(2.6rem,1.7rem + 4.4vw,5rem);
+    line-height:1.06;
+    letter-spacing:-.01em;
+    color:var(--sand);
+    margin-bottom:clamp(22px,3vw,32px);
+    text-wrap:balance;
+  }
+  .cover .rule{
+    width:68px;height:2px;
+    background:var(--gold);
+    margin-bottom:clamp(22px,3vw,32px);
+  }
+  .cover .sub{
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:clamp(1.05rem,1rem + .45vw,1.4rem);
+    line-height:1.7;
+    color:var(--stone);
+    max-width:620px;
+  }
+  .cover .foot{
+    align-self:end;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:18px;
+    padding-top:22px;
+    border-top:1px solid rgba(233,226,211,.18);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(.78rem,.74rem + .12vw,.9rem);
+    letter-spacing:.05em;
+    color:var(--stone);
+  }
+  .cover .foot .r{color:var(--gold);white-space:nowrap;}
+  .cover .foot .who{font-weight:600;color:var(--sand);}
 
-/* dash list, brand style */
-.list { list-style: none; padding: 0; margin: 0 0 1.2em; }
-.list li {
-  position: relative;
-  padding-left: 30px;
-  margin-bottom: 16px;
-  line-height: 1.65;
-}
-.list li::before {
-  content: '';
-  position: absolute;
-  left: 0; top: 13px;
-  width: 14px; height: 1px;
-  background: var(--gold);
-}
-.list li strong { color: var(--charcoal); }
+  /* ---------- BODY CONTENT (floating paper) ---------- */
+  main.doc{
+    position:relative;
+    z-index:2;
+    max-width:920px;
+    margin:clamp(-96px,-7vw,-52px) auto clamp(56px,8vw,104px);
+    padding:clamp(44px,6vw,92px) clamp(26px,5.5vw,84px);
+    background:var(--paper);
+    border-radius:clamp(10px,1.4vw,18px);
+    box-shadow:
+      0 40px 80px -40px rgba(29,31,30,.5),
+      0 2px 10px rgba(29,31,30,.05);
+  }
 
-/* pull quote */
-.pull {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: clamp(20px, 2.7vw, 27px);
-  line-height: 1.46;
-  color: var(--forest);
-  border-left: 2px solid var(--gold);
-  padding: 6px 0 6px 30px;
-  margin: 38px 0;
-}
+  .section{margin-top:clamp(44px,6vw,80px);}
+  main.doc > .section:first-child{margin-top:0;}
+  .section + .section{
+    padding-top:clamp(44px,6vw,80px);
+    border-top:1px solid rgba(29,31,30,.09);
+  }
+  main.doc > .section:first-child{margin-top:0;}
 
-/* callout */
-.callout {
-  background: var(--stone);
-  border-left: 3px solid var(--gold);
-  padding: 32px 34px;
-  margin: 36px 0;
-}
-.callout .lbl {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 11px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--mocha);
-  margin-bottom: 14px;
-}
-.callout p { margin-bottom: 0.9em; }
-.callout p:last-child { margin-bottom: 0; }
+  .sechead{margin-bottom:6px;}
+  .sec-num,.note-head{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.74rem;
+    line-height:1.4;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h2{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(1.7rem,1.25rem + 1.9vw,2.55rem);
+    line-height:1.18;
+    letter-spacing:-.01em;
+    color:var(--obsidian);
+    margin-bottom:6px;
+    text-wrap:balance;
+  }
+  .h2-rule{
+    width:54px;height:3px;
+    background:var(--gold);
+    margin:18px 0 22px 0;
+  }
 
-/* dark band */
-.band {
-  background: var(--charcoal);
-  color: var(--sand);
-  padding: clamp(72px, 10vw, 128px) 0;
-  text-align: center;
-}
-.band .eyebrow { color: var(--gold); margin-bottom: 22px; }
-.band .big {
-  font-family: var(--font-display);
-  font-size: clamp(26px, 3.8vw, 42px);
-  line-height: 1.32;
-  color: var(--sand);
-  max-width: 760px;
-  margin: 0 auto;
-}
-.band .big .hl { color: var(--gold); }
-.band .small {
-  color: var(--taupe);
-  font-size: 15px;
-  margin-top: 26px;
-  max-width: 420px;
-  margin-left: auto;
-  margin-right: auto;
-}
+  h3{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(1.1rem,1rem + .4vw,1.32rem);
+    line-height:1.4;
+    color:var(--forest);
+    margin:clamp(28px,3.5vw,40px) 0 10px 0;
+  }
+  h3:first-of-type{margin-top:clamp(18px,2.5vw,26px);}
 
-/* 90-day phases */
-.phase {
-  border-top: 2px solid var(--gold);
-  padding-top: 26px;
-  margin-bottom: 52px;
-}
-.phase:last-child { margin-bottom: 0; }
-.phase .tag {
-  font-family: var(--font-body);
-  font-weight: 600;
-  font-size: 12px;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 8px;
-}
-.phase h3 {
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: var(--forest);
-  font-size: clamp(20px, 2.6vw, 26px);
-  margin: 0 0 22px;
-}
-ol.steps { list-style: none; counter-reset: s; padding: 0; margin: 0; }
-ol.steps li {
-  counter-increment: s;
-  position: relative;
-  padding-left: 46px;
-  margin-bottom: 20px;
-  line-height: 1.62;
-}
-ol.steps li::before {
-  content: counter(s);
-  position: absolute;
-  left: 0; top: -2px;
-  font-family: var(--font-display);
-  font-weight: 700;
-  font-size: 19px;
-  color: var(--gold);
-}
-ol.steps li strong { color: var(--charcoal); }
+  .lead{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:clamp(1.18rem,1.05rem + .55vw,1.5rem);
+    line-height:1.6;
+    color:var(--mocha);
+    margin-bottom:4px;
+  }
 
-/* closing */
-.closing { background: var(--forest); color: var(--sand); padding: clamp(64px, 9vw, 116px) 0; }
-.closing h2 { color: var(--sand); font-size: clamp(26px, 3.4vw, 38px); margin-bottom: 28px; }
-.closing .eyebrow { color: var(--gold); }
-.closing p { color: var(--stone); margin-bottom: 1.15em; }
-.closing .sign {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: 19px;
-  color: var(--sand);
-  margin-top: 34px;
-}
-.closing .sign .name {
-  display: block;
-  font-style: normal;
-  font-weight: 700;
-  font-size: 22px;
-  margin-top: 6px;
-  color: var(--sand);
-}
-.closing .contact {
-  margin-top: 22px;
-  font-family: var(--font-body);
-  font-size: 13px;
-  letter-spacing: 0.06em;
-  color: var(--taupe);
-}
+  ul,ol{margin:14px 0 22px 0;padding-left:0;list-style:none;}
+  li{
+    position:relative;
+    padding-left:26px;
+    margin-bottom:12px;
+  }
+  ul li::before{
+    content:"";
+    position:absolute;
+    left:3px;top:.62em;
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+  ol{counter-reset:ol;}
+  ol li{padding-left:34px;counter-increment:ol;}
+  ol li::before{
+    content:counter(ol);
+    position:absolute;
+    left:0;top:.02em;
+    font-family:'Raleway',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    line-height:1.55;
+    color:var(--gold);
+  }
 
-/* footer */
-.footer {
-  padding: 44px 0;
-  text-align: center;
-  font-size: 13px;
-  letter-spacing: 0.02em;
-  color: var(--taupe);
-  background: var(--sand);
-}
-.footer .confid {
-  font-size: 11px;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--taupe);
-  opacity: 0.7;
-  margin-bottom: 14px;
-}
-.footer a { opacity: 0.65; transition: opacity 0.2s ease; }
-.footer a:hover { opacity: 1; }
+  .callout{
+    background:linear-gradient(180deg,#EFEADC 0%,var(--stone) 100%);
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:clamp(20px,3vw,30px) clamp(22px,3.4vw,34px);
+    margin:26px 0 28px 0;
+    box-shadow:0 14px 30px -22px rgba(29,31,30,.45);
+  }
+  .callout p{
+    font-family:'Libre Baskerville',serif;
+    font-style:italic;
+    font-size:clamp(1.08rem,1rem + .4vw,1.28rem);
+    line-height:1.62;
+    color:var(--obsidian);
+    margin:0;
+  }
+  .callout p + p{margin-top:12px;}
 
-@media (max-width: 768px) {
-  .reading { padding: 0 22px; }
-  .callout { padding: 26px 24px; }
-  .pull { padding-left: 22px; }
-  ol.steps li { padding-left: 38px; }
-}
+  /* ---------- 90 DAY PLAN ---------- */
+  .phase{
+    margin-bottom:24px;
+    border:1px solid rgba(29,31,30,.08);
+    border-radius:12px;
+    background:#fff;
+    overflow:hidden;
+    box-shadow:0 20px 44px -32px rgba(29,31,30,.4);
+  }
+  .phase:last-child{margin-bottom:0;}
+  .phase-head{
+    background:linear-gradient(135deg,#33473C,#283831);
+    color:var(--sand);
+    padding:clamp(16px,2.4vw,22px) clamp(22px,3.2vw,30px);
+  }
+  .phase-head .tag{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.72rem;
+    line-height:1.3;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:7px;
+  }
+  .phase-head .ttl{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.2rem,1.05rem + .55vw,1.5rem);
+    line-height:1.3;
+    color:var(--sand);
+  }
+  .phase-body{padding:clamp(22px,3vw,30px) clamp(22px,3.2vw,32px) clamp(14px,2vw,20px);}
+  .phase-body ol{margin:0;}
+  .phase-body ol li{margin-bottom:16px;}
+  .phase-body ol li strong{color:var(--forest);}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:left;
+    color:var(--sand);
+    background:
+      radial-gradient(120% 70% at 18% 88%,rgba(194,168,108,.13),transparent 55%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    padding:clamp(72px,11vw,150px) clamp(24px,6vw,84px);
+    overflow:hidden;
+  }
+  .closing > *{width:100%;max-width:680px;}
+  .closing .note-head{color:var(--gold);margin-bottom:14px;}
+  .closing h2{color:var(--sand);}
+  .closing .h2-rule{background:var(--gold);}
+  .closing p{
+    color:var(--stone);
+    font-size:clamp(1.02rem,.96rem + .35vw,1.18rem);
+    line-height:1.75;
+    margin-bottom:15px;
+  }
+  .closing strong{color:var(--sand);}
+  .closing .sign{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.15rem,1.05rem + .4vw,1.35rem);
+    line-height:1.5;
+    color:var(--sand);
+    margin-top:34px;
+  }
+  .closing .sign span{
+    display:block;
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:.86rem;
+    line-height:1.5;
+    letter-spacing:.05em;
+    color:var(--gold);
+    margin-top:12px;
+  }
+
+  /* ---------- SMALL SCREENS ---------- */
+  @media (max-width:600px){
+    body{line-height:1.7;}
+    .cover{min-height:100svh;}
+    .cover .foot{flex-direction:column;gap:6px;align-items:flex-start;}
+    main.doc{
+      margin:-44px 14px clamp(40px,8vw,64px);
+      border-radius:14px;
+      padding:40px 22px;
+    }
+  }
+
+  /* ---------- PRINT (retain clean PDF export) ---------- */
+  @media print{
+    body{background:#fff;}
+    .cover,.closing{min-height:auto;}
+    main.doc{
+      max-width:none;margin:0;padding:14mm 16mm;
+      box-shadow:none;border-radius:0;background:#fff;
+    }
+    .section + .section{border-top:0;}
+    .phase,.callout{box-shadow:none;break-inside:avoid;}
+    .sechead{break-after:avoid;}
+    h3{break-after:avoid;}
+  }
 </style>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container-wide" style="text-align:center;">
-    <img src="./assets/logo.svg" alt="Jason Moss" class="logo">
-  </div>
-</header>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="reading">
+<!-- ===================== COVER ===================== -->
+<section class="cover">
+  <img class="logo" src="assets/logo-light.svg" alt="Jason Moss">
+  <div class="cover-mid">
     <div class="eyebrow">Private Strategy Plan</div>
-    <h1>The work is already world-class.<br><span class="soft">Now the business catches up.</span></h1>
-    <div class="divider"></div>
-    <p class="sub">A personalised growth plan for Benjamin Owen — built from a deep review of your business, your assessment, and your web presence.</p>
-    <div class="meta">Prepared by <strong>Jason Moss</strong> &nbsp;·&nbsp; May 2026 &nbsp;·&nbsp; Confidential</div>
-  </div>
-</section>
-
-<!-- 1. PERSONAL NOTE -->
-<section class="sec">
-  <div class="reading reveal">
-    <div class="sec-num">A note before we begin</div>
-    <h2>First, the honest part</h2>
+    <h1>The work is already world-class.<br>Now the business catches up.</h1>
     <div class="rule"></div>
-    <p>Benjamin —</p>
-    <p>Before we go into any of this, one thing I want you to know.</p>
-    <p>I used AI to help me organise my notes and shape this into something clean enough to read in one sitting. That part is just formatting.</p>
-    <p>The thinking is mine. Every read, every shift, every recommendation in here came out of me sitting with your business — your assessment, your offers, your sales pages, the way you show up online — and recording what I actually saw.</p>
-    <p>This isn't a template with your name dropped into it. It's what I'd tell you across a table, written down so you can come back to it.</p>
-    <p class="lead">You're not a beginner who needs encouragement. You're a serious coach whose business hasn't caught up to the coach yet. So I'm going to be direct. That's the respect.</p>
-    <p>Read it once all the way through before you do anything. Then we work the plan.</p>
+    <div class="sub">A personalised growth plan for Benjamin Owen — built from a deep review of your business, your assessment, and your web presence.</div>
+  </div>
+  <div class="foot">
+    <span class="l">Prepared for <span class="who">Benjamin Owen</span></span>
+    <span class="r">May 2026</span>
   </div>
 </section>
 
-<!-- 2. WHERE YOU ARE NOW -->
-<section class="sec">
-  <div class="reading reveal">
+<main class="doc">
+
+<!-- ===================== 1. PERSONAL NOTE ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="note-head">A note before we begin</div>
+    <h2>First, the honest part</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Benjamin —</p>
+  <p>Before we go into any of this, one thing I want you to know.</p>
+  <p>I used AI to help me organise my notes and shape this into something clean enough to read in one sitting. That part is just formatting.</p>
+  <p>The thinking is mine. Every read, every shift, every recommendation in here came out of me sitting with your business — your assessment, your offers, your sales pages, the way you show up online — and recording what I actually saw.</p>
+  <p>This isn't a template with your name dropped into it. It's what I'd tell you across a table, written down so you can come back to it.</p>
+  <p class="lead">You're not a beginner who needs encouragement. You're a serious coach whose business hasn't caught up to the coach yet. So I'm going to be direct. That's the respect.</p>
+  <p>Read it once all the way through before you do anything. Then we work the plan.</p>
+</section>
+
+<!-- ===================== 2. WHERE YOU ARE NOW ===================== -->
+<section class="section">
+  <div class="sechead">
     <div class="sec-num">Section 02</div>
     <h2>Where you are now</h2>
-    <div class="rule"></div>
-    <p>Here's what I see when I look at your business honestly.</p>
-    <p><strong>You are more advanced as a coach than as a marketer.</strong> That's not a criticism — it's the single most important thing to understand about your situation. The depth is real. The transformation you create is real. Your clients tell you they see what's truly possible for them and that you change how they see themselves. That doesn't come from tactics. That comes from you.</p>
-    <p>The gap isn't your coaching. The gap is everything around it.</p>
-
-    <h3>What's working</h3>
-    <ul class="list">
-      <li>The immersive, in-person work is your genius zone. The Dubai Deep Dive and the monthly in-person mastermind are where your magic actually lives — being on the journey with someone, using body, breath and brain, not theory and chit-chat.</li>
-      <li>Your monthly mastermind already converts. You said it yourself: it's brought you "really, really great clients in Dubai." That's proof of concept most coaches never get.</li>
-      <li>Referrals and rooms work for you. People who meet you, buy. Your close is not the problem.</li>
-      <li>You're in one of the best local markets on earth for this work — affluent, relationship-driven, premium-oriented, word-of-mouth Dubai. We'll come back to this.</li>
-    </ul>
-
-    <h3>What's holding you back</h3>
-    <ul class="list">
-      <li><strong>Growth is the elephant in the room</strong> — and you already know it. Almost everything coming in depends on referrals, networking, nurture, and the chance of meeting the right person. There's no repeatable system bringing new people into your world on purpose.</li>
-      <li><strong>Your content is nurture, not acquisition.</strong> Instagram stories to the same audience is not a growth engine. It's you talking to people who already know you. You feel this — you called it "scattered," "not a drumbeat," "the same people, my low-end stuff."</li>
-      <li><strong>Your pricing doesn't match your caliber.</strong> I'll be specific about this in Section 6. For now: it's the single fastest lever in this whole document.</li>
-      <li><strong>Your positioning is borrowed.</strong> The 10X frame is doing your differentiation for you, and it isn't yours. More on this in Section 5 — it's the deepest piece of work here.</li>
-      <li><strong>Execution is scattered because you're carrying it all.</strong> You make the training but don't do the outreach. The kids are off, momentum dies. Too many moving parts in the calendar pulls you out of alignment. This is a systems problem, not a discipline problem.</li>
-    </ul>
-
-    <p class="lead">Everything you need is already here. You said that yourself — "I have everything I need and I am willing to make fast changes." I agree. This plan isn't about adding more. It's about aligning what already exists with the caliber of what you actually deliver.</p>
+    <div class="h2-rule"></div>
   </div>
+  <p>Here's what I see when I look at your business honestly.</p>
+  <p><strong>You are more advanced as a coach than as a marketer.</strong> That's not a criticism — it's the single most important thing to understand about your situation. The depth is real. The transformation you create is real. Your clients tell you they see what's truly possible for them and that you change how they see themselves. That doesn't come from tactics. That comes from you.</p>
+  <p>The gap isn't your coaching. The gap is everything around it.</p>
+
+  <h3>What's working</h3>
+  <ul>
+    <li>The immersive, in-person work is your genius zone. The Dubai Deep Dive and the monthly in-person mastermind are where your magic actually lives — being on the journey with someone, using body, breath and brain, not theory and chit-chat.</li>
+    <li>Your monthly mastermind already converts. You said it yourself: it's brought you "really, really great clients in Dubai." That's proof of concept most coaches never get.</li>
+    <li>Referrals and rooms work for you. People who meet you, buy. Your close is not the problem.</li>
+    <li>You're in one of the best local markets on earth for this work — affluent, relationship-driven, premium-oriented, word-of-mouth Dubai. We'll come back to this.</li>
+  </ul>
+
+  <h3>What's holding you back</h3>
+  <ul>
+    <li><strong>Growth is the elephant in the room</strong> — and you already know it. Almost everything coming in depends on referrals, networking, nurture, and the chance of meeting the right person. There's no repeatable system bringing new people into your world on purpose.</li>
+    <li><strong>Your content is nurture, not acquisition.</strong> Instagram stories to the same audience is not a growth engine. It's you talking to people who already know you. You feel this — you called it "scattered," "not a drumbeat," "the same people, my low-end stuff."</li>
+    <li><strong>Your pricing doesn't match your caliber.</strong> I'll be specific about this in Section 6. For now: it's the single fastest lever in this whole document.</li>
+    <li><strong>Your positioning is borrowed.</strong> The 10X frame is doing your differentiation for you, and it isn't yours. More on this in Section 5 — it's the deepest piece of work here.</li>
+    <li><strong>Execution is scattered because you're carrying it all.</strong> You make the training but don't do the outreach. The kids are off, momentum dies. Too many moving parts in the calendar pulls you out of alignment. This is a systems problem, not a discipline problem.</li>
+  </ul>
+
+  <p class="lead">Everything you need is already here. You said that yourself — "I have everything I need and I am willing to make fast changes." I agree. This plan isn't about adding more. It's about aligning what already exists with the caliber of what you actually deliver.</p>
 </section>
 
-<!-- 3. OPPORTUNITIES -->
-<section class="sec">
-  <div class="reading reveal">
+<!-- ===================== 3. OPPORTUNITIES ===================== -->
+<section class="section">
+  <div class="sechead">
     <div class="sec-num">Section 03</div>
     <h2>The biggest opportunities I see</h2>
-    <div class="rule"></div>
-    <p>If you only focused on a few things over the next year, focus on these. Each one is pulled straight from what I saw in your business.</p>
+    <div class="h2-rule"></div>
+  </div>
+  <p>If you only focused on a few things over the next year, focus on these. Each one is pulled straight from what I saw in your business.</p>
 
-    <h3>1. Unearth the methodology that's actually yours</h3>
-    <p>You're building on Benjamin Hardy's 10X. Nothing wrong with that as a foundation — but it isn't yet <em>yours</em>, and the market can feel that. The difference between a strong mid-market coach and a premium, high-end thought leader is almost always one thing: a proprietary methodology that could only have come from them. There's something truer and deeper wanting to come through you. We find it, name it, and rebuild the business around it.</p>
+  <h3>1. Unearth the methodology that's actually yours</h3>
+  <p>You're building on Benjamin Hardy's 10X. Nothing wrong with that as a foundation — but it isn't yet <em>yours</em>, and the market can feel that. The difference between a strong mid-market coach and a premium, high-end thought leader is almost always one thing: a proprietary methodology that could only have come from them. There's something truer and deeper wanting to come through you. We find it, name it, and rebuild the business around it.</p>
 
-    <h3>2. Own Dubai before you chase the world</h3>
-    <p>Your instinct on this is right, and it's a bigger advantage than you're treating it as. Dubai is full of affluent founders, runs on relationships and word-of-mouth, and is oriented to premium and proximity. Your magic is in-person. The market that can actually walk into your room is sitting around you. An 80/20 shift from global to local isn't a compromise — it's the unlock.</p>
+  <h3>2. Own Dubai before you chase the world</h3>
+  <p>Your instinct on this is right, and it's a bigger advantage than you're treating it as. Dubai is full of affluent founders, runs on relationships and word-of-mouth, and is oriented to premium and proximity. Your magic is in-person. The market that can actually walk into your room is sitting around you. An 80/20 shift from global to local isn't a compromise — it's the unlock.</p>
 
-    <h3>3. Turn the mastermind into your front door</h3>
-    <p>You already have a low-ticket monthly in-person mastermind that converts great clients. That is rare. Most coaches have to invent a front end from nothing — you have one with proof of concept. The opportunity is to stop treating it as a thing you remember to fill, and start treating it as the growth engine of the whole business.</p>
+  <h3>3. Turn the mastermind into your front door</h3>
+  <p>You already have a low-ticket monthly in-person mastermind that converts great clients. That is rare. Most coaches have to invent a front end from nothing — you have one with proof of concept. The opportunity is to stop treating it as a thing you remember to fill, and start treating it as the growth engine of the whole business.</p>
 
-    <h3>4. Reprice to the truth</h3>
-    <p>Your pricing is the fastest money in this document. The work you deliver is five-figure transformation priced like a workshop. Closing that gap doesn't require a single new client — it requires you to charge what the transformation is worth. Sequenced correctly (Section 6), this is close to free money.</p>
+  <h3>4. Reprice to the truth</h3>
+  <p>Your pricing is the fastest money in this document. The work you deliver is five-figure transformation priced like a workshop. Closing that gap doesn't require a single new client — it requires you to charge what the transformation is worth. Sequenced correctly (Section 6), this is close to free money.</p>
 
-    <h3>5. Build the drumbeat that runs without you</h3>
-    <p>Your 12-month goal was clear: a marketing machine that isn't predicated on your energy or the chance of meeting people. That machine is buildable. Not a personality you have to perform daily — a repeatable system that brings new people in whether you're inspired that week or the kids are off school.</p>
+  <h3>5. Build the drumbeat that runs without you</h3>
+  <p>Your 12-month goal was clear: a marketing machine that isn't predicated on your energy or the chance of meeting people. That machine is buildable. Not a personality you have to perform daily — a repeatable system that brings new people in whether you're inspired that week or the kids are off school.</p>
+</section>
+
+<!-- ===================== THE CORE SHIFT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="note-head">The core shift</div>
+  </div>
+  <div class="callout">
+    <p>You are not a 10X strategist. You are someone who puts founders through an experience that changes who they are — and the business follows.</p>
+    <p>Everything in the next four sections flows from this one sentence. Read it slowly.</p>
   </div>
 </section>
 
-<!-- CORE SHIFT BAND -->
-<section class="band reveal">
-  <div class="reading">
-    <div class="eyebrow">The core shift</div>
-    <div class="big">You are not a <span class="hl">10X strategist</span>. You are someone who puts founders through an experience that changes who they are — and the business follows.</div>
-    <p class="small">Everything in the next four sections flows from this one sentence. Read it slowly.</p>
-  </div>
-</section>
-
-<!-- 4. WHAT NEEDS TO SHIFT -->
-<section class="sec">
-  <div class="reading reveal">
+<!-- ===================== 4. WHAT NEEDS TO SHIFT ===================== -->
+<section class="section">
+  <div class="sechead">
     <div class="sec-num">Section 04</div>
     <h2>What needs to shift</h2>
-    <div class="rule"></div>
-    <p>Before any tactic works, these have to change. Tactics on top of the wrong foundation just make the wrong thing louder.</p>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Before any tactic works, these have to change. Tactics on top of the wrong foundation just make the wrong thing louder.</p>
 
-    <h3>From business-growth mentor to transformational immersive advisor</h3>
-    <p>Right now your business sits between two identities. One is a business-growth mentor running a 10X program. The other is a premium advisor who creates immersive experiences that shift how a founder thinks, leads, and sees themselves. The second one is the real you, and it's far more differentiated. You have to choose it — out loud, in the business — not keep one foot in each.</p>
+  <h3>From business-growth mentor to transformational immersive advisor</h3>
+  <p>Right now your business sits between two identities. One is a business-growth mentor running a 10X program. The other is a premium advisor who creates immersive experiences that shift how a founder thinks, leads, and sees themselves. The second one is the real you, and it's far more differentiated. You have to choose it — out loud, in the business — not keep one foot in each.</p>
 
-    <h3>From abstraction to ground</h3>
-    <p>Your language drifts into "magic," "universal forces," "future self," "possibility." That language is powerful in the room. On a sales page or an ad, untethered, it costs you money. Premium buyers need to feel the concrete on the other side of the poetry — the measurable business shift, the tangible change. This, by the way, is also the answer to your own question: how to communicate "10X in 3 years or less" without saying 10X. You don't say the multiplier. You name the real outcome and the experience that produces it.</p>
+  <h3>From abstraction to ground</h3>
+  <p>Your language drifts into "magic," "universal forces," "future self," "possibility." That language is powerful in the room. On a sales page or an ad, untethered, it costs you money. Premium buyers need to feel the concrete on the other side of the poetry — the measurable business shift, the tangible change. This, by the way, is also the answer to your own question: how to communicate "10X in 3 years or less" without saying 10X. You don't say the multiplier. You name the real outcome and the experience that produces it.</p>
 
-    <h3>From nurture-dependence to a real acquisition system</h3>
-    <p>You can nurture beautifully. You cannot currently <em>acquire</em> on purpose. Those are different machines. The shift is accepting that posting more to the same people is not growth, and committing to one repeatable way new people find you.</p>
+  <h3>From nurture-dependence to a real acquisition system</h3>
+  <p>You can nurture beautifully. You cannot currently <em>acquire</em> on purpose. Those are different machines. The shift is accepting that posting more to the same people is not growth, and committing to one repeatable way new people find you.</p>
 
-    <h3>From carrying everything to running a sequence</h3>
-    <p>Overwhelm pulls you out of alignment — you told me that directly. The fix isn't more discipline. It's fewer things, in order. One drumbeat. One front end. A sequence you run, not a juggle you sustain.</p>
+  <h3>From carrying everything to running a sequence</h3>
+  <p>Overwhelm pulls you out of alignment — you told me that directly. The fix isn't more discipline. It's fewer things, in order. One drumbeat. One front end. A sequence you run, not a juggle you sustain.</p>
 
-    <div class="callout">
-      <div class="lbl">Hold this</div>
-      <p>The sequence is not negotiable: <strong>clarify the methodology → sharpen the positioning → recalibrate the offers → then raise pricing aggressively.</strong> Premium pricing requires premium differentiation to already be true. Do these out of order and the price increase won't hold.</p>
-    </div>
+  <div class="callout">
+    <p>Hold this</p>
+    <p>The sequence is not negotiable: <strong>clarify the methodology → sharpen the positioning → recalibrate the offers → then raise pricing aggressively.</strong> Premium pricing requires premium differentiation to already be true. Do these out of order and the price increase won't hold.</p>
   </div>
 </section>
 
-<!-- 5. POSITIONING -->
-<section class="sec">
-  <div class="reading reveal">
+<!-- ===================== 5. POSITIONING ===================== -->
+<section class="section">
+  <div class="sechead">
     <div class="sec-num">Section 05</div>
     <h2>Positioning &amp; messaging</h2>
-    <div class="rule"></div>
-    <p>This is the deepest work in the document, so I want to be precise.</p>
-    <p>Your real edge is not "10X strategy." It's immersive, transformational leadership work that shifts identity, embodiment, self-concept, and decision-making. That's what your clients actually reflect back to you. That's what feels most like you. That's the thing.</p>
-    <p>But here's what the market currently sees. Your home page leads with "the world-class coach" and "end self-sabotage, build self-discipline." Your Instagram bio says "professional &amp; personal coach." Masterful Leadership University opens with "partner with us to 10X in 3 years or less." None of that is differentiated. Any good coach could put those words on a page. They describe a category, not you.</p>
-    <p class="lead">The borrowed 10X frame is doing the job your proprietary methodology should be doing. That's why premium pricing doesn't hold yet — there's nothing uniquely yours for it to attach to.</p>
-
-    <h3>The good news — it's already in your own words</h3>
-    <p>On your Deep Dive Dubai page you wrote this:</p>
-    <p class="pull">"You can't think your way into a new identity. You have to experience your way into it."</p>
-    <p>That is the seed. That sentence is more "you" than every 10X reference on every page combined. The methodology we need to unearth is already trying to come through — it's the experiential, identity-level transformation you create in person. Our job in the next 90 days is to name it, structure it, and make it the spine of the business instead of a line near the bottom of one sales page.</p>
-
-    <h3>Where this lands</h3>
-    <p>The strongest position for you is a premium transformational founder advisor running luxury, high-touch, immersive leadership experiences. Fewer clients. Deeper transformation. Higher ticket. Proximity and access as part of the value, not an afterthought. That is a position almost no one else can occupy — because it requires being the coach you already are.</p>
+    <div class="h2-rule"></div>
   </div>
+  <p>This is the deepest work in the document, so I want to be precise.</p>
+  <p>Your real edge is not "10X strategy." It's immersive, transformational leadership work that shifts identity, embodiment, self-concept, and decision-making. That's what your clients actually reflect back to you. That's what feels most like you. That's the thing.</p>
+  <p>But here's what the market currently sees. Your home page leads with "the world-class coach" and "end self-sabotage, build self-discipline." Your Instagram bio says "professional &amp; personal coach." Masterful Leadership University opens with "partner with us to 10X in 3 years or less." None of that is differentiated. Any good coach could put those words on a page. They describe a category, not you.</p>
+  <p class="lead">The borrowed 10X frame is doing the job your proprietary methodology should be doing. That's why premium pricing doesn't hold yet — there's nothing uniquely yours for it to attach to.</p>
+
+  <h3>The good news — it's already in your own words</h3>
+  <p>On your Deep Dive Dubai page you wrote this:</p>
+  <div class="callout">
+    <p>"You can't think your way into a new identity. You have to experience your way into it."</p>
+  </div>
+  <p>That is the seed. That sentence is more "you" than every 10X reference on every page combined. The methodology we need to unearth is already trying to come through — it's the experiential, identity-level transformation you create in person. Our job in the next 90 days is to name it, structure it, and make it the spine of the business instead of a line near the bottom of one sales page.</p>
+
+  <h3>Where this lands</h3>
+  <p>The strongest position for you is a premium transformational founder advisor running luxury, high-touch, immersive leadership experiences. Fewer clients. Deeper transformation. Higher ticket. Proximity and access as part of the value, not an afterthought. That is a position almost no one else can occupy — because it requires being the coach you already are.</p>
 </section>
 
-<!-- 6. OFFERS & PRICING -->
-<section class="sec">
-  <div class="reading reveal">
+<!-- ===================== 6. OFFERS & PRICING ===================== -->
+<section class="section">
+  <div class="sechead">
     <div class="sec-num">Section 06</div>
     <h2>Offers &amp; pricing</h2>
-    <div class="rule"></div>
-    <p>Let me be blunt here, because this is the fastest lever you have.</p>
-    <p>I read the Deep Dive Dubai page all the way to the bottom. When I hit the price, something in me actually dropped — not because it was high, because it was <em>low</em> for what it is. A two-day private intensive, the access, the intimacy, the environment, the caliber of transformation — priced at £5,000. That is a workshop price on a life-changing experience.</p>
-    <p>Pricing isn't just what you charge. In your niche it actively signals and creates the perception of quality in the buyer's mind. Underpricing doesn't make you accessible. It makes premium founders quietly assume the work is smaller than it is.</p>
-
-    <div class="callout">
-      <div class="lbl">The pricing move</div>
-      <p><strong>Deep Dive Dubai:</strong> at least double it. Into five figures — think £10,000+. The experience already justifies it; the page just needs to stop apologising for it.</p>
-      <p><strong>Masterful Leadership University:</strong> the individual partnership goes to <strong>£15,000 minimum</strong>, up from its current £9,000.</p>
-      <p><strong>Across the board:</strong> recalibrate every price to reflect the caliber of coach you actually are and the transformation on the other side.</p>
-    </div>
-
-    <p><strong>But the sequence matters, and I won't let you skip it.</strong> You do not raise these prices on Monday. You raise them <em>after</em> the methodology is clarified and the positioning is sharpened — because that's what makes the new price feel inevitable instead of arbitrary. Premium pricing requires premium differentiation to already be visible. Same offer, repriced before the repositioning, just feels expensive. Repriced after, it feels obvious.</p>
-
-    <h3>On the offer suite itself</h3>
-    <p>The MLU "University" framing — faculty-led trainings, team tiers, an institution — pulls you straight back toward the generic business-growth-mentor identity we're trying to leave. Your edge is intimacy and proximity, not scale and faculty. As we recalibrate, the offers should get <em>more</em> high-touch and immersive, not more institutional. Your 1-1 isn't even advertised right now and you said it needs rebuilding to reflect where you are today — good. We rebuild it inside the new positioning, at a price that matches the room you put people in.</p>
+    <div class="h2-rule"></div>
   </div>
+  <p>Let me be blunt here, because this is the fastest lever you have.</p>
+  <p>I read the Deep Dive Dubai page all the way to the bottom. When I hit the price, something in me actually dropped — not because it was high, because it was <em>low</em> for what it is. A two-day private intensive, the access, the intimacy, the environment, the caliber of transformation — priced at £5,000. That is a workshop price on a life-changing experience.</p>
+  <p>Pricing isn't just what you charge. In your niche it actively signals and creates the perception of quality in the buyer's mind. Underpricing doesn't make you accessible. It makes premium founders quietly assume the work is smaller than it is.</p>
+
+  <div class="callout">
+    <p>The pricing move</p>
+    <p><strong>Deep Dive Dubai:</strong> at least double it. Into five figures — think £10,000+. The experience already justifies it; the page just needs to stop apologising for it.</p>
+    <p><strong>Masterful Leadership University:</strong> the individual partnership goes to <strong>£15,000 minimum</strong>, up from its current £9,000.</p>
+    <p><strong>Across the board:</strong> recalibrate every price to reflect the caliber of coach you actually are and the transformation on the other side.</p>
+  </div>
+
+  <p><strong>But the sequence matters, and I won't let you skip it.</strong> You do not raise these prices on Monday. You raise them <em>after</em> the methodology is clarified and the positioning is sharpened — because that's what makes the new price feel inevitable instead of arbitrary. Premium pricing requires premium differentiation to already be visible. Same offer, repriced before the repositioning, just feels expensive. Repriced after, it feels obvious.</p>
+
+  <h3>On the offer suite itself</h3>
+  <p>The MLU "University" framing — faculty-led trainings, team tiers, an institution — pulls you straight back toward the generic business-growth-mentor identity we're trying to leave. Your edge is intimacy and proximity, not scale and faculty. As we recalibrate, the offers should get <em>more</em> high-touch and immersive, not more institutional. Your 1-1 isn't even advertised right now and you said it needs rebuilding to reflect where you are today — good. We rebuild it inside the new positioning, at a price that matches the room you put people in.</p>
 </section>
 
-<!-- 7. MARKETING & CONTENT -->
-<section class="sec">
-  <div class="reading reveal">
+<!-- ===================== 7. MARKETING & CONTENT ===================== -->
+<section class="section">
+  <div class="sechead">
     <div class="sec-num">Section 07</div>
     <h2>Marketing &amp; content strategy</h2>
-    <div class="rule"></div>
-    <p>Here's the core problem stated plainly: almost all your content is nurture, and nurture doesn't bring new people in. It keeps the people you already have warm. You need an acquisition engine in front of the nurture.</p>
-    <p>There are two honest ways to build that, and I want you to understand both before I tell you where to start.</p>
-
-    <h3>Option A — the conventional online build</h3>
-    <p>A paid-traffic front end with a lead magnet that brings new people in continuously, a strong nurture backend (three to five emails a week, retargeting ads), and one live event a month — a masterclass, challenge, or training designed to convert that audience into sales conversations. This is the roadmap inside Limitless Leads in the portal, and it works. It's a proven machine.</p>
-
-    <h3>Option B — the local in-person front end</h3>
-    <p>Build a paid-traffic front end for the low-ticket monthly mastermind you already run. Run ads locally in Dubai. Double or triple the attendance of a room that already converts great clients. This is unusual, proprietary, and it sets you apart from every coach online running the exact same lead-magnet funnel.</p>
-
-    <p class="lead">Start with Option B. Here's my reasoning, and it's specific to you.</p>
-
-    <p>We already have proof that the in-person mastermind converts. We are not inventing a new funnel and hoping — we're putting paid traffic behind something that already works and is already aligned with your genius. It ties directly into Deep Dive Dubai, so the ascension is natural. It plays to your strengths instead of forcing you to become a marketer overnight. And it builds on what's working rather than reinventing from zero. A simple ad → landing page → registration for the mastermind, tested as a growth engine, is the right first move — before we ever touch a traditional online lead-magnet funnel.</p>
-
-    <p>On the fear of running your own ads: I hear it, and we move through it, not around it. Local Dubai ads to a real room you already run is the lowest-stakes possible place to start. You're not performing — you're inviting people to the thing you're already great at.</p>
-
-    <h3>The drumbeat that feels like you</h3>
-    <p>You asked for a drumbeat that feels like you and shows you're not a "scaling bro." It's this: ground the language (Section 4), let the in-person experience be the hook, and run one consistent rhythm — ad to room, room to immersion, immersion to partnership — instead of remembering to post. The micro-VSL you want to build lives right here too: short, plain, you talking like a human about the real shift, pointing to the room. Not a production. You, grounded, on camera, the way the best of your reels already sound.</p>
+    <div class="h2-rule"></div>
   </div>
+  <p>Here's the core problem stated plainly: almost all your content is nurture, and nurture doesn't bring new people in. It keeps the people you already have warm. You need an acquisition engine in front of the nurture.</p>
+  <p>There are two honest ways to build that, and I want you to understand both before I tell you where to start.</p>
+
+  <h3>Option A — the conventional online build</h3>
+  <p>A paid-traffic front end with a lead magnet that brings new people in continuously, a strong nurture backend (three to five emails a week, retargeting ads), and one live event a month — a masterclass, challenge, or training designed to convert that audience into sales conversations. This is the roadmap inside Limitless Leads in the portal, and it works. It's a proven machine.</p>
+
+  <h3>Option B — the local in-person front end</h3>
+  <p>Build a paid-traffic front end for the low-ticket monthly mastermind you already run. Run ads locally in Dubai. Double or triple the attendance of a room that already converts great clients. This is unusual, proprietary, and it sets you apart from every coach online running the exact same lead-magnet funnel.</p>
+
+  <p class="lead">Start with Option B. Here's my reasoning, and it's specific to you.</p>
+
+  <p>We already have proof that the in-person mastermind converts. We are not inventing a new funnel and hoping — we're putting paid traffic behind something that already works and is already aligned with your genius. It ties directly into Deep Dive Dubai, so the ascension is natural. It plays to your strengths instead of forcing you to become a marketer overnight. And it builds on what's working rather than reinventing from zero. A simple ad → landing page → registration for the mastermind, tested as a growth engine, is the right first move — before we ever touch a traditional online lead-magnet funnel.</p>
+
+  <p>On the fear of running your own ads: I hear it, and we move through it, not around it. Local Dubai ads to a real room you already run is the lowest-stakes possible place to start. You're not performing — you're inviting people to the thing you're already great at.</p>
+
+  <h3>The drumbeat that feels like you</h3>
+  <p>You asked for a drumbeat that feels like you and shows you're not a "scaling bro." It's this: ground the language (Section 4), let the in-person experience be the hook, and run one consistent rhythm — ad to room, room to immersion, immersion to partnership — instead of remembering to post. The micro-VSL you want to build lives right here too: short, plain, you talking like a human about the real shift, pointing to the room. Not a production. You, grounded, on camera, the way the best of your reels already sound.</p>
 </section>
 
-<!-- 8. SYSTEMS & OPS -->
-<section class="sec">
-  <div class="reading reveal">
+<!-- ===================== 8. SYSTEMS & OPS ===================== -->
+<section class="section">
+  <div class="sechead">
     <div class="sec-num">Section 08</div>
     <h2>Systems &amp; operations</h2>
-    <div class="rule"></div>
-    <p>Your operational problem isn't laziness. It's that the whole machine currently runs on you remembering to run it. When the kids are off or the calendar fills, momentum dies — because there's no system holding it, only you.</p>
-    <p>So the operational principle for the next 90 days is simple: <strong>fewer moving parts, in a fixed sequence, that don't depend on your energy.</strong></p>
-
-    <h3>What to build</h3>
-    <ul class="list">
-      <li><strong>One front end, not five.</strong> The local mastermind funnel — ad, landing page, registration — set up once and left running. One thing to maintain, not a juggle.</li>
-      <li><strong>A fixed monthly rhythm.</strong> One mastermind a month, on the calendar for the whole year, with the ad always running to fill it. Decided once, not re-decided every month.</li>
-      <li><strong>A nurture backend that runs itself.</strong> When you rebuild the email rhythm, it's a repeatable sequence — not you deciding what to write under pressure to "the same people."</li>
-    </ul>
-
-    <h3>What to protect</h3>
-    <ul class="list">
-      <li><strong>Your time with clients.</strong> You said you give your time away too freely. A smaller, higher-ticket practice with fewer, deeper clients is the structural fix — it's designed into the positioning, not left to willpower.</li>
-      <li><strong>Your alignment.</strong> Overwhelm and a full calendar are your known triggers. Fewer offers and one drumbeat isn't just cleaner marketing — it's how you stay in the state where your actual genius works.</li>
-    </ul>
-
-    <p>You don't need more capability. You need fewer things, built once, running without you.</p>
+    <div class="h2-rule"></div>
   </div>
+  <p>Your operational problem isn't laziness. It's that the whole machine currently runs on you remembering to run it. When the kids are off or the calendar fills, momentum dies — because there's no system holding it, only you.</p>
+  <p>So the operational principle for the next 90 days is simple: <strong>fewer moving parts, in a fixed sequence, that don't depend on your energy.</strong></p>
+
+  <h3>What to build</h3>
+  <ul>
+    <li><strong>One front end, not five.</strong> The local mastermind funnel — ad, landing page, registration — set up once and left running. One thing to maintain, not a juggle.</li>
+    <li><strong>A fixed monthly rhythm.</strong> One mastermind a month, on the calendar for the whole year, with the ad always running to fill it. Decided once, not re-decided every month.</li>
+    <li><strong>A nurture backend that runs itself.</strong> When you rebuild the email rhythm, it's a repeatable sequence — not you deciding what to write under pressure to "the same people."</li>
+  </ul>
+
+  <h3>What to protect</h3>
+  <ul>
+    <li><strong>Your time with clients.</strong> You said you give your time away too freely. A smaller, higher-ticket practice with fewer, deeper clients is the structural fix — it's designed into the positioning, not left to willpower.</li>
+    <li><strong>Your alignment.</strong> Overwhelm and a full calendar are your known triggers. Fewer offers and one drumbeat isn't just cleaner marketing — it's how you stay in the state where your actual genius works.</li>
+  </ul>
+
+  <p>You don't need more capability. You need fewer things, built once, running without you.</p>
 </section>
 
-<!-- 9. PORTAL -->
-<section class="sec">
-  <div class="reading reveal">
+<!-- ===================== 9. PORTAL ===================== -->
+<section class="section">
+  <div class="sechead">
     <div class="sec-num">Section 09</div>
     <h2>Recommended resources from the portal</h2>
-    <div class="rule"></div>
-    <p>One resource matters most for you right now, and timing is everything with it.</p>
-
-    <h3>Limitless Leads</h3>
-    <p>This is the full roadmap for building a paid-traffic front end, a nurture backend, and retargeting. It's the engine room for everything in Section 7.</p>
-    <p><strong>When to use it:</strong> not all at once, and not first. Here's the sequencing that fits your situation specifically.</p>
-    <ul class="list">
-      <li><strong>Days 1–30:</strong> don't open it yet. Positioning comes first. Building traffic to the wrong message just spends money faster.</li>
-      <li><strong>Days 31–60:</strong> use the ad → landing page → registration mechanics from Limitless Leads to build the <em>local mastermind front end</em>. You're borrowing the machinery, not the full online-funnel model. This is the part you need now.</li>
-      <li><strong>Days 61–90:</strong> use the nurture and retargeting modules to build the backend behind the room, so people who don't register the first time still stay in your world.</li>
-      <li><strong>Phase 2 (later, only if you scale internationally):</strong> the full lead-magnet online funnel from Limitless Leads becomes relevant. Not now. Don't let it distract you from the local engine that's working.</li>
-    </ul>
-    <p>The discipline here is using the resource in the order your business actually needs it — not consuming the whole thing and trying to build everything at once. That's the old scattered pattern. We're not doing that.</p>
+    <div class="h2-rule"></div>
   </div>
+  <p>One resource matters most for you right now, and timing is everything with it.</p>
+
+  <h3>Limitless Leads</h3>
+  <p>This is the full roadmap for building a paid-traffic front end, a nurture backend, and retargeting. It's the engine room for everything in Section 7.</p>
+  <p><strong>When to use it:</strong> not all at once, and not first. Here's the sequencing that fits your situation specifically.</p>
+  <ul>
+    <li><strong>Days 1–30:</strong> don't open it yet. Positioning comes first. Building traffic to the wrong message just spends money faster.</li>
+    <li><strong>Days 31–60:</strong> use the ad → landing page → registration mechanics from Limitless Leads to build the <em>local mastermind front end</em>. You're borrowing the machinery, not the full online-funnel model. This is the part you need now.</li>
+    <li><strong>Days 61–90:</strong> use the nurture and retargeting modules to build the backend behind the room, so people who don't register the first time still stay in your world.</li>
+    <li><strong>Phase 2 (later, only if you scale internationally):</strong> the full lead-magnet online funnel from Limitless Leads becomes relevant. Not now. Don't let it distract you from the local engine that's working.</li>
+  </ul>
+  <p>The discipline here is using the resource in the order your business actually needs it — not consuming the whole thing and trying to build everything at once. That's the old scattered pattern. We're not doing that.</p>
 </section>
 
-<!-- 10. 90-DAY PLAN -->
-<section class="sec">
-  <div class="reading reveal">
+<!-- ===================== 10. 90-DAY PLAN ===================== -->
+<section class="section break">
+  <div class="sechead">
     <div class="sec-num">Section 10</div>
     <h2>Your 90-day action plan</h2>
-    <div class="rule"></div>
-    <p>This is the payoff. Everything above, sequenced into something you can start Monday. Don't reorder it — the order is the strategy.</p>
+    <div class="h2-rule"></div>
+  </div>
+  <p>This is the payoff. Everything above, sequenced into something you can start Monday. Don't reorder it — the order is the strategy.</p>
 
-    <div class="phase">
-      <div class="tag">Days 1–30</div>
-      <h3>Foundation — get the positioning right</h3>
-      <ol class="steps">
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 1–30</span>
+      <span class="ttl">Foundation — get the positioning right</span>
+    </div>
+    <div class="phase-body">
+      <ol>
         <li><strong>Excavate the methodology.</strong> Start from your own line — "you can't think your way into a new identity, you have to experience your way into it." Name the experiential, identity-level process you actually run with clients. Give it a name and a clear shape. This is the spine of everything.</li>
         <li><strong>Rewrite the core message.</strong> Strip the borrowed 10X language from how you describe the work. Replace "10X in 3 years" with the concrete outcome plus the experience that produces it. Ground every abstraction — "magic," "future self" — in a tangible business shift.</li>
         <li><strong>Choose the identity, out loud.</strong> Decide, in writing, that you are a premium transformational founder advisor running immersive experiences — not a 10X business-growth mentor. Every rewrite flows from this decision.</li>
         <li><strong>Rewrite the Deep Dive Dubai page</strong> on the new positioning and the methodology — but don't change the price yet.</li>
       </ol>
     </div>
+  </div>
 
-    <div class="phase">
-      <div class="tag">Days 31–60</div>
-      <h3>Recalibrate the offers and build the front end</h3>
-      <ol class="steps">
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 31–60</span>
+      <span class="ttl">Recalibrate the offers and build the front end</span>
+    </div>
+    <div class="phase-body">
+      <ol>
         <li><strong>Reprice, now that the positioning holds it.</strong> Deep Dive Dubai into five figures (£10,000+). MLU individual to £15,000 minimum. Update the live pages.</li>
         <li><strong>Rebuild the 1-1 offer</strong> inside the new positioning — high-touch, immersive, priced to the room you put people in. Make it real and listed.</li>
         <li><strong>Strip MLU back toward intimacy.</strong> Move it away from the "University / faculty / team tiers" institutional framing toward the high-touch immersive identity. Fewer, deeper, higher.</li>
@@ -585,11 +640,15 @@ ol.steps li strong { color: var(--charcoal); }
         <li><strong>Record the micro-VSL:</strong> short, plain, you on camera talking like a human about the real shift, pointing to the room.</li>
       </ol>
     </div>
+  </div>
 
-    <div class="phase">
-      <div class="tag">Days 61–90</div>
-      <h3>Turn on the engine and hold the drumbeat</h3>
-      <ol class="steps">
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 61–90</span>
+      <span class="ttl">Turn on the engine and hold the drumbeat</span>
+    </div>
+    <div class="phase-body">
+      <ol>
         <li><strong>Run local Dubai paid traffic</strong> to the mastermind registration. Start small. The goal is to double or triple attendance of a room that already converts.</li>
         <li><strong>Lock the monthly rhythm:</strong> one mastermind a month on the calendar for the next 12 months, ad always running to fill it. Decided once.</li>
         <li><strong>Build the nurture + retargeting backend</strong> from Limitless Leads so no one who finds you slips away.</li>
@@ -600,54 +659,24 @@ ol.steps li strong { color: var(--charcoal); }
   </div>
 </section>
 
-<!-- CLOSING -->
-<section class="closing reveal">
-  <div class="reading">
-    <div class="eyebrow">Last thing</div>
+</main>
+
+<!-- ===================== CLOSING ===================== -->
+<section class="closing">
+  <div class="sechead">
+    <div class="note-head">Last thing</div>
     <h2>Before you close this</h2>
-    <p>Benjamin — this is a roadmap, not a rulebook. The order matters more than perfection. If you do the positioning work and nothing else this quarter, you'll still be further ahead than another year of scattered effort would get you.</p>
-    <p>You already said the truest thing in your assessment: you have everything you need, and you're willing to make fast changes. I believe both. The talent and the depth are not in question. This is only about aligning the business, the pricing, and the way people find you with the caliber of coach you already are.</p>
-    <p>Don't try to do it all at once. That's the old pattern, and it's the thing that pulls you out of alignment. Fewer things, in order, done well.</p>
-    <p>I'm here as you implement. When you hit the part that feels uncertain — and the positioning work will, because it always does — bring it to me. That's what the next stretch of our work together is for.</p>
-    <p>Let's build the business that matches the coach.</p>
-    <div class="sign">
-      — see you in the work,
-      <span class="name">Jason Moss</span>
-    </div>
-    <div class="contact">Telegram @jasonmossofficial &nbsp;·&nbsp; jason@jasonmoss.com</div>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Benjamin — this is a roadmap, not a rulebook. The order matters more than perfection. If you do the positioning work and nothing else this quarter, you'll still be further ahead than another year of scattered effort would get you.</p>
+  <p>You already said the truest thing in your assessment: you have everything you need, and you're willing to make fast changes. I believe both. The talent and the depth are not in question. This is only about aligning the business, the pricing, and the way people find you with the caliber of coach you already are.</p>
+  <p>Don't try to do it all at once. That's the old pattern, and it's the thing that pulls you out of alignment. Fewer things, in order, done well.</p>
+  <p>I'm here as you implement. When you hit the part that feels uncertain — and the positioning work will, because it always does — bring it to me. That's what the next stretch of our work together is for.</p>
+  <p>Let's build the business that matches the coach.</p>
+  <div class="sign">— see you in the work, Jason Moss
+  <span>Telegram @jasonmossofficial &nbsp;·&nbsp; jason@jasonmoss.com</span>
   </div>
 </section>
-
-<footer class="footer">
-  <div class="container">
-    <div class="confid">Confidential — prepared for Benjamin Owen</div>
-    <p>&copy; 2026 Jason Moss LLC. All rights reserved.</p>
-    <p style="margin-top:8px;">
-      <a href="/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-      <span style="margin:0 8px; opacity:0.4;">|</span>
-      <a href="/terms/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>
-    </p>
-  </div>
-</footer>
-
-<script>
-(function () {
-  var els = document.querySelectorAll('.reveal');
-  if (!('IntersectionObserver' in window)) {
-    els.forEach(function (e) { e.classList.add('visible'); });
-    return;
-  }
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (entry) {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.04 });
-  els.forEach(function (e) { io.observe(e); });
-})();
-</script>
 
 </body>
 </html>
