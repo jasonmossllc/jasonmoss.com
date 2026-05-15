@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Bridge Creative Agency — Strategy Plan</title>
+<style>
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+
+  :root{
+    --obsidian:#1D1F1E;
+    --forest:#2C3F36;
+    --mocha:#5B4B3F;
+    --taupe:#8C837A;
+    --gold:#C2A86C;
+    --stone:#E9E2D3;
+    --sand:#F8F6F2;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html,body{
+    background:var(--sand);
+    color:var(--obsidian);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:10.6pt;
+    line-height:22px;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  p{margin:0 0 12px 0;line-height:22px;orphans:3;widows:3;}
+  strong{font-weight:600;color:var(--obsidian);}
+  em{font-style:italic;}
+
+  /* ---------- COVER ---------- */
+  .cover{
+    position:relative;
+    background:var(--forest);
+    color:var(--sand);
+    min-height:271mm;
+    padding:32mm 26mm 0 26mm;
+    overflow:hidden;
+  }
+  .cover .logo{width:188px;display:block;}
+  .cover .cover-mid{margin-top:92mm;}
+  .cover .eyebrow{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:11pt;
+    line-height:16px;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:20px;
+  }
+  .cover h1{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:39pt;
+    line-height:60px;
+    color:var(--sand);
+    margin-bottom:26px;
+  }
+  .cover .rule{width:64px;height:2px;background:var(--gold);margin-bottom:26px;}
+  .cover .sub{
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:13pt;
+    line-height:29px;
+    color:var(--stone);
+    max-width:128mm;
+  }
+  .cover .foot{
+    position:absolute;
+    left:26mm;right:26mm;bottom:30mm;
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:9.5pt;
+    line-height:16px;
+    letter-spacing:.04em;
+    color:var(--stone);
+  }
+  .cover .foot .l{float:left;}
+  .cover .foot .r{float:right;}
+  .cover .foot::after{content:"";display:block;clear:both;}
+  .cover .foot .who{font-weight:600;color:var(--sand);}
+
+  /* ---------- BODY CONTENT ---------- */
+  main.doc{
+    display:flow-root;
+    padding:15mm 18mm 6mm 18mm;
+  }
+
+  .section{
+    display:flow-root;
+    margin-top:30px;
+  }
+  main.doc > .section:first-child{margin-top:0;}
+  .section.break{break-before:page;margin-top:0;}
+
+  /* header cluster kept together as one unit */
+  .sechead{
+    break-inside:avoid;
+    break-after:avoid;
+  }
+  .sec-num,.note-head{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:9pt;
+    line-height:14px;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:7px;
+  }
+  h2{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:20.5pt;
+    line-height:33px;
+    color:var(--obsidian);
+    margin-bottom:10px;
+  }
+  .h2-rule{width:48px;height:2px;background:var(--gold);margin:14px 0 18px 0;}
+
+  h3{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:12.5pt;
+    line-height:21px;
+    color:var(--forest);
+    margin:21px 0 8px 0;
+    break-after:avoid;
+  }
+
+  .lead{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:12pt;
+    line-height:25px;
+    color:var(--mocha);
+    margin-bottom:14px;
+  }
+
+  ul,ol{margin:4px 0 14px 0;padding-left:0;list-style:none;}
+  li{
+    position:relative;
+    padding-left:20px;
+    margin-bottom:9px;
+    line-height:22px;
+  }
+  ul li::before{
+    content:"";
+    position:absolute;
+    left:2px;top:8px;
+    width:5px;height:5px;
+    background:var(--gold);
+  }
+  ol{counter-reset:ol;}
+  ol li{padding-left:26px;counter-increment:ol;}
+  ol li::before{
+    content:counter(ol);
+    position:absolute;
+    left:0;top:1px;
+    font-family:'Raleway',sans-serif;
+    font-weight:700;
+    font-size:9.5pt;
+    line-height:20px;
+    color:var(--gold);
+  }
+
+  .callout{
+    background:var(--stone);
+    border-left:3px solid var(--gold);
+    padding:17px 23px;
+    margin:18px 0 20px 0;
+    break-inside:avoid;
+  }
+  .callout p{
+    font-family:'Libre Baskerville',serif;
+    font-style:italic;
+    font-size:11.5pt;
+    line-height:24px;
+    color:var(--obsidian);
+    margin:0;
+  }
+  .callout p + p{margin-top:10px;}
+
+  /* ---------- 90 DAY PLAN ---------- */
+  .phase{
+    break-inside:avoid;
+    margin-bottom:20px;
+    border:1px solid var(--stone);
+    background:#FCFBF8;
+  }
+  .phase-head{
+    background:var(--forest);
+    color:var(--sand);
+    padding:13px 22px 14px 22px;
+  }
+  .phase-head .tag{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:8.5pt;
+    line-height:13px;
+    letter-spacing:.24em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:4px;
+  }
+  .phase-head .ttl{
+    font-family:'Libre Baskerville',serif;
+    font-size:14pt;
+    line-height:22px;
+    color:var(--sand);
+  }
+  .phase-body{padding:17px 23px 8px 23px;}
+  .phase-body ol{margin:0;}
+  .phase-body ol li{margin-bottom:12px;line-height:22px;}
+  .phase-body ol li strong{color:var(--forest);}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    position:relative;
+    background:var(--forest);
+    color:var(--sand);
+    padding:60mm 26mm 40mm 26mm;
+    min-height:271mm;
+    overflow:hidden;
+  }
+  .closing .note-head{color:var(--gold);margin-bottom:7px;}
+  .closing h2{color:var(--sand);}
+  .closing .h2-rule{background:var(--gold);}
+  .closing p{color:var(--stone);font-size:11pt;line-height:25px;margin-bottom:13px;}
+  .closing strong{color:var(--sand);}
+  .closing .sign{
+    font-family:'Libre Baskerville',serif;
+    font-size:13pt;
+    line-height:20px;
+    color:var(--sand);
+    margin-top:26px;
+  }
+  .closing .sign span{
+    display:block;
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:9.5pt;
+    line-height:15px;
+    letter-spacing:.05em;
+    color:var(--gold);
+    margin-top:9px;
+  }
+
+  /* ---------- SCREEN / RESPONSIVE (does not affect print) ---------- */
+  @media screen and (min-width:1024px){
+    main.doc{max-width:880px;margin-left:auto;margin-right:auto;}
+  }
+  @media screen and (max-width:768px){
+    html,body{font-size:11pt;line-height:1.65;}
+    .cover{min-height:auto;padding:52px 24px 0 24px;}
+    .cover .logo{width:150px;}
+    .cover .cover-mid{margin-top:96px;margin-bottom:72px;}
+    .cover .eyebrow{font-size:10pt;letter-spacing:.22em;}
+    .cover h1{font-size:28pt;line-height:1.22;margin-bottom:22px;}
+    .cover .sub{font-size:12pt;line-height:1.7;max-width:none;}
+    .cover .foot{position:static;left:auto;right:auto;bottom:auto;padding-bottom:44px;}
+    main.doc{padding:30px 22px 26px 22px;}
+    h2{font-size:18pt;line-height:1.3;}
+    h3{font-size:12pt;line-height:1.45;}
+    .lead{font-size:12pt;line-height:1.7;}
+    .callout{padding:16px 18px;}
+    .callout p{font-size:11.5pt;line-height:1.65;}
+    .closing{min-height:auto;padding:64px 24px 64px 24px;}
+    .closing p{font-size:11.5pt;line-height:1.7;}
+    .section.break{break-before:auto;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section class="cover">
+  <img class="logo" src="assets/logo-light.svg" alt="Jason Moss">
+  <div class="cover-mid">
+    <div class="eyebrow">Business Strategy Plan</div>
+    <h1>Bridge Creative Agency</h1>
+    <div class="rule"></div>
+    <div class="sub">A clear-eyed look at where your business is, the biggest opportunities I see, and a 90-day plan to act on them — built from my review of your business, your assessment, and the notes I recorded going through everything.</div>
+  </div>
+  <div class="foot">
+    <span class="l">Prepared for <span class="who">Noelle No</span></span>
+    <span class="r">May 2026</span>
+  </div>
+</section>
+
+<main class="doc">
+
+<!-- ===================== 1. PERSONAL NOTE ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="note-head">A note before we begin</div>
+    <h2>First, the honest part</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Hey Noelle —</p>
+  <p>Before you read a word of this, I want to be straight with you about how it was made.</p>
+  <p>I used AI to help me organize my notes and shape this into something clean and readable. What you're holding looks polished because I wanted it to be easy to move through... not because a machine decided what your business needs.</p>
+  <p>The strategy itself is mine. Every shift I'm recommending, every opportunity I'm pointing at, came out of sitting with your business — your assessment, your funnel, your lead magnet, your emails, your work — and recording what I saw. This isn't a template with your name dropped in. It's my thinking about <em>your</em> business, made readable.</p>
+  <p>Read it slowly. Some of it will land as relief. Some of it will sting a little. Both are useful.</p>
+  <p>Let's get into it.</p>
+</section>
+
+<!-- ===================== 2. WHERE YOU ARE NOW ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 02</div>
+    <h2>Where you are right now</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You don't have a talent problem. You have a problem with who your machine is built to talk to, and where it stops.</p>
+  </div>
+
+  <p>Let me start with what's true and good, because it matters and I don't want it to get lost under everything else.</p>
+
+  <h3>What's working</h3>
+  <p>Your work is exceptional. When I went to your site and actually looked at what you've built for clients, that was the moment I sat up. There's real craft there — the kind that's hard to fake and hard to teach. Hold onto that, because most of this plan is about getting the right people in front of that work instead of the wrong people.</p>
+  <p>Your core offer is strong. The nine-week container, the $4,200 price point, the payment structure — that's a well-built offer and I'm not going to ask you to touch it.</p>
+  <p>Your instinct about the website itself is right. You frame it as a vehicle to clients, not a digital brochure. For a practitioner, the site is a means to an end — more of the right patients, more trust, less friction. That framing is correct and we are going to protect it.</p>
+  <p>And your new lead magnet — "6 Signs Your Private Practice Has Outgrown Its Current Online Presence" — is heading in exactly the right direction. You pivoted from teaching people how to fix it themselves to helping them <em>feel the gap</em>. That's the right move. We'll build on it.</p>
+
+  <h3>What's holding you back</h3>
+  <p>Your whole funnel is pointed at the wrong person.</p>
+  <p>The ads, the old "7 Must-Have Features" lead magnet, a lot of the email copy — they speak to someone in the mindset of <em>"I'm going to build this myself."</em> "Ditch DIY." "Tired of piecing together advice from all over the internet." That language attracts people looking for tips and templates. Tips-and-templates people are not the people who hire you.</p>
+  <p>Underneath that, three things are quietly costing you money:</p>
+  <ul>
+    <li>The front end attracts DIYers, so your best work rarely gets in front of someone ready to pay for it.</li>
+    <li>The sale is happening over a proposal instead of on the call — which turns an active decision into a passive one.</li>
+    <li>After about two weeks of welcome emails, the people who didn't buy yet fall off a cliff. There's no system catching them.</li>
+  </ul>
+  <p>You told me you've done six sales calls since December, closed one, and that you're "low key traumatized" by people ghosting or saying no. I want to name that directly: the dip in your confidence is real, but it's a symptom, not the disease. You're being asked to close in the worst possible conditions — wrong-fit leads, value introduced too late, the decision pushed off the call and onto a PDF. Almost anyone's confidence erodes under those conditions. We fix the conditions, and your confidence comes back with them.</p>
+  <p>One more pattern. You said inconsistency and perfectionism are what pull you out of alignment. That's important, and it shapes how this plan is built. We are not going to rely on your motivation staying high. We're going to build systems that hold the consistency for you.</p>
+
+  <div class="callout">
+    <p>Your work is the most convincing thing you have. Almost no one in your funnel is seeing it. That single sentence is most of this plan.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. BIGGEST OPPORTUNITIES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 03</div>
+    <h2>The biggest opportunities I see</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">If you only focused on a few things over the next year, focus on these. In this order.</p>
+  </div>
+
+  <h3>1. Reposition the funnel to the established practitioner</h3>
+  <p>This is the root. Everything downstream — ads, lead magnet, emails, the call — is currently tuned to the DIYer. The single highest-leverage move you can make is to point the whole machine at the established practitioner whose business has grown but whose web presence no longer reflects who they've become.</p>
+  <p>Expect your lead costs to go up noticeably when you do this. That is not failure. It's the opposite. You're moving from a big, cheap, mass-market audience of people who want to do it themselves to a smaller, more expensive, far more qualified pool of people who hire. Cheaper leads that never buy are not cheaper.</p>
+
+  <h3>2. Build the back-end nurture engine</h3>
+  <p>Here's a number from our own data: only about 53% of the people who buy from us do it within the first 30 days of becoming a lead. The other half convert over the following year — if someone keeps showing up for them.</p>
+  <p>Right now your funnel runs a roughly two-week welcome sequence and then goes quiet. Everyone who didn't buy in that window is effectively dropped on the floor. That's not a small leak. That's potentially half of your future revenue, from leads you already paid to acquire.</p>
+
+  <h3>3. Add a recurring back-end offer</h3>
+  <p>You spend a lot to acquire a client, you do one excellent nine-week project, and then you send them out the door. There's no structured way to keep earning from a relationship you worked hard to build.</p>
+  <p>An easy-yes monthly retainer — site updates, copy refreshes, social graphics — at a few hundred dollars a month changes the entire economics of your business. It also eases the exact constraint that's capping your growth: cash flow to put back into ads.</p>
+
+  <h3>4. Move the close onto the call</h3>
+  <p>The buying moment is on the call. The proposal kills it. I'll go deep on this later, but understand it as an opportunity, not just a fix: closing on the call is also how your confidence comes back, because you'll be selling at the moment value is highest instead of chasing a decision that's already gone cold.</p>
+
+  <h3>5. Diversify your traffic</h3>
+  <p>Paid traffic is good, but cash flow is your real constraint while you're ramping. A second free-ish lead source — Instagram Reels, done deliberately — takes the pressure off the ad budget and stops cash flow from being the ceiling on how fast you can grow.</p>
+</section>
+
+<!-- ===================== 4. WHAT NEEDS TO SHIFT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 04</div>
+    <h2>What needs to shift first</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Before any tactic works, these have to change. They're foundations, not to-dos.</p>
+  </div>
+
+  <h3>The avatar in your head</h3>
+  <p>Until the established practitioner is vivid and specific in your mind, every piece of copy you write will hedge. Your own welcome sequence proves it — Email 2 literally asks the reader to pick: "just getting your practice off the ground" <em>or</em> "ready to scale." That question exists because you haven't fully chosen yet. We're going to choose.</p>
+
+  <h3>Pain over tips</h3>
+  <p>The job of the front of your funnel is to open the gap, not to close it. Tips and templates close the gap — and in doing so, they select for people who want to DIY. Naming the cost of the gap and deepening someone's awareness of it selects for people who want it solved <em>for</em> them. Same audience size on paper. Completely different buyer.</p>
+
+  <h3>More of you, less generic</h3>
+  <p>Your new lead magnet is directionally right but it currently reads like it was written by AI — clean, competent, and anonymous. The thing that separates "useful PDF" from "I need to work with this woman" is <em>you</em>: your stories, your client examples, your eye, your philosophy. Right now the most persuasive asset you own is barely anywhere in the funnel.</p>
+
+  <h3>Sell live, not on paper</h3>
+  <p>This is a belief shift before it's a tactic. The proposal feels like the safe, professional option. It isn't. It's the leak. Internalize that and the sales changes in this plan will feel natural instead of scary.</p>
+
+  <h3>Consistency as a system</h3>
+  <p>You named it yourself: inconsistency and perfectionism pull you out of alignment. So we don't build a plan that needs you to feel inspired every week. We build cadence — batched, scheduled, repeatable — so the machine runs even on the weeks you don't feel like it. This is also where the part-time admin you want fits: take the inbound and the scheduling off your plate so your energy goes where it actually belongs, into the designing, strategizing, listening, and translating you told me lights you up.</p>
+
+  <h3>The timeline</h3>
+  <p>I need to be honest with you here, because pretending otherwise wouldn't help you.</p>
+  <p>You wrote that you'd love to hit $15K/month within three months and have everything set up before your Korea trip in mid-June. I love the drive. But the math doesn't bend that way. To hit a $20K/month run rate on paid traffic at a healthy return, you're likely looking at $7–10K/month in ad spend — and you don't get there in 30 days. Lead costs rising, cash flow as the constraint, half of conversions landing over the following year: all of it points the same direction. This compounds. It doesn't spike.</p>
+  <div class="callout">
+    <p>$20K/month is the 12-month picture. The next 90 days isn't the sprint that gets you there — it's the foundation that makes getting there inevitable. Build it before Korea. Don't expect it to have paid off by Korea.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. POSITIONING & MESSAGING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 05</div>
+    <h2>Positioning &amp; messaging</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Keep the spine that's strong. Move everything onto one axis. Put yourself back in it.</p>
+  </div>
+
+  <h3>Keep what's working</h3>
+  <p>Your "website as the vehicle to clients" framing is strong and right. For practitioners, the site is a means to an end. As we tighten everything else, we do not lose that. It stays the spine.</p>
+
+  <h3>The reposition, concretely</h3>
+  <p>Your assets are currently split across two messages. The old lead magnet and the ads — "Ditch DIY. Build a Website Patients Trust," "Tired of piecing together advice from all over the internet," "7 must-have features every private practice website needs" — speak to the DIYer. The new lead magnet — "6 Signs Your Private Practice Has Outgrown Its Current Online Presence" — speaks to the established practitioner. They cannot both be true at once. We move everything onto the new axis.</p>
+  <p>Here's the message frame I want under all of it:</p>
+  <div class="callout">
+    <p>You have a website that no longer reflects your brand — and it's quietly costing you clients right now. How much have you left on the table over the last six months? How much revenue is leaking out of your business every month because your site isn't speaking to the people you most want to work with?</p>
+  </div>
+  <p>That's the spine of the ads, the lead magnet, the emails, and the call. Not "here's how to fix your site." Instead: "here's what the gap is costing you, and here's what becomes possible when it closes."</p>
+
+  <h3>Show the work</h3>
+  <p>I'll keep saying this because it's that important. Your portfolio is the single most persuasive thing you have, and it's almost entirely missing from your funnel. Seeing your work is what sells people in this business. Weave it everywhere — screenshots inside emails, active links to your work page, before-and-afters as part of the story. Make seeing your work a deliberate part of how someone warms up to you, not something they only find if they go looking.</p>
+
+  <h3>One avatar, for now</h3>
+  <p>Kill the fork in welcome Email 2. Pick the established practitioner and write only to them. Later — not now — you can build a second funnel for the just-getting-started segment, because they're a genuinely different person who needs different messaging. Two niches, two funnels, eventually. One funnel, done sharply, today.</p>
+</section>
+
+<!-- ===================== 6. OFFERS & PRICING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 06</div>
+    <h2>Offers &amp; pricing</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">The core offer is strong. Stop showing the price too early. Add the thing you're missing.</p>
+  </div>
+
+  <h3>The core offer: leave it alone</h3>
+  <p>Nine weeks, $4,200, the payment plan you've structured — that's good. The price point is right and the structure is right. Don't tinker with it. Spend your energy on who you put in front of it, not on the offer itself.</p>
+
+  <h3>Pricing on the funnel: pull it</h3>
+  <p>At your stage, showing price before a sales call is working against you. When you put the number out before you've had a chance to connect someone to the pain, the cost, and the desire — and to pitch a solution that fits them — you've dropped the price before you ever built the value.</p>
+  <p>Showing price up front is a tool for a later stage of business: when you have heavy lead flow and you need to qualify aggressively to protect your time. That's not your problem right now. Your problem right now is volume of conversations. So pull pricing off the funnel, route everything to the application, and get on as many calls as you can. We start qualifying harder when call volume becomes the bottleneck — not before.</p>
+
+  <h3>The offer you're missing</h3>
+  <p>This is the biggest structural gap in your business, and it's a quiet one.</p>
+  <p>You acquire a client at real cost, deliver one outstanding project, and the relationship ends there. In your assessment you described the retainer as something you mention in the last week, while half-hoping they won't need it. Reframe it completely. The recurring offer is not a fallback for clients who didn't get it right. It's the intended next chapter of the relationship.</p>
+  <p>An easy-yes monthly retainer — a few hundred dollars a month or less, covering site updates, copy refreshes, maybe social graphics — turns a one-time project into a long-term relationship and lifts the lifetime value of every client you sign. It also feeds the cash-flow constraint that's currently capping how much you can spend to grow. Build it. Position it as partnership, not patch.</p>
+</section>
+
+<!-- ===================== 7. MARKETING & CONTENT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 07</div>
+    <h2>Marketing &amp; content strategy</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Same funnel shape. Sharper target. More of you. A real cadence.</p>
+  </div>
+
+  <h3>Front end: ads and landing page</h3>
+  <p>Rebuild the Meta ads and the landing page around the established practitioner and the new lead magnet's axis. Retire the DIY language. The new message is the cost of the gap, not a checklist of fixes. Again — expect lead costs to rise. That's the price of qualification, and it's worth paying.</p>
+
+  <h3>The lead magnet: keep the direction, add yourself</h3>
+  <p>You've done the hard part already — you pivoted it toward exposing the gap and deepening awareness of the problem. From here, make it unmistakably yours:</p>
+  <ul>
+    <li>Weave in real client stories and proprietary examples — things only you could include.</li>
+    <li>Use before-and-after screenshots from real projects: here's what misalignment looked like, here's what alignment looked like, here's what happened afterward.</li>
+    <li>End each page with a reflection question, so it becomes insight instead of passive reading. For example, after the page on misalignment: <em>"If you're being honest with yourself, where do you feel your current brand is most misaligned with who you are today?"</em></li>
+  </ul>
+  <p>Those questions matter more than they look. They move someone from reading about the gap to seeing themselves inside it. That's the shift from intellectual exercise to felt problem — and felt problems are what people pay to solve.</p>
+
+  <h3>The welcome sequence: rebuild around one person</h3>
+  <p>The flow is fine. The messaging is generic — "struggling to show up professionally online" is too vague to move anyone. Rewrite it for the single avatar: deepen the pain, name what it's costing, and carry it with your own experience and your client stories. Weave your work through it. And tighten the cadence — daily for the first week, when someone is warmest. Your VSL push currently spaces emails three days apart; that's too slow. Space things out and people quietly drift away before the message lands.</p>
+
+  <h3>The back-end nurture engine</h3>
+  <p>This is the highest-return build you have after the reposition. Three to five emails a week to everyone past the welcome sequence — stories, the cost of the gap, your work, your thinking. At minimum, that. Then layer a live experience on top: once a month, or every other month. A case-study breakdown showing real before-and-afters, or a short training on what actually shifts when a practitioner's website changes and the biggest gaps you see in most sites. The point isn't the format. The point is that people feel your presence and connect to your value at a level a written email can't reach.</p>
+
+  <h3>Traffic mix</h3>
+  <p>Aim for roughly half your leads from paid and half from Instagram Reels. You said your social is sporadic and you can't see its impact — that changes. Reels becomes a deliberate, primary lead channel, not background noise. It's the fastest way to take the cash-flow pressure off your ad budget while you scale.</p>
+</section>
+
+<!-- ===================== 8. SYSTEMS & OPERATIONS ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 08</div>
+    <h2>Systems &amp; operations</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">The clunkiest links in your chain are the application and the close. We rebuild both — together.</p>
+  </div>
+
+  <h3>Application and call flow</h3>
+  <p>Your application questions feel disjointed right now, and the handoff from application to call on the thank-you page is rough. This is exactly the kind of thing I don't want you guessing at alone. We workshop it together on a coaching call and rebuild the questions and the handoff as one clean motion.</p>
+
+  <h3>The close</h3>
+  <p>Stop sending proposals. I mean that as a system change, not a mood.</p>
+  <p>When you send a proposal, you take an active decision and turn it into a passive one. The energy that was in the room on the call doesn't survive the wait. Instead, demonstrate the value live and decide on the call. Walk them through it in order:</p>
+  <ul>
+    <li>Here's what I see that's broken on your site right now.</li>
+    <li>Here's what I believe it's costing you.</li>
+    <li>Here's what we'll shift, and here's what it looks like on the other side of the nine weeks.</li>
+  </ul>
+  <p>That conversation, had live, is where value is actually felt and where someone decides. The portal has strong sales training and a script for exactly this, and we'll work on how you sell directly.</p>
+
+  <h3>Consistency, staffed and systematized</h3>
+  <p>Because inconsistency is your known failure point, the nurture cadence and the live rhythm can't depend on willpower. Batch the emails. Schedule the live sessions in advance. Make it a system that runs. And bring the part-time admin in first on inbound and scheduling — protect the energy that goes into the work itself, since that's the work that actually sells you.</p>
+
+  <h3>A note on tools</h3>
+  <p>You're on Typeform, Meta, ConvertKit, Squarespace, and Zapier, and you've bought Perspective. Don't let a tool migration become the project. The reposition and the back end matter far more than the stack. Keep what's running, and fold Perspective in once the message is right. A sharper funnel tool pointed at the wrong message just gets you to the wrong person faster.</p>
+</section>
+
+<!-- ===================== 9. PORTAL RESOURCES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 09</div>
+    <h2>Resources from the portal</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">In this order. The order is the point — each one sets up the next.</p>
+  </div>
+
+  <h3>1. Nail Your Niche workshop + worksheet</h3>
+  <p>Do this first, before you touch a single piece of copy. Fill out the worksheet. Get all the way inside the head of the established practitioner — what they're feeling, what the gap is costing them, what they actually want. Every messaging change in this plan lands or fails on the foundation this builds. Start here in your first week.</p>
+
+  <h3>2. Belief-Based Messaging (Launchpad)</h3>
+  <p>Go through this while you're rewriting the ads, the lead magnet, and the welcome sequence — it's the companion to that work. It gives you the building blocks of messaging that converts, with concrete examples you can adapt straight into your copy, emails, and posts.</p>
+
+  <h3>3. Sales training + the sales script (Launchpad)</h3>
+  <p>This is the direct answer to the call-confidence problem. Go through the training and start using the script on your very next call. Don't wait until you feel ready — the script is what helps you get there.</p>
+
+  <h3>4. Back-end and live-event resources</h3>
+  <p>When you reach the nurture build and your first live experience, we work on that together — I have specific resources for it and I'd rather walk you into them at the right moment than dump them on you now.</p>
+</section>
+
+<!-- ===================== 10. 90-DAY PLAN ===================== -->
+<section class="section break">
+  <div class="sechead">
+    <div class="sec-num">Section 10</div>
+    <h2>Your 90-day action plan</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">This is the payoff. Concrete enough to start Monday. Sequenced on purpose — don't reorder it.</p>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 1–30</span>
+      <span class="ttl">Foundation — clarify and rebuild the front end</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Do the Nail Your Niche workshop and fill out the worksheet — before any copy.</strong> Output a one-page profile of the established practitioner in their own words: their pain, and what the gap is costing them. Everything else references this page.</li>
+        <li><strong>Rewrite the Meta ads and landing page off the DIY axis.</strong> Replace "Ditch DIY," "tired of piecing together advice," and the "7 must-have features" angle with the cost-of-the-gap message from Section 5. Point them at the new lead magnet. Run Belief-Based Messaging alongside this as your companion.</li>
+        <li><strong>Deepen the lead magnet.</strong> Add two to three real client before-and-afters (misalignment → alignment → result), your philosophy in your own voice, and a reflection question at the end of every page. Strip out anything that reads like generic AI.</li>
+        <li><strong>Rebuild the welcome sequence around the single avatar.</strong> Delete the "just starting OR scaling" fork in Email 2. Deepen the pain and the cost, weave in screenshots and links to your work, and tighten cadence to daily for the first week.</li>
+        <li><strong>Pull pricing off the funnel.</strong> Route everything to the application and onto a call. Expect lead cost to rise — that's qualification working, not failure.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 31–60</span>
+      <span class="ttl">Implementation — build the back end and fix the sale</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Launch the back-end nurture engine.</strong> Three to five emails a week to everyone past the welcome sequence. Lead with stories, the cost of the gap, and your work. Treat this like half your future revenue, because it is.</li>
+        <li><strong>Book a coaching call with me to workshop the application and the call flow.</strong> We rebuild the questions and the thank-you-page handoff together — don't redesign this one alone.</li>
+        <li><strong>Go through the Launchpad sales training and start using the script.</strong> On the next call. Not the one after you feel ready.</li>
+        <li><strong>Change how you sell.</strong> Demonstrate value live and decide on the call. Stop sending proposals. Walk them through what's broken, what it's costing, what shifts, and what's on the other side of the nine weeks.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 61–90</span>
+      <span class="ttl">Momentum — recurring revenue, live presence, scale</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Launch the recurring retainer.</strong> A few hundred a month or less. Offer it to past clients first, then build it into the end of every new project as the intended next step — not an afterthought in week nine.</li>
+        <li><strong>Run your first live experience.</strong> A case-study breakdown with real before-and-afters, or a short training. Monthly or every other month. Invite the nurture list.</li>
+        <li><strong>Scale Instagram Reels toward a 50/50 split with paid.</strong> Deliberate, consistent, treated as a primary lead source — not sporadic posting.</li>
+        <li><strong>Review what's actually converting.</strong> Lead cost, call show rate, close rate, nurture replies. Refine the message, the cadence, and the spend from real data, not feel.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== CLOSING ===================== -->
+<section class="closing">
+  <div class="sechead">
+    <div class="note-head">Before you go</div>
+    <h2>One last thing</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>This is a roadmap, not a rulebook. The sequence matters — niche, then front end, then back end, then the sale, then scale — but how it feels in practice is yours to shape. If something isn't landing, that's information, not failure. Bring it to me.</p>
+  <p>I want to say the most important thing one more time, because I need it to stick. Your work is not the problem. It's the most convincing thing you have. This entire plan is one idea wearing ten hats: get more of the right people in front of what you can already do.</p>
+  <p>Don't try to do all of this before Korea. Build the foundation before Korea. The results come after, and they compound — that's not a consolation, it's how the durable version of this gets built.</p>
+  <p>I'm in this with you as you implement. When you hit something — a piece of copy that won't come together, a call that rattled you, a decision you're circling — that's exactly when to reach out, not after you've figured it out alone.</p>
+  <div class="sign">— Jason
+  <span>Telegram @jasonmossofficial &nbsp;·&nbsp; jason@jasonmoss.com</span>
+  </div>
+</section>
+
+</body>
+</html>
