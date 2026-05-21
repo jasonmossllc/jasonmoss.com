@@ -1,0 +1,908 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In — Upgrade to VIP | The Business Breakthrough Challenge</title>
+<meta name="description" content="You're registered for the Business Breakthrough Challenge. Before Day 1 — one option that changes how the week lands for you.">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Spiffy Elements — must load in <head> so popup click handlers
+     attach before any button can be clicked -->
+<script>
+"use strict";!function(i,t){var f=t.spiffy=t.spiffy||[];if(!f.init){
+if(f.invoked)return void(t.console&&console.error&&console.warn("Spiffy Elements included twice."))
+;f.invoked=!0,f.methods=["identify","config","debug","off","on"],f.factory=function(i){
+return function(){var t=Array.prototype.slice.call(arguments);return t.unshift(i),f.push(t),f}},
+f.methods.forEach(function(i){spiffy[i]=f.factory(i)}),f.load=function(t,f){if(!spiffy.ACCOUNT){
+spiffy.ACCOUNT=t,spiffy.DOMAIN=f;var e=i.createElement("script");e.type="text/javascript",
+e.async=!0,e.crossorigin="anonymous",e.src="https://js.static.spiffy.co/spiffy.js?a="+t
+;var n=i.getElementsByTagName("script")[0];n.parentNode.insertBefore(e,n)}}}}(document,window),
+spiffy.SNIPPET_VERSION="1.1.0";
+spiffy.config({
+    hideSidebar: false,
+})
+spiffy.load("jasonmoss", "checkout.jasonmoss.com");
+</script>
+
+<style>
+  :root {
+    --pale-sand: #F8F6F2;
+    --charcoal: #1D1F1E;
+    --forest: #2C3F36;
+    --forest-deep: #243530;
+    --warm-stone: #E9E2D3;
+    --warm-stone-soft: #EFEAE0;
+    --gold: #C2A86C;
+    --gold-hover: #AE9359;
+    --mocha: #5B4B3F;
+    --serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    --sans: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: var(--pale-sand);
+    line-height: 1.6;
+    font-weight: 400;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.18;
+    margin: 0;
+    color: var(--charcoal);
+  }
+
+  p { margin: 0 0 16px; }
+  p:last-child { margin-bottom: 0; }
+  a { color: inherit; }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .container-narrow {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 24px;
+    line-height: 1.4;
+  }
+
+  /* CTA Buttons */
+  .btn {
+    display: inline-block;
+    background: var(--gold);
+    color: #FFFFFF;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    padding: 19px 38px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+  .btn:hover {
+    background: var(--gold-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(91, 75, 63, 0.18);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--charcoal);
+    outline-offset: 4px;
+  }
+  .btn-large {
+    font-size: 14px;
+    padding: 22px 48px;
+    letter-spacing: 0.16em;
+  }
+
+  /* ===========================
+     INTRO — unified serif treatment
+     One font, one color, italic for emphasis only.
+     Balanced: airy enough to feel like a personal note,
+     tight enough that the VIP card lands near the fold.
+     =========================== */
+  .ty-intro {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(56px, 8vh, 88px) 0 clamp(48px, 7vh, 72px);
+    background:
+      linear-gradient(180deg, rgba(248,246,242,0.58), rgba(233,226,211,0.74)),
+      url('section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone-soft);
+    text-align: center;
+  }
+  .ty-intro > .container-narrow {
+    position: relative;
+    z-index: 1;
+  }
+
+  .ty-intro-portrait {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 26px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--warm-stone);
+    background: linear-gradient(140deg, #D8CFBC 0%, #B8AC93 100%);
+    box-shadow:
+      0 0 0 1px rgba(91, 75, 63, 0.08),
+      0 14px 32px rgba(91, 75, 63, 0.16);
+  }
+  .ty-intro-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+    display: block;
+  }
+
+  .ty-intro h1 {
+    font-family: var(--serif);
+    font-size: clamp(34px, 4vw, 50px);
+    line-height: 1.07;
+    letter-spacing: -0.008em;
+    color: var(--charcoal);
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  .ty-intro h1 .name {
+    font-style: italic;
+  }
+
+  .intro-body {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+  .intro-body p {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.75vw, 19px);
+    line-height: 1.55;
+    color: var(--charcoal);
+    font-weight: 400;
+    margin: 0 auto 18px;
+  }
+  .intro-body p.lead,
+  .intro-body p.emphasis,
+  .intro-body p.handoff {
+    font-style: italic;
+  }
+  .intro-body p.lead {
+    margin-bottom: 26px;
+  }
+  .intro-body p.emphasis {
+    margin: 24px auto;
+  }
+  .intro-body p.handoff {
+    font-size: clamp(20px, 2.1vw, 24px);
+    line-height: 1.4;
+    margin: 28px auto 0;
+  }
+  .intro-body p.handoff .vip-mark {
+    color: var(--gold);
+  }
+
+  /* Scroll cue — big chevron, no label */
+  .scroll-cue {
+    display: inline-block;
+    margin: 38px auto 0;
+    padding: 8px 20px;
+    text-decoration: none;
+    color: rgba(91, 75, 63, 0.5);
+    transition: color 0.2s ease;
+  }
+  .scroll-cue:hover {
+    color: var(--gold);
+  }
+  .scroll-cue-chevron {
+    width: 56px;
+    height: 56px;
+    display: block;
+    animation: scrollCueBounce 2.4s ease-in-out infinite;
+  }
+  @keyframes scrollCueBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.75; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue-chevron { animation: none; }
+  }
+
+  /* ===========================
+     VIP OFFER — dark, premium card
+     =========================== */
+  .ty-vip {
+    position: relative;
+    padding: clamp(80px, 11vh, 120px) 0;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, rgba(36,53,48,0.86), rgba(36,53,48,0.94)),
+      url('section-bg-forest.jpg') center / cover no-repeat,
+      var(--forest);
+    color: var(--pale-sand);
+  }
+  .ty-vip > .container {
+    position: relative;
+    z-index: 1;
+  }
+  .vip-card {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: clamp(40px, 5vw, 64px) clamp(28px, 4vw, 62px);
+    background: rgba(0, 0, 0, 0.14);
+    border: 1px solid rgba(194, 168, 108, 0.42);
+    box-shadow:
+      0 30px 80px rgba(0, 0, 0, 0.30),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+    text-align: center;
+  }
+  .vip-card .eyebrow {
+    color: var(--gold);
+    margin-bottom: 20px;
+  }
+  .vip-card h2 {
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.1;
+    color: var(--pale-sand);
+    margin-bottom: 0;
+  }
+  .vip-card h2 .price-inline {
+    display: inline-block;
+    color: var(--gold);
+    font-style: italic;
+    white-space: nowrap;
+  }
+  .vip-card .accent-line {
+    width: 52px;
+    height: 1px;
+    background: var(--gold);
+    margin: 30px auto 36px;
+  }
+  .vip-card .vip-intro {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(17px, 1.85vw, 20px);
+    line-height: 1.6;
+    color: rgba(248, 246, 242, 0.84);
+    margin-bottom: 38px;
+    max-width: 580px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .vip-benefits {
+    list-style: none;
+    margin: 0 0 40px;
+    padding: 0;
+    text-align: left;
+  }
+  .vip-benefits li {
+    display: grid;
+    grid-template-columns: 24px 1fr;
+    gap: 18px;
+    padding: 20px 0;
+    border-bottom: 1px solid rgba(194, 168, 108, 0.18);
+  }
+  .vip-benefits li:first-child {
+    padding-top: 0;
+  }
+  .vip-benefits li:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .vip-benefits .check-icon {
+    color: var(--gold);
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3px;
+  }
+  .vip-benefits .check-icon svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+  .vip-benefits .benefit-text {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(248, 246, 242, 0.92);
+  }
+  .vip-benefits .benefit-text strong {
+    color: var(--pale-sand);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 4px;
+    font-family: var(--sans);
+  }
+
+  .vip-closer {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(17px, 1.9vw, 20px);
+    line-height: 1.6;
+    color: rgba(248, 246, 242, 0.88);
+    margin: 0 auto 36px;
+    max-width: 600px;
+  }
+
+  /* Testimonial — photo + quote, no card chrome */
+  .vip-testimonial {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    max-width: 540px;
+    margin: 0 auto 40px;
+    text-align: left;
+  }
+  .vip-testimonial-photo {
+    flex-shrink: 0;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--warm-stone);
+    background: linear-gradient(140deg, #D8CFBC 0%, #B8AC93 100%);
+    box-shadow:
+      0 0 0 1px rgba(0, 0, 0, 0.18),
+      0 10px 24px rgba(0, 0, 0, 0.28);
+  }
+  .vip-testimonial-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 30%;
+    display: block;
+  }
+  .vip-testimonial-body {
+    flex: 1;
+    min-width: 0;
+  }
+  .vip-quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(16px, 1.75vw, 18px);
+    line-height: 1.5;
+    color: var(--pale-sand);
+    margin: 0 0 10px;
+  }
+  .vip-quote-meta {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 12px;
+  }
+  .vip-quote-name {
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--pale-sand);
+    letter-spacing: 0.02em;
+  }
+  .vip-quote-context {
+    font-family: var(--sans);
+    font-size: 10.5px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  /* Guarantee — small reassurance below CTAs */
+  .vip-guarantee {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 14px;
+    line-height: 1.55;
+    color: rgba(248, 246, 242, 0.62);
+    text-align: center;
+    margin: 28px auto 0;
+    max-width: 460px;
+  }
+
+  /* Price callout — $47 is hero, $97 is footnote */
+  .vip-price-callout {
+    max-width: 460px;
+    margin: 0 auto 32px;
+    padding: 32px 32px 24px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.24);
+    border: 1px solid rgba(194, 168, 108, 0.40);
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.22);
+  }
+  .vip-price-callout .price-amount {
+    display: block;
+    font-family: var(--serif);
+    font-size: clamp(54px, 6.4vw, 72px);
+    line-height: 1;
+    color: var(--gold);
+    letter-spacing: -0.012em;
+    margin-bottom: 10px;
+  }
+  .vip-price-callout .price-label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: rgba(248, 246, 242, 0.68);
+    margin-bottom: 22px;
+  }
+  .vip-price-callout .price-after {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(14px, 1.45vw, 15.5px);
+    line-height: 1.45;
+    color: rgba(248, 246, 242, 0.58);
+    padding-top: 18px;
+    border-top: 1px solid rgba(194, 168, 108, 0.25);
+  }
+
+  .vip-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+    margin-top: 8px;
+  }
+  .vip-cta .btn {
+    background: var(--gold);
+    color: #FFFFFF;
+    width: fit-content;
+    max-width: 100%;
+  }
+  .vip-cta .btn:hover {
+    background: #D4BA7C;
+  }
+  .decline-link {
+    display: inline-block;
+    font-family: var(--sans);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    color: rgba(248, 246, 242, 0.42);
+    text-decoration: none;
+    transition: color 0.2s ease, text-decoration-color 0.2s ease;
+    padding: 6px 8px;
+  }
+  .decline-link:hover {
+    color: rgba(248, 246, 242, 0.78);
+    text-decoration: underline;
+    text-decoration-color: rgba(248, 246, 242, 0.45);
+    text-underline-offset: 5px;
+  }
+
+  /* ===========================
+     FOOTER
+     =========================== */
+  footer {
+    background: var(--charcoal);
+    color: rgba(248, 246, 242, 0.42);
+    text-align: center;
+    padding: 44px 0;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+  footer p {
+    margin-bottom: 10px;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  footer a {
+    color: rgba(248, 246, 242, 0.58);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  footer a:hover {
+    color: var(--gold);
+  }
+
+  /* ===========================
+     RESPONSIVE
+     =========================== */
+  @media (max-width: 768px) {
+    .container, .container-narrow { padding: 0 22px; }
+
+    .ty-intro { padding: 48px 0 52px; }
+    .ty-intro-portrait {
+      width: 88px;
+      height: 88px;
+      margin-bottom: 22px;
+    }
+    .ty-intro h1 {
+      font-size: clamp(28px, 7.4vw, 36px);
+      margin-bottom: 20px;
+    }
+    .intro-body p {
+      font-size: 16px;
+      line-height: 1.55;
+      margin-bottom: 15px;
+    }
+    .intro-body p.lead {
+      margin-bottom: 22px;
+    }
+    .intro-body p.emphasis {
+      margin: 20px auto;
+    }
+    .intro-body p.handoff {
+      font-size: 19px;
+      margin-top: 24px;
+    }
+    .scroll-cue {
+      margin-top: 26px;
+      padding: 8px 16px;
+    }
+    .scroll-cue-chevron {
+      width: 44px;
+      height: 44px;
+    }
+
+    .ty-vip { padding: 64px 0; }
+    .vip-card {
+      padding: 38px 24px;
+    }
+    .vip-card h2 {
+      font-size: 28px;
+    }
+    .vip-card h2 .price-inline {
+      display: block;
+      margin-top: 4px;
+    }
+    .vip-card .accent-line {
+      margin: 22px auto 26px;
+    }
+    .vip-card .vip-intro {
+      font-size: 16px;
+      margin-bottom: 28px;
+    }
+    .vip-benefits li {
+      grid-template-columns: 20px 1fr;
+      gap: 14px;
+      padding: 18px 0;
+    }
+    .vip-benefits .check-icon {
+      width: 18px;
+      height: 18px;
+      margin-top: 2px;
+    }
+    .vip-benefits .benefit-text {
+      font-size: 15px;
+      line-height: 1.65;
+    }
+    .vip-closer {
+      font-size: 16px;
+      margin-bottom: 26px;
+    }
+    .vip-testimonial {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .vip-testimonial-photo {
+      width: 56px;
+      height: 56px;
+    }
+    .vip-quote {
+      font-size: 16px;
+      line-height: 1.5;
+    }
+    .vip-quote-meta {
+      justify-content: center;
+    }
+    .vip-quote-name {
+      font-size: 12.5px;
+    }
+    .vip-quote-context {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+    }
+    .vip-guarantee {
+      font-size: 13.5px;
+      margin-top: 24px;
+    }
+    .vip-price-callout {
+      padding: 26px 22px 20px;
+      margin-bottom: 26px;
+    }
+    .vip-price-callout .price-amount {
+      font-size: 48px;
+      margin-bottom: 8px;
+    }
+    .vip-price-callout .price-label {
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      margin-bottom: 18px;
+    }
+    .vip-price-callout .price-after {
+      font-size: 13.5px;
+      padding-top: 14px;
+    }
+    .vip-cta .btn {
+      width: 100%;
+      max-width: 360px;
+      padding: 18px 22px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      white-space: normal;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .ty-hero h1 {
+      font-size: 28px;
+    }
+    .vip-card {
+      padding: 32px 20px;
+    }
+    .vip-card h2 {
+      font-size: 26px;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===========================
+       INTRO — arrival + setup copy
+       =========================== -->
+  <header class="ty-intro">
+    <div class="container-narrow">
+      <div class="ty-intro-portrait">
+        <img src="jm-headshot-1.png" alt="Jason Moss" loading="eager" decoding="async">
+      </div>
+
+      <h1>You&rsquo;re almost in<span id="nameComma">.</span><span class="name" id="firstName"></span></h1>
+
+      <div class="intro-body">
+        <p class="lead">Before you close this tab &mdash; a question worth asking before Day 1.</p>
+        <p>You&rsquo;re about to discover the pattern that&rsquo;s been capping your revenue for years.</p>
+        <p class="emphasis">The question is what you do next.</p>
+        <p>Some people take the insight and run.</p>
+        <p>Others want to go further.</p>
+        <p class="handoff">That&rsquo;s what the <span class="vip-mark">VIP Experience</span> is for.</p>
+      </div>
+
+      <a href="#vip-offer" class="scroll-cue" aria-label="Scroll to your upgrade option">
+        <svg class="scroll-cue-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- ===========================
+       VIP OFFER
+       =========================== -->
+  <section class="ty-vip" id="vip-offer">
+    <div class="container">
+      <div class="vip-card">
+        <div class="eyebrow">The VIP Experience</div>
+        <h2>Upgrade to VIP <span class="price-inline">&mdash; $47</span></h2>
+        <div class="accent-line"></div>
+
+        <ul class="vip-benefits">
+          <li>
+            <div class="check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"/></svg>
+            </div>
+            <div class="benefit-text">
+              <strong>Daily Q&amp;A with me, in a small room.</strong>
+              After each session, the main room closes and the VIP room opens. Your question &mdash; your actual situation &mdash; gets my full attention.
+            </div>
+          </li>
+          <li>
+            <div class="check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"/></svg>
+            </div>
+            <div class="benefit-text">
+              <strong>Post-challenge integration call.</strong>
+              A week after we wrap, we meet again &mdash; VIP only &mdash; to map out your next 90 days with everything you learned, applied to your business.
+            </div>
+          </li>
+          <li>
+            <div class="check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"/></svg>
+            </div>
+            <div class="benefit-text">
+              <strong>Private VIP Telegram.</strong>
+              A small group chat where I show up daily to answer questions and continue the conversation between sessions.
+            </div>
+          </li>
+          <li>
+            <div class="check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"/></svg>
+            </div>
+            <div class="benefit-text">
+              <strong>The Challenge Companion.</strong>
+              Daily prompts and practices you work through between sessions &mdash; so the shifts don&rsquo;t just happen on the call, they happen in your business.
+            </div>
+          </li>
+          <li>
+            <div class="check-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><polyline points="4 12 10 18 20 6"/></svg>
+            </div>
+            <div class="benefit-text">
+              <strong>Lifetime replay access.</strong>
+              Revisit anytime.
+            </div>
+          </li>
+        </ul>
+
+        <p class="vip-closer">With VIP, you&rsquo;ll get my eyes on your actual situation, and leave the week having <em>actually changed something</em>, not just learned something.</p>
+
+        <figure class="vip-testimonial">
+          <div class="vip-testimonial-photo">
+            <img src="https://image.mux.com/BfcAfCHylEb4yZc01nRnxF00v7tVxCRYgYGC1kFLGBJmk/thumbnail.jpg?width=160" alt="Jake Kodweis" loading="lazy" decoding="async">
+          </div>
+          <div class="vip-testimonial-body">
+            <blockquote class="vip-quote">&ldquo;Made $8,200 in my first 30 days after enrolling.&rdquo;</blockquote>
+            <figcaption class="vip-quote-meta">
+              <span class="vip-quote-name">Jake Kodweis</span>
+              <span class="vip-quote-context">Mentorship client</span>
+            </figcaption>
+          </div>
+        </figure>
+
+        <div class="vip-price-callout">
+          <span class="price-amount">$47</span>
+          <span class="price-label">On this page only</span>
+          <span class="price-after">$97 after you close this tab</span>
+        </div>
+
+        <div class="vip-cta">
+          <a href="https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip?c=THANKYOUPAGE#pop" id="vipUpgradeBtn" class="btn btn-large">Yes &mdash; Upgrade Me to VIP ($47)</a>
+          <a href="/business-breakthrough-challenge-complete" id="declineLink" class="decline-link">No thanks &mdash; I&rsquo;ll stick with the free challenge</a>
+        </div>
+
+        <p class="vip-guarantee">Try Day 1. If VIP isn&rsquo;t worth $47, I&rsquo;ll refund you. No questions.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FOOTER
+       =========================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://jasonmoss.com/privacy/">Privacy Policy</a>
+        <a href="https://jasonmoss.com/terms/">Terms &amp; Conditions</a>
+        <a href="https://jasonmoss.com/earnings-disclaimer/">Earnings Disclaimer</a>
+      </div>
+      <p>&copy; Jason Moss LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===========================
+       Personalization + param pass-through
+       (Spiffy snippet itself loads in <head>)
+       =========================== -->
+  <script>
+  (function() {
+    'use strict';
+
+    // Whitelist of URL params we forward to the upgrade + decline links.
+    // Explicit list so random params (?spam=evil) don't leak through.
+    var FORWARD_KEYS = [
+      'first_name', 'email', 'registered', 'qualified',
+      'ad', 'ref',
+      'utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'
+    ];
+
+    var params = new URLSearchParams(window.location.search);
+    var firstName = (params.get('first_name') || '').trim();
+    var email = (params.get('email') || '').trim();
+
+    // Personalize the headline if we have a name
+    if (firstName) {
+      var safeName = firstName.replace(/[<>]/g, '').slice(0, 40);
+      var nameEl = document.getElementById('firstName');
+      var commaEl = document.getElementById('nameComma');
+      if (nameEl && commaEl) {
+        commaEl.textContent = ', ';
+        nameEl.textContent = safeName + '.';
+      }
+    }
+
+    // Tell Spiffy who the visitor is. Belt-and-suspenders alongside the URL
+    // params injected on the upgrade link below — identify() runs through the
+    // SDK; URL params get parsed by the checkout popup directly.
+    if (window.spiffy && (firstName || email)) {
+      var identity = {};
+      if (firstName) identity.first_name = firstName;
+      if (email) identity.email = email;
+      window.spiffy.identify(identity);
+    }
+
+    // Build a URLSearchParams containing only the whitelisted forwarded keys.
+    function forwardedParams() {
+      var p = new URLSearchParams();
+      FORWARD_KEYS.forEach(function(key) {
+        var v = params.get(key);
+        if (v) p.set(key, v);
+      });
+      return p;
+    }
+
+    // Inject params BEFORE the hash so trailing hashes like Spiffy's #pop survive.
+    function injectParams(url, paramsToInject) {
+      if (!url || url === '#') return url;
+      var qs = paramsToInject.toString();
+      if (!qs) return url;
+      var hashIndex = url.indexOf('#');
+      var hash = '';
+      var base = url;
+      if (hashIndex !== -1) {
+        hash = url.substring(hashIndex);
+        base = url.substring(0, hashIndex);
+      }
+      var sep = base.indexOf('?') === -1 ? '?' : '&';
+      return base + sep + qs + hash;
+    }
+
+    var forwarded = forwardedParams();
+
+    // Upgrade button → Spiffy popup. The injected ?email=… &first_name=…
+    // arrives BEFORE the #pop hash so Spiffy still triggers the popup and
+    // pre-fills the checkout form with the buyer's info.
+    var upgradeBtn = document.getElementById('vipUpgradeBtn');
+    if (upgradeBtn) {
+      upgradeBtn.href = injectParams(upgradeBtn.href, forwarded);
+    }
+
+    // Decline link → challenge-complete page. Carries through registration
+    // context + attribution so the destination has the same UTMs / lead info.
+    var declineLink = document.getElementById('declineLink');
+    if (declineLink) {
+      declineLink.href = injectParams(declineLink.href, forwarded);
+    }
+  })();
+  </script>
+
+</body>
+</html>

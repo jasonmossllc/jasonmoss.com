@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Business Breakthrough Challenge — Jason Moss</title>
+<meta name="description" content="5 days live to uncover the hidden pattern keeping your revenue stuck — and the exact shift to break through it.">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pale-sand: #F8F6F2;
+    --charcoal: #1D1F1E;
+    --forest: #2C3F36;
+    --forest-deep: #243530;
+    --warm-stone: #E9E2D3;
+    --warm-stone-soft: #EFEAE0;
+    --gold: #C2A86C;
+    --gold-hover: #AE9359;
+    --mocha: #5B4B3F;
+    --serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    --sans: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: var(--pale-sand);
+    line-height: 1.6;
+    font-weight: 400;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.18;
+    margin: 0;
+    color: var(--charcoal);
+  }
+
+  p { margin: 0 0 16px; }
+  p:last-child { margin-bottom: 0; }
+  a { color: inherit; }
+
+  .container {
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .container-narrow {
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 24px;
+    line-height: 1.4;
+  }
+
+  /* CTA Buttons */
+  .btn {
+    display: inline-block;
+    background: var(--gold);
+    color: #FFFFFF;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    padding: 19px 38px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+  .btn:hover {
+    background: var(--gold-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(91, 75, 63, 0.18);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--charcoal);
+    outline-offset: 4px;
+  }
+
+  /* ===========================
+     HERO — Photo bleeds to right edge,
+     text constrained left, soft fade between
+     =========================== */
+  .hero {
+    position: relative;
+    background: var(--pale-sand);
+    overflow: hidden;
+    min-height: min(760px, 100vh);
+    display: flex;
+    align-items: center;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    pointer-events: none;
+    background:
+      linear-gradient(90deg,
+        rgba(248, 246, 242, 0.92) 0%,
+        rgba(248, 246, 242, 0.82) 30%,
+        rgba(248, 246, 242, 0.28) 55%,
+        rgba(248, 246, 242, 0) 78%);
+  }
+  .hero-inner {
+    position: relative;
+    width: 100%;
+    max-width: 1180px;
+    margin: 0 auto;
+    padding: clamp(56px, 8vh, 86px) 32px clamp(34px, 5.5vh, 70px);
+    z-index: 2;
+  }
+  .hero-text {
+    max-width: 650px;
+  }
+  .hero h1 {
+    font-size: clamp(38px, 4.1vw, 54px);
+    line-height: 1.08;
+    letter-spacing: -0.005em;
+    margin-top: 4px;
+    margin-bottom: 0;
+  }
+  .hero h1 .italic {
+    display: block;
+    font-style: italic;
+    font-size: 0.62em;
+    color: var(--mocha);
+    margin-top: 14px;
+    font-weight: 400;
+  }
+  .hero .lead {
+    font-family: var(--sans);
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--mocha);
+    margin: 24px 0;
+    max-width: 560px;
+  }
+  .hero .meta {
+    font-size: 14px;
+    color: var(--charcoal);
+    margin-bottom: 28px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 500;
+  }
+  .hero .meta svg {
+    color: var(--gold);
+    flex-shrink: 0;
+  }
+  .hero .btn {
+    display: block;
+    width: fit-content;
+    font-size: 14px;
+    padding: 20px 42px;
+  }
+  .hero-trust-logos {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px 20px;
+    max-width: 560px;
+    margin-top: 32px;
+  }
+  .hero-trust-logos img {
+    height: auto;
+    opacity: 0.42;
+    filter: sepia(0.2) saturate(0.6) brightness(0.85);
+    display: block;
+  }
+  .hero-trust-logos .logo-forbes { width: 74px; }
+  .hero-trust-logos .logo-bi { width: 126px; }
+  .hero-trust-logos .logo-obo { width: 64px; }
+  .hero-trust-logos .logo-entrepreneur { width: 96px; }
+  .hero-trust-logos .logo-fc { width: 96px; transform: translateY(1px); }
+  @media (min-width: 961px) and (max-width: 1180px) {
+    .hero-trust-logos {
+      max-width: 360px;
+    }
+  }
+  /* Photo: full-bleed cover (fade is baked into the desktop image) */
+  .hero-photo {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    display: block;
+    overflow: hidden;
+    pointer-events: none;
+  }
+  .hero-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 88% center;
+    display: block;
+  }
+  .hero-mobile-photo {
+    display: none;
+  }
+
+  /* ===========================
+     DIAGNOSIS SECTIONS (alternating)
+     =========================== */
+  section {
+    position: relative;
+    padding: 96px 0;
+    overflow: hidden;
+    background:
+      linear-gradient(180deg, rgba(248,246,242,0.76), rgba(248,246,242,0.88)),
+      url('section-bg-pale.jpg') center / cover no-repeat,
+      var(--pale-sand);
+  }
+  section > .container,
+  section > .container-narrow {
+    position: relative;
+    z-index: 1;
+  }
+  .section-warm {
+    background:
+      linear-gradient(180deg, rgba(233,226,211,0.75), rgba(233,226,211,0.86)),
+      url('section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone);
+    border-top: 1px solid rgba(91, 75, 63, 0.08);
+    box-shadow: inset 0 24px 34px rgba(91, 75, 63, 0.035);
+  }
+  .section-stone-soft {
+    background:
+      linear-gradient(180deg, rgba(248,246,242,0.75), rgba(239,234,224,0.86)),
+      url('section-bg-pale.jpg') center / cover no-repeat,
+      var(--warm-stone-soft);
+  }
+  .section-dark {
+    background:
+      linear-gradient(180deg, rgba(44,63,54,0.80), rgba(36,53,48,0.90)),
+      url('section-bg-forest.jpg') center / cover no-repeat,
+      var(--forest);
+    color: var(--pale-sand);
+  }
+  .section-dark h1,
+  .section-dark h2,
+  .section-dark h3 { color: var(--pale-sand); }
+
+  .diagnosis {
+    max-width: 780px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .diagnosis h2 {
+    font-size: clamp(30px, 3.4vw, 42px);
+    margin-bottom: 28px;
+  }
+  .diagnosis h2 .italic {
+    display: block;
+    font-style: italic;
+    color: var(--mocha);
+    font-size: 0.7em;
+    margin-top: 8px;
+  }
+  .diagnosis .subhead {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.3vw, 28px);
+    line-height: 1.3;
+    font-style: italic;
+    color: var(--mocha);
+    margin: -8px auto 26px;
+  }
+  .diagnosis p {
+    font-size: 17px;
+    line-height: 1.75;
+    margin-bottom: 18px;
+    color: var(--charcoal);
+  }
+  .diagnosis .accent-line {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 0 auto 32px;
+  }
+
+  /* ===========================
+     ARCHETYPES (DARK)
+     =========================== */
+  .archetypes-intro {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 56px;
+  }
+  .archetypes-intro h2 {
+    font-size: clamp(28px, 3.2vw, 38px);
+    margin-bottom: 20px;
+  }
+  .archetypes-intro h2 .italic {
+    display: block;
+    font-style: italic;
+    color: var(--gold);
+    font-size: 0.76em;
+    margin-top: 10px;
+  }
+  .archetypes-intro p {
+    color: rgba(248, 246, 242, 0.82);
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .archetype-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-bottom: 48px;
+  }
+  .archetype-card {
+    border: 1px solid rgba(194, 168, 108, 0.45);
+    padding: 36px 30px;
+    background: rgba(0, 0, 0, 0.10);
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+  .archetype-card:hover {
+    border-color: rgba(194, 168, 108, 0.85);
+    transform: translateY(-2px);
+  }
+  .archetype-card .icon {
+    width: 46px;
+    height: 46px;
+    color: var(--gold);
+    margin-bottom: 22px;
+    display: block;
+  }
+  .archetype-card h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: var(--pale-sand);
+  }
+  .archetype-card p {
+    font-size: 15px;
+    line-height: 1.65;
+    color: rgba(248, 246, 242, 0.82);
+  }
+
+  .archetypes-footer {
+    text-align: center;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .archetypes-footer p {
+    font-family: var(--serif);
+    font-style: normal;
+    color: rgba(248, 246, 242, 0.86);
+    font-size: 17px;
+    line-height: 1.7;
+    margin-bottom: 8px;
+  }
+  .archetypes-footer em {
+    font-style: italic;
+  }
+  .archetypes-footer p:first-child {
+    color: rgba(248, 246, 242, 0.94);
+  }
+
+  /* ===========================
+     JASON INTRO
+     =========================== */
+  .intro-jason {
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 48px;
+    align-items: start;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+  .jason-photo {
+    width: 220px;
+    height: 220px;
+    border-radius: 50%;
+    background: linear-gradient(140deg, #D8CFBC 0%, #B8AC93 100%);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    border: 2px solid var(--warm-stone);
+    box-shadow:
+      0 0 0 1px rgba(91, 75, 63, 0.10),
+      0 18px 42px rgba(91, 75, 63, 0.20);
+  }
+  .jason-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 43%;
+    display: block;
+  }
+  .intro-body h2 {
+    font-size: clamp(28px, 3.2vw, 36px);
+    margin-bottom: 22px;
+  }
+  .intro-body h2 .italic {
+    font-style: italic;
+    color: var(--mocha);
+  }
+  .intro-body p {
+    font-size: 16px;
+    line-height: 1.75;
+    margin-bottom: 16px;
+  }
+  .intro-cta {
+    margin-top: 30px;
+  }
+
+  /* ===========================
+     SOCIAL PROOF
+     =========================== */
+  .proof-heading {
+    max-width: 760px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+  .proof-heading h2 {
+    font-size: clamp(30px, 3.4vw, 42px);
+    margin-bottom: 16px;
+  }
+  .proof-heading p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(29, 31, 30, 0.72);
+  }
+  .section-dark .proof-heading p {
+    color: rgba(248, 246, 242, 0.76);
+  }
+  .client-proof-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .client-proof-picture,
+  .client-proof-image {
+    display: block;
+    width: 100%;
+  }
+  .client-proof-image {
+    height: auto;
+    box-shadow: 0 14px 34px rgba(91, 75, 63, 0.07);
+  }
+  .challenge-stat {
+    max-width: 620px;
+    margin: 0 auto 46px;
+    padding: 30px 34px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.12);
+    border: 1px solid rgba(194, 168, 108, 0.34);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.12);
+  }
+  .challenge-stat strong {
+    display: block;
+    font-family: var(--serif);
+    font-size: clamp(34px, 4.4vw, 52px);
+    line-height: 1.2;
+    color: var(--gold);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  .challenge-stat span {
+    display: block;
+    font-size: 13px;
+    line-height: 1.45;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(248, 246, 242, 0.74);
+  }
+  .challenge-screens {
+    columns: 3 280px;
+    column-gap: 22px;
+    max-width: 1120px;
+    margin: 0 auto;
+  }
+  .challenge-shot {
+    break-inside: avoid;
+    display: inline-block;
+    width: 100%;
+    margin: 0 0 22px;
+  }
+  .challenge-shot img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 8px;
+    border: 1px solid rgba(248, 246, 242, 0.22);
+    box-shadow: 0 18px 42px rgba(0, 0, 0, 0.22);
+  }
+
+  /* ===========================
+     TAKEAWAYS (Over 5 days, you'll)
+     =========================== */
+  .takeaways-section {
+    box-shadow:
+      inset 0 1px 0 rgba(255,255,255,0.40),
+      inset 0 -1px 0 rgba(91, 75, 63, 0.08);
+  }
+  .takeaways-heading {
+    text-align: center;
+    font-size: clamp(32px, 3.8vw, 44px);
+    margin-bottom: 18px;
+  }
+  .takeaways-heading::after {
+    content: '';
+    display: block;
+    width: 52px;
+    height: 1px;
+    background: var(--gold);
+    margin: 24px auto 0;
+  }
+  .takeaways-grid {
+    counter-reset: takeaway;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    max-width: 980px;
+    margin: 46px auto 0;
+  }
+  .takeaway {
+    counter-increment: takeaway;
+    position: relative;
+    min-height: 190px;
+    padding: 34px 34px 32px;
+    background: rgba(248, 246, 242, 0.56);
+    border: 1px solid rgba(91, 75, 63, 0.12);
+    box-shadow:
+      0 14px 34px rgba(91, 75, 63, 0.07),
+      inset 0 1px 0 rgba(255,255,255,0.46);
+  }
+  .takeaway::before {
+    content: '0' counter(takeaway);
+    position: absolute;
+    top: 30px;
+    right: 32px;
+    font-family: var(--serif);
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(91, 75, 63, 0.44);
+  }
+  .takeaway .icon {
+    width: 42px;
+    height: 42px;
+    color: var(--gold);
+    margin-bottom: 24px;
+    display: block;
+  }
+  .takeaway p {
+    max-width: 390px;
+    font-size: 16px;
+    line-height: 1.72;
+    color: var(--charcoal);
+  }
+
+  /* ===========================
+     FIT (This is / This isn't for you)
+     =========================== */
+  .fit-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .fit-col h3 {
+    font-size: 26px;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(91, 75, 63, 0.25);
+  }
+  .fit-col h3 .italic { font-style: italic; }
+  .fit-col ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+  .fit-col li {
+    position: relative;
+    padding: 14px 0 14px 36px;
+    font-size: 15px;
+    line-height: 1.65;
+  }
+  .fit-col.yes li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 19px;
+    width: 14px;
+    height: 8px;
+    border-left: 2px solid var(--gold);
+    border-bottom: 2px solid var(--gold);
+    transform: rotate(-45deg);
+  }
+  .fit-col.no li::before {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 24px;
+    width: 15px;
+    height: 2px;
+    background: var(--mocha);
+    opacity: 0.55;
+    transform: rotate(45deg);
+  }
+  .fit-col.no li::after {
+    content: '';
+    position: absolute;
+    left: 1px;
+    top: 24px;
+    width: 15px;
+    height: 2px;
+    background: var(--mocha);
+    opacity: 0.55;
+    transform: rotate(-45deg);
+  }
+
+  .center-cta {
+    text-align: center;
+    margin-top: 38px;
+  }
+
+  /* ===========================
+     DAYS BREAKDOWN (DARK)
+     =========================== */
+  .days-heading {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .days-heading h2 {
+    font-size: clamp(30px, 3.4vw, 42px);
+    margin-bottom: 14px;
+  }
+  .days-heading p {
+    max-width: 520px;
+    margin: 0 auto;
+    font-size: 15px;
+    line-height: 1.6;
+    color: rgba(248, 246, 242, 0.74);
+  }
+  .days-heading .accent-line {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 24px auto 0;
+  }
+  .days-list {
+    max-width: 880px;
+    margin: 0 auto;
+  }
+  .day {
+    display: grid;
+    grid-template-columns: 180px 1fr;
+    gap: 40px;
+    padding: 36px 0;
+    border-bottom: 1px solid rgba(194, 168, 108, 0.22);
+    align-items: start;
+  }
+  .day:last-child { border-bottom: none; }
+  .day-label .num {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 8px;
+    color: rgba(194, 168, 108, 0.75);
+  }
+  .day-label .title {
+    font-family: var(--serif);
+    font-size: 22px;
+    line-height: 1.25;
+    color: var(--gold);
+    font-style: italic;
+  }
+  .day-label .time {
+    display: block;
+    margin-top: 10px;
+    font-family: var(--sans);
+    font-size: 12px;
+    line-height: 1.45;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(248, 246, 242, 0.66);
+  }
+  .day-content p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(248, 246, 242, 0.88);
+    margin: 0;
+  }
+  .day-cta {
+    text-align: center;
+    margin-top: 64px;
+  }
+
+  /* ===========================
+     FINAL NOTE
+     =========================== */
+  .final-note {
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .final-note h2 {
+    font-size: clamp(28px, 3.2vw, 36px);
+    margin-bottom: 16px;
+  }
+  .final-note h2 .italic {
+    font-style: italic;
+    color: var(--mocha);
+  }
+  .final-note .accent-line {
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 24px auto 32px;
+  }
+  .final-note p {
+    font-size: 17px;
+    line-height: 1.78;
+    margin-bottom: 18px;
+  }
+  .final-note .closing {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+    line-height: 1.6;
+    color: var(--mocha);
+    margin: 28px 0 22px;
+  }
+  .final-note .signature {
+    font-family: var(--serif);
+    font-size: 18px;
+    line-height: 1.35;
+    margin: 28px 0 36px;
+    color: var(--charcoal);
+  }
+  .final-note .signature-name {
+    display: inline-block;
+    margin-top: 4px;
+    font-family: var(--serif);
+    font-size: 22px;
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0;
+    color: var(--mocha);
+  }
+  .final-note .ps {
+    margin: 38px auto 0;
+    padding: 28px 32px;
+    max-width: 660px;
+    text-align: left;
+    background: rgba(248, 246, 242, 0.58);
+    border: 1px solid rgba(91, 75, 63, 0.12);
+    border-left: 2px solid var(--gold);
+    box-shadow: 0 12px 28px rgba(91, 75, 63, 0.055);
+  }
+  .final-note .ps p {
+    font-size: 16px;
+    line-height: 1.75;
+    color: rgba(29, 31, 30, 0.78);
+  }
+  .final-note .ps p:last-child {
+    margin-bottom: 0;
+  }
+  .final-note .ps strong {
+    color: var(--mocha);
+    font-weight: 600;
+  }
+  .final-note .ps a {
+    color: var(--mocha);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: rgba(194, 168, 108, 0.75);
+    text-underline-offset: 4px;
+  }
+  .final-note .ps a:hover {
+    color: var(--charcoal);
+    text-decoration-color: var(--gold);
+  }
+  .final-note .final-cta {
+    margin: 30px 0 42px;
+  }
+
+  /* ===========================
+     FOOTER
+     =========================== */
+  footer {
+    background: var(--charcoal);
+    color: rgba(248, 246, 242, 0.42);
+    text-align: center;
+    padding: 44px 0;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+  footer p {
+    margin-bottom: 10px;
+  }
+  .footer-legal {
+    max-width: 920px;
+    margin: 0 auto 22px;
+    text-align: left;
+    color: rgba(248, 246, 242, 0.34);
+    font-size: 11px;
+    line-height: 1.58;
+  }
+  .footer-legal p {
+    margin-bottom: 11px;
+  }
+  .footer-legal p:last-child {
+    margin-bottom: 0;
+  }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  footer a {
+    color: rgba(248, 246, 242, 0.58);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  .footer-legal a {
+    color: rgba(248, 246, 242, 0.42);
+    text-decoration: underline;
+    text-decoration-color: rgba(248, 246, 242, 0.22);
+    text-underline-offset: 2px;
+  }
+  footer a:hover {
+    color: var(--gold);
+  }
+
+  /* ===========================
+     OPT-IN POPUP MODAL
+     =========================== */
+  .optin-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    background: rgba(29, 31, 30, 0.72);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    align-items: center;
+    justify-content: center;
+    padding: 22px;
+  }
+  .optin-modal.is-open { display: flex; }
+  .optin-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 450px;
+    background: var(--pale-sand);
+    border: 1px solid rgba(233, 226, 211, 0.72);
+    border-radius: 2px;
+    padding: 32px 24px 24px;
+    box-shadow:
+      0 24px 70px rgba(0, 0, 0, 0.34),
+      inset 0 1px 0 rgba(255,255,255,0.55);
+  }
+  .optin-modal-close {
+    position: absolute;
+    top: 13px;
+    right: 13px;
+    width: 30px;
+    height: 30px;
+    border: 0;
+    background: transparent;
+    color: rgba(29, 31, 30, 0.62);
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .optin-modal-close:hover {
+    background: rgba(91, 75, 63, 0.08);
+    color: var(--charcoal);
+  }
+  .optin-modal-heading {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(24px, 6.4vw, 30px);
+    line-height: 1.22;
+    color: var(--charcoal);
+    text-align: center;
+    max-width: 340px;
+    margin: 0 auto 12px;
+  }
+  .optin-modal-lead {
+    font-family: var(--sans);
+    font-size: 15px;
+    line-height: 1.55;
+    color: rgba(29, 31, 30, 0.72);
+    text-align: center;
+    max-width: 350px;
+    margin: 0 auto 22px;
+  }
+  .optin-form {
+    display: flex;
+    flex-direction: column;
+    gap: 11px;
+  }
+  .optin-form .form-input,
+  .optin-form .country-code-select,
+  .optin-form .client-status-select {
+    width: 100%;
+    border: 1px solid rgba(91, 75, 63, 0.26);
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.74);
+    min-height: 50px;
+    padding: 13px 15px;
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 16px;
+    color: var(--charcoal);
+    outline: none;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .optin-form .country-code-select {
+    flex: 0 0 138px;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+  .optin-form .client-status-select {
+    appearance: none;
+    -webkit-appearance: none;
+    padding-right: 46px;
+  }
+  .optin-form .select-wrap {
+    position: relative;
+  }
+  .optin-form .select-wrap::after,
+  .optin-form .phone-row::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 9px;
+    height: 9px;
+    border-right: 1.5px solid rgba(29, 31, 30, 0.72);
+    border-bottom: 1.5px solid rgba(29, 31, 30, 0.72);
+    pointer-events: none;
+    transform: translateY(-62%) rotate(45deg);
+  }
+  .optin-form .select-wrap::after {
+    right: 18px;
+  }
+  .optin-form .form-input::placeholder {
+    color: #8C837A;
+    font-family: var(--sans);
+    opacity: 1;
+  }
+  .optin-form .form-input:focus,
+  .optin-form .country-code-select:focus,
+  .optin-form .client-status-select:focus {
+    border-color: var(--gold);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(194, 168, 108, 0.16);
+  }
+  .optin-form .phone-row {
+    display: flex;
+    gap: 0;
+    border: 1px solid rgba(91, 75, 63, 0.26);
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.74);
+    overflow: hidden;
+    position: relative;
+    transition: border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
+  }
+  .optin-form .phone-row:focus-within {
+    border-color: var(--gold);
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(194, 168, 108, 0.16);
+  }
+  .optin-form .phone-row .country-code-select,
+  .optin-form .phone-row .form-input {
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+  .optin-form .phone-row .country-code-select {
+    border-right: 1px solid rgba(91, 75, 63, 0.16);
+    padding-left: 16px;
+    padding-right: 30px;
+  }
+  .optin-form .phone-row::after {
+    left: 111px;
+  }
+  .optin-form .phone-row .country-code-select:focus,
+  .optin-form .phone-row .form-input:focus {
+    border-color: transparent;
+    background: transparent;
+    box-shadow: none;
+  }
+  .optin-form .form-btn {
+    margin-top: 9px;
+    width: 100%;
+    background: var(--gold);
+    border: 0;
+    border-radius: 0;
+    color: #FFFFFF;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    line-height: 1.25;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    min-height: 56px;
+    padding: 17px 20px;
+    cursor: pointer;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .optin-form .form-btn:hover {
+    background: var(--gold-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(91, 75, 63, 0.18);
+  }
+  .optin-modal-subtext {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 1.5;
+    color: rgba(91, 75, 63, 0.72);
+    text-align: center;
+    margin: 15px 0 12px;
+  }
+  .optin-modal-disclaimer {
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 10.5px;
+    line-height: 1.45;
+    color: rgba(91, 75, 63, 0.42);
+    text-align: center;
+    margin: 0;
+  }
+  .optin-modal-disclaimer a {
+    color: rgba(91, 75, 63, 0.58);
+    text-decoration: underline;
+  }
+  .optin-modal-disclaimer a:hover { color: var(--mocha); }
+
+  @media (min-width: 768px) {
+    .optin-modal-content {
+      max-width: 520px;
+      padding: 38px 58px 28px;
+    }
+    .optin-modal-heading {
+      margin-bottom: 20px;
+    }
+    .optin-form .form-btn {
+      min-height: 56px;
+    }
+    .optin-modal-subtext {
+      font-size: 14px;
+      line-height: 1.4;
+    }
+  }
+
+  /* ===========================
+     RESPONSIVE
+     =========================== */
+
+  /* TABLET — circular portrait hero stays until desktop */
+  @media (max-width: 960px) {
+    section { padding: 72px 0; }
+    .hero {
+      display: block;
+      min-height: 0;
+      background: var(--pale-sand);
+    }
+    .hero::before { display: none; }
+    .hero-photo {
+      display: none;
+    }
+    .hero-mobile-photo {
+      display: block;
+      position: relative;
+      width: 136px;
+      height: 136px;
+      min-height: 0;
+      margin: 32px auto 0;
+      border-radius: 50%;
+      border: 2px solid var(--warm-stone);
+      box-shadow:
+        0 0 0 1px rgba(91, 75, 63, 0.12),
+        0 18px 42px rgba(91, 75, 63, 0.22);
+    }
+    .hero-mobile-photo img {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 0%;
+    }
+    .hero-inner {
+      display: block;
+      padding: 24px 32px 42px;
+    }
+    .hero-text {
+      max-width: 620px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero .eyebrow {
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-size: clamp(36px, 5vw, 46px);
+      line-height: 1.08;
+    }
+    .hero .lead {
+      margin: 16px auto 24px;
+      max-width: 540px;
+    }
+    .hero .meta {
+      display: flex;
+      width: fit-content;
+      margin-left: auto;
+      margin-right: auto;
+      justify-content: center;
+      align-items: flex-start;
+    }
+    .hero .btn {
+      display: block;
+      width: fit-content;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .hero-trust-logos {
+      justify-content: center;
+      margin: 22px auto 0;
+      max-width: 560px;
+      gap: 16px 22px;
+    }
+    .archetype-grid { grid-template-columns: 1fr; gap: 18px; }
+    .client-proof-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .takeaways-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    .fit-grid { grid-template-columns: 1fr; gap: 40px; }
+    .intro-jason {
+      grid-template-columns: 1fr;
+      gap: 28px;
+      text-align: center;
+    }
+    .jason-photo { margin: 0 auto; }
+    .day {
+      grid-template-columns: 1fr;
+      gap: 12px;
+      padding: 28px 0;
+    }
+  }
+
+  /* SMALL TABLET (681–768) — balanced portrait + copy grid */
+  @media (max-width: 768px) {
+    section { padding: 60px 0; }
+    .container, .container-narrow { padding: 0 20px; }
+
+    .hero-mobile-photo {
+      width: 136px;
+      height: 136px;
+      margin-top: 34px;
+    }
+    .hero-inner {
+      padding: 26px 22px 46px;
+    }
+    .hero .eyebrow {
+      font-size: 10px;
+      line-height: 1.5;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: clamp(31px, 8.6vw, 40px);
+      line-height: 1.08;
+    }
+    .hero h1 .italic {
+      font-size: 0.62em;
+    }
+    .hero .lead {
+      font-size: 15px;
+      line-height: 1.58;
+      margin: 15px auto 20px;
+      max-width: 360px;
+    }
+    .hero .meta {
+      font-size: 13px;
+      line-height: 1.42;
+      margin-bottom: 20px;
+      max-width: 300px;
+      gap: 8px;
+    }
+    .hero .meta svg { width: 14px; height: 14px; }
+    .hero .btn {
+      display: block;
+      width: 100%;
+      max-width: 340px;
+      margin: 0 auto;
+      padding: 17px 18px;
+      font-size: 12px;
+      letter-spacing: 0.115em;
+      white-space: normal;
+    }
+    .hero-trust-logos {
+      max-width: 330px;
+      gap: 14px 18px;
+      margin-top: 24px;
+    }
+    .hero-trust-logos .logo-forbes { width: 66px; }
+    .hero-trust-logos .logo-bi { width: 112px; }
+    .hero-trust-logos .logo-obo { width: 56px; }
+    .hero-trust-logos .logo-entrepreneur { width: 84px; }
+    .hero-trust-logos .logo-fc { width: 84px; }
+    .client-proof-grid { grid-template-columns: 1fr; }
+    .challenge-stat { padding: 24px 20px; }
+    .takeaways-grid { grid-template-columns: 1fr; gap: 28px; }
+    .diagnosis h2,
+    .final-note h2,
+    .archetypes-intro h2,
+    .takeaways-heading,
+    .intro-body h2 { font-size: 26px; }
+    .archetypes-intro h2 .italic {
+      margin-top: 18px;
+    }
+    .days-heading h2 { font-size: 28px; }
+  }
+
+  /* PHONE — smaller circular portrait */
+  @media (max-width: 680px) {
+    .hero-mobile-photo {
+      width: 128px;
+      height: 128px;
+      margin: 30px auto 0;
+    }
+    .hero-inner {
+      padding: 24px 22px 42px;
+    }
+    .hero-text {
+      max-width: 430px;
+    }
+    .hero h1 .italic {
+      margin-top: 12px;
+    }
+  }
+
+  @media (max-width: 380px) {
+    .optin-form .country-code-select {
+      flex-basis: 126px;
+      font-size: 13px;
+      padding-left: 9px;
+      padding-right: 24px;
+    }
+    .optin-form .phone-row::after {
+      left: 101px;
+    }
+    .optin-form .phone-row .form-input {
+      font-size: 14px;
+      padding-left: 12px;
+      padding-right: 12px;
+    }
+    .hero-mobile-photo {
+      width: 112px;
+      height: 112px;
+      margin-top: 26px;
+    }
+    .hero-inner {
+      padding: 22px 20px 36px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 8.4vw, 32px);
+    }
+    .hero .lead {
+      font-size: 14px;
+      line-height: 1.55;
+      margin: 17px auto 18px;
+    }
+    .hero .meta {
+      font-size: 12px;
+      margin-bottom: 17px;
+    }
+    .hero .btn {
+      padding: 14px 12px;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+    }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===========================
+       HERO
+       =========================== -->
+  <header class="hero">
+    <picture class="hero-photo">
+      <img src="jm-header-desktop.png" alt="Jason Moss">
+    </picture>
+    <div class="hero-mobile-photo">
+      <img src="jm-headshot-1.png" alt="Jason Moss">
+    </div>
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="eyebrow">Coaches, Consultants &amp; Service-Based Biz Owners</div>
+        <h1>
+          Find the Hidden Pattern Keeping Your Revenue Stuck
+        </h1>
+        <p class="lead">Join the free 5-day Business Breakthrough Challenge to uncover why your business stopped growing &mdash; and <em>the exact shift that breaks through it.</em></p>
+        <div class="meta">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+          <span>Live June 8&ndash;12 &middot; 10am&ndash;11:30am MT &middot; Replays available</span>
+        </div>
+        <a href="#optin" class="btn">Save My Spot &mdash; It&rsquo;s Free</a>
+        <div class="hero-trust-logos" aria-label="Featured in">
+          <img src="logo-forbes-scotland.png" alt="Forbes Scotland" class="logo-forbes">
+          <img src="logo-business-insider.png" alt="Business Insider" class="logo-bi">
+          <img src="logo-obo.png" alt="OBO - Online Business Owner" class="logo-obo">
+          <img src="logo-entrepreneur.png" alt="Entrepreneur" class="logo-entrepreneur">
+          <img src="logo-fast-company-sa.png" alt="Fast Company South Africa" class="logo-fc">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===========================
+       SECTION 1: YOU'VE HIT A CEILING
+       =========================== -->
+  <section class="section-stone-soft">
+    <div class="container">
+      <div class="diagnosis">
+        <h2>You&rsquo;ve hit a ceiling.</h2>
+        <div class="accent-line"></div>
+        <p>Not the kind another 14-hour day fixes.</p>
+        <p>Not the kind another funnel, offer, or framework fixes either.</p>
+        <p>You&rsquo;ve probably tried those.</p>
+        <p><strong><em>And the number still isn&rsquo;t moving.</em></strong></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SECTION 2: THIS ISN'T A STRATEGY PROBLEM
+       =========================== -->
+  <section class="section-warm">
+    <div class="container">
+      <div class="diagnosis">
+        <h2>If strategy were the answer, you&rsquo;d have found it by now.</h2>
+        <p class="subhead">The problem isn&rsquo;t your strategy.</p>
+        <div class="accent-line"></div>
+        <p>After helping 1,000+ coaches and consultants, I&rsquo;ve seen the same thing at every revenue plateau:</p>
+        <p><strong>Every entrepreneur has a &ldquo;default mode&rdquo; &mdash; the way they instinctively respond when growth stalls.</strong></p>
+        <p>In the early days, it was your superpower.</p>
+        <p><em>But now, it&rsquo;s the exact thing capping your growth.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SECTION 3: ARCHETYPES (DARK)
+       =========================== -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="archetypes-intro">
+        <h2>In 1,000+ conversations with entrepreneurs, I&rsquo;ve found three patterns. <span class="italic">One of them is yours.</span></h2>
+      </div>
+
+      <div class="archetype-grid">
+        <div class="archetype-card">
+          <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M10 10h28"/>
+            <path d="M24 36V16"/>
+            <path d="M16 24l8-8 8 8"/>
+            <path d="M15 36h18"/>
+            <path d="M13 17l-4 3"/>
+            <path d="M35 17l4 3"/>
+            <path d="M18 10c0 3.2 2.4 5.2 6 5.2s6-2 6-5.2"/>
+          </svg>
+          <h3>The Pusher</h3>
+          <p>When growth stalls, you add hours. More output. More pressure. But the harder you push, the more exhausted you feel &mdash; because you&rsquo;re trying to outwork a problem that doesn&rsquo;t respond to effort.</p>
+        </div>
+
+        <div class="archetype-card">
+          <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="19" cy="19" r="8"/>
+            <path d="M25 25l9 9"/>
+            <path d="M31 12h7v7"/>
+            <path d="M38 12l-9 9"/>
+            <path d="M12 34h11"/>
+            <path d="M12 40h19"/>
+            <path d="M15 19h8"/>
+            <path d="M19 15v8"/>
+          </svg>
+          <h3>The Thinker</h3>
+          <p>When growth stalls, you think harder. Rewrite the offer. Tweak the funnel. You have a Notion doc called &ldquo;2026 Strategy v7.&rdquo; It feels strategic. But underneath it, thinking has become the place you go to avoid the risk of moving.</p>
+        </div>
+
+        <div class="archetype-card">
+          <svg class="icon" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M24 7l2.7 7.3L34 17l-7.3 2.7L24 27l-2.7-7.3L14 17l7.3-2.7L24 7z"/>
+            <path d="M10 36c5.4-5.2 10.6-5.2 16 0s10.6 5.2 16 0"/>
+            <path d="M9 24c2.8-1.8 5.6-2.4 8.4-1.8"/>
+            <path d="M31 22.2c2.9-.6 5.8 0 8.6 1.8"/>
+            <path d="M15 40h18"/>
+          </svg>
+          <h3>The Dreamer</h3>
+          <p>When growth stalls, you reach for the next vision. New idea. New direction. But before one thing has time to work, you&rsquo;re already onto something else.</p>
+        </div>
+      </div>
+
+      <div class="archetypes-footer">
+        <p>Each one hits a different ceiling.</p>
+        <p>Each one needs a different shift.</p>
+        <p>And until you know what that shift is &mdash; <em>nothing changes.</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SECTION 4: JASON INTRO + CTA
+       =========================== -->
+  <section>
+    <div class="container">
+      <div class="intro-jason">
+        <div class="jason-photo">
+          <img src="jm-headshot-1.png" alt="Jason Moss">
+        </div>
+        <div class="intro-body">
+          <h2>This is where that changes.</h2>
+          <p><strong>I&rsquo;m Jason Moss.</strong> I&rsquo;ve helped 1,000+ coaches and consultants sign clients online, built a multi-six-figure coaching practice, and supported six, multi-six, and seven-figure entrepreneurs in scaling without grinding their way there.</p>
+          <p>Inside the <strong>Business Breakthrough Challenge</strong>, we&rsquo;ll find the real reason your business stopped growing &mdash; and what it&rsquo;ll take to break through.</p>
+          <div class="intro-cta">
+            <a href="#optin" class="btn">Save My Spot &mdash; It&rsquo;s Free</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SECTION 5: CLIENT RESULTS
+       =========================== -->
+  <section class="section-stone-soft client-results">
+    <div class="container">
+      <div class="proof-heading">
+        <div class="eyebrow">Client results</div>
+        <h2>What clients have created with this work</h2>
+        <p>Real outcomes from coaches, consultants, and service-based business owners who stopped trying to solve the wrong problem.</p>
+      </div>
+
+      <div class="client-proof-grid">
+        <picture class="client-proof-picture">
+          <source media="(max-width: 768px)" srcset="proof/testimonial-zach-card-mobile.png">
+          <img src="proof/testimonial-zach-card.png" alt="" class="client-proof-image">
+        </picture>
+
+        <picture class="client-proof-picture">
+          <source media="(max-width: 768px)" srcset="proof/testimonial-ariel-card-mobile.png">
+          <img src="proof/testimonial-ariel-card.png" alt="" class="client-proof-image">
+        </picture>
+
+        <picture class="client-proof-picture">
+          <source media="(max-width: 768px)" srcset="proof/testimonial-meaghan-card-mobile.png">
+          <img src="proof/testimonial-meaghan-card.png" alt="" class="client-proof-image">
+        </picture>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SECTION 6: OVER 5 DAYS, YOU'LL
+       =========================== -->
+  <section class="section-warm takeaways-section" id="takeaways">
+    <div class="container">
+      <h2 class="takeaways-heading">Over 5 days, you&rsquo;ll:</h2>
+      <div class="takeaways-grid">
+        <div class="takeaway">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="11" cy="11" r="7"/>
+            <path d="M21 21l-4.3-4.3"/>
+          </svg>
+          <p>Identify which of the 3 archetypes has been capping your revenue &mdash; <strong>and the exact shift that breaks the ceiling.</strong></p>
+        </div>
+        <div class="takeaway">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M9 18h6"/>
+            <path d="M10 22h4"/>
+            <path d="M12 2a7 7 0 00-4 12.7c.7.6 1 1.5 1 2.3v1h6v-1c0-.8.3-1.7 1-2.3A7 7 0 0012 2z"/>
+          </svg>
+          <p>Get clear on the one decision you&rsquo;ve been avoiding in your business &mdash; <strong>and the answer underneath it.</strong></p>
+        </div>
+        <div class="takeaway">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M4.8 19.2a2 2 0 002.8 2.8L20 9.6V4h-5.6L2 16.4a2 2 0 000 2.8z"/>
+            <path d="M14 6l4 4"/>
+          </svg>
+          <p>Run a live diagnostic on your business to find <strong>the #1 strategic block costing you clients</strong> and revenue right now.</p>
+        </div>
+        <div class="takeaway">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 2v3"/>
+            <path d="M12 19v3"/>
+            <path d="M4.2 4.2l2.1 2.1"/>
+            <path d="M17.7 17.7l2.1 2.1"/>
+            <path d="M2 12h3"/>
+            <path d="M19 12h3"/>
+            <path d="M4.2 19.8l2.1-2.1"/>
+            <path d="M17.7 6.3l2.1-2.1"/>
+            <circle cx="12" cy="12" r="4"/>
+          </svg>
+          <p>Walk away knowing what needs to shift over the next 90 days to <strong>create your most profitable year yet.</strong></p>
+        </div>
+      </div>
+      <div class="center-cta">
+        <a href="#optin" class="btn">Save My Spot &mdash; It&rsquo;s Free</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SECTION 7: RECENT CHALLENGE WINS
+       =========================== -->
+  <section class="section-dark challenge-proof">
+    <div class="container">
+      <div class="proof-heading">
+        <h2>Results from my last live challenge</h2>
+      </div>
+
+      <div class="challenge-stat">
+        <strong>Over $100,000</strong>
+        <span>in sales generated by attendees during the live challenge</span>
+      </div>
+
+      <div class="challenge-screens">
+        <figure class="challenge-shot">
+          <img src="proof/challenge-60k-package.jpg" alt="Client message celebrating a $60k coaching package sold">
+        </figure>
+        <figure class="challenge-shot">
+          <img src="proof/challenge-first-discovery-call.jpg" alt="Client message about booking a first discovery call">
+        </figure>
+        <figure class="challenge-shot">
+          <img src="proof/challenge-money-back-two-days.jpg" alt="Client message about making back their investment in two days">
+        </figure>
+        <figure class="challenge-shot">
+          <img src="proof/challenge-three-discovery-calls.jpg" alt="Client message about three scheduled discovery calls">
+        </figure>
+        <figure class="challenge-shot">
+          <img src="proof/challenge-moving-needle-years.jpg" alt="Client message about the work moving the needle">
+        </figure>
+        <figure class="challenge-shot">
+          <img src="proof/challenge-fredrica-six-clients.png" alt="Client message about signing six new clients">
+        </figure>
+        <figure class="challenge-shot">
+          <img src="proof/challenge-best-challenge.jpg" alt="Client message saying this is the best challenge they have done">
+        </figure>
+        <figure class="challenge-shot">
+          <img src="proof/challenge-six-discovery-calls.jpg" alt="Client message about booking six discovery calls">
+        </figure>
+        <figure class="challenge-shot">
+          <img src="proof/challenge-three-week-reset-sale.jpg" alt="Client message about a sale from a challenge framework">
+        </figure>
+        <figure class="challenge-shot">
+          <img src="proof/challenge-money-back.jpg" alt="Client message about making back their investment">
+        </figure>
+      </div>
+      <div class="center-cta">
+        <a href="#optin" class="btn">Save My Spot &mdash; It&rsquo;s Free</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SECTION 8: FIT
+       =========================== -->
+  <section>
+    <div class="container">
+      <div class="fit-grid">
+        <div class="fit-col yes">
+          <h3>This is for you <span class="italic">if&hellip;</span></h3>
+          <ul>
+            <li>You&rsquo;ve built a real coaching, consulting, or service business &mdash; but your revenue has plateaued for a while and you can&rsquo;t figure out why.</li>
+            <li>You&rsquo;ve tried different strategies (new funnels, offers, niches) and they haven&rsquo;t moved the needle.</li>
+            <li>You&rsquo;re ready to stop doubling down on what&rsquo;s not working &mdash; and find out what&rsquo;s actually holding you back.</li>
+          </ul>
+        </div>
+        <div class="fit-col no">
+          <h3>This isn&rsquo;t for you <span class="italic">if&hellip;</span></h3>
+          <ul>
+            <li>You haven&rsquo;t signed paying clients yet.</li>
+            <li>You&rsquo;re looking for a tactical fix you can implement this week &mdash; this challenge goes deeper than that.</li>
+            <li>You&rsquo;re sure your strategy is the only thing that needs fixing.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="center-cta">
+        <a href="#optin" class="btn">Save My Spot &mdash; It&rsquo;s Free</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SECTION 9: HOW THE 5 DAYS UNFOLD (DARK)
+       =========================== -->
+  <section class="section-dark">
+    <div class="container">
+      <div class="days-heading">
+        <h2>How the 5 days unfold</h2>
+        <p>Replays available if you can&rsquo;t make every session.</p>
+        <div class="accent-line"></div>
+      </div>
+
+      <div class="days-list">
+        <div class="day">
+          <div class="day-label">
+            <span class="num">Day 1</span>
+            <span class="title">The Ceiling</span>
+            <span class="time">June 8 &middot; 10am&ndash;11:30am MT</span>
+          </div>
+          <div class="day-content">
+            <p>Uncover the real reason your business stopped growing, and which of the 3 patterns is keeping you capped. Leave knowing exactly which pattern is yours and the specific way it&rsquo;s already cost you &mdash; a stalled decision, a revenue leak, a loop you keep running.</p>
+          </div>
+        </div>
+
+        <div class="day">
+          <div class="day-label">
+            <span class="num">Day 2</span>
+            <span class="title">The Path Forward</span>
+            <span class="time">June 9 &middot; 10am&ndash;11:30am MT</span>
+          </div>
+          <div class="day-content">
+            <p>There&rsquo;s a different way to operate as an entrepreneur at your level. On Day 2, we&rsquo;ll map it out &mdash; and you&rsquo;ll see what becomes possible when the pattern is no longer in the way.</p>
+          </div>
+        </div>
+
+        <div class="day">
+          <div class="day-label">
+            <span class="num">Day 3</span>
+            <span class="title">The Clarity Beneath the Strategy</span>
+            <span class="time">June 10 &middot; 10am&ndash;11:30am MT</span>
+          </div>
+          <div class="day-content">
+            <p>The decision you&rsquo;ve been avoiding in your business &mdash; the one you keep circling but never quite make &mdash; has an answer. Most entrepreneurs never reach it because they&rsquo;re trying to think their way there. Day 3 is where we&rsquo;ll find it.</p>
+          </div>
+        </div>
+
+        <div class="day">
+          <div class="day-label">
+            <span class="num">Day 4</span>
+            <span class="title">The 5 Pillars of Profitability</span>
+            <span class="time">June 11 &middot; 10am&ndash;11:30am MT</span>
+          </div>
+          <div class="day-content">
+            <p>We&rsquo;ll run a live diagnostic on your business using the framework that helped me sign 2,000+ paying clients online. Leave knowing your #1 strategic block and where to focus over the next 90 days.</p>
+          </div>
+        </div>
+
+        <div class="day">
+          <div class="day-label">
+            <span class="num">Day 5</span>
+            <span class="title">Make It Stick</span>
+            <span class="time">June 12 &middot; 10am&ndash;11:30am MT</span>
+          </div>
+          <div class="day-content">
+            <p>Understand what it takes to make the shift last &mdash; so what you saw this week becomes how you actually operate going forward.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="day-cta">
+        <a href="#optin" class="btn">Save My Spot &mdash; It&rsquo;s Free</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       SECTION 10: FINAL NOTE
+       =========================== -->
+  <section class="section-stone-soft" id="register">
+    <div class="container">
+      <div class="final-note">
+        <h2>A note before <span class="italic">you sign up:</span></h2>
+        <div class="accent-line"></div>
+        <p>I don&rsquo;t run pitch-fest challenges. This is five days of real teaching, live coaching, and shifts that work whether or not we ever work together.</p>
+
+        <p class="closing">The ceiling, named. The pattern, broken. The path forward, clear.</p>
+
+        <p>If you&rsquo;re ready to break through your revenue ceiling, this is where we begin.</p>
+
+        <div class="final-cta">
+          <a href="#optin" class="btn">Save My Spot &mdash; It&rsquo;s Free</a>
+        </div>
+
+        <p class="signature">I&rsquo;ll see you inside,<br><span class="signature-name">Jason</span></p>
+
+        <div class="ps">
+          <p><strong>PS...</strong> most businesses don&rsquo;t die because they failed. They die because they petered out. After months &mdash; sometimes years &mdash; of staying the same, their founder quietly stopped wanting to run them.</p>
+          <p>That&rsquo;s the default. It doesn&rsquo;t have to be yours.</p>
+          <p><a href="#optin">Save your spot here.</a></p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FOOTER
+       =========================== -->
+  <footer>
+    <div class="container">
+      <div class="footer-links">
+        <a href="https://jasonmoss.com/privacy/">Privacy Policy</a>
+        <a href="https://jasonmoss.com/terms/">Terms &amp; Conditions</a>
+        <a href="https://jasonmoss.com/earnings-disclaimer/">Earnings Disclaimer</a>
+      </div>
+      <div class="footer-legal">
+        <p>This website is operated and maintained by Jason Moss LLC. Use of this website is governed by our <a href="https://jasonmoss.com/terms/">Terms &amp; Conditions</a>, <a href="https://jasonmoss.com/privacy/">Privacy Policy</a>, and <a href="https://jasonmoss.com/earnings-disclaimer/">Earnings Disclaimer</a>.</p>
+        <p>Jason Moss LLC provides coaching, education, and training for coaches, consultants, and service-based business owners. We do not sell a business opportunity, franchise, distributorship, &ldquo;get rich quick&rdquo; program, or money-making system. We do not make earnings claims, effort claims, or guarantees that our training will help you earn money, sign clients, increase revenue, or achieve any specific business result.</p>
+        <p>Examples, testimonials, screenshots, sales figures, and other results shown are the experiences of individual clients, customers, or challenge attendees. These results are not typical, are not guaranteed, and should not be interpreted as a promise or representation that you will experience the same or similar outcomes. Your results depend on many factors, including your offer, market, experience, skills, effort, timing, implementation, business model, and conditions outside our control.</p>
+        <p>All materials on this site are intellectual property owned by or licensed to Jason Moss LLC and are protected by copyright. Any unauthorized duplication, reproduction, distribution, or commercial use is strictly prohibited.</p>
+        <p>This website may link to content, platforms, or services provided by third parties. Jason Moss LLC is not responsible for third-party content and does not control or guarantee any third-party products, services, or claims.</p>
+        <p>We use cookies and similar technologies to help improve, promote, and protect our services. By continuing to use this site, you agree to our Privacy Policy and Terms &amp; Conditions. This site is not a part of the Facebook website or Meta Platforms, Inc. This site is not endorsed by Facebook or Meta in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
+      </div>
+      <p>&copy; Jason Moss LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===========================
+       OPT-IN POPUP MODAL
+       =========================== -->
+  <div class="optin-modal" id="optinModal" role="dialog" aria-modal="true" aria-labelledby="optinModalHeading">
+    <div class="optin-modal-content">
+      <button type="button" class="optin-modal-close" aria-label="Close" id="optinModalClose">&times;</button>
+      <h3 class="optin-modal-heading" id="optinModalHeading">Save Your Spot for the Free Challenge</h3>
+      <p class="optin-modal-lead">Join us live June 8&ndash;12 to uncover what&rsquo;s really keeping your revenue stuck.</p>
+      <form class="optin-form email-form" novalidate>
+        <input type="text" name="First Name" class="form-input" placeholder="First Name" required aria-required="true">
+        <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
+        <div class="select-wrap">
+          <select name="Signed Paying Clients" class="client-status-select" required aria-required="true">
+            <option value="" selected disabled>Signed paying clients before?</option>
+            <option value="yes">Yes</option>
+            <option value="not_yet">Not yet</option>
+          </select>
+        </div>
+        <div class="phone-row">
+          <select name="Country Code" class="country-code-select" aria-label="Country code" required aria-required="true">
+            <option value="1">🇺🇸 US/CA +1</option>
+            <option value="44">🇬🇧 UK +44</option>
+            <option value="61">🇦🇺 AU +61</option>
+            <option value="64">🇳🇿 NZ +64</option>
+            <option value="353">🇮🇪 IE +353</option>
+            <option value="27">🇿🇦 ZA +27</option>
+            <option value="49">🇩🇪 DE +49</option>
+            <option value="33">🇫🇷 FR +33</option>
+            <option value="34">🇪🇸 ES +34</option>
+            <option value="39">🇮🇹 IT +39</option>
+            <option value="31">🇳🇱 NL +31</option>
+            <option value="46">🇸🇪 SE +46</option>
+            <option value="47">🇳🇴 NO +47</option>
+            <option value="45">🇩🇰 DK +45</option>
+            <option value="41">🇨🇭 CH +41</option>
+            <option value="52">🇲🇽 MX +52</option>
+            <option value="55">🇧🇷 BR +55</option>
+            <option value="91">🇮🇳 IN +91</option>
+            <option value="65">🇸🇬 SG +65</option>
+          </select>
+          <input type="tel" name="Phone Number" class="form-input" placeholder="Phone Number" inputmode="tel" autocomplete="tel-national" required aria-required="true">
+        </div>
+        <input type="hidden" name="Ad" value="">
+        <input type="hidden" name="Referred By" value="">
+        <button type="submit" class="form-btn">Save My Spot &mdash; It&rsquo;s Free</button>
+      </form>
+      <p class="optin-modal-subtext">No spam. Unsubscribe anytime.</p>
+      <p class="optin-modal-disclaimer">By providing your phone number, you agree to receive automated promotional messages from Jason Moss LLC. Message &amp; Data Rates May Apply. Message frequency varies. Text HELP for help. Text STOP to stop. You also agree to allow Jason Moss LLC to contact you. You also agree to Jason Moss LLC <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">terms of service</a> and <a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">privacy policy</a>.</p>
+    </div>
+  </div>
+
+  <!-- Popup trigger + form submission + URL param injection -->
+  <script>
+  (function() {
+    'use strict';
+
+    var modal = document.getElementById('optinModal');
+    var modalClose = document.getElementById('optinModalClose');
+    var form = document.querySelector('.optin-form');
+    if (!modal || !form) return;
+
+    var params = new URLSearchParams(window.location.search);
+    var adParam = params.get('ad');
+    var referredByParam = params.get('ref');
+    var adField = form.querySelector('input[name="Ad"]');
+    var referredByField = form.querySelector('input[name="Referred By"]');
+    if (adField) adField.value = adParam || '';
+    if (referredByField) referredByField.value = referredByParam || '';
+
+    document.querySelectorAll('a[href="#optin"]').forEach(function(a) {
+      a.addEventListener('click', function(e) {
+        e.preventDefault();
+        openModal();
+      });
+    });
+
+    function openModal() {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      var first = form.querySelector('input[type="text"]');
+      if (first) setTimeout(function() { first.focus(); }, 50);
+    }
+
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', function(e) {
+      if (e.target === modal) closeModal();
+    });
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+
+    var submitBtn = form.querySelector('.form-btn');
+    var originalText = submitBtn.textContent.trim();
+    var submitting = false;
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      if (submitting) return;
+
+      var firstName = form.querySelector('input[name="First Name"]').value.trim();
+      var emailInput = form.querySelector('input[name="E-mail"]');
+      var email = emailInput.value.trim();
+      var signedClientsField = form.querySelector('select[name="Signed Paying Clients"]');
+      var signedClients = signedClientsField.value;
+      var signedClientsLabel = signedClientsField.options[signedClientsField.selectedIndex].text;
+      var countryCodeField = form.querySelector('select[name="Country Code"]');
+      var countryCode = countryCodeField.value.replace(/\D/g, '');
+      var phoneRaw = form.querySelector('input[name="Phone Number"]').value.trim();
+      var phoneDigits = phoneRaw.replace(/\D/g, '');
+      var phone = countryCode ? '+' + countryCode + phoneDigits : phoneDigits;
+
+      if (!firstName) { alert('Please enter your first name.'); return; }
+      if (!email) { alert('Please enter your email address.'); return; }
+      if (!emailInput.checkValidity()) { alert('Please enter a valid email address.'); return; }
+      if (!signedClients) { alert('Please tell us whether you have signed paying clients before.'); return; }
+      if (!countryCode) { alert('Please select your country code.'); return; }
+      if (phoneDigits.length < 6) { alert('Please enter a valid phone number.'); return; }
+
+      submitting = true;
+      submitBtn.textContent = 'Validating...';
+
+      var emailValid = true;
+      var controller = new AbortController();
+      var timeout = setTimeout(function() { controller.abort(); }, 4000);
+
+      try {
+        var res = await fetch('/.netlify/functions/verify-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email }),
+          signal: controller.signal
+        });
+        var data = await res.json();
+        if (!data.valid) {
+          alert(data.reason || 'Please enter a real, non-temporary email address.');
+          emailValid = false;
+        }
+      } catch (err) {
+        console.error('ZeroBounce error or timeout:', err);
+      } finally {
+        clearTimeout(timeout);
+      }
+
+      if (!emailValid) {
+        submitting = false;
+        submitBtn.textContent = originalText;
+        return;
+      }
+
+      submitBtn.textContent = 'Submitting...';
+
+      try {
+        var contactPayload = {
+          email: email,
+          first_name: firstName,
+          phone: phone,
+          signed_clients: signedClientsLabel,
+          qualified_lead: signedClients === 'yes',
+          latest_ad: adField ? adField.value : '',
+          tag: 'Business Breakthrough Challenge'
+        };
+
+        if (referredByField && referredByField.value) {
+          contactPayload.referred_by = referredByField.value;
+        }
+
+        fetch('/.netlify/functions/submit-contact', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(contactPayload),
+          keepalive: true
+        }).catch(function(err) {
+          console.error('AC submit error:', err);
+        });
+
+        var redirectParams = new URLSearchParams();
+        redirectParams.set('registered', 'businessbreakthroughchallenge');
+        redirectParams.set('first_name', firstName);
+        redirectParams.set('email', email);
+        if (signedClients === 'not_yet') {
+          redirectParams.set('qualified', 'false');
+        }
+        window.location.href = '/business-breakthrough-thank-you?' + redirectParams.toString();
+      } catch (err) {
+        console.error('Form submission error:', err);
+        alert('Something went wrong. Please try again.');
+        submitting = false;
+        submitBtn.textContent = originalText;
+      }
+    });
+  })();
+  </script>
+
+</body>
+</html>

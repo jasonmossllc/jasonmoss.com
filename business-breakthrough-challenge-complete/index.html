@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're In | The Business Breakthrough Challenge</title>
+<meta name="description" content="You're registered for the Business Breakthrough Challenge. Here's what to do next.">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Favicon -->
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pale-sand: #F8F6F2;
+    --charcoal: #1D1F1E;
+    --forest: #2C3F36;
+    --forest-deep: #243530;
+    --warm-stone: #E9E2D3;
+    --warm-stone-soft: #EFEAE0;
+    --gold: #C2A86C;
+    --gold-hover: #AE9359;
+    --mocha: #5B4B3F;
+    --serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    --sans: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--sans);
+    color: var(--charcoal);
+    background: var(--pale-sand);
+    line-height: 1.6;
+    font-weight: 400;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4 {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.15;
+    margin: 0;
+    color: var(--charcoal);
+  }
+
+  p { margin: 0 0 16px; }
+  p:last-child { margin-bottom: 0; }
+  a { color: inherit; }
+
+  .container-narrow {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* CTA Buttons (matches thank-you / landing pages) */
+  .btn {
+    display: inline-block;
+    background: var(--gold);
+    color: #FFFFFF;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.16em;
+    padding: 19px 38px;
+    text-decoration: none;
+    text-transform: uppercase;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 1px 0 rgba(0,0,0,0.04);
+  }
+  .btn:hover {
+    background: var(--gold-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(91, 75, 63, 0.18);
+  }
+  .btn:focus-visible {
+    outline: 2px solid var(--charcoal);
+    outline-offset: 4px;
+  }
+  .btn-large {
+    font-size: 14px;
+    padding: 22px 48px;
+  }
+
+  /* Fade-in on scroll */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98),
+                transform 0.7s cubic-bezier(0.21, 0.47, 0.32, 0.98);
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .fade-in { opacity: 1; transform: none; transition: none; }
+  }
+
+  /* Small gold accent rule */
+  .accent-line {
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--gold);
+    margin: 24px auto;
+  }
+
+  /* ===========================
+     HERO — "You're in." personal arrival
+     =========================== */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding: clamp(72px, 11vh, 112px) 0 clamp(56px, 8vh, 80px);
+    background:
+      linear-gradient(180deg, rgba(248,246,242,0.62), rgba(233,226,211,0.78)),
+      url('section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone-soft);
+    text-align: center;
+  }
+  .hero > .container-narrow {
+    position: relative;
+    z-index: 1;
+  }
+
+  .hero-portrait {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 26px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 2px solid var(--warm-stone);
+    background: linear-gradient(140deg, #D8CFBC 0%, #B8AC93 100%);
+    box-shadow:
+      0 0 0 1px rgba(91, 75, 63, 0.08),
+      0 14px 32px rgba(91, 75, 63, 0.16);
+  }
+  .hero-portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 38%;
+    display: block;
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-size: clamp(44px, 5.4vw, 64px);
+    line-height: 1.04;
+    letter-spacing: -0.012em;
+    color: var(--charcoal);
+    font-weight: 400;
+    margin-bottom: 0;
+  }
+  .hero h1 .name {
+    font-style: italic;
+    color: var(--mocha);
+  }
+  .hero .lead {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(18px, 1.95vw, 22px);
+    line-height: 1.5;
+    color: var(--mocha);
+    max-width: 580px;
+    margin: 0 auto;
+  }
+
+  .scroll-cue {
+    display: inline-block;
+    margin: 38px auto 0;
+    padding: 8px 20px;
+    text-decoration: none;
+    color: rgba(91, 75, 63, 0.5);
+    transition: color 0.2s ease;
+  }
+  .scroll-cue:hover { color: var(--gold); }
+  .scroll-cue-chevron {
+    width: 48px;
+    height: 48px;
+    display: block;
+    animation: scrollCueBounce 2.4s ease-in-out infinite;
+  }
+  @keyframes scrollCueBounce {
+    0%, 100% { transform: translateY(0); opacity: 0.75; }
+    50% { transform: translateY(6px); opacity: 1; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .scroll-cue-chevron { animation: none; }
+  }
+
+  /* ===========================
+     STEP SECTIONS — shared
+     =========================== */
+  .step {
+    position: relative;
+    padding: clamp(72px, 10vh, 100px) 0;
+  }
+  .step > .container-narrow {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+  .step-eyebrow {
+    font-family: var(--sans);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 18px;
+  }
+  .step h2 {
+    font-family: var(--serif);
+    font-size: clamp(30px, 3.6vw, 42px);
+    line-height: 1.12;
+    letter-spacing: -0.005em;
+    margin-bottom: 18px;
+    color: var(--charcoal);
+  }
+  .step h2 .accent {
+    font-style: italic;
+    color: var(--mocha);
+  }
+  .step .step-lead {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.85vw, 20px);
+    line-height: 1.55;
+    color: var(--mocha);
+    margin: 0 auto 32px;
+    max-width: 560px;
+  }
+  .step-note {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(14px, 1.45vw, 15.5px);
+    line-height: 1.6;
+    color: rgba(91, 75, 63, 0.78);
+    max-width: 520px;
+    margin: 28px auto 0;
+    padding: 16px 22px;
+    background: rgba(248, 246, 242, 0.58);
+    border-left: 2px solid var(--gold);
+    text-align: left;
+  }
+  .step-note strong {
+    color: var(--mocha);
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  /* Pale step (lighter than hero) */
+  .step-pale {
+    background:
+      linear-gradient(180deg, rgba(248,246,242,0.84), rgba(248,246,242,0.92)),
+      url('section-bg-pale.jpg') center / cover no-repeat,
+      var(--pale-sand);
+    border-top: 1px solid rgba(91, 75, 63, 0.06);
+  }
+
+  /* Warm step (matches hero tone) */
+  .step-warm {
+    background:
+      linear-gradient(180deg, rgba(233,226,211,0.72), rgba(233,226,211,0.86)),
+      url('section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone);
+    border-top: 1px solid rgba(91, 75, 63, 0.06);
+    box-shadow: inset 0 18px 28px rgba(91, 75, 63, 0.03);
+  }
+
+  /* ===========================
+     STEP 3 — VIRAL (DARK)
+     =========================== */
+  .step-dark {
+    position: relative;
+    padding: clamp(80px, 11vh, 120px) 0;
+    background:
+      linear-gradient(180deg, rgba(44,63,54,0.84), rgba(36,53,48,0.94)),
+      url('section-bg-forest.jpg') center / cover no-repeat,
+      var(--forest);
+    color: var(--pale-sand);
+    border-top: 1px solid rgba(0, 0, 0, 0.12);
+  }
+  .step-dark .container-narrow {
+    max-width: 720px;
+    text-align: left;
+  }
+  .step-dark .step-eyebrow {
+    color: var(--gold);
+    text-align: center;
+  }
+  .step-dark h2 {
+    font-family: var(--serif);
+    font-size: clamp(32px, 4vw, 46px);
+    line-height: 1.1;
+    color: var(--pale-sand);
+    margin-bottom: 0;
+    text-align: center;
+  }
+  .step-dark h2 .accent {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .step-dark .accent-line {
+    background: var(--gold);
+    margin: 26px auto 34px;
+  }
+
+  .viral-narrative {
+    font-family: var(--serif);
+    font-size: clamp(17px, 1.85vw, 20px);
+    line-height: 1.6;
+    color: rgba(248, 246, 242, 0.88);
+    max-width: 620px;
+    margin: 0 auto 44px;
+    text-align: center;
+  }
+  .viral-narrative p { margin-bottom: 18px; }
+  .viral-narrative p:last-child { margin-bottom: 0; }
+  .viral-narrative .italic { font-style: italic; color: rgba(248, 246, 242, 0.76); }
+  .viral-narrative strong { color: var(--gold); font-weight: 600; }
+
+  /* Bonus card — modeled after the VIP card */
+  .bonus-card {
+    position: relative;
+    max-width: 620px;
+    margin: 0 auto 48px;
+    padding: clamp(28px, 4vw, 40px) clamp(24px, 3.5vw, 38px);
+    background: rgba(0, 0, 0, 0.18);
+    border: 1px solid rgba(194, 168, 108, 0.42);
+    box-shadow:
+      0 24px 60px rgba(0, 0, 0, 0.28),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    text-align: center;
+  }
+  .bonus-card .bonus-eyebrow {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.24em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .bonus-card h3 {
+    font-family: var(--serif);
+    font-size: clamp(22px, 2.6vw, 28px);
+    line-height: 1.22;
+    color: var(--pale-sand);
+    margin-bottom: 0;
+  }
+  .bonus-card h3 .accent {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .bonus-card .accent-line {
+    background: var(--gold);
+    opacity: 0.6;
+    margin: 22px auto;
+  }
+  .bonus-card p {
+    font-family: var(--serif);
+    font-size: clamp(15.5px, 1.65vw, 17px);
+    line-height: 1.6;
+    color: rgba(248, 246, 242, 0.86);
+    margin-bottom: 12px;
+  }
+  .bonus-card p:last-child { margin-bottom: 0; }
+  .bonus-card p strong {
+    color: var(--gold);
+    font-weight: 600;
+  }
+  .bonus-card .bonus-trigger {
+    font-style: italic;
+    color: rgba(248, 246, 242, 0.7);
+  }
+
+  /* Referral block */
+  .referral-block {
+    max-width: 620px;
+    margin: 0 auto 44px;
+  }
+  .referral-block .label {
+    display: block;
+    font-family: var(--sans);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+  }
+  .referral-row {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .referral-url-display {
+    flex: 1;
+    background: rgba(0, 0, 0, 0.28);
+    border: 1px solid rgba(194, 168, 108, 0.26);
+    padding: 18px 20px;
+    color: var(--pale-sand);
+    font-family: ui-monospace, 'SF Mono', Menlo, Monaco, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    word-break: break-all;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Copy button */
+  .copy-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background: var(--gold);
+    color: #FFFFFF;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    padding: 16px 24px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+    white-space: nowrap;
+  }
+  .copy-btn:hover { background: var(--gold-hover); }
+  .copy-btn:focus-visible { outline: 2px solid var(--pale-sand); outline-offset: 3px; }
+  .copy-btn .icon-copy,
+  .copy-btn .icon-check {
+    width: 14px;
+    height: 14px;
+    display: block;
+    flex-shrink: 0;
+  }
+  .copy-btn .icon-check { display: none; }
+  .copy-btn.copied .icon-copy { display: none; }
+  .copy-btn.copied .icon-check { display: block; }
+
+  /* Message template blocks */
+  .message-block {
+    max-width: 620px;
+    margin: 0 auto 32px;
+  }
+  .message-block:last-of-type {
+    margin-bottom: 0;
+  }
+  .message-block .label {
+    display: block;
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(15px, 1.65vw, 17px);
+    color: rgba(248, 246, 242, 0.74);
+    margin-bottom: 14px;
+  }
+  .message-text {
+    background: rgba(0, 0, 0, 0.20);
+    border: 1px solid rgba(194, 168, 108, 0.20);
+    border-left: 2px solid rgba(194, 168, 108, 0.5);
+    padding: 22px 24px;
+    color: rgba(248, 246, 242, 0.92);
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin-bottom: 14px;
+  }
+  .message-text .ref-url {
+    color: var(--gold);
+    word-break: break-all;
+  }
+
+  /* ===========================
+     CLOSING
+     =========================== */
+  .closing {
+    position: relative;
+    padding: clamp(72px, 10vh, 100px) 0 clamp(60px, 8vh, 84px);
+    background:
+      linear-gradient(180deg, rgba(248,246,242,0.84), rgba(239,234,224,0.92)),
+      url('section-bg-pale.jpg') center / cover no-repeat,
+      var(--pale-sand);
+    border-top: 1px solid rgba(91, 75, 63, 0.06);
+    text-align: center;
+  }
+  .closing .container-narrow {
+    max-width: 680px;
+  }
+  .closing p {
+    font-family: var(--serif);
+    font-size: clamp(18px, 1.95vw, 22px);
+    line-height: 1.55;
+    color: var(--charcoal);
+    margin-bottom: 18px;
+  }
+  .closing .accent-line {
+    margin: 36px auto 26px;
+  }
+  .closing .closing-emphasis {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(26px, 3vw, 34px);
+    line-height: 1.2;
+    color: var(--mocha);
+    margin: 0 0 24px;
+    font-weight: 400;
+  }
+  .closing .signature {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 19px;
+    color: var(--mocha);
+    margin: 0;
+  }
+
+  /* ===========================
+     FOOTER
+     =========================== */
+  footer {
+    background: var(--charcoal);
+    color: rgba(248, 246, 242, 0.42);
+    text-align: center;
+    padding: 44px 0;
+    font-size: 12px;
+    line-height: 1.65;
+  }
+  footer p { margin-bottom: 10px; }
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px 18px;
+    margin-bottom: 14px;
+    font-size: 13px;
+    letter-spacing: 0.04em;
+  }
+  footer a {
+    color: rgba(248, 246, 242, 0.58);
+    text-decoration: none;
+    transition: color 0.2s ease;
+  }
+  footer a:hover { color: var(--gold); }
+
+  /* ===========================
+     RESPONSIVE
+     =========================== */
+  @media (min-width: 640px) {
+    .referral-row {
+      flex-direction: row;
+      align-items: stretch;
+    }
+    .copy-btn { flex-shrink: 0; }
+  }
+
+  @media (max-width: 768px) {
+    .container-narrow { padding: 0 22px; }
+
+    .hero {
+      padding: 56px 0 56px;
+    }
+    .hero-portrait {
+      width: 86px;
+      height: 86px;
+      margin-bottom: 22px;
+    }
+    .hero h1 {
+      font-size: clamp(34px, 8.8vw, 44px);
+    }
+    .hero .lead {
+      font-size: 17px;
+    }
+    .scroll-cue { margin-top: 28px; padding: 8px 16px; }
+    .scroll-cue-chevron { width: 40px; height: 40px; }
+
+    .step { padding: 58px 0; }
+    .step h2 { font-size: 26px; }
+    .step .step-lead { font-size: 16px; margin-bottom: 28px; }
+    .step-note { font-size: 14px; padding: 14px 18px; }
+
+    .step-dark { padding: 64px 0; }
+    .step-dark h2 { font-size: 28px; }
+    .step-dark .accent-line { margin: 22px auto 28px; }
+
+    .viral-narrative {
+      font-size: 16.5px;
+      margin-bottom: 36px;
+    }
+    .viral-narrative p { margin-bottom: 14px; }
+
+    .bonus-card {
+      padding: 26px 22px;
+      margin-bottom: 36px;
+    }
+    .bonus-card h3 { font-size: 21px; }
+    .bonus-card p { font-size: 15px; }
+
+    .referral-block { margin-bottom: 36px; }
+    .referral-url-display {
+      font-size: 13px;
+      padding: 16px 18px;
+    }
+    .copy-btn {
+      padding: 14px 20px;
+      font-size: 11.5px;
+    }
+    .message-text {
+      font-size: 14.5px;
+      padding: 20px 22px;
+    }
+
+    .closing { padding: 56px 0 52px; }
+    .closing p { font-size: 17px; }
+    .closing .closing-emphasis { font-size: 24px; }
+  }
+</style>
+</head>
+<body>
+
+  <!-- ===========================
+       HERO — "You're in."
+       =========================== -->
+  <header class="hero">
+    <div class="container-narrow">
+      <div class="hero-portrait fade-in">
+        <img src="jm-headshot-1.png" alt="Jason Moss" loading="eager" decoding="async">
+      </div>
+
+      <h1 class="fade-in" style="transition-delay: 0.1s;">You&rsquo;re in<span id="nameComma">.</span><span class="name" id="firstName"></span></h1>
+
+      <div class="accent-line fade-in" style="transition-delay: 0.15s;"></div>
+
+      <p class="lead fade-in" style="transition-delay: 0.2s;">Three quick moves to lock this in. I&rsquo;ll send the full session details to your inbox shortly.</p>
+    </div>
+
+    <a href="#step-1" class="scroll-cue fade-in" style="transition-delay: 0.35s;" aria-label="Scroll to step 1">
+      <svg class="scroll-cue-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+    </a>
+  </header>
+
+  <!-- ===========================
+       STEP 1 — Add to calendar
+       =========================== -->
+  <section class="step step-pale" id="step-1">
+    <div class="container-narrow">
+      <div class="fade-in">
+        <p class="step-eyebrow">Step 1</p>
+        <h2>Add the 5 sessions to your calendar.</h2>
+        <p class="step-lead">Don&rsquo;t miss a beat. Block the times now so nothing gets in the way of your breakthrough week.</p>
+      </div>
+      <div class="fade-in" style="transition-delay: 0.1s;">
+        <a href="https://addcal.co/c/iate95pvt15c" id="addCalendarBtn" class="btn btn-large" target="_blank" rel="noopener noreferrer">Add to Calendar</a>
+      </div>
+      <div class="fade-in" style="transition-delay: 0.2s;">
+        <p class="step-note"><strong>Upgraded to VIP?</strong> Watch your inbox &mdash; I&rsquo;ll send a separate calendar with your VIP-only sessions and the post-challenge integration call.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       STEP 2 — Facebook group
+       =========================== -->
+  <section class="step step-warm">
+    <div class="container-narrow">
+      <div class="fade-in">
+        <p class="step-eyebrow">Step 2</p>
+        <h2>Join the private Facebook group.</h2>
+        <p class="step-lead">Coaching, accountability, wins, questions &mdash; where the conversation continues between sessions. The room makes the work stick.</p>
+      </div>
+      <div class="fade-in" style="transition-delay: 0.1s;">
+        <a href="https://www.facebook.com/groups/2022641168633110" id="facebookGroupBtn" class="btn btn-large" target="_blank" rel="noopener noreferrer">Join the Facebook Group</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       STEP 3 — Viral / Refer (DARK)
+       =========================== -->
+  <section class="step-dark" id="step-3">
+    <div class="container-narrow">
+      <div class="fade-in">
+        <p class="step-eyebrow">Step 3</p>
+        <h2>Bring someone <span class="accent">with you.</span></h2>
+        <div class="accent-line" aria-hidden="true"></div>
+      </div>
+
+      <div class="viral-narrative fade-in" style="transition-delay: 0.1s;">
+        <p>You just signed up to find the pattern that&rsquo;s been capping your revenue.</p>
+        <p class="italic">Want to know one of the most common patterns I see? Doing everything alone.</p>
+        <p>Break the pattern <strong>before Day 1.</strong> Share your link below &mdash; every entrepreneur who signs up through it gets in free.</p>
+        <p>And when 3 of them join you, you get something back.</p>
+      </div>
+
+      <div class="fade-in" style="transition-delay: 0.2s;">
+        <div class="bonus-card">
+          <span class="bonus-eyebrow">Your bonus</span>
+          <h3>Unlock my 3-Day Marketing Workshop. <span class="accent">Free.</span></h3>
+          <div class="accent-line" aria-hidden="true"></div>
+          <p>Inside: the core marketing roadmap I use with my private clients &mdash; the same one I&rsquo;ve used to sign <strong>2,000+ paying clients online</strong>.</p>
+          <p class="bonus-trigger">I&rsquo;ll send it to you personally once 3 entrepreneurs sign up through your link.</p>
+        </div>
+      </div>
+
+      <!-- Referral link -->
+      <div class="referral-block fade-in" style="transition-delay: 0.3s;">
+        <span class="label">Your referral link</span>
+        <div class="referral-row">
+          <div class="referral-url-display" id="referralUrlDisplay">https://jasonmoss.com/business-breakthrough-challenge</div>
+          <button type="button" class="copy-btn" data-copy-target="referralUrlDisplay" data-label="Copy Link">
+            <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 9 17 19 7"/></svg>
+            <span class="btn-label">Copy Link</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- DM template -->
+      <div class="message-block fade-in" style="transition-delay: 0.4s;">
+        <span class="label">Not sure what to say? Send this:</span>
+        <div class="message-text" id="dmTemplate">Just signed up for a free 5-day live challenge with Jason Moss called The Business Breakthrough Challenge &mdash; it&rsquo;s about finding the hidden pattern that&rsquo;s been capping your revenue and breaking through it. I have a link that gets you in free. Want to join me? <span class="ref-url" id="dmRefUrl">https://jasonmoss.com/business-breakthrough-challenge</span></div>
+        <button type="button" class="copy-btn" data-copy-target="dmTemplate" data-label="Copy Message">
+          <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 9 17 19 7"/></svg>
+          <span class="btn-label">Copy Message</span>
+        </button>
+      </div>
+
+      <!-- Story / post template -->
+      <div class="message-block fade-in" style="transition-delay: 0.5s;">
+        <span class="label">Or for stories / social posts:</span>
+        <div class="message-text" id="storyTemplate">Got a few free invites to Jason Moss&rsquo;s 5-day challenge next week &mdash; it&rsquo;s for coaches and consultants who&rsquo;ve hit a revenue ceiling and want to find out why. DM if you want one.</div>
+        <button type="button" class="copy-btn" data-copy-target="storyTemplate" data-label="Copy Post">
+          <svg class="icon-copy" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="5 13 9 17 19 7"/></svg>
+          <span class="btn-label">Copy Post</span>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       CLOSING
+       =========================== -->
+  <section class="closing">
+    <div class="container-narrow">
+      <div class="fade-in">
+        <p>This is going to be a powerful 5 days.</p>
+        <p>Show up. Bring someone with you. Let&rsquo;s find what&rsquo;s really been in the way.</p>
+        <div class="accent-line" aria-hidden="true"></div>
+        <p class="closing-emphasis">See you inside.</p>
+        <p class="signature">&mdash; Jason</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===========================
+       FOOTER
+       =========================== -->
+  <footer>
+    <div class="container-narrow">
+      <div class="footer-links">
+        <a href="https://jasonmoss.com/privacy/">Privacy Policy</a>
+        <a href="https://jasonmoss.com/terms/">Terms &amp; Conditions</a>
+        <a href="https://jasonmoss.com/earnings-disclaimer/">Earnings Disclaimer</a>
+      </div>
+      <p>&copy; Jason Moss LLC. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <!-- ===========================
+       Personalization + referral link wiring + copy buttons
+       =========================== -->
+  <script>
+  (function() {
+    'use strict';
+
+    // CONFIG
+    var CHALLENGE_URL = 'https://jasonmoss.com/business-breakthrough-challenge';
+
+    var params = new URLSearchParams(window.location.search);
+    var firstName = (params.get('first_name') || '').trim();
+    var email = (params.get('email') || '').trim();
+
+    // Personalize the hero headline if we have a name
+    if (firstName) {
+      var safeName = firstName.replace(/[<>]/g, '').slice(0, 40);
+      var nameEl = document.getElementById('firstName');
+      var commaEl = document.getElementById('nameComma');
+      if (nameEl && commaEl) {
+        commaEl.textContent = ', ';
+        nameEl.textContent = safeName + '.';
+      }
+    }
+
+    // Build the referral URL. If no email, fall back to the bare challenge URL
+    // (visitor still sees the affiliate section, but with no ?ref= attribution).
+    var referralUrl = CHALLENGE_URL;
+    if (email) {
+      referralUrl = CHALLENGE_URL + '?ref=' + encodeURIComponent(email);
+    }
+
+    var refDisplay = document.getElementById('referralUrlDisplay');
+    if (refDisplay) refDisplay.textContent = referralUrl;
+
+    var dmRefUrl = document.getElementById('dmRefUrl');
+    if (dmRefUrl) dmRefUrl.textContent = referralUrl;
+
+    // Copy-to-clipboard
+    function showCopied(btn) {
+      var labelEl = btn.querySelector('.btn-label');
+      var original = btn.getAttribute('data-label') || (labelEl ? labelEl.textContent : 'Copy');
+      btn.classList.add('copied');
+      if (labelEl) labelEl.textContent = 'Copied';
+      setTimeout(function() {
+        btn.classList.remove('copied');
+        if (labelEl) labelEl.textContent = original;
+      }, 1800);
+    }
+
+    function copyTextFromTarget(btn) {
+      var targetId = btn.getAttribute('data-copy-target');
+      var targetEl = targetId ? document.getElementById(targetId) : null;
+      if (!targetEl) return;
+      var text = (targetEl.innerText || targetEl.textContent || '').trim();
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(function() {
+          showCopied(btn);
+        }).catch(function() {
+          fallbackCopy(text, btn);
+        });
+      } else {
+        fallbackCopy(text, btn);
+      }
+    }
+
+    function fallbackCopy(text, btn) {
+      var ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.opacity = '0';
+      document.body.appendChild(ta);
+      ta.select();
+      try { document.execCommand('copy'); showCopied(btn); } catch (e) {}
+      document.body.removeChild(ta);
+    }
+
+    document.querySelectorAll('.copy-btn').forEach(function(btn) {
+      btn.addEventListener('click', function() { copyTextFromTarget(btn); });
+    });
+
+    // Fade-in on scroll
+    if ('IntersectionObserver' in window) {
+      var observer = new IntersectionObserver(function(entries) {
+        entries.forEach(function(entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.12, rootMargin: '-40px' });
+
+      document.querySelectorAll('.fade-in').forEach(function(el) {
+        observer.observe(el);
+      });
+    } else {
+      document.querySelectorAll('.fade-in').forEach(function(el) {
+        el.classList.add('visible');
+      });
+    }
+  })();
+  </script>
+
+</body>
+</html>
