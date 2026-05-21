@@ -1227,12 +1227,19 @@
     }
     .hero .meta {
       font-size: 13px;
-      line-height: 1.42;
+      line-height: 1.45;
       margin-bottom: 20px;
       max-width: 300px;
       gap: 8px;
+      align-items: flex-start;
     }
-    .hero .meta svg { width: 14px; height: 14px; }
+    .hero .meta svg { width: 14px; height: 14px; margin-top: 2px; }
+    .hero .meta .meta-secondary {
+      display: block;
+      margin-top: 2px;
+    }
+    .challenge-shot { margin: 0 0 12px; }
+    .center-cta { margin-top: 22px; }
     .hero .btn {
       display: block;
       width: 100%;
@@ -1254,7 +1261,8 @@
     .hero-trust-logos .logo-entrepreneur { width: 84px; }
     .hero-trust-logos .logo-fc { width: 84px; }
     .client-proof-grid { grid-template-columns: 1fr; }
-    .challenge-stat { padding: 24px 20px; }
+    .proof-heading { margin: 0 auto 30px; }
+    .challenge-stat { padding: 24px 20px; margin: 0 auto 28px; }
     .takeaways-grid { grid-template-columns: 1fr; gap: 28px; }
     .diagnosis h2,
     .final-note h2,
@@ -1346,10 +1354,10 @@
         <h1>
           Find the Hidden Pattern Keeping Your Revenue Stuck
         </h1>
-        <p class="lead">Join the free 5-day Business Breakthrough Challenge to uncover why your business stopped growing &mdash; and <em>the exact shift that breaks through it.</em></p>
+        <p class="lead">Join the 5-day Business Breakthrough Challenge to uncover why your business stopped growing &mdash; and <em>the exact shift that breaks through it.</em></p>
         <div class="meta">
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
-          <span>Live June 8&ndash;12 &middot; 10am&ndash;11:30am MT &middot; Replays available</span>
+          <span><span class="meta-primary">Live June 8&ndash;12 &middot; 10am&ndash;11:30am MT</span><span class="meta-secondary"> &middot; Replays available</span></span>
         </div>
         <a href="#optin" class="btn">Save My Spot &mdash; It&rsquo;s Free</a>
         <div class="hero-trust-logos" aria-label="Featured in">
