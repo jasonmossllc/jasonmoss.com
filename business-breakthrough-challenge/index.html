@@ -1232,9 +1232,21 @@
       gap: 6px;
     }
     .hero .meta svg { width: 12px; height: 12px; }
-    .challenge-shot { margin: 0 0 12px; }
+    /* Drop CSS column layout on mobile to kill phantom column-balancing
+       space and let screenshots stack tightly via plain block flow. */
+    .challenge-screens {
+      columns: initial;
+      column-gap: 0;
+      display: block;
+    }
+    .challenge-shot {
+      display: block;
+      margin: 0 0 10px;
+    }
+    .challenge-shot:last-child { margin-bottom: 0; }
     .center-cta { margin-top: 22px; }
     .takeaways-section .center-cta { margin-top: 44px; }
+    .challenge-proof .center-cta { margin-top: 16px; }
     .days-heading { margin-bottom: 32px; }
     .day-cta { margin-top: 32px; }
     .hero .btn {
