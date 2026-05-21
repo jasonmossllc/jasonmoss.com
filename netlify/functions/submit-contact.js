@@ -9,6 +9,8 @@
 const CUSTOM_FIELDS = {
   latest_ad: '18',     // Latest Ad (Field ID 18)
   latest_source: '15', // Latest Source (Field ID 15)
+  signed_clients: '102', // Signed Clients (Field ID 102)
+  referred_by: '103', // Referred By (Field ID 103)
   // Add more custom fields as needed
 };
 
@@ -53,6 +55,8 @@ exports.handler = async (event) => {
 
     // Build custom field values
     const fieldValues = [];
+    const signedClients = data.signed_clients || data.signed_paying_clients;
+    const referredBy = data.referred_by || data.referredBy;
 
     if (data.latest_ad && CUSTOM_FIELDS.latest_ad !== 'FIELD_ID_HERE') {
       fieldValues.push({ field: CUSTOM_FIELDS.latest_ad, value: data.latest_ad });
@@ -60,6 +64,14 @@ exports.handler = async (event) => {
 
     if (data.latest_source && CUSTOM_FIELDS.latest_source !== 'FIELD_ID_HERE') {
       fieldValues.push({ field: CUSTOM_FIELDS.latest_source, value: data.latest_source });
+    }
+
+    if (signedClients && CUSTOM_FIELDS.signed_clients !== 'FIELD_ID_HERE') {
+      fieldValues.push({ field: CUSTOM_FIELDS.signed_clients, value: signedClients });
+    }
+
+    if (referredBy && CUSTOM_FIELDS.referred_by !== 'FIELD_ID_HERE') {
+      fieldValues.push({ field: CUSTOM_FIELDS.referred_by, value: referredBy });
     }
 
     if (fieldValues.length > 0) {
