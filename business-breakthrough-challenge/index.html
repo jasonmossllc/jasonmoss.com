@@ -1823,6 +1823,7 @@
           <input type="tel" name="Phone Number" class="form-input" placeholder="Phone Number" inputmode="tel" autocomplete="tel-national" required aria-required="true">
         </div>
         <input type="hidden" name="Ad" value="">
+        <input type="hidden" name="Source" value="">
         <input type="hidden" name="Referred By" value="">
         <button type="submit" class="form-btn">Save My Spot &mdash; It&rsquo;s Free</button>
       </form>
@@ -1843,10 +1844,13 @@
 
     var params = new URLSearchParams(window.location.search);
     var adParam = params.get('ad');
+    var sourceParam = params.get('source');
     var referredByParam = params.get('ref');
     var adField = form.querySelector('input[name="Ad"]');
+    var sourceField = form.querySelector('input[name="Source"]');
     var referredByField = form.querySelector('input[name="Referred By"]');
     if (adField) adField.value = adParam || '';
+    if (sourceField) sourceField.value = sourceParam || '';
     if (referredByField) referredByField.value = referredByParam || '';
 
     document.querySelectorAll('a[href="#optin"]').forEach(function(a) {
@@ -1944,6 +1948,7 @@
           signed_clients: signedClientsLabel,
           qualified_lead: signedClients === 'yes',
           latest_ad: adField ? adField.value : '',
+          latest_source: sourceField ? sourceField.value : '',
           tag: 'Business Breakthrough Challenge'
         };
 
