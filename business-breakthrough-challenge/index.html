@@ -157,6 +157,9 @@
     margin-top: 14px;
     font-weight: 400;
   }
+  .mobile-break {
+    display: none;
+  }
   .hero .subheadline {
     display: block;
     font-family: var(--serif);
@@ -1230,6 +1233,9 @@
       font-size: clamp(31px, 8.6vw, 40px);
       line-height: 1.08;
     }
+    .mobile-break {
+      display: block;
+    }
     .hero h1 .italic {
       font-size: 0.62em;
     }
@@ -1389,7 +1395,7 @@
       <div class="hero-text">
         <div class="eyebrow">Coaches, Consultants &amp; Service-Based Biz Owners</div>
         <h1>
-          There&rsquo;s a Reason Your Business Isn&rsquo;t Growing.
+          There&rsquo;s a Reason Your Business <span class="mobile-break"></span>Isn&rsquo;t Growing.
         </h1>
         <span class="subheadline">Over 5 days, we&rsquo;ll find it.</span>
         <p class="lead">Join the free Business Breakthrough Challenge to uncover the hidden pattern keeping your revenue stuck, and the shift that gets it moving again.</p>
