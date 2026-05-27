@@ -1,0 +1,750 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<title>Dr Selma Coaching — Strategy Plan</title>
+<style>
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+
+  :root{
+    --obsidian:#1D1F1E;
+    --forest:#2C3F36;
+    --mocha:#5B4B3F;
+    --taupe:#8C837A;
+    --gold:#C2A86C;
+    --stone:#E9E2D3;
+    --sand:#F8F6F2;
+    --paper:#FBF9F4;
+    --bg:#E7E1D4;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--obsidian);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(1rem,0.94rem + 0.3vw,1.15rem);
+    line-height:1.78;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  ::selection{background:var(--gold);color:var(--obsidian);}
+
+  p{margin:0 0 1.15em 0;text-wrap:pretty;}
+  strong{font-weight:600;color:var(--obsidian);}
+  em{font-style:italic;}
+
+  /* ---------- COVER / HERO ---------- */
+  .cover{
+    position:relative;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    min-height:100vh;
+    min-height:100svh;
+    padding:clamp(28px,4vw,56px) clamp(24px,6vw,84px);
+    color:var(--sand);
+    background:
+      radial-gradient(120% 80% at 82% 12%,rgba(194,168,108,.14),transparent 52%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    overflow:hidden;
+  }
+  .cover .logo{
+    width:clamp(150px,16vw,196px);
+    display:block;
+    align-self:start;
+  }
+  .cover .cover-mid{
+    align-self:center;
+    max-width:780px;
+    padding:clamp(24px,5vw,40px) 0;
+  }
+  .cover .eyebrow{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(.7rem,.66rem + .15vw,.82rem);
+    line-height:1.4;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:clamp(18px,2.5vw,26px);
+  }
+  .cover h1{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(2.6rem,1.7rem + 4.4vw,5rem);
+    line-height:1.06;
+    letter-spacing:-.01em;
+    color:var(--sand);
+    margin-bottom:clamp(22px,3vw,32px);
+    text-wrap:balance;
+  }
+  .cover .rule{
+    width:68px;height:2px;
+    background:var(--gold);
+    margin-bottom:clamp(22px,3vw,32px);
+  }
+  .cover .sub{
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:clamp(1.05rem,1rem + .45vw,1.4rem);
+    line-height:1.7;
+    color:var(--stone);
+    max-width:620px;
+  }
+  .cover .foot{
+    align-self:end;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:18px;
+    padding-top:22px;
+    border-top:1px solid rgba(233,226,211,.18);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(.78rem,.74rem + .12vw,.9rem);
+    letter-spacing:.05em;
+    color:var(--stone);
+  }
+  .cover .foot .r{color:var(--gold);white-space:nowrap;}
+  .cover .foot .who{font-weight:600;color:var(--sand);}
+
+  /* ---------- BODY CONTENT (floating paper) ---------- */
+  main.doc{
+    position:relative;
+    z-index:2;
+    max-width:920px;
+    margin:clamp(-96px,-7vw,-52px) auto clamp(56px,8vw,104px);
+    padding:clamp(44px,6vw,92px) clamp(26px,5.5vw,84px);
+    background:var(--paper);
+    border-radius:clamp(10px,1.4vw,18px);
+    box-shadow:
+      0 40px 80px -40px rgba(29,31,30,.5),
+      0 2px 10px rgba(29,31,30,.05);
+  }
+
+  .section{margin-top:clamp(44px,6vw,80px);}
+  main.doc > .section:first-child{margin-top:0;}
+  .section + .section{
+    padding-top:clamp(44px,6vw,80px);
+    border-top:1px solid rgba(29,31,30,.09);
+  }
+  main.doc > .section:first-child{margin-top:0;}
+
+  .sechead{margin-bottom:6px;}
+  .sec-num,.note-head{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.74rem;
+    line-height:1.4;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h2{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(1.7rem,1.25rem + 1.9vw,2.55rem);
+    line-height:1.18;
+    letter-spacing:-.01em;
+    color:var(--obsidian);
+    margin-bottom:6px;
+    text-wrap:balance;
+  }
+  .h2-rule{
+    width:54px;height:3px;
+    background:var(--gold);
+    margin:18px 0 22px 0;
+  }
+
+  h3{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(1.1rem,1rem + .4vw,1.32rem);
+    line-height:1.4;
+    color:var(--forest);
+    margin:clamp(28px,3.5vw,40px) 0 10px 0;
+  }
+  h3:first-of-type{margin-top:clamp(18px,2.5vw,26px);}
+
+  .lead{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:clamp(1.18rem,1.05rem + .55vw,1.5rem);
+    line-height:1.6;
+    color:var(--mocha);
+    margin-bottom:4px;
+  }
+
+  ul,ol{margin:14px 0 22px 0;padding-left:0;list-style:none;}
+  li{
+    position:relative;
+    padding-left:26px;
+    margin-bottom:12px;
+  }
+  ul li::before{
+    content:"";
+    position:absolute;
+    left:3px;top:.62em;
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+  ol{counter-reset:ol;}
+  ol li{padding-left:34px;counter-increment:ol;}
+  ol li::before{
+    content:counter(ol);
+    position:absolute;
+    left:0;top:.02em;
+    font-family:'Raleway',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    line-height:1.55;
+    color:var(--gold);
+  }
+
+  .callout{
+    background:linear-gradient(180deg,#EFEADC 0%,var(--stone) 100%);
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:clamp(20px,3vw,30px) clamp(22px,3.4vw,34px);
+    margin:26px 0 28px 0;
+    box-shadow:0 14px 30px -22px rgba(29,31,30,.45);
+  }
+  .callout p{
+    font-family:'Libre Baskerville',serif;
+    font-style:italic;
+    font-size:clamp(1.08rem,1rem + .4vw,1.28rem);
+    line-height:1.62;
+    color:var(--obsidian);
+    margin:0;
+  }
+  .callout p + p{margin-top:12px;}
+
+  /* ---------- 90 DAY PLAN ---------- */
+  .phase{
+    margin-bottom:24px;
+    border:1px solid rgba(29,31,30,.08);
+    border-radius:12px;
+    background:#fff;
+    overflow:hidden;
+    box-shadow:0 20px 44px -32px rgba(29,31,30,.4);
+  }
+  .phase:last-child{margin-bottom:0;}
+  .phase-head{
+    background:linear-gradient(135deg,#33473C,#283831);
+    color:var(--sand);
+    padding:clamp(16px,2.4vw,22px) clamp(22px,3.2vw,30px);
+  }
+  .phase-head .tag{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.72rem;
+    line-height:1.3;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:7px;
+  }
+  .phase-head .ttl{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.2rem,1.05rem + .55vw,1.5rem);
+    line-height:1.3;
+    color:var(--sand);
+  }
+  .phase-body{padding:clamp(22px,3vw,30px) clamp(22px,3.2vw,32px) clamp(14px,2vw,20px);}
+  .phase-body ol{margin:0;}
+  .phase-body ol li{margin-bottom:16px;}
+  .phase-body ol li strong{color:var(--forest);}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:left;
+    color:var(--sand);
+    background:
+      radial-gradient(120% 70% at 18% 88%,rgba(194,168,108,.13),transparent 55%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    padding:clamp(72px,11vw,150px) clamp(24px,6vw,84px);
+    overflow:hidden;
+  }
+  .closing > *{width:100%;max-width:680px;}
+  .closing .note-head{color:var(--gold);margin-bottom:14px;}
+  .closing h2{color:var(--sand);}
+  .closing .h2-rule{background:var(--gold);}
+  .closing p{
+    color:var(--stone);
+    font-size:clamp(1.02rem,.96rem + .35vw,1.18rem);
+    line-height:1.75;
+    margin-bottom:15px;
+  }
+  .closing strong{color:var(--sand);}
+  .closing .sign{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.15rem,1.05rem + .4vw,1.35rem);
+    line-height:1.5;
+    color:var(--sand);
+    margin-top:34px;
+  }
+  .closing .sign span{
+    display:block;
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:.86rem;
+    line-height:1.5;
+    letter-spacing:.05em;
+    color:var(--gold);
+    margin-top:12px;
+  }
+
+  /* ---------- SMALL SCREENS ---------- */
+  @media (max-width:600px){
+    body{line-height:1.7;}
+    .cover{min-height:100svh;}
+    .cover .foot{flex-direction:column;gap:6px;align-items:flex-start;}
+    main.doc{
+      margin:-44px 14px clamp(40px,8vw,64px);
+      border-radius:14px;
+      padding:40px 22px;
+    }
+  }
+
+  /* ---------- PRINT (retain clean PDF export) ---------- */
+  @media print{
+    body{background:#fff;}
+    .cover,.closing{min-height:auto;}
+    main.doc{
+      max-width:none;margin:0;padding:14mm 16mm;
+      box-shadow:none;border-radius:0;background:#fff;
+    }
+    .section + .section{border-top:0;}
+    .phase,.callout{box-shadow:none;break-inside:avoid;}
+    .sechead{break-after:avoid;}
+    h3{break-after:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section class="cover">
+  <img class="logo" src="assets/logo-light.svg" alt="Jason Moss">
+  <div class="cover-mid">
+    <div class="eyebrow">Business Strategy Plan</div>
+    <h1>Dr Selma Coaching</h1>
+    <div class="rule"></div>
+    <div class="sub">A clear-eyed look at where your business is, the biggest opportunities I see, and a 90-day plan to act on them — built from my review of your business, your assessment, and the notes I recorded going through everything.</div>
+  </div>
+  <div class="foot">
+    <span class="l">Prepared for <span class="who">Selma Lamara</span></span>
+    <span class="r">May 2026</span>
+  </div>
+</section>
+
+<main class="doc">
+
+<!-- ===================== 1. PERSONAL NOTE ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="note-head">A note before we begin</div>
+    <h2>Before you read a word of this</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Hey Selma —</p>
+  <p>A quick word about how this is made, before you read any of it.</p>
+  <p>I used AI to help me organize my notes and shape this into something clean and readable for you. It looks polished because I wanted it to be easy to move through. Not because a machine decided what your business needs.</p>
+  <p>The strategy is mine. Every recommendation, every shift I'm pointing at, every line of the 90-day plan came out of sitting with your business — your assessment, your site, your offer, your reels, your words — and recording what I saw. This isn't a template with your name dropped in. It's my thinking about <em>your</em> business, made readable.</p>
+  <p>Read it slowly. There's no rush here. The whole point of what we're going to build together is that you don't have to rush anything anymore.</p>
+</section>
+
+<!-- ===================== 2. WHERE YOU ARE NOW ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 02</div>
+    <h2>Where you are right now</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">This isn't a strategy problem. It's a sustainability problem wearing a strategy problem's clothes.</p>
+  </div>
+
+  <p>Let me start with what's true and good, because there's a lot of it and I don't want it to disappear under everything else.</p>
+
+  <h3>What's working</h3>
+  <p>Your niche is strong. "Women with chronic unexplained symptoms" is clear, specific, and emotionally precise — a woman with ME/CFS, fibromyalgia, long COVID, or unexplained burnout reads that and immediately knows whether you're for her. That clarity is rare. Don't take it for granted.</p>
+  <p>Your credibility is exceptional. Former NHS Doctor, MD, MSc Neuroscience, Root Cause Therapy, Somatic EMDR, Compassionate Inquiry, Islamic Psychology and Counselling. Most people working in this space have one of those. You have all of them. That's not a stack of certifications — it's a stand. It says you went looking for what mainstream medicine couldn't explain, and you went deep.</p>
+  <p>Your offer is solid. <em>Inside Out</em> — a 1:1 private healing journey over twelve sessions — is well-named and well-shaped. It mirrors the work you actually do. £2500 is the right price point for the depth and the credentials behind it.</p>
+  <p>Your site is genuinely well-written. Lines like <em>"Healing begins where the inner fighting ends"</em> and <em>"Healing happens in the GAP — the space between where mainstream medicine stops and where real recovery begins"</em> are doing real work. That copy isn't filler. It speaks to the exact woman you're trying to reach.</p>
+  <p>Your lead magnet — <em>"Your tests are normal. But your body clearly isn't"</em> — is one of the best hooks I've seen for this niche. The woman who reads that line stops scrolling.</p>
+  <p>And one more thing that matters: faith-informed care for Muslim women is a real differentiator. You mentioned in your assessment that your Muslim clients say your work is the missing piece between mainstream medicine and the spiritual dimension. That's a niche-within-a-niche almost no one is serving. We come back to this in Section 5.</p>
+
+  <h3>What's holding you back</h3>
+  <p>You are not in your own content.</p>
+  <p>I went through your Instagram, your Facebook, your site, and the most powerful asset you have — <em>you</em> — is barely visible. Your profile pictures show a logo, or you turned away from the camera. There's no portrait of you on the home page. Your reels don't have you in them.</p>
+  <p>Underneath that, the rhythm tells the same story. Over the last sixty days you've posted three reels. Before that, the last piece of content was March. There's no consistent visibility engine running anywhere in your business right now — and the small amount of content that <em>is</em> running keeps you hidden.</p>
+  <p>You told me in your assessment that of the paying clients you've had, none came from a stranger on social. They knew you offline, or you'd had a face-to-face conversation. That's actually a clean signal — it tells me your work converts the moment someone experiences you. The bottleneck isn't your work. It's that no one cold is ever experiencing you.</p>
+  <p>Underneath all of that is the deeper pattern, the one you named yourself:</p>
+  <ul>
+    <li>The achiever fires. The rescuer fires. They take over and push you into output.</li>
+    <li>Your nervous system can hold that for a while. Then it can't.</li>
+    <li>Your body says no. The chronic condition flares.</li>
+    <li>You disappear from the business for weeks or months.</li>
+    <li>You come back, gather yourself, and try to push again.</li>
+  </ul>
+  <p>This is the cycle. And it's the same cycle you teach your clients to break. The business you've been trying to build has been sitting on top of it.</p>
+  <p>That's the read. Your work is exceptional, your niche is right, your offer is right, and your credentials are extraordinary. The reason none of it is converting strangers yet has very little to do with strategy and almost everything to do with the relationship you have to being visible — and the boom-and-bust pattern that comes with it.</p>
+
+  <div class="callout">
+    <p>This is not a strategy problem dressed up as a sustainability problem. It's a sustainability problem dressed up as a strategy problem. We're going to fix it from the inside out — the same way you fix it for your clients.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. BIGGEST OPPORTUNITIES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 03</div>
+    <h2>The biggest opportunities I see</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">If you focus only on a few things over the next year, focus on these. In this order.</p>
+  </div>
+
+  <h3>1. Bring you, visibly, into your business</h3>
+  <p>This is the highest-leverage move in the entire plan. People do not feel safe with logos. They feel safe with humans. And your whole body of work is about helping a woman feel safe in her own body again — which means the way you show up has to model that safety before a single word about it lands.</p>
+  <p>Right now someone arrives at your site, reads beautiful language about presence and safety, and never sees whose hands are doing the work. They scroll Instagram and find a profile photo of a logo. They open a reel and watch text fly across the screen with no face attached to it. The most persuasive asset you have is missing from every front door.</p>
+  <p>This isn't just a visibility move. It's also where the inner work begins. The fact that you've been running this business without putting yourself in it is information. Something in you has been protecting you from being seen. That something is the same something that's worth getting curious about on our calls.</p>
+
+  <h3>2. YouTube as your visibility engine</h3>
+  <p>Instagram doesn't fit your nervous system. You said it plainly in your assessment — <em>"I'm not a social media person. I prefer writing content and teaching like one-to-many."</em> <em>"High-energy marketing doesn't feel like me."</em> Trust that. Your system is telling you the truth.</p>
+  <p>YouTube is the opposite of Instagram. It rewards depth, not snappiness. It rewards teachers. It rewards the kind of woman who can sit with a camera and explain — slowly, clearly, with weight — how chronic symptoms actually work and what's underneath them. That is who you are. The channel is already shaped for you. You just haven't planted yourself on it yet.</p>
+  <p>YouTube is also evergreen. A reel disappears in 48 hours. A YouTube video keeps pulling people in for years. That's the version of visibility that compounds without you needing to be on. It rewards the woman who can publish thoughtful, search-optimized teaching once a week — and then go live her life. Which is exactly the version of visibility your nervous system can hold.</p>
+  <p>This is the same engine I used to build my first six-figure coaching business online. YouTube long-form, lead magnet, email list, occasional live event. It works because it lets a teacher teach. You are, in your bones, a teacher.</p>
+
+  <h3>3. Sharpen the A-to-B transformation</h3>
+  <p>The niche is clear. The outcome isn't yet.</p>
+  <p>Your offer page tells someone where they're going — <em>"steadier and safer in your body again"</em> — but it doesn't yet show them what they'll see when they get there. That phrase is true and good, but it lands quietly. It doesn't pull someone forward the way the right picture would.</p>
+  <p>We talked about this on our call. Is the promise that she'll feel better than she has in years? That she'll stop crashing after small activities? That she'll start to trust her body again? That she'll be able to say no without her body needing to enforce the no through illness?</p>
+  <p>I'm not asking you to promise something you can't promise. I'm asking you to paint a clearer picture of what's possible. You've been doing this work long enough to know what the other side actually feels like. Trust that, and write it out. The clearer the B, the fewer leads you need.</p>
+
+  <h3>4. The internal work is the real work</h3>
+  <p>Everything I just named has a tactical layer and an internal layer. They are not separate.</p>
+  <p>The reason you're not in your own content has an internal answer. The reason you can't sustain a posting rhythm has an internal answer. The reason you keep crashing has an internal answer. The reason you wonder whether to keep posting on Instagram even though you don't want to has an internal answer.</p>
+  <p>The activities themselves are simple. One YouTube video a week. One email a week. A few stories. The activity isn't the hard part. Your relationship to the activity is what determines whether the activity gets to happen.</p>
+  <p>This is what we'll do on our group coaching calls. The rescuer. The achiever. What fires them. What being visible feels like in your body. What the cycle of overgive and crash is actually protecting. Until we work that layer, no strategy will hold. The minute we do, the strategy starts running almost on its own.</p>
+</section>
+
+<!-- ===================== 4. WHAT NEEDS TO SHIFT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 04</div>
+    <h2>What needs to shift first</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Before any tactic in here works, a few things have to change at the foundation. They're not to-dos. They're orientations.</p>
+  </div>
+
+  <h3>Reduce, don't add</h3>
+  <p>You wrote it in your assessment: <em>"When I get overwhelmed by too many strategies, platforms, or conflicting advice, I tend to freeze, overthink, my health flares up, and I lose alignment with myself."</em></p>
+  <p>I'm taking that seriously. This plan is built on subtraction. Almost every recommendation in here is permission to <em>stop</em> doing something — not pressure to add. You're going to come out of the next ninety days doing fewer things than you're doing now, not more. The few things that remain are the ones that compound.</p>
+
+  <h3>Your relationship to visibility</h3>
+  <p>Right now, being visible feels like a push. Like something you have to force yourself into. The Instagram posting feels heavy. The masterclass plan feels heavy. The WhatsApp content felt heavy by the end.</p>
+  <p>The activity itself isn't heavy. A YouTube video once a week is twenty minutes of speaking to a camera. The weight isn't in the doing. It's in your relationship to being seen.</p>
+  <p>This is what we work on in our calls. There is a version of visibility that doesn't drain you. It exists. I've watched a lot of people who started where you are find it. We're going for that one — not the version that has you forcing yourself onto a platform that isn't yours.</p>
+
+  <h3>The rescuer, the achiever, and the cycle they make together</h3>
+  <p>You named them both. The rescuer over-gives. The achiever takes over and pushes. Together they make output. Then your body says no. Then you crash. Then you come back and try again.</p>
+  <p>This pattern doesn't get solved by working harder. It gets solved by working <em>differently</em>. By designing the structure of the business so it matches the nervous system you're trying to build — not the one that's been driving the burnout.</p>
+  <p>That's why this plan looks the way it does. One channel. One simple rhythm. Built so a medium-health week can carry it. Built so the structure protects you, even on the weeks willpower can't.</p>
+
+  <h3>The recorded masterclass — pause it</h3>
+  <p>You mentioned in your assessment that you're focusing on building one, and you asked for my thoughts. Here they are: pause it.</p>
+  <p>Not forever. Just for now. Live trainings and masterclasses are powerful conversion tools — but they only work when you have an audience to put them in front of. Right now your audience is small. If you spend six weeks building a beautiful masterclass and the room is mostly empty when you finally run it, that crashes you in exactly the way we're trying to avoid. The disappointment alone could pull you back into the cycle for weeks.</p>
+  <p>We build the audience first. The masterclass comes later — in six to nine months — when there's someone there to receive it.</p>
+
+  <h3>WhatsApp as a cold-audience funnel — let it go</h3>
+  <p>WhatsApp is great for warm people. Paying clients. Paid challenge attendees. A small inner circle that's already bought in.</p>
+  <p>For cold followers, it asks too much. Switch platforms. Commit to a community. Expose your phone number to a stranger. People don't make that leap, and you said it yourself — the community never converted, even after a long time of sharing into it.</p>
+  <p>We start by meeting people where they actually are. On the platform → onto your email list → into a conversation. We don't ask them to leap into a chat group with a stranger before they've felt who you are.</p>
+
+  <div class="callout">
+    <p>This plan does not need more discipline from you. It needs less force. The version of this business that lasts is the version you can sustain on a day when your health is medium.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. POSITIONING & MESSAGING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 05</div>
+    <h2>Positioning &amp; messaging</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">The bones are excellent. We sharpen one edge and bring you visibly into the frame.</p>
+  </div>
+
+  <h3>Keep the spine that's working</h3>
+  <p>I want to say this plainly because there's a lot of strategy work in here and I don't want it to read as a request to rebuild what isn't broken. Your site copy is genuinely strong. <em>"Healing begins where the inner fighting ends."</em> <em>"Healing happens in the GAP — the space between where mainstream medicine stops and where real recovery begins."</em> <em>"When the body feels safer, everything begins to change."</em> That language is doing real work for the right woman.</p>
+  <p>Inside Out as the name of your offer — perfect. Aligned. Keep it.</p>
+  <p>Don't touch any of that. The whole content strategy in this plan is downstream of the message you've already built. We're just going to get it in front of more of the right people, and make sure when they arrive, they can actually feel <em>who</em> is saying it.</p>
+
+  <h3>Lead with Former NHS Doctor</h3>
+  <p>This is the single most powerful credibility line you have, and right now it sits inside the site somewhere on the second or third screen.</p>
+  <p>For a woman with chronic unexplained symptoms who has been dismissed by her GP, sent away with normal blood tests, told her pain is in her head — <em>"Former NHS Doctor who saw inside the system and went looking for what it couldn't explain"</em> isn't just credentials. It's the precise reason she should trust you over a coach without medical training. It's a story that lands the moment she reads it.</p>
+  <p>Lead with it. Put it in your YouTube channel description. Put it in the first sentence of your bio across every platform. Open videos with it. <em>"I'm Dr Selma. I'm a Former NHS Doctor and I help women with chronic unexplained symptoms..."</em> The line does enormous work in twelve words.</p>
+
+  <h3>The transformation, painted out</h3>
+  <p>"Steadier and safer in your body" tells someone where they're going. It doesn't yet show them what they'll see when they get there.</p>
+  <p>Write the picture out. Not as a promise — as a picture. It might sound something like this:</p>
+  <div class="callout">
+    <p>Waking up without bracing for what the day will cost you. Going for the walk without paying for it in flares for the next three days. Saying no to your sister, your work, the request you don't have capacity for — without your body needing to crash to enforce the no. The slow return of a sense that your body is on your side, not against you.</p>
+  </div>
+  <p>That kind of language pulls someone forward in a way "steadier and safer" alone doesn't. Use it on the offer page, in the lead magnet, in YouTube video intros, in the welcome sequence. The clearer the B, the less you have to convince anyone. They feel it themselves.</p>
+
+  <h3>Faith-informed care as a stand</h3>
+  <p>You wrote that your Muslim clients have told you your work is the missing piece between mainstream medicine and the spiritual dimension. That a woman of faith looking for trauma-informed body work that doesn't ask her to leave her faith at the door has nowhere else to go.</p>
+  <p>This is a niche-within-a-niche almost no one is serving. Don't bury it.</p>
+  <p>I'm not saying make every piece of content about it. I'm saying — when it's relevant, name it clearly. A YouTube video every month or two specifically for the Muslim woman searching for this work. A line in your bio that names it. A page on the site that speaks directly to her. Let the women who have been quietly looking for someone like you actually be able to find you.</p>
+
+  <h3>The site doesn't need a rewrite — it needs you in it (visually)</h3>
+  <p>This is the smallest change with the biggest effect. Add a portrait. A warm, natural photograph of you — looking at the camera. On the home page. In the about section. In place of the logo profile photos across Instagram and Facebook. Replace the back-of-head shot.</p>
+  <p>Don't overproduce it. Don't book a studio shoot. A clear, well-lit photo, taken in your home or somewhere that feels like you. That's all. The job of the photo is to let a stranger feel they've met a real person before they read a single word.</p>
+</section>
+
+<!-- ===================== 6. OFFERS & PRICING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 06</div>
+    <h2>Offers &amp; pricing</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">The offer is good. Leave most of it alone. Make two clean cuts.</p>
+  </div>
+
+  <h3>Inside Out — leave the spine alone</h3>
+  <p>Twelve sessions over three months, £2500, a private 1:1 container. That's a well-built offer. The structure is right. The depth is right. The price is right for the work and for who you are. Don't dilute it. Don't second-guess it.</p>
+  <p>Spend your energy on getting more of the right women in front of it — not on rebuilding what's already working.</p>
+
+  <h3>Drop the WhatsApp async support between sessions</h3>
+  <p>You already decided this. I'm endorsing it.</p>
+  <p>You wrote in your assessment that the constant back-and-forth between sessions was burning you out, and you wondered whether it was a boundaries issue. It is — and it's also a design issue. You can have strong boundaries and still build an offer that pulls you out of them by default. The structure has to do some of the work, so your willpower doesn't have to do all of it.</p>
+  <p>The sessions are the work. The post-session summary and the agreed-on plans and resources — that's the bridge between sessions. That's enough. Cutting async support is a sustainability cut, not a quality cut. Your client will get the same depth of work. You'll arrive at each session with a fuller tank.</p>
+
+  <h3>75-minute sessions → 60 minutes</h3>
+  <p>75 is awkward. It doesn't fit cleanly into anyone's calendar — yours or theirs. Most people block their days in 30 or 60-minute increments. 75 sits halfway between, costs people more than they expect, and on your end it adds 15 minutes of energy expenditure across every session you run.</p>
+  <p>60 minutes is the standard for a reason. People can hold a 60-minute session. You can hold a 60-minute session. The depth doesn't suffer — it sharpens. You'll feel the difference within three or four weeks of session days. Less drained. Cleaner energy in and out.</p>
+  <p>If you ever feel a particular client needs longer, you can choose to extend a single session in the moment. Don't bake the extension into the structure.</p>
+
+  <h3>The £2500 price point — hold it</h3>
+  <p>You moved from £1500 to £2500 for the right reasons. The work is worth it. The credentials are worth it. The container is worth it.</p>
+  <p>The question isn't whether the price is right. The question is whether enough qualified women are seeing the offer at all. That's a top-of-funnel question. Not a pricing question. Don't drop the price as a response to slow sales — that's solving the wrong problem.</p>
+
+  <h3>Post-container continuation</h3>
+  <p>The one-off session for past clients is fine. A second 12-week container is fine. Keep both open. Don't over-build this yet — when more clients finish the full container, you'll see what they actually want. Build to demand, not to theory.</p>
+</section>
+
+<!-- ===================== 7. MARKETING & CONTENT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 07</div>
+    <h2>Marketing &amp; content strategy</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">One channel. One simple rhythm. Built for a woman who needs the business to hold her — not the other way around.</p>
+  </div>
+
+  <h3>YouTube as the visibility engine</h3>
+  <p>One to two long-form videos per week. Start with one. If one is sustainable for a full month, then move to two. If one starts to feel like a stretch, stay at one. The number is not the point. The rhythm is the point.</p>
+  <p>Each video is built around a specific search term your woman is actually typing into Google or YouTube. Things like:</p>
+  <ul>
+    <li>Why am I crashing after small activities?</li>
+    <li>Chronic fatigue and the nervous system explained</li>
+    <li>What does it mean when all my tests come back normal?</li>
+    <li>Trauma stored in the body — what it actually is</li>
+    <li>The push-and-crash cycle in chronic illness</li>
+    <li>How a nervous system stuck in survival keeps you sick</li>
+  </ul>
+  <p>These aren't viral hooks. They're problems your woman is searching for at 2am after another flare. When she searches one of those phrases and finds an eight-minute video of a Former NHS Doctor explaining the answer — calmly, clearly, with the depth you bring — she stops scrolling. She watches. She subscribes. She finds the link to your guide. She becomes a lead.</p>
+  <p>SEO-optimized titles. Thumbnails built to pull her in. You teaching to camera. Calm, grounded, not performative — the energy you already have. The camera just needs to see it.</p>
+
+  <h3>Why this fits you specifically</h3>
+  <p>You wrote, <em>"I'm not a social media person. I prefer writing content and teaching like one-to-many."</em></p>
+  <p>YouTube is exactly that. It's teaching one-to-many in long-form. It rewards exactly the kind of work you do. The same instinct that makes Instagram feel wrong for your nervous system is the instinct that's going to make YouTube feel like an exhale once you find the rhythm.</p>
+  <p>Reels are short, fast, surface-level. They will not let people experience you. YouTube will. A woman who watches twelve minutes of you teaching feels she's met you. That's the difference between followers and clients.</p>
+
+  <h3>The lead magnet — you already have it</h3>
+  <p>"Your tests are normal. But your body clearly isn't." That guide is your one and only lead magnet. Don't make another one. Don't second-guess it. It's already a great hook for the right woman.</p>
+  <p>The job now is to pitch it in every single video. End every YouTube video the same way: <em>"If this is landing for you, I have a free guide called 'Your Tests Are Normal' — link in the description."</em> Same on Instagram and Facebook stories. Same on the website. Same in the YouTube channel banner. Same in the welcome sequence.</p>
+  <p>One lead magnet. Everywhere. Always. Until you have enough volume on the email list to need a second one — which won't be for a long time.</p>
+
+  <h3>Email</h3>
+  <p>Once someone is on the email list, they should be hearing from you regularly. Start at one email per week. If one is sustainable for a month, move to two.</p>
+  <p>The email is a reflection — the kind of writing you said feels most you. Not a polished marketing newsletter. Not a list of tips. A thoughtful piece of writing, a paragraph or two of teaching, a story from your work or your life, an idea you've been sitting with. The kind of email a thoughtful friend would receive in their inbox and read all the way through.</p>
+  <p>This is the same kind of writing you used to share into your WhatsApp community. Rerouted to a channel that actually grows and that meets a woman in her own quiet inbox, on her own terms.</p>
+
+  <h3>Stories and posts (low effort, deliberate)</h3>
+  <p>Light stories on Instagram and Facebook — a short reflection, a clip from a recent YouTube video, a photo from a walk, a passage from a book you're reading. Not produced. Not scripted. Brief moments that let the people who follow you between videos feel your presence.</p>
+  <p>For Reels — don't write new ones from scratch. Pull 60–90 second clips from your YouTube videos and repurpose. Two or three a week, max. Low effort, real consistency. If you ever stop wanting to do them, stop. Stories alone are enough for now.</p>
+
+  <h3>Live trainings and masterclasses — later, not now</h3>
+  <p>A live training or a monthly live event becomes a conversion mechanism once your audience is big enough to fill the room. Right now your audience is small, and a live event to a small room costs you more than it returns. You spend the energy, you brace for the disappointment, and the disappointment lands in your nervous system harder than the failure of any reel ever would.</p>
+  <p>So pause the masterclass plan. We come back to live conversion events at month six or nine — once the YouTube channel has built a base, the email list has grown, and a small live event has actual people in it.</p>
+
+  <div class="callout">
+    <p>This is the same strategy I used to build my first six-figure coaching business online. YouTube long-form, lead magnet, email list, occasional live event. It works because it lets a teacher teach — and you, in your bones, are a teacher.</p>
+  </div>
+</section>
+
+<!-- ===================== 8. SYSTEMS & OPERATIONS ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 08</div>
+    <h2>Systems &amp; operations</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">The systems work here is mostly subtraction. Take things off the plate so the few things that matter can actually get done.</p>
+  </div>
+
+  <h3>Pause everything you don't need</h3>
+  <p>Three things come off the plate today.</p>
+  <ul>
+    <li>The recorded masterclass project — close the tab, move the files into a "later" folder.</li>
+    <li>The public-facing WhatsApp community — stop directing strangers into it. Keep it only for paying clients if you want.</li>
+    <li>The pressure to be on Instagram in any way that resembles "Instagram marketing" — stories and YouTube repurpose are enough. The rest, off.</li>
+  </ul>
+  <p>Each of these is a draw on your attention right now. When you take them off, the energy comes back for the few things that matter.</p>
+
+  <h3>One weekly rhythm</h3>
+  <p>The entire content engine fits in three lines:</p>
+  <ul>
+    <li>One YouTube video</li>
+    <li>One email</li>
+    <li>A handful of light stories</li>
+  </ul>
+  <p>That's it. Build it so a medium-health week can carry it. On a high-health week you can do more if you want. On a low-health week you can rest. The structure does not require maximum-you all the time. That's the whole design.</p>
+
+  <h3>Email automation</h3>
+  <p>The one piece of automation that matters: the lead magnet flow.</p>
+  <p>Someone signs up for "Your tests are normal" → they get the guide → they roll into a 5–7 email welcome sequence over the following two weeks → at the end of that, they roll into your weekly newsletter. The welcome sequence is your story, your work, who you help, the transformation painted out, and an invitation to apply to work with you. You write it once. It runs forever, in the background, while you're living your life.</p>
+  <p>Use whatever email platform you already have. Don't go shopping for a new one.</p>
+
+  <h3>Boundaries as design, not willpower</h3>
+  <p>Every system change in this plan is also a boundary change. The 60-minute session. Dropping async support. One channel of visibility instead of three. One lead magnet instead of a library. One simple weekly rhythm.</p>
+  <p>Each of those is a structural decision that protects you without requiring you to be disciplined in the moment. That's the difference between a business that depends on willpower and a business that holds you. Your nervous system has been doing a lot of work to compensate for design gaps. We're letting the design carry more of it from here.</p>
+
+  <h3>Don't restructure your tools</h3>
+  <p>You don't need new software. You don't need a fancier CRM. You don't need to migrate platforms. Whatever you have, use it.</p>
+  <p>Tools are not the bottleneck. Consistency is the bottleneck, and consistency comes from rhythm — not from software. A sharper tool pointed at the wrong rhythm just gets you to the wrong place faster.</p>
+</section>
+
+<!-- ===================== 9. PORTAL RESOURCES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 09</div>
+    <h2>Resources from the portal</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">One place to start. We add more once this is in motion.</p>
+  </div>
+
+  <h3>1. Launchpad — YouTube training (audience section)</h3>
+  <p>Watch this in Week 1. Before you script your first video. Before you record anything.</p>
+  <p>The training walks you through the foundations — channel setup, video structure, SEO basics, thumbnails, the difference between discovery content and search content, how to think about your first videos. The whole point of starting here is that you don't have to figure out YouTube from scratch. The path is laid out.</p>
+  <p>I'm intentionally not piling up resources for you. One thing at a time. Adding more right now would do the opposite of what this plan is built for. We add the next resource when this one is rolling and the rhythm has settled in.</p>
+</section>
+
+<!-- ===================== 10. 90-DAY PLAN ===================== -->
+<section class="section break">
+  <div class="sechead">
+    <div class="sec-num">Section 10</div>
+    <h2>Your 90-day action plan</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Concrete enough to start Monday. Built so you can sustain it on a medium-health day. Sequenced on purpose — don't reorder it.</p>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 1–30</span>
+      <span class="ttl">Foundation — clear the plate and get oriented</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Watch the YouTube training in the Launchpad portal (audience section).</strong> Before anything else. This is your blueprint for the next three months. Take notes.</li>
+        <li><strong>Update your profile photos.</strong> A clear, warm photo of you looking at the camera, on the home page of your site, your Instagram, and your Facebook. Replace the logo. Replace the back-of-head shot. Don't overproduce it — a natural photo taken in good light is enough.</li>
+        <li><strong>Pause the recorded masterclass project.</strong> Close the file. Move it into a "later" folder. We come back to it after the audience has grown.</li>
+        <li><strong>Drop the WhatsApp community from public-facing funnels.</strong> Stop directing strangers to it. Remove it from your bio links and your site. Keep it only for paying clients if you choose.</li>
+        <li><strong>Update the Inside Out offer page.</strong> 60-minute sessions (not 75). No async support between sessions. £2500. Then rewrite the transformation section using the picture from Section 5 — what life looks like for a woman six months in.</li>
+        <li><strong>Write the picture of "B".</strong> Two or three paragraphs. What does life look like on the other side of this work? Use it on the offer page, in YouTube video intros, in the welcome sequence. The clearer the B, the less convincing you have to do.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 31–60</span>
+      <span class="ttl">Build the engine — publish, automate, settle into rhythm</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Publish your first 2–4 YouTube videos.</strong> One per week. Each one built around a specific search term your woman is typing into Google. Use the topic list in Section 7 as a starting point. Calm, grounded teaching — the way you already speak.</li>
+        <li><strong>Set up the lead magnet email automation.</strong> Sign-up → guide delivery → 5–7 email welcome sequence over two weeks → rolls into the weekly newsletter. Use the tools you already have. Don't shop for new ones.</li>
+        <li><strong>Start the weekly email.</strong> One per week. A reflection in your voice — the way you used to write into the WhatsApp community, but now to a list that grows over time.</li>
+        <li><strong>Pitch the lead magnet in every video and every email.</strong> Same guide. Everywhere. Always. "Your Tests Are Normal — link in the description" at the end of every video.</li>
+        <li><strong>Repurpose YouTube clips into Reels and stories.</strong> Don't create new Reels from scratch. Pull 60–90 second sections from the long-form videos. Two or three a week. Low effort, high consistency.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 61–90</span>
+      <span class="ttl">Rhythm and momentum — sustain, watch what's working</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Sustain the weekly rhythm.</strong> One YouTube video. One email. Stories. Hold the line. Don't add to it yet.</li>
+        <li><strong>If the rhythm is holding cleanly, move to two emails per week.</strong> Only if. If one per week is the right pace for your nervous system, stay at one. We're building the version of this that lasts, not the version that performs in month three and breaks in month six.</li>
+        <li><strong>Refine YouTube topics from what's actually working.</strong> By month three, two or three videos will be pulling more views than the rest. Make more of those. Drop the ones that aren't landing. Let the data — not the pressure — guide the next set.</li>
+        <li><strong>Bring the cycle to our group calls.</strong> Track when the achiever fires. Track when the rescuer fires. Track what happens in your body the night before you record a video. Bring it to the call. The internal work is half the strategy — the more we work that layer, the more sustainable everything above it becomes.</li>
+        <li><strong>End-of-90-days review.</strong> Audience growth, email list size, YouTube subscribers, applications received. We look at it together and adjust the next 90 days from real data — not from feel.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== CLOSING ===================== -->
+<section class="closing">
+  <div class="sechead">
+    <div class="note-head">Before you go</div>
+    <h2>One last thing</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>This is a roadmap, not a rulebook. Some of it you'll do exactly as written. Some you'll adjust as you move through it. Both are fine. The sequence matters — visibility engine first, then automation, then rhythm — but how it lives in practice is yours to shape.</p>
+  <p>I want to say the most important thing one more time, because I need it to stick. The activity here is small. One video. One email. A few stories. A simple, repeatable rhythm that lets the right people find you and warm up to you over time. The hard part is not the activity. The hard part is your relationship to the activity. And that is exactly what we're going to work on in our calls.</p>
+  <p>You wrote in your assessment, <em>"I want to build a business that supports my own healing journey, health, and values, rather than one built on constant pushing or hustling."</em> That sentence is the whole plan. This roadmap is one way there. We adjust it as we go.</p>
+  <p>I'm in this with you. When the achiever fires and pushes you back into a sprint — that's exactly when to reach out. Not after you've crashed. The pattern <em>is</em> the work.</p>
+  <div class="sign">— Jason
+  <span>Telegram @jasonmossofficial &nbsp;·&nbsp; jason@jasonmoss.com</span>
+  </div>
+</section>
+
+</body>
+</html>
