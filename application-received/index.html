@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Thank You For Your Application</title>
+<title>Application Received</title>
 <meta name="robots" content="noindex, nofollow">
 
 <!-- Favicon -->
@@ -13,10 +13,25 @@
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 
 <!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:ital,wght@0,400;0,700;0,900;1,400;1,700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400;1,700&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <style>
+  :root {
+    --pale-sand: #F8F6F2;
+    --charcoal: #1D1F1E;
+    --forest: #2C3F36;
+    --warm-stone: #E9E2D3;
+    --warm-stone-soft: #EFEAE0;
+    --gold: #C2A86C;
+    --gold-hover: #B89A5E;
+    --mocha: #5B4B3F;
+    --taupe: #8C837A;
+    --serif: 'Libre Baskerville', Georgia, 'Times New Roman', serif;
+    --sans: 'Raleway', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+
   *, *::before, *::after {
     box-sizing: border-box;
     margin: 0;
@@ -26,97 +41,314 @@
   body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    background: #f8f6f2;
-    color: #1D1F1E;
-    font-family: 'Raleway', sans-serif;
+    font-family: var(--sans);
+    color: var(--charcoal);
     font-weight: 400;
+    line-height: 1.6;
     min-height: 100vh;
     min-height: 100dvh;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+    padding: clamp(1.25rem, 4vw, 3rem);
+    background:
+      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
+      url('section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone-soft);
   }
 
-  .container {
-    max-width: 60rem;
+  /* ===========================
+     PANEL
+     =========================== */
+  .card {
+    position: relative;
     width: 100%;
-    margin: 0 auto;
-    padding: 2.25rem 1.5rem 3rem;
+    max-width: 600px;
+    margin: auto;
+    background: linear-gradient(180deg, #FFFEFB 0%, #FAF7F0 100%);
+    border: 1px solid rgba(194, 168, 108, 0.30);
+    border-top: 3px solid var(--gold);
+    box-shadow:
+      0 44px 90px -28px rgba(45, 35, 28, 0.40),
+      0 12px 30px -16px rgba(45, 35, 28, 0.20);
+    padding: clamp(2.4rem, 5vw, 3.5rem) clamp(1.6rem, 4.5vw, 3rem) clamp(2.25rem, 4.5vw, 2.75rem);
+    text-align: center;
+  }
+
+  .portrait {
+    width: 92px;
+    height: 92px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 3px solid #FFFFFF;
+    box-shadow:
+      0 0 0 1px rgba(91, 75, 63, 0.10),
+      0 16px 32px -10px rgba(91, 75, 63, 0.38);
+  }
+  .portrait img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 32%;
+    display: block;
   }
 
   h1 {
-    font-family: 'Libre Baskerville', serif;
-    font-weight: 700;
+    font-family: var(--serif);
     font-style: italic;
-    font-size: 2rem;
-    line-height: 3.2rem;
-    color: #c2a86c;
-    text-align: center;
-    max-width: 55.125rem;
-    margin: 0 auto 1.75rem;
+    font-weight: 400;
+    font-size: clamp(1.9rem, 5vw, 2.35rem);
+    line-height: 1.2;
+    letter-spacing: -0.005em;
+    color: var(--gold);
+    margin: 0 0 1.4rem;
   }
 
-  .body-text {
-    font-size: 1.25rem;
-    line-height: 1.75rem;
-    text-align: center;
-    max-width: 26.8125rem;
+  .letter {
+    max-width: 30rem;
     margin: 0 auto;
   }
-
-  .body-text p {
+  .letter p {
+    font-size: clamp(1rem, 2.4vw, 1.0625rem);
+    line-height: 1.7;
+    color: var(--charcoal);
+    margin: 0 0 1.05rem;
+  }
+  .letter strong {
+    font-weight: 700;
+  }
+  .letter .glad {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: clamp(1.05rem, 2.6vw, 1.15rem);
+    line-height: 1.5;
+    color: var(--mocha);
+    margin: 1.35rem 0;
+  }
+  .letter .signoff {
     margin-bottom: 0;
   }
 
-  .body-text strong {
+  .rule {
+    width: 64px;
+    height: 1px;
+    background: var(--gold);
+    opacity: 0.6;
+    margin: 2.25rem auto;
+  }
+
+  /* ===========================
+     CONFIRM
+     =========================== */
+  .confirm {
+    max-width: 30rem;
+    margin: 0 auto;
+  }
+
+  .eyebrow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    font-size: 0.72rem;
     font-weight: 700;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin: 0 0 0.9rem;
+  }
+  .eyebrow::before {
+    content: "";
+    display: inline-block;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--gold);
   }
 
-  .body-text em {
+  .confirm h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(1.35rem, 3.6vw, 1.6rem);
+    line-height: 1.32;
+    color: var(--charcoal);
+    max-width: 24rem;
+    margin: 0 auto 0.85rem;
+  }
+  .confirm h2 em {
     font-style: italic;
+    color: var(--gold);
   }
 
-  /* Mobile */
-  @media screen and (max-width: 767px) {
-    .container {
-      max-width: 400px;
-      padding: 3.3rem 1.25rem;
-    }
+  .lead {
+    font-size: clamp(0.97rem, 2.4vw, 1.03rem);
+    line-height: 1.6;
+    color: var(--mocha);
+    max-width: 25rem;
+    margin: 0 auto 1.5rem;
+  }
 
-    h1 {
-      max-width: 20rem;
-    }
+  .action {
+    display: flex;
+    align-items: stretch;
+    gap: 0.6rem;
+    margin: 0 0 1.4rem;
+  }
+  .number {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex: 1 1 auto;
+    min-width: 0;
+    padding: 0.85rem 1rem;
+    background: #FFFFFF;
+    border: 1px solid rgba(194, 168, 108, 0.5);
+    color: var(--charcoal);
+    font-size: 1.05rem;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: border-color 0.2s ease;
+  }
+  .number:hover {
+    border-color: var(--gold);
+  }
+  .number svg {
+    width: 19px;
+    height: 19px;
+    color: var(--gold);
+    flex-shrink: 0;
+  }
 
-    .body-text {
-      max-width: 22.4375rem;
-    }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45rem;
+    flex-shrink: 0;
+    background: var(--gold);
+    color: var(--charcoal);
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 0.78rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    padding: 0.85rem 1.4rem;
+    white-space: nowrap;
+    box-shadow: 0 10px 22px -10px rgba(194, 168, 108, 0.95);
+    transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .btn:hover {
+    background: var(--gold-hover);
+    transform: translateY(-1px);
+    box-shadow: 0 14px 28px -10px rgba(194, 168, 108, 1);
+  }
+  .btn svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
 
-    h1 {
-      font-size: 2rem;
-      line-height: 2.8rem;
-      text-align: center;
-    }
+  .assurance {
+    display: flex;
+    gap: 0.75rem;
+    text-align: left;
+    padding: 0.95rem 1.1rem;
+    margin: 0 0 1.4rem;
+    background: rgba(233, 226, 211, 0.55);
+    border: 1px solid rgba(194, 168, 108, 0.28);
+  }
+  .assurance svg {
+    width: 20px;
+    height: 20px;
+    color: var(--gold);
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .assurance p {
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--mocha);
+    margin: 0;
+  }
+  .assurance strong {
+    color: var(--charcoal);
+    font-weight: 600;
+  }
 
-    .body-text {
-      font-size: 1.1875rem;
-      line-height: 1.6625rem;
-      text-align: left;
+  .footnote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--taupe);
+    max-width: 25rem;
+    margin: 0 auto;
+  }
+
+  /* ===========================
+     RESPONSIVE
+     =========================== */
+  @media screen and (max-width: 560px) {
+    .action {
+      flex-direction: column;
+    }
+    .number {
+      white-space: normal;
+      padding: 0.95rem 1rem;
+    }
+    .btn {
+      padding: 1rem 1.25rem;
+    }
+    .rule {
+      margin: 2rem auto;
     }
   }
 </style>
 </head>
 <body>
-<main class="container">
-  <h1>Thank you for your application.</h1>
-  <div class="body-text">
-    <p>I've received it and appreciate the care you brought into your answers.</p>
-    <br>
-    <p>I'll review your app personally.</p>
-    <br>
-    <p>If it feels like a fit, you'll hear from me within the next <strong>24 to 48 hours</strong> via text with next steps.</p>
-    <br>
-    <p>Talk soon,<br>Jason</p>
+<main class="card">
+  <div class="portrait">
+    <img src="jm-headshot-1.png" alt="Jason Moss" width="92" height="92" loading="eager" decoding="async">
   </div>
+
+  <h1>I've got your application.</h1>
+
+  <div class="letter">
+    <p>I read every application personally &mdash; yours included.</p>
+    <p>If it feels like a fit, you'll hear from me within the next <strong>24 to 48 hours</strong>, by text, with next steps.</p>
+    <p class="glad">I'm glad you took this step.</p>
+    <p class="signoff">Talk soon,<br>Jason</p>
+  </div>
+
+  <div class="rule" aria-hidden="true"></div>
+
+  <section class="confirm" aria-labelledby="confirm-title">
+    <p class="eyebrow">One quick thing</p>
+    <h2 id="confirm-title">The text will come from <em>my personal number.</em></h2>
+    <p class="lead">Save it now, so my text doesn&rsquo;t get filtered or missed when it lands:</p>
+
+    <div class="action">
+      <a class="number" href="sms:+19255484037?&amp;body=Hi%20Jason%2C%20confirming%20I%20got%20your%20number." aria-label="Text Jason at +1 925 548 4037">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        <span>+1 925 548 4037</span>
+      </a>
+      <a class="btn" href="sms:+19255484037?&amp;body=Hi%20Jason%2C%20confirming%20I%20got%20your%20number.">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+        <span>Text me to confirm</span>
+      </a>
+    </div>
+
+    <div class="assurance">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+      <p>When you text this number, you&rsquo;re reaching <strong>me &mdash; Jason &mdash; directly</strong>. Every reply is written by me, personally. No AI, no assistant, no automated replies.</p>
+    </div>
+
+    <p class="footnote">Want to be sure it&rsquo;ll come through? Send me a quick message now, and I&rsquo;ll confirm it landed on my end.</p>
+  </section>
 </main>
 </body>
 </html>

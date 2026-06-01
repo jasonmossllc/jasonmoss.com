@@ -121,8 +121,16 @@
   /* ========================================
      Section 1: Hero
      ======================================== */
+  /* Pale texture lives on the wrapper so adjacent pale bands share one
+     continuous texture instead of each re-scaling cover (which seams). */
+  .bg-pale {
+    background:
+      linear-gradient(180deg, rgba(248, 246, 242, 0.80), rgba(248, 246, 242, 0.90)),
+      url('section-bg-pale.jpg') center / cover no-repeat,
+      var(--pale-sand);
+  }
   .hero {
-    background-color: var(--pale-sand);
+    background: transparent;
     text-align: center;
     padding: 56px 24px 32px;
   }
@@ -190,7 +198,7 @@
      Trust Logos — Elevated
      ======================================== */
   .trust-logos {
-    background-color: var(--pale-sand);
+    background: transparent;
     padding: 32px 24px 36px;
     text-align: center;
   }
@@ -226,7 +234,10 @@
     align-items: center;
     justify-content: center;
     padding: 12px 24px;
-    background-color: var(--pale-sand);
+    background:
+      linear-gradient(180deg, rgba(248, 246, 242, 0.80), rgba(248, 246, 242, 0.90)),
+      url('section-bg-pale.jpg') center / cover no-repeat,
+      var(--pale-sand);
   }
   .section-divider__line {
     width: 60px;
@@ -239,7 +250,10 @@
      Section 2: Who This Is For
      ======================================== */
   .who-for {
-    background-color: var(--warm-stone);
+    background:
+      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
+      url('section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone);
     padding: 80px 24px 20px;
   }
   .who-for__header { text-align: center; margin-bottom: 64px; }
@@ -277,7 +291,7 @@
   .inline-cta {
     text-align: center;
     padding: 20px 24px 60px;
-    background-color: var(--pale-sand);
+    background: transparent;
   }
   .inline-cta p {
     font-size: 14px;
@@ -289,7 +303,10 @@
      Section 3: What This Is — Elevated
      ======================================== */
   .what-this-is {
-    background-color: var(--deep-forest-green);
+    background:
+      linear-gradient(180deg, rgba(44, 63, 54, 0.82), rgba(36, 53, 48, 0.92)),
+      url('section-bg-forest.jpg') center / cover no-repeat,
+      var(--deep-forest-green);
     color: var(--pale-sand);
     padding: 110px 24px 100px;
     text-align: center;
@@ -389,7 +406,7 @@
      Section 4: How It Works — Elevated
      ======================================== */
   .how-it-works {
-    background-color: var(--pale-sand);
+    background: transparent;
     padding: 100px 24px 20px;
   }
   .how-it-works__header { text-align: center; margin-bottom: 72px; }
@@ -422,7 +439,10 @@
      Section 5: Testimonials — Elevated
      ======================================== */
   .testimonials {
-    background-color: var(--warm-stone);
+    background:
+      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
+      url('section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone);
     padding: 100px 24px;
   }
   .testimonials__header { text-align: center; margin-bottom: 64px; }
@@ -669,6 +689,9 @@
 </head>
 <body>
 
+  <!-- Hero + Trust Logos share one continuous pale texture (no seam) -->
+  <div class="bg-pale">
+
   <!-- Section 1: Hero -->
   <section class="hero" id="hero">
     <div class="hero__logo" aria-label="Jason Moss">
@@ -706,6 +729,8 @@
       <img src="logo-fast-company-sa.png" alt="Fast Company">
     </div>
   </div>
+
+  </div><!-- /.bg-pale (hero + trust logos) -->
 
 
 
@@ -784,6 +809,9 @@
     </div>
   </section>
 
+  <!-- How It Works + Inline CTA share one continuous pale texture (no seam) -->
+  <div class="bg-pale">
+
   <!-- Section 4: How It Works -->
   <section class="how-it-works" id="how-it-works">
     <div class="how-it-works__header">
@@ -824,6 +852,8 @@
     <a href="https://jasonmoss449611.typeform.com/to/xyn6Fq51?typeform-welcome=0" class="btn-primary">Apply for Mentorship</a>
     <p>Takes about 10–15 minutes.</p>
   </div>
+
+  </div><!-- /.bg-pale (how it works + inline cta) -->
 
   <!-- Section 5: Testimonials -->
   <section class="testimonials" id="testimonials">
