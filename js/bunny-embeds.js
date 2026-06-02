@@ -131,6 +131,16 @@
     document.head.appendChild(style);
   }
 
+  // Apply a quality choice from Plyr's menu to the hls.js stream.
+  // q === 0 -> Auto (let hls.js ABR pick); otherwise pin to the matching height.
+  function setHlsQuality(hls, q) {
+    if (!hls || !hls.levels) return;
+    if (!q) { hls.currentLevel = -1; return; } // -1 = ABR auto
+    for (var i = 0; i < hls.levels.length; i++) {
+      if (hls.levels[i].height === q) { hls.currentLevel = i; return; }
+    }
+  }
+
   // ---- Plyr -> Player.js-compatible adapter (so bunny-tracking.js is unchanged)
   function durationOf(p) {
     return (p.media && p.media.duration) || p.duration || 0;
@@ -192,6 +202,29 @@
 
     function buildPlyr() {
       if (built) return; built = true;
+
+      // Quality selector from the hls.js renditions. 0 == "Auto" (ABR): hls.js
+      // adapts to the viewer's bandwidth and (via capLevelToPlayerSize) the
+      // display size, so it serves the best quality that fits — no waste. The
+      // viewer can still force a specific height from the menu. Native-HLS
+      // (Safari) has no selectable levels — the OS handles ABR there.
+      var hls = entry.hls;
+      var qualityOpts = null;
+      if (hls && hls.levels && hls.levels.length) {
+        var heights = hls.levels.map(function (l) { return l.height; }).filter(Boolean);
+        heights = heights.filter(function (h, i) { return heights.indexOf(h) === i; })
+          .sort(function (a, b) { return b - a; });
+        if (heights.length > 1) {
+          qualityOpts = {
+            default: 0,
+            options: [0].concat(heights),
+            forced: true,
+            onChange: function (q) { setHlsQuality(hls, q); },
+          };
+        }
+      }
+      var settingsMenu = qualityOpts ? ['captions', 'quality', 'speed'] : ['captions', 'speed'];
+
       var plyr;
       try {
         plyr = new window.Plyr(video, {
@@ -212,7 +245,9 @@
           resetOnEnd: !autoplay,
           captions: { active: autoplay, language: lang || 'en', update: true },
           controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
-          settings: ['captions', 'speed'],
+          settings: settingsMenu,
+          quality: qualityOpts || undefined,
+          i18n: { qualityLabel: { 0: 'Auto' } },
           markers: { enabled: markers.length > 0, points: markers },
           iconUrl: PLYR_SVG,
           blankVideo: '', // never used (HLS attached directly); avoid cdn.plyr.io fetch
@@ -269,7 +304,18 @@
 
     // ---- HLS source ----------------------------------------------------------
     if (window.Hls && window.Hls.isSupported()) {
-      var hls = new window.Hls({ enableWorker: true, lowLatencyMode: false, backBufferLength: 90 });
+      // capLevelToPlayerSize: in Auto mode, never fetch a rendition larger than
+      // the player's on-screen size — maximizes quality for the actual display
+      // while not wasting the viewer's bandwidth (e.g. a 300px testimonial won't
+      // pull 1080p). Re-evaluates on resize/fullscreen, so quality scales up
+      // when the player grows. startLevel:-1 lets ABR pick the opening level.
+      var hls = new window.Hls({
+        enableWorker: true,
+        lowLatencyMode: false,
+        backBufferLength: 90,
+        capLevelToPlayerSize: true,
+        startLevel: -1,
+      });
       entry.hls = hls;
       hls.loadSource(hlsUrl);
       hls.attachMedia(video);
