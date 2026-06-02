@@ -76,6 +76,12 @@
     ensureStylesheet(PLYR_CSS);
     if (document.getElementById('jm-bunny-styles')) return;
     var css =
+      // Constrain the BARE <video> to fill its box from the very first paint —
+      // before Plyr wraps it. Otherwise, the instant hls.js attaches, the
+      // element briefly takes the stream's intrinsic 1920x1080 size and flashes
+      // huge for a moment until Plyr + the .jm-plyr rules below kick in.
+      'video.jm-player{position:absolute;top:0;left:0;width:100%;height:100%;' +
+      'object-fit:contain;background:#000;display:block;}' +
       // Fill the same positioned 16:9 / fixed box the iframe used to occupy.
       '.jm-plyr.plyr{position:absolute;top:0;left:0;width:100%;height:100%;' +
       'container-type:inline-size;border-radius:inherit;overflow:hidden;' +
