@@ -118,6 +118,13 @@
       // Poster (thumbnail shown before play): fill the frame like the video, so
       // a non-16:9-exact box never letterboxes the thumbnail with black bars.
       '.jm-plyr .plyr__poster{background-size:cover!important;}' +
+      // Testimonials: the playbar is hidden ONLY in the preview/poster state
+      // (.plyr--stopped, before first play / after reset) — the big play button
+      // stays. The moment playback starts (.plyr--stopped drops) the bar is
+      // shown and kept visible for the whole clip (deterministic, not subject to
+      // Plyr\'s hover/auto-hide timing).
+      '.jm-plyr.jm-minimal.plyr--stopped .plyr__controls{opacity:0!important;pointer-events:none!important;}' +
+      '.jm-plyr.jm-minimal:not(.plyr--stopped) .plyr__controls{opacity:1!important;pointer-events:auto!important;transform:none!important;}' +
       // Seek tooltip: let long text wrap instead of overflowing its bubble.
       '.jm-plyr .plyr__tooltip{white-space:normal!important;width:max-content!important;' +
       'max-width:min(80cqw,260px)!important;line-height:1.3!important;}' +
@@ -325,11 +332,18 @@
         // sits on top and handles the FIRST tap (unmute, stopPropagation);
         // once it retires, taps fall through to Plyr's native clickToPlay.
         clickToPlay: true,
-        hideControls: true,
+        // Testimonials: keep the playbar visible the whole time it plays (don't
+        // auto-hide on inactivity) — it's only hidden in the preview/stopped
+        // state via CSS. Other videos auto-hide the controls as usual.
+        hideControls: !minimal,
         resetOnEnd: !autoplay,
         captions: { active: autoplay, language: lang || 'en', update: true },
+        // Testimonials (minimal) get a compact playbar that is hidden in the
+        // preview/poster state and appears once playing (see the
+        // .jm-minimal.plyr--stopped CSS rule). Compact = no volume slider /
+        // settings / quality, which would cram a small player.
         controls: minimal
-          ? ['play-large']
+          ? ['play-large', 'play', 'progress', 'current-time', 'mute', 'fullscreen']
           : ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
         settings: settingsMenu,
         i18n: { qualityLabel: { 0: 'Auto' } },
@@ -359,6 +373,8 @@
       entry.plyr = plyr;
       entry.player = adapter(plyr);
       try { plyr.elements.container.classList.add('jm-plyr'); } catch (e) {}
+      // Mark testimonials so the playbar is hidden in the preview state only.
+      if (minimal) { try { plyr.elements.container.classList.add('jm-minimal'); } catch (e) {} }
 
       if (autoplay) {
         plyr.on('ready', function () {
