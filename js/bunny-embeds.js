@@ -81,7 +81,7 @@
       // element briefly takes the stream's intrinsic 1920x1080 size and flashes
       // huge for a moment until Plyr + the .jm-plyr rules below kick in.
       'video.jm-player{position:absolute;top:0;left:0;width:100%;height:100%;' +
-      'object-fit:contain;background:#000;display:block;}' +
+      'object-fit:cover;background:#000;display:block;}' +
       // Fill the same positioned 16:9 / fixed box the iframe used to occupy.
       '.jm-plyr.plyr{position:absolute;top:0;left:0;width:100%;height:100%;' +
       'container-type:inline-size;border-radius:inherit;overflow:hidden;' +
@@ -91,8 +91,11 @@
       '--plyr-menu-background:rgba(20,20,22,.92);--plyr-menu-color:#fff;}' +
       '.jm-plyr.plyr .plyr__video-wrapper{position:absolute!important;top:0;left:0;' +
       'width:100%!important;height:100%!important;padding:0!important;background:#000;}' +
+      // cover (not contain): fill the frame edge-to-edge so a slightly-off-16:9
+      // page box never shows black bars. The crop on a near-16:9 box is <2% —
+      // imperceptible — and matches how Wistia filled its frames.
       '.jm-plyr.plyr video{position:absolute!important;top:0;left:0;' +
-      'width:100%!important;height:100%!important;object-fit:contain;}' +
+      'width:100%!important;height:100%!important;object-fit:cover;}' +
       // Wistia-style captions that SCALE with the player width (cqw).
       '.jm-plyr .plyr__captions{font-size:clamp(11px,4.4cqw,22px)!important;' +
       'padding:0 0 1.6%!important;}' +
@@ -111,7 +114,17 @@
       'transition:background .2s;}' +
       '.jm-cfs:hover .jm-cfs__pill{background:rgba(20,20,22,.9);}' +
       '.jm-cfs__pill svg{width:1.05em;height:1.05em;fill:#fff;flex:0 0 auto;}' +
-      '.jm-cfs.is-hiding{opacity:0;pointer-events:none;transition:opacity .25s;}';
+      '.jm-cfs.is-hiding{opacity:0;pointer-events:none;transition:opacity .25s;}' +
+      // Chapter tooltip: let long chapter titles wrap inside the bubble instead
+      // of overflowing past its edge (Plyr injects the marker label into the
+      // shared seek tooltip, which is nowrap by default).
+      '.jm-plyr .plyr__tooltip{white-space:normal!important;width:max-content!important;' +
+      'max-width:min(80cqw,260px)!important;line-height:1.3!important;}' +
+      // Chapter markers: a touch bigger + higher-contrast so they are visible
+      // and easy to hover on the scrubber.
+      '.jm-plyr .plyr__progress__marker{width:6px!important;height:6px!important;' +
+      'border-radius:50%!important;background:#fff!important;' +
+      'box-shadow:0 0 0 1px rgba(0,0,0,.45)!important;}';
     var style = document.createElement('style');
     style.id = 'jm-bunny-styles';
     style.textContent = css;
@@ -182,9 +195,19 @@
       var plyr;
       try {
         plyr = new window.Plyr(video, {
+          // Don't persist/restore volume·muted·captions·speed across players or
+          // page loads. Plyr's default localStorage (one shared 'plyr' key) made
+          // non-autoplay videos randomly inherit a previous (autoplay) video's
+          // muted + captions-on state — different on every load. With storage
+          // off, every player honors its explicit config deterministically.
+          storage: { enabled: false },
           autoplay: autoplay,
           muted: autoplay,
-          clickToPlay: !autoplay, // autoplay videos use the click-for-sound layer instead
+          // Tap the video frame to play/pause — Plyr's built-in behavior, no
+          // custom handler. For autoplay videos the click-for-sound overlay
+          // sits on top and handles the FIRST tap (unmute, stopPropagation);
+          // once it retires, taps fall through to Plyr's native clickToPlay.
+          clickToPlay: true,
           hideControls: true,
           resetOnEnd: !autoplay,
           captions: { active: autoplay, language: lang || 'en', update: true },
