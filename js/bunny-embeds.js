@@ -376,6 +376,17 @@
       // Mark testimonials so the playbar is hidden in the preview state only.
       if (minimal) { try { plyr.elements.container.classList.add('jm-minimal'); } catch (e) {} }
 
+      // Exclusive playback: when this video starts, pause every OTHER player on
+      // the page so only one plays at a time. Pausing an already-paused player
+      // is a no-op, and 'pause' doesn't re-trigger 'play', so there's no cascade.
+      plyr.on('play', function () {
+        var all = window.JM_BUNNY.players || [];
+        for (var i = 0; i < all.length; i++) {
+          var other = all[i];
+          if (other !== entry && other.plyr) { try { other.plyr.pause(); } catch (e) {} }
+        }
+      });
+
       if (autoplay) {
         plyr.on('ready', function () {
           try { plyr.muted = true; } catch (e) {}
