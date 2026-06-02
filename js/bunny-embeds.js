@@ -115,16 +115,32 @@
       '.jm-cfs:hover .jm-cfs__pill{background:rgba(20,20,22,.9);}' +
       '.jm-cfs__pill svg{width:1.05em;height:1.05em;fill:#fff;flex:0 0 auto;}' +
       '.jm-cfs.is-hiding{opacity:0;pointer-events:none;transition:opacity .25s;}' +
-      // Chapter tooltip: let long chapter titles wrap inside the bubble instead
-      // of overflowing past its edge (Plyr injects the marker label into the
-      // shared seek tooltip, which is nowrap by default).
+      // Poster (thumbnail shown before play): fill the frame like the video, so
+      // a non-16:9-exact box never letterboxes the thumbnail with black bars.
+      '.jm-plyr .plyr__poster{background-size:cover!important;}' +
+      // Seek tooltip: let long text wrap instead of overflowing its bubble.
       '.jm-plyr .plyr__tooltip{white-space:normal!important;width:max-content!important;' +
       'max-width:min(80cqw,260px)!important;line-height:1.3!important;}' +
-      // Chapter markers: a touch bigger + higher-contrast so they are visible
-      // and easy to hover on the scrubber.
-      '.jm-plyr .plyr__progress__marker{width:6px!important;height:6px!important;' +
-      'border-radius:50%!important;background:#fff!important;' +
-      'box-shadow:0 0 0 1px rgba(0,0,0,.45)!important;}';
+      // --- Interactive chapter markers (Wistia-like) ---------------------------
+      // A layer over the scrubber; only the dots are interactive (the bar still
+      // seeks normally between them). Each dot has a WIDE invisible hit area so
+      // you don\'t need pixel-perfect hover, grows on hover (snap feel), shows
+      // its title, and seeks to that chapter on click.
+      // NB: rules scoped under .jm-plyr so they beat Plyr\'s ".plyr button{width:auto}".
+      '.jm-plyr .jm-chaps{position:absolute;inset:0;pointer-events:none;z-index:4;}' +
+      '.jm-plyr .jm-chap{position:absolute;top:50%;width:18px!important;height:18px!important;' +
+      'margin:-9px 0 0 -9px;padding:0;border:0;background:transparent;cursor:pointer;' +
+      'pointer-events:auto;flex:none;}' +
+      '.jm-plyr .jm-chap::before{content:"";position:absolute;top:50%;left:50%;width:7px;height:7px;' +
+      'transform:translate(-50%,-50%);border-radius:50%;background:#fff;' +
+      'box-shadow:0 0 0 1px rgba(0,0,0,.5);transition:transform .12s,background .12s;}' +
+      '.jm-plyr .jm-chap:hover::before,.jm-plyr .jm-chap:focus-visible::before{transform:translate(-50%,-50%) scale(1.7);background:#c2a86c;}' +
+      '.jm-plyr .jm-chap-tip{position:absolute;bottom:calc(100% + 12px);transform:translateX(-50%);' +
+      'background:rgba(20,20,22,.94);color:#fff;padding:.42em .6em;border-radius:5px;' +
+      'font:600 clamp(11px,3cqw,14px)/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;' +
+      'white-space:normal;width:max-content;max-width:min(70cqw,240px);text-align:center;' +
+      'pointer-events:none;opacity:0;transition:opacity .14s;box-shadow:0 2px 12px rgba(0,0,0,.4);}' +
+      '.jm-chap-tip.is-visible{opacity:1;}';
     var style = document.createElement('style');
     style.id = 'jm-bunny-styles';
     style.textContent = css;
@@ -138,6 +154,70 @@
     if (!q) { hls.currentLevel = -1; return; } // -1 = ABR auto
     for (var i = 0; i < hls.levels.length; i++) {
       if (hls.levels[i].height === q) { hls.currentLevel = i; return; }
+    }
+  }
+
+  // Render an interactive chapter layer on the scrubber: wider hit area than a
+  // bare dot (looser hover), grows + labels on hover, seeks to the chapter on
+  // click. Replaces Plyr's tiny non-interactive markers. Chapters at t<=0 are
+  // skipped (the start is the default first chapter, like Wistia/Bunny).
+  function enhanceChapters(plyr, chapters) {
+    var progress = plyr.elements && plyr.elements.progress;
+    if (!progress) return;
+    var pts = chapters.filter(function (c) { return c.time > 0; });
+    if (!pts.length) return;
+
+    function build() {
+      var d = durationOf(plyr);
+      if (!d || !isFinite(d)) return false;
+      if (progress.querySelector('.jm-chaps')) return true; // build once
+      var layer = document.createElement('div');
+      layer.className = 'jm-chaps';
+      var tip = document.createElement('span');
+      tip.className = 'jm-chap-tip';
+      pts.forEach(function (ch) {
+        var pct = Math.max(0, Math.min(100, (ch.time / d) * 100));
+        var dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = 'jm-chap';
+        dot.style.left = pct + '%';
+        dot.setAttribute('aria-label', 'Chapter: ' + ch.label);
+        dot.addEventListener('click', function (e) {
+          e.preventDefault(); e.stopPropagation();
+          try { plyr.currentTime = ch.time; } catch (x) {}
+        });
+        function show() {
+          tip.textContent = ch.label;
+          tip.style.left = pct + '%';
+          tip.style.transform = 'translateX(-50%)';
+          tip.classList.add('is-visible');
+          // keep the bubble inside the scrubber bounds at the edges
+          try {
+            var pr = progress.getBoundingClientRect();
+            var tr = tip.getBoundingClientRect();
+            var over = tr.right > pr.right ? tr.right - pr.right
+              : (tr.left < pr.left ? tr.left - pr.left : 0);
+            if (over) tip.style.transform = 'translateX(calc(-50% - ' + over + 'px))';
+          } catch (x) {}
+        }
+        function hide() { tip.classList.remove('is-visible'); }
+        dot.addEventListener('pointerenter', show);
+        dot.addEventListener('pointerleave', hide);
+        dot.addEventListener('focus', show);
+        dot.addEventListener('blur', hide);
+        layer.appendChild(dot);
+      });
+      layer.appendChild(tip);
+      progress.appendChild(layer);
+      return true;
+    }
+
+    if (!build()) {
+      var tries = 0;
+      var iv = window.setInterval(function () {
+        tries++;
+        if (build() || tries > 24) window.clearInterval(iv);
+      }, 250);
     }
   }
 
@@ -187,6 +267,11 @@
     var capUrl = lang ? 'https://' + cdn + '/' + guid + '/captions/' + lang + '.vtt' : null;
     var poster = cfg.poster ? 'https://' + cdn + '/' + guid + '/' + cfg.poster : null;
     var markers = (cfg.chapters || []).map(function (c) { return { time: c.time, label: c.label }; });
+    // Testimonials get a MINIMAL player — no control/play bar, just a big play
+    // button + tap-to-toggle. Identified by the Bunny title containing
+    // "testimonial" (page-independent; the .testimonial-video container class
+    // isn't used on every page).
+    var minimal = /testimonial/i.test(cfg.title || '');
 
     video.setAttribute('playsinline', '');
     video.setAttribute('crossorigin', 'anonymous');
@@ -223,38 +308,48 @@
           };
         }
       }
-      var settingsMenu = qualityOpts ? ['captions', 'quality', 'speed'] : ['captions', 'speed'];
+      var useQuality = !minimal && !!qualityOpts;
+      var settingsMenu = minimal ? [] : (useQuality ? ['captions', 'quality', 'speed'] : ['captions', 'speed']);
+
+      var plyrOpts = {
+        // Don't persist/restore volume·muted·captions·speed across players or
+        // page loads. Plyr's default localStorage (one shared 'plyr' key) made
+        // non-autoplay videos randomly inherit a previous (autoplay) video's
+        // muted + captions-on state — different on every load. With storage
+        // off, every player honors its explicit config deterministically.
+        storage: { enabled: false },
+        autoplay: autoplay,
+        muted: autoplay,
+        // Tap the video frame to play/pause — Plyr's built-in behavior, no
+        // custom handler. For autoplay videos the click-for-sound overlay
+        // sits on top and handles the FIRST tap (unmute, stopPropagation);
+        // once it retires, taps fall through to Plyr's native clickToPlay.
+        clickToPlay: true,
+        hideControls: true,
+        resetOnEnd: !autoplay,
+        captions: { active: autoplay, language: lang || 'en', update: true },
+        controls: minimal
+          ? ['play-large']
+          : ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
+        settings: settingsMenu,
+        i18n: { qualityLabel: { 0: 'Auto' } },
+        // Plyr's own markers are tiny + non-interactive; we render our own
+        // chapter layer (enhanceChapters) with a wider hit area + click-to-seek.
+        markers: { enabled: false, points: [] },
+        iconUrl: PLYR_SVG,
+        blankVideo: '', // never used (HLS attached directly); avoid cdn.plyr.io fetch
+        ratio: null, // the surrounding box already enforces 16:9
+        tooltips: { controls: true, seek: true },
+        keyboard: { focused: true, global: false },
+      };
+      // Only set `quality` when there is a real menu to show. Passing
+      // `quality: undefined` overrides Plyr's default and crashes its
+      // getQualityOptions (reads config.quality.forced). Omit it instead.
+      if (useQuality) { plyrOpts.quality = qualityOpts; }
 
       var plyr;
       try {
-        plyr = new window.Plyr(video, {
-          // Don't persist/restore volume·muted·captions·speed across players or
-          // page loads. Plyr's default localStorage (one shared 'plyr' key) made
-          // non-autoplay videos randomly inherit a previous (autoplay) video's
-          // muted + captions-on state — different on every load. With storage
-          // off, every player honors its explicit config deterministically.
-          storage: { enabled: false },
-          autoplay: autoplay,
-          muted: autoplay,
-          // Tap the video frame to play/pause — Plyr's built-in behavior, no
-          // custom handler. For autoplay videos the click-for-sound overlay
-          // sits on top and handles the FIRST tap (unmute, stopPropagation);
-          // once it retires, taps fall through to Plyr's native clickToPlay.
-          clickToPlay: true,
-          hideControls: true,
-          resetOnEnd: !autoplay,
-          captions: { active: autoplay, language: lang || 'en', update: true },
-          controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
-          settings: settingsMenu,
-          quality: qualityOpts || undefined,
-          i18n: { qualityLabel: { 0: 'Auto' } },
-          markers: { enabled: markers.length > 0, points: markers },
-          iconUrl: PLYR_SVG,
-          blankVideo: '', // never used (HLS attached directly); avoid cdn.plyr.io fetch
-          ratio: null, // the surrounding box already enforces 16:9
-          tooltips: { controls: true, seek: true },
-          keyboard: { focused: true, global: false },
-        });
+        plyr = new window.Plyr(video, plyrOpts);
       } catch (e) {
         // Plyr failed: register a stub so tracking no-ops, native <video> still plays.
         entry.player = null;
@@ -273,6 +368,9 @@
         });
         addClickForSound(plyr, entry);
       }
+      // Interactive chapter markers (wider hit area + click-to-seek). Minimal
+      // (testimonial) players have no scrubber, so skip them.
+      if (!minimal && markers.length) { enhanceChapters(plyr, markers); }
       registerPlayer(entry);
     }
 
@@ -363,6 +461,7 @@
       if (e) { e.preventDefault(); e.stopPropagation(); }
       try { plyr.muted = false; } catch (x) {}
       try { plyr.volume = 1; } catch (x) {}
+      try { plyr.currentTime = 0; } catch (x) {} // restart from the beginning with sound
       try { var r = plyr.play(); if (r && r.catch) r.catch(function () {}); } catch (x) {}
       try { plyr.toggleCaptions(false); } catch (x) {}
       retire();
