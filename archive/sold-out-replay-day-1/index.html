@@ -77,7 +77,7 @@
       position: relative;
       z-index: 3;
     }
-    .hero-video .wistia_embed {
+    .hero-video .jm-embed {
       width: 100%;
       aspect-ratio: 16 / 9;
     }
@@ -243,9 +243,9 @@
       <h1 class="hero-heading">Day 1: Where<br><em>Sold Out Begins.</em></h1>
       <p class="hero-desc">Inside&nbsp;Day 1,&nbsp;you&rsquo;ll shift how you think about selling, spot the mindset blocks quietly costing you deals, and start the daily practice of making invitations that turn conversations into clients.</p>
       <div class="hero-video">
-        <div class="wistia_responsive_padding" style="padding:56.25% 0 0 0;position:relative;">
-          <div class="wistia_responsive_wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
-            <div class="wistia_embed wistia_async_ncvrwu0082 seo=true videoFoam=true" style="height:100%;position:relative;width:100%;">&nbsp;</div>
+        <div class="jm-responsive-padding" style="padding:56.25% 0 0 0;position:relative;">
+          <div class="jm-responsive-wrapper" style="height:100%;left:0;position:absolute;top:0;width:100%;">
+            <iframe class="jm-bunny" data-bunny-id="d7b7080c-ccd1-49a5-8b69-8b9e0c4904b1" data-video-id="ncvrwu0082" data-autoplay="true" src="https://iframe.mediadelivery.net/embed/674511/d7b7080c-ccd1-49a5-8b69-8b9e0c4904b1?autoplay=true&muted=true&captions=en&playsinline=true&preload=true&loop=false" loading="lazy" style="border:0;position:absolute;top:0;left:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen" allowfullscreen="true"></iframe>
           </div>
         </div>
       </div>
@@ -280,10 +280,8 @@
     </div>
   </footer>
 
-  <!-- Wistia video script + 75% tracking -->
-  <script src="https://fast.wistia.com/embed/medias/ncvrwu0082.jsonp" async></script>
-  <script src="https://fast.wistia.com/assets/external/E-v1.js" async></script>
-  <script src="/js/wistia-tracking.js" defer></script>
+  <!-- Bunny video tracking (75% watch webhook) -->
+  <script src="/js/bunny-tracking.js" defer></script>
 
   <!-- URL param passthrough for CTA -->
   <script>
@@ -302,5 +300,6 @@
       });
     })();
   </script>
+  <script src="/js/bunny-embeds.js" defer></script>
 </body>
 </html>
