@@ -463,13 +463,6 @@ window.JM_BUNNY_CONFIG = {
         }
       ]
     },
-    "4f216919-21d1-4766-ab17-f0f2d5a94a4e": {
-      "videoId": "4f216919-21d1-4766-ab17-f0f2d5a94a4e",
-      "title": "Sold Out — Day 3",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
     "c05e987d-3646-452e-a6f3-1a8e1ed3bb37": {
       "videoId": "ltajjoq9hq",
       "title": "Sold Out VSL",
