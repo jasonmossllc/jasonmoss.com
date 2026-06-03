@@ -28,7 +28,16 @@
     /* Mobile: continuous body background, transparent sections (prevents seam) */
     @media (max-width: 767px) {
       .hero, .cta, .footer { background: transparent !important; }
-      body { background-size: 100vw auto; }
+      /* Disable the per-section overlays: two 0.3 overlays butting edge-to-edge at a
+         section boundary render a hairline seam (sub-pixel rounding). Apply ONE
+         continuous overlay on the body instead — same darkening, no boundary. */
+      .hero::before, .cta::before, .footer::before { display: none; }
+      body {
+        background-image: linear-gradient(rgba(44, 63, 54, 0.3), rgba(44, 63, 54, 0.3)), url('assets/images/section-bg.png');
+        background-repeat: no-repeat, repeat;
+        background-size: cover, 100vw auto;
+        background-position: center, 50% 0;
+      }
     }
 
     /* =====================================
