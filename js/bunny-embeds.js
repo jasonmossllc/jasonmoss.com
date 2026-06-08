@@ -115,6 +115,7 @@
       '.jm-cfs:hover .jm-cfs__pill{background:rgba(20,20,22,.9);}' +
       '.jm-cfs__pill svg{width:1.05em;height:1.05em;fill:#fff;flex:0 0 auto;}' +
       '.jm-cfs.is-hiding{opacity:0;pointer-events:none;transition:opacity .25s;}' +
+      '.jm-plyr.plyr--video .plyr__controls{z-index:12;}' +
       // Poster (thumbnail shown before play): fill the frame like the video, so
       // a non-16:9-exact box never letterboxes the thumbnail with black bars.
       '.jm-plyr .plyr__poster{background-size:cover!important;}' +
@@ -256,6 +257,28 @@
     };
   }
 
+  function isIosDevice() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent)
+      || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+  }
+
+  function installMobileFullscreenFallback(plyr, entry) {
+    var container = plyr.elements && plyr.elements.container;
+    if (!container) return;
+    var button = container.querySelector('[data-plyr="fullscreen"]');
+    if (!button) return;
+
+    button.addEventListener('click', function (e) {
+      var video = entry.video;
+      if (!video || !isIosDevice() || typeof video.webkitEnterFullscreen !== 'function') return;
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      try { video.webkitEnterFullscreen(); } catch (x) {
+        try { plyr.fullscreen.enter(); } catch (y) {}
+      }
+    }, true);
+  }
+
   // ---- per-video init --------------------------------------------------------
   function initOne(video) {
     if (video.__jmInit) return;
@@ -355,6 +378,7 @@
         ratio: null, // the surrounding box already enforces 16:9
         tooltips: { controls: true, seek: true },
         keyboard: { focused: true, global: false },
+        fullscreen: { enabled: true, fallback: true, iosNative: true },
       };
       // Only set `quality` when there is a real menu to show. Passing
       // `quality: undefined` overrides Plyr's default and crashes its
@@ -373,6 +397,7 @@
       entry.plyr = plyr;
       entry.player = adapter(plyr);
       try { plyr.elements.container.classList.add('jm-plyr'); } catch (e) {}
+      installMobileFullscreenFallback(plyr, entry);
       // Mark testimonials so the playbar is hidden in the preview state only.
       if (minimal) { try { plyr.elements.container.classList.add('jm-minimal'); } catch (e) {} }
 
