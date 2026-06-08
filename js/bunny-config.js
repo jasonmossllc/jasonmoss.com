@@ -18,13 +18,6 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
-    "4f3aa4af-d972-4a60-ab8f-1b531079ff44": {
-      "videoId": "4f3aa4af-d972-4a60-ab8f-1b531079ff44",
-      "title": "Business Breakthrough Challenge — Day 1: The Ceiling",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
     "7eb243ed-b0c9-4054-a432-c11e2cb009ca": {
       "videoId": "7eb243ed-b0c9-4054-a432-c11e2cb009ca",
       "title": "Business Breakthrough Challenge VIP — Day 1 Q&A",
