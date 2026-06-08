@@ -11,6 +11,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "df3f8a15-662a-4abd-beec-6ff2fd1ae312": {
+      "videoId": "df3f8a15-662a-4abd-beec-6ff2fd1ae312",
+      "title": "Business Breakthrough Challenge — Day 1: The Ceiling",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "4f3aa4af-d972-4a60-ab8f-1b531079ff44": {
       "videoId": "4f3aa4af-d972-4a60-ab8f-1b531079ff44",
       "title": "Business Breakthrough Challenge — Day 1: The Ceiling",
