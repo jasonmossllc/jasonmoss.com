@@ -279,6 +279,29 @@
     }, true);
   }
 
+  function installTouchFrameToggle(plyr) {
+    var container = plyr.elements && plyr.elements.container;
+    if (!container || !plyr.config || !plyr.config.hideControls) return;
+    var wrap = container.querySelector('.plyr__video-wrapper');
+    var isTouch = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+    if (!wrap || !isTouch) return;
+
+    function toggle(e) {
+      if (e && e.pointerType && e.pointerType !== 'touch') return;
+      if (e) {
+        e.preventDefault();
+        e.stopImmediatePropagation();
+      }
+      try { plyr.togglePlay(); } catch (x) {}
+    }
+
+    if (window.PointerEvent) {
+      wrap.addEventListener('pointerup', toggle, true);
+    } else {
+      wrap.addEventListener('touchend', toggle, true);
+    }
+  }
+
   // ---- per-video init --------------------------------------------------------
   function initOne(video) {
     if (video.__jmInit) return;
@@ -398,12 +421,9 @@
       entry.player = adapter(plyr);
       try { plyr.elements.container.classList.add('jm-plyr'); } catch (e) {}
       installMobileFullscreenFallback(plyr, entry);
-      // Mobile tap-to-pause: on touch, Plyr skips play/pause when you tap the
-      // video frame (the tap only reveals the playbar). Do the toggle it skips.
-      var wrap = plyr.elements.container.querySelector('.plyr__video-wrapper');
-      if (wrap) wrap.addEventListener('click', function () {
-        if (plyr.touch && plyr.config.hideControls) plyr.togglePlay();
-      });
+      // Mobile tap-to-pause: on touch, Plyr can treat a frame tap as "show the
+      // controls" instead of play/pause. Capture the touch and toggle directly.
+      installTouchFrameToggle(plyr);
       // Mark testimonials so the playbar is hidden in the preview state only.
       if (minimal) { try { plyr.elements.container.classList.add('jm-minimal'); } catch (e) {} }
 

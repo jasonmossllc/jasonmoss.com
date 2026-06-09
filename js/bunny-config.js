@@ -18,18 +18,11 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
-    "ad3ba17e-bc46-4858-bb94-d294f297cd0e": {
-      "videoId": "ad3ba17e-bc46-4858-bb94-d294f297cd0e",
-      "title": "Business Breakthrough Challenge — Day 2",
-      "poster": "thumbnail.jpg",
-      "captions": null,
-      "chapters": []
-    },
     "98895900-e4f2-4108-957c-4fee3002a634": {
       "videoId": "98895900-e4f2-4108-957c-4fee3002a634",
       "title": "Business Breakthrough Challenge — Day 2 Replay",
       "poster": "thumbnail.jpg",
-      "captions": null,
+      "captions": "en",
       "chapters": []
     },
     "7eb243ed-b0c9-4054-a432-c11e2cb009ca": {
