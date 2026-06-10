@@ -25,6 +25,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "44000da6-f2e3-45e6-b3f5-1cb67b4be849": {
+      "videoId": "44000da6-f2e3-45e6-b3f5-1cb67b4be849",
+      "title": "Business Breakthrough Challenge — Day 3 Replay",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "f7c0eb13-8320-4dc5-97ed-76cf36f00d26": {
       "videoId": "f7c0eb13-8320-4dc5-97ed-76cf36f00d26",
       "title": "Business Breakthrough Challenge — Day 3 Replay",
