@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Business Breakthrough Challenge VIP &mdash; Day 4 Q&amp;A Replay</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 0;
+      background-size: 780px auto;
+    }
+    img { max-width: 100%; display: block; }
+
+    /* Mobile: continuous body background, transparent sections (prevents seam) */
+    @media (max-width: 767px) {
+      .hero, .cta, .footer { background: transparent !important; }
+      /* Disable the per-section overlays: two 0.3 overlays butting edge-to-edge at a
+         section boundary render a hairline seam (sub-pixel rounding). Apply ONE
+         continuous overlay on the body instead — same darkening, no boundary. */
+      .hero::before, .cta::before, .footer::before { display: none; }
+      body {
+        background-image: linear-gradient(rgba(44, 63, 54, 0.3), rgba(44, 63, 54, 0.3)), url('assets/images/section-bg.png');
+        background-repeat: no-repeat, repeat;
+        background-size: cover, 100vw auto;
+        background-position: center, 50% 0;
+      }
+    }
+
+    /* =====================================
+       HERO SECTION
+       ===================================== */
+    .hero {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 2rem 0.5rem 1.5rem;
+      color: #F8F6F2;
+      overflow: visible;
+    }
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .hero-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.6875rem;
+      line-height: 2.025rem;
+      color: #F8F6F2;
+      margin: 0 0 0.75rem;
+      max-width: 24rem;
+    }
+    .hero-heading em { color: #c2a86c; font-style: italic; }
+    .hero-desc {
+      font-family: 'Raleway', sans-serif;
+      font-size: 1.125rem;
+      line-height: 1.35rem;
+      color: #F8F6F2;
+      margin: 0 0 2rem;
+      max-width: 22.3125rem;
+    }
+    .hero-inner { gap: 0; }
+    .hero-video {
+      width: 100%;
+      max-width: 23.875rem;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      box-shadow: 2px 0 60px 0 rgb(194, 168, 108);
+      position: relative;
+      z-index: 3;
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 2.375rem 1.8125rem 1.5rem;
+      }
+      .hero-heading {
+        font-size: 2.1875rem;
+        line-height: 2.625rem;
+        max-width: 52.8125rem;
+        margin-bottom: 1.25rem;
+      }
+      .hero-desc {
+        font-size: 1.375rem;
+        line-height: 1.65rem;
+        max-width: 31.375rem;
+        margin-bottom: 2.5rem;
+      }
+      .hero-video {
+        max-width: 41.25rem;
+        height: 23.1875rem;
+        aspect-ratio: auto;
+      }
+    }
+
+    /* =====================================
+       CTA SECTION
+       ===================================== */
+    .cta {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 0.5rem 1.25rem 4rem;
+      color: #F8F6F2;
+    }
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .cta-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.1875rem;
+      line-height: 1.6625rem;
+      color: #F8F6F2;
+      margin: 0 0 2rem;
+      max-width: 20.875rem;
+    }
+    .cta-heading p { margin: 0 0 1.6625rem; }
+    .cta-heading p:last-child { margin-bottom: 0; }
+    .cta-heading em { font-style: italic; }
+    .cta-heading .gold { color: #c2a86c; }
+    .cta-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#E0C68A, #C2A86C 50%);
+      color: #1D1F1E;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 120%;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: 21.375rem;
+      max-width: 100%;
+      height: 3.875rem;
+      border-radius: 0;
+      text-decoration: none;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .cta-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(#E8CE92, #E3C98C 50%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .cta-btn:hover::before { opacity: 1; }
+    .cta-logo {
+      width: 2.625rem;
+      height: 2.625rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .cta {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 0.5rem 1.8125rem 5rem;
+      }
+      .cta-heading {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        max-width: 36.4375rem;
+        margin-bottom: 1.8125rem;
+      }
+      .cta-btn {
+        width: 39rem;
+        height: 3.6875rem;
+      }
+      .cta-logo {
+        width: 3.25rem;
+        height: 3.25rem;
+        margin-top: 2rem;
+      }
+    }
+
+    /* =====================================
+       FOOTER
+       ===================================== */
+    .footer {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 3rem 1.25rem;
+    }
+    .footer::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .footer-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      text-align: center;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8125rem;
+      line-height: 1.1375rem;
+      font-weight: 400;
+      color: #545454;
+    }
+    .footer-inner p { margin: 0; }
+    .footer-inner a {
+      color: #545454;
+      text-decoration: none;
+    }
+    .footer-inner a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .footer {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+      SECTION 1: HERO (heading + desc + video)
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <h1 class="hero-heading">The Day 4 VIP Room<br><em>Coming From The Real Place.</em></h1>
+      <p class="hero-desc">Inside this final Q&amp;A, Jason coaches on solving cash flow through past clients, redesigning your offers to fit who you&rsquo;ve become, the fear of being visible, writing and selling from the heart instead of forcing it from your head, and dropping out of your mind and into your body.</p>
+      <div class="hero-video" style="overflow:hidden;">
+        <video class="jm-player" data-bunny-id="b21c34df-736a-47a5-86dd-ffc3a27954fb" data-video-id="b21c34df-736a-47a5-86dd-ffc3a27954fb" data-autoplay="true" muted playsinline crossorigin="anonymous"></video>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: CTA
+      ============================================ -->
+  <section class="cta">
+    <div class="cta-inner">
+      <div class="cta-heading">
+        <p>If this week stirred something you don&rsquo;t want to lose&hellip;</p>
+        <p>There&rsquo;s a <em>deeper level</em> we can do this work together &mdash; and I&rsquo;d love to have that conversation with you.</p>
+        <p>If you feel the pull, the next step is simple. Apply below and we&rsquo;ll open that door together.</p>
+      </div>
+      <a class="cta-btn" href="/apply" target="_blank" rel="noopener">Explore Working Together</a>
+      <img class="cta-logo" src="assets/images/jm-logo-gold.png" srcset="assets/images/jm-logo-gold.png 1x, assets/images/jm-logo-gold@2x.png 2x" alt="">
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 3: FOOTER
+      ============================================ -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>&copy; Jason Moss LLC. All rights reserved</p>
+      <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+      <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+      <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+      <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </footer>
+
+  <!-- Bunny video tracking (75% watch webhook) -->
+  <script src="/js/bunny-tracking.js" defer></script>
+
+  <!-- URL param passthrough for CTA -->
+  <script>
+    (function () {
+      const params = window.location.search;
+      if (!params) return;
+      document.querySelectorAll('a[href*="/apply"]').forEach(a => {
+        try {
+          const url = new URL(a.href);
+          const existing = new URLSearchParams(url.search);
+          const incoming = new URLSearchParams(params);
+          incoming.forEach((v, k) => { if (!existing.has(k)) existing.set(k, v); });
+          url.search = existing.toString();
+          a.href = url.toString();
+        } catch (e) {}
+      });
+    })();
+  </script>
+  <script src="/js/bunny-embeds.js" defer></script>
+</body>
+</html>

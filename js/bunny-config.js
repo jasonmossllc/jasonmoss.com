@@ -60,6 +60,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "b21c34df-736a-47a5-86dd-ffc3a27954fb": {
+      "videoId": "b21c34df-736a-47a5-86dd-ffc3a27954fb",
+      "title": "Business Breakthrough Challenge VIP — Day 4",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "a1f94ac2-724c-427f-a21a-8b6e557de13a": {
       "videoId": "ufmx6s8p7w",
       "title": "Dana Fradella Testimonial",
