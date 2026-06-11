@@ -27,11 +27,11 @@
 
     /* Mobile: continuous body background, transparent sections (prevents seam) */
     @media (max-width: 767px) {
-      .hero, .footer { background: transparent !important; }
+      .hero, .cta, .footer { background: transparent !important; }
       /* Disable the per-section overlays: two 0.3 overlays butting edge-to-edge at a
          section boundary render a hairline seam (sub-pixel rounding). Apply ONE
          continuous overlay on the body instead — same darkening, no boundary. */
-      .hero::before, .footer::before { display: none; }
+      .hero::before, .cta::before, .footer::before { display: none; }
       body {
         background-image: linear-gradient(rgba(44, 63, 54, 0.3), rgba(44, 63, 54, 0.3)), url('assets/images/section-bg.png');
         background-repeat: no-repeat, repeat;
@@ -121,6 +121,104 @@
     }
 
     /* =====================================
+       CTA SECTION
+       ===================================== */
+    .cta {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 0.5rem 1.25rem 4rem;
+      color: #F8F6F2;
+    }
+    .cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: #2C3F36;
+      opacity: 0.3;
+      pointer-events: none;
+    }
+    .cta-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .cta-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.1875rem;
+      line-height: 1.6625rem;
+      color: #F8F6F2;
+      margin: 0 0 2rem;
+      max-width: 20.875rem;
+    }
+    .cta-heading p { margin: 0 0 1.6625rem; }
+    .cta-heading p:last-child { margin-bottom: 0; }
+    .cta-heading em { font-style: italic; }
+    .cta-heading .gold { color: #c2a86c; }
+    .cta-btn {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(#E0C68A, #C2A86C 50%);
+      color: #1D1F1E;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1rem;
+      line-height: 120%;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      width: 21.375rem;
+      max-width: 100%;
+      height: 3.875rem;
+      border-radius: 0;
+      text-decoration: none;
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .cta-btn::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(#E8CE92, #E3C98C 50%);
+      opacity: 0;
+      transition: opacity 0.2s ease;
+      z-index: -1;
+    }
+    .cta-btn:hover::before { opacity: 1; }
+    .cta-logo {
+      width: 2.625rem;
+      height: 2.625rem;
+      margin-top: 1.25rem;
+    }
+
+    @media (min-width: 768px) {
+      .cta {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 0.5rem 1.8125rem 5rem;
+      }
+      .cta-heading {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        max-width: 36.4375rem;
+        margin-bottom: 1.8125rem;
+      }
+      .cta-btn {
+        width: 39rem;
+        height: 3.6875rem;
+      }
+      .cta-logo {
+        width: 3.25rem;
+        height: 3.25rem;
+        margin-top: 2rem;
+      }
+    }
+
+    /* =====================================
        FOOTER
        ===================================== */
     .footer {
@@ -176,6 +274,19 @@
     </div>
   </section>
 
+  <section class="cta">
+    <div class="cta-inner">
+      <div class="cta-heading">
+        <p>If these four days shifted how you see your business&hellip;</p>
+        <p><em><span class="gold">The Collective</span>&nbsp;</em>is where you build the business those four days pointed to&mdash;clients coming in consistently, income you can count on, growth that doesn&rsquo;t cost you your life to sustain.</p>
+        <p>Six months from now, this isn&rsquo;t a week you remember. It&rsquo;s the way your business runs.</p>
+        <p>Apply by Sunday and you&rsquo;ll get <span class="gold">$3,000 off</span> when you enroll&mdash;and we&rsquo;ll map the path on a no-pressure call.</p>
+      </div>
+      <a class="cta-btn" href="/apply" target="_blank" rel="noopener">Apply To Join</a>
+      <img class="cta-logo" src="assets/images/jm-logo-gold.png" srcset="assets/images/jm-logo-gold.png 1x, assets/images/jm-logo-gold@2x.png 2x" alt="">
+    </div>
+  </section>
+
   <!-- ============================================
       SECTION 2: FOOTER
       ============================================ -->
@@ -191,6 +302,24 @@
 
   <!-- Bunny video tracking (75% watch webhook) -->
   <script src="/js/bunny-tracking.js" defer></script>
+
+  <!-- URL param passthrough for CTA -->
+  <script>
+    (function () {
+      const params = window.location.search;
+      if (!params) return;
+      document.querySelectorAll('a[href*="/apply"]').forEach(a => {
+        try {
+          const url = new URL(a.href);
+          const existing = new URLSearchParams(url.search);
+          const incoming = new URLSearchParams(params);
+          incoming.forEach((v, k) => { if (!existing.has(k)) existing.set(k, v); });
+          url.search = existing.toString();
+          a.href = url.toString();
+        } catch (e) {}
+      });
+    })();
+  </script>
 
   <script src="/js/bunny-embeds.js" defer></script>
 </body>
