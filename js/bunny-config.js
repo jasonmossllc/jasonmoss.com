@@ -32,6 +32,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "eadfb8a0-492a-44aa-88cb-f33ecfc2d949": {
+      "videoId": "eadfb8a0-492a-44aa-88cb-f33ecfc2d949",
+      "title": "Business Breakthrough Challenge — Day 4",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "7eb243ed-b0c9-4054-a432-c11e2cb009ca": {
       "videoId": "7eb243ed-b0c9-4054-a432-c11e2cb009ca",
       "title": "Business Breakthrough Challenge VIP — Day 1 Q&A",
