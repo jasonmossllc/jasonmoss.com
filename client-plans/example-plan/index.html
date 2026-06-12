@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<title>Marta Bellini — Strategy Plan</title>
+
+<style>
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+
+  :root{
+    --obsidian:#1D1F1E;
+    --forest:#2C3F36;
+    --mocha:#5B4B3F;
+    --taupe:#8C837A;
+    --gold:#C2A86C;
+    --stone:#E9E2D3;
+    --sand:#F8F6F2;
+    --paper:#FBF9F4;
+    --bg:#E7E1D4;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--obsidian);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(1rem,0.94rem + 0.3vw,1.15rem);
+    line-height:1.78;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  ::selection{background:var(--gold);color:var(--obsidian);}
+
+  p{margin:0 0 1.15em 0;text-wrap:pretty;}
+  strong{font-weight:600;color:var(--obsidian);}
+  em{font-style:italic;}
+
+  /* ---------- COVER / HERO ---------- */
+  .cover{
+    position:relative;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    min-height:100vh;
+    min-height:100svh;
+    padding:clamp(28px,4vw,56px) clamp(24px,6vw,84px);
+    color:var(--sand);
+    background:
+      radial-gradient(120% 80% at 82% 12%,rgba(194,168,108,.14),transparent 52%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    overflow:hidden;
+  }
+  .cover .logo{
+    width:clamp(150px,16vw,196px);
+    display:block;
+    align-self:start;
+  }
+  .cover .cover-mid{
+    align-self:center;
+    max-width:780px;
+    padding:clamp(24px,5vw,40px) 0;
+  }
+  .cover .eyebrow{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(.7rem,.66rem + .15vw,.82rem);
+    line-height:1.4;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:clamp(18px,2.5vw,26px);
+  }
+  .cover h1{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(2.6rem,1.7rem + 4.4vw,5rem);
+    line-height:1.06;
+    letter-spacing:-.01em;
+    color:var(--sand);
+    margin-bottom:clamp(22px,3vw,32px);
+    text-wrap:balance;
+  }
+  .cover .rule{
+    width:68px;height:2px;
+    background:var(--gold);
+    margin-bottom:clamp(22px,3vw,32px);
+  }
+  .cover .sub{
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:clamp(1.05rem,1rem + .45vw,1.4rem);
+    line-height:1.7;
+    color:var(--stone);
+    max-width:620px;
+  }
+  .cover .foot{
+    align-self:end;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:18px;
+    padding-top:22px;
+    border-top:1px solid rgba(233,226,211,.18);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(.78rem,.74rem + .12vw,.9rem);
+    letter-spacing:.05em;
+    color:var(--stone);
+  }
+  .cover .foot .r{color:var(--gold);white-space:nowrap;}
+  .cover .foot .who{font-weight:600;color:var(--sand);}
+
+  /* ---------- BODY CONTENT (floating paper) ---------- */
+  main.doc{
+    position:relative;
+    z-index:2;
+    max-width:920px;
+    margin:clamp(-96px,-7vw,-52px) auto clamp(56px,8vw,104px);
+    padding:clamp(44px,6vw,92px) clamp(26px,5.5vw,84px);
+    background:var(--paper);
+    border-radius:clamp(10px,1.4vw,18px);
+    box-shadow:
+      0 40px 80px -40px rgba(29,31,30,.5),
+      0 2px 10px rgba(29,31,30,.05);
+  }
+
+  .section{margin-top:clamp(44px,6vw,80px);}
+  main.doc > .section:first-child{margin-top:0;}
+  .section + .section{
+    padding-top:clamp(44px,6vw,80px);
+    border-top:1px solid rgba(29,31,30,.09);
+  }
+  main.doc > .section:first-child{margin-top:0;}
+
+  .sechead{margin-bottom:6px;}
+  .sec-num,.note-head{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.74rem;
+    line-height:1.4;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h2{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(1.7rem,1.25rem + 1.9vw,2.55rem);
+    line-height:1.18;
+    letter-spacing:-.01em;
+    color:var(--obsidian);
+    margin-bottom:6px;
+    text-wrap:balance;
+  }
+  .h2-rule{
+    width:54px;height:3px;
+    background:var(--gold);
+    margin:18px 0 22px 0;
+  }
+
+  h3{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(1.1rem,1rem + .4vw,1.32rem);
+    line-height:1.4;
+    color:var(--forest);
+    margin:clamp(28px,3.5vw,40px) 0 10px 0;
+  }
+  h3:first-of-type{margin-top:clamp(18px,2.5vw,26px);}
+
+  .lead{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:clamp(1.18rem,1.05rem + .55vw,1.5rem);
+    line-height:1.6;
+    color:var(--mocha);
+    margin-bottom:4px;
+  }
+
+  ul,ol{margin:14px 0 22px 0;padding-left:0;list-style:none;}
+  li{
+    position:relative;
+    padding-left:26px;
+    margin-bottom:12px;
+  }
+  ul li::before{
+    content:"";
+    position:absolute;
+    left:3px;top:.62em;
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+  ol{counter-reset:ol;}
+  ol li{padding-left:34px;counter-increment:ol;}
+  ol li::before{
+    content:counter(ol);
+    position:absolute;
+    left:0;top:.02em;
+    font-family:'Raleway',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    line-height:1.55;
+    color:var(--gold);
+  }
+
+  .callout{
+    background:linear-gradient(180deg,#EFEADC 0%,var(--stone) 100%);
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:clamp(20px,3vw,30px) clamp(22px,3.4vw,34px);
+    margin:26px 0 28px 0;
+    box-shadow:0 14px 30px -22px rgba(29,31,30,.45);
+  }
+  .callout p{
+    font-family:'Libre Baskerville',serif;
+    font-style:italic;
+    font-size:clamp(1.08rem,1rem + .4vw,1.28rem);
+    line-height:1.62;
+    color:var(--obsidian);
+    margin:0;
+  }
+  .callout p + p{margin-top:12px;}
+
+  /* ---------- 90 DAY PLAN ---------- */
+  .phase{
+    margin-bottom:24px;
+    border:1px solid rgba(29,31,30,.08);
+    border-radius:12px;
+    background:#fff;
+    overflow:hidden;
+    box-shadow:0 20px 44px -32px rgba(29,31,30,.4);
+  }
+  .phase:last-child{margin-bottom:0;}
+  .phase-head{
+    background:linear-gradient(135deg,#33473C,#283831);
+    color:var(--sand);
+    padding:clamp(16px,2.4vw,22px) clamp(22px,3.2vw,30px);
+  }
+  .phase-head .tag{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.72rem;
+    line-height:1.3;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:7px;
+  }
+  .phase-head .ttl{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.2rem,1.05rem + .55vw,1.5rem);
+    line-height:1.3;
+    color:var(--sand);
+  }
+  .phase-body{padding:clamp(22px,3vw,30px) clamp(22px,3.2vw,32px) clamp(14px,2vw,20px);}
+  .phase-body ol{margin:0;}
+  .phase-body ol li{margin-bottom:16px;}
+  .phase-body ol li strong{color:var(--forest);}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:left;
+    color:var(--sand);
+    background:
+      radial-gradient(120% 70% at 18% 88%,rgba(194,168,108,.13),transparent 55%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    padding:clamp(72px,11vw,150px) clamp(24px,6vw,84px);
+    overflow:hidden;
+  }
+  .closing > *{width:100%;max-width:680px;}
+  .closing .note-head{color:var(--gold);margin-bottom:14px;}
+  .closing h2{color:var(--sand);}
+  .closing .h2-rule{background:var(--gold);}
+  .closing p{
+    color:var(--stone);
+    font-size:clamp(1.02rem,.96rem + .35vw,1.18rem);
+    line-height:1.75;
+    margin-bottom:15px;
+  }
+  .closing strong{color:var(--sand);}
+  .closing .sign{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.15rem,1.05rem + .4vw,1.35rem);
+    line-height:1.5;
+    color:var(--sand);
+    margin-top:34px;
+  }
+  .closing .sign span{
+    display:block;
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:.86rem;
+    line-height:1.5;
+    letter-spacing:.05em;
+    color:var(--gold);
+    margin-top:12px;
+  }
+
+  /* ---------- SMALL SCREENS ---------- */
+  @media (max-width:600px){
+    body{line-height:1.7;}
+    .cover{min-height:100svh;}
+    .cover .foot{flex-direction:column;gap:6px;align-items:flex-start;}
+    main.doc{
+      margin:-44px 14px clamp(40px,8vw,64px);
+      border-radius:14px;
+      padding:40px 22px;
+    }
+  }
+
+  /* ---------- PRINT (retain clean PDF export) ---------- */
+  @media print{
+    body{background:#fff;}
+    .cover,.closing{min-height:auto;}
+    main.doc{
+      max-width:none;margin:0;padding:14mm 16mm;
+      box-shadow:none;border-radius:0;background:#fff;
+    }
+    .section + .section{border-top:0;}
+    .phase,.callout{box-shadow:none;break-inside:avoid;}
+    .sechead{break-after:avoid;}
+    h3{break-after:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section class="cover">
+  <img class="logo" src="assets/logo-light.svg" alt="Jason Moss">
+  <div class="cover-mid">
+    <div class="eyebrow">Business Strategy Plan</div>
+    <h1>Marta Bellini</h1>
+    <div class="rule"></div>
+    <div class="sub">A clear-eyed look at where your business is, the biggest opportunities I see, and a 90-day plan to act on them — built from my review of your business, your assessment, and the notes I recorded going through everything.</div>
+  </div>
+  <div class="foot">
+    <span class="l">Prepared for <span class="who">Marta Bellini</span></span>
+    <span class="r">May 2026</span>
+  </div>
+</section>
+
+<main class="doc">
+
+<!-- ===================== 1. PERSONAL NOTE ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="note-head">A note before we begin</div>
+    <h2>Before you read this</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Hey Marta —</p>
+  <p>One quick note before you dive in. I used AI to help me organize my notes and shape this into something clean for you to read. But the strategy itself — every recommendation, every shift I'm suggesting — came from my own review of your assessment, your website, your offers, and the voice notes I recorded going through everything carefully.</p>
+  <p>This isn't a templated AI plan. It's my thinking, made readable.</p>
+  <p>Read it slowly. The parts that feel like a relief are usually pointing at what already wants to come forward. The parts that make you bristle a little are usually pointing at where the real growth lives.</p>
+  <p>We'll work it together from here.</p>
+</section>
+
+<!-- ===================== 2. WHERE YOU ARE NOW ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 02</div>
+    <h2>Where you are right now</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You don't have a business problem. You have a structure problem — and a handful of inherited beliefs that are quietly holding back work the market is already asking for.</p>
+  </div>
+
+  <p>Let me start with what's true and good, because it matters and I don't want it to get lost under everything else.</p>
+
+  <h3>What's working</h3>
+  <p>Your story is real. Seven years of infertility, becoming a mother, and building this entire body of work out of what you actually walked through. That's not a marketing story — it's lived. Most people in this space don't have it, and it's the foundation of everything you've built.</p>
+  <p>Your brand is built. Radici Fertili® as a trademarked method, martabellini.it, the line <em>"con te, passo dopo passo"</em> — these are real assets. Don't touch them.</p>
+  <p>The podcast is a quiet powerhouse. <em>Diventare Madre</em>, three seasons in, ranked in the top 30 Italian health and true-stories podcasts. That's evergreen trust accruing in the background every day you don't post.</p>
+  <p>Your credentials are rare. Being one of the few certified Hormonal Yoga instructors in Italy is a real moat. Combined with the story and the podcast, you have an authority position in your market that most practitioners would need a decade to build.</p>
+  <p>Sister Circle is a real foundation. Thirty women paying €120 a month is not nothing — that's roughly €43K in recurring revenue annually before any retreats, and it's the heart of the model you actually want to build.</p>
+  <p>And the hire matters. Bringing your former client in for admin in January was a bigger shift than you may be giving it credit for. Don't undervalue it. We'll lean on it.</p>
+  <p>Now the most important sentence in your business — the one that doesn't appear anywhere on the front of your site:</p>
+  <div class="callout">
+    <p>Eight out of ten women who attend your retreats become pregnant. Read that sentence again. That's not a marketing line — that's evidence of something real happening in the body when it finally feels safe. And right now, almost no one finding you for the first time ever sees it.</p>
+  </div>
+
+  <h3>What's holding you back</h3>
+  <p>Three things. They're connected.</p>
+
+  <p><strong>One — your messaging has swung too far inside your own evolution.</strong></p>
+  <p>You've grown so much in your own understanding of this work that you now speak to your audience from where <em>you</em> are, not where <em>they</em> are. The clearest example is on your own homepage: <em>"Non prometto miracoli — prometto un corpo che torna a casa."</em> "I don't promise miracles — I promise a body that comes home." That sentence is honest, and it's part of why I respect you. But it's also costing you.</p>
+  <p>The woman who finds you is not yet where you are. She is in fear, in hypervigilance, in grief. She wants a baby. She is not, on day one, interested in deconstructing the idea that motherhood is her identity. We don't manipulate that — we honor it, and we lead her deeper from there. Right now you're skipping the meeting and going straight to the destination, and a lot of women who'd benefit from your work never come inside.</p>
+
+  <p><strong>Two — your offer suite is emotionally rich and commercially messy.</strong></p>
+  <p>Let me name what's actually for sale right now. The Reset at €49. The IVF preparation guide at €99. The free survival manual. Free masterclasses. Sister Circle at €120 a month. 1:1 somatic sessions at €85. Retreats at €650. A 1:1 mentoring package at €1,200 — which you told me nobody buys. And the new Threshold at €750–900.</p>
+  <p>That's nine doors into your world. There's no obvious map between them. Someone arriving on your site has to figure out the right entry point on their own, which mostly means they don't pick one.</p>
+  <p>And more importantly: your business effectively caps out at €1,200, and the offer at that price is the one nobody buys. That tells me something specific. It's not a pricing gap. It's a positioning gap. You haven't built a true high-ticket offer yet. The €750–900 Threshold doesn't count, because it's dramatically underpriced for what it actually delivers — and I'll come back to that in Section 06.</p>
+
+  <p><strong>Three — growth is bottlenecked on you, energetically.</strong></p>
+  <p>You convert through DMs, Instagram stories, and your live presence. That works — but it works because <em>you</em> are the engine. As soon as your energy dips, the engine stops.</p>
+  <p>You named this yourself in the assessment: financial instability puts you in survival mode, and survival mode kills the creative, visionary leadership the work actually needs. You also named that sales calls drain you, that DM selling drains you, that writing nurture emails drains you, that constant content creation drains you. Almost every part of how revenue currently enters your business is one of the things that pulls you out of alignment.</p>
+  <p>This is why €85K a year feels like the right ceiling for you right now. It isn't the ceiling of your work. It's the ceiling of <em>this structure</em>. We rebuild the structure, and €85K becomes a floor.</p>
+</section>
+
+<!-- ===================== 3. BIGGEST OPPORTUNITIES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 03</div>
+    <h2>The biggest opportunities I see</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">If you only focus on a few things over the next year, focus on these. In this order.</p>
+  </div>
+
+  <h3>1. Bridge the messaging gap</h3>
+  <p>This is the root opportunity, and everything downstream — site, content, sales, offers — moves easier once it's solved. Your audience finds you in the middle of fear, hypervigilance, and grief. They're looking for a way through. You, in your evolved understanding, are no longer in that place — you see the deeper work, the identity reclamation, the body-as-home return. All of that is real. None of it is where she is when she meets you.</p>
+  <p>The fix isn't to abandon what you actually believe. It's to build a bridge: meet her in the world she's living in (she wants a baby, she wants her body to work, she wants the fear to end), and lead her, gently, from there into the deeper work she'll discover once she's inside the room.</p>
+  <p>You already have the evidence. Eight out of ten retreat attendees become pregnant. That isn't a coincidence — it's what happens when a body finally feels safe. You can honor that outcome honestly without promising it. We'll get to the exact frame in Section 05.</p>
+
+  <h3>2. Simplify the offer ecosystem</h3>
+  <p>You don't need more offers. You need fewer, clearer ones. The simplification I'm going to walk you through is: one front door, one back door, one path between them.</p>
+  <p>Front door: Sister Circle at €120 a month. That becomes your single core paid offer. Back door: a true premium experience at €2,500–€3,500 — the Threshold, retooled and repriced. Path between them: Free → Live experience → Sister Circle → Threshold.</p>
+  <p>Everything else either dissolves into Sister Circle as a bonus, gets retired, or stays as a deliverable for existing clients (the 1:1 somatic sessions). I'll detail this in Section 06.</p>
+
+  <h3>3. Build a real high-ticket back end</h3>
+  <p>This is where your revenue actually shifts. You don't have a high-ticket offer right now. You have a €750–900 program that's a margin disaster the moment you fly people to Tuscany, a €1,200 1:1 mentoring package nobody buys, and a-la-carte sessions at €85.</p>
+  <p>The Threshold — 5 weeks plus an in-person retreat weekend — is the high-ticket back end the business needs. At the current price you're losing money on it once you account for venue, travel, food, the loss of other client capacity during those weeks, and your own delivery cost. At €2,500–€3,500, it becomes the offer that lifts you from €85K to €150–200K without adding hours.</p>
+
+  <h3>4. Create one repeatable sales pathway</h3>
+  <p>You don't need a complicated funnel. You need one sequence that works, that you can repeat without losing your soul:</p>
+  <p>Free live masterclass (with you) → invitation to Sister Circle → sales page → enrollment → from inside Sister Circle, once value is felt, an invitation to the Threshold.</p>
+  <p>Notice what is <em>not</em> in that path: sales calls, DM selling, heavy weekly nurture emails. The exact things you told me drain you most. We are removing them by design.</p>
+
+  <h3>5. Honor the structural truth of your business</h3>
+  <p>The thing that makes this business valuable is not how systematized it is. It's the intimacy, the humanity, the emotional attunement, the relational safety, the depth. <em>That</em> is the product. If we over-systematize this — if we turn your work into an optimized funnel machine — the magic disappears and you'll feel it before the data does.</p>
+  <p>So the order matters. We premiumize first, then simplify, then automate only at the periphery where automation doesn't touch the felt experience. The evergreen ecosystem you mentioned — the intimacy chapter, the pregnancy chapter, the maternity chapter — is Phase 2. We're not building it yet, on purpose.</p>
+</section>
+
+<!-- ===================== 4. WHAT NEEDS TO SHIFT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 04</div>
+    <h2>What needs to shift first</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Before any tactic works, these have to change. They're foundations, not to-dos.</p>
+  </div>
+
+  <h3>Stop apologizing for the outcome women came for</h3>
+  <p>Your refusal to promise pregnancy is integrity, and I want you to keep it. Your refusal to even <em>speak</em> to it is overcorrection, and it's costing you. There's a real difference between promising and acknowledging. You work with the body, the nervous system, the emotional landscape — and very often, the outcome women came for emerges <em>because</em> of that work. That's true. Say it.</p>
+
+  <h3>Pick: are you their first practitioner or their last?</h3>
+  <p>Right now your messaging tries to be both — meeting her on day one of her IVF and also leading her into the deeper identity work that takes years. You can't be both equally at the front door. You have to pick.</p>
+  <p>What I'd recommend: front door speaks to her as her first practitioner — the woman she finds when her PMA journey is hardest and she's looking for support. Depth — the conscious sexuality, the surrender work, the identity beyond motherhood — is what she <em>discovers</em> once she's inside Sister Circle. The deeper work isn't the hook. It's the gift.</p>
+
+  <h3>Premium pricing is a structural belief, not a tactic</h3>
+  <p>You wrote in your assessment that financial instability pulls you out of alignment, and that you can't lead from survival mode. Your current pricing is keeping you in that survival mode. A €900 program that includes a Tuscany retreat is a margin disaster — you'll burn most of the in-person experience just covering costs. A €2,500–€3,500 price isn't ambition. It's the price that lets you actually deliver the depth your work demands without bleeding yourself dry doing it.</p>
+
+  <h3>Sales pathway over sales energy</h3>
+  <p>You currently sell through being present, all the time — beautifully present, in DMs and in stories. That's both your magic and your trap. We're going to design a sales pathway that does the work whether or not you're "on" today. Not to remove you. To remove the requirement that revenue depends on you being on.</p>
+
+  <h3>Premiumize before automating</h3>
+  <p>Don't build evergreen infrastructure yet. Don't build complex funnels. Don't add automation on top of a structure that hasn't been simplified. We are tightening, not adding.</p>
+
+  <div class="callout">
+    <p>You're not building a machine. You're building a temple. Your work shouldn't be felt at the funnel level — it should be felt the moment a woman steps inside. Premiumize first. Simplify second. Automate only where it doesn't touch the experience.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. POSITIONING & MESSAGING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 05</div>
+    <h2>Positioning &amp; messaging</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Keep the welcome. Rewrite the layer right under it. Bridge where she is to where you're taking her.</p>
+  </div>
+
+  <h3>Keep what's already right</h3>
+  <p>Your hero — <em>"Stai affrontando un percorso di fertilità difficile? Respira. Sei nel posto giusto."</em> — is exactly right. It meets her in the emotional reality of where she actually is. Do not touch it. <em>"Con te, passo dopo passo."</em> — keep. Radici Fertili® as the method name — keep. These are real brand assets and the new positioning will sit on top of them, not replace them.</p>
+
+  <h3>The bridge frame</h3>
+  <p>What needs to evolve is the layer right under the welcome. Right now it reads, translated: <em>"Don't chase the outcome — find your balance, and the rest will follow."</em> That's beautiful, and it's true. But it's a sentence she needs to hear <em>after</em> she trusts you. At the front door, it can land as evasive — like you're not actually engaging with what she came in for.</p>
+  <p>Here is the message frame I want underneath the welcome:</p>
+  <div class="callout">
+    <p>Your body isn't broken. The fertility journey has put it in a state of constant alarm — and a body in alarm can't easily welcome new life. My work supports the natural process of conception by supporting the whole woman: the nervous system, the body, the heart. Eight out of ten women who attend my retreats become pregnant. I can't promise that to you. But I can promise this — here, you'll be supported as a whole woman, not handled as a patient. And from that place, real things become possible.</p>
+  </div>
+  <p>That's the spine. The current copy speaks only to who she'll become. The new copy speaks to where she <em>is</em> and who she'll become. The "and" is the unlock.</p>
+
+  <h3>The Italian market context</h3>
+  <p>Your audience lives inside the Italian PMA system. That system speaks one language — protocols, success rates, percentages, transfers. You speak another — nervous systems, breath, somatic safety, sisterhood. You don't have to compete with the protocols. You have to position yourself as the missing complement to them: the support PMA doesn't give her. <em>Il supporto che la PMA non ti dà.</em> Something to that effect. That positioning lets you speak honestly to the medical reality of her life without becoming part of the industry's noise.</p>
+
+  <h3>Content energy — the bridge is also the post</h3>
+  <p>You wrote that you feel creatively blocked because you feel pressure to say what people want to hear — "how to get pregnant," "what to eat for transfer," "yoga positions to conceive" — instead of what you actually want to communicate: somatic healing, surrender, conscious sexuality, identity beyond motherhood.</p>
+  <p>Here's the truth: you don't have to choose. You can lead with the surface of what she came looking for and bridge — inside the same post, the same reel, the same email — into the deeper truth she didn't know she needed. The bridge is the work. You bridge in your content the same way you bridge in your sessions. That's the way out of the creative block, and it's how the audience who came for one thing slowly discovers they came for something deeper.</p>
+</section>
+
+<!-- ===================== 6. OFFERS & PRICING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 06</div>
+    <h2>Offers &amp; pricing</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Collapse the clutter. Triple the price on the back end. Let Sister Circle be the heart.</p>
+  </div>
+
+  <h3>The ascension you actually want</h3>
+  <p>Here is what your offer suite should look like, by tier:</p>
+  <ul>
+    <li><strong>Free.</strong> Podcast, Instagram, email list, the survival manual lead magnet. Keep all of these — they're working.</li>
+    <li><strong>Live experience (free).</strong> A monthly live masterclass. This is the single bridge between your free audience and your paid offer.</li>
+    <li><strong>Front-end paid (€120/month).</strong> Sister Circle. Your one core paid offer. Everything else dissolves into it.</li>
+    <li><strong>High-ticket back end (€2,500–€3,500).</strong> Threshold, repriced. Sold to roughly 10% of Sister Circle members.</li>
+    <li><strong>Retreats (€650 → testing €1,200–€1,500).</strong> Standalone retreats stay. I'd let pricing rise here too on the next one. The outcomes you produce justify it.</li>
+  </ul>
+
+  <h3>On the 1:1 sessions — we need to talk about this</h3>
+  <p>You're currently charging €85 for 1:1 somatic sessions, in person or online. I want to be honest with you: €85 is dramatically underpriced for the depth of work you actually deliver in that room. It's not in the same conversation as your Sister Circle or the Threshold. It's a different category of underpricing, and it's the kind that quietly burns out a practitioner.</p>
+  <p>You mentioned that the price sits at €85 because your somatic teacher requires it. I hear that, and I'm not going to ask you to break a commitment to her lightly. But this is exactly the kind of inherited belief I want to dig into with you on a call — because right now it's coexisting with you charging €120/month for Sister Circle and €2,997 for the Threshold, and the math of those three numbers together doesn't hold. Either the 1:1 is worth more than €85, or the rest of the work is worth less than what you're charging. We both know which one is true.</p>
+  <p>There are two real options here, and we'll decide together:</p>
+  <ul>
+    <li><strong>Reprice significantly.</strong> Think €180–€250 minimum, almost certainly higher once we look honestly at what's in the room. If the teacher constraint is real, we work through how to honor it without continuing to extract from yourself.</li>
+    <li><strong>Pull 1:1 out of the offer suite entirely.</strong> Keep the depth in retreats and the Threshold. Stop offering individual sessions as a product. This is the cleaner move if the price ceiling can't move.</li>
+  </ul>
+  <p>What I won't recommend is keeping things as they are. €85 is not a viable middle path. We'll work this together on our next call.</p>
+
+  <h3>What to retire or fold in</h3>
+  <p>The Reset at €49 → fold into Sister Circle as a bonus, or quietly retire. My recommendation: fold in. Stop selling it as a standalone product.</p>
+  <p>The IVF preparation guide at €99 → already included inside Sister Circle per your assessment. Make that visible in the membership positioning. Stop selling it separately as if it's a different product.</p>
+  <p>The 1:1 mentoring package at €1,200 → retire. Nobody buys it because there's nothing premium about €1,200 next to your actual depth of work. The new Threshold at €2,500+ replaces it cleanly.</p>
+  <p>The paid orientation session at €80 → retire as a sales mechanism. You don't need it. Replace it with the masterclass-to-membership pathway. (The €85 1:1 somatic offering is its own question — see the subsection above.)</p>
+
+  <h3>The Threshold, specifically — and why €2,997</h3>
+  <p>Your assessment had this at €750–€900. I'd open it at <strong>€2,997</strong>.</p>
+  <p>I know that feels like a stretch. Let me show you the math.</p>
+  <p>At €900: you run a five-week premium intensive, you fly people to Tuscany, you house them, you feed them, you hold the container for the entire weekend. By the time you account for travel, venue, food, materials, your own time, and the cost of not taking on other clients during those weeks, your margin is essentially zero. You're paying to deliver depth. That's not a price — that's a tax on your own work.</p>
+  <p>At €2,997: the same delivery, with breathing room. You can hire support for the retreat. You can pay yourself properly. You can deliver the depth without the resentment that quietly accumulates when you over-give and under-charge.</p>
+  <p>You wrote: <em>"I don't want to build a business based on fear, hyper-productivity or false promises."</em> Agreed. The €900 price is the fear-based price. The €2,997 price is what the work actually costs to deliver well.</p>
+  <p>The revenue math is straightforward. If 10% of Sister Circle (three women) ascend per year: that's an extra €9,000. If you run the Threshold twice a year and 5–8 women enroll each round: that's €15,000–€48,000 on the back end alone. That's how €85K becomes €150K without working more hours.</p>
+
+  <div class="callout">
+    <p>Underpricing isn't humility. It's quietly extracting from your own future. The €900 price puts you back in survival. The €2,997 price funds the version of you that can actually lead the way you want to.</p>
+  </div>
+</section>
+
+<!-- ===================== 7. MARKETING & CONTENT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 07</div>
+    <h2>Marketing &amp; content strategy</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Live is your engine. Less content, more presence. Stop doing the work that drains you.</p>
+  </div>
+
+  <h3>The live experience is the engine</h3>
+  <p>The single most leveraged move you can make for visibility and conversion is to run a free live masterclass on a real cadence. Monthly to start. Not "occasionally," which is what you wrote in your assessment.</p>
+  <p>Here's why this works for you specifically: your assessment is full of evidence that live experiences are what convert your audience <em>and</em> what energize you. You said it yourself — sales calls drain you, DMs drain you, writing nurture emails drains you. But live classes and masterclasses light you up. Use the thing that converts <em>and</em> gives you life.</p>
+  <p>The structure is simple, and it repeats:</p>
+  <ul>
+    <li>Promote 7–10 days out — stories, podcast mention, email sequence.</li>
+    <li>Run the masterclass live, 60–90 minutes — teach real value and lead a short guided practice so she <em>feels</em> the work, not just hears about it.</li>
+    <li>At the end, invite into Sister Circle with a sales page link.</li>
+    <li>Open a 24–48 hour enrollment window with a small bonus for attendees.</li>
+  </ul>
+  <p>This is your one repeatable engine. Once it's working, do not introduce a second sales mechanism on top of it. Run this, the same way, every month.</p>
+
+  <h3>Content cadence — be a presence, not a machine</h3>
+  <p>You don't need to be a content machine. You need to be a content <em>presence</em>. The shift is:</p>
+  <ul>
+    <li><strong>Instagram.</strong> Three high-quality reels per week plus daily stories from your real life will outperform seven forced posts that drain you. Your audience doesn't need more of you. They need your alive presence.</li>
+    <li><strong>Podcast.</strong> Keep going exactly as you are. <em>Diventare Madre</em> is the asset that compounds in the background — don't tinker with it.</li>
+    <li><strong>Email.</strong> Write less, but write from where you actually are. One excellent email a week beats three drained ones. Let the masterclass cycle drive most of your sending — promotion, recap, open enrollment — instead of trying to write daily "nurture" content you don't want to write.</li>
+  </ul>
+
+  <h3>What to stop doing</h3>
+  <ul>
+    <li>Stop forcing daily nurture emails. You told me they drain you. The masterclass cycle replaces them.</li>
+    <li>Stop running sales conversations in DMs as a system. Let DMs be relational — connection, not conversion.</li>
+    <li>Stop creating "how to get pregnant" or "yoga positions to conceive" content. It pulls you out of alignment, and your audience is better served by the deeper work bridged through the surface — which is the content you actually want to make.</li>
+  </ul>
+
+  <h3>The collaborations move — not yet</h3>
+  <p>You mentioned wanting to expand through partnerships with fertility clinics and aligned professionals. I love it as a long-term move. Don't rush it. First, get the messaging tight and the funnel repeatable. Once you can say cleanly "this is what we do, this is how we receive women, this is what we charge" — collaborations become much easier to enter and much easier to convert from. That's a Month 4–6 conversation, not a Month 1 one.</p>
+</section>
+
+<!-- ===================== 8. SYSTEMS & OPERATIONS ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 08</div>
+    <h2>Systems &amp; operations</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Automate the periphery. Keep the human texture everywhere it actually matters.</p>
+  </div>
+
+  <h3>Protect the magic</h3>
+  <p>The single most important systems principle for your business: do not automate anywhere that touches the felt experience. Automate the periphery — admin, scheduling, payment processing, basic onboarding, technical email sending — and keep the human texture in every part of the work the client actually feels.</p>
+  <p>Most coaches at your stage make this mistake in the other direction — they try to automate the relational layer and watch their conversion collapse. You won't, because we're going to keep the live, the personal, the somatic, and the in-person all in your hands.</p>
+
+  <h3>Your assistant is the foundation</h3>
+  <p>The January hire matters more than you may be giving it credit for. Lean on her for:</p>
+  <ul>
+    <li>Payments and member onboarding for Sister Circle.</li>
+    <li>Scheduling and confirming the masterclasses.</li>
+    <li>Customer service inbound — anything that doesn't need to be you.</li>
+    <li>The technical side of email broadcasts and sales pages.</li>
+    <li>Retreat logistics: deposits, communications, venue coordination.</li>
+  </ul>
+  <p>Everything client-facing — the live calls, the practice classes, the somatic sessions, the retreat presence, the emails that carry your actual voice — stays with you. Forever. That's the deal we're making with the structure.</p>
+
+  <h3>The sales pathway, technically</h3>
+  <p>You don't need a complex tech stack. You need:</p>
+  <ul>
+    <li>One clean sales page for Sister Circle.</li>
+    <li>One masterclass registration and delivery setup (whatever you're using now is probably fine — don't migrate platforms while we're rebuilding the messaging).</li>
+    <li>One sales page for the Threshold, opened first only to existing members.</li>
+    <li>An email sequence built around the masterclass cycle.</li>
+  </ul>
+  <p>Resist the urge to rebuild your whole funnel infrastructure right now. Use what you have. We tighten the messaging and the offer architecture first; we upgrade tech later, only if and where it's actually limiting us.</p>
+
+  <h3>What not to build yet</h3>
+  <p>You mentioned the future ecosystem — the intimacy chapter, the pregnancy chapter, the maternity chapter. I love the vision. <em>Don't build any of it yet.</em> Build the messaging bridge and the simplified front-and-back-end architecture first. Those chapters become natural expansions once the foundation is solid — and trying to build the whole ecosystem before the foundation is exactly what burns founders out at your stage. We'll plan the first new chapter together once Sister Circle and the Threshold are running cleanly.</p>
+</section>
+
+<!-- ===================== 9. 90-DAY PLAN ===================== -->
+<section class="section break">
+  <div class="sechead">
+    <div class="sec-num">Section 09</div>
+    <h2>Your 90-day action plan</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">The payoff. Concrete, sequenced, start-Monday.</p>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 1–30</span>
+      <span class="ttl">Clarify and decide</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Rewrite your messaging spine.</strong> On a single document, write the new positioning frame: who you serve, where she is when she finds you, what you do, how you talk about pregnancy honestly, and what becomes possible inside the work. Use the bridge frame from Section 05 as your starting point. This document becomes the source of truth — every page, post, email, and sales page we touch after this gets aligned to it.</li>
+        <li><strong>Lock the Threshold.</strong> Confirm the name (The Threshold), the opening price (€2,997), exact dates, exact deliverables, and the Tuscany venue. Draft the sales page — we can workshop the copy together on a call. You don't need to launch it externally yet. You need it real, on paper, so everything downstream can point to it.</li>
+        <li><strong>Audit the low-ticket offers and the 1:1 question.</strong> The Reset (€49) and the standalone IVF guide (€99) — decide: fold into Sister Circle as included bonuses, or quietly retire (my recommendation: fold in). The €85 1:1 somatic sessions — flagged in Section 06 — bring to our next call so we can work through the teacher-constraint piece together and land on either repricing significantly or pulling 1:1 from the suite.</li>
+        <li><strong>Retire the 1:1 mentoring package offer.</strong> Pull it from your offerings page entirely. It's dead weight occupying the price tier we're about to fill cleanly with the Threshold.</li>
+        <li><strong>Schedule three masterclasses.</strong> Pick the dates for Months 2, 3, and 4 right now. Put them in the calendar and let your assistant build the operational rhythm around them. The cadence is the point.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 31–60</span>
+      <span class="ttl">Build and launch the pathway</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Run your first new-positioning masterclass.</strong> Pick a topic that lights you up — somatic healing, surrender, conscious sexuality, or identity beyond motherhood — and frame it through the bridge: this is how this work touches fertility outcomes too. Promote 7–10 days out. Open Sister Circle at the end with a 48-hour enrollment window. This is your engine's first real test.</li>
+        <li><strong>Soft-open the Threshold to existing Sister Circle members.</strong> Don't market it externally yet. Send one personal voice note to each of your 30 community members offering them first access at the new price. Cap at 5–8 spots. This is your real-world price test — and the women who say yes inside the community will be the easiest, warmest first cohort to deliver to.</li>
+        <li><strong>Update Sister Circle's positioning page.</strong> Reflect the new bridge messaging from Section 05. Make explicit that the Reset and the IVF preparation program are now included in the membership. Simplify what's listed; don't add anything.</li>
+        <li><strong>Run your first email sequence around the masterclass.</strong> Five emails: announce, deepen the topic, behind-the-scenes from your own life, last call, post-class invitation to Sister Circle. Let your assistant handle scheduling and sending. You write the content from where you actually are.</li>
+        <li><strong>Lock the retreat calendar for the year.</strong> You want to grow to four retreats a year. Pick the dates now. Half of them anchor the year; the other half can stay more spontaneous. Get deposits and registrations live on the page.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 61–90</span>
+      <span class="ttl">Refine and ascend</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Run masterclass #2 with refinements.</strong> You'll have learned from the first one. Tighten the sales page, the email cadence, the offer at the end. Most growth at this stage doesn't come from doing more — it comes from doing the same thing better.</li>
+        <li><strong>Formally launch the Threshold.</strong> After the soft-open inside the community, do a wider invitation through email and Instagram. Keep cohorts small — 8–12 women, twice a year — so the proximity stays real and the experience stays premium.</li>
+        <li><strong>Optimize the masterclass → Sister Circle conversion.</strong> Look at the numbers: registration rate, attendance rate, conversion rate to membership, and where the drop-off was sharpest. Make <em>one</em> specific improvement based on the data. Just one. Resist the urge to overhaul.</li>
+        <li><strong>Plan retreat #1 of the new cadence.</strong> With the Threshold opening, your first retreat in the new model is your first chance to show what the premium experience actually feels like. Make it count — and test the higher retreat pricing (€1,200–€1,500) at the same time.</li>
+        <li><strong>Review the month-on-month revenue picture.</strong> By Day 90 you should have a real masterclass engine, a cleaner front door, a high-ticket back end soft-launched, and the low-ticket clutter cleared. Look at the numbers honestly. We'll adjust together before planning the next 90 days.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== CLOSING ===================== -->
+<section class="closing">
+  <div class="sechead">
+    <div class="note-head">Before you go</div>
+    <h2>One last thing</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Marta, you don't have a business problem. You have a self-trust problem dressed up as a strategy problem.</p>
+  <p>You believe in the work. You believe in the women. And — for honorable reasons — you've been terrified of promising something you can't deliver. So you've under-promised, under-priced, and over-extended yourself trying to make the math work. The result is a business that quietly takes more from you than it gives back, and a price tag that doesn't match the depth of what you're actually delivering.</p>
+  <p>The strategy here isn't a 10x ad funnel or a complex automation. It's tighter messaging, fewer offers, higher pricing on the back end, and one repeatable rhythm — held by you, supported by your assistant. That's the whole plan.</p>
+  <p>This is a roadmap, not a rulebook. We'll calibrate as we go. The €2,997 number is an anchor, not a verdict — we'll watch the data and tune. The masterclass cadence is a starting rhythm, not a sentence. The Threshold is yours to shape.</p>
+  <p>What I most want you to take from this: <strong>the work you're doing is already worth more than you're charging for it.</strong> Eight out of ten women becoming pregnant after a retreat is not a marketing line — it's evidence of something real. Honor that. Charge for it. Let the structure catch up to the work.</p>
+  <p>I'm in this with you for the next 90 days. We'll work this together.</p>
+  <div class="sign">— Jason
+  <span>Telegram @jasonmossofficial &nbsp;·&nbsp; jason@jasonmoss.com</span>
+  </div>
+</section>
+
+</body>
+</html>
