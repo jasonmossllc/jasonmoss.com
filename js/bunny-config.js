@@ -39,6 +39,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "b071f82f-37a4-434d-8f18-96c82133e4d2": {
+      "videoId": "b071f82f-37a4-434d-8f18-96c82133e4d2",
+      "title": "Business Breakthrough Challenge — Day 5",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "7eb243ed-b0c9-4054-a432-c11e2cb009ca": {
       "videoId": "7eb243ed-b0c9-4054-a432-c11e2cb009ca",
       "title": "Business Breakthrough Challenge VIP — Day 1 Q&A",
@@ -63,6 +70,13 @@ window.JM_BUNNY_CONFIG = {
     "b21c34df-736a-47a5-86dd-ffc3a27954fb": {
       "videoId": "b21c34df-736a-47a5-86dd-ffc3a27954fb",
       "title": "Business Breakthrough Challenge VIP — Day 4",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
+    "f99a94ab-cdf1-4bfe-b188-3af7136bc385": {
+      "videoId": "f99a94ab-cdf1-4bfe-b188-3af7136bc385",
+      "title": "Business Breakthrough Challenge VIP — Day 5",
       "poster": "thumbnail.jpg",
       "captions": "en",
       "chapters": []
