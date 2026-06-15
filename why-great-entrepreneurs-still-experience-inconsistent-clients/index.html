@@ -1310,6 +1310,10 @@
         <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
         <input type="tel" name="Phone Number" class="form-input" placeholder="Phone Number" inputmode="numeric" pattern="[0-9]+" required aria-required="true">
         <input type="hidden" name="Ad" value="">
+        <!-- Honeypot: hidden from humans; bots fill it and get rejected server-side -->
+        <input type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+        <!-- Cloudflare Turnstile (renders once the site key is set) -->
+        <div id="cf-turnstile-box" style="margin:0 auto 12px;display:flex;justify-content:center;max-width:100%;"></div>
         <button type="submit" class="form-btn">Save My Spot</button>
       </form>
       <p class="optin-modal-subtext">No spam. Unsubscribe anytime.</p>
@@ -1405,7 +1409,9 @@
             first_name: firstName,
             phone: phone,
             latest_ad: adField ? adField.value : '',
-            tag: 'Why Great Entrepreneurs Still Experience Inconsistent Clients'
+            tag: 'Why Great Entrepreneurs Still Experience Inconsistent Clients',
+            turnstile_token: window.getTurnstileToken ? window.getTurnstileToken() : '',
+            website: (document.querySelector('input[name="website"]') || {}).value || ''
           }),
           keepalive: true
         }).catch(function(err) { console.error('AC submit error:', err); });
@@ -1423,5 +1429,26 @@
   </script>
 
   <script src="/js/bunny-embeds.js" defer></script>
+  <!-- Cloudflare Turnstile loader (bot protection). Replace the site key below. -->
+  <script>
+    window.__TURNSTILE_SITEKEY = '0x4AAAAAAADlUEkeJ6kJ-_AML';
+    window.__tsWidgetId = null;
+    window.getTurnstileToken = function () {
+      try {
+        if (window.turnstile && window.__tsWidgetId !== null) {
+          return window.turnstile.getResponse(window.__tsWidgetId) || '';
+        }
+      } catch (e) {}
+      return '';
+    };
+    window.onloadTurnstile = function () {
+      var k = window.__TURNSTILE_SITEKEY;
+      if (k && k.indexOf('REPLACE_WITH') === -1 && window.turnstile &&
+          document.getElementById('cf-turnstile-box')) {
+        window.__tsWidgetId = window.turnstile.render('#cf-turnstile-box', { sitekey: k });
+      }
+    };
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstile&render=explicit" async defer></script>
 </body>
 </html>

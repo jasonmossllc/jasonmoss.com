@@ -1,0 +1,9 @@
+# Security headers for all pages (Netlify).
+# Conservative set — no Content-Security-Policy yet (a strict CSP needs
+# report-only testing first so it doesn't break inline scripts, GTM, the
+# Cloudflare Turnstile widget, Bunny video embeds, or Google Fonts).
+/*
+  X-Frame-Options: SAMEORIGIN
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Permissions-Policy: camera=(), microphone=(), geolocation=()

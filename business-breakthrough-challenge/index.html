@@ -1821,6 +1821,10 @@
         <input type="hidden" name="Ad" value="">
         <input type="hidden" name="Source" value="">
         <input type="hidden" name="Referred By" value="">
+        <!-- Honeypot: hidden from humans; bots fill it and get rejected server-side -->
+        <input type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+        <!-- Cloudflare Turnstile (renders once the site key is set) -->
+        <div id="cf-turnstile-box" style="margin:0 auto 12px;display:flex;justify-content:center;max-width:100%;"></div>
         <button type="submit" class="form-btn">Save My Spot &mdash; It&rsquo;s Free</button>
       </form>
       <p class="optin-modal-subtext">No spam. Unsubscribe anytime.</p>
@@ -1951,6 +1955,8 @@
         if (referredByField && referredByField.value) {
           contactPayload.referred_by = referredByField.value;
         }
+        contactPayload.turnstile_token = window.getTurnstileToken ? window.getTurnstileToken() : '';
+        contactPayload.website = (form.querySelector('input[name="website"]') || {}).value || '';
 
         fetch('/.netlify/functions/submit-contact', {
           method: 'POST',
@@ -1978,6 +1984,27 @@
     });
   })();
   </script>
+  <!-- Cloudflare Turnstile loader (bot protection). Replace the site key below. -->
+  <script>
+    window.__TURNSTILE_SITEKEY = '0x4AAAAAAADlUEkeJ6kJ-_AML';
+    window.__tsWidgetId = null;
+    window.getTurnstileToken = function () {
+      try {
+        if (window.turnstile && window.__tsWidgetId !== null) {
+          return window.turnstile.getResponse(window.__tsWidgetId) || '';
+        }
+      } catch (e) {}
+      return '';
+    };
+    window.onloadTurnstile = function () {
+      var k = window.__TURNSTILE_SITEKEY;
+      if (k && k.indexOf('REPLACE_WITH') === -1 && window.turnstile &&
+          document.getElementById('cf-turnstile-box')) {
+        window.__tsWidgetId = window.turnstile.render('#cf-turnstile-box', { sitekey: k });
+      }
+    };
+  </script>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstile&render=explicit" async defer></script>
 
 </body>
 </html>
