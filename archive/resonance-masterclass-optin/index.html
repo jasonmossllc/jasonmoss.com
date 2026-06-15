@@ -660,20 +660,28 @@
         var prev = b.previousElementSibling;   // in-flow field above (skip the hidden honeypot)
         while (prev && (getComputedStyle(prev).position === 'absolute' || prev.offsetParent === null)) prev = prev.previousElementSibling;
         var inner = b.firstElementChild;
+        if (inner) inner.style.zoom = '';
         var natW = inner ? inner.getBoundingClientRect().width : 0;
-        // Invisible widget (Managed auto-pass = most visitors): collapse to zero space and
-        // restore neighbors so the no-widget layout is unchanged.
-        if (!inner || !natW) { b.style.margin = '0'; b.style.height = '0'; if (inner) inner.style.zoom = ''; if (btn) btn.style.marginTop = ''; if (prev) prev.style.marginBottom = ''; return; }
-        // Visible: zoom to fit width (zoom scales LAYOUT too -> box auto-sizes, never
-        // overlaps the button) and let the BOX own ALL spacing by zeroing both neighbors'
-        // margins -> identical symmetric gap on every page.
-        b.style.height = '';
+        var natH = inner ? inner.getBoundingClientRect().height : 0;
+        if (!inner || !natW || !natH) {
+          // Not visible yet. Only collapse if we never reserved space, so a transient 0
+          // during a Verifying<->Success state change can't make the button jump.
+          if (b.getAttribute('data-reserved') !== '1') { b.style.height = '0'; b.style.margin = '0'; if (btn) btn.style.marginTop = ''; if (prev) prev.style.marginBottom = ''; }
+          return;
+        }
+        var avail = b.clientWidth || natW;
+        var z = natW > avail ? (avail / natW) : 1;
+        if (z < 1) inner.style.zoom = z;
+        b.style.display = 'flex'; b.style.alignItems = 'center'; b.style.justifyContent = 'center';
         b.style.margin = '16px auto';
         if (btn) btn.style.marginTop = '0px';
         if (prev) prev.style.marginBottom = '0px';
-        inner.style.zoom = '';
-        var avail = b.clientWidth || natW;
-        inner.style.zoom = natW > avail ? (avail / natW) : '';
+        // Reserve a STABLE height once (grow-only) so the widget's Verifying<->Success
+        // height changes never reposition the box / move the button -> no jump.
+        var reserved = Math.ceil(natH * z) + 4;
+        var cur = parseInt(b.style.height, 10) || 0;
+        if (reserved > cur) b.style.height = reserved + 'px';
+        b.setAttribute('data-reserved', '1');
       } catch (e) {}
     }
     window.onloadTurnstile = function () {
