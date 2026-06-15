@@ -20,15 +20,25 @@
 
 const HARD_BLOCK_SUB_STATUSES = new Set(['disposable', 'toxic']);
 
-exports.handler = async (event) => {
-  // Only allow POST
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
-  }
+// Only allow calls coming from a jasonmoss.com page (or a Netlify preview).
+// Stops bots hitting this endpoint directly to burn ZeroBounce credits.
+function originAllowed(event) {
+  const h = event.headers || {};
+  const candidates = [h.origin, h.referer, h.referrer].filter(Boolean);
+  if (candidates.length === 0) return false;
+  const hostOf = (u) => {
+    try { return new URL(u).hostname.toLowerCase(); } catch (e) { return ''; }
+  };
+  return candidates.some((u) => {
+    const host = hostOf(u);
+    return host === 'jasonmoss.com' || host.endsWith('.jasonmoss.com') || host.endsWith('.netlify.app');
+  });
+}
 
-  // CORS headers
+exports.handler = async (event) => {
+  // CORS headers — locked to the live domain (calls are same-origin anyway).
   const headers = {
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'https://jasonmoss.com',
     'Access-Control-Allow-Headers': 'Content-Type',
     'Content-Type': 'application/json',
   };
@@ -36,6 +46,14 @@ exports.handler = async (event) => {
   // Handle preflight
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
+  }
+  // Only allow POST
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
+  }
+  // Reject direct/cross-origin abuse before spending a ZeroBounce lookup.
+  if (!originAllowed(event)) {
+    return { statusCode: 403, headers, body: JSON.stringify({ valid: false, reason: 'Forbidden', did_you_mean: null }) };
   }
 
   try {
