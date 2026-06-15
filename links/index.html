@@ -372,11 +372,28 @@
       } catch (e) {}
       return '';
     };
+    function fitTurnstile() {
+      try {
+        var b = document.getElementById('cf-turnstile-box');
+        if (!b) return;
+        b.style.transform = 'none'; b.style.height = ''; b.style.margin = '';
+        var inner = b.firstElementChild;
+        var natH = inner ? Math.round(inner.getBoundingClientRect().height) : 0;
+        if (!natH) { b.style.height = '0px'; b.style.margin = '0'; return; }   // invisible widget -> no gap
+        var s = Math.min(1, (b.clientWidth || 300) / 300);
+        b.style.transformOrigin = 'center top';
+        if (s < 1) b.style.transform = 'scale(' + s + ')';
+        b.style.height = Math.ceil(natH * s) + 'px';
+        b.style.margin = '8px auto -4px';                                       // tight, balanced spacing
+      } catch (e) {}
+    }
     window.onloadTurnstile = function () {
       var k = window.__TURNSTILE_SITEKEY;
       if (k && k.indexOf('REPLACE_WITH') === -1 && window.turnstile &&
           document.getElementById('cf-turnstile-box')) {
-        window.__tsWidgetId = window.turnstile.render('#cf-turnstile-box', { sitekey: k });
+        window.__tsWidgetId = window.turnstile.render('#cf-turnstile-box', { sitekey: k, callback: fitTurnstile, 'expired-callback': fitTurnstile, 'error-callback': fitTurnstile });
+        setTimeout(fitTurnstile, 600); setTimeout(fitTurnstile, 1800);
+        window.addEventListener('resize', fitTurnstile);
       }
     };
   </script>
