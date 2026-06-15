@@ -657,15 +657,25 @@
       try {
         var b = document.getElementById('cf-turnstile-box');
         if (!b) return;
-        b.style.transform = 'none'; b.style.height = ''; b.style.margin = '';
+        var form = b.closest('.email-form');
+        var btn = form ? form.querySelector('.form-btn') : null;
+        var prev = b.previousElementSibling;   // in-flow field above (skip the hidden honeypot)
+        while (prev && (getComputedStyle(prev).position === 'absolute' || prev.offsetParent === null)) prev = prev.previousElementSibling;
         var inner = b.firstElementChild;
-        var natH = inner ? Math.round(inner.getBoundingClientRect().height) : 0;
-        if (!natH) { b.style.height = '0px'; b.style.margin = '0'; return; }   // invisible widget -> no gap
-        var s = Math.min(1, (b.clientWidth || 300) / 300);
-        b.style.transformOrigin = 'center top';
-        if (s < 1) b.style.transform = 'scale(' + s + ')';
-        b.style.height = Math.ceil(natH * s) + 'px';
-        b.style.margin = '8px auto -4px';                                       // tight, balanced spacing
+        var natW = inner ? inner.getBoundingClientRect().width : 0;
+        // Invisible widget (Managed auto-pass = most visitors): collapse to zero space and
+        // restore neighbors so the no-widget layout is unchanged.
+        if (!inner || !natW) { b.style.margin = '0'; b.style.height = '0'; if (inner) inner.style.zoom = ''; if (btn) btn.style.marginTop = ''; if (prev) prev.style.marginBottom = ''; return; }
+        // Visible: zoom to fit width (zoom scales LAYOUT too -> box auto-sizes, never
+        // overlaps the button) and let the BOX own ALL spacing by zeroing both neighbors'
+        // margins -> identical symmetric gap on every page.
+        b.style.height = '';
+        b.style.margin = '16px auto';
+        if (btn) btn.style.marginTop = '0px';
+        if (prev) prev.style.marginBottom = '0px';
+        inner.style.zoom = '';
+        var avail = b.clientWidth || natW;
+        inner.style.zoom = natW > avail ? (avail / natW) : '';
       } catch (e) {}
     }
     window.onloadTurnstile = function () {
