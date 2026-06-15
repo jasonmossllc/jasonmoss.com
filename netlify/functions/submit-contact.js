@@ -81,10 +81,15 @@ function looksLikeBotName(raw) {
   return maxConsonantRun(letters) >= 4 || vowelRatio < 0.30;   // unpronounceable
 }
 
+// Verify a Cloudflare Turnstile token. RESILIENT BY DESIGN: only hard-block an
+// AFFIRMATIVELY-BAD token (forged / reused) — that's a bot. A missing token, a
+// config error (e.g. a wrong/rotated secret), or a Cloudflare outage must NEVER
+// block a real signup; the honeypot + origin + name + email gates still apply.
+// This stops Turnstile from being a single point of failure that silently takes
+// the whole funnel down (which is exactly what a mis-keyed secret did once).
 async function verifyTurnstile(token, ip) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret) return { enforced: false, ok: true };           // dormant
-  if (!token) return { enforced: true, ok: false };
+  if (!secret || !token) return { block: false, verified: false };
   try {
     const form = new URLSearchParams();
     form.append('secret', secret);
@@ -95,10 +100,19 @@ async function verifyTurnstile(token, ip) {
       { method: 'POST', body: form }
     );
     const out = await r.json();
-    return { enforced: true, ok: !!out.success, data: out };
+    if (out.success) return { block: false, verified: true };
+    const codes = out['error-codes'] || [];
+    // Forged or replayed token = a real bot signal -> block.
+    if (codes.includes('invalid-input-response') || codes.includes('timeout-or-duplicate')) {
+      return { block: true, verified: false };
+    }
+    // invalid-input-secret / bad-request / missing-input-secret = OUR config
+    // problem, not the visitor's fault -> do NOT block; log it loudly.
+    console.error('Turnstile non-blocking failure (check TURNSTILE_SECRET_KEY):', codes);
+    return { block: false, verified: false };
   } catch (e) {
-    console.error('Turnstile verify error:', e);
-    return { enforced: true, ok: false };                      // fail closed when enforcing
+    console.error('Turnstile verify error (failing open):', e);
+    return { block: false, verified: false };
   }
 }
 
@@ -166,10 +180,11 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid name' }) };
     }
 
-    // 5) Cloudflare Turnstile — the primary gate (when configured).
+    // 5) Cloudflare Turnstile — blocks forged/replayed tokens (bots). Never
+    //    blocks on a missing token or our own config/outage (see verifyTurnstile).
     const ts = await verifyTurnstile(data.turnstile_token, ip);
-    if (ts.enforced && !ts.ok) {
-      console.log('Blocked: Turnstile failed', { ip });
+    if (ts.block) {
+      console.log('Blocked: forged/invalid Turnstile token', { ip });
       return { statusCode: 403, headers, body: JSON.stringify({ error: 'Verification failed' }) };
     }
 
