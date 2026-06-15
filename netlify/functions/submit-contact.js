@@ -33,16 +33,16 @@ function originAllowed(event) {
   const h = event.headers || {};
   const candidates = [h.origin, h.referer, h.referrer].filter(Boolean);
   if (candidates.length === 0) return false; // no Origin/Referer = direct (bot) call
-  const hostOf = (u) => {
-    try { return new URL(u).hostname.toLowerCase(); } catch (e) { return ''; }
-  };
+  const okHost = (host) =>
+    host === 'jasonmoss.com' ||
+    host.endsWith('.jasonmoss.com') ||
+    host === 'jasonmoss.netlify.app' ||
+    host.endsWith('--jasonmoss.netlify.app'); // this site's Netlify deploy previews/branches only
   return candidates.some((u) => {
-    const host = hostOf(u);
-    return (
-      host === 'jasonmoss.com' ||
-      host.endsWith('.jasonmoss.com') ||
-      host.endsWith('.netlify.app')
-    );
+    try {
+      const url = new URL(u);
+      return url.protocol === 'https:' && okHost(url.hostname.toLowerCase());
+    } catch (e) { return false; }
   });
 }
 
@@ -126,7 +126,15 @@ exports.handler = async (event) => {
   };
 
   try {
-    const data = JSON.parse(event.body || '{}');
+    let data;
+    try {
+      data = JSON.parse(event.body || '{}');
+    } catch (e) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request body' }) };
+    }
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request body' }) };
+    }
     const ip =
       event.headers['x-nf-client-connection-ip'] ||
       event.headers['client-ip'] ||

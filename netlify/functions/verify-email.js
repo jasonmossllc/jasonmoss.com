@@ -20,19 +20,42 @@
 
 const HARD_BLOCK_SUB_STATUSES = new Set(['disposable', 'toxic']);
 
-// Only allow calls coming from a jasonmoss.com page (or a Netlify preview).
-// Stops bots hitting this endpoint directly to burn ZeroBounce credits.
+// Only allow https calls coming from a jasonmoss.com page (or this site's
+// Netlify previews). Stops bots hitting this endpoint directly to burn
+// ZeroBounce credits. Origin/Referer are spoofable, so this is paired with
+// the per-IP rate limit below — both gate the paid lookup.
 function originAllowed(event) {
   const h = event.headers || {};
   const candidates = [h.origin, h.referer, h.referrer].filter(Boolean);
   if (candidates.length === 0) return false;
-  const hostOf = (u) => {
-    try { return new URL(u).hostname.toLowerCase(); } catch (e) { return ''; }
-  };
+  const okHost = (host) =>
+    host === 'jasonmoss.com' ||
+    host.endsWith('.jasonmoss.com') ||
+    host === 'jasonmoss.netlify.app' ||
+    host.endsWith('--jasonmoss.netlify.app');
   return candidates.some((u) => {
-    const host = hostOf(u);
-    return host === 'jasonmoss.com' || host.endsWith('.jasonmoss.com') || host.endsWith('.netlify.app');
+    try {
+      const url = new URL(u);
+      return url.protocol === 'https:' && okHost(url.hostname.toLowerCase());
+    } catch (e) { return false; }
   });
+}
+
+// Lightweight per-IP rate limit (per warm function instance, fail-open).
+// Caps how fast any single source can spend ZeroBounce credits.
+const RL_WINDOW_MS = 60000;
+const RL_MAX = 8;
+const rlHits = new Map();
+function rateLimited(ip) {
+  try {
+    if (!ip) return false;
+    const now = Date.now();
+    const arr = (rlHits.get(ip) || []).filter((t) => now - t < RL_WINDOW_MS);
+    arr.push(now);
+    rlHits.set(ip, arr);
+    if (rlHits.size > 5000) rlHits.clear(); // crude memory bound
+    return arr.length > RL_MAX;
+  } catch (e) { return false; }
 }
 
 exports.handler = async (event) => {
@@ -55,9 +78,25 @@ exports.handler = async (event) => {
   if (!originAllowed(event)) {
     return { statusCode: 403, headers, body: JSON.stringify({ valid: false, reason: 'Forbidden', did_you_mean: null }) };
   }
+  // Per-IP rate limit — cap credit-burn from any single source. Fail open
+  // (valid:true) so a real user who somehow trips it can still submit.
+  const ip = event.headers['x-nf-client-connection-ip'] ||
+    event.headers['client-ip'] ||
+    (event.headers['x-forwarded-for'] || '').split(',')[0].trim();
+  if (rateLimited(ip)) {
+    return { statusCode: 429, headers, body: JSON.stringify({ valid: true, reason: '', did_you_mean: null }) };
+  }
 
   try {
-    const data = JSON.parse(event.body);
+    let data;
+    try {
+      data = JSON.parse(event.body || '{}');
+    } catch (e) {
+      return { statusCode: 400, headers, body: JSON.stringify({ valid: false, reason: 'Invalid request body', did_you_mean: null }) };
+    }
+    if (!data || typeof data !== 'object' || Array.isArray(data)) {
+      return { statusCode: 400, headers, body: JSON.stringify({ valid: false, reason: 'Invalid request body', did_you_mean: null }) };
+    }
 
     if (!data.email) {
       return {
