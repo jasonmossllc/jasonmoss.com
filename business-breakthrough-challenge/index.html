@@ -2048,7 +2048,7 @@
           e.preventDefault();
           e.stopImmediatePropagation();
           try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.execute(window.__tsWidgetId); } catch (_) {}
-          alert('Please wait a moment for the verification below to finish, then submit again.');
+          alert('Please complete the verification below, then submit again.');
         }
       }
       function wire() { document.querySelectorAll('.email-form').forEach(function (f) { f.addEventListener('submit', gate, true); }); }
