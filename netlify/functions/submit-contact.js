@@ -81,15 +81,19 @@ function looksLikeBotName(raw) {
   return maxConsonantRun(letters) >= 4 || vowelRatio < 0.30;   // unpronounceable
 }
 
-// Verify a Cloudflare Turnstile token. RESILIENT BY DESIGN: only hard-block an
-// AFFIRMATIVELY-BAD token (forged / reused) — that's a bot. A missing token, a
-// config error (e.g. a wrong/rotated secret), or a Cloudflare outage must NEVER
-// block a real signup; the honeypot + origin + name + email gates still apply.
-// This stops Turnstile from being a single point of failure that silently takes
-// the whole funnel down (which is exactly what a mis-keyed secret did once).
+// Verify a Cloudflare Turnstile token. STRICT but with a safety valve:
+//  - missing token (verification not completed)        -> BLOCK
+//  - forged / reused / invalid token (failed verify)   -> BLOCK
+//  - valid token                                       -> allow
+//  - OUR config error (wrong/rotated secret) or a Cloudflare outage -> FAIL OPEN
+// Blocking missing/failed tokens enforces "no verification, no submit". Failing
+// open ONLY on our-side config/infra errors keeps a mis-keyed secret or a CF
+// outage from silently taking the whole funnel down (which a mis-keyed secret
+// did once) — those are never the visitor's fault.
 async function verifyTurnstile(token, ip) {
   const secret = process.env.TURNSTILE_SECRET_KEY;
-  if (!secret || !token) return { block: false, verified: false };
+  if (!secret) return { block: false, verified: false };   // not configured -> dormant (don't block)
+  if (!token) return { block: true, verified: false };     // no verification -> BLOCK
   try {
     const form = new URLSearchParams();
     form.append('secret', secret);

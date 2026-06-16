@@ -695,6 +695,22 @@
         window.addEventListener('resize', fitTurnstile);
       }
     };
+    // Hard gate: no Turnstile token (verification not completed) => block submit.
+    // Capture phase + stopImmediatePropagation runs BEFORE the page's own submit
+    // handler, so nothing is sent until the visitor is verified.
+    (function () {
+      function gate(e) {
+        var tok = window.getTurnstileToken ? window.getTurnstileToken() : '';
+        if (!tok) {
+          e.preventDefault();
+          e.stopImmediatePropagation();
+          try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.execute(window.__tsWidgetId); } catch (_) {}
+          alert('Please wait a moment for the verification below to finish, then submit again.');
+        }
+      }
+      function wire() { document.querySelectorAll('.email-form').forEach(function (f) { f.addEventListener('submit', gate, true); }); }
+      if (document.readyState !== 'loading') wire(); else document.addEventListener('DOMContentLoaded', wire);
+    })();
   </script>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstile&render=explicit" async defer></script>
 </body>
