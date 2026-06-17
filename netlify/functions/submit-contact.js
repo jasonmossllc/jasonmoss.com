@@ -3,6 +3,8 @@
 //
 // Environment variables required (set in Netlify dashboard):
 //   KIT_API_KEY           - your Kit API v4 key
+//   KIT_RESUBSCRIBE_FORM_ID - Kit form ID used to reactivate unsubscribed contacts
+//                             before applying signup tags. Defaults to 9576424.
 //   TURNSTILE_SECRET_KEY  - Cloudflare Turnstile SECRET key (optional).
 //                           When set, every submission MUST carry a valid
 //                           Turnstile token or it is rejected. Leave it unset
@@ -18,6 +20,8 @@
 // so all of these run here, server-side, regardless of the page.
 //
 const KIT_API_BASE = (process.env.KIT_API_URL || 'https://api.kit.com').replace(/\/+$/, '');
+const KIT_RESUBSCRIBE_FORM_ID = process.env.KIT_RESUBSCRIBE_FORM_ID || '9576424';
+const RESUBSCRIBE_ACTIVE_CHECK_DELAYS_MS = [0, 250, 750, 1500];
 const ORIGINAL_AD_FIELD = 'original_ad';
 const ORIGINAL_SOURCE_FIELD = 'original_source';
 
@@ -67,6 +71,10 @@ function isBlank(value) {
   return value == null || String(value).trim() === '';
 }
 
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 function fieldValue(fields, key) {
   if (!fields) return null;
   if (Array.isArray(fields)) {
@@ -85,7 +93,7 @@ function extractSubscriber(result) {
 }
 
 async function findSubscriberByEmail(email) {
-  const qs = new URLSearchParams({ email_address: email, per_page: '1' });
+  const qs = new URLSearchParams({ email_address: email, status: 'all', per_page: '1' });
   return extractSubscriber(await kitRequest(`/v4/subscribers?${qs.toString()}`));
 }
 
@@ -120,6 +128,34 @@ async function tagSubscriberByEmail(tagId, email) {
     method: 'POST',
     body: JSON.stringify({ email_address: email }),
   });
+}
+
+function isSubscribed(subscriber) {
+  return subscriber?.state === 'active';
+}
+
+function canUseResubscribeForm(subscriber) {
+  return subscriber?.state === 'cancelled' || subscriber?.state === 'inactive';
+}
+
+async function addSubscriberToResubscribeForm(email, referrer) {
+  return kitRequest(`/v4/forms/${KIT_RESUBSCRIBE_FORM_ID}/subscribers`, {
+    method: 'POST',
+    body: JSON.stringify({
+      email_address: email,
+      ...(referrer ? { referrer } : {}),
+    }),
+  });
+}
+
+async function waitForActiveSubscriber(email) {
+  let subscriber = null;
+  for (const delay of RESUBSCRIBE_ACTIVE_CHECK_DELAYS_MS) {
+    if (delay) await sleep(delay);
+    subscriber = await findSubscriberByEmail(email);
+    if (isSubscribed(subscriber)) return subscriber;
+  }
+  return subscriber;
 }
 
 // Hosts allowed to submit. Covers the live domain, subdomains (go./www.),
@@ -300,8 +336,8 @@ exports.handler = async (event) => {
 
     const latestAd = cleanString(data.latest_ad, 500);
     const latestSource = cleanString(data.latest_source, 500);
-    const needsAttributionCheck = !!(latestAd || latestSource);
-    const existingSubscriber = needsAttributionCheck ? await findSubscriberByEmail(email) : null;
+    const referrer = cleanString(event.headers.referer || event.headers.referrer || event.headers.origin, 1000);
+    const existingSubscriber = await findSubscriberByEmail(email);
 
     const fields = {};
     if (latestAd && isBlank(fieldValue(existingSubscriber?.fields, ORIGINAL_AD_FIELD))) {
@@ -314,6 +350,34 @@ exports.handler = async (event) => {
     const subscriber = existingSubscriber?.id
       ? await updateSubscriber(existingSubscriber.id, { email, firstName, fields })
       : await saveSubscriber({ email, firstName, fields });
+
+    if (existingSubscriber?.id && !isSubscribed(subscriber)) {
+      if (!canUseResubscribeForm(subscriber)) {
+        console.error('Kit subscriber is not eligible for automatic form resubscribe', {
+          subscriberId: existingSubscriber.id,
+          state: subscriber?.state || null,
+        });
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify({ success: true, subscriberId: existingSubscriber.id, tagged: false }),
+        };
+      }
+
+      await addSubscriberToResubscribeForm(email, referrer);
+      const resubscribedSubscriber = await waitForActiveSubscriber(email);
+      if (!isSubscribed(resubscribedSubscriber)) {
+        console.error('Kit resubscribe form did not activate subscriber before tagging', {
+          subscriberId: existingSubscriber.id,
+          state: resubscribedSubscriber?.state || null,
+        });
+        return {
+          statusCode: 200,
+          headers,
+          body: JSON.stringify({ success: true, subscriberId: existingSubscriber.id, tagged: false }),
+        };
+      }
+    }
 
     await tagSubscriberByEmail(tagId, email);
 
