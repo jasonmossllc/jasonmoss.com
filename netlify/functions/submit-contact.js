@@ -1,9 +1,8 @@
-// ActiveCampaign Contact Submission
+// Kit Contact Submission
 // Netlify Serverless Function
 //
 // Environment variables required (set in Netlify dashboard):
-//   AC_API_URL            - e.g. https://jasonmoss.api-us1.com
-//   AC_API_KEY            - your ActiveCampaign API key
+//   KIT_API_KEY           - your Kit API v4 key
 //   TURNSTILE_SECRET_KEY  - Cloudflare Turnstile SECRET key (optional).
 //                           When set, every submission MUST carry a valid
 //                           Turnstile token or it is rejected. Leave it unset
@@ -18,14 +17,110 @@
 // Client-side checks alone are bypassable (bots POST straight to this URL),
 // so all of these run here, server-side, regardless of the page.
 //
-// Custom field IDs (from ActiveCampaign):
-const CUSTOM_FIELDS = {
-  latest_ad: '18',     // Latest Ad (Field ID 18)
-  latest_source: '15', // Latest Source (Field ID 15)
-  signed_clients: '102', // Signed Clients (Field ID 102)
-  referred_by: '103', // Referred By (Field ID 103)
-  // Add more custom fields as needed
-};
+const KIT_API_BASE = (process.env.KIT_API_URL || 'https://api.kit.com').replace(/\/+$/, '');
+const ORIGINAL_AD_FIELD = 'original_ad';
+const ORIGINAL_SOURCE_FIELD = 'original_source';
+
+class KitApiError extends Error {
+  constructor(message, status, body) {
+    super(message);
+    this.name = 'KitApiError';
+    this.status = status;
+    this.body = body;
+  }
+}
+
+async function kitRequest(path, options = {}) {
+  const apiKey = process.env.KIT_API_KEY || process.env.CONVERTKIT_V4_API_KEY;
+  if (!apiKey) {
+    throw new KitApiError('KIT_API_KEY is not configured', 500);
+  }
+
+  const res = await fetch(`${KIT_API_BASE}${path}`, {
+    ...options,
+    headers: {
+      Accept: 'application/json',
+      'Content-Type': 'application/json',
+      'X-Kit-Api-Key': apiKey,
+      ...(options.headers || {}),
+    },
+  });
+
+  const text = await res.text();
+  let body = {};
+  if (text) {
+    try { body = JSON.parse(text); } catch (e) { body = { raw: text }; }
+  }
+
+  if (!res.ok) {
+    throw new KitApiError(`Kit API ${res.status}`, res.status, body);
+  }
+  return body;
+}
+
+function cleanString(value, maxLength = 500) {
+  if (typeof value !== 'string') return '';
+  return value.trim().slice(0, maxLength);
+}
+
+function isBlank(value) {
+  return value == null || String(value).trim() === '';
+}
+
+function fieldValue(fields, key) {
+  if (!fields) return null;
+  if (Array.isArray(fields)) {
+    const match = fields.find((f) => f && (f.key === key || f.name === key || f.label === key));
+    return match ? match.value : null;
+  }
+  if (typeof fields === 'object') return fields[key];
+  return null;
+}
+
+function extractSubscriber(result) {
+  if (!result || typeof result !== 'object') return null;
+  if (result.subscriber) return result.subscriber;
+  if (Array.isArray(result.subscribers)) return result.subscribers[0] || null;
+  return null;
+}
+
+async function findSubscriberByEmail(email) {
+  const qs = new URLSearchParams({ email_address: email, per_page: '1' });
+  return extractSubscriber(await kitRequest(`/v4/subscribers?${qs.toString()}`));
+}
+
+async function saveSubscriber({ email, firstName, fields }) {
+  const body = {
+    email_address: email,
+    ...(firstName ? { first_name: firstName } : {}),
+    ...(fields && Object.keys(fields).length ? { fields } : {}),
+  };
+
+  return extractSubscriber(await kitRequest('/v4/subscribers', {
+    method: 'POST',
+    body: JSON.stringify(body),
+  }));
+}
+
+async function updateSubscriber(subscriberId, { email, firstName, fields }) {
+  const body = {
+    email_address: email,
+    ...(firstName ? { first_name: firstName } : {}),
+    ...(fields && Object.keys(fields).length ? { fields } : {}),
+  };
+
+  return extractSubscriber(await kitRequest(`/v4/subscribers/${subscriberId}`, {
+    method: 'PUT',
+    body: JSON.stringify(body),
+  }));
+}
+
+async function tagSubscriberByEmail(tagId, email) {
+  return kitRequest(`/v4/tags/${tagId}/subscribers`, {
+    method: 'POST',
+    body: JSON.stringify({ email_address: email }),
+  });
+}
 
 // Hosts allowed to submit. Covers the live domain, subdomains (go./www.),
 // and Netlify deploy previews (*.netlify.app).
@@ -184,146 +279,48 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid name' }) };
     }
 
-    // 5) Cloudflare Turnstile — blocks forged/replayed tokens (bots). Never
-    //    blocks on a missing token or our own config/outage (see verifyTurnstile).
+    // 5) Cloudflare Turnstile — blocks missing, forged, or replayed tokens
+    //    (bots). It only fails open on our own config/outage (see verifyTurnstile).
     const ts = await verifyTurnstile(data.turnstile_token, ip);
     if (ts.block) {
       console.log('Blocked: forged/invalid Turnstile token', { ip });
       return { statusCode: 403, headers, body: JSON.stringify({ error: 'Verification failed' }) };
     }
 
-    // ── Passed all checks — create/update the contact in ActiveCampaign ──────
-    const contact = {
-      email: String(data.email).trim(),
-    };
+    // ── Passed all checks — create/update the subscriber in Kit ──────────────
+    const email = String(data.email).trim().toLowerCase();
+    const firstName = cleanString(data.first_name, 100);
 
-    if (data.first_name) contact.firstName = String(data.first_name).trim();
-    if (data.last_name) contact.lastName = String(data.last_name).trim();
-    if (data.phone) contact.phone = data.phone;
-
-    // Build custom field values
-    const fieldValues = [];
-    const signedClients = data.signed_clients || data.signed_paying_clients;
-    const referredBy = data.referred_by || data.referredBy;
-
-    if (data.latest_ad && CUSTOM_FIELDS.latest_ad !== 'FIELD_ID_HERE') {
-      fieldValues.push({ field: CUSTOM_FIELDS.latest_ad, value: data.latest_ad });
+    // Tag IDs are hardcoded by site pages. Visitors never provide tag names.
+    const tagId = Number.parseInt(data.tag_id, 10);
+    if (!Number.isSafeInteger(tagId) || tagId <= 0) {
+      console.error('Missing or invalid Kit tag_id', { tag_id: data.tag_id });
+      return { statusCode: 500, headers, body: JSON.stringify({ error: 'Signup tag is not configured' }) };
     }
 
-    if (data.latest_source && CUSTOM_FIELDS.latest_source !== 'FIELD_ID_HERE') {
-      fieldValues.push({ field: CUSTOM_FIELDS.latest_source, value: data.latest_source });
+    const latestAd = cleanString(data.latest_ad, 500);
+    const latestSource = cleanString(data.latest_source, 500);
+    const needsAttributionCheck = !!(latestAd || latestSource);
+    const existingSubscriber = needsAttributionCheck ? await findSubscriberByEmail(email) : null;
+
+    const fields = {};
+    if (latestAd && isBlank(fieldValue(existingSubscriber?.fields, ORIGINAL_AD_FIELD))) {
+      fields[ORIGINAL_AD_FIELD] = latestAd;
+    }
+    if (latestSource && isBlank(fieldValue(existingSubscriber?.fields, ORIGINAL_SOURCE_FIELD))) {
+      fields[ORIGINAL_SOURCE_FIELD] = latestSource;
     }
 
-    if (signedClients && CUSTOM_FIELDS.signed_clients !== 'FIELD_ID_HERE') {
-      fieldValues.push({ field: CUSTOM_FIELDS.signed_clients, value: signedClients });
-    }
+    const subscriber = existingSubscriber?.id
+      ? await updateSubscriber(existingSubscriber.id, { email, firstName, fields })
+      : await saveSubscriber({ email, firstName, fields });
 
-    if (referredBy && CUSTOM_FIELDS.referred_by !== 'FIELD_ID_HERE') {
-      fieldValues.push({ field: CUSTOM_FIELDS.referred_by, value: referredBy });
-    }
-
-    if (fieldValues.length > 0) {
-      contact.fieldValues = fieldValues;
-    }
-
-    // Step 1: Create or update the contact
-    const contactResponse = await fetch(`${process.env.AC_API_URL}/api/3/contact/sync`, {
-      method: 'POST',
-      headers: {
-        'Api-Token': process.env.AC_API_KEY,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ contact }),
-    });
-
-    if (!contactResponse.ok) {
-      const errorText = await contactResponse.text();
-      console.error('ActiveCampaign contact sync failed:', errorText);
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ error: 'Failed to create contact' }),
-      };
-    }
-
-    const contactResult = await contactResponse.json();
-    const contactId = contactResult.contact.id;
-
-    // Step 2: Subscribe contact to Main List (List ID 1)
-    const listResponse = await fetch(`${process.env.AC_API_URL}/api/3/contactLists`, {
-      method: 'POST',
-      headers: {
-        'Api-Token': process.env.AC_API_KEY,
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({
-        contactList: { list: 1, contact: contactId, status: 1 },
-      }),
-    });
-
-    if (!listResponse.ok) {
-      const errorText = await listResponse.text();
-      console.error('ActiveCampaign list subscription failed:', errorText);
-      return {
-        statusCode: 500,
-        headers,
-        body: JSON.stringify({ error: 'Failed to subscribe contact to list' }),
-      };
-    }
-
-    // Step 3: Apply tag if provided (capped + sanitized)
-    const tag = typeof data.tag === 'string' ? data.tag.trim().slice(0, 80) : '';
-    if (tag) {
-      // First, find or create the tag
-      const tagSearchResponse = await fetch(
-        `${process.env.AC_API_URL}/api/3/tags?search=${encodeURIComponent(tag)}`,
-        {
-          headers: { 'Api-Token': process.env.AC_API_KEY },
-        }
-      );
-
-      let tagId;
-      const tagSearchResult = await tagSearchResponse.json();
-
-      if (tagSearchResult.tags && tagSearchResult.tags.length > 0) {
-        // Tag exists — find exact match
-        const exactMatch = tagSearchResult.tags.find(
-          (t) => t.tag.toLowerCase() === tag.toLowerCase()
-        );
-        tagId = exactMatch ? exactMatch.id : tagSearchResult.tags[0].id;
-      } else {
-        // Tag doesn't exist — create it
-        const createTagResponse = await fetch(`${process.env.AC_API_URL}/api/3/tags`, {
-          method: 'POST',
-          headers: {
-            'Api-Token': process.env.AC_API_KEY,
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({
-            tag: { tag: tag, tagType: 'contact', description: '' },
-          }),
-        });
-        const createTagResult = await createTagResponse.json();
-        tagId = createTagResult.tag.id;
-      }
-
-      // Apply the tag to the contact
-      await fetch(`${process.env.AC_API_URL}/api/3/contactTags`, {
-        method: 'POST',
-        headers: {
-          'Api-Token': process.env.AC_API_KEY,
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          contactTag: { contact: contactId, tag: tagId },
-        }),
-      });
-    }
+    await tagSubscriberByEmail(tagId, email);
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ success: true, contactId }),
+      body: JSON.stringify({ success: true, subscriberId: subscriber?.id || null }),
     };
   } catch (error) {
     console.error('Function error:', error);

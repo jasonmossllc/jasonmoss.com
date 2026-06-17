@@ -7,5 +7,5 @@ Website and landing pages for Jason Moss. Deployed via Netlify.
 - `/` — Main website (index.html, testimonials.html)
 - `/pages/` — Landing pages and event pages
 - `/shared/` — Shared CSS and brand assets
-- `/netlify/functions/` — Serverless functions (ActiveCampaign, ZeroBounce)
+- `/netlify/functions/` — Serverless functions (Kit, ZeroBounce)
 - `_redirects` — URL redirect rules

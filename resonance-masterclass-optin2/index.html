@@ -540,7 +540,7 @@
       </div>
     </div>
   </section>
-  <!-- Form JS: ZeroBounce validation + submit to ActiveCampaign + email passthrough -->
+  <!-- Form JS: ZeroBounce validation + submit to Kit + email passthrough -->
   <script>
   (function() {
     'use strict';
@@ -611,23 +611,23 @@
 
       try {
         // Build payload — only include latest_ad / latest_source when present in URL
-        var payload = {
-          email: email,
-          first_name: firstName,
-          tag: 'Resonance Masterclass (Cold Traffic)'
-        };
+	        var payload = {
+	          email: email,
+	          first_name: firstName,
+	          tag_id: 20410092 // Resonance Masterclass (Cold Traffic)
+	        };
         if (latestAd) payload.latest_ad = latestAd;
         if (latestSource) payload.latest_source = latestSource;
         payload.turnstile_token = window.getTurnstileToken ? window.getTurnstileToken() : '';
         payload.website = (form.querySelector('input[name="website"]') || {}).value || '';
 
-        // Fire AC submit non-blocking via keepalive, then redirect immediately
+        // Fire Kit submit non-blocking via keepalive, then redirect immediately
         fetch('/.netlify/functions/submit-contact', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
           keepalive: true
-        }).catch(function(err) { console.error('AC submit error:', err); });
+        }).catch(function(err) { console.error('Kit submit error:', err); });
 
         var redirectUrl = '/optin-thank-you?redirect=resonance-masterclass-replay&email=' + encodeURIComponent(email);
         window.location.href = redirectUrl;

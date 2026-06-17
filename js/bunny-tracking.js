@@ -8,7 +8,8 @@
 // automation continues to behave identically — only the video host changed.
 //
 // Requirements:
-//   - Email must be in the URL as ?email=someone@example.com
+//   - Kit subscriber ID must be in the URL as ?ck_subscriber_id=123, or email
+//     must be in the URL as ?email=someone@example.com for legacy links.
 //   - One or more Bunny Stream embeds on the page (built by bunny-embeds.js,
 //     which registers them on window.JM_BUNNY). Falls back to scanning the DOM
 //     if that registry is absent.
@@ -140,8 +141,9 @@
   // PURE CORE — webhook payload + sender
   // ==============================
   function buildPayload(o) {
-    return {
+    var payload = {
       email: o.email,
+      ck_subscriber_id: o.kitSubscriberId,
       video_id: o.videoId,                       // ORIGINAL Wistia id — backend continuity
       duration_seconds: Math.round(o.duration),
       watched_seconds: Math.round(o.accumulated),
@@ -149,6 +151,12 @@
       page: o.page,
       timestamp: o.timestamp,
     };
+    Object.keys(payload).forEach(function (key) {
+      if (payload[key] === null || payload[key] === undefined || payload[key] === '') {
+        delete payload[key];
+      }
+    });
+    return payload;
   }
 
   function buildUrl(URLCtor, payload) {
@@ -202,6 +210,16 @@
     } catch (e) { return null; }
   }
 
+  function parseKitSubscriberId(search, URLSearchParamsCtor) {
+    try {
+      var params = new URLSearchParamsCtor(search);
+      var id = params.get('ck_subscriber_id') || params.get('subscriber_id');
+      if (!id) return null;
+      id = id.trim();
+      return /^[1-9]\d*$/.test(id) ? id : null;
+    } catch (e) { return null; }
+  }
+
   function dedupKeys(pathname) {
     return {
       current: 'jm_video_engaged_' + pathname,
@@ -233,8 +251,12 @@
     L('Script loaded');
 
     var email = parseEmail(window.location.search, window.URLSearchParams);
-    if (!email) { console.warn('[BunnyEngagement] No email in URL. Exiting.'); return; }
-    L('Email detected:', email);
+    var kitSubscriberId = parseKitSubscriberId(window.location.search, window.URLSearchParams);
+    if (!email && !kitSubscriberId) {
+      console.warn('[BunnyEngagement] No email or Kit subscriber ID in URL. Exiting.');
+      return;
+    }
+    L(email ? 'Email detected: ' + email : 'Kit subscriber ID detected: ' + kitSubscriberId);
 
     var pathname = window.location.pathname;
     var storage = null;
@@ -254,6 +276,7 @@
       markFired(storage, pathname);
       var payload = buildPayload({
         email: email,
+        kitSubscriberId: kitSubscriberId,
         videoId: entry.videoId || entry.bunnyId || 'unknown',
         duration: trackerState.duration,
         accumulated: trackerState.accumulated,
@@ -359,6 +382,7 @@
     buildUrl: buildUrl,
     sendWebhook: sendWebhook,
     parseEmail: parseEmail,
+    parseKitSubscriberId: parseKitSubscriberId,
     dedupKeys: dedupKeys,
     alreadyFired: alreadyFired,
     markFired: markFired,

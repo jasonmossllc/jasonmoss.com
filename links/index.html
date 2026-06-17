@@ -262,7 +262,7 @@
   <a href="/transmission" class="link-btn">Listen To The Podcast</a>
 </main>
 
-<!-- Form JS: ZeroBounce validation + submit to ActiveCampaign + email passthrough -->
+<!-- Form JS: ZeroBounce validation + submit to Kit + email passthrough -->
 <script>
 (function() {
   'use strict';
@@ -329,7 +329,7 @@
       return;
     }
 
-    // Step 2: Fire AC submit non-blocking via keepalive, then redirect immediately
+    // Step 2: Fire Kit submit non-blocking via keepalive, then redirect immediately
     submitBtn.textContent = 'Submitting…';
 
     try {
@@ -337,17 +337,17 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          email: email,
-          first_name: firstName,
-          latest_source: source,
-          tag: 'Resonance Masterclass (Cold Traffic)',
-          turnstile_token: window.getTurnstileToken ? window.getTurnstileToken() : '',
-          website: (document.querySelector('input[name="website"]') || {}).value || ''
-        }),
-        keepalive: true
-      }).catch(function(err) { console.error('AC submit error:', err); });
+	          email: email,
+	          first_name: firstName,
+	          latest_source: source,
+	          tag_id: 20410092, // Resonance Masterclass (Cold Traffic)
+	          turnstile_token: window.getTurnstileToken ? window.getTurnstileToken() : '',
+	          website: (document.querySelector('input[name="website"]') || {}).value || ''
+	        }),
+	        keepalive: true
+	      }).catch(function(err) { console.error('Kit submit error:', err); });
 
-      // Step 3: Redirect with email passthrough (does not wait on AC)
+      // Step 3: Redirect with email passthrough (does not wait on Kit)
       var redirectUrl = '/optin-thank-you?redirect=resonance-masterclass-replay&email=' + encodeURIComponent(email);
       window.location.href = redirectUrl;
 

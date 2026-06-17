@@ -1820,7 +1820,6 @@
         </div>
         <input type="hidden" name="Ad" value="">
         <input type="hidden" name="Source" value="">
-        <input type="hidden" name="Referred By" value="">
         <!-- Honeypot: hidden from humans; bots fill it and get rejected server-side -->
         <input type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
         <!-- Cloudflare Turnstile (renders once the site key is set) -->
@@ -1845,13 +1844,10 @@
     var params = new URLSearchParams(window.location.search);
     var adParam = params.get('ad');
     var sourceParam = params.get('source');
-    var referredByParam = params.get('ref');
     var adField = form.querySelector('input[name="Ad"]');
     var sourceField = form.querySelector('input[name="Source"]');
-    var referredByField = form.querySelector('input[name="Referred By"]');
     if (adField) adField.value = adParam || '';
     if (sourceField) sourceField.value = sourceParam || '';
-    if (referredByField) referredByField.value = referredByParam || '';
 
     document.querySelectorAll('a[href="#optin"]').forEach(function(a) {
       a.addEventListener('click', function(e) {
@@ -1942,20 +1938,16 @@
 
       try {
         var contactPayload = {
-          email: email,
-          first_name: firstName,
-          phone: phone,
-          signed_clients: signedClientsLabel,
-          qualified_lead: signedClients === 'yes',
-          latest_ad: adField ? adField.value : '',
-          latest_source: sourceField ? sourceField.value : '',
-          tag: 'Business Breakthrough Challenge'
-        };
+	          email: email,
+	          first_name: firstName,
+	          phone: phone,
+	          qualified_lead: signedClients === 'yes',
+	          latest_ad: adField ? adField.value : '',
+	          latest_source: sourceField ? sourceField.value : '',
+	          tag_id: 20410114 // Business Breakthrough Challenge
+	        };
 
-        if (referredByField && referredByField.value) {
-          contactPayload.referred_by = referredByField.value;
-        }
-        contactPayload.turnstile_token = window.getTurnstileToken ? window.getTurnstileToken() : '';
+	        contactPayload.turnstile_token = window.getTurnstileToken ? window.getTurnstileToken() : '';
         contactPayload.website = (form.querySelector('input[name="website"]') || {}).value || '';
 
         fetch('/.netlify/functions/submit-contact', {
@@ -1964,7 +1956,7 @@
           body: JSON.stringify(contactPayload),
           keepalive: true
         }).catch(function(err) {
-          console.error('AC submit error:', err);
+          console.error('Kit submit error:', err);
         });
 
         var redirectParams = new URLSearchParams();

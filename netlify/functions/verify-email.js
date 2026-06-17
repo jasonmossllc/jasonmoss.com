@@ -15,7 +15,7 @@
 //
 // Rationale: on opt-in pages, the priority is not losing real leads.
 // Spamtrap/abuse are vanishingly rare on voluntary opt-ins and ZB's
-// classification isn't perfect — better to let AC handle edge cases
+// classification isn't perfect — better to let Kit handle edge cases
 // through normal list hygiene than to false-positive a real person.
 
 const HARD_BLOCK_SUB_STATUSES = new Set(['disposable', 'toxic']);
