@@ -5,6 +5,7 @@
 //   KIT_API_KEY           - your Kit API v4 key
 //   KIT_RESUBSCRIBE_FORM_ID - Kit form ID used to reactivate unsubscribed contacts
 //                             before applying signup tags. Defaults to 9576424.
+//   KIT_QUEUE_BATCH_SIZE  - optional max queued opt-ins to retry per minute.
 //   TURNSTILE_SECRET_KEY  - Cloudflare Turnstile SECRET key (optional).
 //                           When set, every submission MUST carry a valid
 //                           Turnstile token or it is rejected. Leave it unset
@@ -22,8 +23,17 @@
 const KIT_API_BASE = (process.env.KIT_API_URL || 'https://api.kit.com').replace(/\/+$/, '');
 const KIT_RESUBSCRIBE_FORM_ID = process.env.KIT_RESUBSCRIBE_FORM_ID || '9576424';
 const RESUBSCRIBE_ACTIVE_CHECK_DELAYS_MS = [0, 250, 750, 1500];
+const KIT_RETRY_DELAYS_MS = [250, 750, 1500];
+const KIT_OPTIN_QUEUE_STORE = 'kit-optin-queue';
 const ORIGINAL_AD_FIELD = 'original_ad';
 const ORIGINAL_SOURCE_FIELD = 'original_source';
+// Add future page payload -> Kit custom field mappings here. Public pages should
+// not be allowed to submit arbitrary Kit field names.
+const PRESERVED_FIELD_MAPPINGS = [
+  { payloadKey: 'latest_ad', kitField: ORIGINAL_AD_FIELD, maxLength: 500 },
+  { payloadKey: 'latest_source', kitField: ORIGINAL_SOURCE_FIELD, maxLength: 500 },
+];
+const MAX_TAG_IDS = 10;
 
 class KitApiError extends Error {
   constructor(message, status, body) {
@@ -34,32 +44,68 @@ class KitApiError extends Error {
   }
 }
 
+class DeferredKitSyncError extends Error {
+  constructor(message, submissionPatch = {}) {
+    super(message);
+    this.name = 'DeferredKitSyncError';
+    this.retryable = true;
+    this.submissionPatch = submissionPatch;
+  }
+}
+
 async function kitRequest(path, options = {}) {
   const apiKey = process.env.KIT_API_KEY || process.env.CONVERTKIT_V4_API_KEY;
   if (!apiKey) {
     throw new KitApiError('KIT_API_KEY is not configured', 500);
   }
 
-  const res = await fetch(`${KIT_API_BASE}${path}`, {
-    ...options,
-    headers: {
-      Accept: 'application/json',
-      'Content-Type': 'application/json',
-      'X-Kit-Api-Key': apiKey,
-      ...(options.headers || {}),
-    },
-  });
+  const { returnResponseMeta, ...fetchOptions } = options;
 
-  const text = await res.text();
-  let body = {};
-  if (text) {
-    try { body = JSON.parse(text); } catch (e) { body = { raw: text }; }
+  for (let attempt = 0; attempt <= KIT_RETRY_DELAYS_MS.length; attempt += 1) {
+    let res;
+    try {
+      res = await fetch(`${KIT_API_BASE}${path}`, {
+        ...fetchOptions,
+        headers: {
+          Accept: 'application/json',
+          'Content-Type': 'application/json',
+          'X-Kit-Api-Key': apiKey,
+          ...(fetchOptions.headers || {}),
+        },
+      });
+    } catch (error) {
+      if (attempt >= KIT_RETRY_DELAYS_MS.length) throw error;
+      await sleep(KIT_RETRY_DELAYS_MS[attempt]);
+      continue;
+    }
+
+    const text = await res.text();
+    let body = {};
+    if (text) {
+      try { body = JSON.parse(text); } catch (e) { body = { raw: text }; }
+    }
+
+    if (!res.ok) {
+      const retryAfterSeconds = Number.parseFloat(res.headers.get('retry-after') || '');
+      const shouldRetry =
+        attempt < KIT_RETRY_DELAYS_MS.length &&
+        (res.status === 429 || res.status >= 500);
+
+      if (shouldRetry) {
+        const delay = Number.isFinite(retryAfterSeconds)
+          ? Math.min(Math.max(retryAfterSeconds * 1000, 250), 5000)
+          : KIT_RETRY_DELAYS_MS[attempt];
+        await sleep(delay);
+        continue;
+      }
+
+      throw new KitApiError(`Kit API ${res.status}`, res.status, body);
+    }
+
+    return returnResponseMeta ? { status: res.status, body } : body;
   }
 
-  if (!res.ok) {
-    throw new KitApiError(`Kit API ${res.status}`, res.status, body);
-  }
-  return body;
+  throw new KitApiError('Kit API request failed after retries', 500);
 }
 
 function cleanString(value, maxLength = 500) {
@@ -69,6 +115,10 @@ function cleanString(value, maxLength = 500) {
 
 function isBlank(value) {
   return value == null || String(value).trim() === '';
+}
+
+function safeSubscriberId(subscriber) {
+  return subscriber?.id || null;
 }
 
 function sleep(ms) {
@@ -85,6 +135,45 @@ function fieldValue(fields, key) {
   return null;
 }
 
+function normalizeTagIds(value) {
+  const values = Array.isArray(value) ? value : [value];
+  const tagIds = [];
+  for (const value of values) {
+    const normalized = String(value).trim();
+    if (!/^\d+$/.test(normalized)) return null;
+    tagIds.push(Number.parseInt(normalized, 10));
+  }
+  if (
+    tagIds.length === 0 ||
+    tagIds.length > MAX_TAG_IDS ||
+    tagIds.some((tagId) => !Number.isSafeInteger(tagId) || tagId <= 0)
+  ) {
+    return null;
+  }
+  return [...new Set(tagIds)];
+}
+
+function cleanMappedFieldValues(data) {
+  return PRESERVED_FIELD_MAPPINGS.reduce((fields, mapping) => {
+    const value = cleanString(data[mapping.payloadKey], mapping.maxLength);
+    if (value) fields[mapping.kitField] = value;
+    return fields;
+  }, {});
+}
+
+function buildFieldsToSet(mappedFields, existingFields) {
+  return Object.entries(mappedFields).reduce((fields, [key, value]) => {
+    if (value && isBlank(fieldValue(existingFields, key))) fields[key] = value;
+    return fields;
+  }, {});
+}
+
+function headerValue(headers, name) {
+  const target = name.toLowerCase();
+  const match = Object.entries(headers || {}).find(([key]) => key.toLowerCase() === target);
+  return match ? match[1] : undefined;
+}
+
 function extractSubscriber(result) {
   if (!result || typeof result !== 'object') return null;
   if (result.subscriber) return result.subscriber;
@@ -98,16 +187,26 @@ async function findSubscriberByEmail(email) {
 }
 
 async function saveSubscriber({ email, firstName, fields }) {
+  return (await saveSubscriberWithMeta({ email, firstName, fields })).subscriber;
+}
+
+async function saveSubscriberWithMeta({ email, firstName, fields }) {
   const body = {
     email_address: email,
     ...(firstName ? { first_name: firstName } : {}),
     ...(fields && Object.keys(fields).length ? { fields } : {}),
   };
 
-  return extractSubscriber(await kitRequest('/v4/subscribers', {
+  const result = await kitRequest('/v4/subscribers', {
     method: 'POST',
     body: JSON.stringify(body),
-  }));
+    returnResponseMeta: true,
+  });
+
+  return {
+    status: result.status,
+    subscriber: extractSubscriber(result.body),
+  };
 }
 
 async function updateSubscriber(subscriberId, { email, firstName, fields }) {
@@ -128,6 +227,12 @@ async function tagSubscriberByEmail(tagId, email) {
     method: 'POST',
     body: JSON.stringify({ email_address: email }),
   });
+}
+
+async function tagSubscriberWithAll(tagIds, email) {
+  for (const tagId of tagIds) {
+    await tagSubscriberByEmail(tagId, email);
+  }
 }
 
 function isSubscribed(subscriber) {
@@ -158,11 +263,129 @@ async function waitForActiveSubscriber(email) {
   return subscriber;
 }
 
+function isQueueableKitError(error) {
+  if (error?.retryable) return true;
+  if (error instanceof KitApiError) {
+    return error.status === 429 || error.status >= 500;
+  }
+  return error instanceof TypeError;
+}
+
+function kitErrorSummary(error) {
+  return {
+    name: error?.name || 'Error',
+    message: error?.message || String(error),
+    status: error?.status || null,
+  };
+}
+
+function getOptinQueueStore() {
+  const { getStore } = require('@netlify/blobs');
+  return getStore({ name: KIT_OPTIN_QUEUE_STORE });
+}
+
+function optinQueueKey(email) {
+  const safeEmail = String(email || 'unknown').replace(/[^a-z0-9@._-]+/gi, '').slice(0, 80);
+  const random = Math.random().toString(36).slice(2, 10);
+  return `pending/${Date.now()}-${safeEmail}-${random}.json`;
+}
+
+async function enqueueOptin(submission, error) {
+  const store = getOptinQueueStore();
+  const queuedSubmission = {
+    ...submission,
+    ...(error?.submissionPatch || {}),
+  };
+  const key = optinQueueKey(submission.email);
+  await store.setJSON(key, {
+    submission: queuedSubmission,
+    attempts: 0,
+    queuedAt: new Date().toISOString(),
+    lastError: kitErrorSummary(error),
+  }, { onlyIfNew: true });
+  return key;
+}
+
+async function syncContactToKit(submission) {
+  const {
+    email,
+    firstName,
+    tagIds,
+    mappedFields = {},
+    referrer = '',
+  } = submission;
+
+  if (submission.resubscribeAttempted) {
+    const resubscribedSubscriber = await waitForActiveSubscriber(email);
+    if (!isSubscribed(resubscribedSubscriber)) {
+      throw new DeferredKitSyncError(
+        'Kit subscriber is still waiting for resubscribe activation',
+        { resubscribeAttempted: true }
+      );
+    }
+
+    await tagSubscriberWithAll(tagIds, email);
+    return { subscriberId: safeSubscriberId(resubscribedSubscriber), tagged: true };
+  }
+
+  const needsAttributionCheck = Object.keys(mappedFields).length > 0;
+  const existingSubscriber = needsAttributionCheck ? await findSubscriberByEmail(email) : null;
+  const fields = buildFieldsToSet(mappedFields, existingSubscriber?.fields);
+
+  let subscriber;
+  let subscriberExisted = false;
+  if (needsAttributionCheck) {
+    subscriberExisted = !!existingSubscriber?.id;
+    subscriber = subscriberExisted
+      ? await updateSubscriber(existingSubscriber.id, { email, firstName, fields })
+      : await saveSubscriber({ email, firstName, fields });
+  } else {
+    const saved = await saveSubscriberWithMeta({ email, firstName });
+    subscriber = saved.subscriber;
+    subscriberExisted = saved.status === 200;
+  }
+
+  if (subscriberExisted && !isSubscribed(subscriber)) {
+    if (!canUseResubscribeForm(subscriber)) {
+      console.error('Kit subscriber is not eligible for automatic form resubscribe', {
+        subscriberId: safeSubscriberId(subscriber),
+        state: subscriber?.state || null,
+      });
+      return { subscriberId: safeSubscriberId(subscriber), tagged: false };
+    }
+
+    await addSubscriberToResubscribeForm(email, referrer);
+    let resubscribedSubscriber;
+    try {
+      resubscribedSubscriber = await waitForActiveSubscriber(email);
+    } catch (error) {
+      if (isQueueableKitError(error)) {
+        error.submissionPatch = { ...(error.submissionPatch || {}), resubscribeAttempted: true };
+      }
+      throw error;
+    }
+
+    if (!isSubscribed(resubscribedSubscriber)) {
+      throw new DeferredKitSyncError(
+        'Kit subscriber is still waiting for resubscribe activation',
+        { resubscribeAttempted: true }
+      );
+    }
+  }
+
+  await tagSubscriberWithAll(tagIds, email);
+  return { subscriberId: safeSubscriberId(subscriber), tagged: true };
+}
+
 // Hosts allowed to submit. Covers the live domain, subdomains (go./www.),
 // and Netlify deploy previews (*.netlify.app).
 function originAllowed(event) {
   const h = event.headers || {};
-  const candidates = [h.origin, h.referer, h.referrer].filter(Boolean);
+  const candidates = [
+    headerValue(h, 'origin'),
+    headerValue(h, 'referer'),
+    headerValue(h, 'referrer'),
+  ].filter(Boolean);
   if (candidates.length === 0) return false; // no Origin/Referer = direct (bot) call
   const okHost = (host) =>
     host === 'jasonmoss.com' ||
@@ -285,9 +508,9 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request body' }) };
     }
     const ip =
-      event.headers['x-nf-client-connection-ip'] ||
-      event.headers['client-ip'] ||
-      (event.headers['x-forwarded-for'] || '').split(',')[0].trim();
+      headerValue(event.headers, 'x-nf-client-connection-ip') ||
+      headerValue(event.headers, 'client-ip') ||
+      (headerValue(event.headers, 'x-forwarded-for') || '').split(',')[0].trim();
 
     // 1) Honeypot — a real user never fills the hidden "website" field.
     //    Return a fake success so bots don't learn they were blocked.
@@ -299,7 +522,9 @@ exports.handler = async (event) => {
     // 2) Origin/Referer must be a jasonmoss.com page.
     if (!originAllowed(event)) {
       console.log('Blocked: origin not allowed', {
-        ip, origin: event.headers.origin, referer: event.headers.referer,
+        ip,
+        origin: headerValue(event.headers, 'origin'),
+        referer: headerValue(event.headers, 'referer'),
       });
       return { statusCode: 403, headers, body: JSON.stringify({ error: 'Forbidden' }) };
     }
@@ -328,63 +553,47 @@ exports.handler = async (event) => {
     const firstName = cleanString(data.first_name, 100);
 
     // Tag IDs are hardcoded by site pages. Visitors never provide tag names.
-    const tagId = Number.parseInt(data.tag_id, 10);
-    if (!Number.isSafeInteger(tagId) || tagId <= 0) {
-      console.error('Missing or invalid Kit tag_id', { tag_id: data.tag_id });
+    const tagIds = normalizeTagIds(data.tag_ids || data.tag_id);
+    if (!tagIds) {
+      console.error('Missing or invalid Kit tag_id', { tag_id: data.tag_id, tag_ids: data.tag_ids });
       return { statusCode: 500, headers, body: JSON.stringify({ error: 'Signup tag is not configured' }) };
     }
 
-    const latestAd = cleanString(data.latest_ad, 500);
-    const latestSource = cleanString(data.latest_source, 500);
-    const referrer = cleanString(event.headers.referer || event.headers.referrer || event.headers.origin, 1000);
-    const existingSubscriber = await findSubscriberByEmail(email);
+    const submission = {
+      email,
+      firstName,
+      tagIds,
+      mappedFields: cleanMappedFieldValues(data),
+      referrer: cleanString(
+        headerValue(event.headers, 'referer') ||
+        headerValue(event.headers, 'referrer') ||
+        headerValue(event.headers, 'origin'),
+        1000
+      ),
+    };
 
-    const fields = {};
-    if (latestAd && isBlank(fieldValue(existingSubscriber?.fields, ORIGINAL_AD_FIELD))) {
-      fields[ORIGINAL_AD_FIELD] = latestAd;
+    let result;
+    try {
+      result = await syncContactToKit(submission);
+    } catch (error) {
+      if (!isQueueableKitError(error)) throw error;
+      const queueKey = await enqueueOptin(submission, error);
+      console.error('Queued Kit opt-in after transient Kit failure', {
+        queueKey,
+        email,
+        error: kitErrorSummary(error),
+      });
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ success: true, queued: true }),
+      };
     }
-    if (latestSource && isBlank(fieldValue(existingSubscriber?.fields, ORIGINAL_SOURCE_FIELD))) {
-      fields[ORIGINAL_SOURCE_FIELD] = latestSource;
-    }
-
-    const subscriber = existingSubscriber?.id
-      ? await updateSubscriber(existingSubscriber.id, { email, firstName, fields })
-      : await saveSubscriber({ email, firstName, fields });
-
-    if (existingSubscriber?.id && !isSubscribed(subscriber)) {
-      if (!canUseResubscribeForm(subscriber)) {
-        console.error('Kit subscriber is not eligible for automatic form resubscribe', {
-          subscriberId: existingSubscriber.id,
-          state: subscriber?.state || null,
-        });
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify({ success: true, subscriberId: existingSubscriber.id, tagged: false }),
-        };
-      }
-
-      await addSubscriberToResubscribeForm(email, referrer);
-      const resubscribedSubscriber = await waitForActiveSubscriber(email);
-      if (!isSubscribed(resubscribedSubscriber)) {
-        console.error('Kit resubscribe form did not activate subscriber before tagging', {
-          subscriberId: existingSubscriber.id,
-          state: resubscribedSubscriber?.state || null,
-        });
-        return {
-          statusCode: 200,
-          headers,
-          body: JSON.stringify({ success: true, subscriberId: existingSubscriber.id, tagged: false }),
-        };
-      }
-    }
-
-    await tagSubscriberByEmail(tagId, email);
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ success: true, subscriberId: subscriber?.id || null }),
+      body: JSON.stringify({ success: true, subscriberId: result.subscriberId, tagged: result.tagged }),
     };
   } catch (error) {
     console.error('Function error:', error);
@@ -398,3 +607,10 @@ exports.handler = async (event) => {
 
 // Exposed for unit tests only; Netlify invokes .handler exclusively.
 module.exports.__test = { looksLikeBotName, maxConsonantRun, originAllowed, EMAIL_RE };
+module.exports.__internal = {
+  enqueueOptin,
+  getOptinQueueStore,
+  isQueueableKitError,
+  kitErrorSummary,
+  syncContactToKit,
+};
