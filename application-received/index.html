@@ -332,11 +332,11 @@
     <p class="lead">Save it now, so my text doesn&rsquo;t get filtered or missed when it lands:</p>
 
     <div class="action">
-      <a class="number" href="sms:+19255484037?&amp;body=Hi%20Jason%2C%20confirming%20I%20got%20your%20number." aria-label="Text Jason at +1 925 548 4037">
+      <a class="number" id="js-num-link" href="#" aria-label="Text Jason">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        <span>+1 925 548 4037</span>
+        <span id="js-num">+1&nbsp;&bull;&bull;&bull;&nbsp;&bull;&bull;&bull;&nbsp;&bull;&bull;&bull;&bull;</span>
       </a>
-      <a class="btn" href="sms:+19255484037?&amp;body=Hi%20Jason%2C%20confirming%20I%20got%20your%20number.">
+      <a class="btn" id="js-text-btn" href="#">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
         <span>Text me to confirm</span>
       </a>
@@ -350,5 +350,23 @@
     <p class="footnote">Want to be sure it&rsquo;ll come through? Send me a quick message now, and I&rsquo;ll confirm it landed on my end.</p>
   </section>
 </main>
+<script>
+  // Number is kept out of the raw HTML and assembled at runtime so simple
+  // (non-JS) phone harvesters can't scrape it. Real visitors see it instantly.
+  (function () {
+    try {
+      var e164 = atob('KzE5MjU1NDg0MDM3');
+      var d = e164.slice(2);
+      var pretty = '+1 ' + d.slice(0, 3) + ' ' + d.slice(3, 6) + ' ' + d.slice(6);
+      var href = 'sms:' + e164 + '?&body=' + encodeURIComponent('Hi Jason, confirming I got your number.');
+      var num = document.getElementById('js-num');
+      var link = document.getElementById('js-num-link');
+      var btn = document.getElementById('js-text-btn');
+      if (num) num.textContent = pretty;
+      if (link) { link.setAttribute('href', href); link.setAttribute('aria-label', 'Text Jason at ' + e164); }
+      if (btn) btn.setAttribute('href', href);
+    } catch (e) {}
+  })();
+</script>
 </body>
 </html>
