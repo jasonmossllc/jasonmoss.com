@@ -384,8 +384,9 @@
       <p class="formlabel">Apply for your free conversation:</p>
       <div class="formcard" id="book">
         <span class="corner tl"></span><span class="corner br"></span>
-        <div class="tf" id="tf-embed"></div>
-        <noscript><p style="padding:24px;text-align:center;"><a href="https://jasonmoss449611.typeform.com/to/j1pl7rh0">Open the application form</a></p></noscript>
+        <iframe class="tf" id="tf-embed" title="Apply for your free conversation"
+          src="https://jasonmoss449611.typeform.com/to/j1pl7rh0?typeform-welcome=0&typeform-embed=embed-widget&typeform-embed-no-heading=true&typeform-medium=embed-snippet"
+          allow="camera; microphone; autoplay; encrypted-media;"></iframe>
       </div>
     </div>
   </section>
@@ -440,18 +441,14 @@
     <a href="#book" class="btn">Apply now<span class="arr">→</span></a>
   </div>
 
-  <script src="https://embed.typeform.com/next/embed.js"></script>
   <script>
     (function(){
-      // Typeform embed (official SDK); on submit the visitor is
-      // forwarded to /application-received/.
-      window.tf.createWidget('j1pl7rh0', {
-        container: document.getElementById('tf-embed'),
-        hideHeaders: true,
-        opacity: 0,
-        inlineOnMobile: true,
-        medium: 'runs-you-page',
-        onSubmit: function(){
+      // On submit, forward to the application-received page
+      // (the form's own thank-you screen redirect is the fallback)
+      window.addEventListener('message', function(e){
+        if(e.origin.indexOf('typeform.com') === -1) return;
+        var d = e.data;
+        if(d && (d.type === 'form-submit' || (typeof d === 'string' && d.indexOf('form-submit') > -1))){
           window.location.href = 'https://jasonmoss.com/application-received/';
         }
       });
