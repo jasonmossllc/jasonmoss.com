@@ -32,7 +32,7 @@
     --ease:cubic-bezier(0.16, 1, 0.3, 1);
   }
   *{ box-sizing:border-box; }
-  html{ scroll-behavior:smooth; scroll-padding-top:80px; }
+  html{ scroll-padding-top:80px; }
   body{
     margin:0; font-family:var(--sans); color:var(--sand);
     background:var(--obsidian); -webkit-font-smoothing:antialiased;
@@ -463,12 +463,34 @@
         }
       });
 
-      // CTAs scroll the form to the center of the screen
+      // CTAs scroll the form to the center of the screen.
+      // Manual rAF animation: browser-native smooth scrolling gets canceled
+      // in some environments (embed iframes / in-app browsers), this can't be.
+      var scrollAnim = null;
+      function animateScrollTo(destY, ms){
+        if(scrollAnim) cancelAnimationFrame(scrollAnim);
+        var startY = window.scrollY, delta = destY - startY, t0 = null;
+        function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
+        function step(ts){
+          if(t0 === null) t0 = ts;
+          var p = Math.min((ts - t0) / ms, 1);
+          window.scrollTo(0, startY + delta * ease(p));
+          if(p < 1){ scrollAnim = requestAnimationFrame(step); } else { scrollAnim = null; }
+        }
+        scrollAnim = requestAnimationFrame(step);
+      }
+      window.addEventListener('wheel', function(){ if(scrollAnim){ cancelAnimationFrame(scrollAnim); scrollAnim = null; } }, { passive:true });
+      window.addEventListener('touchstart', function(){ if(scrollAnim){ cancelAnimationFrame(scrollAnim); scrollAnim = null; } }, { passive:true });
       document.querySelectorAll('a[href="#book"]').forEach(function(a){
         a.addEventListener('click', function(e){
           e.preventDefault();
           var el = document.getElementById('book');
-          if(el) el.scrollIntoView({ behavior:'smooth', block:'center' });
+          if(!el) return;
+          var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+          var r = el.getBoundingClientRect();
+          var dest = r.top + window.scrollY - Math.max((vh - r.height) / 2, 20);
+          dest = Math.max(0, Math.min(dest, document.documentElement.scrollHeight - vh));
+          animateScrollTo(dest, 700);
         });
       });
       // sticky apply bar (hidden while form is on screen) + scroll reveals
