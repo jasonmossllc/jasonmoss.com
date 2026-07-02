@@ -466,18 +466,24 @@
       // CTAs scroll the form to the center of the screen.
       // Manual rAF animation: browser-native smooth scrolling gets canceled
       // in some environments (embed iframes / in-app browsers), this can't be.
-      var scrollAnim = null;
+      var scrollAnim = null, scrollWatchdog = null;
       function animateScrollTo(destY, ms){
         if(scrollAnim) cancelAnimationFrame(scrollAnim);
+        if(scrollWatchdog) clearTimeout(scrollWatchdog);
         var startY = window.scrollY, delta = destY - startY, t0 = null;
         function ease(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2; }
         function step(ts){
           if(t0 === null) t0 = ts;
           var p = Math.min((ts - t0) / ms, 1);
           window.scrollTo(0, startY + delta * ease(p));
-          if(p < 1){ scrollAnim = requestAnimationFrame(step); } else { scrollAnim = null; }
+          if(p < 1){ scrollAnim = requestAnimationFrame(step); }
+          else { scrollAnim = null; clearTimeout(scrollWatchdog); scrollWatchdog = null; }
         }
         scrollAnim = requestAnimationFrame(step);
+        // If rAF is throttled (background tab / some in-app browsers), jump instantly
+        scrollWatchdog = setTimeout(function(){
+          if(scrollAnim){ cancelAnimationFrame(scrollAnim); scrollAnim = null; window.scrollTo(0, destY); }
+        }, ms + 500);
       }
       window.addEventListener('wheel', function(){ if(scrollAnim){ cancelAnimationFrame(scrollAnim); scrollAnim = null; } }, { passive:true });
       window.addEventListener('touchstart', function(){ if(scrollAnim){ cancelAnimationFrame(scrollAnim); scrollAnim = null; } }, { passive:true });
