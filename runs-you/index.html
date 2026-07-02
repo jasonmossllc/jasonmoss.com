@@ -232,6 +232,7 @@
   .formcard .corner.tl{ top:-1px; left:-1px; border-top:2px solid var(--gold); border-left:2px solid var(--gold); }
   .formcard .corner.br{ bottom:-1px; right:-1px; border-bottom:2px solid var(--gold); border-right:2px solid var(--gold); }
   .formcard .tf{ display:block; width:100%; height:640px; border:0; }
+  .formcard .tf iframe{ width:100%; height:100%; border:0; }
 
   /* ============ WHO THIS IS FOR ============ */
   .who .eyebrow{ color:var(--mocha); }
@@ -383,9 +384,7 @@
       <p class="formlabel">Apply for your free conversation:</p>
       <div class="formcard" id="book">
         <span class="corner tl"></span><span class="corner br"></span>
-        <iframe class="tf" id="tf-embed" title="Apply for your free conversation"
-          data-tf-src="https://jasonmoss449611.typeform.com/to/j1pl7rh0?typeform-welcome=0&typeform-embed=embed-widget&typeform-embed-no-heading=true&typeform-medium=embed-snippet"
-          allow="camera; microphone; autoplay; encrypted-media;"></iframe>
+        <div class="tf" id="tf-embed"></div>
         <noscript><p style="padding:24px;text-align:center;"><a href="https://jasonmoss449611.typeform.com/to/j1pl7rh0">Open the application form</a></p></noscript>
       </div>
     </div>
@@ -441,24 +440,25 @@
     <a href="#book" class="btn">Apply now<span class="arr">→</span></a>
   </div>
 
+  <script src="https://embed.typeform.com/next/embed.js"></script>
   <script>
     (function(){
-      // Load the Typeform embed, passing ad UTM params through as hidden fields
-      var tf = document.getElementById('tf-embed');
-      var src = tf.getAttribute('data-tf-src');
+      // Typeform embed (official SDK): ad UTM params pass through as hidden
+      // fields; on submit the visitor is forwarded to /application-received/.
       var qs = new URLSearchParams(window.location.search);
-      var hidden = [];
+      var hidden = {};
       ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(function(k){
         var v = qs.get(k);
-        if(v){ hidden.push(k + '=' + encodeURIComponent(v)); }
+        if(v){ hidden[k] = v; }
       });
-      tf.src = hidden.length ? src + '#' + hidden.join('&') : src;
-
-      // On submit, forward to the application-received page
-      window.addEventListener('message', function(e){
-        if(e.origin.indexOf('typeform.com') === -1) return;
-        var d = e.data;
-        if(d && (d.type === 'form-submit' || (typeof d === 'string' && d.indexOf('form-submit') > -1))){
+      window.tf.createWidget('j1pl7rh0', {
+        container: document.getElementById('tf-embed'),
+        hidden: hidden,
+        hideHeaders: true,
+        opacity: 0,
+        inlineOnMobile: true,
+        medium: 'runs-you-page',
+        onSubmit: function(){
           window.location.href = 'https://jasonmoss.com/application-received/';
         }
       });
