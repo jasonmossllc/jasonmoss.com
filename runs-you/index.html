@@ -383,9 +383,10 @@
       <p class="formlabel">Apply for your free conversation:</p>
       <div class="formcard" id="book">
         <span class="corner tl"></span><span class="corner br"></span>
-        <iframe class="tf" title="Apply for your free conversation"
-          src="https://jasonmoss449611.typeform.com/to/j1pl7rh0?typeform-welcome=0&typeform-embed=embed-widget&typeform-embed-no-heading=true&typeform-medium=embed-snippet"
+        <iframe class="tf" id="tf-embed" title="Apply for your free conversation"
+          data-tf-src="https://jasonmoss449611.typeform.com/to/j1pl7rh0?typeform-welcome=0&typeform-embed=embed-widget&typeform-embed-no-heading=true&typeform-medium=embed-snippet"
           allow="camera; microphone; autoplay; encrypted-media;"></iframe>
+        <noscript><p style="padding:24px;text-align:center;"><a href="https://jasonmoss449611.typeform.com/to/j1pl7rh0">Open the application form</a></p></noscript>
       </div>
     </div>
   </section>
@@ -442,6 +443,26 @@
 
   <script>
     (function(){
+      // Load the Typeform embed, passing ad UTM params through as hidden fields
+      var tf = document.getElementById('tf-embed');
+      var src = tf.getAttribute('data-tf-src');
+      var qs = new URLSearchParams(window.location.search);
+      var hidden = [];
+      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(function(k){
+        var v = qs.get(k);
+        if(v){ hidden.push(k + '=' + encodeURIComponent(v)); }
+      });
+      tf.src = hidden.length ? src + '#' + hidden.join('&') : src;
+
+      // On submit, forward to the application-received page
+      window.addEventListener('message', function(e){
+        if(e.origin.indexOf('typeform.com') === -1) return;
+        var d = e.data;
+        if(d && (d.type === 'form-submit' || (typeof d === 'string' && d.indexOf('form-submit') > -1))){
+          window.location.href = 'https://jasonmoss.com/application-received/';
+        }
+      });
+
       // CTAs scroll the form to the center of the screen
       document.querySelectorAll('a[href="#book"]').forEach(function(a){
         a.addEventListener('click', function(e){
