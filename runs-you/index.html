@@ -443,17 +443,10 @@
   <script src="https://embed.typeform.com/next/embed.js"></script>
   <script>
     (function(){
-      // Typeform embed (official SDK): ad UTM params pass through as hidden
-      // fields; on submit the visitor is forwarded to /application-received/.
-      var qs = new URLSearchParams(window.location.search);
-      var hidden = {};
-      ['utm_source','utm_medium','utm_campaign','utm_content','utm_term','fbclid'].forEach(function(k){
-        var v = qs.get(k);
-        if(v){ hidden[k] = v; }
-      });
+      // Typeform embed (official SDK); on submit the visitor is
+      // forwarded to /application-received/.
       window.tf.createWidget('j1pl7rh0', {
         container: document.getElementById('tf-embed'),
-        hidden: hidden,
         hideHeaders: true,
         opacity: 0,
         inlineOnMobile: true,
