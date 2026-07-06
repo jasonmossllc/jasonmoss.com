@@ -314,6 +314,10 @@
     font-size:11px; letter-spacing:.22em; text-transform:uppercase; font-weight:600;
     color:var(--taupe); margin:0;
   }
+  @media (max-width:780px){
+    .testi .t-who span{ display:block; }
+    .testi .t-who .t-sep{ display:none; }
+  }
 
   footer{
     text-align:center; padding:54px 24px 120px; background:var(--obsidian-deep);
@@ -594,7 +598,7 @@
         '<img src="../assets/meaghan.jpg" alt="Meaghan L.">' +
         '<div>' +
           '<p class="t-text">With Jason’s help, I went from working 80-hour weeks to 20–25 — and scaled past <b>$260K in sales</b>.</p>' +
-          '<p class="t-who">Meaghan L. · Business Coach</p>' +
+          '<p class="t-who"><span>Meaghan L.</span><span class="t-sep"> · </span><span>Business Coach</span></p>' +
         '</div>' +
       '</div>' +
       '</div></div>' +
