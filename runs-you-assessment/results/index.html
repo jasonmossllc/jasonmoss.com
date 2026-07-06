@@ -237,7 +237,7 @@
     color:rgba(233,226,211,.92); margin:0 0 30px; padding-left:26px;
     border-left:1px solid rgba(194,168,108,.5);
   }
-  .cost-beats p:last-child{ margin-bottom:0; color:var(--gold); font-style:italic; }
+  .cost-beats p:last-child{ margin-bottom:0; }
 
   /* ============ BOOK CARD ============ */
   .bookcard{
@@ -501,7 +501,7 @@
         '<p class="eyebrow">' + (firstName ? firstName + ', here’s' : 'Here’s') + ' your result</p>' +
         dialSvg() +
         '<h1><span class="l1">' + v.l1 + '</span><span class="l2">' + v.l2 + '</span></h1>' +
-        '<p class="vsub">Based on your six answers. Here’s what they actually say — and what they’re costing you.</p>' +
+        '<p class="vsub">Here’s what your answers actually say.</p>' +
       '</div></div>' +
       '<button type="button" class="scrollcue" id="scrollCue" aria-label="See your full results"><span></span></button>' +
     '</header>';
@@ -519,19 +519,19 @@
       '<h2>Here’s what’s actually going on:</h2>' +
       '<ol class="reasons">' +
       '<li><b>You built it around yourself.</b><p>Every important decision, every fire, every final call still routes through you — by design. That’s how you got it off the ground.</p></li>' +
-      '<li><b>You secretly like being the one who solves it.</b><p>There’s a hit in being the person everything depends on — the one who saves the day, who holds it all together. So even as you complain about the weight of it, some part of you keeps stepping back in. Because being needed is where you feel competent. Valuable. Alive.</p></li>' +
+      '<li><b>And there’s often something underneath it.</b><p>For a lot of entrepreneurs, being the one everything depends on isn’t only a burden — it’s also where you feel most competent, most needed, most alive. If that’s even a little true for you, letting go isn’t just logistically hard. It’s identity-level hard.</p></li>' +
       '<li><b>The real bottleneck isn’t the business. It’s you.</b><p>The version of you that built this — the one who does everything, controls everything, can’t let go — is the exact thing capping it now.</p></li>' +
       '</ol></div></section>';
 
     /* The cost (with the compounding line folded in) */
     html += '<section class="bg-forest hairline-b"><div class="wrap stack reveal">' +
       '<hr class="divider"><p class="eyebrow">The cost</p>' +
-      '<p class="open">And here’s what most people miss: this isn’t just costing you time.</p>' +
+      '<p class="open">This isn’t just costing you time.</p>' +
       '<p class="costline">It’s costing you <em>' + esc(MIRROR.q6[q6]) + '</em>.</p>' +
       '<div class="cost-beats">' +
         COST_BEATS[q6].map(function(b){ return '<p>' + esc(b) + '</p>'; }).join('') +
       '</div>' +
-      '<p class="pull">And it compounds. The bigger the business gets, the bigger the cage — more revenue, more dependency, less of you.</p>' +
+      '<p class="pull" style="color:var(--sand)">And it compounds. The bigger the business gets, the bigger the cage — more revenue, more dependency, less of you.</p>' +
       '</div></section>';
 
     /* You're not alone — connection + authority BEFORE the ask (cold traffic) */
