@@ -689,7 +689,7 @@
       if (!offrampFired){ offrampFired = true; track('assessment_offramp'); }
       view = 'offramp';
       setProgress('', 0, false);
-      backBtn.hidden = false;
+      backBtn.hidden = true;
       swapStep(
         '<div class="offramp">' +
         '<h2>This one’s not for you — at least not yet.</h2>' +
@@ -868,7 +868,6 @@
       b.addEventListener('click', openQuiz);
     });
     backBtn.addEventListener('click', function(){
-      if (view === 'offramp'){ current = 0; renderQuestion(); return; }
       if (view === 'email'){ current = QUESTIONS.length - 1; renderQuestion(); return; }
       if (current > 0){ current -= 1; renderQuestion(); }
     });
