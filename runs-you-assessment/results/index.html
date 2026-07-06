@@ -224,6 +224,7 @@
   }
   .reasons b{ display:block; font-family:var(--serif); font-weight:400; font-size:21px; color:var(--sand); margin:0 0 8px; line-height:1.4; }
   .reasons p{ margin:0; color:rgba(233,226,211,.8); font-size:16.5px; line-height:1.7; }
+  .reasons p.trap{ margin-top:12px; font-style:italic; color:rgba(233,226,211,.65); }
 
   /* ============ COST ============ */
   .costline{
@@ -303,9 +304,9 @@
     border-top:1px solid rgba(194,168,108,.14);
   }
   footer img{ height:26px; margin:0 auto 16px; opacity:.85; }
-  footer p{ color:rgba(140,131,122,.8); font-size:12.5px; margin:0 0 8px; letter-spacing:.06em; }
+  footer p{ color:rgba(140,131,122,.5); font-size:10.5px; margin:0 0 6px; letter-spacing:.05em; }
   footer p:last-child{ margin-bottom:0; }
-  footer a{ color:rgba(140,131,122,.9); text-decoration:underline; text-underline-offset:3px; }
+  footer a{ color:rgba(140,131,122,.6); text-decoration:underline; text-underline-offset:3px; }
   footer a:hover{ color:var(--gold); }
 
   /* ============ STICKY BOOK BAR ============ */
@@ -543,9 +544,9 @@
       '<hr class="divider"><p class="eyebrow">Why this is happening</p>' +
       '<h2>Here’s what’s actually going on:</h2>' +
       '<ol class="reasons">' +
-      '<li><b>You built it around yourself.</b><p>Every important decision, every fire, every final call still routes through you — by design. That’s how you got it off the ground.</p></li>' +
-      '<li><b>Part of you doesn’t fully want to let go.</b><p>There’s a hit in being the one everything depends on — the one who holds it together, who saves the day. And if some part of you feels most valuable when you’re doing it all, then stepping back doesn’t just feel hard. It feels like losing something.</p></li>' +
-      '<li><b>The real bottleneck isn’t the business. It’s you.</b><p>The version of you that built this — the one who does everything, controls everything, can’t let go — is the exact thing capping it now.</p></li>' +
+      '<li><b>You built it this way on purpose — and it worked.</b><p>Being the one who did everything was your edge. You were faster, smarter, more capable than anyone you could hire. Being indispensable is how you got to where you are.</p><p class="trap">The trap: the exact thing that got you here is what’s capping you now.</p></li>' +
+      '<li><b>And part of you still won’t let go.</b><p>There’s a pull to being the one everyone depends on. If some part of you feels most valuable when you’re most needed, stepping back doesn’t feel like relief. It feels like loss.</p><p class="trap">That’s why “just delegate” never worked. It’s not a systems problem. It’s a letting-go problem.</p></li>' +
+      '<li><b>So now you’re the ceiling.</b><p>The version of you that built this — does everything, holds everything, can’t hand it off — is what the business can’t grow past. You don’t have a bottleneck. You are it.</p><p class="trap">And no hire or system fixes that, because it isn’t just structural. It’s personal.</p></li>' +
       '</ol></div></section>';
 
     /* The cost (with the compounding line folded in) */
@@ -556,7 +557,7 @@
       '<div class="cost-beats">' +
         COST_BEATS[q6].map(function(b){ return '<p>' + esc(b) + '</p>'; }).join('') +
       '</div>' +
-      '<p class="pull" style="color:var(--sand)">And it compounds. The bigger the business gets, the bigger the cage — more revenue, more dependency, less of you.</p>' +
+      '<p class="pull" style="color:rgba(233,226,211,.92)">And it compounds. The bigger the business gets, the bigger the cage — more revenue, more dependency, less of you.</p>' +
       '</div></section>';
 
     /* You're not alone — connection + authority BEFORE the ask (cold traffic) */
