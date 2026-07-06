@@ -40,7 +40,7 @@
 
   /* ---------- type ---------- */
   h1,h2{ font-family:var(--serif); font-weight:400; margin:0; text-wrap:balance; }
-  h1{ font-size:clamp(38px,5.6vw,66px); line-height:1.12; letter-spacing:-.02em; }
+  h1{ font-size:clamp(36px,4.6vw,54px); line-height:1.14; letter-spacing:-.02em; }
   h2{ font-size:clamp(27px,3.6vw,40px); line-height:1.22; letter-spacing:-.01em; }
   .eyebrow{
     font-size:11px; letter-spacing:.30em; text-transform:uppercase; font-weight:600;
@@ -54,6 +54,12 @@
   }
   .stack p:last-child{ margin-bottom:0; }
   .stack h2{ margin:0 0 34px; }
+  .centered{ text-align:center; }
+  .centered .divider{ margin-left:auto; margin-right:auto; }
+  .centered > p, .centered h2{ margin-left:auto; margin-right:auto; }
+  .centered .bookcard{ text-align:left; }
+  .centered .bookcard p{ margin-left:0; margin-right:0; max-width:none; }
+  .centered .bookcard .microcta{ text-align:center; }
   .pull{
     font-family:var(--serif); font-style:italic; font-size:clamp(21px,2.6vw,26px);
     line-height:1.5; color:var(--gold); margin-top:34px !important;
@@ -144,7 +150,7 @@
   }
 
   /* severity dial */
-  .dial{ margin:0 auto 40px; width:min(320px, 78vw); position:relative; }
+  .dial{ margin:0 auto 44px; width:min(400px, 80vw); position:relative; }
   .dial svg{ display:block; width:100%; height:auto; overflow:visible; }
   .dial .arc-bg{ stroke:rgba(194,168,108,.16); }
   .dial .arc-fill{
@@ -155,7 +161,7 @@
     fill:var(--gold); filter:drop-shadow(0 0 8px rgba(194,168,108,.7));
   }
   .dial-center{
-    position:absolute; left:0; right:0; bottom:34px; text-align:center; pointer-events:none;
+    position:absolute; left:0; right:0; bottom:38px; text-align:center; pointer-events:none;
   }
   .dial-center .dc-label{
     display:block; font-size:10px; letter-spacing:.30em; text-transform:uppercase;
@@ -163,7 +169,7 @@
   }
   .dial-center .dc-tier{
     display:block; font-family:var(--serif); font-style:italic;
-    font-size:clamp(25px,3.6vw,32px); line-height:1.1; color:var(--gold);
+    font-size:clamp(26px,3.6vw,38px); line-height:1.1; color:var(--gold);
     text-shadow:0 0 30px rgba(194,168,108,.35);
   }
   .dial-ends{
@@ -564,7 +570,7 @@
       '<ol class="reasons">' +
       '<li><b>You built it this way on purpose.</b><p>Being the one who did everything was your edge — faster, smarter, more trusted than anyone you could hire. And it’s exactly what’s trapping you now.</p></li>' +
       '<li><b>And part of you won’t let go.</b><p>If you feel most valuable when you’re most needed, stepping back feels like loss, not relief. That’s why delegating never stuck. It’s not a systems problem. It’s a letting-go problem.</p></li>' +
-      '<li><b>So now you’re the ceiling.</b><p>You don’t have a bottleneck. You are it. And no hire or system fixes that — because it isn’t just structural. It’s personal.</p></li>' +
+      '<li><b>So now you’re the ceiling.</b><p>You don’t have a bottleneck. You <em>are</em> it. And no hire or system fixes that — because it isn’t just structural. It’s personal.</p></li>' +
       '</ol></div></section>';
 
     /* The cost (with the compounding line folded in) */
@@ -608,7 +614,7 @@
 
     /* The turn */
     if (qualified){
-      html += '<section class="bg-pale"><div class="wrap stack reveal">' +
+      html += '<section class="bg-pale"><div class="wrap stack centered reveal">' +
         '<hr class="divider"><p class="eyebrow" style="color:var(--mocha)">Your next step</p>' +
         '<h2>Here’s the good news: this is fixable.</h2>' +
         '<p>Not by working harder or hiring another person — but by changing both things at once: how the business runs, and how you run it.</p>' +
@@ -622,7 +628,7 @@
           '<p class="microcta">Free. 20 minutes. Directly with me.</p>' +
         '</div></div></section>';
     } else {
-      html += '<section class="bg-pale"><div class="wrap stack reveal">' +
+      html += '<section class="bg-pale"><div class="wrap stack centered reveal">' +
         '<hr class="divider"><p class="eyebrow" style="color:var(--mocha)">The honest next step</p>' +
         '<h2>Here’s the honest truth.</h2>' +
         '<p>The deepest version of this work is for people whose business is already generating real revenue — because the fix involves restructuring something that’s already substantial.</p>' +
