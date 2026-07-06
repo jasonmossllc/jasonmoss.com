@@ -680,11 +680,17 @@
     // counts don't inflate on re-opens.
     if (fresh){
       track('assessment_complete', { assessment_severity: severity, assessment_qualified: qualified ? 'yes' : 'no' });
-      if (qualified){
+      // Lead + qualified_lead fire ONCE EVER per person (localStorage flag,
+      // keyed by email) — retakes, revisits, and back-button replays never
+      // re-fire the Meta optimization event.
+      var leadKey = 'ryLeadFired.' + email;
+      var leadAlreadyFired = false;
+      try { leadAlreadyFired = localStorage.getItem(leadKey) === '1'; } catch(e){}
+      if (qualified && !leadAlreadyFired){
+        try { localStorage.setItem(leadKey, '1'); } catch(e){}
         track('qualified_lead', { assessment_severity: severity });
         // Meta standard Lead event, fired straight at the pixel (loaded by
-        // GTM's base code) — qualified ($5k+/mo) completers only, once per
-        // submission (fresh=1). This is the campaign optimization event.
+        // GTM's base code) — qualified ($5k+/mo) completers only.
         (function fireMetaLead(tries){
           if (window.fbq){
             window.fbq('track', 'Lead', { content_name: 'runs-you-assessment', content_category: severity });

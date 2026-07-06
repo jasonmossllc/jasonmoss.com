@@ -644,9 +644,18 @@
       quiz.scrollTop = 0;
     }
 
+    var qFired = {};
     function pick(qid, value, btn){
       state.answers[qid] = value;
       persist();
+      // one funnel event per question per visit (repeat answers via Back don't
+      // recount). Named by SCREEN POSITION (step1..step6), not internal id,
+      // so GA4 funnel order matches what visitors actually see.
+      if (!qFired[qid]){
+        qFired[qid] = true;
+        var stepNum = QUESTIONS.findIndex(function(q){ return q.id === qid; }) + 1;
+        track('assessment_step' + stepNum + '_answered');
+      }
       stepEl.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('picked'); });
       btn.classList.add('picked');
       setTimeout(function(){
@@ -656,7 +665,9 @@
       }, 260);
     }
 
+    var offrampFired = false;
     function renderOfframp(){
+      if (!offrampFired){ offrampFired = true; track('assessment_offramp'); }
       view = 'offramp';
       setProgress('', 0, false);
       backBtn.hidden = false;
