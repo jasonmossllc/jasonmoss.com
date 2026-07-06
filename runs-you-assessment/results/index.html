@@ -109,9 +109,11 @@
     position:relative; min-height:100vh; min-height:100svh;
     display:flex; flex-direction:column; overflow:hidden; text-align:center;
     background:
-      linear-gradient(180deg, rgba(20,22,21,.82) 0%, rgba(24,28,26,.78) 45%, rgba(20,22,21,.94) 100%),
+      linear-gradient(180deg, rgba(20,22,21,.80) 0%, rgba(24,28,26,.76) 45%, rgba(20,22,21,.92) 100%),
+      url('../assets/section-bg-forest.jpg') center / cover no-repeat,
       url('../assets/forest-bg.jpg') center 30% / cover no-repeat,
       var(--obsidian-deep);
+    background-blend-mode: normal, soft-light, normal;
   }
   .verdict:before{
     content:""; position:absolute; inset:0; pointer-events:none;

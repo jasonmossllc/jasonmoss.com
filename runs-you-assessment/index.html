@@ -131,9 +131,11 @@
     position:relative; min-height:100vh; min-height:100svh; display:flex; flex-direction:column;
     overflow:hidden; text-align:center;
     background:
-      linear-gradient(180deg, rgba(20,22,21,.82) 0%, rgba(24,28,26,.78) 45%, rgba(20,22,21,.94) 100%),
+      linear-gradient(180deg, rgba(20,22,21,.80) 0%, rgba(24,28,26,.76) 45%, rgba(20,22,21,.92) 100%),
+      url('assets/section-bg-forest.jpg') center / cover no-repeat,
       url('assets/forest-bg.jpg') center 30% / cover no-repeat,
       var(--obsidian-deep);
+    background-blend-mode: normal, soft-light, normal;
   }
   .hero:before{
     content:""; position:absolute; inset:0; pointer-events:none;
@@ -208,7 +210,7 @@
     border-top:1px solid rgba(194,168,108,.22);
     border-bottom:1px solid rgba(194,168,108,.22);
     background:
-      linear-gradient(180deg, rgba(20,22,21,.55) 0%, rgba(20,22,21,.25) 45%, rgba(29,31,30,.65) 100%),
+      linear-gradient(180deg, rgba(20,22,21,.32) 0%, rgba(20,22,21,.10) 45%, rgba(29,31,30,.42) 100%),
       url('assets/mountain-headon.jpg') center 30% / cover no-repeat;
   }
 
@@ -760,7 +762,7 @@
       if (el){ el.textContent = msg; el.classList.add('show'); }
     }
 
-    function onSubmit(e){
+    async function onSubmit(e){
       e.preventDefault();
       if (submitting) return;
       var name = (document.getElementById('qName').value || '').trim();
@@ -772,8 +774,37 @@
       submitting = true;
       var btn = document.getElementById('qSubmit');
       btn.disabled = true;
-      btn.innerHTML = 'Reading your answers…';
+      btn.innerHTML = 'Validating…';
 
+      // ZeroBounce validation (shared verify-email function). Fails open on
+      // timeout/outage so a ZB hiccup can never block a real lead.
+      var zbValid = true, zbReason = '';
+      var zbController = new AbortController();
+      var zbTimeout = setTimeout(function(){ zbController.abort(); }, 4000);
+      try {
+        var zbRes = await fetch('/.netlify/functions/verify-email', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: email }),
+          signal: zbController.signal
+        });
+        var zb = await zbRes.json();
+        if (!zb.valid){
+          zbValid = false;
+          zbReason = zb.reason || 'Please enter a real, non-temporary email address.';
+          if (zb.did_you_mean) zbReason += ' Did you mean ' + zb.did_you_mean + '?';
+        }
+      } catch(zbErr){} finally { clearTimeout(zbTimeout); }
+
+      if (!zbValid){
+        submitting = false;
+        btn.disabled = false;
+        btn.innerHTML = 'Show me my results<span class="arr">→</span>';
+        showErr(zbReason);
+        return;
+      }
+
+      btn.innerHTML = 'Reading your answers…';
       state.name = name; state.email = email; persist();
 
       var payload = {
