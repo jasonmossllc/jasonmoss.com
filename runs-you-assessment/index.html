@@ -278,16 +278,10 @@
   .quiz.open{ display:flex; }
   body.quiz-locked{ overflow:hidden; }
   .quiz-top{
-    display:flex; align-items:center; justify-content:space-between;
+    display:flex; align-items:center; justify-content:center;
     padding:26px 28px 0; max-width:760px; margin:0 auto; width:100%;
   }
   .quiz-top img{ height:26px; width:auto; }
-  .quiz-close{
-    background:none; border:0; color:var(--taupe); font-size:15px; cursor:pointer;
-    font-family:var(--sans); letter-spacing:.08em; padding:8px 0 8px 16px;
-    transition:color .2s ease;
-  }
-  .quiz-close:hover{ color:var(--sand); }
   .quiz-progress{ max-width:760px; margin:26px auto 0; width:100%; padding:0 28px; }
   .qp-label{
     display:block; font-size:11px; letter-spacing:.30em; text-transform:uppercase;
@@ -425,7 +419,7 @@
         <p class="subhead">For established entrepreneurs who built a profitable business — but feel like they’re a prisoner to the thing they created.</p>
         <div class="hero-cta">
           <button type="button" class="btn" data-quiz-open>Find out why<span class="arr">→</span></button>
-          <p class="microcta">Free 3-minute assessment. 6 questions. Instant results. No email wall until the end.</p>
+          <p class="microcta">Free 3-minute assessment. 6 questions. Instant results.</p>
         </div>
       </div>
     </div>
@@ -485,7 +479,7 @@
       <p>Answer honestly and I'll show you exactly where you sit — how deep the pattern goes, what it's already costing you, and why nothing you've tried has fixed it.</p>
       <p>Your results appear instantly at the end.</p>
       <p style="margin-top:34px"><button type="button" class="btn" data-quiz-open>Take the free assessment<span class="arr">→</span></button></p>
-      <p class="microcta">6 questions. Instant results. No email wall until the end.</p>
+      <p class="microcta">6 questions. Instant results.</p>
     </div>
   </section>
 
@@ -524,7 +518,7 @@
       <hr class="divider center">
       <span class="lead">Ready to find out why it runs you?</span>
       <button type="button" class="btn" data-quiz-open>Take the free assessment<span class="arr">→</span></button>
-      <p class="microcta">6 questions. Instant results. No email wall until the end.</p>
+      <p class="microcta">6 questions. Instant results.</p>
     </div>
   </section>
 
@@ -544,7 +538,6 @@
   <div class="quiz" id="quiz" role="dialog" aria-modal="true" aria-label="Does your business run you? Assessment">
     <div class="quiz-top">
       <img src="assets/logo-light.svg" alt="Jason Moss">
-      <button type="button" class="quiz-close" id="quizClose" aria-label="Close assessment">✕&nbsp; Close</button>
     </div>
     <div class="quiz-progress" id="quizProgress">
       <span class="qp-label" id="qpLabel">Question 1 of 6</span>
@@ -1045,7 +1038,6 @@
     document.querySelectorAll('[data-quiz-open]').forEach(function(b){
       b.addEventListener('click', openQuiz);
     });
-    document.getElementById('quizClose').addEventListener('click', closeQuiz);
     document.addEventListener('keydown', function(e){
       if (e.key === 'Escape' && quiz.classList.contains('open') && view !== 'email') closeQuiz();
     });
