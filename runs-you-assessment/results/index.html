@@ -264,11 +264,15 @@
     border:1px solid rgba(194,168,108,.55); z-index:0;
   }
   .proof-grid b{ color:var(--gold); font-weight:400; }
-  .tl-row{ display:flex; align-items:center; flex-wrap:wrap; gap:14px 44px; }
+  .trustlogos{ text-align:center; margin:84px auto 0; padding:0 24px; }
+  .tl-row{
+    display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
+    gap:14px 44px; max-width:860px; margin:0 auto;
+  }
   .tl-row img{ height:17px; width:auto; opacity:.38; filter:brightness(0) invert(1); }
   .tl-label{
     display:block; font-size:10px; letter-spacing:.30em; text-transform:uppercase;
-    color:rgba(140,131,122,.85); margin:0 0 18px; font-weight:600;
+    color:rgba(140,131,122,.85); margin:0 0 20px; font-weight:600;
   }
   .testi{
     display:flex; align-items:flex-start; gap:20px; margin:36px 0 0;
@@ -320,6 +324,9 @@
     .stickybar .t{ display:none; }
     .btn{ white-space:nowrap; padding:18px 26px; font-size:14px; }
     .cost-beats p{ padding-left:20px; margin-bottom:26px; }
+    .trustlogos{ margin-top:60px; }
+    .tl-row{ gap:12px 26px; }
+    .tl-row img{ height:13px; }
   }
 </style>
 </head>
@@ -535,7 +542,7 @@
       '</div></section>';
 
     /* You're not alone — connection + authority BEFORE the ask (cold traffic) */
-    html += '<section class="bg-forest hairline-b"><div class="proof-grid reveal">' +
+    html += '<section class="bg-charcoal glow hairline-b"><div class="proof-grid reveal">' +
       '<div class="portrait"><img src="../assets/featured.jpg" alt="Jason Moss"></div>' +
       '<div class="stack"><hr class="divider"><p class="eyebrow">You’re not alone</p>' +
       '<h2>I’ve been there.</h2>' +
@@ -544,11 +551,12 @@
       '<div class="testi">' +
         '<img src="../assets/meaghan.jpg" alt="Meaghan L.">' +
         '<div>' +
-          '<p class="t-text">With Jason’s help, Meaghan went from working 80-hour weeks to 20–25 — and scaled past <b>$260K in sales</b>.</p>' +
+          '<p class="t-text">With Jason’s help, I went from working 80-hour weeks to 20–25 — and scaled past <b>$260K in sales</b>.</p>' +
           '<p class="t-who">Meaghan L. · Business Coach</p>' +
         '</div>' +
       '</div>' +
-      '<div style="margin-top:40px">' +
+      '</div></div>' +
+      '<div class="trustlogos reveal">' +
         '<span class="tl-label">As featured in</span>' +
         '<div class="tl-row">' +
           '<img src="../assets/logo-forbes-scotland.png" alt="Forbes">' +
@@ -557,7 +565,7 @@
           '<img src="../assets/logo-fast-company-sa.png" alt="Fast Company">' +
           '<img src="../assets/logo-obo.png" alt="One Business Original">' +
         '</div>' +
-      '</div></div></div></section>';
+      '</div></section>';
 
     /* The turn */
     if (qualified){
