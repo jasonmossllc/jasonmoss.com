@@ -528,7 +528,7 @@
     var CALENDLY_URL = 'https://calendly.com/jasonmoss/business-assessment-call-with-jason-moss';
     var YOUTUBE_URL = 'https://www.youtube.com/@jasonmossofficial';
     var TURNSTILE_SITEKEY = '0x4AAAAAADlUEkeJ6kJ-_AML';
-    var STORE_KEY = 'ryAssessment.v1';
+    var STORE_KEY = 'ryAssessment.v2';  // v2: q3/q4 swap — old stored results URLs are invalid
 
     var urlParams = new URLSearchParams(window.location.search);
     var latestAd = (urlParams.get('ad') || '').trim();
@@ -615,7 +615,11 @@
     }
 
     function openQuiz(){
-      if (state.submitted && state.resultsUrl){ window.location.href = state.resultsUrl; return; }
+      if (state.submitted && state.resultsUrl &&
+          state.resultsUrl.indexOf('/results/') !== -1 &&
+          /[?&]q4=[1-5](&|$)/.test(state.resultsUrl)){
+        window.location.href = state.resultsUrl; return;
+      }
       quiz.classList.add('open');
       document.body.classList.add('quiz-locked');
       view = 'q'; current = 0;
