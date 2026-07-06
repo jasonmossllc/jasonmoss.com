@@ -171,7 +171,7 @@
 
   /* scroll cue */
   .scrollcue{
-    position:absolute; left:50%; bottom:30px; transform:translateX(-50%); z-index:3;
+    position:absolute; left:0; right:0; bottom:30px; margin:0 auto; width:max-content; z-index:3;
     background:none; border:0; cursor:pointer; padding:10px;
   }
   .scrollcue span{
@@ -239,16 +239,6 @@
   }
   .cost-beats p:last-child{ margin-bottom:0; color:var(--gold); font-style:italic; }
 
-  /* ============ PHOTO BAND ============ */
-  .photoband{
-    height:48vh; min-height:340px;
-    border-top:1px solid rgba(194,168,108,.22);
-    border-bottom:1px solid rgba(194,168,108,.22);
-    background:
-      linear-gradient(180deg, rgba(20,22,21,.55) 0%, rgba(20,22,21,.25) 45%, rgba(29,31,30,.65) 100%),
-      url('../assets/lifestyle-3.jpg') center 30% / cover no-repeat;
-  }
-
   /* ============ BOOK CARD ============ */
   .bookcard{
     position:relative; background:#fff; margin-top:46px; padding:44px 40px;
@@ -276,6 +266,28 @@
   .proof-grid b{ color:var(--gold); font-weight:400; }
   .tl-row{ display:flex; align-items:center; flex-wrap:wrap; gap:14px 44px; }
   .tl-row img{ height:17px; width:auto; opacity:.38; filter:brightness(0) invert(1); }
+  .tl-label{
+    display:block; font-size:10px; letter-spacing:.30em; text-transform:uppercase;
+    color:rgba(140,131,122,.85); margin:0 0 18px; font-weight:600;
+  }
+  .testi{
+    display:flex; align-items:flex-start; gap:20px; margin:36px 0 0;
+    padding:26px 28px; background:rgba(20,22,21,.35);
+    border:1px solid rgba(194,168,108,.25);
+  }
+  .testi img{
+    width:64px; height:64px; border-radius:50%; object-fit:cover;
+    border:1px solid rgba(194,168,108,.55); flex-shrink:0;
+  }
+  .testi .t-text{
+    font-family:var(--serif); font-size:17.5px; line-height:1.65;
+    color:rgba(233,226,211,.92); margin:0 0 10px; max-width:52ch;
+  }
+  .testi .t-text b{ color:var(--gold); font-weight:400; }
+  .testi .t-who{
+    font-size:11px; letter-spacing:.22em; text-transform:uppercase; font-weight:600;
+    color:var(--taupe); margin:0;
+  }
 
   footer{
     text-align:center; padding:54px 24px 120px; background:var(--obsidian-deep);
@@ -305,7 +317,6 @@
     .verdict .vsub{ font-size:15.5px; margin-top:26px; }
     .proof-grid{ grid-template-columns:1fr; gap:44px; }
     .portrait{ max-width:340px; }
-    .photoband{ height:38vh; min-height:260px; }
     .stickybar .t{ display:none; }
     .btn{ white-space:nowrap; padding:18px 26px; font-size:14px; }
     .cost-beats p{ padding-left:20px; margin-bottom:26px; }
@@ -523,9 +534,6 @@
       '<p class="pull">And it compounds. The bigger the business gets, the bigger the cage — more revenue, more dependency, less of you.</p>' +
       '</div></section>';
 
-    /* Photo band — a breath before the turn */
-    html += '<div class="photoband" role="img" aria-label="Jason Moss overlooking the mountains"></div>';
-
     /* You're not alone — connection + authority BEFORE the ask (cold traffic) */
     html += '<section class="bg-forest hairline-b"><div class="proof-grid reveal">' +
       '<div class="portrait"><img src="../assets/featured.jpg" alt="Jason Moss"></div>' +
@@ -533,16 +541,28 @@
       '<h2>I’ve been there.</h2>' +
       '<p>Early on in my journey, I built a six-figure coaching business and then hit this exact wall. The thing I’d built was running me, and no amount of hustle was fixing it. So I rebuilt it, from the inside out, and scaled past $500k / year as a result.</p>' +
       '<p>Since then I’ve helped <b>1,000+ entrepreneurs</b> navigate the journey of business growth without self-sacrifice.</p>' +
-      '<div class="tl-row" style="margin-top:26px">' +
-        '<img src="../assets/logo-forbes-scotland.png" alt="Forbes">' +
-        '<img src="../assets/logo-business-insider.png" alt="Business Insider">' +
-        '<img src="../assets/logo-entrepreneur.png" alt="Entrepreneur">' +
+      '<div class="testi">' +
+        '<img src="../assets/meaghan.jpg" alt="Meaghan L.">' +
+        '<div>' +
+          '<p class="t-text">With Jason’s help, Meaghan went from working 80-hour weeks to 20–25 — and scaled past <b>$260K in sales</b>.</p>' +
+          '<p class="t-who">Meaghan L. · Business Coach</p>' +
+        '</div>' +
+      '</div>' +
+      '<div style="margin-top:40px">' +
+        '<span class="tl-label">As featured in</span>' +
+        '<div class="tl-row">' +
+          '<img src="../assets/logo-forbes-scotland.png" alt="Forbes">' +
+          '<img src="../assets/logo-business-insider.png" alt="Business Insider">' +
+          '<img src="../assets/logo-entrepreneur.png" alt="Entrepreneur">' +
+          '<img src="../assets/logo-fast-company-sa.png" alt="Fast Company">' +
+          '<img src="../assets/logo-obo.png" alt="One Business Original">' +
+        '</div>' +
       '</div></div></div></section>';
 
     /* The turn */
     if (qualified){
       html += '<section class="bg-pale"><div class="wrap stack reveal">' +
-        '<hr class="divider"><p class="eyebrow" style="color:var(--mocha)">The next step</p>' +
+        '<hr class="divider"><p class="eyebrow" style="color:var(--mocha)">Your next step</p>' +
         '<h2>The fix is real — and it’s specific.</h2>' +
         '<p>But it’s not a tactic you can download. It’s both: changing how the business runs, <i>and</i> changing how you run it. That’s the work, and it’s what we’ll map out together.</p>' +
         '<div class="bookcard" id="bookcard"><span class="corner tl"></span><span class="corner br"></span>' +
