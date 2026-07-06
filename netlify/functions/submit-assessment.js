@@ -76,6 +76,16 @@ function severityTier(score) {
   return 'Low';
 }
 
+// Canonical personalized results URL. Stored on the Kit subscriber
+// (assessment_results_url) so emails can link straight back to the exact
+// results page, and returned to the quiz page for the post-submit redirect.
+function buildResultsUrl({ q2, q3, q4, q5, q6, firstName, email }) {
+  const params = new URLSearchParams({ q2, q3: String(q3), q4, q5, q6 });
+  if (firstName) params.set('name', firstName);
+  if (email) params.set('email', email);
+  return `https://jasonmoss.com/runs-you-assessment/results/?${params.toString()}`;
+}
+
 // Best-effort: flip assessment_booked to Yes after a Calendly booking.
 // Never blocks the visitor — the booking already happened.
 async function markBooked(email) {
@@ -183,6 +193,9 @@ exports.handler = async (event) => {
     const qualified = data.q2 !== '0-5k';
 
     const firstName = cleanString(data.first_name, 100);
+    const resultsUrl = buildResultsUrl({
+      q2: data.q2, q3, q4: data.q4, q5: data.q5, q6: data.q6, firstName, email,
+    });
     const submission = {
       email,
       firstName,
@@ -203,6 +216,7 @@ exports.handler = async (event) => {
         assessment_qualified: qualified ? 'Yes' : 'No',
         assessment_severity: severity,
         assessment_date: new Date().toISOString().slice(0, 10),
+        assessment_results_url: resultsUrl,
       },
       referrer: cleanString(
         headerValue(event.headers, 'referer') ||
@@ -226,7 +240,7 @@ exports.handler = async (event) => {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ success: true, queued: true, qualified, severity, score }),
+        body: JSON.stringify({ success: true, queued: true, qualified, severity, score, resultsUrl }),
       };
     }
 
@@ -240,6 +254,7 @@ exports.handler = async (event) => {
         qualified,
         severity,
         score,
+        resultsUrl,
       }),
     };
   } catch (error) {
