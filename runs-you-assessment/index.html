@@ -12,6 +12,7 @@
 <link rel="icon" type="image/png" sizes="32x32" href="https://jasonmoss.com/assets/images/favicon-32x32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-P5D1GH2M97"></script>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
 <meta property="og:url" content="https://jasonmoss.com/runs-you-assessment/">
 <link rel="canonical" href="https://jasonmoss.com/runs-you-assessment/">
@@ -530,10 +531,15 @@
     var latestSource = (urlParams.get('source') || '').trim();
 
     window.dataLayer = window.dataLayer || [];
+    function gtag(){ window.dataLayer.push(arguments); }
+    gtag('js', new Date());
+    // direct GA4 hookup — GTM keeps owning page_view, we send funnel events
+    gtag('config', 'G-P5D1GH2M97', { send_page_view: false });
     function track(eventName, extra){
       var payload = { event: eventName };
       if (extra) for (var k in extra) payload[k] = extra[k];
-      window.dataLayer.push(payload);
+      window.dataLayer.push(payload);   // GTM-style (Meta/GTM triggers)
+      gtag('event', eventName, extra || {});  // straight to GA4
     }
 
     /* ─────────────────────────── quiz data ─────────────────────────── */
