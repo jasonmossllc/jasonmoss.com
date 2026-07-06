@@ -619,6 +619,14 @@
             kids:'your time with your kids', friendships:'your friendships',
             identity:'who you are outside the business' }
     };
+    // One concrete beat after the cost is named — makes it felt, not stated.
+    var COST_IMAGE = {
+      health: 'the sleep, the energy, the body you keep promising you’ll get back to',
+      marriage: 'the unhurried conversations, the attention, the person closest to you getting whatever’s left of you at the end of the day',
+      kids: 'the bedtimes, the games, the ordinary afternoons they’ll only want you around for once',
+      friendships: 'the calls you don’t return, the plans you cancel, the people who’ve quietly stopped asking',
+      identity: 'the interests, the play, the person you were before every conversation became about the business'
+    };
     var HOURS_POINTS = { 'under-40':1, '40-50':2, '50-60':3, '60-plus':4 };
     var VAC_POINTS = { '3-months':1, '6-months':2, 'over-year':3, 'cant-remember':4 };
 
@@ -886,6 +894,7 @@
       var results = document.getElementById('results');
       var name = state.name ? esc(state.name.split(' ')[0]) : '';
       var costPhrase = esc(MIRROR.q6[state.answers.q6] || 'who you are outside the business');
+      var costImage = esc(COST_IMAGE[state.answers.q6] || COST_IMAGE.identity);
       var verdict = VERDICTS[state.severity] || VERDICTS.Moderate;
 
       var html = '';
@@ -921,7 +930,7 @@
       html += '<section class="bg-forest hairline-b"><div class="wrap stack">' +
         '<hr class="divider"><p class="eyebrow">The cost</p>' +
         '<p class="open">And here’s what most people miss: this isn’t just costing you time.</p>' +
-        '<p class="costline">It’s costing you <em>' + costPhrase + '</em>.</p>' +
+        '<p class="costline">It’s costing you <em>' + costPhrase + '</em> — ' + costImage + '.</p>' +
         '<p>And it compounds. The longer the business is built around you, the harder it becomes to ever step out of it.</p>' +
         '</div></section>';
 
