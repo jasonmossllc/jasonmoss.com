@@ -342,7 +342,6 @@
   #cf-turnstile-box{ margin:0 0 20px; min-height:0; display:flex; justify-content:flex-start; max-width:100%; }
   .qerr{ color:#d98f7e; font-size:14.5px; margin:0 0 18px; display:none; }
   .qerr.show{ display:block; }
-  .qprivacy{ color:var(--taupe); font-size:13px; margin:16px 0 0; letter-spacing:.03em; }
   .btn[disabled]{ opacity:.55; cursor:default; transform:none; box-shadow:none; }
 
   /* off-ramp */
@@ -582,7 +581,12 @@
         options:[
           {v:'0-5k', t:'$0–5k'}, {v:'5-10k', t:'$5–10k'}, {v:'10-25k', t:'$10–25k'},
           {v:'25-50k', t:'$25–50k'}, {v:'50k-plus', t:'$50k+'} ] },
-      { id:'q3', label:'Question 3 of 6',
+      { id:'q4', label:'Question 3 of 6',
+        title:'How many hours a week do you actually work?',
+        options:[
+          {v:'under-40', t:'Under 40'}, {v:'40-50', t:'40–50'},
+          {v:'50-60', t:'50–60'}, {v:'60-plus', t:'60+'} ] },
+      { id:'q3', label:'Question 4 of 6',
         title:'If you disappeared for two weeks with no phone, what would happen to your business?',
         options:[
           {v:'1', t:'It would run fine without me'},
@@ -590,11 +594,6 @@
           {v:'3', t:'Things would start breaking'},
           {v:'4', t:'It would grind to a halt'},
           {v:'5', t:'Honestly? It’d fall apart'} ] },
-      { id:'q4', label:'Question 4 of 6',
-        title:'How many hours a week do you actually work?',
-        options:[
-          {v:'under-40', t:'Under 40'}, {v:'40-50', t:'40–50'},
-          {v:'50-60', t:'50–60'}, {v:'60-plus', t:'60+'} ] },
       { id:'q5', label:'Question 5 of 6',
         title:'When did you last take a real week off — fully unplugged?',
         options:[
@@ -744,7 +743,6 @@
           '<div id="cf-turnstile-box"></div>' +
           '<p class="qerr" id="qErr"></p>' +
           '<button type="submit" class="btn" id="qSubmit">Show me my results<span class="arr">→</span></button>' +
-          '<p class="qprivacy">Your results appear instantly. I’ll also send them to your inbox — no spam, unsubscribe anytime.</p>' +
         '</form>'
       );
       renderTurnstile();
@@ -880,8 +878,8 @@
     function mirrorSentence(){
       var twoWeeks = esc(MIRROR.q3[state.answers.q3] || '');
       var hours = esc(MIRROR.q4[state.answers.q4] || '');
-      var s = 'You told me that if you disappeared for two weeks, <b>' + twoWeeks + '</b>. ' +
-              'You’re working <b>' + hours + '</b> hours a week. ';
+      var s = 'You’re working <b>' + hours + '</b> hours a week. ' +
+              'You told me that if you disappeared for two weeks, <b>' + twoWeeks + '</b>. ';
       if (state.answers.q5 === 'cant-remember'){
         s += 'And the last time you took a real week off… <b>you genuinely can’t remember</b>.';
       } else {
@@ -1046,9 +1044,6 @@
     /* ─────────────────────────── wiring ─────────────────────────── */
     document.querySelectorAll('[data-quiz-open]').forEach(function(b){
       b.addEventListener('click', openQuiz);
-    });
-    document.addEventListener('keydown', function(e){
-      if (e.key === 'Escape' && quiz.classList.contains('open') && view !== 'email') closeQuiz();
     });
     backBtn.addEventListener('click', function(){
       if (view === 'offramp'){ current = 0; renderQuestion(); return; }
