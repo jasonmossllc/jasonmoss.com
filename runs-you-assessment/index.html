@@ -601,11 +601,11 @@
           {v:'3-months', t:'In the last 3 months'}, {v:'6-months', t:'In the last 6 months'},
           {v:'over-year', t:'Over a year ago'}, {v:'cant-remember', t:"I genuinely can't remember"} ] },
       { id:'q6', label:'Question 6 of 6',
-        title:'When your business grew, what in your life got smaller?',
+        title:'When your business grew, what’s the #1 thing in your life that got smaller?',
         options:[
-          {v:'health', t:'My health'}, {v:'relationships', t:'My relationships'},
-          {v:'family', t:'My presence with family'}, {v:'purpose', t:'My sense of purpose'},
-          {v:'all', t:'All of it'} ] }
+          {v:'health', t:'My health'}, {v:'marriage', t:'My marriage or relationship'},
+          {v:'kids', t:'My time with my kids'}, {v:'friendships', t:'My friendships'},
+          {v:'identity', t:'Who I am outside the business'} ] }
     ];
 
     var MIRROR = {
@@ -615,9 +615,9 @@
       q4: { 'under-40':'under 40', '40-50':'40–50', '50-60':'50–60', '60-plus':'60+' },
       q5: { '3-months':'in the last 3 months', '6-months':'in the last 6 months',
             'over-year':'over a year ago', 'cant-remember':'' },
-      q6: { health:'your health', relationships:'your relationships',
-            family:'your presence with the people you love',
-            purpose:'your sense of why you started', all:'all of it' }
+      q6: { health:'your health', marriage:'your marriage',
+            kids:'your time with your kids', friendships:'your friendships',
+            identity:'who you are outside the business' }
     };
     var HOURS_POINTS = { 'under-40':1, '40-50':2, '50-60':3, '60-plus':4 };
     var VAC_POINTS = { '3-months':1, '6-months':2, 'over-year':3, 'cant-remember':4 };
@@ -885,7 +885,7 @@
     function renderResults(){
       var results = document.getElementById('results');
       var name = state.name ? esc(state.name.split(' ')[0]) : '';
-      var costPhrase = esc(MIRROR.q6[state.answers.q6] || 'all of it');
+      var costPhrase = esc(MIRROR.q6[state.answers.q6] || 'who you are outside the business');
       var verdict = VERDICTS[state.severity] || VERDICTS.Moderate;
 
       var html = '';

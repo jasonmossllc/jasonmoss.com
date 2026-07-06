@@ -61,10 +61,10 @@ const VACATION = {
 };
 const COST = {
   health: 'My health',
-  relationships: 'My relationships',
-  family: 'My presence with family',
-  purpose: 'My sense of purpose',
-  all: 'All of it',
+  marriage: 'My marriage or relationship',
+  kids: 'My time with my kids',
+  friendships: 'My friendships',
+  identity: 'Who I am outside the business',
 };
 // Severity scoring per spec: Q3 value + hours band + vacation band.
 const HOURS_POINTS = { 'under-40': 1, '40-50': 2, '50-60': 3, '60-plus': 4 };
