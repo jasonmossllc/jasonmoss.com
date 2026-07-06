@@ -322,12 +322,6 @@
   .opt:focus-visible{ outline:2px solid var(--gold); outline-offset:2px; }
   .opt.picked{ border-color:var(--gold); background:rgba(194,168,108,.16); }
   .opt small{ display:block; color:var(--taupe); font-size:13.5px; margin-top:2px; }
-  /* 1–5 scale */
-  .scale{ display:flex; gap:12px; margin:0; padding:0; list-style:none; }
-  .scale li{ flex:1; display:flex; }
-  .scale .opt{ width:100%; text-align:center; padding:20px 0; font-family:var(--serif); font-size:22px; min-height:64px; }
-  .scale-ends{ display:flex; justify-content:space-between; margin-top:14px; color:var(--taupe); font-size:13.5px; gap:20px; }
-  .scale-ends span:last-child{ text-align:right; }
   .quiz-nav{ max-width:760px; margin:0 auto; width:100%; padding:0 28px 34px; }
   .quiz-back{
     background:none; border:0; color:var(--taupe); font-family:var(--sans); font-size:14px;
@@ -595,10 +589,14 @@
         options:[
           {v:'0-5k', t:'$0–5k'}, {v:'5-10k', t:'$5–10k'}, {v:'10-25k', t:'$10–25k'},
           {v:'25-50k', t:'$25–50k'}, {v:'50k-plus', t:'$50k+'} ] },
-      { id:'q3', label:'Question 3 of 6', scale:true,
-        title:'On a scale of 1 to 5, how much does your business run you?',
-        options:[ {v:'1',t:'1'},{v:'2',t:'2'},{v:'3',t:'3'},{v:'4',t:'4'},{v:'5',t:'5'} ],
-        ends:['1 — It runs smoothly without me', '5 — It completely runs me'] },
+      { id:'q3', label:'Question 3 of 6',
+        title:'If you disappeared for two weeks with no phone, what would happen to your business?',
+        options:[
+          {v:'1', t:'It would run fine without me'},
+          {v:'2', t:'It’d be okay, but a few things would slip'},
+          {v:'3', t:'Things would start breaking'},
+          {v:'4', t:'It would grind to a halt'},
+          {v:'5', t:'Honestly? It’d fall apart'} ] },
       { id:'q4', label:'Question 4 of 6',
         title:'How many hours a week do you actually work?',
         options:[
@@ -618,6 +616,9 @@
     ];
 
     var MIRROR = {
+      q3: { '1':'it would run fine without you', '2':'a few things would slip',
+            '3':'things would start breaking', '4':'it would grind to a halt',
+            '5':'honestly — it’d fall apart' },
       q4: { 'under-40':'under 40', '40-50':'40–50', '50-60':'50–60', '60-plus':'60+' },
       q5: { '3-months':'in the last 3 months', '6-months':'in the last 6 months',
             'over-year':'over a year ago', 'cant-remember':'' },
@@ -680,19 +681,11 @@
       setProgress(q.label, current / 6);
       backBtn.hidden = current === 0;
       var html = '<h2>' + esc(q.title) + '</h2>';
-      if (q.scale){
-        html += '<ul class="scale">';
-        q.options.forEach(function(o){
-          html += '<li><button type="button" class="opt" data-v="' + o.v + '">' + esc(o.t) + '</button></li>';
-        });
-        html += '</ul><div class="scale-ends"><span>' + esc(q.ends[0]) + '</span><span>' + esc(q.ends[1]) + '</span></div>';
-      } else {
-        html += '<ul class="opts">';
-        q.options.forEach(function(o){
-          html += '<li><button type="button" class="opt' + (state.answers[q.id] === o.v ? ' picked' : '') + '" data-v="' + o.v + '">' + esc(o.t) + '</button></li>';
-        });
-        html += '</ul>';
-      }
+      html += '<ul class="opts">';
+      q.options.forEach(function(o){
+        html += '<li><button type="button" class="opt' + (state.answers[q.id] === o.v ? ' picked' : '') + '" data-v="' + o.v + '">' + esc(o.t) + '</button></li>';
+      });
+      html += '</ul>';
       swapStep(html);
       stepEl.querySelectorAll('.opt').forEach(function(btn){
         btn.addEventListener('click', function(){ pick(q.id, btn.getAttribute('data-v'), btn); });
@@ -884,9 +877,9 @@
     };
 
     function mirrorSentence(){
-      var q3 = esc(state.answers.q3);
+      var twoWeeks = esc(MIRROR.q3[state.answers.q3] || '');
       var hours = esc(MIRROR.q4[state.answers.q4] || '');
-      var s = 'You told me your business runs you at a <b>' + q3 + ' out of 5</b>. ' +
+      var s = 'You told me that if you disappeared for two weeks, <b>' + twoWeeks + '</b>. ' +
               'You’re working <b>' + hours + '</b> hours a week. ';
       if (state.answers.q5 === 'cant-remember'){
         s += 'And the last time you took a real week off… <b>you genuinely can’t remember</b>.';

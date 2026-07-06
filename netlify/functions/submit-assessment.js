@@ -38,6 +38,15 @@ const REVENUE = {
   '25-50k': '$25-50k',
   '50k-plus': '$50k+',
 };
+// Q3: "If you disappeared for two weeks with no phone, what would happen to
+// your business?" — the 1-5 value doubles as the severity-score component.
+const TWO_WEEKS = {
+  1: '1 - It would run fine without me',
+  2: "2 - It'd be okay, but a few things would slip",
+  3: '3 - Things would start breaking',
+  4: '4 - It would grind to a halt',
+  5: "5 - Honestly? It'd fall apart",
+};
 const HOURS = {
   'under-40': 'Under 40',
   '40-50': '40-50',
@@ -187,7 +196,7 @@ exports.handler = async (event) => {
       // Always take the latest assessment's answers.
       overwriteFields: {
         assessment_revenue: REVENUE[data.q2],
-        assessment_runs_you_score: String(q3),
+        assessment_runs_you_score: TWO_WEEKS[q3],
         assessment_hours: HOURS[data.q4],
         assessment_vacation: VACATION[data.q5],
         assessment_cost: COST[data.q6],
