@@ -252,6 +252,10 @@
   .bookcard p{ color:#3a3c3b; margin:0 0 18px; }
   .bookcard p:first-of-type{ font-family:var(--serif); font-size:21px; color:var(--obsidian); }
   .bookcard .microcta{ color:var(--taupe); }
+  .bookcard .stakes{
+    font-family:var(--serif); font-style:italic; color:var(--mocha);
+    border-top:1px solid rgba(140,131,122,.25); padding-top:20px; margin-top:24px;
+  }
   .booked-note{ display:none; font-family:var(--serif); font-size:19px; color:var(--forest); margin:8px 0 0; }
   .booked-note.show{ display:block; }
 
@@ -298,7 +302,10 @@
     border-top:1px solid rgba(194,168,108,.14);
   }
   footer img{ height:26px; margin:0 auto 16px; opacity:.85; }
-  footer p{ color:rgba(140,131,122,.8); font-size:12.5px; margin:0; letter-spacing:.06em; }
+  footer p{ color:rgba(140,131,122,.8); font-size:12.5px; margin:0 0 8px; letter-spacing:.06em; }
+  footer p:last-child{ margin-bottom:0; }
+  footer a{ color:rgba(140,131,122,.9); text-decoration:underline; text-underline-offset:3px; }
+  footer a:hover{ color:var(--gold); }
 
   /* ============ STICKY BOOK BAR ============ */
   .stickybar{
@@ -397,6 +404,14 @@
         'Notice how long that took.',
         'That pause is the cost.'
       ]
+    };
+    // "Another year of X" — the stakes line echoes their chosen cost.
+    var COST_STAKES = {
+      health: 'another year of 2am wake-ups',
+      marriage: 'another year of them falling asleep alone next to you',
+      kids: 'another year of “one sec, buddy”',
+      friendships: 'another year of calls you don’t return',
+      identity: 'another year of disappearing into the business'
     };
     var VERDICTS = {
       High:     { l1: 'You’re not running a business.', l2: 'You’re being run by one.' },
@@ -571,13 +586,15 @@
     if (qualified){
       html += '<section class="bg-pale"><div class="wrap stack reveal">' +
         '<hr class="divider"><p class="eyebrow" style="color:var(--mocha)">Your next step</p>' +
-        '<h2>The fix is real — and it’s specific.</h2>' +
-        '<p>But it’s not a tactic you can download. It’s both: changing how the business runs, <i>and</i> changing how you run it. That’s the work, and it’s what we’ll map out together.</p>' +
+        '<p class="open">Here’s the good news the last few minutes probably didn’t feel like:</p>' +
+        '<h2>This is fixable.</h2>' +
+        '<p>Not by working harder or hiring another person — you’ve tried that. But by changing the two things at the same time: how the business runs, and how you run it. Because they’re the same problem. That’s the part almost no one gets right.</p>' +
         '<div class="bookcard" id="bookcard"><span class="corner tl"></span><span class="corner br"></span>' +
-          '<p>I’m opening a handful of free 20-minute business assessment calls this week.</p>' +
-          '<p>We’ll pinpoint exactly why your business is running you — and the first real shift to change it.</p>' +
-          '<p>No pitch. If I think I can help you go deeper, I’ll say so. Either way, you’ll leave clearer than you came.</p>' +
-          '<button type="button" class="btn" id="bookBtn">Book my assessment call<span class="arr">→</span></button>' +
+          '<p>I’m opening a handful of free 20-minute calls this week.</p>' +
+          '<p>On it, we’ll find the one thing most responsible for your business running you — and the first concrete move to change it. You’ll leave knowing exactly what’s keeping you the bottleneck, whether or not we ever work together.</p>' +
+          '<p>That’s it. No pitch. If I can help you further, I’ll tell you.</p>' +
+          '<p class="stakes">But the version of this where nothing changes — where it’s ' + esc(COST_STAKES[q6]) + ' — that one’s not fixable later. It only gets more expensive.</p>' +
+          '<button type="button" class="btn" id="bookBtn">Book my call<span class="arr">→</span></button>' +
           '<p class="booked-note" id="bookedNote">You’re booked. The calendar invite is in your inbox — come ready to look at the real thing.</p>' +
           '<p class="microcta">Free. 20 minutes. Directly with me.</p>' +
         '</div></div></section>';
@@ -591,7 +608,13 @@
         '</div></section>';
     }
 
-    html += '<footer><img src="../assets/logo-light.svg" alt="Jason Moss"><p>© 2026 Jason Moss</p></footer>';
+    html += '<footer><img src="../assets/logo-light.svg" alt="Jason Moss">' +
+      '<p>© Jason Moss LLC. All rights reserved</p>' +
+      '<p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>' +
+      '<p>This website is not a part of Facebook or Meta Platforms, Inc.</p>' +
+      '<p>Additionally, this site is NOT endorsed by Facebook in any way.</p>' +
+      '<p>Facebook is a trademark of Meta Platforms, Inc.</p>' +
+      '</footer>';
 
     /* Sticky book bar (qualified only) */
     if (qualified){
