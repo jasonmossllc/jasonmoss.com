@@ -680,7 +680,19 @@
     // counts don't inflate on re-opens.
     if (fresh){
       track('assessment_complete', { assessment_severity: severity, assessment_qualified: qualified ? 'yes' : 'no' });
-      if (qualified) track('qualified_lead', { assessment_severity: severity });
+      if (qualified){
+        track('qualified_lead', { assessment_severity: severity });
+        // Meta standard Lead event, fired straight at the pixel (loaded by
+        // GTM's base code) — qualified ($5k+/mo) completers only, once per
+        // submission (fresh=1). This is the campaign optimization event.
+        (function fireMetaLead(tries){
+          if (window.fbq){
+            window.fbq('track', 'Lead', { content_name: 'runs-you-assessment', content_category: severity });
+            return;
+          }
+          if ((tries || 0) < 40) setTimeout(function(){ fireMetaLead((tries || 0) + 1); }, 250);
+        })(0);
+      }
     }
     track('results_viewed', { assessment_severity: severity, assessment_qualified: qualified ? 'yes' : 'no' });
 
