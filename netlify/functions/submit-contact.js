@@ -312,6 +312,7 @@ async function syncContactToKit(submission) {
     firstName,
     tagIds,
     mappedFields = {},
+    overwriteFields = {},
     referrer = '',
   } = submission;
 
@@ -324,13 +325,21 @@ async function syncContactToKit(submission) {
       );
     }
 
+    if (Object.keys(overwriteFields).length) {
+      await updateSubscriber(resubscribedSubscriber.id, { email, fields: overwriteFields });
+    }
     await tagSubscriberWithAll(tagIds, email);
     return { subscriberId: safeSubscriberId(resubscribedSubscriber), tagged: true };
   }
 
   const needsAttributionCheck = Object.keys(mappedFields).length > 0;
   const existingSubscriber = needsAttributionCheck ? await findSubscriberByEmail(email) : null;
-  const fields = buildFieldsToSet(mappedFields, existingSubscriber?.fields);
+  // mappedFields are preserved (set only when blank, e.g. original attribution);
+  // overwriteFields always take the latest submission's value (e.g. assessment answers).
+  const fields = {
+    ...buildFieldsToSet(mappedFields, existingSubscriber?.fields),
+    ...overwriteFields,
+  };
 
   let subscriber;
   let subscriberExisted = false;
@@ -340,7 +349,7 @@ async function syncContactToKit(submission) {
       ? await updateSubscriber(existingSubscriber.id, { email, firstName, fields })
       : await saveSubscriber({ email, firstName, fields });
   } else {
-    const saved = await saveSubscriberWithMeta({ email, firstName });
+    const saved = await saveSubscriberWithMeta({ email, firstName, fields });
     subscriber = saved.subscriber;
     subscriberExisted = saved.status === 200;
   }
@@ -613,4 +622,15 @@ module.exports.__internal = {
   isQueueableKitError,
   kitErrorSummary,
   syncContactToKit,
+  // Shared with sibling form functions (submit-assessment.js) so every public
+  // endpoint runs the exact same bot guards and Kit plumbing.
+  verifyTurnstile,
+  originAllowed,
+  looksLikeBotName,
+  cleanString,
+  cleanMappedFieldValues,
+  headerValue,
+  EMAIL_RE,
+  findSubscriberByEmail,
+  updateSubscriber,
 };
