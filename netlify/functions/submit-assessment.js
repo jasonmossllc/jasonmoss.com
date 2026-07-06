@@ -41,7 +41,7 @@ const REVENUE = {
   '25-50k': '$25-50k',
   '50k-plus': '$50k+',
 };
-// Q3: "If you disappeared for two weeks with no phone, what would happen to
+// Q4: "If you disappeared for two weeks with no phone, what would happen to
 // your business?" — the 1-5 value doubles as the severity-score component.
 const TWO_WEEKS = {
   1: '1 - It would run fine without me',
@@ -83,7 +83,7 @@ function severityTier(score) {
 // (assessment_results_url) so emails can link straight back to the exact
 // results page, and returned to the quiz page for the post-submit redirect.
 function buildResultsUrl({ q2, q3, q4, q5, q6, firstName, email }) {
-  const params = new URLSearchParams({ q2, q3: String(q3), q4, q5, q6 });
+  const params = new URLSearchParams({ q2, q3, q4: String(q4), q5, q6 });
   if (firstName) params.set('name', firstName);
   if (email) params.set('email', email);
   return `https://jasonmoss.com/runs-you-assessment/results/?${params.toString()}`;
@@ -179,25 +179,26 @@ exports.handler = async (event) => {
 
     // Validate answers. Q1 must be "yes" — a "no" routes to the off-ramp and
     // never reaches email capture, so any other value here is a forged payload.
-    const q3 = Number.parseInt(data.q3, 10);
+    // q3 = hours band, q4 = two-week question (1-5), matching screen order.
+    const q4 = Number.parseInt(data.q4, 10);
     if (
       data.q1 !== 'yes' ||
       !REVENUE[data.q2] ||
-      !Number.isInteger(q3) || q3 < 1 || q3 > 5 ||
-      !HOURS[data.q4] ||
+      !HOURS[data.q3] ||
+      !Number.isInteger(q4) || q4 < 1 || q4 > 5 ||
       !VACATION[data.q5] ||
       !COST[data.q6]
     ) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid answers' }) };
     }
 
-    const score = q3 + HOURS_POINTS[data.q4] + VACATION_POINTS[data.q5];
+    const score = q4 + HOURS_POINTS[data.q3] + VACATION_POINTS[data.q5];
     const severity = severityTier(score);
     const qualified = data.q2 !== '0-5k';
 
     const firstName = cleanString(data.first_name, 100);
     const resultsUrl = buildResultsUrl({
-      q2: data.q2, q3, q4: data.q4, q5: data.q5, q6: data.q6, firstName, email,
+      q2: data.q2, q3: data.q3, q4, q5: data.q5, q6: data.q6, firstName, email,
     });
     const submission = {
       email,
@@ -213,8 +214,8 @@ exports.handler = async (event) => {
       // Always take the latest assessment's answers.
       overwriteFields: {
         assessment_revenue: REVENUE[data.q2],
-        assessment_runs_you_score: TWO_WEEKS[q3],
-        assessment_hours: HOURS[data.q4],
+        assessment_runs_you_score: TWO_WEEKS[q4],
+        assessment_hours: HOURS[data.q3],
         assessment_vacation: VACATION[data.q5],
         assessment_cost: COST[data.q6],
         assessment_qualified: qualified ? 'Yes' : 'No',

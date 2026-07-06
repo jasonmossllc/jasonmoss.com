@@ -63,19 +63,19 @@
   /* ---------- textured grounds ---------- */
   .bg-forest{
     background:
-      linear-gradient(180deg, rgba(44,63,54,.84), rgba(31,45,39,.94)),
+      linear-gradient(180deg, rgba(44,63,54,.72), rgba(31,45,39,.86)),
       url('../assets/section-bg-forest.jpg') center / cover no-repeat,
       var(--forest);
   }
   .bg-charcoal{
     background:
-      linear-gradient(180deg, rgba(29,31,30,.88), rgba(20,22,21,.96)),
+      linear-gradient(180deg, rgba(29,31,30,.78), rgba(20,22,21,.90)),
       url('../assets/section-bg-forest.jpg') center / cover no-repeat,
       var(--obsidian);
   }
   .bg-pale{
     background:
-      linear-gradient(180deg, rgba(248,246,242,.90), rgba(248,246,242,.96)),
+      linear-gradient(180deg, rgba(248,246,242,.82), rgba(248,246,242,.90)),
       url('../assets/section-bg-pale.jpg') center / cover no-repeat,
       var(--sand);
     color:var(--obsidian);
@@ -370,10 +370,10 @@
     var HOURS_POINTS = { 'under-40':1, '40-50':2, '50-60':3, '60-plus':4 };
     var VAC_POINTS = { '3-months':1, '6-months':2, 'over-year':3, 'cant-remember':4 };
     var MIRROR = {
-      q3: { '1':'it would run fine without you', '2':'a few things would slip',
+      q3: { 'under-40':'under 40', '40-50':'40–50', '50-60':'50–60', '60-plus':'60+' },
+      q4: { '1':'it would run fine without you', '2':'a few things would slip',
             '3':'things would start breaking', '4':'it would grind to a halt',
             '5':'honestly — it’d fall apart' },
-      q4: { 'under-40':'under 40', '40-50':'40–50', '50-60':'50–60', '60-plus':'60+' },
       q5: { '3-months':'in the last 3 months', '6-months':'in the last 6 months',
             'over-year':'over a year ago', 'cant-remember':'' },
       q6: { health:'your health', marriage:'your marriage',
@@ -429,14 +429,14 @@
     var email = (params.get('email') || '').trim().slice(0, 200);
     var fresh = params.get('fresh') === '1';
     var jumpToBook = params.get('book') === '1';
-    var q3n = parseInt(q3, 10);
+    var q4n = parseInt(q4, 10);
 
-    if (!REVENUE[q2] || !(q3n >= 1 && q3n <= 5) || !HOURS_POINTS[q4] || !VAC_POINTS[q5] || !MIRROR.q6[q6]){
+    if (!REVENUE[q2] || !HOURS_POINTS[q3] || !(q4n >= 1 && q4n <= 5) || !VAC_POINTS[q5] || !MIRROR.q6[q6]){
       window.location.replace(ASSESSMENT_URL);
       return;
     }
 
-    var score = q3n + HOURS_POINTS[q4] + VAC_POINTS[q5];
+    var score = q4n + HOURS_POINTS[q3] + VAC_POINTS[q5];
     var severity = score >= 10 ? 'High' : score >= 6 ? 'Moderate' : 'Low';
     var qualified = q2 !== '0-5k';
     var booked = false;
@@ -507,8 +507,8 @@
 
     /* ── render ─────────────────────────────────────────────────────── */
     function mirrorSentence(){
-      var s = 'You’re working <b>' + esc(MIRROR.q4[q4]) + '</b> hours a week. ' +
-              'You told me that if you disappeared for two weeks, <b>' + esc(MIRROR.q3[q3]) + '</b>. ';
+      var s = 'You’re working <b>' + esc(MIRROR.q3[q3]) + '</b> hours a week. ' +
+              'You told me that if you disappeared for two weeks, <b>' + esc(MIRROR.q4[q4]) + '</b>. ';
       if (q5 === 'cant-remember'){
         s += 'And the last time you took a real week off… <b>you genuinely can’t remember</b>.';
       } else {
