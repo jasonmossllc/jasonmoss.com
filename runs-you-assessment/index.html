@@ -78,26 +78,26 @@
   /* ---------- textured grounds ---------- */
   .bg-forest{
     background:
-      linear-gradient(180deg, rgba(44,63,54,.72), rgba(31,45,39,.86)),
+      linear-gradient(180deg, rgba(44,63,54,.84), rgba(31,45,39,.94)),
       url('assets/section-bg-forest.jpg') center / cover no-repeat,
       var(--forest);
   }
   .bg-charcoal{
     background:
-      linear-gradient(180deg, rgba(29,31,30,.78), rgba(20,22,21,.90)),
+      linear-gradient(180deg, rgba(29,31,30,.88), rgba(20,22,21,.96)),
       url('assets/section-bg-forest.jpg') center / cover no-repeat,
       var(--obsidian);
   }
   .bg-warm{
     background:
-      linear-gradient(180deg, rgba(233,226,211,.80), rgba(233,226,211,.90)),
+      linear-gradient(180deg, rgba(233,226,211,.88), rgba(233,226,211,.95)),
       url('assets/section-bg-warm.jpg') center / cover no-repeat,
       var(--stone);
     color:var(--obsidian);
   }
   .bg-pale{
     background:
-      linear-gradient(180deg, rgba(248,246,242,.82), rgba(248,246,242,.90)),
+      linear-gradient(180deg, rgba(248,246,242,.90), rgba(248,246,242,.96)),
       url('assets/section-bg-pale.jpg') center / cover no-repeat,
       var(--sand);
     color:var(--obsidian);
@@ -278,9 +278,7 @@
     position:fixed; inset:0; z-index:100; display:none; flex-direction:column;
     background:
       radial-gradient(ellipse 70% 45% at 50% 0%, rgba(194,168,108,.10) 0%, transparent 70%),
-      linear-gradient(180deg, rgba(20,22,21,.90), rgba(29,31,30,.95)),
-      url('assets/section-bg-forest.jpg') center / cover no-repeat,
-      var(--obsidian-deep);
+      linear-gradient(180deg, var(--obsidian-deep), var(--obsidian));
     overflow-y:auto; -webkit-overflow-scrolling:touch;
   }
   .quiz.open{ display:flex; }
