@@ -269,6 +269,7 @@
   }
   .proof-grid b{ color:var(--gold); font-weight:400; }
   .trustlogos{ text-align:center; margin:84px auto 0; padding:0 24px; }
+  .tl-row2{ margin-top:14px; }
   .tl-row{
     display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
     gap:14px 44px; max-width:860px; margin:0 auto;
@@ -425,6 +426,7 @@
     var name = (params.get('name') || '').trim().slice(0, 100);
     var email = (params.get('email') || '').trim().slice(0, 200);
     var fresh = params.get('fresh') === '1';
+    var jumpToBook = params.get('book') === '1';
     var q3n = parseInt(q3, 10);
 
     if (!REVENUE[q2] || !(q3n >= 1 && q3n <= 5) || !HOURS_POINTS[q4] || !VAC_POINTS[q5] || !MIRROR.q6[q6]){
@@ -439,8 +441,9 @@
     try { booked = sessionStorage.getItem('ryBooked.' + email) === '1'; } catch(e){}
 
     // canonical address bar: drop the one-time fresh flag so copied links are clean
-    if (fresh && window.history && history.replaceState){
+    if ((fresh || jumpToBook) && window.history && history.replaceState){
       params.delete('fresh');
+      params.delete('book');
       history.replaceState(null, '', window.location.pathname + '?' + params.toString());
     }
 
@@ -577,6 +580,8 @@
           '<img src="../assets/logo-forbes-scotland.png" alt="Forbes">' +
           '<img src="../assets/logo-business-insider.png" alt="Business Insider">' +
           '<img src="../assets/logo-entrepreneur.png" alt="Entrepreneur">' +
+        '</div>' +
+        '<div class="tl-row tl-row2">' +
           '<img src="../assets/logo-fast-company-sa.png" alt="Fast Company">' +
           '<img src="../assets/logo-obo.png" alt="One Business Original">' +
         '</div>' +
@@ -626,6 +631,19 @@
 
     document.getElementById('results').innerHTML = html;
     animateDial();
+
+    // email CTAs land right on the booking card (?book=1). Instant jump —
+    // native smooth scrolling gets canceled in in-app browsers (Gmail etc.),
+    // which is exactly where email clicks open.
+    if (jumpToBook){
+      setTimeout(function(){
+        var card = document.getElementById('bookcard');
+        if (!card) return;
+        var vh = window.innerHeight || document.documentElement.clientHeight || 800;
+        var r = card.getBoundingClientRect();
+        window.scrollTo(0, Math.max(0, r.top + window.scrollY - Math.max((vh - r.height) / 2, 20)));
+      }, 250);
+    }
 
     /* scroll cue */
     var cue = document.getElementById('scrollCue');

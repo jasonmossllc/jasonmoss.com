@@ -28,6 +28,9 @@ const {
 } = __internal;
 
 const ASSESSMENT_TAG_ID = 20922469; // Kit tag: "Runs You Assessment"
+// Kit sequence "Runs You Assessment" — 5-email book-a-call follow-up.
+// QUALIFIED completers only; unqualified leads get the tag but no call pitch.
+const ASSESSMENT_SEQUENCE_ID = 2818025;
 
 // Allowed answer keys -> human-readable Kit field values. Anything outside
 // these maps is rejected (bots POST arbitrary payloads straight at functions).
@@ -200,6 +203,7 @@ exports.handler = async (event) => {
       email,
       firstName,
       tagIds: [ASSESSMENT_TAG_ID],
+      ...(qualified ? { sequenceId: ASSESSMENT_SEQUENCE_ID } : {}),
       // Preserved (only set when blank): original attribution + booked, so a
       // retake never resets a booked lead back to "No".
       mappedFields: {

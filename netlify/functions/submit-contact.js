@@ -235,6 +235,13 @@ async function tagSubscriberWithAll(tagIds, email) {
   }
 }
 
+async function addSubscriberToSequence(sequenceId, email) {
+  return kitRequest(`/v4/sequences/${sequenceId}/subscribers`, {
+    method: 'POST',
+    body: JSON.stringify({ email_address: email }),
+  });
+}
+
 function isSubscribed(subscriber) {
   return subscriber?.state === 'active';
 }
@@ -329,6 +336,7 @@ async function syncContactToKit(submission) {
       await updateSubscriber(resubscribedSubscriber.id, { email, fields: overwriteFields });
     }
     await tagSubscriberWithAll(tagIds, email);
+    if (submission.sequenceId) await addSubscriberToSequence(submission.sequenceId, email);
     return { subscriberId: safeSubscriberId(resubscribedSubscriber), tagged: true };
   }
 
@@ -383,6 +391,7 @@ async function syncContactToKit(submission) {
   }
 
   await tagSubscriberWithAll(tagIds, email);
+  if (submission.sequenceId) await addSubscriberToSequence(submission.sequenceId, email);
   return { subscriberId: safeSubscriberId(subscriber), tagged: true };
 }
 
