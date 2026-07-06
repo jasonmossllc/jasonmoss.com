@@ -69,7 +69,7 @@ const COST = {
   friendships: 'My friendships',
   identity: 'Who I am outside the business',
 };
-// Severity scoring per spec: Q3 value + hours band + vacation band.
+// Severity scoring per spec: two-week value (q4) + hours band (q3) + vacation band (q5).
 const HOURS_POINTS = { 'under-40': 1, '40-50': 2, '50-60': 3, '60-plus': 4 };
 const VACATION_POINTS = { '3-months': 1, '6-months': 2, 'over-year': 3, 'cant-remember': 4 };
 
