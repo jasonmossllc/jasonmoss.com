@@ -261,16 +261,14 @@
   .booked-note.show{ display:block; }
 
   /* ============ PROOF ============ */
-  .proof-grid{ display:grid; grid-template-columns:.8fr 1.2fr; gap:64px; align-items:center; max-width:980px; margin:0 auto; padding:0 28px; }
-  .portrait{ position:relative; }
-  .portrait img{ aspect-ratio:4/5; object-fit:cover; width:100%; position:relative; z-index:1; }
-  .portrait:before{
-    content:""; position:absolute; inset:0; transform:translate(14px,14px);
-    border:1px solid rgba(194,168,108,.55); z-index:0;
+  .jm-face{
+    width:96px; height:96px; border-radius:50%; object-fit:cover;
+    border:1px solid rgba(194,168,108,.55); margin:0 0 30px;
+    box-shadow:0 10px 34px -12px rgba(0,0,0,.6);
   }
-  .proof-grid b{ color:var(--gold); font-weight:400; }
+  .stack b{ color:var(--gold); font-weight:400; }
   .trustlogos{ text-align:center; margin:84px auto 0; padding:0 24px; }
-  .tl-row2{ margin-top:14px; }
+  .tl-row.tl-row2{ margin:16px auto 0; }
   .tl-row{
     display:flex; align-items:center; justify-content:center; flex-wrap:wrap;
     gap:14px 44px; max-width:860px; margin:0 auto;
@@ -328,8 +326,6 @@
     section{ padding:78px 0; }
     .verdict-main{ padding:30px 24px 80px; }
     .verdict .vsub{ font-size:15.5px; margin-top:26px; }
-    .proof-grid{ grid-template-columns:1fr; gap:44px; }
-    .portrait{ max-width:340px; }
     .stickybar .t{ display:none; }
     .btn{ white-space:nowrap; padding:18px 26px; font-size:14px; }
     .cost-beats p{ padding-left:20px; margin-bottom:26px; }
@@ -561,8 +557,8 @@
       '</div></section>';
 
     /* You're not alone — connection + authority BEFORE the ask (cold traffic) */
-    html += '<section class="bg-charcoal glow hairline-b"><div class="proof-grid reveal">' +
-      '<div class="portrait"><img src="../assets/featured.jpg" alt="Jason Moss"></div>' +
+    html += '<section class="bg-charcoal glow hairline-b"><div class="wrap reveal">' +
+      '<img class="jm-face" src="../assets/jason-face.jpg" alt="Jason Moss">' +
       '<div class="stack"><hr class="divider"><p class="eyebrow">You’re not alone</p>' +
       '<h2>I’ve been there.</h2>' +
       '<p>Early on in my journey, I built a six-figure coaching business and then hit this exact wall. The thing I’d built was running me, and no amount of hustle was fixing it. So I rebuilt it, from the inside out, and scaled past $500k / year as a result.</p>' +
