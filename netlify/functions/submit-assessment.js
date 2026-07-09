@@ -222,6 +222,9 @@ exports.handler = async (event) => {
         assessment_severity: severity,
         assessment_date: new Date().toISOString().slice(0, 10),
         assessment_results_url: resultsUrl,
+        // free-text context question ("what's your business, and what made
+        // you take this?") — optional server-side, client requires it
+        ...(cleanString(data.q7, 1000) ? { assessment_business_context: cleanString(data.q7, 1000) } : {}),
       },
       referrer: cleanString(
         headerValue(event.headers, 'referer') ||

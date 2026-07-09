@@ -343,7 +343,14 @@
     font-family:var(--sans); font-size:17px; padding:16px 18px; margin:0 0 22px;
     transition:border-color .18s ease;
   }
-  .qform input:focus{ outline:none; border-color:var(--gold); }
+  .qform textarea{
+    width:100%; background:rgba(233,226,211,.04); color:var(--sand);
+    border:1px solid rgba(194,168,108,.28); border-radius:0; resize:vertical;
+    font-family:var(--sans); font-size:17px; line-height:1.6; padding:16px 18px;
+    margin:0 0 22px; min-height:110px;
+  }
+  .qform input:focus, .qform textarea:focus{ outline:none; border-color:var(--gold); }
+  .qform textarea::placeholder{ color:rgba(140,131,122,.6); }
   .qform input::placeholder{ color:rgba(140,131,122,.6); }
   .hp-field{ position:absolute; left:-9999px; top:-9999px; height:0; width:0; overflow:hidden; }
   #cf-turnstile-box{ margin:0 0 20px; min-height:0; display:flex; justify-content:flex-start; max-width:100%; }
@@ -680,7 +687,7 @@
       setTimeout(function(){
         if (qid === 'q1' && value === 'no'){ renderOfframp(); return; }
         if (current < QUESTIONS.length - 1){ current += 1; renderQuestion(); }
-        else { renderEmail(); }
+        else { renderContext(); }
       }, 260);
     }
 
@@ -698,6 +705,36 @@
         '<a class="btn" href="' + YOUTUBE_URL + '" target="_blank" rel="noopener">Watch on YouTube<span class="arr">→</span></a>' +
         '</div>'
       );
+    }
+
+    var contextFired = false;
+    function renderContext(){
+      view = 'context';
+      setProgress('One more thing', 0.92);
+      backBtn.hidden = false;
+      swapStep(
+        '<h2>Finally, in a sentence or two — what’s your business, and what’s the thing that made you take this?</h2>' +
+        '<form class="qform" id="ctxForm" novalidate>' +
+          '<textarea id="qContext" rows="4" placeholder="e.g. i run a design agency — took this because i haven’t had a real week off in two years">' + esc(state.answers.q7 || '') + '</textarea>' +
+          '<p class="qerr" id="ctxErr"></p>' +
+          '<button type="submit" class="btn">Continue<span class="arr">→</span></button>' +
+        '</form>'
+      );
+      var ta = document.getElementById('qContext');
+      document.getElementById('ctxForm').addEventListener('submit', function(e){
+        e.preventDefault();
+        var val = (ta.value || '').trim();
+        if (val.length < 2){
+          var err = document.getElementById('ctxErr');
+          err.textContent = 'A sentence or two is all it takes.';
+          err.classList.add('show');
+          return;
+        }
+        state.answers.q7 = val.slice(0, 1000);
+        persist();
+        if (!contextFired){ contextFired = true; track('assessment_context_answered'); }
+        renderEmail();
+      });
     }
 
     function renderEmail(){
@@ -816,6 +853,7 @@
         email: email,
         q1: state.answers.q1, q2: state.answers.q2, q3: state.answers.q3,
         q4: state.answers.q4, q5: state.answers.q5, q6: state.answers.q6,
+        q7: state.answers.q7,
         turnstile_token: turnstileToken(),
         website: (document.querySelector('#qForm input[name="website"]') || {}).value || ''
       };
@@ -868,7 +906,8 @@
       b.addEventListener('click', openQuiz);
     });
     backBtn.addEventListener('click', function(){
-      if (view === 'email'){ current = QUESTIONS.length - 1; renderQuestion(); return; }
+      if (view === 'email'){ renderContext(); return; }
+      if (view === 'context'){ current = QUESTIONS.length - 1; renderQuestion(); return; }
       if (current > 0){ current -= 1; renderQuestion(); }
     });
 
