@@ -705,15 +705,45 @@
     // Hard gate: no Turnstile token (verification not completed) => block submit.
     // Capture phase + stopImmediatePropagation runs BEFORE the page's own submit
     // handler, so nothing is sent until the visitor is verified.
+    // The widget is invisible (interaction-only), so a missing token is almost
+    // always a token that hasn't minted yet or has expired — not something the
+    // visitor can act on. So: let field errors surface first (checkValidity),
+    // and on a missing token re-run the challenge and retry the submit
+    // automatically. Only ask the visitor to act if Cloudflare actually shows
+    // an interactive challenge (data-reserved=1 means it painted).
     (function () {
+      var retrying = false;
       function gate(e) {
+        var form = e.currentTarget;
         var tok = window.getTurnstileToken ? window.getTurnstileToken() : '';
-        if (!tok) {
-          e.preventDefault();
-          e.stopImmediatePropagation();
-          try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.execute(window.__tsWidgetId); } catch (_) {}
-          alert('Please complete the verification below, then submit again.');
-        }
+        if (tok) return;
+        if (form && typeof form.checkValidity === 'function' && !form.checkValidity()) return;
+        e.preventDefault();
+        e.stopImmediatePropagation();
+        if (retrying) return;
+        retrying = true;
+        try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.execute(window.__tsWidgetId); } catch (_) {}
+        var waited = 0;
+        var poll = setInterval(function () {
+          waited += 250;
+          var tok2 = window.getTurnstileToken ? window.getTurnstileToken() : '';
+          if (tok2) {
+            clearInterval(poll); retrying = false;
+            if (form && typeof form.requestSubmit === 'function') form.requestSubmit();
+            else if (form) form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+            return;
+          }
+          var b = document.getElementById('cf-turnstile-box');
+          if (b && b.getAttribute('data-reserved') === '1') {
+            clearInterval(poll); retrying = false;
+            alert('Please complete the verification below, then submit again.');
+            return;
+          }
+          if (waited >= 6000) {
+            clearInterval(poll); retrying = false;
+            alert('Verification is taking a moment \u2014 please try submitting again.');
+          }
+        }, 250);
       }
       function wire() { document.querySelectorAll('.email-form').forEach(function (f) { f.addEventListener('submit', gate, true); }); }
       if (document.readyState !== 'loading') wire(); else document.addEventListener('DOMContentLoaded', wire);
