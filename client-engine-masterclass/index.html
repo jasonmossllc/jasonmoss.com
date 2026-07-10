@@ -590,7 +590,7 @@ footer .fine.links a:hover{color:var(--mocha);}
   transition:border-color 0.2s ease, background 0.2s ease, box-shadow 0.2s ease;
 }
 .optin-form .country-code-select{
-  flex:0 0 138px;
+  flex:0 0 152px;
   appearance:none;
   -webkit-appearance:none;
 }
@@ -632,7 +632,7 @@ footer .fine.links a:hover{color:var(--mocha);}
   content:'';
   position:absolute;
   top:50%;
-  left:111px;
+  left:125px;
   width:9px;height:9px;
   border-right:1.5px solid rgba(29,31,30,0.72);
   border-bottom:1.5px solid rgba(29,31,30,0.72);
@@ -708,6 +708,10 @@ footer .fine.links a:hover{color:var(--mocha);}
   .proof-cap::before,.proof-cap::after{display:none;}
   .eyebrow::before,.eyebrow.lined::after{display:none;}
   .eyebrow{letter-spacing:0.24em;}
+  /* When .when flows inline with the sentence (mobile), separate
+     "…with Jason Moss" and "Tuesday…" with a middot; at 641px+ the
+     .when is display:block on its own line, so no dot is rendered. */
+  .hero .sub .when::before{content:"\00B7  ";}
   /* Compact hero so the CTA lands above the fold on phones —
      tightened from the desktop spacing, but with room to breathe */
   .hero{padding:36px 0 50px;}
@@ -816,6 +820,9 @@ footer .fine.links a:hover{color:var(--mocha);}
       <div class="proof-shot pw-48"><img width="700" height="190" src="assets/proof/kristina-3x.png" alt="Client post from Kristina: I have earned 14,000€ in the past 3 months — in the 3 months before it was only 4,000€." loading="lazy"></div>
     </div>
     <div class="proof-cap">From clients across my programs over the years</div>
+    <div class="cta-inline">
+      <a class="btn" href="#optin">Save My Seat &mdash; Free</a>
+    </div>
   </div>
 </section>
 
