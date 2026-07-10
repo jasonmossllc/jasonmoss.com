@@ -25,6 +25,7 @@ const {
   EMAIL_RE,
   findSubscriberByEmail,
   updateSubscriber,
+  corsHeaders,
 } = __internal;
 
 const ASSESSMENT_TAG_ID = 20922469; // Kit tag: "Runs You Assessment"
@@ -99,25 +100,13 @@ async function markBooked(email) {
 }
 
 exports.handler = async (event) => {
+  const headers = corsHeaders(event);
   if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://jasonmoss.com',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-      body: '',
-    };
+    return { statusCode: 200, headers, body: '' };
   }
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
+    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
-
-  const headers = {
-    'Access-Control-Allow-Origin': 'https://jasonmoss.com',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json',
-  };
 
   try {
     let data;
@@ -156,13 +145,16 @@ exports.handler = async (event) => {
 
     // ── Booking ping from the results page (post-Calendly) ──────────────────
     if (data.action === 'booked') {
+      // Deliberately opaque: the response must not reveal whether the email
+      // exists as a Kit subscriber (an "updated" flag here was an email-
+      // enumeration oracle). Outcome is logged server-side only.
       try {
         const updated = await markBooked(email);
-        return { statusCode: 200, headers, body: JSON.stringify({ success: true, updated }) };
+        if (!updated) console.log('Booked ping for unknown subscriber', { email });
       } catch (error) {
         console.error('Failed to mark assessment booked', { email, error: kitErrorSummary(error) });
-        return { statusCode: 200, headers, body: JSON.stringify({ success: true, updated: false }) };
       }
+      return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
     }
 
     // ── Full assessment submission ───────────────────────────────────────────

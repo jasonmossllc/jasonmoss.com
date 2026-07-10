@@ -2,6 +2,10 @@ const { schedule } = require('@netlify/functions');
 const { __internal } = require('./submit-contact.js');
 
 const QUEUE_BATCH_SIZE = Number.parseInt(process.env.KIT_QUEUE_BATCH_SIZE || '10', 10);
+// Items that keep failing must eventually leave the pending/ prefix: the
+// queue is processed oldest-first, so without a cap a handful of permanently
+// failing items would monopolize every run and starve newer opt-ins forever.
+const QUEUE_MAX_ATTEMPTS = Number.parseInt(process.env.KIT_QUEUE_MAX_ATTEMPTS || '12', 10);
 
 async function moveToFailed(store, key, item, error) {
   const failedKey = key.replace(/^pending\//, 'failed/');
@@ -30,7 +34,17 @@ async function processQueuedOptins() {
       }
 
       const key = blob.key;
-      const item = await store.get(key, { type: 'json' });
+      let item;
+      try {
+        item = await store.get(key, { type: 'json' });
+      } catch (error) {
+        // A corrupt blob would otherwise abort this and every future run at
+        // the same key (oldest-first ordering). Park it and move on.
+        await moveToFailed(store, key, { corrupt: true }, error);
+        processed += 1;
+        failed += 1;
+        continue;
+      }
       if (!item?.submission) {
         await store.delete(key);
         processed += 1;
@@ -54,7 +68,7 @@ async function processQueuedOptins() {
           lastError: __internal.kitErrorSummary(error),
         };
 
-        if (__internal.isQueueableKitError(error)) {
+        if (__internal.isQueueableKitError(error) && updated.attempts < QUEUE_MAX_ATTEMPTS) {
           await store.setJSON(key, updated);
           retained += 1;
         } else {

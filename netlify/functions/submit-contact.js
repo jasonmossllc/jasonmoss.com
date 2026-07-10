@@ -83,6 +83,10 @@ async function kitRequest(path, options = {}) {
           'X-Kit-Api-Key': apiKey,
           ...(fetchOptions.headers || {}),
         },
+        // A hanging connection would otherwise ride out Netlify's 10s kill —
+        // which throws away the request without ever reaching the durable
+        // queue. An abort throws, which the queue path can catch and enqueue.
+        signal: AbortSignal.timeout(4000),
       });
     } catch (error) {
       if (attempt >= KIT_RETRY_DELAYS_MS.length) throw error;
@@ -258,8 +262,9 @@ async function tagSubscriberByEmail(tagId, email) {
   });
 }
 
-async function tagSubscriberWithAll(tagIds, email) {
+async function tagSubscriberWithAll(tagIds, email, ensureTime) {
   for (const tagId of tagIds) {
+    if (ensureTime) ensureTime();
     await tagSubscriberByEmail(tagId, email);
   }
 }
@@ -342,7 +347,17 @@ async function enqueueOptin(submission, error) {
   return key;
 }
 
-async function syncContactToKit(submission) {
+// deadline: worst-case Kit chains (resubscribe wait + several sequential tag
+// POSTs, each with retries) can exceed Netlify's 10s function limit — and a
+// platform kill loses the lead without ever reaching the durable queue. When
+// time runs short we throw a DeferredKitSyncError instead, so the remaining
+// work is enqueued and finished by the scheduled retry (tagging is idempotent).
+async function syncContactToKit(submission, deadline = Date.now() + 8000) {
+  const ensureTime = () => {
+    if (Date.now() > deadline) {
+      throw new DeferredKitSyncError('Function deadline reached mid-sync; queued for retry');
+    }
+  };
   const {
     email,
     firstName,
@@ -364,7 +379,7 @@ async function syncContactToKit(submission) {
     if (Object.keys(overwriteFields).length) {
       await updateSubscriber(resubscribedSubscriber.id, { email, fields: overwriteFields });
     }
-    await tagSubscriberWithAll(tagIds, email);
+    await tagSubscriberWithAll(tagIds, email, ensureTime);
     if (submission.sequenceId) await addSubscriberToSequence(submission.sequenceId, email);
     return { subscriberId: safeSubscriberId(resubscribedSubscriber), tagged: true };
   }
@@ -400,6 +415,7 @@ async function syncContactToKit(submission) {
       return { subscriberId: safeSubscriberId(subscriber), tagged: false };
     }
 
+    ensureTime();
     await addSubscriberToResubscribeForm(email, referrer);
     let resubscribedSubscriber;
     try {
@@ -419,7 +435,7 @@ async function syncContactToKit(submission) {
     }
   }
 
-  await tagSubscriberWithAll(tagIds, email);
+  await tagSubscriberWithAll(tagIds, email, ensureTime);
   if (submission.sequenceId) await addSubscriberToSequence(submission.sequenceId, email);
   return { subscriberId: safeSubscriberId(subscriber), tagged: true };
 }
@@ -502,7 +518,9 @@ async function verifyTurnstile(token, ip) {
     if (ip) form.append('remoteip', ip);
     const r = await fetch(
       'https://challenges.cloudflare.com/turnstile/v0/siteverify',
-      { method: 'POST', body: form }
+      // Timeout so a Cloudflare stall fails open (caught below) instead of
+      // riding out Netlify's function limit and 502ing the visitor.
+      { method: 'POST', body: form, signal: AbortSignal.timeout(3000) }
     );
     const out = await r.json();
     if (out.success) return { block: false, verified: true };
@@ -526,31 +544,34 @@ async function verifyTurnstile(token, ip) {
 // can't verify the same token here and again in submit-roezan-contact.js —
 // and re-running the widget risks showing the visitor a second challenge.
 // Instead, once a submission clears every bot gate here, the response carries
-// roezan_pass = "<ms-timestamp>.<hmac-sha256(email + '.' + timestamp)>" and
-// submit-roezan-contact.js accepts that in place of a Turnstile token.
-// Email-bound + short TTL: forging needs the server secret, and replaying it
-// can only repeat the same idempotent Roezan tag for the same email.
+// roezan_pass = "<ms-timestamp>.<hmac-sha256(email \n phone \n timestamp)>"
+// and submit-roezan-contact.js accepts that in place of a Turnstile token.
+// Bound to email AND normalized phone + short TTL: forging needs the server
+// secret, and a replay can only re-run the same contact's sync — it cannot
+// redirect the pass to a different email or phone number. The phone the page
+// sends to submit-roezan-contact must therefore match what it sent here
+// (js/optin-shared.js sends the identical value to both).
 const ROEZAN_PASS_TTL_MS = 5 * 60 * 1000;
 
-function roezanPassSignature(email, timestamp) {
+function roezanPassSignature(email, phone, timestamp) {
   const secret = process.env.ROEZAN_PASS_SECRET;
   if (!secret) return null;
-  return crypto.createHmac('sha256', secret).update(`${email}.${timestamp}`).digest('hex');
+  return crypto.createHmac('sha256', secret).update(`${email}\n${phone || ''}\n${timestamp}`).digest('hex');
 }
 
-function issueRoezanPass(email) {
+function issueRoezanPass(email, phone) {
   const timestamp = Date.now();
-  const signature = roezanPassSignature(email, timestamp);
+  const signature = roezanPassSignature(email, phone, timestamp);
   return signature ? `${timestamp}.${signature}` : null;
 }
 
-function verifyRoezanPass(pass, email) {
+function verifyRoezanPass(pass, email, phone) {
   if (typeof pass !== 'string' || typeof email !== 'string' || !email) return false;
   const match = pass.match(/^(\d{10,16})\.([a-f0-9]{64})$/);
   if (!match) return false;
   const timestamp = Number.parseInt(match[1], 10);
   if (!Number.isSafeInteger(timestamp) || Math.abs(Date.now() - timestamp) > ROEZAN_PASS_TTL_MS) return false;
-  const expected = roezanPassSignature(email, timestamp);
+  const expected = roezanPassSignature(email, phone, timestamp);
   if (!expected) return false;
   try {
     return crypto.timingSafeEqual(Buffer.from(match[2], 'hex'), Buffer.from(expected, 'hex'));
@@ -559,28 +580,46 @@ function verifyRoezanPass(pass, email) {
   }
 }
 
-exports.handler = async (event) => {
-  // Only allow POST
-  if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://jasonmoss.com',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-      body: '',
-    };
+// ── CORS ───────────────────────────────────────────────────────────────────
+// The origin allowlist accepts subdomains and this site's deploy previews,
+// but a fixed apex-only ACAO header made responses unreadable from those
+// origins (deploy previews silently lost roezan_pass). Echo the origin when
+// it's one of ours; fall back to the apex otherwise.
+function allowedCorsOrigin(event) {
+  const raw = headerValue(event.headers, 'origin');
+  if (!raw) return null;
+  try {
+    const url = new URL(raw);
+    const host = url.hostname.toLowerCase();
+    const ok =
+      url.protocol === 'https:' &&
+      (host === 'jasonmoss.com' ||
+        host.endsWith('.jasonmoss.com') ||
+        host === 'jasonmoss.netlify.app' ||
+        host.endsWith('--jasonmoss.netlify.app'));
+    return ok ? raw : null;
+  } catch (e) {
+    return null;
   }
-  if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
-  }
+}
 
-  // CORS headers — locked to the live domain (calls are same-origin anyway).
-  const headers = {
-    'Access-Control-Allow-Origin': 'https://jasonmoss.com',
+function corsHeaders(event) {
+  return {
+    'Access-Control-Allow-Origin': allowedCorsOrigin(event) || 'https://jasonmoss.com',
     'Access-Control-Allow-Headers': 'Content-Type',
+    Vary: 'Origin',
     'Content-Type': 'application/json',
   };
+}
+
+exports.handler = async (event) => {
+  const headers = corsHeaders(event);
+  if (event.httpMethod === 'OPTIONS') {
+    return { statusCode: 200, headers, body: '' };
+  }
+  if (event.httpMethod !== 'POST') {
+    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
+  }
 
   try {
     let data;
@@ -671,7 +710,7 @@ exports.handler = async (event) => {
 
     // Issued only after every bot gate above has passed; lets the page call
     // submit-roezan-contact.js without a second Turnstile run (see ROEZAN PASS).
-    const roezanPass = issueRoezanPass(email);
+    const roezanPass = issueRoezanPass(email, phone);
 
     let result;
     try {
@@ -737,4 +776,6 @@ module.exports.__internal = {
   updateSubscriber,
   issueRoezanPass,
   verifyRoezanPass,
+  corsHeaders,
+  allowedCorsOrigin,
 };

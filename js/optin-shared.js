@@ -106,7 +106,7 @@
       e.stopImmediatePropagation();
       if (retrying) return;
       retrying = true;
-      try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.execute(window.__tsWidgetId); } catch (_) {}
+      try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (_) {}
       var waited = 0;
       var poll = setInterval(function () {
         waited += 250;
@@ -236,49 +236,68 @@
           payload.turnstile_token = window.getTurnstileToken();
           payload.website = honeypot;
 
-          if (config.roezanTagId) {
-            // Kit first (awaited, bounded): its response carries a short-lived
-            // roezan_pass — Turnstile tokens are single-use, so the SMS call
-            // reuses this server-minted pass instead of re-verifying.
-            var roezanPass = '';
-            try {
-              var scRes = await Promise.race([
-                fetch('/.netlify/functions/submit-contact', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify(payload),
-                  keepalive: true
-                }),
-                new Promise(function (resolve, reject) { setTimeout(function () { reject(new Error('submit-contact timeout')); }, 8000); })
-              ]);
-              var scData = await scRes.json();
-              roezanPass = (scData && scData.roezan_pass) || '';
-            } catch (err) {
-              console.error('Kit submit error:', err);
-            }
-            if (roezanPass) {
-              fetch('/.netlify/functions/submit-roezan-contact', {
+          // Await the Kit submit (bounded) in every case:
+          //  - fetch keepalive alone is unsupported in Firefox < 133, where an
+          //    immediate redirect cancels the in-flight POST (silent lead loss)
+          //  - a definite server rejection (4xx: expired token, bot guard)
+          //    means the lead was NOT captured — faking success by redirecting
+          //    to the thank-you page would strand a real visitor.
+          // Network errors / timeouts / 5xx still fail open to the redirect:
+          // never block a lead on our own infrastructure hiccups.
+          var scRes = null;
+          var scData = null;
+          try {
+            scRes = await Promise.race([
+              fetch('/.netlify/functions/submit-contact', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                  email: email,
-                  first_name: firstName,
-                  phone: phone,
-                  tag_id: config.roezanTagId,
-                  roezan_pass: roezanPass,
-                  website: honeypot
-                }),
+                body: JSON.stringify(payload),
                 keepalive: true
-              }).catch(function (err) { console.error('Roezan submit error:', err); });
+              }),
+              new Promise(function (resolve, reject) { setTimeout(function () { reject(new Error('submit-contact timeout')); }, 8000); })
+            ]);
+            try { scData = await scRes.json(); } catch (e) {}
+          } catch (err) {
+            console.error('Kit submit error:', err);
+          }
+
+          if (scRes && scRes.status >= 400 && scRes.status < 500) {
+            // Rejected outright (most often an expired Turnstile token after
+            // idling on the form). Re-run the invisible widget so the next
+            // click carries a fresh token, and let the visitor retry.
+            try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (e) {}
+            alert("That didn't go through — please click the button again.");
+            restore();
+            return;
+          }
+
+          if (config.roezanTagId) {
+            // roezan_pass from the Kit response replaces a second Turnstile
+            // run (tokens are single-use). Await bounded so Firefox can't
+            // cancel it on redirect; a Roezan hiccup never blocks the visitor.
+            var roezanPass = (scData && scData.roezan_pass) || '';
+            if (roezanPass) {
+              try {
+                await Promise.race([
+                  fetch('/.netlify/functions/submit-roezan-contact', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      email: email,
+                      first_name: firstName,
+                      phone: phone,
+                      tag_id: config.roezanTagId,
+                      roezan_pass: roezanPass,
+                      website: honeypot
+                    }),
+                    keepalive: true
+                  }),
+                  new Promise(function (resolve, reject) { setTimeout(function () { reject(new Error('roezan timeout')); }, 2500); })
+                ]);
+              } catch (err) {
+                console.error('Roezan submit error:', err);
+              }
             }
-          } else {
-            // Email-only pages: fire-and-forget; keepalive survives the redirect.
-            fetch('/.netlify/functions/submit-contact', {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify(payload),
-              keepalive: true
-            }).catch(function (err) { console.error('Kit submit error:', err); });
           }
 
           window.location.href = config.redirect({ firstName: firstName, email: email, form: form });

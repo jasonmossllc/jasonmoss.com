@@ -31,6 +31,7 @@ const { __internal } = require('./submit-contact.js');
 const {
   verifyTurnstile,
   verifyRoezanPass,
+  corsHeaders,
   originAllowed,
   looksLikeBotName,
   cleanString,
@@ -40,10 +41,13 @@ const {
 } = __internal;
 
 const ROEZAN_API_BASE = (process.env.ROEZAN_API_URL || 'https://app.roezan.com/api').replace(/\/+$/, '');
-// Netlify gives synchronous functions ~10s total, and a submission can make up
-// to 3 sequential Roezan calls — keep per-call timeouts and retries tight.
-const ROEZAN_TIMEOUT_MS = 6000;
-const ROEZAN_RETRY_DELAYS_MS = [300, 900];
+// Netlify gives synchronous functions ~10s total, and a submission can make
+// up to 3 sequential Roezan calls. Per-call timeout 3.5s with one retry, plus
+// a hard request deadline checked before every call, keeps the worst case
+// inside the budget instead of being killed by the platform.
+const ROEZAN_TIMEOUT_MS = 3500;
+const ROEZAN_RETRY_DELAYS_MS = [400];
+const REQUEST_DEADLINE_MS = 8500;
 
 function sleep(ms) {
   return new Promise((resolve) => setTimeout(resolve, ms));
@@ -57,10 +61,13 @@ function normalizeRoezanTagId(value) {
   return Number.isSafeInteger(tagId) && tagId > 0 ? tagId : null;
 }
 
-async function roezanRequest(path, { method = 'GET', body, allowNotFound = false } = {}) {
+async function roezanRequest(path, { method = 'GET', body, allowNotFound = false, deadline } = {}) {
   const apiKey = process.env.ROEZAN_API_KEY;
   if (!apiKey) {
     throw new Error('ROEZAN_API_KEY is not configured');
+  }
+  if (deadline && Date.now() > deadline) {
+    throw new Error(`Roezan ${method} ${path} skipped: request deadline reached`);
   }
   const url = path.startsWith('http') ? path : `${ROEZAN_API_BASE}${path}`;
 
@@ -101,24 +108,25 @@ async function roezanRequest(path, { method = 'GET', body, allowNotFound = false
   throw new Error(`Roezan ${method} ${path} failed after retries`);
 }
 
-async function getRoezanContactByEmail(email) {
+async function getRoezanContactByEmail(email, deadline) {
   const qs = new URLSearchParams({ email });
-  const result = await roezanRequest(`/integrations/contacts?${qs.toString()}`, { allowNotFound: true });
+  const result = await roezanRequest(`/integrations/contacts?${qs.toString()}`, { allowNotFound: true, deadline });
   return result?.contact || null;
 }
 
-async function syncContactToRoezan({ email, firstName, lastName, phone, tagId }) {
+async function syncContactToRoezan({ email, firstName, lastName, phone, tagId }, deadline) {
   // Roezan writes are keyed by phone; fall back to an existing contact's
   // number when the page didn't collect one.
   let resolvedPhone = phone;
   if (!resolvedPhone) {
-    const existing = await getRoezanContactByEmail(email);
+    const existing = await getRoezanContactByEmail(email, deadline);
     resolvedPhone = normalizePhone(existing?.phone_number) || '';
   }
   if (!resolvedPhone) return { synced: false, reason: 'no_phone' };
 
   await roezanRequest('/integrations/contacts', {
     method: 'POST',
+    deadline,
     body: {
       phone: resolvedPhone,
       lists: [],
@@ -131,6 +139,7 @@ async function syncContactToRoezan({ email, firstName, lastName, phone, tagId })
 
   await roezanRequest('/integrations/contacts/tags', {
     method: 'POST',
+    deadline,
     body: { phone: resolvedPhone, tagIds: [tagId] },
   });
 
@@ -138,25 +147,14 @@ async function syncContactToRoezan({ email, firstName, lastName, phone, tagId })
 }
 
 exports.handler = async (event) => {
+  const headers = corsHeaders(event);
+  const requestDeadline = Date.now() + REQUEST_DEADLINE_MS;
   if (event.httpMethod === 'OPTIONS') {
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': 'https://jasonmoss.com',
-        'Access-Control-Allow-Headers': 'Content-Type',
-      },
-      body: '',
-    };
+    return { statusCode: 200, headers, body: '' };
   }
   if (event.httpMethod !== 'POST') {
-    return { statusCode: 405, body: JSON.stringify({ error: 'Method not allowed' }) };
+    return { statusCode: 405, headers, body: JSON.stringify({ error: 'Method not allowed' }) };
   }
-
-  const headers = {
-    'Access-Control-Allow-Origin': 'https://jasonmoss.com',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json',
-  };
 
   try {
     let data;
@@ -206,7 +204,10 @@ exports.handler = async (event) => {
     //    re-challenging the visitor), or a fresh Turnstile token when this
     //    endpoint is called standalone.
     const email = String(data.email).trim().toLowerCase();
-    if (!verifyRoezanPass(data.roezan_pass, email)) {
+    // The pass is bound to email + the normalized phone submit-contact saw,
+    // so the phone sent here must match the phone sent there (optin-shared
+    // sends the identical value to both calls).
+    if (!verifyRoezanPass(data.roezan_pass, email, normalizePhone(data.phone) || '')) {
       const ts = await verifyTurnstile(data.turnstile_token, ip);
       if (ts.block) {
         console.log('Blocked: no valid roezan_pass or Turnstile token', { ip });
@@ -229,7 +230,7 @@ exports.handler = async (event) => {
       return { statusCode: 500, headers, body: JSON.stringify({ error: 'SMS tag is not configured' }) };
     }
 
-    const result = await syncContactToRoezan({ email, firstName, lastName, phone, tagId });
+    const result = await syncContactToRoezan({ email, firstName, lastName, phone, tagId }, requestDeadline);
 
     // synced:false = no phone submitted and none on file in Roezan. That's an
     // expected outcome for email-only opt-ins (nothing to tag), not an error —

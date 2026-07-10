@@ -18,27 +18,35 @@
 // classification isn't perfect — better to let Kit handle edge cases
 // through normal list hygiene than to false-positive a real person.
 
+const { __internal } = require('./submit-contact.js');
+// Shared with the form endpoints so the allowlist and CORS behavior can't
+// drift between functions. Origin/Referer are spoofable, so originAllowed is
+// paired with the per-IP rate limit and the daily credit cap below — all
+// three gate the paid lookup.
+const { originAllowed, corsHeaders } = __internal;
+
 const HARD_BLOCK_SUB_STATUSES = new Set(['disposable', 'toxic']);
 
-// Only allow https calls coming from a jasonmoss.com page (or this site's
-// Netlify previews). Stops bots hitting this endpoint directly to burn
-// ZeroBounce credits. Origin/Referer are spoofable, so this is paired with
-// the per-IP rate limit below — both gate the paid lookup.
-function originAllowed(event) {
-  const h = event.headers || {};
-  const candidates = [h.origin, h.referer, h.referrer].filter(Boolean);
-  if (candidates.length === 0) return false;
-  const okHost = (host) =>
-    host === 'jasonmoss.com' ||
-    host.endsWith('.jasonmoss.com') ||
-    host === 'jasonmoss.netlify.app' ||
-    host.endsWith('--jasonmoss.netlify.app');
-  return candidates.some((u) => {
-    try {
-      const url = new URL(u);
-      return url.protocol === 'https:' && okHost(url.hostname.toLowerCase());
-    } catch (e) { return false; }
-  });
+// Global daily cap on paid ZeroBounce lookups (Netlify Blobs counter). The
+// per-IP limiter below is per-warm-instance and resets on cold start, so a
+// distributed spender could otherwise drain credits. Coarse and slightly racy
+// by design; fail-open (a Blobs error never blocks a real visitor).
+const ZB_DAILY_CAP = Number.parseInt(process.env.ZB_DAILY_CAP || '500', 10);
+async function underDailyCap() {
+  try {
+    const { getStore } = require('@netlify/blobs');
+    const store = getStore({ name: 'zb-usage' });
+    const key = new Date().toISOString().slice(0, 10);
+    const used = (await store.get(key, { type: 'json' })) || 0;
+    if (used >= ZB_DAILY_CAP) {
+      console.error('ZeroBounce daily cap reached', { used, cap: ZB_DAILY_CAP });
+      return false;
+    }
+    await store.setJSON(key, used + 1);
+    return true;
+  } catch (e) {
+    return true;
+  }
 }
 
 // Lightweight per-IP rate limit (per warm function instance, fail-open).
@@ -59,12 +67,7 @@ function rateLimited(ip) {
 }
 
 exports.handler = async (event) => {
-  // CORS headers — locked to the live domain (calls are same-origin anyway).
-  const headers = {
-    'Access-Control-Allow-Origin': 'https://jasonmoss.com',
-    'Access-Control-Allow-Headers': 'Content-Type',
-    'Content-Type': 'application/json',
-  };
+  const headers = corsHeaders(event);
 
   // Handle preflight
   if (event.httpMethod === 'OPTIONS') {
@@ -132,9 +135,21 @@ exports.handler = async (event) => {
       };
     }
 
+    // Global daily spend cap — fail open (accept the email) once reached so
+    // an attack can cost at most the cap, never a blocked real lead.
+    if (!(await underDailyCap())) {
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ valid: true, reason: '', did_you_mean: null }),
+      };
+    }
+
     const zbUrl = `https://api.zerobounce.net/v2/validate?api_key=${encodeURIComponent(apiKey)}&email=${encodeURIComponent(data.email)}&ip_address=`;
 
-    const zbResponse = await fetch(zbUrl);
+    // Timeout so a ZeroBounce stall fails open (outer catch) instead of
+    // riding out Netlify's function limit and 502ing the visitor mid-submit.
+    const zbResponse = await fetch(zbUrl, { signal: AbortSignal.timeout(4000) });
 
     if (!zbResponse.ok) {
       console.error('ZeroBounce API error:', zbResponse.status, await zbResponse.text());
