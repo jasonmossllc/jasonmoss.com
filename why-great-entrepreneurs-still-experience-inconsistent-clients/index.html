@@ -1386,7 +1386,8 @@
   </div>
 
   <!-- Popup trigger + form submission + URL param injection -->
-  <script>
+  <script src="/js/optin-shared.js"></script>
+<script>
   (function() {
     'use strict';
 
@@ -1424,208 +1425,21 @@
     document.addEventListener('keydown', function(e) { if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal(); });
 
     // Form submission — ZeroBounce → submit-contact → redirect
-    var submitBtn = form.querySelector('.form-btn');
-    var originalText = submitBtn.textContent.trim();
-    var submitting = false;
-
-    // Build an E.164 phone from the country-code dropdown + the typed number.
-    // Handles common typing habits: a trunk "0" before the national number
-    // (07700... outside +1), the 00 international dialing prefix, a full
-    // "+44..." pasted into the field despite the dropdown, and a US number
-    // typed with its leading 1.
-    function buildE164(countryCode, phoneRaw) {
-      var raw = String(phoneRaw).trim();
-      var digits = raw.replace(/\D/g, '');
-      if (!digits) return '';
-      if (raw.charAt(0) === '+') return '+' + digits;
-      if (digits.slice(0, 2) === '00') return '+' + digits.slice(2);
-      if (countryCode === '1') {
-        if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
-      } else {
-        digits = digits.replace(/^0+/, '');
-      }
-      return '+' + countryCode + digits;
-    }
-
-    form.addEventListener('submit', async function(e) {
-      e.preventDefault();
-      if (submitting) return;
-
-      var firstName = form.querySelector('input[name="First Name"]').value.trim();
-      var email = form.querySelector('input[name="E-mail"]').value.trim();
-      var countryCodeField = form.querySelector('select[name="Country Code"]');
-      var countryCode = countryCodeField ? countryCodeField.value.replace(/\D/g, '') : '1';
-      var phoneRaw = form.querySelector('input[name="Phone Number"]').value.trim();
-      var phoneDigits = phoneRaw.replace(/\D/g, '');
-      var phone = buildE164(countryCode, phoneRaw);
-
-      if (!firstName) { alert('Please enter your first name.'); return; }
-      if (!email) { alert('Please enter your email address.'); return; }
-      if (!form.querySelector('input[name="E-mail"]').checkValidity()) { alert('Please enter a valid email address.'); return; }
-      if (!countryCode) { alert('Please select your country code.'); return; }
-      if (phoneDigits.length < 6) { alert('Please enter a valid phone number.'); return; }
-
-      submitting = true;
-      submitBtn.textContent = 'Validating…';
-
-      var emailValid = true;
-      var controller = new AbortController();
-      var timeout = setTimeout(function(){ controller.abort(); }, 4000);
-      try {
-        var res = await fetch('/.netlify/functions/verify-email', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email: email }),
-          signal: controller.signal
-        });
-        var data = await res.json();
-        if (!data.valid) { alert(data.reason || 'Please enter a real, non-temporary email address.'); emailValid = false; }
-      } catch (err) { console.error('ZeroBounce error or timeout:', err); }
-      finally { clearTimeout(timeout); }
-
-      if (!emailValid) { submitting = false; submitBtn.textContent = originalText; return; }
-
-      submitBtn.textContent = 'Submitting…';
-      try {
-	        // Fire Kit submit non-blocking via keepalive, then redirect immediately
-        fetch('/.netlify/functions/submit-contact', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            email: email,
-	            first_name: firstName,
-	            phone: phone,
-	            latest_ad: adField ? adField.value : '',
-	            tag_id: 20410107, // Why Great Entrepreneurs Still Experience Inconsistent Clients
-	            turnstile_token: window.getTurnstileToken ? window.getTurnstileToken() : '',
-            website: (document.querySelector('input[name="website"]') || {}).value || ''
-          }),
-          keepalive: true
-	        }).catch(function(err) { console.error('Kit submit error:', err); });
-
-        var redirectUrl = '/post-purchase-thank-you?registered=whygreatentrepreneursstillexperienceinconsistentclients&email=' + encodeURIComponent(email);
-        window.location.href = redirectUrl;
-      } catch (err) {
-        console.error('Form submission error:', err);
-        alert('Something went wrong. Please try again.');
-        submitting = false;
-        submitBtn.textContent = originalText;
+    JMOptin.init({
+      kitTagId: 20410107, // Kit: Why Great Entrepreneurs Still Experience Inconsistent Clients
+      phone: true,
+      extraPayload: function () {
+        return { latest_ad: adField ? adField.value : '' };
+      },
+      redirect: function (ctx) {
+        return '/post-purchase-thank-you?registered=whygreatentrepreneursstillexperienceinconsistentclients&email=' + encodeURIComponent(ctx.email);
       }
     });
   })();
   </script>
 
   <script src="/js/bunny-embeds.js" defer></script>
-  <!-- Cloudflare Turnstile loader (bot protection). Replace the site key below. -->
-  <script>
-    window.__TURNSTILE_SITEKEY = '0x4AAAAAADlUEkeJ6kJ-_AML';
-    window.__tsWidgetId = null;
-    window.getTurnstileToken = function () {
-      try {
-        if (window.turnstile && window.__tsWidgetId !== null) {
-          return window.turnstile.getResponse(window.__tsWidgetId) || '';
-        }
-      } catch (e) {}
-      return '';
-    };
-    // Cloudflare now renders the widget inside a CLOSED shadow root whose host
-    // div always measures 0px tall, so the widget's real size cannot be read
-    // from the DOM (the old fitTurnstile measured 0, collapsed the box, and
-    // the widget still painted ~65px behind the submit button). Fix: render
-    // with appearance:'interaction-only' so nothing paints for auto-passed
-    // visitors, and reserve the widget's KNOWN size (300x65) via Cloudflare's
-    // before-interactive-callback at the moment it is about to paint.
-    var TS_NAT_W = 300, TS_NAT_H = 65; // Turnstile "normal" widget nominal size
-    function collapseTurnstile() {
-      var b = document.getElementById('cf-turnstile-box');
-      if (b && b.getAttribute('data-reserved') !== '1') { b.style.height = '0'; b.style.margin = '0'; }
-    }
-    function reserveTurnstile() {
-      try {
-        var b = document.getElementById('cf-turnstile-box');
-        if (!b) return;
-        var form = b.closest('.email-form');
-        var btn = form ? form.querySelector('.form-btn') : null;
-        var prev = b.previousElementSibling;   // in-flow field above (skip the hidden honeypot)
-        while (prev && (getComputedStyle(prev).position === 'absolute' || prev.offsetParent === null)) prev = prev.previousElementSibling;
-        var inner = b.firstElementChild;
-        var avail = b.getBoundingClientRect().width || TS_NAT_W;
-        var z = TS_NAT_W > avail ? (avail / TS_NAT_W) : 1;
-        if (inner) inner.style.zoom = (z < 1 ? z : '');
-        b.style.display = 'flex'; b.style.alignItems = 'center'; b.style.justifyContent = 'center';
-        b.style.margin = '16px auto';
-        if (btn) btn.style.marginTop = '0px';
-        if (prev) prev.style.marginBottom = '0px';
-        // Grow-only so later calls never shrink the box mid-interaction (no jump).
-        var reserved = Math.ceil(TS_NAT_H * z) + 6;
-        var cur = parseInt(b.style.height, 10) || 0;
-        if (reserved > cur) b.style.height = reserved + 'px';
-        b.setAttribute('data-reserved', '1');
-      } catch (e) {}
-    }
-    window.onloadTurnstile = function () {
-      var k = window.__TURNSTILE_SITEKEY;
-      if (k && k.indexOf('REPLACE_WITH') === -1 && window.turnstile &&
-          document.getElementById('cf-turnstile-box')) {
-        collapseTurnstile();
-        window.__tsWidgetId = window.turnstile.render('#cf-turnstile-box', {
-          sitekey: k,
-          appearance: 'interaction-only',
-          'before-interactive-callback': reserveTurnstile
-        });
-        window.addEventListener('resize', function () {
-          var b = document.getElementById('cf-turnstile-box');
-          if (b && b.getAttribute('data-reserved') === '1') reserveTurnstile();
-        });
-      }
-    };
-    // Hard gate: no Turnstile token (verification not completed) => block submit.
-    // Capture phase + stopImmediatePropagation runs BEFORE the page's own submit
-    // handler, so nothing is sent until the visitor is verified.
-    // The widget is invisible (interaction-only), so a missing token is almost
-    // always a token that hasn't minted yet or has expired — not something the
-    // visitor can act on. So: let field errors surface first (checkValidity),
-    // and on a missing token re-run the challenge and retry the submit
-    // automatically. Only ask the visitor to act if Cloudflare actually shows
-    // an interactive challenge (data-reserved=1 means it painted).
-    (function () {
-      var retrying = false;
-      function gate(e) {
-        var form = e.currentTarget;
-        var tok = window.getTurnstileToken ? window.getTurnstileToken() : '';
-        if (tok) return;
-        if (form && typeof form.checkValidity === 'function' && !form.checkValidity()) return;
-        e.preventDefault();
-        e.stopImmediatePropagation();
-        if (retrying) return;
-        retrying = true;
-        try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.execute(window.__tsWidgetId); } catch (_) {}
-        var waited = 0;
-        var poll = setInterval(function () {
-          waited += 250;
-          var tok2 = window.getTurnstileToken ? window.getTurnstileToken() : '';
-          if (tok2) {
-            clearInterval(poll); retrying = false;
-            if (form && typeof form.requestSubmit === 'function') form.requestSubmit();
-            else if (form) form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-            return;
-          }
-          var b = document.getElementById('cf-turnstile-box');
-          if (b && b.getAttribute('data-reserved') === '1') {
-            clearInterval(poll); retrying = false;
-            alert('Please complete the verification below, then submit again.');
-            return;
-          }
-          if (waited >= 6000) {
-            clearInterval(poll); retrying = false;
-            alert('Verification is taking a moment \u2014 please try submitting again.');
-          }
-        }, 250);
-      }
-      function wire() { document.querySelectorAll('.email-form').forEach(function (f) { f.addEventListener('submit', gate, true); }); }
-      if (document.readyState !== 'loading') wire(); else document.addEventListener('DOMContentLoaded', wire);
-    })();
-  </script>
+  
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstile&render=explicit" async defer></script>
 </body>
 </html>
