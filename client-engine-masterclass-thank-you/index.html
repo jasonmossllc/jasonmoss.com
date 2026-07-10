@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Registered — The Client Engine Masterclass</title>
+<meta name="description" content="Your seat for The Client Engine masterclass is saved. Here's what happens next.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="https://jasonmoss.com/assets/images/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --obsidian:#1D1F1E;
+  --forest:#2C3F36;
+  --mocha:#5B4B3F;
+  --taupe:#8C837A;
+  --gold:#C2A86C;
+  --gold-dark:#b89a5e;
+  --gold-deep:#A08752;
+  --stone:#E9E2D3;
+  --sand:#F8F6F2;
+  --white:#FFFFFF;
+  --ink-soft:#3E413F;
+  --serif:'Libre Baskerville', Georgia, serif;
+  --sans:'Raleway', 'Helvetica Neue', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:17px;
+  line-height:1.75;
+  color:var(--obsidian);
+  background:
+    radial-gradient(1000px 560px at 50% -10%, rgba(194,168,108,0.22), rgba(194,168,108,0) 62%),
+    linear-gradient(180deg, rgba(248,246,242,0.88), rgba(248,246,242,0.93)),
+    url('/client-engine-masterclass/assets/section-bg-pale.jpg') top left / 1716px 916px repeat,
+    var(--sand);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.3;}
+p{margin-bottom:1.1em;}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+
+header.top{
+  background:var(--sand);
+  padding:16px 0;
+  border-bottom:1px solid rgba(91,75,63,0.14);
+}
+header.top .wrap{display:flex;align-items:center;justify-content:center;}
+header.top img{height:28px;width:auto;}
+
+.confirm{padding:clamp(52px,7vw,84px) 0 clamp(64px,8vw,96px);}
+.panel{
+  position:relative;
+  background:var(--white);
+  border:1px solid rgba(91,75,63,0.18);
+  padding:clamp(44px,6vw,64px) clamp(26px,6vw,68px);
+  box-shadow:0 34px 70px -40px rgba(91,75,63,0.55);
+  text-align:center;
+}
+.panel::before{
+  content:"";
+  position:absolute;inset:10px;
+  border:1px solid rgba(194,168,108,0.5);
+  pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+  font-weight:600;
+  font-size:12px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:24px;
+}
+.eyebrow::before,.eyebrow::after{content:"";width:36px;height:1px;background:var(--gold);}
+.panel h1{font-size:clamp(30px,4vw,42px);margin-bottom:14px;}
+.panel .sub{
+  max-width:480px;
+  margin:0 auto 8px;
+  color:var(--ink-soft);
+  font-size:16.5px;
+}
+.panel .when{
+  display:inline-block;
+  margin:14px auto 0;
+  font-weight:600;
+  font-size:13px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--mocha);
+  border-top:1px solid rgba(194,168,108,0.55);
+  border-bottom:1px solid rgba(194,168,108,0.55);
+  padding:10px 22px;
+}
+.steps{
+  max-width:520px;
+  margin:34px auto 0;
+  text-align:left;
+}
+.step{
+  display:flex;
+  gap:18px;
+  padding:16px 0;
+  border-bottom:1px solid rgba(91,75,63,0.12);
+  align-items:flex-start;
+}
+.step:last-child{border-bottom:0;}
+.step .n{
+  flex:none;
+  width:34px;height:34px;
+  border:1px solid var(--gold);
+  color:var(--gold-deep);
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:17px;
+  display:flex;align-items:center;justify-content:center;
+  margin-top:3px;
+}
+.step p{margin:0;font-size:15.5px;line-height:1.65;color:var(--ink-soft);}
+.step p strong{color:var(--obsidian);font-weight:700;}
+.cal-btn{
+  display:inline-block;
+  margin-top:12px;
+  background:var(--gold);
+  color:var(--obsidian);
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:11px 22px;
+  transition:background .25s ease;
+}
+.cal-btn:hover{background:var(--gold-dark);}
+.jm{
+  margin:38px auto 0;
+  max-width:520px;
+  display:flex;
+  gap:20px;
+  align-items:center;
+  text-align:left;
+  background:var(--sand);
+  border:1px solid rgba(91,75,63,0.14);
+  padding:18px 22px;
+}
+.jm img{
+  flex:none;
+  width:64px;height:64px;
+  object-fit:cover;
+  border-radius:50%;
+}
+.jm p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-soft);}
+.jm p .sig{font-family:var(--serif);font-style:italic;color:var(--obsidian);}
+
+footer{padding:0 0 44px;}
+footer .wrap{text-align:center;}
+footer img{height:22px;width:auto;opacity:0.8;}
+footer .fine{font-size:12.5px;color:var(--taupe);margin-top:12px;}
+footer .fine a{color:var(--taupe);text-decoration:none;margin:0 8px;}
+footer .fine a:hover{color:var(--mocha);}
+
+@media (max-width:640px){
+  body{font-size:16px;}
+  .jm{flex-direction:row;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <img src="/client-engine-masterclass/assets/logo-obsidian.svg" alt="Jason Moss">
+  </div>
+</header>
+
+<section class="confirm">
+  <div class="wrap">
+    <div class="panel">
+      <span class="eyebrow">Registration Confirmed</span>
+      <h1 id="headline">Your seat is saved.</h1>
+      <p class="sub">You're registered for <strong>The Client Engine</strong> &mdash; a free, live 60-minute masterclass on creating consistent clients through real conversations.</p>
+      <span class="when"><span class="mc-date">Tuesday, July 21</span> at <span class="mc-time">10:00 a.m. Mountain Time</span> &middot; Live on Zoom</span>
+
+      <div class="steps">
+        <div class="step">
+          <span class="n">1</span>
+          <p><strong>Add it to your calendar.</strong> Do this first, while it's in front of you. Give yourself the full hour &mdash; I'll walk through the entire system, and what it takes to install it in your business.<br>
+          <a class="cal-btn" href="https://addcal.co/e/znsbr1vlcvgt" target="_blank" rel="noopener">Add to Calendar</a></p>
+        </div>
+        <div class="step">
+          <span class="n">2</span>
+          <p><strong>Check your inbox.</strong> Your Zoom link is on its way to the email address you registered with. If it hasn't arrived in a few minutes, check your spam or promotions folder.</p>
+        </div>
+        <div class="step">
+          <span class="n">3</span>
+          <p><strong>Come live.</strong> A replay will be available for a limited time, but I'll be answering questions and coaching real scenarios at the end &mdash; and that only happens live.</p>
+        </div>
+      </div>
+
+      <div class="jm">
+        <img src="/client-engine-masterclass/assets/jm-headshot.png" alt="Jason Moss">
+        <p>Show up live, bring your real questions, and you'll leave with the complete map. <span class="sig">&mdash; Jason</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="/client-engine-masterclass/assets/logo-obsidian.svg" alt="Jason Moss">
+    <div class="fine">
+      <a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms of Service</a>
+      <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a>
+    </div>
+    <div class="fine">&copy; 2026 Jason Moss. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Event config: keep in sync with /client-engine-masterclass/
+  window.MC_EVENT = {
+    date: 'Tuesday, July 21',
+    time: '10:00 a.m. Mountain Time'
+  };
+  document.querySelectorAll('.mc-date').forEach(function(el){ el.textContent = window.MC_EVENT.date; });
+  document.querySelectorAll('.mc-time').forEach(function(el){ el.textContent = window.MC_EVENT.time; });
+
+  // Personalize with first name from the registration redirect
+  (function(){
+    var p = new URLSearchParams(window.location.search);
+    var name = (p.get('first_name') || '').trim();
+    if (name && /^[A-Za-z][A-Za-z' -]{0,30}$/.test(name)) {
+      var safe = name.charAt(0).toUpperCase() + name.slice(1);
+      document.getElementById('headline').textContent = safe + ", your seat is saved.";
+    }
+  })();
+</script>
+
+</body>
+</html>
