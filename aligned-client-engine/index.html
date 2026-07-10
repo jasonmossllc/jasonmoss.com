@@ -54,7 +54,9 @@ body{
   color:var(--obsidian);
   background:var(--sand);
   -webkit-font-smoothing:antialiased;
-  overflow-x:hidden;
+  /* clip, not hidden: overflow-x:hidden turns body into a scroll container,
+     which silently breaks position:sticky descendants (the CTA bar). */
+  overflow-x:clip;
 }
 body::after{
   content:"";
