@@ -1,0 +1,1902 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Aligned Client Engine — Jason Moss</title>
+<meta name="description" content="In six weeks, you'll build a repeatable system for creating clients through real conversations — without posting every day, building a complicated funnel, or becoming someone you're not.">
+<meta property="og:title" content="The Aligned Client Engine">
+<meta property="og:description" content="A simpler, more human way to find and sign clients.">
+<meta property="og:image" content="https://jasonmoss.com/aligned-client-engine/assets/hero-jason.jpg">
+<meta property="og:type" content="website">
+<link rel="icon" href="https://jasonmoss.com/assets/images/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="assets/hero-jason.jpg">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "The Aligned Client Engine",
+  "description": "In six weeks, you'll build a repeatable system for creating clients through real conversations — without posting every day, building a complicated funnel, or becoming someone you're not.",
+  "image": "https://jasonmoss.com/aligned-client-engine/assets/hero-jason.jpg",
+  "brand": {"@type": "Person", "name": "Jason Moss"},
+  "offers": {"@type": "Offer", "price": "997", "priceCurrency": "USD", "availability": "https://schema.org/InStock", "url": "https://checkout.jasonmoss.com/checkout/the-aligned-client-engine"}
+}
+</script>
+<style>
+:root{
+  --obsidian:#1D1F1E;
+  --forest:#2C3F36;
+  --mocha:#5B4B3F;
+  --taupe:#8C837A;
+  --gold:#C2A86C;
+  --gold-dark:#b89a5e;
+  --gold-deep:#A08752;
+  --stone:#E9E2D3;
+  --sand:#F8F6F2;
+  --white:#FFFFFF;
+  --ink-soft:#3E413F;
+  --serif:'Libre Baskerville', Georgia, serif;
+  --sans:'Raleway', 'Helvetica Neue', Arial, sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:17px;
+  line-height:1.78;
+  color:var(--obsidian);
+  background:var(--sand);
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  z-index:2000;
+  opacity:0.4;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0.45 0 0 0 0 0.4 0 0 0 0 0.32 0 0 0 0.05 0'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+::selection{background:rgba(194,168,108,0.35);}
+img{max-width:100%;display:block;}
+a{color:inherit;}
+
+/* ---------- shared ---------- */
+.wrap{max-width:1160px;margin:0 auto;padding:0 32px;}
+.narrow{max-width:720px;margin:0 auto;padding:0 32px;}
+.mid{max-width:880px;margin:0 auto;padding:0 32px;}
+
+.eyebrow{
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:12px;
+  letter-spacing:0.32em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  display:inline-flex;
+  align-items:center;
+  gap:18px;
+}
+.eyebrow::before,.eyebrow.lined::after{
+  content:"";
+  display:block;
+  width:40px;
+  height:1px;
+  background:var(--gold);
+}
+.eyebrow.center{justify-content:center;}
+
+h1,h2,.serif{font-family:var(--serif);font-weight:400;}
+h1{font-size:clamp(38px,4.5vw,55px);line-height:1.14;letter-spacing:-0.015em;text-wrap:balance;}
+h1 em,h2 em{font-style:italic;}
+h2{font-size:clamp(30px,3.7vw,46px);line-height:1.2;letter-spacing:-0.01em;margin-bottom:28px;text-wrap:balance;}
+h3{font-family:var(--serif);font-weight:400;font-size:clamp(21px,2.2vw,26px);line-height:1.35;}
+
+p{margin-bottom:1.4em;}
+p:last-child{margin-bottom:0;}
+.lede{font-size:clamp(18px,2vw,21px);line-height:1.72;color:var(--ink-soft);font-weight:300;}
+.lede strong{font-weight:600;color:var(--obsidian);}
+
+em{font-style:italic;}
+strong{font-weight:600;}
+
+/* buttons */
+.btn{
+  display:inline-block;
+  background:var(--gold);
+  color:var(--obsidian);
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:19px 42px;
+  border:none;
+  border-radius:0;
+  transition:background .25s ease, transform .25s ease;
+  text-align:center;
+}
+.btn:hover{background:var(--gold-dark);transform:translateY(-1px);}
+.btn.green{background:var(--forest);color:var(--sand);border:2px solid #27362F;}
+.btn.green:hover{background:#25362E;}
+.btn-note{
+  font-size:13px;
+  color:var(--taupe);
+  font-weight:500;
+  letter-spacing:0.12em;
+  text-transform:uppercase;
+  margin-top:12px;
+}
+.cta-stack{display:flex;flex-direction:column;align-items:flex-start;}
+.cta-stack.center{align-items:center;text-align:center;}
+
+/* reveal on scroll */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .9s cubic-bezier(.22,.61,.36,1), transform .9s cubic-bezier(.22,.61,.36,1);}
+.reveal.visible{opacity:1;transform:none;}
+.part-grid .part:nth-child(2),.outcome-grid .outcome:nth-child(2){transition-delay:.07s;}
+.part-grid .part:nth-child(3),.outcome-grid .outcome:nth-child(4){transition-delay:.14s;}
+.part-grid .part:nth-child(4),.outcome-grid .outcome:nth-child(6){transition-delay:.09s;}
+.part-grid .part:nth-child(5),.outcome-grid .outcome:nth-child(3){transition-delay:.17s;}
+.outcome-grid .outcome:nth-child(5){transition-delay:.2s;}
+.outcome-grid .outcome:nth-child(7){transition-delay:.24s;}
+.outcome-grid .outcome.highlight{transition-delay:.32s;}
+@media (prefers-reduced-motion: reduce){
+  .reveal{opacity:1;transform:none;transition:none;}
+  html{scroll-behavior:auto;}
+}
+
+/* gold hairline divider */
+.rule{width:56px;height:2px;background:var(--gold);margin:0 auto;}
+
+/* focus visibility */
+a:focus-visible,summary:focus-visible,.btn:focus-visible{
+  outline:2px solid var(--gold-deep);
+  outline-offset:3px;
+}
+
+/* sticky cta bar */
+.sticky-cta{
+  position:fixed;
+  top:0;left:0;right:0;
+  z-index:1500;
+  background:rgba(248,246,242,0.93);
+  -webkit-backdrop-filter:blur(10px);
+  backdrop-filter:blur(10px);
+  border-bottom:1px solid rgba(91,75,63,0.18);
+  transform:translateY(-100%);
+  transition:transform .4s cubic-bezier(.22,.61,.36,1);
+}
+.sticky-cta.show{transform:none;}
+.sticky-cta .inner{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:20px;
+  padding-top:12px;
+  padding-bottom:12px;
+}
+.sticky-cta img{height:30px;width:auto;}
+.sticky-cta .right{display:flex;align-items:center;gap:22px;}
+.sticky-cta .mini-meta{display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
+.sticky-cta .mini-date{
+  font-weight:600;
+  font-size:11px;
+  letter-spacing:0.16em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+}
+.sticky-cta .mini-price{
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:0.18em;
+  text-transform:uppercase;
+  color:var(--taupe);
+}
+.sticky-cta .btn{padding:13px 26px;font-size:12.5px;letter-spacing:0.12em;}
+@media (max-width:720px){
+  .sticky-cta .mini-meta{display:none;}
+  .sticky-cta img{height:26px;}
+  .sticky-cta .btn{padding:12px 18px;font-size:11.5px;width:auto;}
+}
+.sticky-cta .btn-short{display:none;}
+@media (max-width:480px){
+  .sticky-cta img{height:24px;}
+  .sticky-cta .inner{gap:14px;}
+  .sticky-cta .btn{letter-spacing:0.1em;white-space:nowrap;}
+  .sticky-cta .btn-full{display:none;}
+  .sticky-cta .btn-short{display:inline;}
+}
+
+/* proof strips */
+.proof-strip{display:flex;flex-wrap:wrap;justify-content:center;gap:30px;max-width:1020px;margin:0 auto;align-items:flex-start;}
+.proof-strip.cols-2{max-width:880px;}
+.proof-strip .proof-shot{flex:0 1 auto;}
+.pw-25{width:22.5%;}
+.pw-27{width:24.5%;}
+.pw-33{width:30%;}
+.pw-34{width:30.5%;}
+.pw-35{width:31.5%;}
+.pw-40{width:36%;}
+.pw-44{width:42%;}
+.pw-48{width:45%;}
+.pw-52{width:48%;}
+.proof-shot{
+  background:var(--white);
+  padding:10px 10px 12px;
+  border:1px solid rgba(91,75,63,0.14);
+  box-shadow:0 26px 50px -32px rgba(91,75,63,0.5);
+  transform:rotate(-1.1deg);
+}
+.proof-strip .proof-shot:nth-child(2n){transform:rotate(0.9deg);}
+.proof-strip .proof-shot:nth-child(3n){transform:rotate(-0.5deg);}
+.proof-shot img{width:100%;height:auto;display:block;}
+.proof-cap{
+  display:flex;align-items:center;justify-content:center;gap:16px;
+  margin-top:34px;
+  font-weight:600;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--taupe);text-align:center;
+}
+.proof-cap::before,.proof-cap::after{content:"";flex:none;width:34px;height:1px;background:var(--gold);}
+.proof-note{
+  max-width:620px;margin:22px auto 0;text-align:center;
+  font-size:14.5px;line-height:1.7;color:var(--taupe);
+}
+.proof-single{max-width:400px;margin:0 auto;}
+.proof-block{margin-top:clamp(64px,7vw,90px);}
+
+/* wall of love */
+.wall{background:var(--sand);padding:clamp(100px,10vw,112px) 0 clamp(72px,7vw,84px);border-top:1px solid rgba(91,75,63,0.12);}
+.wall .sec-head{margin-bottom:0;}
+.wall .wrap{max-width:1500px;}
+.wall .wall-note{
+  max-width:640px;margin:20px auto clamp(44px,5vw,60px);text-align:center;
+  font-size:15.5px;line-height:1.75;color:var(--ink-soft);
+}
+.wall iframe{width:100%;min-height:820px;border:0;display:block;}
+
+/* section head */
+.sec-head{text-align:center;max-width:780px;margin:0 auto clamp(52px,5vw,60px);}
+.sec-head .eyebrow{margin-bottom:24px;}
+.sec-head h2{margin-bottom:0;}
+.sec-head .sub{max-width:640px;margin:26px auto 0;}
+
+/* ---------- header ---------- */
+header.top{
+  background:var(--sand);
+  padding:16px 0;
+  border-bottom:1px solid rgba(91,75,63,0.14);
+}
+header.top .wrap{display:flex;align-items:center;justify-content:center;}
+header.top img{height:28px;width:auto;}
+
+/* ---------- hero ---------- */
+.hero{
+  position:relative;
+  background:
+    radial-gradient(1100px 620px at 85% 4%, rgba(194,168,108,0.22), rgba(194,168,108,0) 60%),
+    var(--sand);
+  padding:clamp(40px,4.5vw,60px) 0 clamp(48px,5vw,64px);
+  overflow:hidden;
+  border-bottom:1px solid rgba(91,75,63,0.16);
+}
+.hero .wrap{
+  display:grid;
+  grid-template-columns:minmax(0,1.08fr) minmax(0,0.82fr);
+  gap:clamp(48px,5.5vw,80px);
+  align-items:center;
+}
+.hero-copy .eyebrow{margin-bottom:20px;}
+.hero-copy h1{margin-bottom:22px;max-width:12em;}
+.hero-copy .lede{margin-bottom:1.1em;max-width:560px;font-size:clamp(17px,1.7vw,19px);}
+.hero-copy .cta-stack{margin-top:22px;}
+.hero-copy .start-date{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--mocha);
+  margin-bottom:14px;
+}
+.hero-copy .start-date::before{content:"";width:26px;height:1px;background:var(--gold);}
+.hero-copy .g-link{
+  margin-top:12px;
+  font-size:13.5px;
+  letter-spacing:0.04em;
+  color:var(--mocha);
+}
+.hero-copy .g-link a{
+  color:var(--forest);
+  text-decoration:none;
+  border-bottom:1px solid rgba(44,63,54,0.35);
+  transition:border-color .2s ease;
+}
+.hero-copy .g-link a:hover{border-color:var(--forest);}
+.trust-logos{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:14px 28px;
+  margin-top:28px;
+}
+.trust-logos img{
+  height:auto;
+  opacity:0.45;
+  filter:sepia(0.2) saturate(0.6) brightness(0.85);
+}
+.trust-logos .lg-forbes{width:76px;}
+.trust-logos .lg-bi{width:130px;}
+.trust-logos .lg-obo{width:64px;}
+.trust-logos .lg-ent{width:96px;}
+.trust-logos .lg-fc{width:96px;transform:translateY(2px);}
+.hero-media{position:relative;}
+.hero-media .frame{position:relative;z-index:2;}
+.hero-media .frame img{
+  width:100%;
+  aspect-ratio:4/4.05;
+  object-fit:cover;
+  object-position:47% 50%;
+  filter:saturate(0.95) sepia(0.05) brightness(1.01);
+}
+.hero-media .frame::after{
+  content:"";
+  position:absolute;inset:14px;
+  border:1px solid rgba(248,246,242,0.55);
+  pointer-events:none;
+}
+.hero-media::before{
+  content:"";
+  position:absolute;
+  inset:44px -26px -26px 44px;
+  border:1px solid var(--gold);
+  z-index:1;
+}
+.hero-media::after{
+  content:"";
+  position:absolute;
+  top:-40px;right:-70px;
+  width:220px;height:220px;
+  background:radial-gradient(circle, rgba(194,168,108,0.32), rgba(194,168,108,0) 70%);
+  z-index:0;
+}
+.hero-media .tag{
+  position:absolute;
+  z-index:3;
+  left:-14px;bottom:26px;
+  background:var(--sand);
+  padding:9px 22px;
+  display:flex;align-items:center;gap:14px;
+  font-weight:600;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--obsidian);
+  box-shadow:0 10px 28px -16px rgba(29,31,30,0.35);
+}
+.hero-media .tag::before{content:"";width:26px;height:1px;background:var(--gold);}
+
+/* ---------- letter ---------- */
+.letter{padding:68px 0 clamp(80px,7.5vw,92px);background:var(--sand);}
+.letter .narrow p{margin-bottom:1.5em;}
+.letter .narrow > p:first-child{
+  font-size:clamp(18px,2vw,20.5px);
+  font-weight:300;
+  color:var(--ink-soft);
+}
+.letter .kicker{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(22px,2.6vw,29px);
+  line-height:1.52;
+  color:var(--forest);
+  padding:12px 0 12px 30px;
+  border-left:2px solid var(--gold);
+  margin:46px 0;
+}
+.letter .closer{margin-top:54px;text-align:center;}
+.letter .closer .rule{margin-bottom:34px;}
+.letter .closer .serif{
+  font-size:clamp(23px,2.7vw,30px);
+  line-height:1.5;
+}
+.letter .closer .serif em{color:var(--forest);}
+
+/* ---------- why ---------- */
+.why{background:var(--stone);padding:clamp(96px,8.5vw,108px) 0;position:relative;}
+.why::before{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(900px 520px at 100% 0%, rgba(248,246,242,0.65), rgba(248,246,242,0) 58%);
+  pointer-events:none;
+}
+.why .mid{position:relative;}
+.why .eyebrow{margin-bottom:22px;}
+.why h2{max-width:15em;}
+.model-chant{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(19px,2.2vw,24px);
+  line-height:1.7;
+  color:var(--mocha);
+  background:var(--white);
+  border:1px solid rgba(91,75,63,0.18);
+  border-left:3px solid var(--gold);
+  padding:34px 38px 30px 74px;
+  margin:38px 0;
+  position:relative;
+  box-shadow:0 18px 38px -32px rgba(91,75,63,0.35);
+}
+.model-chant::before{
+  content:"\201C";
+  position:absolute;
+  left:26px;top:16px;
+  font-family:var(--serif);
+  font-style:normal;
+  font-size:64px;
+  line-height:1;
+  color:var(--gold);
+}
+.not-list{list-style:none;margin:30px 0;}
+.not-list li{
+  position:relative;
+  padding:12px 0 12px 42px;
+  font-size:17.5px;
+  color:var(--mocha);
+  border-bottom:1px solid rgba(91,75,63,0.16);
+}
+.not-list li:last-child{border-bottom:none;}
+.not-list li::before{
+  content:"✕";
+  position:absolute;left:8px;top:12px;
+  color:var(--taupe);
+  font-size:13px;
+}
+.pull{
+  font-family:var(--serif);
+  font-size:clamp(26px,3.2vw,36px);
+  line-height:1.4;
+  color:var(--forest);
+  text-align:center;
+  max-width:660px;
+  margin:clamp(52px,6vw,72px) auto;
+}
+.pull em{color:var(--gold-deep);}
+.pull .rule{margin-bottom:30px;}
+
+/* ---------- five parts ---------- */
+.parts{padding:clamp(100px,9vw,112px) 0;background:var(--sand);}
+.part-grid{
+  display:grid;
+  grid-template-columns:repeat(6,1fr);
+  gap:26px;
+}
+.part{
+  background:var(--white);
+  border:1px solid rgba(91,75,63,0.16);
+  border-top:3px solid var(--gold);
+  padding:44px 36px 40px;
+  grid-column:span 2;
+  box-shadow:0 18px 38px -30px rgba(91,75,63,0.4);
+  transition:transform .3s ease, box-shadow .3s ease;
+}
+.part:hover{transform:translateY(-5px);box-shadow:0 28px 52px -28px rgba(91,75,63,0.45);}
+.part:nth-child(4){grid-column:2 / span 2;}
+.part:nth-child(5){grid-column:4 / span 2;}
+.part .num{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:26px;
+  color:var(--gold);
+  margin-bottom:16px;
+}
+.part h3{margin-bottom:14px;font-size:22px;}
+.part p{font-size:16px;color:var(--ink-soft);line-height:1.72;}
+.parts .closer{text-align:center;margin-top:64px;}
+.parts .closer p{font-family:var(--serif);font-size:clamp(21px,2.4vw,26px);line-height:1.6;margin-bottom:0.4em;}
+.parts .closer p em{color:var(--forest);}
+
+/* ---------- story ---------- */
+.story{background:var(--stone);padding:clamp(100px,9vw,112px) 0;position:relative;overflow:hidden;}
+.story::before{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(820px 520px at 0% 100%, rgba(248,246,242,0.6), rgba(248,246,242,0) 58%);
+  pointer-events:none;
+}
+.story .wrap{
+  display:grid;
+  grid-template-columns:minmax(0,0.88fr) minmax(0,1.12fr);
+  gap:clamp(28px,3vw,36px) clamp(52px,6.5vw,88px);
+  align-items:start;
+  position:relative;
+}
+.story-media{position:sticky;top:64px;}
+.story-media .frame{position:relative;z-index:2;}
+.story-media .frame img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  object-position:24% 42%;
+}
+.story-media .frame::after{
+  content:"";
+  position:absolute;inset:14px;
+  border:1px solid rgba(248,246,242,0.5);
+  pointer-events:none;
+}
+.story-media::before{
+  content:"";
+  position:absolute;
+  inset:26px -26px -26px 26px;
+  border:1px solid var(--gold);
+  z-index:1;
+}
+.story-media .tag{
+  position:absolute;
+  z-index:3;
+  left:-14px;bottom:26px;
+  background:var(--stone);
+  padding:9px 22px;
+  display:flex;align-items:center;gap:14px;
+  font-weight:600;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;color:var(--obsidian);
+  box-shadow:0 10px 28px -16px rgba(29,31,30,0.35);
+}
+.story-media .tag::before{content:"";width:26px;height:1px;background:var(--gold);}
+.story-media .rail-proof{margin-top:64px;position:relative;z-index:2;}
+.story-media .rail-proof .proof-cap{margin-top:22px;}
+.story-copy .eyebrow{margin-bottom:22px;}
+.story-copy h2{margin-bottom:34px;}
+.story-copy .body p{color:var(--ink-soft);}
+.stat-panel{
+  background:var(--forest);
+  padding:clamp(36px,4vw,50px) clamp(32px,4vw,48px);
+  margin:44px 0;
+}
+.stat-panel p{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(20px,2.3vw,25px);
+  line-height:1.62;
+  color:var(--sand);
+}
+.stat-panel .gold-rule{width:44px;height:2px;background:var(--gold);margin-bottom:24px;}
+.story-after{grid-column:1 / -1;max-width:680px;width:100%;margin:clamp(16px,1.8vw,24px) auto 0;justify-self:center;}
+.story-after .body p{color:var(--ink-soft);}
+.how-q{margin-top:52px;padding-top:46px;border-top:1px solid rgba(91,75,63,0.22);text-align:center;}
+.how-q h3{margin-bottom:26px;font-size:clamp(24px,2.7vw,30px);}
+.how-q .q-stack p{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:18.5px;
+  line-height:1.9;
+  color:var(--mocha);
+  margin-bottom:0.35em;
+}
+.how-q .resolve{
+  margin-top:34px;
+  font-weight:600;
+  font-size:14px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--forest);
+}
+
+/* ---------- introducing ---------- */
+.intro{
+  padding:clamp(110px,9.5vw,120px) 0;
+  background:
+    radial-gradient(1050px 580px at 50% 0%, rgba(194,168,108,0.2), rgba(194,168,108,0) 64%),
+    linear-gradient(180deg, var(--sand) 0%, #F3EEE2 100%);
+  text-align:center;
+  position:relative;
+}
+.intro .eyebrow{margin-bottom:24px;}
+.intro h2{max-width:760px;margin-left:auto;margin-right:auto;font-size:clamp(36px,4.6vw,58px);}
+.intro .lead-in{
+  font-family:var(--serif);
+  font-size:clamp(20px,2.3vw,25px);
+  line-height:1.62;
+  max-width:660px;
+  margin:34px auto;
+}
+.intro .motion{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(18px,2vw,22px);
+  line-height:1.7;
+  color:var(--forest);
+  margin-bottom:clamp(52px,6vw,72px);
+}
+.intro .have-label{
+  font-weight:600;
+  font-size:12px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--obsidian);
+  display:flex;align-items:center;justify-content:center;gap:22px;
+  max-width:880px;
+  margin:0 auto 26px;
+}
+.intro .have-label::before,.intro .have-label::after{content:"";flex:1;height:1px;background:rgba(91,75,63,0.26);}
+.outcome-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:18px;
+  max-width:920px;
+  margin:0 auto;
+  text-align:left;
+}
+.outcome{
+  background:var(--white);
+  border:1px solid rgba(91,75,63,0.16);
+  padding:24px 28px;
+  display:flex;
+  gap:18px;
+  align-items:flex-start;
+  font-size:16.5px;
+  line-height:1.62;
+  color:var(--ink-soft);
+}
+.outcome .check{
+  flex:none;
+  width:26px;height:26px;
+  margin-top:2px;
+  border:1px solid var(--gold);
+  color:var(--gold-deep);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;
+}
+.outcome.highlight{
+  background:var(--forest);
+  color:var(--sand);
+  border:none;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:17.5px;
+  padding:24px 28px;
+}
+.outcome.highlight .check{border-color:var(--gold);color:var(--gold);}
+
+/* ---------- weeks ---------- */
+.weeks{padding:clamp(100px,9vw,112px) 0;background:var(--sand);}
+.week-track{position:relative;max-width:880px;margin:0 auto;}
+.week-track::before{
+  content:"";
+  position:absolute;
+  left:31px;top:10px;bottom:10px;
+  width:1px;
+  background:linear-gradient(180deg, var(--gold) 0%, rgba(194,168,108,0.25) 100%);
+}
+.week{position:relative;padding:0 0 60px 100px;}
+.week:last-child{padding-bottom:0;}
+.week .marker{
+  position:absolute;
+  left:0;top:0;
+  width:62px;height:62px;
+  background:var(--white);
+  border:1px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:23px;
+  color:var(--gold-deep);
+  box-shadow:0 10px 24px -16px rgba(91,75,63,0.45);
+}
+.week .marker::after{
+  content:"";
+  position:absolute;
+  left:calc(100% + 1px);top:50%;
+  width:36px;height:1px;
+  background:linear-gradient(90deg, var(--gold), rgba(194,168,108,0));
+}
+.week .wk-label{
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:8px;
+}
+.week h3{font-size:clamp(24px,2.6vw,29px);margin-bottom:20px;}
+.week.week-proof{padding-bottom:68px;}
+.week.week-proof .proof-single{max-width:480px;margin:0;}
+.proof-pair{display:flex;gap:34px;align-items:flex-start;max-width:800px;}
+.proof-pair figure{flex:1;margin:0;}
+.proof-pair figure:nth-child(2) .proof-shot{transform:rotate(0.9deg);}
+.proof-pair .proof-cap{margin-top:18px;font-size:10.5px;letter-spacing:0.16em;}
+.proof-pair .proof-cap::before,.proof-pair .proof-cap::after{width:18px;}
+.week .body{
+  background:var(--white);
+  border:1px solid rgba(91,75,63,0.15);
+  padding:38px 42px;
+  box-shadow:0 18px 38px -32px rgba(91,75,63,0.35);
+}
+.week .body p{font-size:16.5px;color:var(--ink-soft);margin-bottom:1.35em;}
+.week .body p:last-child{margin-bottom:0;}
+.week .body .em-line{
+  font-family:var(--serif);
+  font-style:italic;
+  color:var(--forest);
+  font-size:18px;
+}
+
+/* ---------- included ---------- */
+.included{background:var(--stone);padding:clamp(100px,9vw,112px) 0;position:relative;}
+.included::before{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(900px 520px at 100% 100%, rgba(248,246,242,0.6), rgba(248,246,242,0) 58%);
+  pointer-events:none;
+}
+.included .wrap{position:relative;}
+.inc-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:26px;
+}
+.inc{
+  background:var(--white);
+  border:1px solid rgba(91,75,63,0.16);
+  padding:46px 44px;
+  box-shadow:0 18px 38px -30px rgba(91,75,63,0.35);
+}
+.inc:first-child{grid-column:1 / -1;border-top:3px solid var(--forest);}
+.inc .icon{width:34px;height:34px;margin-bottom:20px;color:var(--gold-deep);}
+.inc .icon svg{width:100%;height:100%;display:block;}
+.inc .inc-eyebrow{
+  font-weight:600;font-size:11px;letter-spacing:0.28em;text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:14px;
+}
+.inc h3{margin-bottom:18px;font-size:23px;}
+.inc p{font-size:16.5px;color:var(--ink-soft);}
+.inc p strong{color:var(--obsidian);}
+
+/* ---------- who ---------- */
+.who{padding:clamp(100px,9vw,112px) 0;background:var(--sand);}
+.who-grid{display:grid;grid-template-columns:1fr 1fr;gap:32px;align-items:start;}
+.who-col{padding:48px 46px;}
+.who-col.yes{background:var(--white);border:1px solid rgba(91,75,63,0.16);border-top:3px solid var(--forest);}
+.who-col.no{background:transparent;border:1px solid rgba(91,75,63,0.26);border-top:3px solid var(--taupe);}
+.who-col .badge{
+  width:38px;height:38px;
+  border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;
+  margin-bottom:20px;
+}
+.who-col.yes .badge{background:var(--forest);color:var(--sand);}
+.who-col.no .badge{border:1px solid var(--taupe);color:var(--taupe);font-size:12px;}
+.who-col h3{margin-bottom:8px;font-size:clamp(23px,2.5vw,28px);}
+.who-col .intro-line{color:var(--taupe);font-size:15px;margin-bottom:24px;}
+.who-list{list-style:none;}
+.who-list li{
+  position:relative;
+  padding:13px 0 13px 40px;
+  border-bottom:1px solid rgba(91,75,63,0.14);
+  font-size:16.5px;
+  line-height:1.62;
+  color:var(--ink-soft);
+}
+.who-list li:last-child{border-bottom:none;}
+.who-list.checks li::before{
+  content:"✓";
+  position:absolute;left:4px;top:13px;
+  color:var(--forest);
+  font-size:15px;
+}
+.who-list.crosses li::before{
+  content:"✕";
+  position:absolute;left:4px;top:13px;
+  color:var(--taupe);
+  font-size:12.5px;
+}
+.who-after{max-width:720px;margin:68px auto 0;text-align:center;}
+.who-after .needs{
+  font-family:var(--serif);
+  font-size:clamp(21px,2.4vw,27px);
+  line-height:1.72;
+  margin-bottom:1.3em;
+}
+.who-after .need-real{color:var(--ink-soft);max-width:600px;margin:0 auto;}
+.who-after .plain{
+  text-align:left;
+  border-left:2px solid var(--gold);
+  padding:12px 0 12px 30px;
+  margin-top:44px;
+}
+.who-after .plain p{margin-bottom:1.1em;color:var(--ink-soft);}
+.who-after .plain .strong-line{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:19.5px;
+  color:var(--obsidian);
+}
+
+/* ---------- guarantee ---------- */
+.guarantee{
+  padding:clamp(110px,9.5vw,120px) 0;
+  background:
+    radial-gradient(1100px 600px at 50% 100%, rgba(194,168,108,0.16), rgba(194,168,108,0) 60%),
+    var(--stone);
+}
+.g-card{
+  max-width:860px;
+  margin:0 auto;
+  background:var(--white);
+  border:1px solid var(--gold);
+  padding:clamp(52px,6.5vw,84px) clamp(28px,7vw,84px);
+  position:relative;
+  box-shadow:0 36px 80px -44px rgba(29,31,30,0.32);
+}
+.g-card::before{
+  content:"";
+  position:absolute;
+  inset:12px;
+  border:1px solid rgba(194,168,108,0.35);
+  pointer-events:none;
+}
+.g-card .inner{position:relative;}
+.g-seal{
+  width:72px;height:72px;
+  margin:0 auto 26px;
+  border-radius:50%;
+  background:var(--sand);
+  border:1px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  position:relative;
+}
+.g-seal::before{
+  content:"";
+  position:absolute;inset:5px;
+  border-radius:50%;
+  border:1px solid rgba(194,168,108,0.5);
+}
+.g-seal svg{width:34px;height:34px;color:var(--gold-deep);}
+.g-card .eyebrow{margin-bottom:20px;}
+.g-card h2{margin-bottom:28px;}
+.g-card .head-block{text-align:center;margin-bottom:34px;}
+.g-card .promise{color:var(--ink-soft);max-width:620px;margin:0 auto 2em;}
+.g-card .qual-label{
+  font-weight:600;font-size:11.5px;letter-spacing:0.26em;text-transform:uppercase;color:var(--obsidian);
+  display:flex;align-items:center;gap:20px;
+  max-width:600px;margin:0 auto 6px;
+}
+.g-card .qual-label::before,.g-card .qual-label::after{content:"";flex:1;height:1px;background:rgba(91,75,63,0.22);}
+.g-card .q-list{list-style:none;max-width:600px;margin:18px auto 34px;}
+.g-card .q-list li{
+  position:relative;
+  padding:11px 0 11px 38px;
+  font-size:16.5px;
+  color:var(--ink-soft);
+  border-bottom:1px solid rgba(91,75,63,0.14);
+}
+.g-card .q-list li:last-child{border-bottom:none;}
+.g-card .q-list li::before{
+  content:"✓";
+  position:absolute;left:2px;top:11px;
+  color:var(--forest);
+}
+.g-card .no-hoops{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(21px,2.4vw,26px);
+  line-height:1.62;
+  color:var(--forest);
+  text-align:center;
+  margin:34px auto;
+}
+.g-card .fine{color:var(--ink-soft);max-width:620px;margin:0 auto;}
+.g-card .fine p strong{color:var(--obsidian);}
+
+/* ---------- investment ---------- */
+#guarantee{scroll-margin-top:70px;}
+#join{scroll-margin-top:70px;}
+.invest{
+  position:relative;
+  padding:clamp(120px,10vw,128px) 0;
+  background-image:linear-gradient(rgba(248,246,242,0.9), rgba(248,246,242,0.85) 45%, rgba(248,246,242,0.94)), url('https://jasonmoss.com/assets/images/jason-big.jpg');
+  background-size:cover;
+  background-position:center 62%;
+}
+.invest .inner{max-width:760px;margin:0 auto;text-align:center;}
+.invest .eyebrow{margin-bottom:26px;}
+.invest .price{
+  font-family:var(--serif);
+  font-size:clamp(72px,9.5vw,120px);
+  line-height:1;
+  letter-spacing:-0.02em;
+  margin:6px 0 0;
+}
+.invest .price .cur{
+  font-size:0.42em;
+  vertical-align:baseline;
+  position:relative;
+  top:-0.85em;
+  margin-right:0.06em;
+  color:var(--gold-deep);
+}
+.invest .thats-it .flank{
+  display:inline-flex;align-items:center;gap:18px;
+}
+.invest .thats-it .flank::before,.invest .thats-it .flank::after{
+  content:"";width:34px;height:1px;background:var(--gold);
+}
+.invest .price-alt{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:clamp(17px,1.9vw,21px);
+  color:var(--mocha);
+  margin:20px 0 8px;
+}
+.invest .thats-it{
+  font-weight:600;
+  font-size:12.5px;
+  letter-spacing:0.3em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:clamp(44px,5vw,60px);
+}
+.invest .body{
+  text-align:left;
+  background:var(--white);
+  border:1px solid rgba(91,75,63,0.18);
+  padding:clamp(36px,5vw,58px) clamp(28px,5.5vw,62px);
+  margin:0 0 48px;
+  box-shadow:0 30px 66px -40px rgba(29,31,30,0.32);
+}
+.invest .body p{font-size:16.5px;color:var(--ink-soft);}
+.invest .body .diff{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:21px;
+  color:var(--forest);
+}
+
+/* ---------- faq ---------- */
+.faq{padding:clamp(100px,9vw,112px) 0;background:var(--sand);}
+.faq-list{max-width:840px;margin:0 auto;}
+details.qa{border-bottom:1px solid rgba(91,75,63,0.2);}
+details.qa:first-of-type{border-top:1px solid rgba(91,75,63,0.2);}
+details.qa summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:baseline;
+  justify-content:space-between;
+  gap:26px;
+  padding:28px 6px;
+  font-family:var(--serif);
+  font-size:clamp(18px,2vw,21.5px);
+  line-height:1.5;
+  transition:color .2s ease;
+}
+details.qa summary:hover{color:var(--forest);}
+details.qa summary::-webkit-details-marker{display:none;}
+details.qa summary .indicator{
+  flex:none;
+  font-family:var(--sans);
+  font-weight:300;
+  font-size:27px;
+  line-height:1;
+  color:var(--gold-deep);
+  transition:transform .3s ease;
+  position:relative;top:2px;
+}
+details.qa[open] summary .indicator{transform:rotate(45deg);}
+details.qa .answer{
+  padding:4px 6px 36px 26px;
+  max-width:700px;
+  border-left:2px solid rgba(194,168,108,0.5);
+  margin:0 0 32px 4px;
+}
+details.qa .answer p{font-size:16.5px;color:var(--ink-soft);margin-bottom:1.25em;}
+details.qa .answer p:last-child{margin-bottom:0;}
+
+/* ---------- final ---------- */
+.final{background:var(--stone);padding:clamp(110px,9.5vw,120px) 0 clamp(100px,9vw,108px);position:relative;overflow:hidden;}
+.final::before{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(1000px 600px at 85% 12%, rgba(194,168,108,0.16), rgba(194,168,108,0) 60%);
+  pointer-events:none;
+}
+.final .wrap{
+  display:grid;
+  grid-template-columns:minmax(0,0.85fr) minmax(0,1.15fr);
+  column-gap:clamp(52px,7vw,92px);
+  row-gap:28px;
+  align-items:start;
+  position:relative;
+}
+.final-media{position:sticky;top:64px;}
+.final-media .frame{position:relative;z-index:2;}
+.final-media .frame img{
+  width:100%;
+  aspect-ratio:4/5;
+  object-fit:cover;
+  object-position:42% 50%;
+}
+.final-media .frame::after{
+  content:"";
+  position:absolute;inset:14px;
+  border:1px solid rgba(248,246,242,0.5);
+  pointer-events:none;
+}
+.final-media::before{
+  content:"";
+  position:absolute;
+  inset:26px -26px -26px 26px;
+  border:1px solid var(--gold);
+  z-index:1;
+}
+.final-copy .eyebrow{margin-bottom:24px;}
+.final-copy .opening{
+  font-family:var(--serif);
+  font-size:clamp(24px,2.8vw,32px);
+  line-height:1.48;
+  margin-bottom:1.2em;
+}
+.final-copy .opening em{color:var(--forest);}
+.final-copy p{margin-bottom:1.5em;color:var(--ink-soft);}
+.final-copy p strong{color:var(--obsidian);}
+.final-copy .build{
+  font-family:var(--serif);
+  font-size:clamp(19px,2vw,22px);
+  line-height:1.7;
+  color:var(--obsidian);
+  margin-top:32px;
+}
+.final-copy .build em{color:var(--forest);}
+.final-copy .sig{
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:23px;
+  color:var(--obsidian);
+  margin:26px 0 0;
+  padding-top:20px;
+  position:relative;
+}
+.final-copy .sig::before{
+  content:"";
+  position:absolute;top:0;left:2px;
+  width:44px;height:1px;
+  background:var(--gold);
+}
+.final-cta{
+  margin-top:clamp(24px,3vw,36px);
+  padding-top:clamp(36px,4vw,48px);
+  border-top:1px solid rgba(91,75,63,0.22);
+  grid-column:1 / -1;
+}
+
+/* ---------- footer ---------- */
+footer{
+  background:var(--sand);
+  border-top:1px solid rgba(91,75,63,0.15);
+  padding:64px 0 54px;
+  text-align:center;
+}
+footer .foot-rule{width:56px;height:2px;background:var(--gold);margin:0 auto 34px;}
+footer img{height:25px;width:auto;margin:0 auto 26px;opacity:0.9;}
+footer .fine{font-size:13px;color:var(--taupe);letter-spacing:0.04em;}
+footer .fine a{color:var(--taupe);text-decoration:none;border-bottom:1px solid rgba(91,75,63,0.3);transition:color .2s;}
+footer .fine a:hover{color:var(--mocha);}
+footer .links{margin-bottom:10px;}
+footer .links a{margin:0 12px;}
+
+/* ---------- responsive ---------- */
+@media (max-width: 980px){
+  .proof-strip .proof-shot[class*="pw-"]{width:44%;}
+  .hero .wrap{grid-template-columns:1fr;gap:64px;}
+  .hero-media{max-width:520px;}
+  .story .wrap,.final .wrap{grid-template-columns:1fr;gap:64px;}
+  .story-media,.final-media{position:static;max-width:520px;}
+  .part-grid{grid-template-columns:1fr 1fr;}
+  .part,.part:nth-child(4),.part:nth-child(5){grid-column:auto;}
+  .part:nth-child(5){grid-column:1 / -1;}
+  .inc-grid{grid-template-columns:1fr;}
+  .inc:first-child{grid-column:auto;}
+  .outcome-grid{grid-template-columns:1fr;}
+  .who-grid{grid-template-columns:1fr;}
+}
+@media (max-width: 640px){
+  body{font-size:16px;}
+  .proof-strip .proof-shot[class*="pw-"],.proof-strip .proof-shot{width:100%;}
+  .proof-strip{max-width:400px;}
+  .proof-cap{letter-spacing:0.16em;}
+  .proof-cap::before,.proof-cap::after{display:none;}
+  .wrap,.narrow,.mid{padding:0 22px;}
+  .eyebrow::before,.eyebrow.lined::after{display:none;}
+  .eyebrow{letter-spacing:0.24em;}
+  .hero{padding:36px 0 44px;}
+  .letter{padding-top:52px;}
+  .trust-logos{gap:12px 22px;margin-top:24px;}
+  .trust-logos .lg-bi{width:110px;}
+  .proof-single{max-width:330px;}
+  .proof-pair{flex-direction:column;gap:40px;max-width:400px;}
+  .hero-media::before{inset:16px -14px -14px 16px;}
+  .hero-media .tag{left:-8px;}
+  .story-media::before,.final-media::before{inset:16px -14px -14px 16px;}
+  .part-grid{grid-template-columns:1fr;}
+  .part:nth-child(5){grid-column:auto;}
+  .week{padding-left:0;}
+  .week-track::before{display:none;}
+  .week .marker{position:static;margin-bottom:18px;}
+  .week .marker::after{display:none;}
+  .week .body{padding:28px 24px;}
+  .g-card{padding-left:24px;padding-right:24px;}
+  .g-card::before{inset:9px;}
+  .invest .body{padding:34px 24px;}
+  .who-col{padding:36px 26px;}
+  .btn{padding:19px 28px;font-size:13.5px;width:100%;letter-spacing:0.1em;}
+  .cta-stack{width:100%;}
+}
+</style>
+</head>
+<body>
+
+<div class="sticky-cta" id="stickyCta">
+  <div class="wrap inner">
+    <img src="assets/logo-obsidian.svg" alt="Jason Moss">
+    <div class="right">
+      <div class="mini-meta">
+        <span class="mini-date">Begins Tuesday, July 28</span>
+        <span class="mini-price">$997 &middot; or 3 payments of $367</span>
+      </div>
+      <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine"><span class="btn-full">Join the Aligned Client Engine</span><span class="btn-short">Join Now &mdash; $997</span></a>
+    </div>
+  </div>
+</div>
+
+<header class="top">
+  <div class="wrap">
+    <img src="assets/logo-obsidian.svg" alt="Jason Moss">
+  </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero">
+  <div class="wrap">
+    <div class="hero-copy">
+      <span class="eyebrow lined reveal">The Aligned Client Engine</span>
+      <h1 class="reveal">A simpler, more <em>human</em> way to find and sign clients</h1>
+      <div class="reveal">
+        <p class="lede">In six weeks, you&rsquo;ll build a repeatable system for creating clients through real conversations &mdash; without posting every day, building a complicated funnel, or becoming someone you&rsquo;re not.</p>
+        <p class="lede"><strong>You&rsquo;ll leave with the complete engine running &mdash; and potential clients already moving through it.</strong></p>
+      </div>
+      <div class="cta-stack reveal">
+        <span class="start-date">Six weeks &middot; Begins Tuesday, July 28</span>
+        <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
+        <span class="btn-note">or 3 payments of $367</span>
+        <p class="g-link">Backed by <a href="#guarantee">The "Engine Works" Guarantee</a></p>
+        <div class="trust-logos">
+          <img src="https://jasonmoss.com/assets/logo-forbes-scotland.png" alt="Forbes Scotland" class="lg-forbes" loading="lazy">
+          <img src="https://jasonmoss.com/assets/logo-business-insider.png" alt="Business Insider" class="lg-bi" loading="lazy">
+          <img src="https://jasonmoss.com/assets/logo-obo.png" alt="Online Business Owner" class="lg-obo" loading="lazy">
+          <img src="https://jasonmoss.com/assets/logo-entrepreneur.png" alt="Entrepreneur" class="lg-ent" loading="lazy">
+          <img src="https://jasonmoss.com/assets/logo-fast-company-sa.png" alt="Fast Company South Africa" class="lg-fc" loading="lazy">
+        </div>
+      </div>
+    </div>
+    <div class="hero-media reveal">
+      <div class="frame">
+        <img src="assets/hero-jason.jpg" alt="Jason Moss" fetchpriority="high">
+      </div>
+      <div class="tag">Jason Moss</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= LETTER ================= -->
+<section class="letter">
+  <div class="narrow reveal">
+    <p>If you're reading this, I probably don't need to convince you that you're good at what you do.</p>
+    <p>You've seen the transformation happen.</p>
+    <p>You've watched someone's life change because of your work.</p>
+    <p>That was never the problem.</p>
+    <p><strong>The problem is, you don't have enough clients.</strong> And you&rsquo;re missing a reliable, consistent way to create them.</p>
+    <p>So you post.</p>
+    <p>You tweak your messaging.</p>
+    <p>You wonder whether you need a funnel, a podcast, a bigger audience, a new lead magnet, or another content strategy.</p>
+    <p>You keep hearing that consistency is the answer.</p>
+    <p>But underneath it all, there's a growing suspicion:</p>
+    <div class="kicker">Even if you did everything perfectly, you&rsquo;d feel like a burned-out marketing machine &mdash; far from the freedom you actually want.</div>
+    <p>If you're making under $10K a month in your business right now, I want to tell you something that took me years &mdash; and a lot of money &mdash; to learn:</p>
+    <p><strong>You were never meant to become a content machine.</strong></p>
+    <p>Connection and intimacy is your real gift.</p>
+    <p>And it&rsquo;s the best way for you to create the clients you want.</p>
+    <div class="closer">
+      <div class="rule"></div>
+      <p class="serif">The problem is&hellip;<br><em>No one ever showed you how to build a client engine out of it.</em></p>
+    </div>
+  </div>
+  <div class="wrap proof-block reveal">
+    <div class="proof-strip cols-3">
+      <div class="proof-shot pw-40"><img width="700" height="336" src="assets/proof/dana-10k-thursday.jpg" alt="Client message from Dana: a $10,000 payment received — 'just another Thursday.'" loading="lazy"></div>
+      <div class="proof-shot pw-34"><img width="700" height="207" src="assets/proof/mercedes-new-clients.png" alt="Client message from Mercedes: I landed a few paid clients and am rolling — it really changed the trajectory of my business." loading="lazy"></div>
+      <div class="proof-shot pw-25"><img width="700" height="700" src="assets/proof/charlotte-first-package.jpg" alt="Client message from Charlotte: I'm so excited to share that I just sold my first coaching package." loading="lazy"></div>
+    </div>
+    <div class="proof-cap">Real messages from real clients</div>
+    <p class="proof-note">These are from clients I've worked with across various programs over the years &mdash; who integrated many of the same principles I'll be teaching inside The Aligned Client Engine.</p>
+  </div>
+</section>
+
+<!-- ================= WHY ================= -->
+<section class="why">
+  <div class="mid reveal">
+    <span class="eyebrow">The Old Model</span>
+    <h2>Why the marketing you've been taught isn't working</h2>
+    <p>Most client-acquisition programs teach some version of the same model:</p>
+    <div class="model-chant">Post every day. Build an audience. Funnel strangers. Convert them into clients.</div>
+    <p>That model can work.</p>
+    <p>But it works best when you already have a large audience, a big advertising budget, or the capacity to create lots of content at scale.</p>
+    <p><strong>When you have 300 followers and a handful of hours a week, the math is brutal.</strong></p>
+    <p>A post reaches a fraction of your audience.</p>
+    <p>Only some of them need what you do.</p>
+    <p>Even fewer are ready to buy.</p>
+    <p>Content may support the sale &mdash; but at your stage, it will rarely create enough opportunities by itself.</p>
+    <p>Meanwhile, the thing most likely to create a client is sitting right in front of you:</p>
+    <div class="pull">
+      <div class="rule"></div>
+      A <em>real conversation</em> with a real human.
+    </div>
+    <ul class="not-list">
+      <li>Not a cold pitch.</li>
+      <li>Not an awkward "Hey girl" message.</li>
+      <li>Not copying and pasting a script to 50 strangers.</li>
+    </ul>
+    <p><strong>A genuine conversation with someone who needs what you do, or can introduce you to someone who does.</strong></p>
+  </div>
+</section>
+
+<!-- ================= FIVE PARTS ================= -->
+<section class="parts">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center lined">The System</span>
+      <h2>This isn't "DM everyone you know"</h2>
+      <p class="lede sub">The Aligned Client Engine is a complete system built around five connected parts.</p>
+    </div>
+    <div class="part-grid">
+      <div class="part reveal">
+        <div class="num">01</div>
+        <h3>Your foundation</h3>
+        <p>A clear, desirable transformation you can explain in one sentence &mdash; but customize to each person you&rsquo;re working with. No cookie-cutter offer means more people will say yes.</p>
+      </div>
+      <div class="part reveal">
+        <div class="num">02</div>
+        <h3>Your relationship map</h3>
+        <p>The people already around you: previous clients, almost-clients, colleagues, peers, referrers, community members, and people who have expressed interest in your work. These are your fastest path to new clients.</p>
+      </div>
+      <div class="part reveal">
+        <div class="num">03</div>
+        <h3>Your conversation pathways</h3>
+        <p>Natural ways to connect, create opportunities, ask for referrals, follow up, and move a conversation forward without being pushy or salesy.</p>
+      </div>
+      <div class="part reveal">
+        <div class="num">04</div>
+        <h3>Your gathering places</h3>
+        <p>Communities, organizations, events, classes, partnerships, and rooms where your people already gather &mdash; so you don't have to build an audience from scratch.</p>
+      </div>
+      <div class="part reveal">
+        <div class="num">05</div>
+        <h3>Your weekly rhythm</h3>
+        <p>A simple set of actions, scheduled into your calendar, that keeps new people and opportunities moving through your business every week.</p>
+      </div>
+    </div>
+    <div class="closer reveal">
+      <p>Each part strengthens the others.</p>
+      <p><em>Together, they become an engine for consistent clients that you can run for years.</em></p>
+    </div>
+    <div class="proof-block reveal">
+      <div class="proof-strip cols-2">
+        <div class="proof-shot pw-52"><img width="460" height="294" src="assets/proof/emma-referral.jpg" alt="Client post: Just sold my first coaching package — a client I worked with 3 years ago recommended me to one of her clients." loading="lazy"></div>
+        <div class="proof-shot pw-48"><img width="820" height="313" src="assets/proof/josefine-three-clients.png" alt="Client message from Josefine: closed 3 new clients this week — people I've been talking to since last year — $10.2K in total." loading="lazy"></div>
+      </div>
+      <div class="proof-cap">From clients across my programs over the years</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= STORY ================= -->
+<section class="story">
+  <div class="wrap">
+    <div class="story-media reveal">
+      <div class="frame">
+        <img src="https://jasonmoss.com/assets/images/lifestyle-3.jpg" alt="Jason Moss" loading="lazy" decoding="async">
+        <div class="tag">Jason Moss</div>
+      </div>
+      <div class="rail-proof">
+        <div class="proof-shot"><img width="363" height="136" src="assets/proof/ariel-consistent.jpg" alt="Client quote: Working with Jason has single-handedly driven the most consistent results I've seen in my business since I started 3 years ago. — Ariel Naftali" loading="lazy"></div>
+        <div class="proof-cap">From a past client</div>
+      </div>
+    </div>
+    <div class="story-copy reveal">
+      <span class="eyebrow">Proof</span>
+      <h2>I've seen what happens when this engine is working</h2>
+      <div class="body">
+        <p>One of my clients teaches yoga.</p>
+        <p>She doesn't have a complicated funnel, a massive audience, or a dialed-in content strategy.</p>
+        <p><strong>Yet she makes around $8K a month &mdash; nearly six figures a year.</strong></p>
+        <p>Why?</p>
+        <p>She&rsquo;s consistently present in rooms filled with the right people.</p>
+        <p>Her classes build relationships.</p>
+        <p>Those relationships create conversations.</p>
+        <p>And those conversations fill her retreats.</p>
+      </div>
+      <div class="stat-panel">
+        <div class="gold-rule"></div>
+        <p>Over the last 18 years, I've served more than 2,000 clients and generated nearly $2 million in sales online.</p>
+      </div>
+    </div>
+    <div class="story-after reveal">
+      <div class="body">
+        <p>Content has helped people find me.</p>
+        <p>But conversations have consistently become one of my highest-converting paths to clients.</p>
+        <p>This system isn&rsquo;t theory. I&rsquo;ve seen it work firsthand &mdash; both with the clients I serve, and in my own business.</p>
+        <p>And as AI makes it harder and harder to stand out online, I believe that building a conversation engine in your business is the fastest and easiest path to consistent clients in 2026 and beyond.</p>
+      </div>
+      <div class="how-q">
+        <h3>But how do you create these conversations?</h3>
+        <p>The truth is, creating these conversations &mdash; and turning them into clients &mdash; is a skill.</p>
+        <div class="q-stack">
+          <p>Where do the right conversations come from?</p>
+          <p>How do you open one up without making it weird?</p>
+          <p>How do you recognize a real opportunity?</p>
+          <p>Move the conversation forward?</p>
+          <p>Invite someone to work with you without pressure?</p>
+          <p>And how do you make the entire process repeatable?</p>
+        </div>
+        <p class="resolve">That is what we're going to build together.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INTRODUCING ================= -->
+<section class="intro">
+  <div class="wrap">
+    <div class="reveal">
+      <span class="eyebrow center lined">Introducing</span>
+      <h2>The Aligned Client Engine</h2>
+      <p class="lead-in">In six weeks, you'll build a simple, repeatable system for finding and signing clients through real conversations.</p>
+      <p class="motion">You won't just learn the system.<br>You'll put it into motion during the program.</p>
+    </div>
+    <div class="reveal">
+      <div class="have-label">By the end, you'll have</div>
+      <div class="outcome-grid">
+        <div class="outcome"><span class="check">✓</span>A clear offer you can confidently talk about</div>
+        <div class="outcome"><span class="check">✓</span>A message that makes the value of your work easy to understand</div>
+        <div class="outcome"><span class="check">✓</span>A map of the warm opportunities already around you</div>
+        <div class="outcome"><span class="check">✓</span>A natural way to begin and advance client conversations</div>
+        <div class="outcome"><span class="check">✓</span>A discovery-call process that leads toward a genuine decision</div>
+        <div class="outcome"><span class="check">✓</span>A repeatable way to enter rooms where your future clients already gather</div>
+        <div class="outcome"><span class="check">✓</span>A weekly rhythm that keeps your pipeline active without living online</div>
+        <div class="outcome highlight"><span class="check">✓</span>Real prospective clients already moving through your engine</div>
+      </div>
+    </div>
+    <div class="proof-block reveal">
+      <div class="proof-strip cols-3">
+        <div class="proof-shot pw-48"><img width="700" height="155" src="assets/proof/steve-six-month-client.png" alt="Client message from Steve: I've secured my first 6 month client — more than double the price I've charged previously." loading="lazy"></div>
+        <div class="proof-shot pw-48"><img width="700" height="214" src="assets/proof/andrew-two-10k-months.png" alt="Client message from Andrew: I'm 3 months into launching my coaching business and I have had 2 10K months." loading="lazy"></div>
+        <div class="proof-shot pw-48"><img width="700" height="190" src="assets/proof/kristina-3x.png" alt="Client post from Kristina: I have earned 14,000€ in the past 3 months — in the 3 months before it was only 4,000€." loading="lazy"></div>
+      </div>
+      <div class="proof-cap">From clients across my programs over the years</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WEEKS ================= -->
+<section class="weeks">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center lined">The Journey</span>
+      <h2>Here's what we'll build <em>each week</em></h2>
+    </div>
+    <div class="week-track">
+
+      <div class="week reveal">
+        <div class="marker">1</div>
+        <div class="wk-label">Week 1</div>
+        <h3>Your Engine Blueprint</h3>
+        <div class="body">
+          <p>By the end of the first week, you'll be able to say what you do and who it's for in one sentence out loud.</p>
+          <p>Also &mdash; there's a specific way to structure your offer that makes it far easier for someone to say yes, and removes the endless "I need to perfect my packages first."</p>
+          <p>Most coaches get this backwards &mdash; because they&rsquo;ve been told the only way to build a successful business is to have &ldquo;one offer&rdquo; with a fixed price, deliverables and way of helping people.</p>
+          <p>Because of this, they miss out on opportunities, clients who would&rsquo;ve said yes, if they&rsquo;d just taken a different approach. We fix it in week one.</p>
+          <p>Then we'll map the relationships, opportunities, and potential referral pathways already surrounding you.</p>
+          <p>You'll discover something most people don't believe until they see it on paper:</p>
+          <p class="em-line">You are not starting from zero. And there&rsquo;s way more opportunity right in front of you than you realize.</p>
+        </div>
+      </div>
+
+      <div class="week reveal">
+        <div class="marker">2</div>
+        <div class="wk-label">Week 2</div>
+        <h3>Your Message</h3>
+        <div class="body">
+          <p>"I can't explain what I do in a compelling way."</p>
+          <p>It's one of the most common things coaches and service providers tell me.</p>
+          <p>There's a reason for it &mdash; and it isn't that you're bad at words.</p>
+          <p>This week, you'll build your messaging core: one clear way of describing the transformation you create that works everywhere it needs to &mdash; in conversations, introductions, referrals, and calls.</p>
+          <p>It will sound like you &mdash; not like a template.</p>
+          <p class="em-line">And by Friday, your engine will already be warming. (You'll see what I mean.)</p>
+        </div>
+      </div>
+
+      <div class="week reveal">
+        <div class="marker">3</div>
+        <div class="wk-label">Week 3</div>
+        <h3>The Conversation Engine</h3>
+        <div class="body">
+          <p>This is the heart of the program &mdash; and the week when sales opportunities begin moving.</p>
+          <p>You'll learn the aligned way to open doors with people who already know you: how to connect without being weird, how to recognize when genuine interest is present, and how to move a friendly exchange toward a real opportunity &mdash; without the ick, and without chasing.</p>
+          <p>You'll also learn the one small thing you add to every conversation that keeps new people flowing into your world indefinitely. (This alone is worth the program.)</p>
+          <p>We won't just discuss it.</p>
+          <p class="em-line">We'll write the messages, begin the conversations, and put the system into motion together &mdash; live on the call, that day.</p>
+        </div>
+      </div>
+
+      <div class="week reveal">
+        <div class="marker">4</div>
+        <div class="wk-label">Week 4</div>
+        <h3>The Design Conversation</h3>
+        <div class="body">
+          <p>There is a way to run a discovery call where you never need to pressure, perform, or convince &mdash; and where the person on the other end often ends up asking you how they can work together.</p>
+          <p>This week, you'll learn and practice the complete Design Conversation, live.</p>
+          <p>We'll also work through how to talk about money without shrinking &mdash; and how to handle the "who am I to charge this" fear right when it actually shows up: with real calls on your real calendar. Not as an abstract mindset module. In context, where it actually shifts.</p>
+          <p class="em-line">And we'll coach your real calls and real opportunities as they happen.</p>
+        </div>
+      </div>
+
+      <div class="week reveal">
+        <div class="marker">5</div>
+        <div class="wk-label">Week 5</div>
+        <h3>Your Gathering Places</h3>
+        <div class="body">
+          <p>Where do your people already gather?</p>
+          <p>That one question makes audience-building irrelevant at your stage &mdash; and once you truly answer it, you'll never think about "visibility" the same way again.</p>
+          <p>Because there's a way to be consistently present in those rooms &mdash; communities, classes, events, partnerships &mdash; with one specific rhythm, a few hours a month, that keeps your engine fed with new people forever.</p>
+          <p>No posting schedule. No algorithm. No permission needed from anyone.</p>
+          <p>You're no longer performing for an algorithm and hoping the right person happens to see you. You're becoming consistently present in the rooms where trust naturally develops.</p>
+          <p>My client making around $8K a month with no real funnel and no content strategy?</p>
+          <p>This is the foundation of her entire model.</p>
+          <p class="em-line">This week, you'll build your version of it.</p>
+        </div>
+      </div>
+
+      <div class="week reveal">
+        <div class="marker">6</div>
+        <div class="wk-label">Week 6</div>
+        <h3>The Engine, Assembled</h3>
+        <div class="body">
+          <p>In the final week, we'll assemble your complete client engine on one page.</p>
+          <p>You'll schedule it into your actual calendar and create the weekly rhythm you can realistically sustain.</p>
+          <p>No fantasy posting schedule.</p>
+          <p>No 47-step funnel.</p>
+          <p>No plan that requires you to become a different person.</p>
+          <p>You'll know exactly where new opportunities come from, who you should be talking to, and what to do each week to keep the engine running.</p>
+          <p>For some of you, this week will also be spent coaching your live opportunities &mdash; because you'll already be in conversation with potential clients created through the engine.</p>
+          <p>You'll leave with a system you can continue running for years.</p>
+          <p class="em-line">And you won't be doing it alone &mdash; even between our calls.</p>
+        </div>
+      </div>
+
+      <div class="week week-proof reveal">
+        <div class="proof-pair">
+          <figure>
+            <div class="proof-shot"><img width="960" height="1479" src="assets/proof/andrew-sold-to-serve.jpg" alt="Client messages from Andrew: I totally sold from a place of just wanting to serve. It was uncomfortable to ask all the questions, but I did it anyway — closed the call in 30 mins. Your sales script is really gold." loading="lazy"></div>
+            <figcaption class="proof-cap">A past client, after a simple conversation</figcaption>
+          </figure>
+          <figure>
+            <div class="proof-shot"><img width="796" height="1208" src="assets/proof/meaghan-year-over-year.jpg" alt="A past client's revenue screenshots one year apart: December 2022 at $1,359 — December 2023 at $26,325." loading="lazy"></div>
+            <figcaption class="proof-cap">A past client's December, one year apart</figcaption>
+          </figure>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ================= INCLUDED ================= -->
+<section class="included">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center lined">Everything You Receive</span>
+      <h2>What's included</h2>
+    </div>
+    <div class="inc-grid">
+      <div class="inc reveal">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><circle cx="17" cy="17" r="13"/><path d="M14 12.5v9l7.5-4.5z"/></svg></div>
+        <div class="inc-eyebrow">Live &amp; Hands-On</div>
+        <h3>Six live training and implementation calls with me</h3>
+        <p>Each call is two hours.</p>
+        <p>We'll spend approximately 60 minutes learning the week's framework and 60 minutes implementing it together.</p>
+        <p><strong>You won't leave with another pile of homework. You'll leave with the thing built.</strong></p>
+        <p>That includes live hot seats, real messages reviewed, real conversations coached, discovery calls debriefed, active opportunities supported, and your specific obstacles worked through.</p>
+      </div>
+      <div class="inc reveal">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M29 6 5 15.5l7.5 3L27 9 15 20.5l1 7.5 4-5 6 3z"/></svg></div>
+        <div class="inc-eyebrow">Between Calls</div>
+        <h3>Private Telegram community</h3>
+        <p>You'll have a place to ask questions, get feedback, share what's happening, and receive support between our live sessions.</p>
+        <p>When a conversation takes an unexpected turn, you won't have to wait until the next weekly call to get clarity.</p>
+      </div>
+      <div class="inc reveal">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M17 4 30 11 17 18 4 11z"/><path d="M4 17.5 17 24.5 30 17.5"/><path d="M4 23.5 17 30.5 30 23.5"/></svg></div>
+        <div class="inc-eyebrow">Your Tools</div>
+        <h3>The complete Aligned Client Engine toolkit</h3>
+        <p>The practical resources we use throughout the program: relationship-mapping tools, reconnection prompts, referral asks, follow-up frameworks, the Design Conversation framework, your one-page Client Engine, and your sustainable weekly rhythm.</p>
+      </div>
+      <div class="inc reveal">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h22v16H14l-6 6v-6H6z"/><path d="M12 12h10M12 16h6"/></svg></div>
+        <div class="inc-eyebrow">Always There</div>
+        <h3>The Conversation Coach</h3>
+        <p>Every student receives an AI conversation partner trained on my complete conversation methodology.</p>
+        <p>If you're stuck in the middle of a real conversation and don't know what to say next, you can paste in the thread and receive specific feedback on what's actually happening, whether a genuine opportunity is present, the most aligned next move, and how to respond in your own voice.</p>
+        <p>It's there at 11 p.m. on a Thursday when the scary reply arrives and you're tempted to overthink it for two days.</p>
+        <p><strong>And it's yours to keep after the program ends.</strong></p>
+      </div>
+      <div class="inc reveal">
+        <div class="icon" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="8" width="24" height="18"/><path d="M9 4h16M14.5 13.5v7l6-3.5z"/></svg></div>
+        <div class="inc-eyebrow">Never Miss a Thing</div>
+        <h3>All recordings, yours to keep</h3>
+        <p>Can't attend a call live? Every session will be recorded, and you'll have ongoing access to the complete program.</p>
+      </div>
+    </div>
+    <div class="cta-stack center reveal" style="margin-top:clamp(52px,6vw,72px);">
+      <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
+      <span class="btn-note">or 3 payments of $367</span>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WHO ================= -->
+<section class="who">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center lined">An Honest Fit Check</span>
+    </div>
+    <div class="who-grid">
+      <div class="who-col yes reveal">
+        <div class="badge" aria-hidden="true">✓</div>
+        <h3>Who this is for</h3>
+        <p class="intro-line">The Aligned Client Engine is for:</p>
+        <ul class="who-list checks">
+          <li>Coaches, consultants, healers, and service providers making under $10K per month</li>
+          <li>People who are genuinely good at their work but lack a reliable way to find clients</li>
+          <li>People who have signed clients before but are tired of how unpredictable it feels</li>
+          <li>People exhausted by the belief that they need to constantly post, perform, and feed an algorithm</li>
+          <li>People willing to have genuine conversations with real humans each week</li>
+          <li>People who want a simple system they can continue using as their business grows</li>
+        </ul>
+      </div>
+      <div class="who-col no reveal">
+        <div class="badge" aria-hidden="true">✕</div>
+        <h3>Who this is not for</h3>
+        <p class="intro-line">This isn't for:</p>
+        <ul class="who-list crosses">
+          <li>Anyone looking for a completely passive client-acquisition system</li>
+          <li>Anyone who wants to avoid interacting with potential clients</li>
+          <li>Anyone unwilling to implement during the six weeks</li>
+          <li>Anyone looking for a set-it-and-forget-it funnel</li>
+          <li>Established businesses already making $10K+ per month consistently</li>
+        </ul>
+      </div>
+    </div>
+    <div class="who-after reveal">
+      <p class="needs">You do not need a large audience.<br>You do not need a funnel.<br>You do not need to be an extrovert.</p>
+      <p class="need-real"><strong>You do need a real service that helps people &mdash; and a willingness to start conversations.</strong></p>
+      <div class="plain">
+        <p>If you're already consistently above $10K per month, you have different constraints, and this program isn't built to solve them.</p>
+        <p>And I'll say this plainly:</p>
+        <p class="strong-line">If you're unwilling to talk to people, no program on earth can sign clients for you.</p>
+        <p>But if you're willing to connect, listen, and put the engine into motion, I'll show you exactly how to turn that ability into a reliable path to clients.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= GUARANTEE ================= -->
+<section class="guarantee" id="guarantee">
+  <div class="wrap">
+    <div class="g-card reveal">
+      <div class="inner">
+        <div class="head-block">
+          <div class="g-seal" aria-hidden="true"><svg viewBox="0 0 34 34" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 26 13 11l6 9 4-5.5L30 26z"/><path d="M11 26h12"/></svg></div>
+          <span class="eyebrow center lined">My Promise</span>
+          <h2>The <span style="white-space:nowrap;">"Engine Works"</span> Guarantee</h2>
+        </div>
+        <p class="promise">Here's my promise: if you show up to the calls, build your engine, and actually start the conversations each week &mdash; and by the end of six weeks the engine hasn't created genuine conversations with qualified potential clients &mdash; I'll refund every dollar.</p>
+        <div class="qual-label">A qualified potential client means someone who</div>
+        <ul class="q-list">
+          <li>Fits the audience your offer is built for</li>
+          <li>Has a real problem your work can help solve</li>
+          <li>Is willing to explore that problem with you</li>
+          <li>Could realistically become a client or refer you to one</li>
+        </ul>
+        <p class="no-hoops">No hoops. No forms.<br>No "well, did you really try."</p>
+        <div class="fine">
+          <p>Just tell me what you did and what happened. If you did the work and the engine didn't create qualified opportunities, you don't pay for it.</p>
+          <p>I can't guarantee that a specific person will say yes. No honest mentor can.</p>
+          <p><strong>But I can put the risk behind the system on my side of the table.</strong></p>
+          <p>The only thing I can't guarantee is work you don't do. If you skip the conversations, no program on earth can sign clients for you &mdash; and I'd rather tell you that now than after you've paid me.</p>
+        </div>
+      </div>
+    </div>
+    <div class="proof-block reveal">
+      <div class="proof-strip cols-2">
+        <div class="proof-shot pw-44"><img width="840" height="681" src="assets/proof/marine-17k-month.jpg" alt="Client message from Marine: I did 11k in a week — closing a 17k month, my biggest month yet." loading="lazy"></div>
+        <div class="proof-shot pw-48"><img width="840" height="554" src="assets/proof/karuna-15k-month.jpg" alt="Client message from Karuna: 15k! My biggest month yet. I'm blown away." loading="lazy"></div>
+      </div>
+      <div class="proof-cap">From clients across my programs over the years</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= INVESTMENT ================= -->
+<section class="invest" id="join">
+  <div class="wrap">
+    <div class="inner reveal">
+      <span class="eyebrow center lined">The Investment</span>
+      <div class="price"><span class="cur">$</span>997</div>
+      <p class="price-alt">&mdash; or 3 payments of $367.</p>
+      <p class="thats-it"><span class="flank">That's it.</span></p>
+      <div class="body">
+        <p>There are no surprise upsells inside the program.</p>
+        <p>There's no moment when you discover the "real" training is hidden inside a $10,000 mastermind.</p>
+        <p>For context, many client-acquisition programs cost $3,000&ndash;$8,000.</p>
+        <p>And many are built around a model that requires an audience, an advertising budget, or an enormous amount of content before you can even know whether it works.</p>
+        <p class="diff">The Aligned Client Engine is different.</p>
+        <p>It's six weeks. It's live. It's built specifically for your stage.</p>
+        <p>You'll implement it with me.</p>
+        <p>You'll create real opportunities while the program is happening.</p>
+        <p>And if you do the work but the engine doesn't produce qualified potential-client conversations, you'll receive your money back.</p>
+      </div>
+      <div class="cta-stack center">
+        <a class="btn green" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
+        <span class="btn-note">or 3 payments of $367</span>
+      </div>
+      <div class="proof-block reveal">
+        <div class="proof-single">
+          <div class="proof-shot"><img width="700" height="584" src="assets/proof/andrea-12k-month.jpg" alt="Client message from Andrea: I'm at $12,400 for the month — my best month so far." loading="lazy"></div>
+          <div class="proof-cap">From a past client</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FAQ ================= -->
+<section class="faq">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center lined">Before You Decide</span>
+      <h2>Questions you're probably asking</h2>
+    </div>
+    <div class="faq-list reveal">
+
+      <details class="qa">
+        <summary>How much time will this take?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>Plan for three to five focused hours each week.</p>
+          <p>That includes the live call, your conversations, and your follow-up.</p>
+          <p>This is designed for people with day jobs, children, clients, and full lives. We'll size the engine to your actual capacity &mdash; not to a fantasy schedule you'll abandon after two weeks.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>I don't have an audience. Will this still work?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>Yes.</p>
+          <p>This is especially useful if you don't have an audience.</p>
+          <p>The engine doesn't require thousands of followers, a large email list, a content platform, or an advertising budget.</p>
+          <p>It begins with the people and opportunities already around you, then builds a repeatable way to meet more of the right people.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>Is this just messaging everyone I know?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>No.</p>
+          <p>You won't spam your contacts or treat every relationship like a sales opportunity.</p>
+          <p>We'll identify where genuine alignment already exists, connect naturally, create pathways for referrals, and help interested people take the next step.</p>
+          <p>The goal isn't to extract something from your relationships.</p>
+          <p>It's to create more of the right relationships &mdash; and learn how to recognize and lead the opportunities that emerge from them.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>I'm an introvert. This sounds terrifying.<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>For many introverts, constantly performing in public for strangers is far more exhausting than having a meaningful one-on-one conversation.</p>
+          <p>This system doesn't ask you to become louder.</p>
+          <p>It helps you become more intentional with something you already know how to do: listen, connect, and help someone feel understood.</p>
+          <p>You won't be cold-pitching strangers.</p>
+          <p>You'll be learning how to create and lead genuine conversations.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What if I get stuck and don't know what to say?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>That is exactly why you'll receive the Conversation Coach.</p>
+          <p>Paste in the conversation and it will help you understand what's happening, identify the next move, and draft a response that sounds like you.</p>
+          <p>You'll also be able to bring real conversations to our live calls and the Telegram community for direct coaching.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What if I've bought programs before and they didn't work?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>I know.</p>
+          <p>That describes many of the people reading this page.</p>
+          <p>Most of those programs probably gave you more information, more content to create, or a funnel that would supposedly work once you generated enough traffic.</p>
+          <p>This program uses a different mechanism.</p>
+          <p>You'll build the engine and put it into action during the six weeks &mdash; not "someday" after you finish watching 47 prerecorded modules.</p>
+          <p>If you implement it and it doesn't create qualified conversations with potential clients, you'll get your money back.</p>
+          <p>I've tried to make this the safest "one more time" you'll ever take.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What if I don't know enough people?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>Almost everyone thinks this.</p>
+          <p>And almost everyone ends up surprised once they go through the Aligned Client Engine process.</p>
+          <p>Previous clients. Almost-clients. Former colleagues. Peers. Friends of clients. Referrers. Community members. People who have engaged with your work. People in organizations you've already joined.</p>
+          <p>Week one exists to help you see, on paper, that you aren't starting from zero.</p>
+          <p>Then week five builds the system that keeps new people entering your world.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What if I've never signed a client before?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>If you're newer and already have a clear skill, service, or methodology that genuinely helps people, you&rsquo;ll still be a fit.</p>
+          <p>This program will help you clarify your offer, message and pathway to clients &mdash; though it is not a certification program or a substitute for developing real expertise.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>When does the program begin?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>The cohort begins Tuesday, July 28.</p>
+          <p>Our live calls will be held on Tuesdays at 10:00 a.m. Mountain Time.</p>
+          <p>Every call will be recorded, so you can catch up if you need to miss one.</p>
+        </div>
+      </details>
+
+      <details class="qa">
+        <summary>What happens after the six weeks?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p>You'll have your entire engine on one page and a weekly rhythm you can continue running.</p>
+          <p>You'll also keep all program recordings, the complete toolkit, the Conversation Coach framework, your messaging and conversation assets, and the system you built during the program.</p>
+          <p>For some students, there may eventually be a conversation about working with me more deeply.</p>
+          <p>But there is no hidden pitch waiting at the end.</p>
+          <p>The Aligned Client Engine is complete as it is.</p>
+        </div>
+      </details>
+
+    </div>
+    <div class="proof-block reveal">
+      <div class="proof-strip cols-3">
+        <div class="proof-shot pw-40"><img width="1000" height="778" src="assets/proof/stephanie-six-weeks.jpg" alt="Client email from Stephanie: about 6 weeks into the program, I'm filling my days with what I'm confident are the right steps — I appreciate how you balance specific guidance with the energetics and mindset required. It's made a massive difference." loading="lazy"></div>
+        <div class="proof-shot pw-27"><img width="654" height="820" src="assets/proof/jake-first-client.jpg" alt="Client messages from Jake: Just signed my first client! First client within 10 days of working with you, so grateful dude." loading="lazy"></div>
+        <div class="proof-shot pw-33"><img width="660" height="1027" src="assets/proof/ariel-six-clients.jpg" alt="Client messages from Ariel: $4500 in Nov and $5300 in Dec — my highest earning months since I started my biz. Officially have 6 clients — $6K this month." loading="lazy"></div>
+      </div>
+      <div class="proof-cap">From clients across my programs over the years</div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FINAL WORD ================= -->
+<section class="final">
+  <div class="wrap">
+    <div class="final-media reveal">
+      <div class="frame">
+        <img src="https://jasonmoss.com/assets/images/lifestyle-2.jpg" alt="Jason Moss" loading="lazy" decoding="async">
+      </div>
+    </div>
+    <div class="final-copy reveal">
+      <span class="eyebrow">A Final Word From Me</span>
+      <p class="opening">I've spent the last 10 years learning &mdash; the expensive way &mdash; that the best marketing <em>isn't a performance.</em></p>
+      <p>It's connecting with someone heart-to-heart.</p>
+      <p>It's helping them feel seen, heard, and understood.</p>
+      <p>It's helping someone see what's possible &mdash; and helping them feel safe enough to say yes to it.</p>
+      <p><strong>There is no technology on earth that does both better than a real conversation.</strong></p>
+      <p>And the good news is:</p>
+      <p>You already know how to have those conversations.</p>
+      <p>You have them every time you do your actual work.</p>
+      <p>You don't need to become a content machine.</p>
+      <p>You don't need to perform your way into a profitable business.</p>
+      <p>You need a clear, repeatable system that turns your natural ability to connect into a consistent path to clients.</p>
+      <p class="build">That's the Aligned Client Engine.<br>Six weeks.<br><em>Let's build it&hellip; together.</em></p>
+      <p class="sig">&mdash; Jason</p>
+    </div>
+    <div class="final-cta reveal">
+      <div class="cta-stack center">
+        <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
+        <span class="btn-note">or 3 payments of $367</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= WALL OF LOVE ================= -->
+<section class="wall">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow center lined">In Their Words</span>
+    </div>
+    <p class="wall-note reveal">These testimonials are from clients I've worked with across various programs over the years &mdash; who integrated many of the same principles I'll be teaching inside The Aligned Client Engine.</p>
+    <iframe
+      id="testimonialto-jason-moss-testimonials-tag-all-light"
+      src="https://embed-v2.testimonial.to/w/jason-moss-testimonials/?theme=light&card=base&loadMore=on&initialCount=20&tag=all"
+      frameborder="0"
+      scrolling="no"
+      width="100%"
+      style="min-height:820px;"
+      loading="lazy"
+      title="Client testimonials"
+    ></iframe>
+    <div class="cta-stack center reveal" style="margin-top:clamp(48px,5vw,68px);">
+      <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
+      <span class="btn-note">or 3 payments of $367</span>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-rule"></div>
+    <img src="assets/logo-obsidian.svg" alt="Jason Moss">
+    <div class="fine links">
+      <a href="https://jasonmoss.com/privacy/">Privacy Policy</a>
+      <a href="https://jasonmoss.com/earnings-disclaimer/">Earnings Disclaimer</a>
+    </div>
+    <div class="fine">&copy; 2026 Jason Moss. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+const params = new URLSearchParams(location.search);
+if(params.has('static')){
+  document.querySelectorAll('.reveal').forEach(el=>{el.style.transition='none';el.classList.add('visible');});
+  if(params.get('ss')) document.documentElement.style.marginTop = (-parseInt(params.get('ss'),10))+'px';
+  if(params.has('bar')){const b=document.getElementById('stickyCta');b.style.transition='none';b.classList.add('show');}
+}else{
+  const obs = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{
+      if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target);}
+    });
+  },{threshold:0.1,rootMargin:'0px 0px -40px 0px'});
+  document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+}
+
+// sticky cta: show after the hero, hide while the pricing section is on screen
+const stickyBar = document.getElementById('stickyCta');
+const heroEl = document.querySelector('.hero');
+const investEl = document.getElementById('join');
+const syncBar = ()=>{
+  if(params.has('bar')) return;
+  const pastHero = heroEl.getBoundingClientRect().bottom < 0;
+  const ir = investEl.getBoundingClientRect();
+  const investOnScreen = ir.top < innerHeight*0.85 && ir.bottom > 0;
+  stickyBar.classList.toggle('show', pastHero && !investOnScreen);
+};
+addEventListener('scroll', syncBar, {passive:true});
+addEventListener('resize', syncBar, {passive:true});
+syncBar();
+</script>
+<script type="text/javascript" src="https://embed-v2.testimonial.to/js/iframeResizer.min.js"></script>
+<script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, '#testimonialto-jason-moss-testimonials-tag-all-light');</script>
+
+</body>
+</html>
