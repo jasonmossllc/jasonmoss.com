@@ -14,10 +14,15 @@
 //      automation hub's proven sync behavior for existing contacts).
 // It only creates/updates the contact and tags it; it never sends an SMS.
 //
+// Verification accepts EITHER a fresh Turnstile token (standalone use) OR a
+// roezan_pass from submit-contact.js's response (dual Kit+SMS opt-in pages:
+// one widget run, Kit first, then this call — see ROEZAN PASS over there).
+//
 // Environment variables required (set in Netlify dashboard):
 //   ROEZAN_API_KEY       - Roezan Integrations API key (X-API-Key header).
 //   ROEZAN_API_URL       - optional base URL override.
 //                          Defaults to https://app.roezan.com/api.
+//   ROEZAN_PASS_SECRET   - HMAC secret shared with submit-contact.js.
 //   TURNSTILE_SECRET_KEY - shared with submit-contact.js (see there).
 //
 // Bot guards (honeypot, origin allowlist, gibberish-name check, Turnstile)
@@ -25,6 +30,7 @@
 const { __internal } = require('./submit-contact.js');
 const {
   verifyTurnstile,
+  verifyRoezanPass,
   originAllowed,
   looksLikeBotName,
   cleanString,
@@ -204,15 +210,21 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid name' }) };
     }
 
-    // 5) Cloudflare Turnstile — blocks missing, forged, or replayed tokens.
-    const ts = await verifyTurnstile(data.turnstile_token, ip);
-    if (ts.block) {
-      console.log('Blocked: forged/invalid Turnstile token', { ip });
-      return { statusCode: 403, headers, body: JSON.stringify({ error: 'Verification failed' }) };
+    // 5) Verification — either a roezan_pass minted by submit-contact.js on
+    //    this same submission (Turnstile tokens are single-use, so a page
+    //    that already verified once hands trust off server-side instead of
+    //    re-challenging the visitor), or a fresh Turnstile token when this
+    //    endpoint is called standalone.
+    const email = String(data.email).trim().toLowerCase();
+    if (!verifyRoezanPass(data.roezan_pass, email)) {
+      const ts = await verifyTurnstile(data.turnstile_token, ip);
+      if (ts.block) {
+        console.log('Blocked: no valid roezan_pass or Turnstile token', { ip });
+        return { statusCode: 403, headers, body: JSON.stringify({ error: 'Verification failed' }) };
+      }
     }
 
     // ── Passed all checks — normalize and sync to Roezan ────────────────────
-    const email = String(data.email).trim().toLowerCase();
     const firstName = cleanString(data.first_name, 100);
     const lastName = cleanString(data.last_name, 100);
 
@@ -228,16 +240,14 @@ exports.handler = async (event) => {
     }
 
     const result = await syncContactToRoezan({ email, firstName, lastName, phone, tagId });
-    if (!result.synced) {
-      // No phone submitted and none on file in Roezan — an SMS contact can't
-      // exist without a number.
-      return { statusCode: 400, headers, body: JSON.stringify({ error: 'A valid phone number is required' }) };
-    }
 
+    // synced:false = no phone submitted and none on file in Roezan. That's an
+    // expected outcome for email-only opt-ins (nothing to tag), not an error —
+    // pages fire-and-forget this call, so don't make it look like a failure.
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ success: true }),
+      body: JSON.stringify({ success: true, synced: result.synced }),
     };
   } catch (error) {
     console.error('Function error:', error);

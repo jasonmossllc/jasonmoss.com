@@ -20,6 +20,8 @@
 // Client-side checks alone are bypassable (bots POST straight to this URL),
 // so all of these run here, server-side, regardless of the page.
 //
+const crypto = require('crypto');
+
 const KIT_API_BASE = (process.env.KIT_API_URL || 'https://api.kit.com').replace(/\/+$/, '');
 const KIT_RESUBSCRIBE_FORM_ID = process.env.KIT_RESUBSCRIBE_FORM_ID || '9576424';
 const RESUBSCRIBE_ACTIVE_CHECK_DELAYS_MS = [0, 250, 750, 1500];
@@ -492,6 +494,44 @@ async function verifyTurnstile(token, ip) {
   }
 }
 
+// ── ROEZAN PASS ────────────────────────────────────────────────────────────
+// Turnstile tokens are single-use, so a page that collects email AND phone
+// can't verify the same token here and again in submit-roezan-contact.js —
+// and re-running the widget risks showing the visitor a second challenge.
+// Instead, once a submission clears every bot gate here, the response carries
+// roezan_pass = "<ms-timestamp>.<hmac-sha256(email + '.' + timestamp)>" and
+// submit-roezan-contact.js accepts that in place of a Turnstile token.
+// Email-bound + short TTL: forging needs the server secret, and replaying it
+// can only repeat the same idempotent Roezan tag for the same email.
+const ROEZAN_PASS_TTL_MS = 5 * 60 * 1000;
+
+function roezanPassSignature(email, timestamp) {
+  const secret = process.env.ROEZAN_PASS_SECRET;
+  if (!secret) return null;
+  return crypto.createHmac('sha256', secret).update(`${email}.${timestamp}`).digest('hex');
+}
+
+function issueRoezanPass(email) {
+  const timestamp = Date.now();
+  const signature = roezanPassSignature(email, timestamp);
+  return signature ? `${timestamp}.${signature}` : null;
+}
+
+function verifyRoezanPass(pass, email) {
+  if (typeof pass !== 'string' || typeof email !== 'string' || !email) return false;
+  const match = pass.match(/^(\d{10,16})\.([a-f0-9]{64})$/);
+  if (!match) return false;
+  const timestamp = Number.parseInt(match[1], 10);
+  if (!Number.isSafeInteger(timestamp) || Math.abs(Date.now() - timestamp) > ROEZAN_PASS_TTL_MS) return false;
+  const expected = roezanPassSignature(email, timestamp);
+  if (!expected) return false;
+  try {
+    return crypto.timingSafeEqual(Buffer.from(match[2], 'hex'), Buffer.from(expected, 'hex'));
+  } catch (e) {
+    return false;
+  }
+}
+
 exports.handler = async (event) => {
   // Only allow POST
   if (event.httpMethod === 'OPTIONS') {
@@ -590,6 +630,10 @@ exports.handler = async (event) => {
       ),
     };
 
+    // Issued only after every bot gate above has passed; lets the page call
+    // submit-roezan-contact.js without a second Turnstile run (see ROEZAN PASS).
+    const roezanPass = issueRoezanPass(email);
+
     let result;
     try {
       result = await syncContactToKit(submission);
@@ -604,14 +648,23 @@ exports.handler = async (event) => {
       return {
         statusCode: 200,
         headers,
-        body: JSON.stringify({ success: true, queued: true }),
+        body: JSON.stringify({
+          success: true,
+          queued: true,
+          ...(roezanPass ? { roezan_pass: roezanPass } : {}),
+        }),
       };
     }
 
     return {
       statusCode: 200,
       headers,
-      body: JSON.stringify({ success: true, subscriberId: result.subscriberId, tagged: result.tagged }),
+      body: JSON.stringify({
+        success: true,
+        subscriberId: result.subscriberId,
+        tagged: result.tagged,
+        ...(roezanPass ? { roezan_pass: roezanPass } : {}),
+      }),
     };
   } catch (error) {
     console.error('Function error:', error);
@@ -642,4 +695,6 @@ module.exports.__internal = {
   EMAIL_RE,
   findSubscriberByEmail,
   updateSubscriber,
+  issueRoezanPass,
+  verifyRoezanPass,
 };
