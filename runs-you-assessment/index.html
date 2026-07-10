@@ -760,13 +760,24 @@
     }
 
     /* ─────────────────────────── Turnstile ─────────────────────────── */
+    // Cloudflare renders the widget inside a CLOSED shadow root whose host div
+    // measures 0px tall, so a painted widget overflows the page flow. Render
+    // interaction-only (invisible unless a challenge is actually needed) and
+    // reserve its known 300x65 size right before it paints.
     var tsWidgetId = null, tsLoading = false;
+    function tsRenderOptions(){
+      return { sitekey: TURNSTILE_SITEKEY, theme:'dark', appearance:'interaction-only',
+        'before-interactive-callback': function(){
+          var box = document.getElementById('cf-turnstile-box');
+          if (box) box.style.minHeight = '71px';
+        } };
+    }
     function renderTurnstile(){
       tsWidgetId = null;
       var box = document.getElementById('cf-turnstile-box');
       if (!box || !TURNSTILE_SITEKEY) return;
       if (window.turnstile){
-        try { tsWidgetId = window.turnstile.render(box, { sitekey: TURNSTILE_SITEKEY, theme:'dark' }); } catch(e){}
+        try { tsWidgetId = window.turnstile.render(box, tsRenderOptions()); } catch(e){}
         return;
       }
       if (tsLoading){ waitForTurnstile(); return; }
@@ -782,7 +793,7 @@
       var box = document.getElementById('cf-turnstile-box');
       if (!box) return;
       if (window.turnstile){
-        try { tsWidgetId = window.turnstile.render(box, { sitekey: TURNSTILE_SITEKEY, theme:'dark' }); } catch(e){}
+        try { tsWidgetId = window.turnstile.render(box, tsRenderOptions()); } catch(e){}
         return;
       }
       if (attempt < 40) setTimeout(function(){ waitForTurnstile(attempt + 1); }, 250);

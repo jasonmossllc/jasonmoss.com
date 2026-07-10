@@ -372,7 +372,19 @@
       } catch (e) {}
       return '';
     };
-    function fitTurnstile() {
+    // Cloudflare now renders the widget inside a CLOSED shadow root whose host
+    // div always measures 0px tall, so the widget's real size cannot be read
+    // from the DOM (the old fitTurnstile measured 0, collapsed the box, and
+    // the widget still painted ~65px behind the submit button). Fix: render
+    // with appearance:'interaction-only' so nothing paints for auto-passed
+    // visitors, and reserve the widget's KNOWN size (300x65) via Cloudflare's
+    // before-interactive-callback at the moment it is about to paint.
+    var TS_NAT_W = 300, TS_NAT_H = 65; // Turnstile "normal" widget nominal size
+    function collapseTurnstile() {
+      var b = document.getElementById('cf-turnstile-box');
+      if (b && b.getAttribute('data-reserved') !== '1') { b.style.height = '0'; b.style.margin = '0'; }
+    }
+    function reserveTurnstile() {
       try {
         var b = document.getElementById('cf-turnstile-box');
         if (!b) return;
@@ -381,25 +393,15 @@
         var prev = b.previousElementSibling;   // in-flow field above (skip the hidden honeypot)
         while (prev && (getComputedStyle(prev).position === 'absolute' || prev.offsetParent === null)) prev = prev.previousElementSibling;
         var inner = b.firstElementChild;
-        if (inner) inner.style.zoom = '';
-        var natW = inner ? inner.getBoundingClientRect().width : 0;
-        var natH = inner ? inner.getBoundingClientRect().height : 0;
-        if (!inner || !natW || !natH) {
-          // Not visible yet. Only collapse if we never reserved space, so a transient 0
-          // during a Verifying<->Success state change can't make the button jump.
-          if (b.getAttribute('data-reserved') !== '1') { b.style.height = '0'; b.style.margin = '0'; if (btn) btn.style.marginTop = ''; if (prev) prev.style.marginBottom = ''; }
-          return;
-        }
-        var avail = b.clientWidth || natW;
-        var z = natW > avail ? (avail / natW) : 1;
-        if (z < 1) inner.style.zoom = z;
+        var avail = b.getBoundingClientRect().width || TS_NAT_W;
+        var z = TS_NAT_W > avail ? (avail / TS_NAT_W) : 1;
+        if (inner) inner.style.zoom = (z < 1 ? z : '');
         b.style.display = 'flex'; b.style.alignItems = 'center'; b.style.justifyContent = 'center';
         b.style.margin = '16px auto';
         if (btn) btn.style.marginTop = '0px';
         if (prev) prev.style.marginBottom = '0px';
-        // Reserve a STABLE height once (grow-only) so the widget's Verifying<->Success
-        // height changes never reposition the box / move the button -> no jump.
-        var reserved = Math.ceil(natH * z) + 4;
+        // Grow-only so later calls never shrink the box mid-interaction (no jump).
+        var reserved = Math.ceil(TS_NAT_H * z) + 6;
         var cur = parseInt(b.style.height, 10) || 0;
         if (reserved > cur) b.style.height = reserved + 'px';
         b.setAttribute('data-reserved', '1');
@@ -409,9 +411,16 @@
       var k = window.__TURNSTILE_SITEKEY;
       if (k && k.indexOf('REPLACE_WITH') === -1 && window.turnstile &&
           document.getElementById('cf-turnstile-box')) {
-        window.__tsWidgetId = window.turnstile.render('#cf-turnstile-box', { sitekey: k, callback: fitTurnstile, 'expired-callback': fitTurnstile, 'error-callback': fitTurnstile });
-        setTimeout(fitTurnstile, 600); setTimeout(fitTurnstile, 1800);
-        window.addEventListener('resize', fitTurnstile);
+        collapseTurnstile();
+        window.__tsWidgetId = window.turnstile.render('#cf-turnstile-box', {
+          sitekey: k,
+          appearance: 'interaction-only',
+          'before-interactive-callback': reserveTurnstile
+        });
+        window.addEventListener('resize', function () {
+          var b = document.getElementById('cf-turnstile-box');
+          if (b && b.getAttribute('data-reserved') === '1') reserveTurnstile();
+        });
       }
     };
     // Hard gate: no Turnstile token (verification not completed) => block submit.
