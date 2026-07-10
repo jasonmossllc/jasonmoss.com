@@ -298,7 +298,6 @@
       if (!player || entry._tracked) return;
       entry._tracked = true;
       var muted = entry.autoplay ? true : false; // autoplay starts muted; click-to-play starts audible
-      if (entry.unmuted) muted = false;
 
       var tracker = makeVideoTracker({
         ratio: WATCH_THRESHOLD,
@@ -320,15 +319,15 @@
       } catch (e) {}
 
       try { player.on('play', function () { refreshMuted(); }); } catch (e) {}
+      // The viewer can mute/unmute at any moment (incl. re-muting after the
+      // tap-for-sound overlay) — the live player state is authoritative.
+      try { player.on('volumechange', function () { refreshMuted(); }); } catch (e) {}
       try { player.on('pause', function () { tracker.pause(); }); } catch (e) {}
       try { player.on('ended', function () { tracker.ended(); }); } catch (e) {}
       try {
         player.on('timeupdate', function (d) {
           d = d || {};
-          // entry.unmuted (set by the tap-for-sound overlay) is authoritative
-          // the instant it flips; the poll keeps muted fresh otherwise.
-          var isMuted = entry.unmuted ? false : muted;
-          tracker.timeupdate(d.seconds, d.duration, isMuted);
+          tracker.timeupdate(d.seconds, d.duration, muted);
         });
       } catch (e) {}
 

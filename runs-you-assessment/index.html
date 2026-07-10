@@ -548,8 +548,9 @@
     function gtag(){ window.dataLayer.push(arguments); }
     if (IS_LIVE){
       gtag('js', new Date());
-      // direct GA4 hookup — GTM keeps owning page_view, we send funnel events
-      gtag('config', 'G-P5D1GH2M97', { send_page_view: false });
+      // direct GA4 hookup — this page has no GTM container, so gtag must send
+      // page_view itself or funnel conversion rates have no denominator
+      gtag('config', 'G-P5D1GH2M97');
     }
     function track(eventName, extra){
       var payload = { event: eventName };
@@ -671,6 +672,7 @@
     }
 
     var qFired = {};
+    var advanceTimer = null;
     function pick(qid, value, btn){
       state.answers[qid] = value;
       persist();
@@ -684,7 +686,11 @@
       }
       stepEl.querySelectorAll('.opt').forEach(function(b){ b.classList.remove('picked'); });
       btn.classList.add('picked');
-      setTimeout(function(){
+      // Re-picking inside the 260ms window (double-tap, or changing the
+      // answer) must not queue a second advance — that skipped a question.
+      if (advanceTimer) clearTimeout(advanceTimer);
+      advanceTimer = setTimeout(function(){
+        advanceTimer = null;
         if (qid === 'q1' && value === 'no'){ renderOfframp(); return; }
         if (current < QUESTIONS.length - 1){ current += 1; renderQuestion(); }
         else { renderContext(); }
@@ -871,11 +877,15 @@
       if (latestAd) payload.latest_ad = latestAd;
       if (latestSource) payload.latest_source = latestSource;
 
+      var subController = new AbortController();
+      var subTimeout = setTimeout(function(){ subController.abort(); }, 10000);
       fetch(FN_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
+        signal: subController.signal
       }).then(function(res){
+        clearTimeout(subTimeout);
         return res.json().catch(function(){ return {}; }).then(function(body){
           return { ok: res.ok, body: body };
         });

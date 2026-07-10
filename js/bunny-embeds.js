@@ -491,10 +491,18 @@
         backBufferLength: 90,
         capLevelToPlayerSize: true,
         startLevel: -1,
+        // Click-to-play videos must not buffer segments on page load (hls.js
+        // otherwise pre-downloads ~30s per player — real bandwidth on pages
+        // with several videos). The manifest still loads, so the quality menu
+        // and duration work; segment loading starts on first play below.
+        autoStartLoad: autoplay,
       });
       entry.hls = hls;
       hls.loadSource(hlsUrl);
       hls.attachMedia(video);
+      if (!autoplay) {
+        video.addEventListener('play', function () { try { hls.startLoad(); } catch (e) {} }, { once: true });
+      }
       hls.on(window.Hls.Events.MANIFEST_PARSED, function () { withCaptionTrack(buildPlyr); });
       hls.on(window.Hls.Events.ERROR, function (ev, data) {
         if (!data || !data.fatal) return;
