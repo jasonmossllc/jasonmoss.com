@@ -20,6 +20,11 @@
 // Client-side checks alone are bypassable (bots POST straight to this URL),
 // so all of these run here, server-side, regardless of the page.
 //
+// Optional payload fields: `phone` (written to the Kit "phone" custom field,
+// normalized, latest value wins; unusable values are dropped silently so the
+// email opt-in always proceeds). Pages that also want the Roezan SMS sync
+// read `roezan_pass` from the response — see ROEZAN PASS below.
+//
 const crypto = require('crypto');
 
 const KIT_API_BASE = (process.env.KIT_API_URL || 'https://api.kit.com').replace(/\/+$/, '');
@@ -36,6 +41,10 @@ const PRESERVED_FIELD_MAPPINGS = [
   { payloadKey: 'latest_source', kitField: ORIGINAL_SOURCE_FIELD, maxLength: 500 },
 ];
 const MAX_TAG_IDS = 10;
+// Kit custom field that receives an opt-in's phone number when a page
+// collects one. Optional: pages without a phone field are unaffected, and an
+// unusable value is dropped rather than blocking the email opt-in.
+const KIT_PHONE_FIELD = 'phone';
 
 class KitApiError extends Error {
   constructor(message, status, body) {
@@ -113,6 +122,19 @@ async function kitRequest(path, options = {}) {
 function cleanString(value, maxLength = 500) {
   if (typeof value !== 'string') return '';
   return value.trim().slice(0, maxLength);
+}
+
+// Shared with submit-roezan-contact.js so Kit and Roezan always store the
+// same E.164-ish format. Keep digits (and a leading +); a bare 10-digit
+// number is assumed US. Returns '' for blank input, null for input that
+// can't be a phone number.
+function normalizePhone(raw) {
+  const trimmed = String(raw == null ? '' : raw).trim();
+  if (!trimmed) return '';
+  const digits = trimmed.replace(/[^\d]/g, '');
+  if (digits.length < 10 || digits.length > 15) return null;
+  if (digits.length === 10) return `+1${digits}`;
+  return `+${digits}`;
 }
 
 function isBlank(value) {
@@ -617,11 +639,23 @@ exports.handler = async (event) => {
       return { statusCode: 500, headers, body: JSON.stringify({ error: 'Signup tag is not configured' }) };
     }
 
+    // Optional phone passthrough → Kit "phone" custom field. Overwrite
+    // semantics (latest submission wins), and an unusable value is dropped —
+    // the phone is auxiliary data and must never cost us the email opt-in.
+    const overwriteFields = {};
+    const phone = normalizePhone(data.phone);
+    if (phone) {
+      overwriteFields[KIT_PHONE_FIELD] = phone;
+    } else if (phone === null) {
+      console.log('Ignoring unusable phone on opt-in', { ip });
+    }
+
     const submission = {
       email,
       firstName,
       tagIds,
       mappedFields: cleanMappedFieldValues(data),
+      overwriteFields,
       referrer: cleanString(
         headerValue(event.headers, 'referer') ||
         headerValue(event.headers, 'referrer') ||
@@ -691,6 +725,7 @@ module.exports.__internal = {
   looksLikeBotName,
   cleanString,
   cleanMappedFieldValues,
+  normalizePhone,
   headerValue,
   EMAIL_RE,
   findSubscriberByEmail,

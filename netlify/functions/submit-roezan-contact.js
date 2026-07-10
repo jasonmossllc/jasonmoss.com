@@ -34,6 +34,7 @@ const {
   originAllowed,
   looksLikeBotName,
   cleanString,
+  normalizePhone,
   headerValue,
   EMAIL_RE,
 } = __internal;
@@ -54,17 +55,6 @@ function normalizeRoezanTagId(value) {
   if (!/^\d+$/.test(normalized)) return null;
   const tagId = Number.parseInt(normalized, 10);
   return Number.isSafeInteger(tagId) && tagId > 0 ? tagId : null;
-}
-
-// Keep digits (and a leading +). A bare 10-digit number is assumed US.
-// Returns '' for blank input, null for input that can't be a phone number.
-function normalizePhone(raw) {
-  const trimmed = String(raw == null ? '' : raw).trim();
-  if (!trimmed) return '';
-  const digits = trimmed.replace(/[^\d]/g, '');
-  if (digits.length < 10 || digits.length > 15) return null;
-  if (digits.length === 10) return `+1${digits}`;
-  return `+${digits}`;
 }
 
 async function roezanRequest(path, { method = 'GET', body, allowNotFound = false } = {}) {
