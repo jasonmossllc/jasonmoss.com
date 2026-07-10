@@ -125,13 +125,18 @@ function cleanString(value, maxLength = 500) {
 }
 
 // Shared with submit-roezan-contact.js so Kit and Roezan always store the
-// same E.164-ish format. Keep digits (and a leading +); a bare 10-digit
-// number is assumed US. Returns '' for blank input, null for input that
-// can't be a phone number.
+// same E.164-ish format. An explicit leading + means the country code is
+// already present — trust it (a Danish +45 number is 10 digits total and
+// must NOT get the US rule). Only a bare 10-digit number is assumed US.
+// Returns '' for blank input, null for input that can't be a phone number.
 function normalizePhone(raw) {
   const trimmed = String(raw == null ? '' : raw).trim();
   if (!trimmed) return '';
   const digits = trimmed.replace(/[^\d]/g, '');
+  if (trimmed.charAt(0) === '+') {
+    if (digits.length < 8 || digits.length > 15) return null;
+    return `+${digits}`;
+  }
   if (digits.length < 10 || digits.length > 15) return null;
   if (digits.length === 10) return `+1${digits}`;
   return `+${digits}`;

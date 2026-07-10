@@ -1041,6 +1041,51 @@
       opacity: 1;
     }
     .optin-form .form-input:focus { border-color: #C2A86C; }
+    .optin-form .phone-row {
+      display: flex;
+      gap: 0;
+      border: 1px solid #8C837A;
+      border-radius: 4px;
+      background: #FFFFFF;
+      overflow: hidden;
+      position: relative;
+      transition: border-color 0.3s ease;
+    }
+    .optin-form .phone-row:focus-within { border-color: #C2A86C; }
+    .optin-form .country-code-select {
+      flex: 0 0 8.25rem;
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      border-right: 1px solid rgba(140, 131, 122, 0.45);
+      border-radius: 0;
+      background: transparent;
+      padding: 0.8125rem 1.75rem 0.8125rem 0.875rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      color: #1D1F1E;
+      outline: none;
+      cursor: pointer;
+    }
+    .optin-form .phone-row .form-input {
+      border: 0;
+      border-radius: 0;
+      background: transparent;
+    }
+    .optin-form .phone-row .form-input:focus { border-color: transparent; }
+    .optin-form .phone-row::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 6.9rem;
+      width: 8px;
+      height: 8px;
+      border-right: 1.5px solid rgba(29, 31, 30, 0.72);
+      border-bottom: 1.5px solid rgba(29, 31, 30, 0.72);
+      pointer-events: none;
+      transform: translateY(-62%) rotate(45deg);
+    }
     .optin-form .form-btn {
       margin-top: 0.5rem;
       width: 100%;
@@ -1308,7 +1353,26 @@
       <form class="optin-form email-form" novalidate>
         <input type="text" name="First Name" class="form-input" placeholder="First Name" required aria-required="true">
         <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
-        <input type="tel" name="Phone Number" class="form-input" placeholder="Phone Number" inputmode="numeric" pattern="[0-9]+" required aria-required="true">
+        <div class="phone-row">
+          <select name="Country Code" class="country-code-select" aria-label="Country code" required aria-required="true">
+            <option value="1">🇺🇸 US/CA +1</option>
+            <option value="44">🇬🇧 UK +44</option>
+            <option value="61">🇦🇺 AU +61</option>
+            <option value="64">🇳🇿 NZ +64</option>
+            <option value="353">🇮🇪 IE +353</option>
+            <option value="49">🇩🇪 DE +49</option>
+            <option value="43">🇦🇹 AT +43</option>
+            <option value="358">🇫🇮 FI +358</option>
+            <option value="352">🇱🇺 LU +352</option>
+            <option value="31">🇳🇱 NL +31</option>
+            <option value="46">🇸🇪 SE +46</option>
+            <option value="47">🇳🇴 NO +47</option>
+            <option value="45">🇩🇰 DK +45</option>
+            <option value="41">🇨🇭 CH +41</option>
+            <option value="971">🇦🇪 AE +971</option>
+          </select>
+          <input type="tel" name="Phone Number" class="form-input" placeholder="Phone Number" inputmode="tel" autocomplete="tel-national" required aria-required="true">
+        </div>
         <input type="hidden" name="Ad" value="">
         <!-- Honeypot: hidden from humans; bots fill it and get rejected server-side -->
         <input type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
@@ -1364,19 +1428,42 @@
     var originalText = submitBtn.textContent.trim();
     var submitting = false;
 
+    // Build an E.164 phone from the country-code dropdown + the typed number.
+    // Handles common typing habits: a trunk "0" before the national number
+    // (07700... outside +1), the 00 international dialing prefix, a full
+    // "+44..." pasted into the field despite the dropdown, and a US number
+    // typed with its leading 1.
+    function buildE164(countryCode, phoneRaw) {
+      var raw = String(phoneRaw).trim();
+      var digits = raw.replace(/\D/g, '');
+      if (!digits) return '';
+      if (raw.charAt(0) === '+') return '+' + digits;
+      if (digits.slice(0, 2) === '00') return '+' + digits.slice(2);
+      if (countryCode === '1') {
+        if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
+      } else {
+        digits = digits.replace(/^0+/, '');
+      }
+      return '+' + countryCode + digits;
+    }
+
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
       if (submitting) return;
 
       var firstName = form.querySelector('input[name="First Name"]').value.trim();
       var email = form.querySelector('input[name="E-mail"]').value.trim();
+      var countryCodeField = form.querySelector('select[name="Country Code"]');
+      var countryCode = countryCodeField ? countryCodeField.value.replace(/\D/g, '') : '1';
       var phoneRaw = form.querySelector('input[name="Phone Number"]').value.trim();
-      var phone = phoneRaw.replace(/\D/g, '');
+      var phoneDigits = phoneRaw.replace(/\D/g, '');
+      var phone = buildE164(countryCode, phoneRaw);
 
       if (!firstName) { alert('Please enter your first name.'); return; }
       if (!email) { alert('Please enter your email address.'); return; }
       if (!form.querySelector('input[name="E-mail"]').checkValidity()) { alert('Please enter a valid email address.'); return; }
-      if (!phone) { alert('Please enter a valid phone number (digits only).'); return; }
+      if (!countryCode) { alert('Please select your country code.'); return; }
+      if (phoneDigits.length < 6) { alert('Please enter a valid phone number.'); return; }
 
       submitting = true;
       submitBtn.textContent = 'Validating…';

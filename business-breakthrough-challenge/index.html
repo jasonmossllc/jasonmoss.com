@@ -1876,6 +1876,25 @@
       if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
     });
 
+    // Build an E.164 phone from the country-code dropdown + the typed number.
+    // Handles common typing habits: a trunk "0" before the national number
+    // (07700... outside +1), the 00 international dialing prefix, a full
+    // "+44..." pasted into the field despite the dropdown, and a US number
+    // typed with its leading 1.
+    function buildE164(countryCode, phoneRaw) {
+      var raw = String(phoneRaw).trim();
+      var digits = raw.replace(/\D/g, '');
+      if (!digits) return '';
+      if (raw.charAt(0) === '+') return '+' + digits;
+      if (digits.slice(0, 2) === '00') return '+' + digits.slice(2);
+      if (countryCode === '1') {
+        if (digits.length === 11 && digits.charAt(0) === '1') digits = digits.slice(1);
+      } else {
+        digits = digits.replace(/^0+/, '');
+      }
+      return '+' + countryCode + digits;
+    }
+
     var submitBtn = form.querySelector('.form-btn');
     var originalText = submitBtn.textContent.trim();
     var submitting = false;
@@ -1894,7 +1913,7 @@
       var countryCode = countryCodeField.value.replace(/\D/g, '');
       var phoneRaw = form.querySelector('input[name="Phone Number"]').value.trim();
       var phoneDigits = phoneRaw.replace(/\D/g, '');
-      var phone = countryCode ? '+' + countryCode + phoneDigits : phoneDigits;
+      var phone = buildE164(countryCode, phoneRaw);
 
       if (!firstName) { alert('Please enter your first name.'); return; }
       if (!email) { alert('Please enter your email address.'); return; }
