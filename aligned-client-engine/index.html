@@ -164,10 +164,12 @@ a:focus-visible,summary:focus-visible,.btn:focus-visible{
 }
 
 /* sticky cta bar */
+/* Zero-height sticky wrapper instead of position:fixed — on iOS Safari,
+   fixed elements pin to the LAYOUT viewport and visibly lag/detach from the
+   top while the browser chrome collapses during scroll; sticky elements
+   track the visual viewport smoothly. height:0 so it takes no layout space. */
+.sticky-anchor{position:sticky;top:0;height:0;z-index:1500;}
 .sticky-cta{
-  position:fixed;
-  top:0;left:0;right:0;
-  z-index:1500;
   background:rgba(248,246,242,0.93);
   -webkit-backdrop-filter:blur(10px);
   backdrop-filter:blur(10px);
@@ -1228,7 +1230,7 @@ footer .links a{margin:0 12px;}
 </head>
 <body>
 
-<div class="sticky-cta" id="stickyCta">
+<div class="sticky-anchor"><div class="sticky-cta" id="stickyCta">
   <div class="wrap inner">
     <img src="assets/logo-obsidian.svg" alt="Jason Moss">
     <div class="right">
@@ -1239,7 +1241,7 @@ footer .links a{margin:0 12px;}
       <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine"><span class="btn-full">Join the Aligned Client Engine</span><span class="btn-short">Join Now &mdash; $997</span></a>
     </div>
   </div>
-</div>
+</div></div>
 
 <header class="top">
   <div class="wrap">
