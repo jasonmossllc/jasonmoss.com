@@ -12,6 +12,7 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /resonance    /resonance-masterclass-optin2?source=YouTube_Organic                            301
 /resonance-masterclass-optin    /resonance-masterclass-optin2                                  301
 /aligned      https://jasonmoss.com/aligned-client-engine/                                     301
+/clients      https://jasonmoss.com/aligned-client-engine/                                     301
 
 # June 2026 challenge ended — page archived (noindex); old ad/email links still resolve
 /business-breakthrough-challenge/*    /archive/business-breakthrough-challenge/:splat          301
