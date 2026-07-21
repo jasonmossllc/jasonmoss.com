@@ -477,13 +477,6 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
-    "306f2e6f-8a40-4e7d-bbd2-ab6fb890930a": {
-      "videoId": "306f2e6f-8a40-4e7d-bbd2-ab6fb890930a",
-      "title": "The Client Engine Masterclass",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
     "f79f0527-5dd3-4950-9c44-73829f09b7ed": {
       "videoId": "hlntpnigew",
       "title": "Zach Bloom Testimonial",
