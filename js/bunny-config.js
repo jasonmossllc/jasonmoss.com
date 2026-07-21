@@ -11,76 +11,6 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
-    "df3f8a15-662a-4abd-beec-6ff2fd1ae312": {
-      "videoId": "df3f8a15-662a-4abd-beec-6ff2fd1ae312",
-      "title": "Business Breakthrough Challenge — Day 1: The Ceiling",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "98895900-e4f2-4108-957c-4fee3002a634": {
-      "videoId": "98895900-e4f2-4108-957c-4fee3002a634",
-      "title": "Business Breakthrough Challenge — Day 2 Replay",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "44000da6-f2e3-45e6-b3f5-1cb67b4be849": {
-      "videoId": "44000da6-f2e3-45e6-b3f5-1cb67b4be849",
-      "title": "Business Breakthrough Challenge — Day 3 Replay",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "eadfb8a0-492a-44aa-88cb-f33ecfc2d949": {
-      "videoId": "eadfb8a0-492a-44aa-88cb-f33ecfc2d949",
-      "title": "Business Breakthrough Challenge — Day 4",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "b071f82f-37a4-434d-8f18-96c82133e4d2": {
-      "videoId": "b071f82f-37a4-434d-8f18-96c82133e4d2",
-      "title": "Business Breakthrough Challenge — Day 5",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "7eb243ed-b0c9-4054-a432-c11e2cb009ca": {
-      "videoId": "7eb243ed-b0c9-4054-a432-c11e2cb009ca",
-      "title": "Business Breakthrough Challenge VIP — Day 1 Q&A",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "b5239e5c-3c64-4d5d-8834-17b80c9dfe14": {
-      "videoId": "b5239e5c-3c64-4d5d-8834-17b80c9dfe14",
-      "title": "Business Breakthrough Challenge VIP — Day 2 Q&A",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "825cf455-8c77-46a1-853e-6793ae2dac1b": {
-      "videoId": "825cf455-8c77-46a1-853e-6793ae2dac1b",
-      "title": "Business Breakthrough Challenge VIP — Day 3 Q&A",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "b21c34df-736a-47a5-86dd-ffc3a27954fb": {
-      "videoId": "b21c34df-736a-47a5-86dd-ffc3a27954fb",
-      "title": "Business Breakthrough Challenge VIP — Day 4",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "f99a94ab-cdf1-4bfe-b188-3af7136bc385": {
-      "videoId": "f99a94ab-cdf1-4bfe-b188-3af7136bc385",
-      "title": "Business Breakthrough Challenge VIP — Day 5",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
     "a1f94ac2-724c-427f-a21a-8b6e557de13a": {
       "videoId": "ufmx6s8p7w",
       "title": "Dana Fradella Testimonial",
@@ -537,6 +467,13 @@ window.JM_BUNNY_CONFIG = {
       "videoId": "ltajjoq9hq",
       "title": "Sold Out VSL",
       "poster": "thumbnail_cfdd9b7b.jpg",
+      "captions": "en",
+      "chapters": []
+    },
+    "306f2e6f-8a40-4e7d-bbd2-ab6fb890930a": {
+      "videoId": "306f2e6f-8a40-4e7d-bbd2-ab6fb890930a",
+      "title": "The Client Engine Masterclass",
+      "poster": "thumbnail.jpg",
       "captions": "en",
       "chapters": []
     },
