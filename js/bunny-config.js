@@ -470,6 +470,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "9deaf01b-c1ad-48c3-839c-68e0941ed875": {
+      "videoId": "9deaf01b-c1ad-48c3-839c-68e0941ed875",
+      "title": "The Client Engine Masterclass",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "306f2e6f-8a40-4e7d-bbd2-ab6fb890930a": {
       "videoId": "306f2e6f-8a40-4e7d-bbd2-ab6fb890930a",
       "title": "The Client Engine Masterclass",
