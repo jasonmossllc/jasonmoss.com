@@ -1,5 +1,5 @@
 // "What's Actually Stopping Your Business From Growing?" — Growth Bottleneck
-// Assessment Funnel — /growth-bottleneck/
+// Assessment Funnel — /bottleneck/
 // Netlify Serverless Function
 //
 // Receives the completed 60-second assessment (5 scored questions — one per
@@ -170,7 +170,7 @@ function buildResultsUrl({ scores, primary, second, excluded, revenueKey, firstN
   if (excluded.length) params.set('ny', excluded.join(','));
   if (firstName) params.set('name', firstName);
   if (email) params.set('email', email);
-  return `https://jasonmoss.com/growth-bottleneck/results/?${params.toString()}`;
+  return `https://jasonmoss.com/bottleneck/results/?${params.toString()}`;
 }
 
 // Best-effort: flip bottleneck_booked to Yes after a Calendly booking.

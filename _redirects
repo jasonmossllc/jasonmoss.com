@@ -19,3 +19,4 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /vip          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /VIP          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /Vip          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
+/growth-bottleneck/* /bottleneck/:splat 301
