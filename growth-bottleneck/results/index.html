@@ -332,29 +332,6 @@
     .seg, .crow.gold .seg.fill{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   }
 
-  /* concept chain — the five stages, introduced before the diagnosis */
-  .cchain{ display:flex; align-items:stretch; justify-content:center; gap:0; margin:34px auto 6px; max-width:860px; }
-  .cchain .cnode{ flex:1 1 0; display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 6px; position:relative; }
-  .cchain .cnum{
-    width:34px; height:34px; border-radius:50%; border:1.5px solid var(--gold); color:var(--gold);
-    display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:15px; margin-bottom:10px;
-    background:rgba(194,168,108,.08);
-  }
-  .cchain .cname{ font-size:12px; letter-spacing:.18em; text-transform:uppercase; font-weight:600; color:var(--sand); margin-bottom:6px; }
-  .cchain .cdesc{ font-size:13.5px; line-height:1.5; color:rgba(248,246,242,.66); max-width:120px; }
-  .cchain .cnode:not(:last-child)::after{
-    content:'→'; position:absolute; right:-7px; top:7px; color:var(--gold); opacity:.6; font-size:15px;
-  }
-  @media (max-width:640px){
-    .cchain{ flex-direction:column; gap:14px; align-items:flex-start; max-width:300px; }
-    .cchain .cnode{ flex-direction:row; text-align:left; gap:14px; padding:0; align-items:center; }
-    .cchain .cnum{ margin-bottom:0; flex:0 0 34px; }
-    .cchain .cnode > div{ display:flex; flex-direction:column; }
-    .cchain .cdesc{ max-width:none; }
-    .cchain .cnode:not(:last-child)::after{ content:'↓'; right:auto; left:13px; top:auto; bottom:-15px; }
-  }
-
-
   .hero-result{ font-family:var(--serif); font-weight:400; font-size:clamp(40px,7vw,72px); line-height:1.12; letter-spacing:-.02em; margin:10px 0 18px; }
   .hero-result b{ color:var(--gold); font-weight:400; }
   .hero-hint{ font-size:15px; color:rgba(248,246,242,.55); margin-top:26px; }
@@ -843,50 +820,19 @@
     var html = '';
 
 
-    function conceptChainHtml(){
-      var steps = [
-        ['Reach', 'New people find you'],
-        ['Nurture', 'They grow to trust you'],
-        ['Enroll', 'They become clients'],
-        ['Deliver', 'They get results'],
-        ['Deepen', 'They stay and go deeper']
-      ];
-      var out = '<div class="cchain" role="img" aria-label="The five stages: Reach, Nurture, Enroll, Deliver, Deepen">';
-      for (var i = 0; i < steps.length; i++){
-        out += '<div class="cnode"><span class="cnum">' + (i + 1) + '</span><div>' +
-               '<span class="cname">' + steps[i][0] + '</span>' +
-               '<span class="cdesc">' + steps[i][1] + '</span></div></div>';
-      }
-      return out + '</div>';
-    }
-
     /* hero — the chain visual */
     html += '<header class="hero">' +
       '<div class="topbar"><img src="../assets/logo-light.svg" alt="Jason Moss"></div>' +
       '<div class="hero-main"><div class="hero-inner">' +
         '<p class="eyebrow">' + (firstName ? firstName + ', here’s' : 'Here’s') + ' your result</p>' +
-        '<h1 class="hero-result">Your bottleneck is <b>' + LABELS[b] + '</b>.</h1>' +
-        '<p class="hero-sub">I’ll show you exactly what that means — and what to do about it.</p>' +
+        '<p class="hero-lead">Every client goes through five stages with you — from stranger to paying client.</p>' +
+        '<p class="hero-sub">When all five work, growth gets a lot easier. When one breaks, growth stops.</p>' +
+        '<p class="hero-sub" style="color:var(--gold)"><em>Here’s yours — ' + introTail + '.</em></p>' +
+        chainHtml() +
+        '<p class="chain-cap">' + capLead + ' You don’t have five problems. You have one — and fixing it frees up everything after it.</p>' +
       '</div></div>' +
       '<button type="button" class="scrollcue" id="scrollCue" aria-label="Read your verdict"><span></span></button>' +
     '</header>';
-
-    /* the concept — brief, 1:1, before their numbers */
-    html += '<section class="bg-forest hairline-b"><div class="wrap stack reveal">' +
-      '<hr class="divider"><p class="eyebrow">First, the idea</p>' +
-      '<h2>Every client travels the same path.</h2>' +
-      '<p class="open">Every new client moves through a predictable path in your business — from stranger to buyer. That path runs through five stages.</p>' +
-      '<p>When all five are dialed in, the business just works. Signing clients gets easier. Growth takes less force.</p>' +
-      '<p>But if even one isn’t fully in place, there’s a bottleneck. Like a broken link in a chain, the business can’t support growth — no matter how hard you work on the other four.</p>' +
-      '</div></section>';
-
-    /* their chain — where their bottleneck sits among the five */
-    html += '<section class="bg-charcoal glow hairline-b"><div class="wrap stack reveal">' +
-      '<hr class="divider"><p class="eyebrow">Your five stages</p>' +
-      '<h2>Here’s what I see in your business.</h2>' +
-      chainHtml() +
-      '<p class="chain-cap">' + capLead + ' You don’t have five problems. You have one — and fixing it frees up everything after it.</p>' +
-      '</div></section>';
 
     /* verdict */
     html += '<section class="bg-forest hairline-b verdict" id="verdict"><div class="wrap stack reveal">' +
