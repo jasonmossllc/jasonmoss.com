@@ -331,6 +331,34 @@
     .stickybar, .scrollcue{ display:none !important; }
     .seg, .crow.gold .seg.fill{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
   }
+
+  /* concept chain — the five stages, introduced before the diagnosis */
+  .cchain{ display:flex; align-items:stretch; justify-content:center; gap:0; margin:34px auto 6px; max-width:860px; }
+  .cchain .cnode{ flex:1 1 0; display:flex; flex-direction:column; align-items:center; text-align:center; padding:0 6px; position:relative; }
+  .cchain .cnum{
+    width:34px; height:34px; border-radius:50%; border:1.5px solid var(--gold); color:var(--gold);
+    display:flex; align-items:center; justify-content:center; font-family:var(--serif); font-size:15px; margin-bottom:10px;
+    background:rgba(194,168,108,.08);
+  }
+  .cchain .cname{ font-size:12px; letter-spacing:.18em; text-transform:uppercase; font-weight:600; color:var(--sand); margin-bottom:6px; }
+  .cchain .cdesc{ font-size:13.5px; line-height:1.5; color:rgba(248,246,242,.66); max-width:120px; }
+  .cchain .cnode:not(:last-child)::after{
+    content:'→'; position:absolute; right:-7px; top:7px; color:var(--gold); opacity:.6; font-size:15px;
+  }
+  @media (max-width:640px){
+    .cchain{ flex-direction:column; gap:14px; align-items:flex-start; max-width:300px; }
+    .cchain .cnode{ flex-direction:row; text-align:left; gap:14px; padding:0; align-items:center; }
+    .cchain .cnum{ margin-bottom:0; flex:0 0 34px; }
+    .cchain .cnode > div{ display:flex; flex-direction:column; }
+    .cchain .cdesc{ max-width:none; }
+    .cchain .cnode:not(:last-child)::after{ content:'↓'; right:auto; left:13px; top:auto; bottom:-15px; }
+  }
+
+
+  .hero-result{ font-family:var(--serif); font-weight:400; font-size:clamp(40px,7vw,72px); line-height:1.12; letter-spacing:-.02em; margin:10px 0 18px; }
+  .hero-result b{ color:var(--gold); font-weight:400; }
+  .hero-hint{ font-size:15px; color:rgba(248,246,242,.55); margin-top:26px; }
+
 </style>
 </head>
 <body>
@@ -571,7 +599,7 @@
         'Nothing is moving people from “I like this person” to “I want their help.”'
       ],
       enroll: [
-        'You’re doing the hard part well. People find you and trust you — that’s the part most people struggle with most.',
+        'You’re doing the hard part well. People find you and trust you — that’s the part I watch most people struggle with.',
         bScore >= 2
           ? 'What’s missing is a clear path from interest to a sale. Right now, people buy later and less often than they would — because the path is only half built.'
           : 'What’s missing is a path that turns interest into a sale. Right now, people almost never get a clear chance to buy — because nothing in your business creates that moment.'
@@ -596,7 +624,7 @@
           'Reach is how new people find out you exist. Content, conversations, collaborations, ads — anything that puts your work in front of strangers.',
           'It comes first for a reason. Every other stage can only work with the people reach brings in. You can’t build trust with an audience that isn’t there. And nobody can buy from you if they’ve never heard of you.',
           'Reach is also less exciting than most of us want it to be. It’s not one viral moment. It’s showing up steadily, for a long time. Volume and consistency matter more than brilliance.',
-          'Most coaches, consultants, and service providers underestimate how much output this takes. They publish a fraction of what’s needed, wait a few weeks, and decide content doesn’t work. In truth, they never really tried it at full volume.'
+          'Most coaches, consultants, and service providers underestimate how much output this takes — I see it constantly. You publish a fraction of what’s needed, wait a few weeks, and decide content doesn’t work. If that sounds familiar, here’s the truth: you never really tried it at full volume.'
         ],
         cost: sc('reach') >= 2 ? [
           'New people keep showing up. Each one goes looking — and finds less than they should. A quiet feed. A watered-down point of view. Big gaps where your work should be.',
@@ -613,33 +641,33 @@
           'And each single post stops mattering so much. You become someone who publishes regularly, not someone who performs. That alone changes how the work feels.'
         ],
         outside: [
-          'Usually it’s one of three things.',
+          'In my experience, it’s usually one of three things.',
           'You’re not publishing enough. You’re inconsistent — bursts of activity, then weeks of silence. Or there’s no real strategy, so your effort scatters in every direction and adds up to nothing.',
           'Sometimes it’s simpler than that. You never actually committed to it. Reach was always the thing you’d get to after client work.',
           'And sometimes people are finding you just fine — through ads, referrals, other people’s audiences — but there’s no steady body of your own work for them to land on. The traffic is real. The presence is borrowed.'
         ],
         inside: [
-          'But underneath the low output, something else is usually going on.',
+          'But here’s what I usually find underneath the low output.',
           'For most of us, it’s some version of the fear of being seen. Not stage fright — something quieter. Rewriting a post that was already done. Leaving an idea in drafts until it goes stale. Perfectionism looks like high standards, but it works like hiding.',
           'Overthinking does the same thing. Every post becomes a big decision instead of a habit. And if you have to decide, every single time, whether it’s safe to be visible — you’ll always produce less than you need to.',
           'That’s what’s really keeping your output low. Not discipline. Not the algorithm. The part of you that still isn’t sure it’s safe to be fully seen.'
         ],
         bridge: [
           'Here’s the thing about a reach bottleneck: the fix depends on which layer is the real problem — strategy, consistency, or the fear underneath. They look identical from the outside, and they’re fixed in completely different ways.',
-          'Fifteen minutes of honest conversation is usually enough to tell which one is yours.'
+          'Fifteen minutes of honest conversation is usually all I need to tell which one is yours.'
         ]
       },
       nurture: {
         what: [
           'Nurture is everything that happens between someone finding you and someone buying from you. It’s how a stranger becomes a person who trusts you enough to seriously consider working with you.',
           'Real nurture does two things at once. It gives people real value — and it moves them somewhere. Toward understanding their problem better. Toward seeing it the way you see it. Toward the real possibility of working together.',
-          'Most coaches, consultants, and service providers only do the first half. They give value endlessly and call it nurture. But value without direction is just content. Real nurture points somewhere — every piece moves people one step closer to working with you.',
+          'Most coaches, consultants, and service providers I talk to only do the first half. They give value endlessly and call it nurture. But value without direction is just content. Real nurture points somewhere — every piece moves people one step closer to working with you.',
           'This stage can also break in the opposite direction: asking people to buy before they trust you enough. Either way, the result is the same — trust and buying never connect.',
           'And nurture depends on consistency. Showing up now and then doesn’t build trust. Showing up steadily does.'
         ],
         cost: [
           'Your audience grows but rarely buys. You become a resource instead of an option — the expert people quote, share, and thank… but don’t hire.',
-          'Every launch starts from zero, because nothing between launches moved anyone closer. So launches feel hard, sales feel random, and you start believing the problem is your offer. It usually isn’t. The offer is being shown to people who were never led toward it.',
+          'Every launch starts from zero, because nothing between launches moved anyone closer. So launches feel hard, sales feel random, and you start believing the problem is your offer. In my experience, it usually isn’t. Your offer is being shown to people who were never led toward it.',
           'Meanwhile, the attention you worked hard to earn slowly fades. Attention doesn’t keep. Trust you don’t build on fades away.'
         ],
         payoff: [
@@ -648,7 +676,7 @@
           'And your content gets easier to make — because it finally has a direction, not just a quota.'
         ],
         outside: [
-          'There are two common ways this stage breaks, and they look nothing alike.',
+          'I see this stage break in two common ways — and they look nothing alike.',
           'The first is the friend zone. You’re warm and generous, but you never point people anywhere. No clear problem named. No path shown. No next step offered. Endless value, zero movement. People love you — and have no idea what you’d actually help them do.',
           'The second is the opposite: asking too soon. Inviting people to buy who barely know you yet.',
           'And underneath both: inconsistency. When you show up and then disappear, people learn to stop paying attention.'
@@ -665,7 +693,7 @@
         ],
         bridge: [
           'A nurture bottleneck is one of the hardest to see from inside your own business — because on the surface, everything looks fine. Audience growing, engagement good, everyone friendly.',
-          'An outside set of eyes can usually spot where things stop moving in about fifteen minutes.'
+          'An outside set of eyes — mine, in this case — can usually spot where things stop moving in about fifteen minutes.'
         ]
       },
       enroll: {
@@ -678,7 +706,7 @@
         cost: [
           'Trust doesn’t keep forever. People stay interested for a while, wait for a clear way to buy that never shows up, and eventually hire someone else — often someone less skilled with a clearer offer. If you’ve been at this a while, you’ve probably watched it happen — and it stings most when you knew you were the better fit.',
           'There’s the math, too: everything you put into content and building trust pays off through this stage or not at all. That’s why a break here costs more than a break anywhere else.',
-          'And every month this stays broken, the thought “maybe people just won’t pay for this” gets a little more believable. It usually isn’t true. But it chips away at your confidence.'
+          'And every month this stays broken, the thought “maybe people just won’t pay for this” gets a little more believable. I can tell you it’s almost never true. But it chips away at your confidence.'
         ],
         payoff: [
           'Real buying conversations with the right people happen regularly instead of by accident. You always know where your next client is likely to come from — not as a guarantee, but as a system.',
@@ -686,18 +714,18 @@
           'And selling itself changes. When there’s a clear, honest path, inviting someone onto it stops feeling pushy and starts feeling like what it really is — helping.'
         ],
         outside: [
-          'The most common gap: there’s no path at all. Content goes out, trust builds — and then nothing invites anyone to buy. No next step. No place where a buying conversation could happen. Trust builds up — and then has nowhere to go.',
+          'The most common gap I see: there’s no path at all. Your content goes out, trust builds — and then nothing invites anyone to buy. No next step. No place where a buying conversation could happen. Trust builds up — and then has nowhere to go.',
           'The second gap is hoping visibility does the selling for you: posting on social media and waiting for people to buy on their own. If clients only show up when someone happens to reach out, you don’t have a sales process. You have luck.'
         ],
         inside: [
-          'Underneath both gaps is almost always the same fear: the fear of being salesy. Of being pushy. Of becoming the kind of marketer you can’t stand.',
+          'What I almost always find underneath both gaps is the same fear: the fear of being salesy. Of being pushy. Of becoming the kind of marketer you can’t stand.',
           'So you overcorrect. You mention your offers rarely, briefly, apologetically — or not at all. You keep giving, because giving feels safe, and asking feels like it might cost you the relationship. The ask keeps getting pushed to a moment that never comes.',
           'Here’s what that fear misses: the people who trust you want to know how to go further with you. Holding back the invitation doesn’t protect them. It leaves them alone with a problem you could help solve.',
           'Selling, done honestly, is just telling the truth about how you can help — and letting a capable adult decide.'
         ],
         bridge: [
           'If enroll is your bottleneck, you’re closer than it probably feels. The trust is already there. What’s missing is a sales path — a planned route from interest to a real decision. And that’s a concrete thing you can build.',
-          'Fifteen minutes of looking at what you’ve already built is usually enough to see the shortest path from “people trust me” to “people buy.”'
+          'Fifteen minutes looking at what you’ve already built — together — is usually enough to see the shortest path from “people trust me” to “people buy.”'
         ]
       },
       deliver: {
@@ -718,30 +746,30 @@
           'Often, the work itself gets better too. Clients in a well-designed group don’t get less of you — they get a better-rested version of you, plus each other. And when your pricing matches the value of the result, clients take the work more seriously.'
         ],
         outside: [
-          'The pattern is trading time for money, usually one-to-one. Every client takes a block of your hours. And there’s only one of you.',
-          'The obvious fix is leverage — group programs, hybrid models, better structure. It keeps getting put off.',
+          'The pattern I see most often is trading time for money, usually one-to-one. Every client takes a block of your hours. And there’s only one of you.',
+          'You probably already know the obvious fix — leverage. Group programs, hybrid models, better structure. And it keeps getting put off.',
           'Pricing usually makes it worse. Most of us price based on what an hour of our time feels worth — a number our own history sets too low — instead of what the result is worth to the client. Underpriced and over-delivering, you burn yourself out to keep the promise.'
         ],
         inside: [
-          'The resistance to leverage is rarely laziness. It’s usually over-caring — the belief that unless you personally handle every piece, clients get shortchanged. It feels noble. It works like a ceiling.',
+          'In my experience, the resistance to leverage is rarely laziness. It’s usually over-caring — the belief that unless you personally handle every piece, clients get shortchanged. It feels noble. It works like a ceiling.',
           'Under the pricing problem are money stories. “I can’t charge that.” “My people can’t pay that.” Beliefs about what your market can afford that are really beliefs about what you’re allowed to ask for.',
           'And here’s the part almost nobody sees: those stories don’t stay private. You carry them into every sales conversation, and clients pick up on them. The hesitation you expect is often the hesitation you brought into the room.'
         ],
         bridge: [
           'A deliver bottleneck is tangled by nature — the model, the pricing, and the beliefs underneath all hold each other in place. That’s why fixing just one of them rarely works.',
-          'From the outside, the first thing to change is usually visible in about fifteen minutes.'
+          'From the outside, I can usually see the first thing to change in about fifteen minutes.'
         ]
       },
       deepen: {
         what: [
-          'Deepen is the stage almost nobody works on on purpose: everything that happens after someone becomes a client. The ongoing relationship. The next round of work. The renewal, the deeper program, the referral.',
+          'Deepen is the stage almost nobody works on on purpose: everything that happens after someone becomes your client. The ongoing relationship. The next round of work. The renewal, the deeper program, the referral.',
           'The logic is simple and widely ignored: the people most likely to hire you next are the people working with you now. They’ve seen the work from the inside. Trust is already built. There’s nothing left to prove — only further to go.',
           'And this stage is about more than keeping revenue. Results compound with time. A client who stays for a second round does deeper work than one who got a good ninety days. That depth is where your best results — and your best stories — come from.',
           'Deepen is also the most honest feedback in your whole business. If clients consistently don’t want more, that tells you something. Sometimes the real work of this stage is taking a hard look at the client experience itself.'
         ],
         cost: [
           'You live on a treadmill that never slows down. Every client who finishes and leaves has to be replaced by a stranger — found, warmed up, and sold from scratch, at full cost, every time. Your marketing has to be excellent forever just to stay even.',
-          'The compounding you should be getting never happens. Businesses that keep clients get easier over time. Businesses that don’t start over every quarter — and never get easier.',
+          'The compounding you should be getting never happens. A business that keeps its clients gets easier to run over time. Right now, yours starts over every quarter — so it never gets easier.',
           'And your best relationships go to waste — people who already trust you, already got value, and would genuinely want to know what’s next… are never asked. So their next step happens somewhere else, with someone who did ask.'
         ],
         payoff: [
@@ -750,7 +778,7 @@
           'And referrals go from happy accidents to a regular rhythm — because staying close to the people you’ve helped is exactly where referrals come from.'
         ],
         outside: [
-          'The pattern is front-end obsession. All the attention goes to marketing and sales — new leads, new eyes, new strangers. The people who already bought get a fraction of the attention a cold lead gets. Current clients get treated like finished business instead of your most valuable relationships.',
+          'The pattern I see is front-end obsession. All your attention goes to marketing and sales — new leads, new eyes, new strangers. The people who already said yes to you get a fraction of the attention a cold lead gets. Your current clients get treated like finished business instead of your most valuable relationships.',
           'Sometimes there’s a harder truth underneath: the client experience isn’t strong enough to earn a second yes, and the offer needs an honest look before anything else will work. Either way, the shift is the same — your clients need at least as much attention as your leads.'
         ],
         inside: [
@@ -761,7 +789,7 @@
         ],
         bridge: [
           'If deepen is your bottleneck, the raw material is already there — real relationships, real trust, real results. What’s missing is the structure and the ask — and sometimes an honest look at which one.',
-          'Fifteen minutes of honest conversation is usually enough to tell which one.'
+          'Fifteen minutes of honest conversation with me is usually enough to tell which one.'
         ]
       }
     };
@@ -814,19 +842,51 @@
     var block = BLOCKS[b];
     var html = '';
 
+
+    function conceptChainHtml(){
+      var steps = [
+        ['Reach', 'New people find you'],
+        ['Nurture', 'They grow to trust you'],
+        ['Enroll', 'They become clients'],
+        ['Deliver', 'They get results'],
+        ['Deepen', 'They stay and go deeper']
+      ];
+      var out = '<div class="cchain" role="img" aria-label="The five stages: Reach, Nurture, Enroll, Deliver, Deepen">';
+      for (var i = 0; i < steps.length; i++){
+        out += '<div class="cnode"><span class="cnum">' + (i + 1) + '</span><div>' +
+               '<span class="cname">' + steps[i][0] + '</span>' +
+               '<span class="cdesc">' + steps[i][1] + '</span></div></div>';
+      }
+      return out + '</div>';
+    }
+
     /* hero — the chain visual */
     html += '<header class="hero">' +
       '<div class="topbar"><img src="../assets/logo-light.svg" alt="Jason Moss"></div>' +
       '<div class="hero-main"><div class="hero-inner">' +
         '<p class="eyebrow">' + (firstName ? firstName + ', here’s' : 'Here’s') + ' your result</p>' +
-        '<p class="hero-lead">Every client goes through five stages with you — from stranger to paying client.</p>' +
-        '<p class="hero-sub">When all five work, growth gets a lot easier. When one breaks, growth stops.</p>' +
-        '<p class="hero-sub" style="color:var(--gold)"><em>Here’s yours — ' + introTail + '.</em></p>' +
-        chainHtml() +
-        '<p class="chain-cap">' + capLead + ' You don’t have five problems. You have one — and fixing it frees up everything after it.</p>' +
+        '<h1 class="hero-result">Your bottleneck is <b>' + LABELS[b] + '</b>.</h1>' +
+        '<p class="hero-sub">I’ll show you exactly what that means — and what to do about it.</p>' +
       '</div></div>' +
       '<button type="button" class="scrollcue" id="scrollCue" aria-label="Read your verdict"><span></span></button>' +
     '</header>';
+
+    /* the concept — brief, 1:1, before their numbers */
+    html += '<section class="bg-forest hairline-b"><div class="wrap stack reveal">' +
+      '<hr class="divider"><p class="eyebrow">First, the idea</p>' +
+      '<h2>Every client travels the same path.</h2>' +
+      '<p class="open">Every new client moves through a predictable path in your business — from stranger to buyer. That path runs through five stages.</p>' +
+      '<p>When all five are dialed in, the business just works. Signing clients gets easier. Growth takes less force.</p>' +
+      '<p>But if even one isn’t fully in place, there’s a bottleneck. Like a broken link in a chain, the business can’t support growth — no matter how hard you work on the other four.</p>' +
+      '</div></section>';
+
+    /* their chain — where their bottleneck sits among the five */
+    html += '<section class="bg-charcoal glow hairline-b"><div class="wrap stack reveal">' +
+      '<hr class="divider"><p class="eyebrow">Your five stages</p>' +
+      '<h2>Here’s what I see in your business.</h2>' +
+      chainHtml() +
+      '<p class="chain-cap">' + capLead + ' You don’t have five problems. You have one — and fixing it frees up everything after it.</p>' +
+      '</div></section>';
 
     /* verdict */
     html += '<section class="bg-forest hairline-b verdict" id="verdict"><div class="wrap stack reveal">' +
