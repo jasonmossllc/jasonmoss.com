@@ -236,11 +236,14 @@
 
   /* ============ PROOF ============ */
   .proof-grid{ display:grid; grid-template-columns:.8fr 1.2fr; gap:64px; align-items:center; max-width:980px; margin:0 auto; padding:0 28px; }
-  .portrait{ position:relative; }
-  .portrait img{ aspect-ratio:4/5; object-fit:cover; width:100%; position:relative; z-index:1; }
+  .portrait{ position:relative; max-width:340px; margin:0 auto; }
+  .portrait img{
+    width:100%; aspect-ratio:1/1; object-fit:contain; display:block;
+    position:relative; z-index:1;
+  }
   .portrait:before{
-    content:""; position:absolute; inset:0; transform:translate(14px,14px);
-    border:1px solid rgba(194,168,108,.55); z-index:0;
+    content:""; position:absolute; inset:-16px; border-radius:50%;
+    border:1px solid rgba(194,168,108,.5); z-index:0;
   }
   .proof-grid b{ color:var(--gold); font-weight:400; }
 
@@ -494,7 +497,7 @@
   <!-- ============ ABOUT JASON ============ -->
   <section class="bg-warm">
     <div class="proof-grid reveal">
-      <div class="portrait"><img src="assets/featured.jpg" alt="Jason Moss"></div>
+      <div class="portrait"><img src="assets/jm-headshot.png" alt="Jason Moss" width="402" height="402"></div>
       <div class="stack">
         <hr class="divider">
         <p class="eyebrow" style="color:var(--mocha)">About Jason</p>
