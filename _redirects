@@ -19,6 +19,10 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /vip          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /VIP          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /Vip          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
-/growth-bottleneck/* /bottleneck/:splat 301
+/growth-bottleneck/* /growth-bottleneck-quiz/:splat 301
 # Runs You assessment retired (archived) -> new bottleneck assessment
-/runs-you-assessment/* /bottleneck/ 301
+/runs-you-assessment/* /growth-bottleneck-quiz/ 301
+# Vanity link for YouTube CTAs (stamps organic attribution), then catch-all
+/bottleneck   /growth-bottleneck-quiz/?source=YouTube_Organic&ad=Growth_Bottleneck_Quiz 301
+/bottleneck/  /growth-bottleneck-quiz/?source=YouTube_Organic&ad=Growth_Bottleneck_Quiz 301
+/bottleneck/* /growth-bottleneck-quiz/:splat 301
