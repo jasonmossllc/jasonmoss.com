@@ -256,7 +256,9 @@ exports.handler = async (event) => {
       email,
       firstName,
       tagIds: [BOTTLENECK_TAG_ID],
-      ...(qualified && BOTTLENECK_SEQUENCE_ID ? { sequenceId: BOTTLENECK_SEQUENCE_ID } : {}),
+      // Follow-up is driven by a Kit visual automation triggered off the tag
+      // (it also suppresses the general newsletter for the duration), so this
+      // function deliberately does not enroll anyone in a sequence directly.
       // Preserved (only set when blank): original attribution + booked, so a
       // retake never resets a booked lead back to "No".
       mappedFields: {
