@@ -302,6 +302,26 @@
   .stickybar .t b{ color:var(--gold); font-weight:400; font-style:italic; }
   .stickybar .btn{ padding:14px 30px; font-size:13.5px; }
 
+  /* ---- lever list (three things that must all be dialed in) ---- */
+  .levers{ list-style:none; margin:34px 0 4px; padding:0; counter-reset:lv; }
+  .levers li{ position:relative; padding:0 0 0 56px; margin:0 0 26px; }
+  .levers li:last-child{ margin-bottom:0; }
+  .levers li::before{
+    counter-increment:lv; content:counter(lv);
+    position:absolute; left:0; top:0;
+    width:34px; height:34px; line-height:32px; text-align:center;
+    border:1px solid rgba(194,168,108,.45); border-radius:50%;
+    font-family:var(--serif); font-size:14px; color:var(--gold);
+  }
+  .levers .lv{
+    display:block; font-family:var(--serif); font-size:20px; line-height:1.3;
+    color:var(--gold); margin:2px 0 7px;
+  }
+  @media (max-width:780px){
+    .levers li{ padding-left:48px; margin-bottom:22px; }
+    .levers .lv{ font-size:18px; }
+  }
+
   /* ============ EMPTY STATE ============ */
   .empty{
     min-height:100vh; min-height:100svh; justify-content:flex-start;
@@ -717,7 +737,12 @@
           'Delivery is how you keep your promise. It’s the actual work — the sessions, the program, the results your clients came for.',
           'It matters in two ways. First, the obvious one: results are the product. Everything else is packaging around what happens here.',
           'But it matters a second way that most coaches, consultants, and service providers miss: how you deliver decides whether your business can grow at all. If every new client costs you hours, your growth is capped at the number of hours you have. No amount of marketing or selling can push past that.',
-          'Delivery has three levers. Clarity — whether what you sell is one specific thing a person can say yes to, or a shifting collection of possibilities. Pricing — whether you charge for what your time feels worth to you, or for what the result is actually worth to the client. Those are very different numbers. And structure — one-to-one, group, hybrid, and how much of the result depends on you being in the room.'
+          'Delivery runs on three levers. All three have to be dialed in — if any one of them is off, it holds this whole stage back.',
+          '<ol class="levers">' +
+            '<li><span class="lv">Clarity</span>Is what you sell one specific thing a person can say yes to — or a shifting collection of possibilities?</li>' +
+            '<li><span class="lv">Pricing</span>Do you charge for what an hour of your time feels worth to you, or for what the result is worth to the client? Those are very different numbers.</li>' +
+            '<li><span class="lv">Structure</span>One-to-one, group, hybrid — and how much of the result depends on you being in the room.</li>' +
+          '</ol>'
         ],
         cost: [
           'You start to quietly fear growth. Every new client makes your life heavier, so part of you starts easing off — softer asks, slower follow-up, quiet relief when someone doesn’t book. When success feels like a threat, your business finds ways to stay small.',
@@ -782,6 +807,8 @@
     /* ── render helpers ─────────────────────────────────────────────── */
     function paras(list, firstOpen){
       return list.map(function(p, i){
+        // entries that are already markup (e.g. the lever list) pass through
+        if (p.charAt(0) === '<') return p;
         return '<p' + (firstOpen && i === 0 ? ' class="open"' : '') + '>' + p + '</p>';
       }).join('');
     }
