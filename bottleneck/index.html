@@ -550,6 +550,19 @@
     var FN_URL = '/.netlify/functions/submit-bottleneck';
     var TURNSTILE_SITEKEY = '0x4AAAAAADlUEkeJ6kJ-_AML';
     var STORE_KEY = 'gba_v1';   // localStorage — answers survive tab close (resume model)
+    // Attribution: capture ?source= / ?ad= (ads pass these; UTM lesson from the
+    // resonance-funnel audit — every entry path must carry provenance). First
+    // touch wins and survives return visits via localStorage.
+    var ATTR_KEY = 'gba_attr_v1';
+    var _q = new URLSearchParams(window.location.search);
+    var latestSource = (_q.get('source') || _q.get('utm_source') || '').trim();
+    var latestAd = (_q.get('ad') || _q.get('utm_content') || '').trim();
+    try {
+      var storedAttr = JSON.parse(localStorage.getItem(ATTR_KEY) || 'null') || {};
+      if (!latestSource && storedAttr.source) latestSource = storedAttr.source;
+      if (!latestAd && storedAttr.ad) latestAd = storedAttr.ad;
+      if (latestSource || latestAd) localStorage.setItem(ATTR_KEY, JSON.stringify({ source: latestSource, ad: latestAd }));
+    } catch(e){}
     var TOTAL_SCREENS = 6;      // 5 scored + revenue; capture screen sits at full
 
     window.dataLayer = window.dataLayer || [];
@@ -938,6 +951,8 @@
         turnstile_token: turnstileToken(),
         website: (document.querySelector('#qForm input[name="website"]') || {}).value || ''
       };
+      if (latestAd) payload.latest_ad = latestAd;
+      if (latestSource) payload.latest_source = latestSource;
       for (var n = 1; n <= 5; n++){ payload['q' + n] = state.answers['q' + n]; }
 
       var subController = new AbortController();
