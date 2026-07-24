@@ -68,14 +68,15 @@ const REVENUE = {
   '50k-plus': '$50k+',
 };
 
-// Option → points, per final-instrument.md, verbatim. One question per stage;
-// stage score 0-3. The 3-point option's position varies (anti-gaming).
+// Option → points. One question per stage; stage score 0-3.
+// Options run bad -> good on every question (a=0 ... d=3); the not-yet
+// option (e, where present) sits last as the escape hatch.
 const QUESTION_POINTS = {
-  q1: { a: 3, b: 2, c: 1, d: 0 },
-  q2: { a: 0, b: 3, c: 1, d: 2, e: 1 },
-  q3: { a: 1, b: 3, c: 2, d: 0 },
-  q4: { a: 2, b: 0, c: 3, d: 1, e: 2 },
-  q5: { a: 3, b: 2, c: 1, d: 0, e: 2 },
+  q1: { a: 0, b: 1, c: 2, d: 3 },
+  q2: { a: 0, b: 1, c: 2, d: 3, e: 1 },
+  q3: { a: 0, b: 1, c: 2, d: 3 },
+  q4: { a: 0, b: 1, c: 2, d: 3, e: 2 },
+  q5: { a: 0, b: 1, c: 2, d: 3, e: 2 },
 };
 
 // Not-yet options: the taker says this stage genuinely isn't in play yet

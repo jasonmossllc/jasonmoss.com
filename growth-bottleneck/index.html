@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>What's stopping your business from growing? | Jason Moss</title>
-<meta name="description" content="Every client business runs the same five stages. You don't have five problems — you have one bottleneck. Find yours in about 60 seconds. Free.">
+<meta name="description" content="Find your #1 growth bottleneck — in 60 seconds or less. Free, for coaches, consultants, and service providers.">
 <meta property="og:type" content="website">
 <meta property="og:title" content="What's actually stopping your business from growing?">
-<meta property="og:description" content="A free assessment for coaches, consultants, and service providers. About 60 seconds. Find your #1 growth bottleneck — and what's underneath it.">
+<meta property="og:description" content="Find your #1 growth bottleneck — in 60 seconds or less. Free, for coaches, consultants, and service providers.">
 <meta property="og:image" content="https://jasonmoss.com/assets/images/featured.jpg">
 <link rel="icon" type="image/png" sizes="32x32" href="https://jasonmoss.com/assets/images/favicon-32x32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -234,23 +234,6 @@
   .chain li:last-child{ border-bottom:0; }
   .chain li b{ font-family:var(--serif); font-weight:400; color:var(--gold); }
 
-  /* ============ PHOTO BAND ============ */
-  .photoband{
-    height:52vh; min-height:360px;
-    border-top:1px solid rgba(194,168,108,.22);
-    border-bottom:1px solid rgba(194,168,108,.22);
-    background:
-      linear-gradient(180deg, rgba(20,22,21,.32) 0%, rgba(20,22,21,.10) 45%, rgba(29,31,30,.42) 100%),
-      url('assets/mountain-headon.jpg') center 30% / cover no-repeat;
-  }
-
-  /* ============ GOOD TO KNOW ============ */
-  .faq{ margin:34px 0 0; max-width:660px; }
-  .fq{ padding:22px 0; border-bottom:1px solid rgba(91,75,63,.16); }
-  .fq:last-child{ border-bottom:0; }
-  .fq b{ display:block; font-weight:600; font-size:16.5px; color:var(--obsidian); margin:0 0 8px; }
-  .fq p{ margin:0; font-size:16.5px; line-height:1.65; color:#3a3c3b; max-width:60ch; }
-
   /* ============ PROOF ============ */
   .proof-grid{ display:grid; grid-template-columns:.8fr 1.2fr; gap:64px; align-items:center; max-width:980px; margin:0 auto; padding:0 28px; }
   .portrait{ position:relative; }
@@ -341,17 +324,11 @@
     font-family:var(--serif); font-style:italic; color:var(--taupe);
     font-size:15.5px; line-height:1.6; margin:-2px 0 30px; max-width:56ch;
   }
-  .qintro-line1{
-    font-family:var(--serif); font-size:clamp(22px,3vw,30px); line-height:1.5;
-    color:var(--sand); margin:0 0 24px; max-width:24ch; text-wrap:balance;
+  .qnote{
+    font-size:13.5px; line-height:1.6; color:var(--taupe);
+    margin:-16px 0 32px; max-width:56ch;
   }
-  .qintro-line{
-    font-size:17px; line-height:1.7; color:rgba(233,226,211,.8); margin:0 0 16px; max-width:54ch;
-  }
-  .qintro-line.em{
-    font-family:var(--serif); font-style:italic; color:var(--gold); margin-top:6px;
-  }
-  .qintro-cta{ margin-top:34px; }
+  h2 + .qnote{ margin-top:-2px; }
   .opts{ display:flex; flex-direction:column; gap:14px; margin:0; padding:0; list-style:none; }
   .opt{
     display:block; width:100%; text-align:left; cursor:pointer;
@@ -410,7 +387,6 @@
     .steps{ grid-template-columns:1fr; gap:34px; margin-top:36px; }
     .proof-grid{ grid-template-columns:1fr; gap:44px; }
     .portrait{ max-width:340px; }
-    .photoband{ height:40vh; min-height:280px; }
     .finalcta{ padding:90px 0 100px; }
     .stickybar .t{ display:none; }
     .btn{ white-space:nowrap; padding:18px 26px; font-size:14px; }
@@ -418,6 +394,22 @@
     .opt{ font-size:16px; padding:17px 20px; }
     .m-br{ display:inline; }
   }
+
+  .symptoms{ list-style:none; margin:34px 0 0; padding:0; display:grid; gap:14px; text-align:left; }
+  .symptoms li{
+    background:rgba(248,246,242,.045); border:1px solid rgba(194,168,108,.22);
+    padding:18px 22px 18px 54px; position:relative; font-size:17px; line-height:1.6;
+  }
+  .symptoms li::before{
+    content:''; position:absolute; left:22px; top:24px; width:14px; height:14px;
+    border:1.5px solid var(--gold); border-radius:50%;
+  }
+  .symptoms li::after{
+    content:''; position:absolute; left:26px; top:28px; width:6px; height:6px;
+    background:var(--gold); border-radius:50%;
+  }
+
+  .bg-pale .eyebrow, .bg-warm .eyebrow{ color:var(--mocha); }
 </style>
 </head>
 <body>
@@ -431,10 +423,10 @@
       <div class="hero-inner">
         <div class="orn" aria-hidden="true"><span></span></div>
         <h1><span class="l1">What’s actually stopping</span><span class="l2">your business from growing?</span></h1>
-        <p class="subhead">Every client business runs the same five stages. Growth stops when one of them breaks. This free assessment finds your #1 bottleneck — in about 60 seconds.</p>
+        <p class="subhead">Find the #1 bottleneck holding you back from signing more clients — in 60 seconds or less.</p>
         <div class="hero-cta">
           <button type="button" class="btn" data-quiz-open>Find my bottleneck<span class="arr">→</span></button>
-          <p class="microcta">Free. About 60 seconds.<br class="m-br"> For coaches, consultants, and service providers.</p>
+          <p class="microcta">Completely free.<br class="m-br"> For coaches, consultants, and service providers.</p>
         </div>
       </div>
     </div>
@@ -450,128 +442,59 @@
     </div>
   </header>
 
+  <!-- ============ SOUND FAMILIAR (pain / empathy) ============ -->
+  <section class="bg-forest center glow hairline-b">
+    <div class="wrap stack centered reveal">
+      <hr class="divider center">
+      <p class="eyebrow">Sound familiar?</p>
+      <h2>If your business feels stuck, you’re not alone.</h2>
+      <ul class="symptoms">
+        <li>Your business isn’t growing the way it should be.</li>
+        <li>Clients come in waves — a great month, then a quiet one.</li>
+        <li>You’re working harder than you want to be, for less than you’re worth.</li>
+        <li>You’ve tried more content, new offers, new tactics — and nothing has fixed it.</li>
+      </ul>
+      <p class="pull">Every business grows through five stages. When even one is missing, you’re stuck — no matter how hard you work on the others.</p>
+      <p>This diagnostic shows you which one — and what to do about it.</p>
+    </div>
+  </section>
+
   <!-- ============ HOW IT WORKS ============ -->
-  <section class="bg-forest hairline-b">
+  <section class="bg-pale hairline-b">
     <div class="wrap stack reveal">
       <hr class="divider">
       <p class="eyebrow">How it works</p>
-      <h2>About 60 seconds. Honest answers.</h2>
+      <h2>60 seconds or less. Honest answers.</h2>
       <div class="steps">
         <div class="step">
           <span class="n">Step one</span>
           <h3>Answer five quick questions</h3>
-          <p>One question per stage, plus your monthly revenue. Six quick taps. About 60 seconds.</p>
+          <p>Five questions about your business, plus your monthly revenue. Six taps. 60 seconds or less.</p>
         </div>
         <div class="step">
           <span class="n">Step two</span>
           <h3>See where you stand</h3>
-          <p>Every stage your business runs today, scored — where you’re strong, where you’re stretched, and the one stage setting your ceiling.</p>
+          <p>You’ll get a score for each of the five stages — where you’re strong, where you’re weak, and which one is holding you back.</p>
         </div>
         <div class="step">
           <span class="n">Step three</span>
           <h3>Get the diagnosis</h3>
-          <p>What’s breaking on the outside, what’s driving it on the inside — and where to look first.</p>
+          <p>What’s broken on the outside, what’s causing it on the inside — and what to fix first.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ============ THE FIVE STAGES ============ -->
-  <section class="bg-charcoal center glow">
-    <div class="wrap stack centered reveal">
-      <hr class="divider center">
-      <p class="eyebrow">The five stages</p>
-      <h2>The 5 stages every client business runs.</h2>
-      <p>Whether you call yourself a coach, consultant, healer, or guide — the anatomy is the same. New people find you. They come to trust you. Some become clients. You deliver. And the ones you’ve served go deeper.</p>
-      <ul class="chain">
-        <li><b>Reach</b> — getting in front of new people, consistently, not in bursts.</li>
-        <li><b>Nurture</b> — turning attention into real trust with the people who’ve found you.</li>
-        <li><b>Enroll</b> — turning that trust into clients. The conversations, the offer, the ask.</li>
-        <li><b>Deliver</b> — getting clients results in a way that doesn’t max out your calendar.</li>
-        <li><b>Deepen</b> — growing what you’ve already built. Clients who stay, go further, and send others.</li>
-      </ul>
-      <p style="margin-top:38px">Here’s the part that matters.</p>
-      <p class="pull">You don’t have five problems. You have one bottleneck — and everything downstream of it starves until it’s fixed.</p>
-    </div>
-  </section>
-
-  <!-- ============ PHOTO BAND ============ -->
-  <div class="photoband" role="img" aria-label="Jason Moss in the mountains"></div>
-
-  <!-- ============ WHY THIS IS DIFFERENT ============ -->
-  <section class="bg-pale">
-    <div class="wrap stack reveal">
-      <hr class="divider">
-      <p class="eyebrow" style="color:var(--mocha)">The part most assessments miss</p>
-      <h2>Your bottleneck has an outside and an inside.</h2>
-      <p class="open">Most business assessments stop at strategy. Post more. Fix your funnel. Raise your prices.</p>
-      <p>That advice isn’t wrong. It’s just half the picture.</p>
-      <p>After years of this work, here’s what I see over and over: smart, capable people who already know what they should be doing — and still aren’t doing it.</p>
-      <p>That’s not a strategy problem.</p>
-      <p>Here’s the move in miniature.</p>
-      <p><b>The outside:</b> a coach posting once a week when the plan says daily. Looks like a discipline problem.</p>
-      <p><b>The inside:</b> every post gets written, reread four times, and quietly deleted. That’s not discipline. That’s the fear of being seen.</p>
-      <p>Work there, and the volume takes care of itself.</p>
-      <p>So this assessment looks at both layers. What’s breaking on the outside — the tactical, fixable gap in how you reach, nurture, enroll, deliver, or deepen. And what’s running underneath it — the thing that keeps that gap in place no matter how many trainings you buy.</p>
-      <p>No formulas. No scare tactics. Just an honest read on where your business is actually stuck — and why.</p>
-    </div>
-  </section>
-
-  <!-- ============ WHY ME ============ -->
-  <section class="bg-forest hairline-b">
+  <!-- ============ ABOUT JASON ============ -->
+  <section class="bg-warm">
     <div class="proof-grid reveal">
       <div class="portrait"><img src="assets/featured.jpg" alt="Jason Moss"></div>
       <div class="stack">
         <hr class="divider">
-        <p class="eyebrow">About Jason</p>
-        <p class="open">I hit every one of these bottlenecks myself — usually the hard way.</p>
-        <p>What finally moved each one was never the tactic. It was the layer underneath.</p>
-        <p>Since then I’ve helped people find the one thing actually in their way — and fix that first.</p>
-        <p><b>Emily</b> — rebuilt after a multi-7-figure business burned her out. <b>Jeremy</b> — 2,000+ homes sold, now building his next chapter. And <b>1,000+ entrepreneurs</b> along the way.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ THE ASSESSMENT ============ -->
-  <section class="bg-pale offer">
-    <div class="wrap stack reveal">
-      <hr class="divider">
-      <p class="eyebrow" style="color:var(--mocha)">The assessment</p>
-      <h2>Find your bottleneck in about 60 seconds.</h2>
-      <p class="open">Five quick questions, plus your revenue. Six quick taps.</p>
-      <p>Answer them and I’ll show you where you stand — every stage your business runs today, scored, your #1 bottleneck named, what it’s costing you, and the two layers underneath it.</p>
-      <p>When you finish, you’ll tell me where to send your copy. Then your results are on screen.</p>
-      <p style="margin-top:34px"><button type="button" class="btn" data-quiz-open>Find my bottleneck<span class="arr">→</span></button></p>
-      <p class="microcta">Free. About 60 seconds.</p>
-    </div>
-  </section>
-
-  <!-- ============ GOOD TO KNOW ============ -->
-  <section class="bg-warm">
-    <div class="wrap reveal">
-      <hr class="divider">
-      <p class="eyebrow" style="color:var(--mocha)">Good to know</p>
-      <div class="faq">
-        <div class="fq">
-          <b>How long does this take?</b>
-          <p>About 60 seconds. Five quick questions about how your business actually runs, plus your monthly revenue. Six taps in all.</p>
-        </div>
-        <div class="fq">
-          <b>What does it cost?</b>
-          <p>Nothing. It’s free.</p>
-        </div>
-        <div class="fq">
-          <b>When do I see my results?</b>
-          <p>Straight to your inbox — the full breakdown: where you stand across all five stages, your bottleneck named, and what’s underneath it.</p>
-        </div>
-        <div class="fq">
-          <b>What happens with my email?</b>
-          <p>A copy of your results goes there. You’ll also get occasional letters from me. You can leave anytime.</p>
-        </div>
-        <div class="fq">
-          <b>What if I’m just getting started?</b>
-          <p>The five stages apply at every level. The questions ask what’s true right now — not how far along you are.</p>
-        </div>
+        <p class="eyebrow" style="color:var(--mocha)">About Jason</p>
+        <p class="open">I’ve helped more than 1,000 entrepreneurs grow their businesses — and scaled my own past $500K a year.</p>
+        <p>I’ve also personally hit every one of these bottlenecks. Each time, the way forward started with seeing clearly what was actually in the way.</p>
+        <p>I built this diagnostic to help you find yours — and move past it.</p>
       </div>
     </div>
   </section>
@@ -582,7 +505,7 @@
       <hr class="divider center">
       <span class="lead">Ready to find out what’s actually in the way?</span>
       <button type="button" class="btn" data-quiz-open>Find my bottleneck<span class="arr">→</span></button>
-      <p class="microcta">Free, and about 60 seconds.</p>
+      <p class="microcta">Free. 60 seconds or less.</p>
     </div>
   </section>
 
@@ -598,7 +521,7 @@
 
   <!-- sticky assessment bar -->
   <div class="stickybar" id="stickybar">
-    <div class="t">What’s stopping your business from growing? — <b>Find out free, in about 60 seconds.</b></div>
+    <div class="t">What’s stopping your business from growing? — <b>Find out free, in 60 seconds or less.</b></div>
     <button type="button" class="btn" data-quiz-open>Find my bottleneck<span class="arr">→</span></button>
   </div>
 
@@ -651,55 +574,56 @@
     // server exactly as-is. `sub` renders as an italic subline under the stem.
     var SCORED = [
       { id:'q1',
-        title:'Think about the last 7 days. How many new potential clients found you for the first time?',
-        sub:'New followers, subscribers, inquiries — anyone who didn’t know you existed last week',
+        title:'Over the past 7 days, how many new people in your niche found you for the first time?',
+        sub:'New followers, subscribers, or inquiries.',
         options:[
-          {k:'a', t:'A steady stream — new names almost every day'},
-          {k:'b', t:'A handful'},
-          {k:'c', t:'One or two, maybe'},
-          {k:'d', t:'Honestly... probably none'} ] },
+          {k:'a', t:'Honestly... probably none'},
+          {k:'b', t:'One or two'},
+          {k:'c', t:'A handful'},
+          {k:'d', t:'New people almost every day'} ] },
       { id:'q2',
-        title:'Once someone’s found you, what happens between ‘they follow you’ and ‘they’re ready to buy’?',
+        title:'What happens after someone new finds you?',
         options:[
-          {k:'a', t:'They mostly don’t hear from me again'},
-          {k:'b', t:'They hear from me consistently — and each touch moves them closer to working with me'},
-          {k:'c', t:'They get a lot from me — but it stays friendly; nobody’s really moving toward buying'},
-          {k:'d', t:'They hear from me most weeks, though it’s more free value than direction'},
-          {k:'e', t:'I don’t really have a list or a place people hear from me yet'} ] },
+          {k:'a', t:'Nothing — they never hear from me again'},
+          {k:'b', t:'They hear from me once in a while'},
+          {k:'c', t:'They hear from me consistently, but it stays casual'},
+          {k:'d', t:'They hear from me consistently — and it leads somewhere: calls, offers, clients'},
+          {k:'e', t:'I don’t have a list or audience yet'} ] },
       { id:'q3',
-        title:'How do sales conversations actually start in your business?',
+        title:'How do new clients actually happen in your business?',
         options:[
-          {k:'a', t:'They happen when someone reaches out on their own'},
-          {k:'b', t:'There’s a clear path — people regularly step from my content into real conversations with me'},
-          {k:'c', t:'I create openings sometimes — a launch, an event — and conversations follow'},
-          {k:'d', t:'They rarely happen — honestly, I talk about my offers less than I should'} ] },
+          {k:'a', t:'Rarely — I don’t really talk about my offers'},
+          {k:'b', t:'Luck — someone reaches out on their own'},
+          {k:'c', t:'Bursts — when I run a launch or an event'},
+          {k:'d', t:'There’s a clear path from my content to booked sales conversations'} ] },
       { id:'q4',
         title:'How does delivering your work feel right now?',
         options:[
-          {k:'a', t:'Results are good, but everything runs through me — I’m near the ceiling of my hours'},
-          {k:'b', t:'Delivery drains me — every new client makes the business feel heavier'},
-          {k:'c', t:'Clients get real results, my time isn’t maxed, and my pricing feels right'},
-          {k:'d', t:'I over-deliver, under-charge, or both — it only works because I absorb the cost'},
+          {k:'a', t:'Draining — every new client makes the business heavier'},
+          {k:'b', t:'I over-deliver and under-charge'},
+          {k:'c', t:'Clients get results, but everything depends on me'},
+          {k:'d', t:'Clients get results, pricing feels right, and my time isn’t maxed'},
           {k:'e', t:'I don’t have paying clients yet'} ] },
       { id:'q5',
         title:'What happens after a client finishes working with you?',
         options:[
-          {k:'a', t:'Most stay, renew, or go deeper — the back end of my business feeds itself'},
-          {k:'b', t:'Some come back — but when it happens, it’s them asking, not me offering'},
-          {k:'c', t:'They leave happy... and that’s usually the end of it'},
-          {k:'d', t:'I’ve never really offered a next step — asking feels uncomfortable'},
+          {k:'a', t:'I’ve never really offered a next step'},
+          {k:'b', t:'They leave happy — and that’s the end'},
+          {k:'c', t:'Some come back — but only when they ask'},
+          {k:'d', t:'Most stay, renew, or go deeper'},
           {k:'e', t:'I haven’t had a client finish yet'} ] }
     ];
 
-    // Option -> points, verbatim from final-instrument.md. Client-side this
-    // is ONLY for the fallback results URL when the server response omits
-    // resultsUrl — the server recomputes everything and its URL is canonical.
+    // Option -> points, mirroring the server maps exactly (a=0, b=1, c=2,
+    // d=3; e per question). Client-side this is ONLY for the fallback
+    // results URL when the server response omits resultsUrl — the server
+    // recomputes everything and its URL is canonical.
     var POINTS = {
-      q1:{a:3,b:2,c:1,d:0},
-      q2:{a:0,b:3,c:1,d:2,e:1},
-      q3:{a:1,b:3,c:2,d:0},
-      q4:{a:2,b:0,c:3,d:1,e:2},
-      q5:{a:3,b:2,c:1,d:0,e:2}
+      q1:{a:0,b:1,c:2,d:3},
+      q2:{a:0,b:1,c:2,d:3,e:1},
+      q3:{a:0,b:1,c:2,d:3},
+      q4:{a:0,b:1,c:2,d:3,e:2},
+      q5:{a:0,b:1,c:2,d:3,e:2}
     };
 
     // Not-yet options: stage isn't in play yet — flagged and excluded from
@@ -741,7 +665,7 @@
     var progressEl = document.getElementById('quizProgress');
     var startedFired = false;
     var current = 0;      // index into SCORED
-    var view = 'intro';   // 'intro' | 'q' | 'revenue' | 'email'
+    var view = 'q';       // 'q' | 'revenue' | 'email'
     var resumeNote = false;
 
     /* ─────────────────────────── helpers ─────────────────────────── */
@@ -781,12 +705,10 @@
       }
       quiz.classList.add('open');
       document.body.classList.add('quiz-locked');
-      if (hasProgress()){
-        resumeNote = true;
-        goToFirstUnanswered();
-      } else {
-        renderIntro();
-      }
+      // No intro screen — every open lands directly on the first
+      // unanswered question (Question 1 for a fresh visitor).
+      if (hasProgress()) resumeNote = true;
+      goToFirstUnanswered();
       if (!startedFired){ startedFired = true; track('bottleneck_start'); }
     }
 
@@ -806,21 +728,6 @@
     }
 
     /* ─────────────────────────── screens ─────────────────────────── */
-    function renderIntro(){
-      view = 'intro';
-      setProgress('', 0, false);
-      backBtn.hidden = true;
-      swapStep(
-        '<p class="qintro-line1">Five quick questions, plus your revenue. About 60 seconds.</p>' +
-        '<p class="qintro-line">Answer with what’s true right now — not what you’re aiming for.</p>' +
-        '<p class="qintro-line em">The honest answer is the one that finds the bottleneck.</p>' +
-        '<div class="qintro-cta"><button type="button" class="btn" id="qBegin">Begin</button></div>'
-      );
-      document.getElementById('qBegin').addEventListener('click', function(){
-        goToFirstUnanswered();
-      });
-    }
-
     function optsHtml(qid, options){
       var html = '<ul class="opts">';
       options.forEach(function(o){
@@ -836,11 +743,12 @@
       view = 'q';
       var q = SCORED[current];
       setProgress((current + 1) + ' of 6', current / TOTAL_SCREENS);
-      backBtn.hidden = false;
+      backBtn.hidden = (current === 0);   // Q1 is the first screen — nothing to go back to
       var html = resumeNoteHtml();
-      html += '<p class="qcount">' + STAGE_NAMES[current] + '</p>';
       html += '<h2>' + esc(q.title) + '</h2>';
       if (q.sub) html += '<p class="qsubline">' + esc(q.sub) + '</p>';
+      // Honesty framing lives under the Q1 stem only (no intro screen).
+      if (current === 0) html += '<p class="qnote">Answer with what’s true right now — not what you’re aiming for.</p>';
       html += optsHtml(q.id, q.options);
       swapStep(html);
       bindOpts(q.id);
@@ -853,7 +761,7 @@
       var html = resumeNoteHtml();
       html += '<p class="qtrans">Last one — then your results.</p>';
       html += '<h2>Where’s your monthly revenue right now?</h2>';
-      html += '<p class="qsubline">No judgment in this question. It shapes how your results get read.</p>';
+      html += '<p class="qsubline">No judgment. This just helps me read your results correctly.</p>';
       html += optsHtml('revenue', REVENUE_OPTS);
       swapStep(html);
       bindOpts('revenue');
@@ -899,8 +807,7 @@
       var html = resumeNoteHtml();
       html +=
         '<h2>Where should I send your results?</h2>' +
-        '<p class="qsub">Your bottleneck, named — and what’s actually underneath it.<br>' +
-        'Your bottleneck, named — and what’s actually underneath it. Tell me where to send it.</p>' +
+        '<p class="qsub">Enter your email and get instant access to your results.</p>' +
         '<form class="qform" id="qForm" novalidate>' +
           '<label for="qName">First name</label>' +
           '<input type="text" id="qName" name="first_name" autocomplete="given-name" placeholder="first name" value="' + esc(state.name || '') + '">' +
@@ -910,7 +817,7 @@
           '<div id="cf-turnstile-box"></div>' +
           '<p class="qerr" id="qErr"></p>' +
           '<button type="submit" class="btn btn-forest" id="qSubmit">Show me my bottleneck</button>' +
-          '<p class="qsmallprint">You’ll also get occasional letters from me. You can leave anytime.</p>' +
+          '<p class="qsmallprint">You’ll also get occasional emails from me. You can unsubscribe anytime.</p>' +
         '</form>';
       swapStep(html);
       renderTurnstile();
@@ -1145,10 +1052,7 @@
     backBtn.addEventListener('click', function(){
       if (view === 'email'){ renderRevenue(); return; }
       if (view === 'revenue'){ current = SCORED.length - 1; renderQuestion(); return; }
-      if (view === 'q'){
-        if (current > 0){ current -= 1; renderQuestion(); }
-        else { renderIntro(); }
-      }
+      if (view === 'q' && current > 0){ current -= 1; renderQuestion(); }
     });
 
     /* sticky bar + scroll reveals */
