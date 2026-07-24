@@ -1,9 +1,9 @@
 // Unit tests for the Growth Bottleneck scoring/routing (final-instrument.md).
-// Run: node netlify/functions/submit-bottleneck.test.mjs
+// Run: node tests/submit-bottleneck.test.mjs
 import { createRequire } from 'module';
 const require = createRequire(import.meta.url);
 process.env.KIT_API_KEY = process.env.KIT_API_KEY || 'test';
-const { __test } = require('./submit-bottleneck.js');
+const { __test } = require('../netlify/functions/submit-bottleneck.js');
 const { scoreAssessment } = __test;
 
 let failures = 0;
