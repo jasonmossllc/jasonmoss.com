@@ -104,7 +104,7 @@
     padding:20px 46px; border:0; border-radius:0; text-decoration:none; cursor:pointer;
     transition:background .2s var(--ease), transform .2s var(--ease), box-shadow .2s var(--ease);
   }
-  .btn .arr{ display:inline-block; transition:transform .25s var(--ease); margin-left:10px; }
+  .btn .arr{ display:inline-block; transition:transform .25s var(--ease); margin-left:3px; }
   .btn:hover{
     background:var(--gold-dark); transform:translateY(-1px);
     box-shadow:0 16px 34px -14px rgba(194,168,108,.45);
@@ -512,7 +512,7 @@
             '<p class="eyebrow">The Growth Bottleneck Assessment</p>' +
             '<h1>Your result isn’t here yet.</h1>' +
             '<p>This link doesn’t include a result, and there’s no saved result on this device. The assessment takes 60 seconds or less — five stages, one bottleneck.</p>' +
-            '<a class="btn" href="' + ASSESSMENT_URL + '">Take the assessment<span class="arr">→</span></a>' +
+            '<a class="btn" href="' + ASSESSMENT_URL + '">Take the assessment&nbsp;<span class="arr">→</span></a>' +
           '</div></div>' +
         '</header>' +
         '<footer><img src="../assets/logo-light.svg" alt="Jason Moss">' +
@@ -927,7 +927,7 @@
         '<p>A result like this is useful. A conversation about it is more useful.</p>' +
         '<p>If you want a second set of eyes, I’d be glad to offer you a free 15-minute session — you and me, one on one. We’ll look at what’s actually going on in your business and map out exactly what needs to change.</p>' +
         '<p>It’s fifteen minutes looking at your business together. If it’s clear I can help beyond that, I’ll say so. If not, you’ll still leave with a clearer picture.</p>' +
-        '<button type="button" class="btn" id="bookBtn">Book your free 15-minute session<span class="arr">→</span></button>' +
+        '<button type="button" class="btn" id="bookBtn">Book your free 15-minute session&nbsp;<span class="arr">→</span></button>' +
         '<p class="booked-note" id="bookedNote">You’re booked. The calendar invite is in your inbox — see you there.</p>' +
         '<p class="microcta">No preparation needed. Bring your business as it is — not as you think it should be.</p>' +
       '</div></div></section>';
@@ -945,7 +945,7 @@
     /* sticky book bar — same single CTA, kept in reach */
     html += '<div class="stickybar" id="stickybar">' +
       '<div class="t">Want to look at this together? — <b>free 15 minutes, directly with me.</b></div>' +
-      '<button type="button" class="btn" id="stickyBookBtn">Book your session<span class="arr">→</span></button>' +
+      '<button type="button" class="btn" id="stickyBookBtn">Book your session&nbsp;<span class="arr">→</span></button>' +
     '</div>';
 
     root.innerHTML = html;
