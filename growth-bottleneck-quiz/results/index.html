@@ -552,7 +552,9 @@
         : sc('deliver') === 1
         ? { l1:'You’re carrying more', l2:'than you’re charging for.' }
         : { l1:'Your business runs on your hours —', l2:'and the hours are running out.' },
-      deepen:  { l1:'You keep replacing clients', l2:'instead of keeping them.' }
+      deepen:  sc('deepen') === 2
+        ? { l1:'Your clients stay —', l2:'but nobody comes with them.' }
+        : { l1:'You keep replacing clients', l2:'instead of keeping them.' }
     };
 
     var VERDICT_LINES = {
@@ -587,9 +589,13 @@
         'The problem is what happens after the yes: each client costs you too much — in hours, in energy, or in what you charge for the work.',
         'Your bottleneck isn’t before the sale. It’s after it.'
       ],
-      deepen: [
+      deepen: sc('deepen') === 2 ? [
+        'The front of your business works. People find you, trust you, say yes — and most of them stay.',
+        'What’s missing is what comes after that: your clients aren’t bringing anyone with them. No introductions, no referrals, no word of mouth working while you sleep.',
+        'The people who already trust you most are your quietest asset. Right now, nothing is asking them to speak.'
+      ] : [
         'The front of your business works. People find you, trust you, and say yes.',
-        bScore >= 2
+        bScore >= 1
           ? 'But too many clients leave when the work ends — so every month starts lower than it should.'
           : 'But almost all of your clients leave when the work ends — so every month starts back near zero.',
         'You don’t have a getting-clients problem. You have a keeping-them problem.'
@@ -757,13 +763,14 @@
         ],
         outside: [
           'The pattern I see is front-end obsession. All your attention goes to marketing and sales — new leads, new eyes, new strangers. The people who already said yes to you get a fraction of the attention a cold lead gets. Your current clients get treated like finished business instead of your most valuable relationships.',
-          'Sometimes there’s a harder truth underneath: the client experience isn’t strong enough to earn a second yes, and the offer needs an honest look before anything else will work. Either way, the shift is the same — your clients need at least as much attention as your leads.'
+          'Sometimes there’s a harder truth underneath: the client experience isn’t strong enough to earn a second yes, and the offer needs an honest look before anything else will work. Either way, the shift is the same — your clients need at least as much attention as your leads.',
+          'And referrals rarely come up at all. Not because your clients wouldn’t refer you — most would, gladly. Because nobody ever asks them, and there’s no moment built into the work where it would naturally happen.'
         ],
         inside: [
           'Selling to a stranger is oddly safe. If a cold lead says no, they were never really yours.',
           'Selling to someone who knows you is riskier. They’ve seen the actual work — not the marketing, the work. Offering them a next step means finding out what the work was really worth to them. A no from them hurts in a way a stranger’s no can’t.',
-          'So the ask never happens. Not because you don’t care — because it feels safer not to ask. It’s the same fear that breaks the enroll stage, one layer deeper.',
-          'Here’s the shift that unlocks it: inviting a client to go further isn’t a burden on them. To a client doing real work, “here’s what’s next” isn’t a pitch. It’s leadership.'
+          'So the ask never happens — not the next step, and not the referral either. Asking someone who knows your work to hand you their own reputation is the most exposed ask there is. Not because you don’t care. Because it feels safer not to ask. It’s the same fear that breaks the enroll stage, one layer deeper.',
+          'Here’s the shift that unlocks it: inviting a client to go further isn’t a burden on them. To a client doing real work, “here’s what’s next” isn’t a pitch. It’s leadership. And someone who’s genuinely been helped usually wants to tell people — they’re just waiting for you to make it easy.'
         ],
         bridge: [
           'If deepen is your bottleneck, the raw material is already there — real relationships, real trust, real results. What’s missing is the structure and the ask — and sometimes an honest look at which one.',
