@@ -810,6 +810,31 @@
       ? 'Your bottleneck is the weakest of the stages that apply to you right now.'
       : 'Your bottleneck is the weakest link in your chain.';
 
+    var H = HEADLINES[b];
+    var block = BLOCKS[b];
+    var html = '';
+
+    /* hero — the chain visual */
+    html += '<header class="hero">' +
+      '<div class="topbar"><img src="../assets/logo-light.svg" alt="Jason Moss"></div>' +
+      '<div class="hero-main"><div class="hero-inner">' +
+        '<p class="eyebrow">' + (firstName ? firstName + ', here’s' : 'Here’s') + ' your result</p>' +
+        '<p class="hero-lead">Every client goes through five stages with you — from stranger to paying client.</p>' +
+        '<p class="hero-sub">When all five work, growth gets a lot easier. When one breaks, growth stops.</p>' +
+        '<p class="hero-sub" style="color:var(--gold)"><em>Here’s yours — ' + introTail + '.</em></p>' +
+        chainHtml() +
+        '<p class="chain-cap">' + capLead + ' You don’t have five problems. You have one — and fixing it frees up everything after it.</p>' +
+      '</div></div>' +
+      '<button type="button" class="scrollcue" id="scrollCue" aria-label="Read your verdict"><span></span></button>' +
+    '</header>';
+
+    /* verdict */
+    html += '<section class="bg-forest hairline-b verdict" id="verdict"><div class="wrap stack reveal">' +
+      '<hr class="divider"><p class="eyebrow">Your bottleneck — ' + LABELS[b] + '</p>' +
+      '<h1><span class="l1">' + H.l1 + '</span>' + (H.l2 ? '<span class="l2">' + H.l2 + '</span>' : '') + '</h1>' +
+      '<div class="vlines">' + paras(VERDICT_LINES[b], true) + '</div>';
+
+
     ORDER.forEach(function(k){
       if (ny[k] && NY_NOTES[k]){
         html += '<div class="aside quiet"><p>' + NY_NOTES[k] + '</p></div>';
