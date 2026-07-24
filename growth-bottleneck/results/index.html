@@ -318,7 +318,7 @@
     section{ padding:78px 0; }
     .hero-main{ padding:40px 24px 90px; }
     .stickybar .t{ display:none; }
-    .btn{ white-space:nowrap; padding:18px 26px; font-size:14px; }
+    .btn{ white-space:normal; line-height:1.35; padding:16px 26px; font-size:14px; max-width:100%; }
     .aside{ padding:20px 22px; }
     .crow-top{ gap:9px; }
     .c-badge{ letter-spacing:.16em; padding:3px 7px 2px; }
@@ -785,6 +785,7 @@
 
     // Words carry the meaning; the small bar only echoes it.
     var STATUS = ['Stalled', 'Shaky', 'Solid', 'Strong'];
+    var STAGE_NOUNS = { reach: 'reach', nurture: 'nurture', enroll: 'enrollment', deliver: 'delivery', deepen: 'deepening' };
     function chainHtml(){
       var rows = '';
       ORDER.forEach(function(k, i){
@@ -856,7 +857,7 @@
     /* the stage — what it is and why it matters */
     html += '<section class="bg-charcoal glow hairline-b"><div class="wrap stack reveal">' +
       '<hr class="divider"><p class="eyebrow">The stage</p>' +
-      '<h2>What ' + LABELS[b].toLowerCase() + ' is — and why it matters.</h2>' +
+      '<h2>What ' + STAGE_NOUNS[b] + ' is — and why it matters.</h2>' +
       paras(block.what) +
       '</div></section>';
 

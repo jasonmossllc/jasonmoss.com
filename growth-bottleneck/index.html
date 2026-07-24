@@ -47,7 +47,7 @@
 
   /* ---------- type ---------- */
   h1,h2{ font-family:var(--serif); font-weight:400; margin:0; text-wrap:balance; }
-  h1{ font-size:clamp(42px,6.4vw,74px); line-height:1.09; letter-spacing:-.02em; }
+  h1{ font-size:clamp(40px,5.2vw,58px); line-height:1.12; letter-spacing:-.02em; }
   h2{ font-size:clamp(27px,3.6vw,40px); line-height:1.22; letter-spacing:-.01em; }
   .eyebrow{
     font-size:11px; letter-spacing:.30em; text-transform:uppercase; font-weight:600;
@@ -389,7 +389,7 @@
     .portrait{ max-width:340px; }
     .finalcta{ padding:90px 0 100px; }
     .stickybar .t{ display:none; }
-    .btn{ white-space:nowrap; padding:18px 26px; font-size:14px; }
+    .btn{ white-space:normal; line-height:1.35; padding:16px 26px; font-size:14px; max-width:100%; }
     .quiz-step h2{ font-size:24px; }
     .opt{ font-size:16px; padding:17px 20px; }
     .m-br{ display:inline; }
@@ -410,6 +410,10 @@
   }
 
   .bg-pale .eyebrow, .bg-warm .eyebrow{ color:var(--mocha); }
+
+  .bg-pale, .bg-warm{ color:#3a3c3b; }
+  .bg-pale h2, .bg-warm h2, .bg-pale h3, .bg-warm h3{ color:var(--obsidian); }
+
 </style>
 </head>
 <body>
@@ -492,7 +496,7 @@
       <div class="stack">
         <hr class="divider">
         <p class="eyebrow" style="color:var(--mocha)">About Jason</p>
-        <p class="open">I’ve helped more than 1,000 entrepreneurs grow their businesses — and scaled my own past $500K a year.</p>
+        <p class="open">I’ve helped more than 1,000 entrepreneurs grow their businesses — and scaled my own past $500K years.</p>
         <p>I’ve also personally hit every one of these bottlenecks. Each time, the way forward started with seeing clearly what was actually in the way.</p>
         <p>I built this diagnostic to help you find yours — and move past it.</p>
       </div>
