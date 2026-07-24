@@ -145,10 +145,10 @@
   .hero .eyebrow{ margin-bottom:30px; }
   .hero-lead{
     font-family:var(--serif); font-size:clamp(21px,2.8vw,28px); line-height:1.55;
-    color:var(--sand); margin:0 auto; max-width:24em; text-wrap:balance;
+    color:var(--sand); margin:0 auto 22px; max-width:24em; text-wrap:balance;
     text-shadow:0 2px 44px rgba(0,0,0,.4);
   }
-  .hero-sub{ font-family:var(--sans); font-size:16.5px; line-height:1.75; color:rgba(248,246,242,.82); max-width:640px; margin:0 auto 18px; }
+  .hero-sub{ font-family:var(--sans); font-size:16.5px; line-height:1.75; color:rgba(248,246,242,.82); max-width:640px; margin:0 auto 12px; }
   .hero-lead em{ font-style:italic; color:var(--gold); }
 
   /* ============ CHAIN VISUAL — words first ============ */
@@ -833,7 +833,7 @@
         '<p class="eyebrow">' + (firstName ? firstName + ', here’s' : 'Here’s') + ' your result</p>' +
         '<p class="hero-lead">Every client goes through five stages with you — from stranger to paying client.</p>' +
         '<p class="hero-sub">When all five work, growth gets a lot easier. When one breaks, growth stops.</p>' +
-        '<p class="hero-sub" style="color:var(--gold)"><em>Here’s yours — ' + introTail + '.</em></p>' +
+        '<p class="hero-sub" style="color:var(--gold);margin:30px auto 0"><em>Here’s yours — ' + introTail + '.</em></p>' +
         chainHtml() +
         '<p class="chain-cap">' + capLead + ' You don’t have five problems. You have one — and fixing it frees up everything after it.</p>' +
       '</div></div>' +
