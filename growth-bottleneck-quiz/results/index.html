@@ -1071,6 +1071,13 @@
       s.async = true;
       document.head.appendChild(s);
     }
+    function calendlyUrl(){
+      var u = CALENDLY_URL + '?hide_gdpr_banner=1&primary_color=2c3f36'
+            + '&utm_source=gba&utm_medium=results&utm_content=' + encodeURIComponent(b);
+      if (name)  u += '&name='  + encodeURIComponent(name);
+      if (email) u += '&email=' + encodeURIComponent(email);
+      return u;
+    }
     function openCalendly(){
       loadCalendly();
       if (!window.Calendly){
@@ -1078,12 +1085,15 @@
         var t = setInterval(function(){
           tries += 1;
           if (window.Calendly){ clearInterval(t); openCalendly(); }
-          else if (tries > 20){ clearInterval(t); window.open(CALENDLY_URL, '_blank'); }
+          else if (tries > 20){ clearInterval(t); window.open(calendlyUrl(), '_blank'); }
         }, 250);
         return;
       }
+      // Calendly's `prefill` option is unreliable for PopupText embeds (it never
+      // reaches the iframe). Query-string prefill is the documented mechanism
+      // that always works, for both the embed and the new-tab fallback.
       window.Calendly.initPopupWidget({
-        url: CALENDLY_URL + '?hide_gdpr_banner=1&primary_color=2c3f36&utm_source=gba&utm_medium=results&utm_content=' + b,
+        url: calendlyUrl(),
         prefill: { name: name || '', email: email || '' }
       });
     }
