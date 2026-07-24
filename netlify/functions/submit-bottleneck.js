@@ -97,8 +97,7 @@ function stageOfQuestion(n) {
 //     Deliver on tie).
 //   - otherwise: lowest-scoring eligible stage; exact ties break to the
 //     earliest stage in chain order.
-// Returns { primary, second } — second = next-lowest non-excluded stage
-// within 1 point of primary (earliest on tie), else null.
+// Returns { primary }.
 function routeBottleneck(scores, excluded, revenueKey) {
   let pool;
   if (revenueKey === '0-5k') {
@@ -122,14 +121,7 @@ function routeBottleneck(scores, excluded, revenueKey) {
   for (const stage of pool) {
     if (scores[stage] < scores[primary]) primary = stage;
   }
-  let second = null;
-  for (const stage of STAGES) {
-    if (stage === primary || excluded.includes(stage)) continue;
-    if (scores[stage] - scores[primary] <= 1) {
-      if (second === null || scores[stage] < scores[second]) second = stage;
-    }
-  }
-  return { primary, second };
+  return { primary };
 }
 
 // Validate + score a full submission. Pure — no I/O. Returns { ok: false }
@@ -153,20 +145,19 @@ function scoreAssessment(data) {
     scores[stageOfQuestion(n)] = QUESTION_POINTS[q][key];
     if (NOT_YET_OPTIONS[q] === key) excluded.push(stageOfQuestion(n));
   }
-  const { primary, second } = routeBottleneck(scores, excluded, revenueKey);
-  return { ok: true, scores, excluded, primary, second, revenueKey };
+  const { primary } = routeBottleneck(scores, excluded, revenueKey);
+  return { ok: true, scores, excluded, primary, revenueKey };
 }
 
 // Canonical personalized results URL — must match the results page's param
-// schema exactly: s= scores csv (chain order), b= primary, c= close second,
+// schema exactly: s= scores csv (chain order), b= primary, c= close,
 // ny= excluded stages csv, rev= band key, name, email.
-function buildResultsUrl({ scores, primary, second, excluded, revenueKey, firstName, email }) {
+function buildResultsUrl({ scores, primary, excluded, revenueKey, firstName, email }) {
   const params = new URLSearchParams({
     s: STAGES.map((st) => scores[st]).join(','),
     b: primary,
     rev: revenueKey,
   });
-  if (second) params.set('c', second);
   if (excluded.length) params.set('ny', excluded.join(','));
   if (firstName) params.set('name', firstName);
   if (email) params.set('email', email);
@@ -256,11 +247,11 @@ exports.handler = async (event) => {
     if (!scored.ok) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid answers' }) };
     }
-    const { scores, excluded, primary, second, revenueKey } = scored;
+    const { scores, excluded, primary, revenueKey } = scored;
     const qualified = revenueKey !== '0-5k';
 
     const firstName = cleanString(data.first_name, 100);
-    const resultsUrl = buildResultsUrl({ scores, primary, second, excluded, revenueKey, firstName, email });
+    const resultsUrl = buildResultsUrl({ scores, primary, excluded, revenueKey, firstName, email });
     const submission = {
       email,
       firstName,
@@ -319,7 +310,6 @@ exports.handler = async (event) => {
         subscriberId: result.subscriberId,
         tagged: result.tagged,
         bottleneck: STAGE_LABELS[primary],
-        second: second ? STAGE_LABELS[second] : null,
         scores,
         resultsUrl,
       }),

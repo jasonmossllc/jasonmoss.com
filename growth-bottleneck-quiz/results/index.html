@@ -421,18 +421,14 @@
       var rev = p.get('rev') || '';
       if (rev && !REV[rev]) rev = '';
       var b = STAGE_KEYS[(p.get('b') || '').trim()] || '';
-      var cParam = p.get('c');
-      var c = STAGE_KEYS[(cParam || '').trim()] || '';
       // a stage the instrument excluded can never carry the verdict
       if (b && ny[b]) b = '';
       if (!b){
         var routed = route(scores, ny, rev);
         b = routed.primary;
-        c = routed.second;               // computed set: compute both
       }
-      if (c && (c === b || ny[c])) c = '';
       return {
-        scores: scores, ny: ny, rev: rev, b: b, c: c,
+        scores: scores, ny: ny, rev: rev, b: b,
         name: (p.get('name') || '').trim().slice(0, 100),
         email: (p.get('email') || '').trim().slice(0, 200),
         fresh: p.get('fresh') === '1',
@@ -511,7 +507,7 @@
     }
 
     var scores = state.scores, ny = state.ny, rev = state.rev;
-    var b = state.b, c = state.c;
+    var b = state.b;
     var name = state.name, email = state.email;
     function sc(k){ return scores[ORDER.indexOf(k)]; }
     var bScore = sc(b);
@@ -541,12 +537,6 @@
       history.replaceState(null, '', window.location.pathname + '?' + clean.toString());
     }
 
-    /* ── exact tie among displayed stages (earliest partner) ────────── */
-    var tiePartner = '';
-    for (var ti = 0; ti < ORDER.length; ti++){
-      var tk = ORDER[ti];
-      if (tk !== b && !ny[tk] && sc(tk) === bScore){ tiePartner = tk; break; }
-    }
 
     /* ══ COPY — the five bottleneck blocks (base register) ══════════── */
     // Reach + Deliver headlines are keyed to the stage's own score, so the
