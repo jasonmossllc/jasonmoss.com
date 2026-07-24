@@ -164,6 +164,24 @@ function buildResultsUrl({ scores, primary, excluded, revenueKey, firstName, ema
   return `https://jasonmoss.com/growth-bottleneck-quiz/results/?${params.toString()}`;
 }
 
+// Per-IP rate limit for the booked ping (per warm instance, fail-open).
+// Mirrors verify-email.js. A real visitor books once; anything walking a list
+// of addresses trips this immediately.
+const BOOKED_RL_WINDOW_MS = 60000;
+const BOOKED_RL_MAX = 5;
+const bookedHits = new Map();
+function bookedRateLimited(ip) {
+  try {
+    if (!ip) return false;
+    const now = Date.now();
+    const arr = (bookedHits.get(ip) || []).filter((t) => now - t < BOOKED_RL_WINDOW_MS);
+    arr.push(now);
+    bookedHits.set(ip, arr);
+    if (bookedHits.size > 5000) bookedHits.clear();
+    return arr.length > BOOKED_RL_MAX;
+  } catch (e) { return false; }
+}
+
 // Best-effort: flip bottleneck_booked to Yes after a Calendly booking.
 // Never blocks the visitor — the booking already happened.
 async function markBooked(email) {
@@ -219,6 +237,14 @@ exports.handler = async (event) => {
 
     // ── Booking ping from the results page (post-Calendly) ──────────────────
     if (data.action === 'booked') {
+      // No Turnstile here on purpose: this fires from the results page after a
+      // Calendly booking, where no widget exists. It is instead rate limited so
+      // it cannot be walked as an email-enumeration oracle or used to mass-flip
+      // bottleneck_booked. The response stays deliberately opaque either way.
+      if (bookedRateLimited(ip)) {
+        console.log('Blocked: booked ping rate limit', { ip });
+        return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+      }
       // Deliberately opaque: the response must not reveal whether the email
       // exists as a Kit subscriber (an "updated" flag here was an email-
       // enumeration oracle). Outcome is logged server-side only.

@@ -16,12 +16,10 @@ function check(name, cond, extra) {
 let r = scoreAssessment({ revenue: '5-10k', q1: 'c', q2: 'c', q3: 'a', q4: 'c', q5: 'b' });
 check('P1 enroll bottleneck', r.ok && r.primary === 'enroll', r);
 check('P1 scores', JSON.stringify(r.scores) === JSON.stringify({ reach: 2, nurture: 2, enroll: 0, deliver: 2, deepen: 1 }), r.scores);
-check('P1 close second deepen', r.second === 'deepen', r.second);
 
 // P2 tie reach/nurture at 1 → earliest (reach) wins.
 r = scoreAssessment({ revenue: '10-25k', q1: 'b', q2: 'b', q3: 'c', q4: 'c', q5: 'd' });
 check('P2 tie -> reach', r.ok && r.primary === 'reach', r);
-check('P2 close second nurture', r.second === 'nurture', r.second);
 
 // P3 $0-5k guardrail: deliver 0 strictly below min(front)=1 → deliver wins.
 r = scoreAssessment({ revenue: '0-5k', q1: 'b', q2: 'b', q3: 'b', q4: 'a', q5: 'd' });
@@ -53,10 +51,10 @@ check('e on 4-option q rejected', scoreAssessment({ revenue: '5-10k', q1: 'e', q
 // Results URL carries the full schema.
 const u = __test.buildResultsUrl({
   scores: { reach: 2, nurture: 2, enroll: 0, deliver: 2, deepen: 1 },
-  primary: 'enroll', second: 'deepen', excluded: [], revenueKey: '5-10k',
+  primary: 'enroll', excluded: [], revenueKey: '5-10k',
   firstName: 'Ana', email: 'a@b.co',
 });
-check('url schema', u.includes('s=2%2C2%2C0%2C2%2C1') && u.includes('b=enroll') && u.includes('c=deepen') && u.includes('rev=5-10k'), u);
+check('url schema', u.includes('s=2%2C2%2C0%2C2%2C1') && u.includes('b=enroll') && !u.includes('c=') && u.includes('rev=5-10k'), u);
 
 if (failures) { console.error(failures + ' failure(s)'); process.exit(1); }
 console.log('ALL PASS');

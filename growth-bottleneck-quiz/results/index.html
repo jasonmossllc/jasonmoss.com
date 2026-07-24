@@ -383,16 +383,32 @@
     // out of the funnel data.
     var IS_LIVE = location.hostname === 'jasonmoss.com';
     function gtag(){ window.dataLayer.push(arguments); }
+    // The results URL carries name/email so the page can greet + prefill. Those
+    // must never reach analytics: gtag stamps document.location onto EVERY hit,
+    // including GA4's auto-fired events, which run before any code below. So we
+    // pin page_location to a sanitised URL at config time.
+    function sanitisedHref(){
+      try {
+        var u = new URL(window.location.href);
+        ['name','email','fresh','book'].forEach(function(k){ u.searchParams.delete(k); });
+        return u.toString();
+      } catch(e){ return window.location.pathname; }
+    }
     if (IS_LIVE){
       gtag('js', new Date());
       // direct GA4 hookup — GTM keeps owning page_view, we send funnel events
-      gtag('config', 'G-P5D1GH2M97', { send_page_view: false });
+      gtag('config', 'G-P5D1GH2M97', { send_page_view: false, page_location: sanitisedHref() });
     }
     function track(eventName, extra){
       var payload = { event: eventName };
       if (extra) for (var k in extra) payload[k] = extra[k];
       window.dataLayer.push(payload);   // GTM-style (Meta/GTM triggers)
-      if (IS_LIVE) gtag('event', eventName, extra || {});  // straight to GA4
+      if (IS_LIVE) {
+        var ga = {};
+        if (extra) for (var k2 in extra) ga[k2] = extra[k2];
+        ga.page_location = sanitisedHref();      // never ship name/email to GA
+        gtag('event', eventName, ga);
+      }
     }
     // Every param-derived string that touches markup goes through esc() —
     // stage keys / scores / bands are additionally whitelist-validated below,
@@ -551,12 +567,18 @@
       } catch(e){}
     }
 
-    // canonical address bar: drop the one-time flags so copied links are clean
-    if ((state.fresh || state.book) && window.history && history.replaceState){
+    // canonical address bar: drop the one-time flags AND the visitor's personal
+    // details. name/email are already parsed into `state`; leaving them in the
+    // URL would ship PII to analytics (gtag attaches document.location to every
+    // hit), into browser history, and into any link the visitor shares.
+    if (window.history && history.replaceState){
       var clean = new URLSearchParams(window.location.search);
       clean.delete('fresh');
       clean.delete('book');
-      history.replaceState(null, '', window.location.pathname + '?' + clean.toString());
+      clean.delete('name');
+      clean.delete('email');
+      var qs = clean.toString();
+      history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
     }
 
 

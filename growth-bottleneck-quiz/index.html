@@ -718,7 +718,7 @@
       // but only if the stored URL matches the current param schema.
       if (state.submitted && state.resultsUrl &&
           state.resultsUrl.indexOf('/results/') !== -1 &&
-          /[?&]s=[0-3](,[0-3]){4}(&|$)/.test(state.resultsUrl) &&
+          /[?&]s=[0-3]((,|%2C)[0-3]){4}(&|$)/i.test(state.resultsUrl) &&
           /[?&]b=/.test(state.resultsUrl)){
         window.location.href = state.resultsUrl; return;
       }
