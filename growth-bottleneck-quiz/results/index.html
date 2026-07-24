@@ -547,7 +547,9 @@
         : { l1:'Not enough people', l2:'know you exist.' },
       nurture: { l1:'People find you —', l2:'then nothing happens.' },
       enroll:  { l1:'People trust you —', l2:'they’re just not becoming clients.' },
-      deliver: sc('deliver') === 1
+      deliver: sc('deliver') === 0
+        ? { l1:'What you’re selling', l2:'isn’t clear enough yet.' }
+        : sc('deliver') === 1
         ? { l1:'You’re carrying more', l2:'than you’re charging for.' }
         : { l1:'Your business runs on your hours —', l2:'and the hours are running out.' },
       deepen:  { l1:'You keep replacing clients', l2:'instead of keeping them.' }
@@ -576,7 +578,11 @@
           ? 'What’s missing is a clear path from interest to a sale. Right now, people buy later and less often than they would — because the path is only half built.'
           : 'What’s missing is a path that turns interest into a sale. Right now, people almost never get a clear chance to buy — because nothing in your business creates that moment.'
       ],
-      deliver: [
+      deliver: sc('deliver') === 0 ? [
+        'You can have reach. You can have trust. People still won’t buy something they can’t quite name.',
+        'Right now what you sell keeps moving — the shape of it, who it’s for, what it costs. That uncertainty shows up in every conversation, whether you name it or not.',
+        'Everything after this stage stands on the offer. Until it’s solid, there’s nothing to build on.'
+      ] : [
         'The front of your business works — finding people, building trust, getting to yes. That part is doing its job.',
         'The problem is what happens after the yes: each client costs you too much — in hours, in energy, or in what you charge for the work.',
         'Your bottleneck isn’t before the sale. It’s after it.'
@@ -705,7 +711,7 @@
           'Deliver is how you keep your promise. It’s the actual work — the sessions, the program, the results your clients came for.',
           'It matters in two ways. First, the obvious one: results are the product. Everything else is packaging around what happens here.',
           'But it matters a second way that most coaches, consultants, and service providers miss: how you deliver decides whether your business can grow at all. If every new client costs you hours, your growth is capped at the number of hours you have. No amount of marketing or selling can push past that.',
-          'Deliver has two levers. Structure — how you do the work: one-to-one, group, hybrid, and how much of the result depends on you being there live. And pricing — whether you charge for what your time feels worth to you, or for what the result is actually worth to the client. Those are very different numbers.'
+          'Deliver has three levers. Clarity — whether what you sell is one specific thing a person can say yes to, or a shifting collection of possibilities. Pricing — whether you charge for what your time feels worth to you, or for what the result is actually worth to the client. Those are very different numbers. And structure — one-to-one, group, hybrid, and how much of the result depends on you being in the room.'
         ],
         cost: [
           'You start to quietly fear growth. Every new client makes your life heavier, so part of you starts easing off — softer asks, slower follow-up, quiet relief when someone doesn’t book. When success feels like a threat, your business finds ways to stay small.',
@@ -714,18 +720,18 @@
         ],
         payoff: [
           'Space. That’s the honest answer. Space in your calendar, space in your energy, space between a good month and an exhausting one.',
-          'Your hours stop being your ceiling. You can take on a new client without doing math on your own energy. Growth stops costing you your wellbeing.',
+          'One clear offer. Priced for the result it creates, not the hours it takes. Delivered in a way that lets you serve more people without spending more of yourself. Your hours stop being your ceiling — you can take on a new client without doing math on your own energy.',
           'Often, the work itself gets better too. Clients in a well-designed group don’t get less of you — they get a better-rested version of you, plus each other. And when your pricing matches the value of the result, clients take the work more seriously.'
         ],
         outside: [
-          'The pattern I see most often is trading time for money, usually one-to-one. Every client takes a block of your hours. And there’s only one of you.',
-          'You probably already know the obvious fix — leverage. Group programs, hybrid models, better structure. And it keeps getting put off.',
+          'The first thing I look at is whether the offer is actually clear. Not clever — clear. One thing, for one kind of person, with one result. When what you sell keeps shifting, every other part of the business has to work twice as hard to sell it.',
+          'Then the pattern I see most often: trading time for money, usually one-to-one. Every client takes a block of your hours, and there’s only one of you. You probably already know the fix — leverage, group, better structure. And it keeps getting put off.',
           'Pricing usually makes it worse. Most of us price based on what an hour of our time feels worth — a number our own history sets too low — instead of what the result is worth to the client. Underpriced and over-delivering, you burn yourself out to keep the promise.'
         ],
         inside: [
-          'In my experience, the resistance to leverage is rarely laziness. It’s usually over-caring — the belief that unless you personally handle every piece, clients get shortchanged. It feels noble. It works like a ceiling.',
-          'Under the pricing problem are money stories. “I can’t charge that.” “My people can’t pay that.” Beliefs about what your market can afford that are really beliefs about what you’re allowed to ask for.',
-          'And here’s the part almost nobody sees: those stories don’t stay private. You carry them into every sales conversation, and clients pick up on them. The hesitation you expect is often the hesitation you brought into the room.'
+          'Underneath a fuzzy offer is usually the fear of choosing. Narrowing feels like closing doors — like you’ll lose everyone who doesn’t fit. So you keep it broad, keep your options open, and end up with something nobody can quite say yes to.',
+          'The resistance to leverage is rarely laziness. It’s usually over-caring — the belief that unless you personally handle every piece, clients get shortchanged. It feels noble. It works like a ceiling.',
+          'And under the pricing problem are money stories. “I can’t charge that.” “My people can’t pay that.” Beliefs about what your market can afford that are really beliefs about what you’re allowed to ask for. Those stories don’t stay private — you carry them into every sales conversation, and clients pick up on them. The hesitation you expect is often the hesitation you brought into the room.'
         ],
         bridge: [
           'A deliver bottleneck is tangled by nature — the model, the pricing, and the beliefs underneath all hold each other in place. That’s why fixing just one of them rarely works.',
