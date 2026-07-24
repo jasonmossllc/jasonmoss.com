@@ -595,9 +595,9 @@
         sub:'New followers, subscribers, or inquiries.',
         options:[
           {k:'a', t:'Honestly... probably none'},
-          {k:'b', t:'One or two'},
-          {k:'c', t:'A handful'},
-          {k:'d', t:'New people almost every day'} ] },
+          {k:'b', t:'A few — I could count them on one hand'},
+          {k:'c', t:'A steady stream — a couple dozen, maybe more'},
+          {k:'d', t:'More than I can keep track of'} ] },
       { id:'q2',
         title:'What happens after someone new finds you?',
         options:[
@@ -765,7 +765,6 @@
       html += '<h2>' + esc(q.title) + '</h2>';
       if (q.sub) html += '<p class="qsubline">' + esc(q.sub) + '</p>';
       // Honesty framing lives under the Q1 stem only (no intro screen).
-      if (current === 0) html += '<p class="qnote">Answer with what’s true right now — not what you’re aiming for.</p>';
       html += optsHtml(q.id, q.options);
       swapStep(html);
       bindOpts(q.id);
