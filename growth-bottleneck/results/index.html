@@ -337,7 +337,9 @@
   .hero-hint{ font-size:15px; color:rgba(248,246,242,.55); margin-top:26px; }
 
 
-  .clink{ display:flex; justify-content:center; padding:5px 0; color:rgba(194,168,108,.55); line-height:0; }
+
+
+  .c-num{ font-family:var(--serif); font-style:italic; color:rgba(194,168,108,.75); margin-right:12px; font-size:16px; }
 
 </style>
 </head>
@@ -786,10 +788,9 @@
     function chainHtml(){
       var rows = '';
       ORDER.forEach(function(k, i){
-        if (i > 0) rows += '<div class="clink" aria-hidden="true"><svg viewBox="0 0 12 14" width="12" height="14"><path d="M6 0v10M2 8l4 5 4-5" fill="none" stroke="currentColor" stroke-width="1.4"/></svg></div>';
         var isB = k === b;
         var cls = 'crow' + (isB ? ' gold' : '') + (ny[k] ? ' muted' : '');
-        var top = '<div class="crow-top"><span class="c-name">' + LABELS[k] + '</span>';
+        var top = '<div class="crow-top"><span class="c-name"><span class="c-num">' + (i + 1) + '</span>' + LABELS[k] + '</span>';
         if (isB) top += '<span class="c-badge">Your bottleneck</span>';
         if (ny[k]){
           top += '<span class="c-status">Not scored yet</span></div>';
