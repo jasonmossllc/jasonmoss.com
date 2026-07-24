@@ -20,3 +20,5 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /VIP          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /Vip          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /growth-bottleneck/* /bottleneck/:splat 301
+# Runs You assessment retired (archived) -> new bottleneck assessment
+/runs-you-assessment/* /bottleneck/ 301
