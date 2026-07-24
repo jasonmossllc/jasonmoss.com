@@ -2,6 +2,25 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>
+/* FIRST thing in the document, on purpose. The results URL carries name/email so
+   this page can greet the visitor and prefill Calendly. Both are stashed on
+   window and stripped from the address bar right here — before gtag loads and
+   before Netlify injects GTM at the end of <head> — so no analytics tag, browser
+   history entry, or shared link ever contains the visitor's personal details. */
+(function(){
+  try {
+    var u = new URL(window.location.href);
+    var n = u.searchParams.get('name'), e = u.searchParams.get('email');
+    window.__gbaIdentity = { name: n || '', email: e || '' };
+    if (n !== null || e !== null) {
+      u.searchParams.delete('name');
+      u.searchParams.delete('email');
+      window.history.replaceState(null, '', u.pathname + u.search + u.hash);
+    }
+  } catch (err) { window.__gbaIdentity = { name: '', email: '' }; }
+})();
+</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Your Result — The Growth Bottleneck Assessment — Jason Moss</title>
 <meta name="description" content="Your growth bottleneck, scored across the five stages every client business grows through.">
@@ -467,8 +486,8 @@
       }
       return {
         scores: scores, ny: ny, rev: rev, b: b,
-        name: (p.get('name') || '').trim().slice(0, 100),
-        email: (p.get('email') || '').trim().slice(0, 200),
+        name: (((window.__gbaIdentity || {}).name) || p.get('name') || '').trim().slice(0, 100),
+        email: (((window.__gbaIdentity || {}).email) || p.get('email') || '').trim().slice(0, 200),
         fresh: p.get('fresh') === '1',
         book: p.get('book') === '1'
       };
@@ -575,8 +594,6 @@
       var clean = new URLSearchParams(window.location.search);
       clean.delete('fresh');
       clean.delete('book');
-      clean.delete('name');
-      clean.delete('email');
       var qs = clean.toString();
       history.replaceState(null, '', window.location.pathname + (qs ? '?' + qs : ''));
     }
