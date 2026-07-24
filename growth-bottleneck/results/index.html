@@ -148,6 +148,7 @@
     color:var(--sand); margin:0 auto; max-width:24em; text-wrap:balance;
     text-shadow:0 2px 44px rgba(0,0,0,.4);
   }
+  .hero-sub{ font-family:var(--sans); font-size:16.5px; line-height:1.75; color:rgba(248,246,242,.82); max-width:640px; margin:0 auto 18px; }
   .hero-lead em{ font-style:italic; color:var(--gold); }
 
   /* ============ CHAIN VISUAL — words first ============ */
@@ -821,7 +822,10 @@
       '<div class="topbar"><img src="../assets/logo-light.svg" alt="Jason Moss"></div>' +
       '<div class="hero-main"><div class="hero-inner">' +
         '<p class="eyebrow">' + (firstName ? firstName + ', here’s' : 'Here’s') + ' your result</p>' +
-        '<p class="hero-lead">Every client business runs the same five stages, in the same order. Here’s how yours scored — <em>' + introTail + '</em>.</p>' +
+        '<p class="hero-lead">Every client walks the same path through your business — five stages, from stranger to client.</p>' +
+        '<p class="hero-sub">They find you. They come to trust you. They say yes. You deliver. And they go deeper. Every client business runs these five stages, whether it knows it or not.</p>' +
+        '<p class="hero-sub">When all five are working, growth feels almost easy — clients arrive, say yes, and stay. When one is weak, it’s a broken link in the chain: everything upstream of it goes to waste, and the business stalls no matter how hard you work on the rest.</p>' +
+        '<p class="hero-sub" style="color:var(--gold)"><em>Here’s how yours scored — ' + introTail + '.</em></p>' +
         chainHtml() +
         '<p class="chain-cap">' + capLead + ' You don’t have five problems. You have one — and everything downstream of it is waiting.</p>' +
       '</div></div>' +
