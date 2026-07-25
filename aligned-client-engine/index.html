@@ -43,6 +43,7 @@
   --ink-soft:#3E413F;
   --serif:'Libre Baskerville', Georgia, serif;
   --sans:'Raleway', 'Helvetica Neue', Arial, sans-serif;
+  --dl-h:40px; /* enrollment deadline bar height, re-measured in JS */
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 html{scroll-behavior:smooth;}
@@ -165,12 +166,82 @@ a:focus-visible,summary:focus-visible,.btn:focus-visible{
   outline-offset:3px;
 }
 
+/* ---------- enrollment deadline ---------- */
+/* Thin sticky bar above everything. Understated on purpose: a real deadline
+   stated once, not a countdown. --dl-h is measured in JS so the sticky CTA
+   bar and scroll offsets sit below it (and collapse to 0 if the bar is gone). */
+.deadline-bar{
+  position:sticky;
+  top:0;
+  z-index:1600;
+  background:var(--obsidian);
+  border-bottom:1px solid rgba(194,168,108,0.34);
+}
+.deadline-bar .inner{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  padding:10px 24px;
+  text-align:center;
+}
+.deadline-bar .pip{
+  width:5px;height:5px;
+  border-radius:50%;
+  background:var(--gold);
+  box-shadow:0 0 0 4px rgba(194,168,108,0.13);
+  flex:0 0 auto;
+}
+.deadline-bar .line{
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+@media (max-width:760px){
+  .deadline-bar .inner{gap:10px;padding:9px 16px;}
+  .deadline-bar .line{font-size:10px;letter-spacing:0.13em;}
+}
+@media (max-width:400px){
+  .deadline-bar .inner{gap:8px;padding:9px 12px;}
+  .deadline-bar .line{font-size:9.5px;letter-spacing:0.07em;}
+}
+
+/* deadline note beneath each CTA */
+.cta-deadline{
+  margin-top:22px;
+  margin-bottom:0;
+  padding-top:17px;
+  border-top:1px solid rgba(194,168,108,0.5);
+  max-width:520px;
+  font-family:var(--serif);
+  font-size:15px;
+  line-height:1.72;
+  color:var(--ink-soft);
+}
+.cta-stack.center .cta-deadline{margin-left:auto;margin-right:auto;text-align:center;}
+.cta-deadline .dl-lead{
+  display:block;
+  font-family:var(--sans);
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:0.2em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:9px;
+}
+@media (max-width:480px){
+  .cta-deadline{font-size:14.5px;}
+  .cta-deadline .dl-lead{font-size:10.5px;letter-spacing:0.12em;}
+}
+
 /* sticky cta bar */
 /* Zero-height sticky wrapper instead of position:fixed — on iOS Safari,
    fixed elements pin to the LAYOUT viewport and visibly lag/detach from the
    top while the browser chrome collapses during scroll; sticky elements
    track the visual viewport smoothly. height:0 so it takes no layout space. */
-.sticky-anchor{position:sticky;top:0;height:0;z-index:1500;}
+.sticky-anchor{position:sticky;top:var(--dl-h,40px);height:0;z-index:1500;}
 .sticky-cta{
   background:rgba(248,246,242,0.93);
   -webkit-backdrop-filter:blur(10px);
@@ -193,6 +264,7 @@ a:focus-visible,summary:focus-visible,.btn:focus-visible{
 .sticky-cta .mini-meta{display:flex;flex-direction:column;align-items:flex-end;gap:3px;}
 .sticky-cta .mini-date{
   font-weight:600;
+  white-space:nowrap;
   font-size:11px;
   letter-spacing:0.16em;
   text-transform:uppercase;
@@ -323,6 +395,13 @@ header.top img{height:28px;width:auto;}
   margin-bottom:14px;
 }
 .hero-copy .start-date::before{content:"";width:26px;height:1px;background:var(--gold);}
+.hero-copy .start-date .sd-short{display:none;}
+@media (max-width:520px){
+  .hero-copy .start-date{letter-spacing:0.17em;gap:10px;}
+  .hero-copy .start-date::before{width:20px;}
+  .hero-copy .start-date .sd-full{display:none;}
+  .hero-copy .start-date .sd-short{display:inline;}
+}
 .hero-copy .g-link{
   margin-top:12px;
   font-size:13.5px;
@@ -970,8 +1049,8 @@ header.top img{height:28px;width:auto;}
 .g-card .fine p strong{color:var(--obsidian);}
 
 /* ---------- investment ---------- */
-#guarantee{scroll-margin-top:70px;}
-#join{scroll-margin-top:70px;}
+#guarantee{scroll-margin-top:calc(70px + var(--dl-h,40px));}
+#join{scroll-margin-top:calc(70px + var(--dl-h,40px));}
 .invest{
   position:relative;
   padding:clamp(120px,10vw,128px) 0;
@@ -1105,7 +1184,7 @@ details.qa .answer p:last-child{margin-bottom:0;}
   align-items:start;
   position:relative;
 }
-.final-media{position:sticky;top:64px;}
+.final-media{position:sticky;top:calc(64px + var(--dl-h,40px));}
 .final-media .frame{position:relative;z-index:2;}
 .final-media .frame img{
   width:100%;
@@ -1232,6 +1311,13 @@ footer .links a{margin:0 12px;}
 </head>
 <body>
 
+<div class="deadline-bar" id="deadlineBar">
+  <div class="inner">
+    <span class="pip" aria-hidden="true"></span>
+    <span class="line js-dl">Enrollment closes Sunday at 11:59 pm MT</span>
+  </div>
+</div>
+
 <div class="sticky-anchor"><div class="sticky-cta" id="stickyCta">
   <div class="wrap inner">
     <img src="assets/logo-obsidian.svg" alt="Jason Moss">
@@ -1262,9 +1348,10 @@ footer .links a{margin:0 12px;}
         <p class="lede"><strong>You&rsquo;ll leave with the complete engine running &mdash; and potential clients already moving through it.</strong></p>
       </div>
       <div class="cta-stack reveal">
-        <span class="start-date">Six weeks &middot; Begins Tuesday, July 28</span>
+        <span class="start-date"><span class="sd-full">Six weeks &middot; Begins Tuesday, July 28</span><span class="sd-short">Six weeks &middot; Begins Tue, 7/28</span></span>
         <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
         <span class="btn-note">or 3 payments of $367</span>
+        <p class="cta-deadline"><span class="dl-lead js-dl">Enrollment closes Sunday at 11:59 pm MT</span>We build this together &mdash; live. Enrollment closes before we begin so the whole cohort starts the same week.</p>
         <p class="g-link">Backed by <a href="#guarantee">The "Engine Works" Guarantee</a></p>
         <div class="trust-logos">
           <img src="https://jasonmoss.com/assets/logo-forbes-scotland.png" alt="Forbes Scotland" class="lg-forbes" loading="lazy">
@@ -1645,6 +1732,7 @@ footer .links a{margin:0 12px;}
     <div class="cta-stack center reveal" style="margin-top:clamp(52px,6vw,72px);">
       <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
       <span class="btn-note">or 3 payments of $367</span>
+      <p class="cta-deadline"><span class="dl-lead js-dl">Enrollment closes Sunday at 11:59 pm MT</span>We begin Tuesday, July 28, and we&rsquo;ll be building this together &mdash; live. Enrollment closes first so the whole cohort starts the same week.</p>
     </div>
   </div>
 </section>
@@ -1754,6 +1842,7 @@ footer .links a{margin:0 12px;}
       <div class="cta-stack center">
         <a class="btn green" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
         <span class="btn-note">or 3 payments of $367</span>
+        <p class="cta-deadline"><span class="dl-lead js-dl">Enrollment closes Sunday at 11:59 pm MT</span>We begin Tuesday, July 28, and we&rsquo;ll be building this together &mdash; live. Enrollment closes first so the whole cohort starts the same week.</p>
       </div>
       <div class="proof-block reveal">
         <div class="proof-single">
@@ -1773,6 +1862,15 @@ footer .links a{margin:0 12px;}
       <h2>Questions you're probably asking</h2>
     </div>
     <div class="faq-list reveal">
+
+      <details class="qa">
+        <summary>When does enrollment close?<span class="indicator">+</span></summary>
+        <div class="answer">
+          <p class="js-dl-prose">Enrollment closes Sunday at 11:59 p.m. Mountain Time.</p>
+          <p>The deadline isn't a marketing device. This is a live cohort &mdash; we begin together on Tuesday, July 28, and I want everyone building the same thing in the same week.</p>
+          <p>Once we begin, enrollment is closed for this round.</p>
+        </div>
+      </details>
 
       <details class="qa">
         <summary>How much time will this take?<span class="indicator">+</span></summary>
@@ -1916,6 +2014,7 @@ footer .links a{margin:0 12px;}
       <div class="cta-stack center">
         <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
         <span class="btn-note">or 3 payments of $367</span>
+        <p class="cta-deadline"><span class="dl-lead js-dl">Enrollment closes Sunday at 11:59 pm MT</span>We begin Tuesday, July 28, and we&rsquo;ll be building this together &mdash; live. Enrollment closes first so the whole cohort starts the same week.</p>
       </div>
     </div>
   </div>
@@ -1941,6 +2040,7 @@ footer .links a{margin:0 12px;}
     <div class="cta-stack center reveal" style="margin-top:clamp(48px,5vw,68px);">
       <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
       <span class="btn-note">or 3 payments of $367</span>
+      <p class="cta-deadline"><span class="dl-lead js-dl">Enrollment closes Sunday at 11:59 pm MT</span>We begin Tuesday, July 28, and we&rsquo;ll be building this together &mdash; live. Enrollment closes first so the whole cohort starts the same week.</p>
     </div>
   </div>
 </section>
@@ -1958,6 +2058,43 @@ footer .links a{margin:0 12px;}
 </footer>
 
 <script>
+// ---- enrollment deadline: Sunday July 26, 2026, 11:59 pm Mountain ----
+// Swaps "Sunday" -> "tomorrow" -> "today" on its own; once the deadline passes
+// the bar and the CTA notes remove themselves rather than declaring the page closed.
+(function(){
+  const DEADLINE = Date.UTC(2026,6,27,5,59,59);   // Jul 26 11:59:59 pm MDT (UTC-6)
+  const CLOSE_DAY = '2026-07-26', PREV_DAY = '2026-07-25';
+  const bar = document.getElementById('deadlineBar');
+  const now = Date.now();
+
+  // "Sunday" -> "tomorrow" (Sat) -> "today" (Sun), judged in Mountain Time
+  function whenFor(ms){
+    if(ms > DEADLINE) return null;
+    try{
+      const day = new Intl.DateTimeFormat('en-CA',{timeZone:'America/Denver',year:'numeric',month:'2-digit',day:'2-digit'}).format(new Date(ms));
+      if(day === CLOSE_DAY) return 'today';
+      if(day === PREV_DAY) return 'tomorrow';
+    }catch(e){}
+    return 'Sunday';
+  }
+  window.__deadlineWhen = whenFor; // so the copy can be spot-checked for any date
+
+  const when = whenFor(now);
+  if(when === null){
+    if(bar) bar.remove();
+    document.querySelectorAll('.cta-deadline').forEach(el=>el.remove());
+  }else{
+    document.querySelectorAll('.js-dl').forEach(el=>{el.textContent = 'Enrollment closes '+when+' at 11:59 pm MT';});
+    document.querySelectorAll('.js-dl-prose').forEach(el=>{el.textContent = 'Enrollment closes '+when+' at 11:59 p.m. Mountain Time.';});
+  }
+
+  // keep the sticky CTA bar and anchor offsets below the deadline bar
+  const setH = ()=>document.documentElement.style.setProperty('--dl-h', (bar && bar.isConnected ? bar.offsetHeight : 0)+'px');
+  setH();
+  addEventListener('resize', setH, {passive:true});
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(setH);
+})();
+
 const params = new URLSearchParams(location.search);
 if(params.has('static')){
   document.querySelectorAll('.reveal').forEach(el=>{el.style.transition='none';el.classList.add('visible');});
