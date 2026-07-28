@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Book Your Business Assessment Call — Jason Moss</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: rgb(48, 59, 51);
+    }
+    img { max-width: 100%; display: block; }
+
+    .page {
+      position: relative;
+      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 2.5rem 1.25rem 3rem;
+      color: #F8F6F2;
+      overflow: visible;
+    }
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgb(40, 54, 47);
+      opacity: 0.64;
+      pointer-events: none;
+    }
+    .page-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .headshot {
+      width: 8.375rem;
+      height: 8.375rem;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.25rem;
+      display: block;
+    }
+
+    .page-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+      color: #F8F6F2;
+      margin: 0 0 1.5rem;
+    }
+    .page-heading em { font-style: italic; }
+    .page-heading .gold { color: #C2A86C; }
+
+    /* -- Letter-style copy -- */
+    .page-copy {
+      max-width: 25.5rem;
+      margin: 0 0 2.5rem;
+      text-align: left;
+    }
+    .page-copy p {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.65rem;
+      color: #E9E2D3;
+      margin: 0 0 1.25rem;
+    }
+    .page-copy p:last-child { margin-bottom: 0; }
+    .page-copy em { font-style: italic; }
+    .page-copy strong { font-weight: 700; color: #F8F6F2; }
+    .call-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+    .call-list li {
+      position: relative;
+      padding-left: 1.625rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.9375rem;
+      line-height: 1.65rem;
+      color: #E9E2D3;
+    }
+    .call-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      color: #C2A86C;
+    }
+
+    /* -- Testimonials -- */
+    .quotes {
+      width: 100%;
+      max-width: 25.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0 0 3rem;
+    }
+    .quote-card {
+      margin: 0;
+      border: 1px solid rgb(78, 92, 78);
+      border-radius: 0.75rem;
+      background: rgb(56, 71, 62);
+      padding: 1.375rem 1.75rem 1.5rem;
+      text-align: left;
+    }
+    .quote-card::before {
+      content: "\201C";
+      display: block;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.75rem;
+      line-height: 1;
+      height: 1.375rem;
+      color: #C2A86C;
+      margin-bottom: 0.625rem;
+    }
+    .quote-card p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: #E9E2D3;
+      margin: 0 0 1rem;
+    }
+    .quote-byline {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .quote-byline img {
+      width: 2.625rem;
+      height: 2.625rem;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #C2A86C;
+    }
+    .quote-card cite {
+      display: block;
+      font-family: 'Raleway', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: #C2A86C;
+      white-space: nowrap;
+    }
+
+    /* -- Booking section -- */
+    .book-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #C2A86C;
+      margin: 0 0 0.5rem;
+    }
+    .book-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.375rem;
+      line-height: 1.85rem;
+      color: #F8F6F2;
+      margin: 0 0 1.5rem;
+      max-width: 24rem;
+    }
+    .calendly-wrap {
+      width: 100%;
+      max-width: 42rem;
+      border: 1px solid rgb(78, 92, 78);
+      border-radius: 0.75rem;
+      background: rgb(56, 71, 62);
+      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.2);
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+    }
+    .calendly-inline-widget {
+      width: 100%;
+      height: 52rem;
+    }
+
+    /* -- Email fallback -- */
+    .alt-time {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.4rem;
+      color: #E9E2D3;
+      margin: 0 0 5rem;
+      max-width: 22rem;
+    }
+    .alt-time a {
+      color: #C2A86C;
+      font-weight: 600;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+    .alt-time a:hover { color: #A7915D; }
+
+    /* -- Footer -- */
+    .page-footer {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.6875rem;
+      line-height: 0.9625rem;
+      color: rgb(61, 75, 68);
+      text-align: center;
+    }
+    .page-footer p { margin: 0; }
+    .page-footer a {
+      color: rgb(61, 75, 68);
+      text-decoration: none;
+    }
+    .page-footer a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .page {
+        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 3.5rem 1.8125rem 4rem;
+      }
+      .page-heading {
+        font-size: 2.1875rem;
+        line-height: 2.625rem;
+        margin-bottom: 1.75rem;
+      }
+      .page-copy {
+        max-width: 34rem;
+        margin-bottom: 3rem;
+      }
+      .page-copy p {
+        font-size: 1.0625rem;
+        line-height: 1.85rem;
+      }
+      .call-list li {
+        font-size: 1.0625rem;
+        line-height: 1.85rem;
+      }
+      /* Desktop: three equal cards, bylines pinned to a shared baseline. */
+      .quotes {
+        max-width: 60rem;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 1.25rem;
+        margin-bottom: 3.5rem;
+      }
+      .quote-card {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        padding: 1.25rem 1.75rem 1.375rem;
+      }
+      .quote-card::before {
+        font-size: 2.5rem;
+        height: 1.25rem;
+        margin-bottom: 0.5rem;
+      }
+      .quote-card p {
+        font-size: 0.875rem;
+        line-height: 1.55rem;
+        margin-bottom: 1rem;
+      }
+      .quote-byline {
+        margin-top: auto;
+      }
+      .book-heading {
+        font-size: 1.5rem;
+        line-height: 2.05rem;
+      }
+      .calendly-inline-widget { height: 61.5rem; }
+      .page-footer {
+        max-width: 40.1875rem;
+        margin: 0 auto;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page">
+    <div class="page-inner">
+      <img src="assets/images/jm-headshot.png" alt="Jason Moss" class="headshot" width="134" height="134">
+      <h1 class="page-heading">You&rsquo;ve seen it. <em><span class="gold">Now what?</span></em></h1>
+
+      <div class="page-copy">
+        <p>If the masterclass landed the way it does for most&hellip; you&rsquo;re probably sitting with something you can&rsquo;t quite unsee.</p>
+        <p>The question is what you do with it.</p>
+        <p>Over the past few years, I&rsquo;ve supported more than a thousand entrepreneurs to attract more clients and grow their businesses &mdash; in a way that feels authentic, and feels like <em>them</em>.</p>
+        <p>If that&rsquo;s what you want &mdash; more clients, more income, more <em>you</em> &mdash; your next step is a <strong>free 15-minute business assessment call</strong>, one-on-one with me.</p>
+        <p>On that call, we&rsquo;ll:</p>
+        <ul class="call-list">
+          <li>Take a closer look at your business together</li>
+          <li>Map out what&rsquo;s possible for you</li>
+          <li>Get clear on what needs to shift for you to start creating it</li>
+        </ul>
+        <p>If it feels like I can help on a deeper level, I&rsquo;ll share what next steps could look like. Either way, you&rsquo;ll walk away with more clarity than you came with.</p>
+      </div>
+
+      <div class="quotes">
+        <blockquote class="quote-card">
+          <p>From $2k to $260k in sales, while cutting my hours in half.</p>
+          <div class="quote-byline">
+            <img src="assets/images/meaghan.jpg" alt="Meaghan Long" width="42" height="42" loading="lazy" decoding="async">
+            <cite>Meaghan Long</cite>
+          </div>
+        </blockquote>
+        <blockquote class="quote-card">
+          <p>Never experienced financial success like this in my life.</p>
+          <div class="quote-byline">
+            <img src="assets/images/zach.png" alt="Zach Bloom" width="42" height="42" loading="lazy" decoding="async">
+            <cite>Zach Bloom</cite>
+          </div>
+        </blockquote>
+        <blockquote class="quote-card">
+          <p>I created a multi-seven-figure business that wasn&rsquo;t in alignment&hellip; Jason is helping me build something that actually feels good.</p>
+          <div class="quote-byline">
+            <img src="assets/images/emily.png" alt="Emily Hill" width="42" height="42" loading="lazy" decoding="async">
+            <cite>Emily Hill</cite>
+          </div>
+        </blockquote>
+      </div>
+
+      <p class="book-label">Free &middot; 15 Minutes &middot; 1-on-1 With Jason</p>
+      <h2 class="book-heading">Choose a time below.</h2>
+
+      <div class="calendly-wrap">
+        <div id="calendlyEmbed" class="calendly-inline-widget"></div>
+      </div>
+
+      <p class="alt-time">Can&rsquo;t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20%E2%80%94%20alternate%20time">Tap here to send me an email</a> and we&rsquo;ll arrange an alternate.</p>
+
+      <div class="page-footer">
+        <p>&copy; Jason Moss LLC. All rights reserved</p>
+        <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+        <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+        <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+        <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Calendly inline embed — themed to match the page, with query-param
+       passthrough so links from email (name/email/utm) prefill the form. -->
+  <script>
+    (function () {
+      var base = 'https://calendly.com/jasonmoss/business-assessment-call-resonance';
+      var qs = new URLSearchParams(window.location.search);
+      var params = new URLSearchParams({
+        hide_gdpr_banner: '1',
+        background_color: '38473e',
+        text_color: 'f8f6f2',
+        primary_color: 'c2a86c'
+      });
+      qs.forEach(function (v, k) { if (!params.has(k)) params.set(k, v); });
+      document.getElementById('calendlyEmbed').setAttribute('data-url', base + '?' + params.toString());
+      var s = document.createElement('script');
+      s.src = 'https://assets.calendly.com/assets/external/widget.js';
+      s.async = true;
+      document.head.appendChild(s);
+    })();
+  </script>
+</body>
+</html>
