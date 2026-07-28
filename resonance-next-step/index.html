@@ -198,7 +198,7 @@
       max-width: 42rem;
       border: 1px solid rgb(78, 92, 78);
       border-radius: 0.75rem;
-      background: rgb(56, 71, 62);
+      background: #F8F6F2;
       box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.2);
       overflow: hidden;
       margin-bottom: 1.75rem;
@@ -373,9 +373,9 @@
       var qs = new URLSearchParams(window.location.search);
       var params = new URLSearchParams({
         hide_gdpr_banner: '1',
-        background_color: '38473e',
-        text_color: 'f8f6f2',
-        primary_color: 'c2a86c'
+        background_color: 'f8f6f2',
+        text_color: '1d1f1e',
+        primary_color: '2c3f36'
       });
       qs.forEach(function (v, k) { if (!params.has(k)) params.set(k, v); });
       document.getElementById('calendlyEmbed').setAttribute('data-url', base + '?' + params.toString());
