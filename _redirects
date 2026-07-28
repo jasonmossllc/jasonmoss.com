@@ -9,8 +9,9 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /zoom         https://us02web.zoom.us/j/5239082694                                            301
 /go           /links                                                                           301
 /go/          /links                                                                           301
-/resonance    /resonance-masterclass-optin2?source=YouTube_Organic                            301
-/resonance-masterclass-optin    /resonance-masterclass-optin2                                  301
+/resonance    /resonance-masterclass-optin?source=YouTube_Organic                             301
+# optin2 retired (archived) -> restored original optin page; old ad/email links still resolve
+/resonance-masterclass-optin2    /resonance-masterclass-optin                                  301
 /clients      https://jasonmoss.com/aligned-client-engine/                                     301
 
 # June 2026 challenge ended — page archived (noindex); old ad/email links still resolve
