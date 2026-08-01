@@ -42,8 +42,9 @@
   // ==============================
   // CONFIG (matches the Wistia script)
   // ==============================
-  // 75% watch time. Overridable ONLY for automated testing via a global set
-  // before this script loads; never set in production (defaults to 0.75).
+  // Watch-time threshold (defaults to 0.75). Overridable per page via
+  // window.JM_TRACK_THRESHOLD set before this script loads — used in production
+  // by the resonance masterclass replay (0.5) and by automated tests.
   var WATCH_THRESHOLD =
     (typeof window !== 'undefined' &&
       typeof window.JM_TRACK_THRESHOLD === 'number' &&

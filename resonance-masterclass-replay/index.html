@@ -320,7 +320,8 @@
     </div>
   </section>
 
-  <!-- Bunny video tracking (75% watch webhook) -->
+  <!-- Bunny video tracking — this funnel fires the watch webhook at 50% (site default is 75%) -->
+  <script>window.JM_TRACK_THRESHOLD = 0.5;</script>
   <script src="/js/bunny-tracking.js" defer></script>
 
   <!-- URL param passthrough for CTA -->
