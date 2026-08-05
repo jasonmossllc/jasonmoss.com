@@ -380,9 +380,11 @@
   @media (max-width:780px){
     section{ padding:78px 0; }
     .hero-main{ padding:44px 24px 30px; }
-    .hero .eyebrow{ font-size:10px; letter-spacing:.2em; line-height:1.8; margin:0 0 20px; }
+    .hero{ min-height:auto; }
+    .hero-main{ flex:none; padding:46px 24px 34px; }
+    .hero .eyebrow{ font-size:9.5px; letter-spacing:.18em; line-height:1.8; margin:0 0 18px; }
     .hero .eyebrow:before, .hero .eyebrow:after{ display:none; }
-    .hero .subhead{ font-size:17px; margin:28px auto 36px; }
+    .hero .subhead{ font-size:17px; margin:26px auto 34px; }
     .tl-row{ gap:12px 26px; }
     .tl-row img{ height:13px; }
     .steps{ grid-template-columns:1fr; gap:34px; margin-top:36px; }
@@ -726,11 +728,29 @@
       }
       quiz.classList.add('open');
       document.body.classList.add('quiz-locked');
-      // No intro screen — every open lands directly on the first
-      // unanswered question (Question 1 for a fresh visitor).
-      if (hasProgress()) resumeNote = true;
-      goToFirstUnanswered();
+      // Fresh visitors get a scene-setting intro card; anyone with saved
+      // progress skips it and resumes on their first unanswered question.
+      if (hasProgress()){
+        resumeNote = true;
+        goToFirstUnanswered();
+      } else {
+        renderIntro();
+      }
       if (!startedFired){ startedFired = true; track('bottleneck_start'); }
+    }
+
+    function renderIntro(){
+      view = 'intro';
+      setProgress('', 0, false);
+      backBtn.hidden = true;
+      swapStep(
+        '<h2>Let’s find your bottleneck.</h2>' +
+        '<p class="qsub">Answer five quick questions and you’ll get a personalized result showing exactly what your #1 business bottleneck is — and what to do about it.</p>' +
+        '<button type="button" class="btn" id="qStart">Start now&nbsp;<span class="arr">→</span></button>'
+      );
+      document.getElementById('qStart').addEventListener('click', function(){
+        goToFirstUnanswered();
+      });
     }
 
     function setProgress(label, frac, show){
@@ -768,7 +788,7 @@
       var html = resumeNoteHtml();
       html += '<h2>' + esc(q.title) + '</h2>';
       if (q.sub) html += '<p class="qsubline">' + esc(q.sub) + '</p>';
-      // Honesty framing lives under the Q1 stem only (no intro screen).
+      // Honesty framing lives under the Q1 stem only.
       html += optsHtml(q.id, q.options);
       swapStep(html);
       bindOpts(q.id);
