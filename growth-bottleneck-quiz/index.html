@@ -174,6 +174,7 @@
   .orn span{
     width:7px; height:7px; background:var(--gold); transform:rotate(45deg); opacity:.9;
   }
+  .hero .eyebrow{ margin:0 0 24px; }
   .hero h1{ text-shadow:0 2px 44px rgba(0,0,0,.4); }
   .hero h1 .l1{ display:block; color:var(--sand); }
   .hero h1 .l2{ display:block; font-style:italic; color:var(--gold); margin-top:10px; }
@@ -198,12 +199,13 @@
   .tl-row img:hover{ opacity:.62; }
 
   @media (prefers-reduced-motion:no-preference){
-    .hero .topbar, .orn, .hero h1, .hero .subhead, .hero-cta, .trustlogos{
+    .hero .topbar, .orn, .hero .eyebrow, .hero h1, .hero .subhead, .hero-cta, .trustlogos{
       opacity:0; transform:translateY(18px);
       animation:rise 1s var(--ease) forwards;
     }
     .hero .topbar{ animation-delay:.05s; }
     .orn{ animation-delay:.15s; }
+    .hero .eyebrow{ animation-delay:.22s; }
     .hero h1{ animation-delay:.28s; }
     .hero .subhead{ animation-delay:.44s; }
     .hero-cta{ animation-delay:.58s; }
@@ -381,6 +383,7 @@
   @media (max-width:780px){
     section{ padding:78px 0; }
     .hero-main{ padding:44px 24px 30px; }
+    .hero .eyebrow{ font-size:10px; letter-spacing:.2em; line-height:1.8; margin:0 0 20px; }
     .hero .subhead{ font-size:17px; margin:28px auto 36px; }
     .tl-row{ gap:12px 26px; }
     .tl-row img{ height:13px; }
@@ -428,11 +431,12 @@
     <div class="hero-main">
       <div class="hero-inner">
         <div class="orn" aria-hidden="true"><span></span></div>
+        <p class="eyebrow">Coaches, consultants and service providers:</p>
         <h1><span class="l1">What’s actually stopping</span><span class="l2">your business from growing?</span></h1>
         <p class="subhead">Find out in 60 seconds or less.</p>
         <div class="hero-cta">
           <button type="button" class="btn" data-quiz-open>Find my bottleneck&nbsp;<span class="arr">→</span></button>
-          <p class="microcta">Completely free.<br class="m-br"> For coaches, consultants, and service providers.</p>
+          <p class="microcta">Completely free. Instant answers.</p>
         </div>
       </div>
     </div>
