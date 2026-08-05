@@ -304,6 +304,13 @@
   .quiz-step{ max-width:704px; width:100%; margin:0 auto; padding-top:clamp(36px,7vh,80px); }
   .quiz-step h2{ margin:0 0 14px; font-size:clamp(25px,3.4vw,36px); }
   .quiz-step .qsub{ color:var(--taupe); font-size:16px; margin:0 0 36px; max-width:56ch; }
+  .qintro{ text-align:center; }
+  .qintro .qsub{ margin-left:auto; margin-right:auto; max-width:46ch; }
+  /* intro card centers in the viewport so the CTA doesn't jump when the overlay opens */
+  .quiz-step.intro{
+    align-self:stretch; display:flex; flex-direction:column; align-items:center;
+    justify-content:center; padding-top:0; padding-bottom:12vh;
+  }
   @media (prefers-reduced-motion:no-preference){
     .quiz-step{ animation:qrise .5s var(--ease) both; }
     @keyframes qrise{ from{ opacity:0; transform:translateY(16px); } to{ opacity:1; transform:none; } }
@@ -744,10 +751,13 @@
       setProgress('', 0, false);
       backBtn.hidden = true;
       swapStep(
+        '<div class="qintro">' +
         '<h2>Let’s find your bottleneck.</h2>' +
         '<p class="qsub">Answer five quick questions and you’ll get a personalized result showing exactly what your #1 business bottleneck is — and what to do about it.</p>' +
-        '<button type="button" class="btn" id="qStart">Start now&nbsp;<span class="arr">→</span></button>'
+        '<button type="button" class="btn" id="qStart">Start now&nbsp;<span class="arr">→</span></button>' +
+        '</div>'
       );
+      stepEl.classList.add('intro');
       document.getElementById('qStart').addEventListener('click', function(){
         goToFirstUnanswered();
       });
@@ -762,6 +772,7 @@
     function swapStep(html){
       // retrigger the entrance animation
       var fresh = stepEl.cloneNode(false);
+      fresh.className = 'quiz-step';   // reset per-screen modifiers (e.g. intro)
       fresh.innerHTML = html;
       stepEl.parentNode.replaceChild(fresh, stepEl);
       stepEl = fresh;
