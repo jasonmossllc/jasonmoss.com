@@ -72,6 +72,7 @@
     font-family:var(--serif); font-style:italic; font-size:clamp(21px,2.6vw,26px);
     line-height:1.5; color:var(--gold); margin-top:34px !important;
   }
+  .lead + .pull{ margin-top:14px !important; }
   .bg-pale .stack p, .bg-warm .stack p{ color:#3a3c3b; }
   .bg-pale .stack p.open, .bg-warm .stack p.open{ color:var(--obsidian); }
 
@@ -149,7 +150,7 @@
   .hero:before{
     content:""; position:absolute; inset:0; pointer-events:none;
     background:
-      radial-gradient(ellipse 70% 45% at 50% 8%, rgba(194,168,108,.13) 0%, transparent 70%),
+      radial-gradient(ellipse 75% 52% at 50% 30%, rgba(194,168,108,.15) 0%, transparent 70%),
       radial-gradient(ellipse 130% 90% at 50% 50%, transparent 58%, rgba(14,16,15,.5) 100%);
   }
   .hero:after{
@@ -165,16 +166,12 @@
     padding:60px 28px 40px;
   }
   .hero-inner{ max-width:900px; }
-  .orn{
-    display:flex; align-items:center; justify-content:center; gap:16px; margin:0 0 38px;
+  .hero .eyebrow{
+    display:flex; align-items:center; justify-content:center; gap:18px; margin:0 0 30px;
   }
-  .orn:before, .orn:after{
-    content:""; width:52px; height:1px; background:rgba(194,168,108,.45);
+  .hero .eyebrow:before, .hero .eyebrow:after{
+    content:""; width:44px; height:1px; background:rgba(194,168,108,.45); flex:none;
   }
-  .orn span{
-    width:7px; height:7px; background:var(--gold); transform:rotate(45deg); opacity:.9;
-  }
-  .hero .eyebrow{ margin:0 0 24px; }
   .hero h1{ text-shadow:0 2px 44px rgba(0,0,0,.4); }
   .hero h1 .l1{ display:block; color:var(--sand); }
   .hero h1 .l2{ display:block; font-style:italic; color:var(--gold); margin-top:10px; }
@@ -199,13 +196,12 @@
   .tl-row img:hover{ opacity:.62; }
 
   @media (prefers-reduced-motion:no-preference){
-    .hero .topbar, .orn, .hero .eyebrow, .hero h1, .hero .subhead, .hero-cta, .trustlogos{
+    .hero .topbar, .hero .eyebrow, .hero h1, .hero .subhead, .hero-cta, .trustlogos{
       opacity:0; transform:translateY(18px);
       animation:rise 1s var(--ease) forwards;
     }
     .hero .topbar{ animation-delay:.05s; }
-    .orn{ animation-delay:.15s; }
-    .hero .eyebrow{ animation-delay:.22s; }
+    .hero .eyebrow{ animation-delay:.15s; }
     .hero h1{ animation-delay:.28s; }
     .hero .subhead{ animation-delay:.44s; }
     .hero-cta{ animation-delay:.58s; }
@@ -384,6 +380,7 @@
     section{ padding:78px 0; }
     .hero-main{ padding:44px 24px 30px; }
     .hero .eyebrow{ font-size:10px; letter-spacing:.2em; line-height:1.8; margin:0 0 20px; }
+    .hero .eyebrow:before, .hero .eyebrow:after{ display:none; }
     .hero .subhead{ font-size:17px; margin:28px auto 36px; }
     .tl-row{ gap:12px 26px; }
     .tl-row img{ height:13px; }
@@ -430,8 +427,7 @@
     <div class="topbar"><img src="assets/logo-light.svg" alt="Jason Moss"></div>
     <div class="hero-main">
       <div class="hero-inner">
-        <div class="orn" aria-hidden="true"><span></span></div>
-        <p class="eyebrow">Coaches, consultants and service providers:</p>
+        <p class="eyebrow">Coaches, consultants and service providers</p>
         <h1><span class="l1">What’s actually stopping</span><span class="l2">your business from growing?</span></h1>
         <p class="subhead">Find out in 60 seconds or less.</p>
         <div class="hero-cta">
@@ -456,13 +452,14 @@
   <section class="bg-forest center glow hairline-b">
     <div class="wrap stack centered reveal">
       <hr class="divider center">
-      <p class="eyebrow">Sound familiar?</p>
+      <p class="eyebrow">The problem</p>
       <h2>If your business isn’t growing the way you want, there’s a reason.</h2>
       <ul class="symptoms">
         <li>Clients come in waves — a great month, then a quiet one.</li>
         <li>You’re working harder than you want to be, for less than you’re worth.</li>
         <li>You’ve tried more content, new offers, new tactics — and nothing has fixed it.</li>
       </ul>
+      <p class="lead" style="font-size:19px; margin:38px 0 0">Here’s why…</p>
       <p class="pull">Every business grows through the same five stages. When even one is off, you’re stuck — no matter how hard you work on the others.</p>
       <p>This diagnostic shows you which one is standing between you and more clients — and what to do about it.</p>
     </div>
