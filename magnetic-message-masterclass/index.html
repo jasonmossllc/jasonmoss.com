@@ -152,8 +152,9 @@ header.top img{height:28px;width:auto;}
 .hero{
   position:relative;
   background:
-    radial-gradient(1000px 560px at 50% -10%, rgba(194,168,108,0.24), rgba(194,168,108,0) 62%),
-    linear-gradient(180deg, rgba(248,246,242,0.88), rgba(248,246,242,0.93)),
+    radial-gradient(1000px 560px at 50% -10%, rgba(194,168,108,0.34), rgba(194,168,108,0) 62%),
+    radial-gradient(900px 480px at 50% 108%, rgba(194,168,108,0.16), rgba(194,168,108,0) 60%),
+    linear-gradient(180deg, rgba(248,246,242,0.84), rgba(248,246,242,0.9)),
     url('assets/section-bg-pale.jpg') top left / 1716px 916px repeat,
     var(--sand);
   padding:clamp(64px,7vw,96px) 0 clamp(60px,6.5vw,84px);
@@ -667,6 +668,82 @@ footer .fine.links a:hover{color:var(--mocha);}
   .optin-modal-heading{margin-bottom:14px;}
 }
 
+/* ── magnetic treatment ─────────────────────────────────────────────
+   The page should feel like a pull, not a pitch: a slow-breathing gold
+   field behind the hero, a shimmer riding the word "Magnetic", CTAs that
+   glow like something charged, and the two competing voices literally
+   converging into one gold line. All CSS/SVG — no libraries. */
+@keyframes auraPulse{0%,100%{opacity:.5;}50%{opacity:.95;}}
+@keyframes auraSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
+@keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
+@keyframes ctaGlow{
+  0%,100%{box-shadow:0 12px 34px -12px rgba(160,135,82,.6), 0 0 0 0 rgba(194,168,108,.38);}
+  50%{box-shadow:0 12px 34px -10px rgba(160,135,82,.8), 0 0 0 16px rgba(194,168,108,0);}
+}
+.hero{overflow:hidden;}
+.hero .wrap{position:relative;z-index:2;}
+.hero-aura{
+  position:absolute;
+  left:50%;top:45%;
+  width:min(1150px,160vw);
+  transform:translate(-50%,-50%);
+  pointer-events:none;
+  z-index:1;
+  animation:auraPulse 7s ease-in-out infinite;
+}
+.hero-aura .aura-dots{transform-origin:400px 400px;animation:auraSpin 70s linear infinite;}
+.hero h1 .title-lead{font-size:clamp(44px,6vw,76px);letter-spacing:-0.015em;}
+.title-lead .mag{
+  font-style:italic;
+  background:linear-gradient(100deg, #A08752 20%, #E7CF92 42%, #C2A86C 58%, #A08752 80%);
+  background-size:220% auto;
+  -webkit-background-clip:text;
+  background-clip:text;
+  color:transparent;
+  animation:shimmer 6.5s linear infinite;
+  padding-right:0.05em;
+}
+.hero h1 .title-rest em{font-style:italic;color:var(--gold-deep);white-space:nowrap;}
+@media (max-width:480px){.hero h1 .title-rest em{white-space:normal;}}
+.hero .host img{
+  box-shadow:
+    0 0 0 6px rgba(194,168,108,0.16),
+    0 0 46px rgba(194,168,108,0.5),
+    0 14px 28px -14px rgba(91,75,63,0.55);
+}
+h2 em{font-style:italic;color:var(--gold-deep);}
+.btn{box-shadow:0 12px 34px -12px rgba(160,135,82,.55);}
+.btn:hover{transform:translateY(-2px) scale(1.015);}
+.btn.pulse{animation:ctaGlow 3.4s ease-in-out infinite;}
+.btn .arr{display:inline-block;margin-left:10px;transition:transform .25s ease;}
+.btn:hover .arr{transform:translateX(5px);}
+.letter .lead-line::after{content:"";display:block;width:52px;height:2px;background:var(--gold);margin-top:18px;}
+.proof-shot{transition:transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .5s ease;}
+.proof-shot:hover{transform:rotate(0deg) scale(1.03);box-shadow:0 34px 62px -30px rgba(91,75,63,0.62);position:relative;z-index:2;}
+.d-card{box-shadow:0 34px 70px -40px rgba(91,75,63,0.55), 0 0 60px -20px rgba(194,168,108,0.35);}
+
+/* two voices converging into one line */
+.converge{position:relative;margin:38px 0 8px;}
+.converge svg{width:100%;height:auto;display:block;}
+.converge .p1,.converge .p2{stroke-dasharray:720;stroke-dashoffset:720;transition:stroke-dashoffset 1.8s cubic-bezier(.22,.61,.36,1) .25s;}
+.converge .merge-dot{opacity:0;transition:opacity .6s ease 1.7s;}
+.converge.visible .p1,.converge.visible .p2{stroke-dashoffset:0;}
+.converge.visible .merge-dot{opacity:1;}
+.converge .lab{
+  position:absolute;
+  font-size:11px;font-weight:600;
+  letter-spacing:0.18em;text-transform:uppercase;
+}
+.converge .l1{top:4%;left:3%;color:var(--taupe);}
+.converge .l2{bottom:4%;left:3%;color:var(--gold-deep);}
+.converge .l3{right:0;top:60%;color:var(--forest);text-align:right;}
+@media (max-width:640px){
+  .converge .lab{font-size:9px;letter-spacing:0.12em;}
+  /* on phones the drifting dots overlap copy and read as stray bullets */
+  .hero-aura .aura-dots{display:none;}
+  .hero-aura{opacity:.7;}
+}
+
 /* responsive */
 @media (max-width:900px){
   .who .wrap{grid-template-columns:1fr;gap:56px;}
@@ -725,18 +802,33 @@ footer .fine.links a:hover{color:var(--mocha);}
 
 <!-- ================= HERO ================= -->
 <section class="hero">
+  <svg class="hero-aura" viewBox="0 0 800 800" aria-hidden="true" fill="none">
+    <g stroke="#C2A86C">
+      <circle cx="400" cy="400" r="150" stroke-opacity="0.30"/>
+      <circle cx="400" cy="400" r="238" stroke-opacity="0.21"/>
+      <circle cx="400" cy="400" r="322" stroke-opacity="0.13"/>
+      <circle cx="400" cy="400" r="396" stroke-opacity="0.07"/>
+    </g>
+    <g class="aura-dots" fill="#A08752">
+      <circle cx="400" cy="162" r="3.5" fill-opacity="0.75"/>
+      <circle cx="618" cy="493" r="2.8" fill-opacity="0.55"/>
+      <circle cx="196" cy="524" r="2.4" fill-opacity="0.5"/>
+      <circle cx="704" cy="298" r="2" fill-opacity="0.4"/>
+      <circle cx="118" cy="286" r="2" fill-opacity="0.4"/>
+    </g>
+  </svg>
   <div class="wrap">
     <div class="host reveal">
       <img src="assets/jm-headshot.png" alt="Jason Moss" width="402" height="402">
     </div>
     <span class="eyebrow lined center reveal">Free Live Masterclass</span>
     <h1 class="reveal">
-      <span class="title-lead">The Magnetic Message</span>
-      <span class="title-rest">How to Talk About Your Work So the Right Clients Can&rsquo;t Help But Buy</span>
+      <span class="title-lead">The <span class="mag">Magnetic</span> Message</span>
+      <span class="title-rest">How to Talk About Your Work So the Right Clients <em>Can&rsquo;t Help But Buy</em></span>
     </h1>
     <p class="sub reveal">A free 60-minute live masterclass with Jason Moss <span class="when"><span class="mc-date">Wednesday, August 19</span> at <span class="mc-time">9:00 a.m. Mountain Time</span></span></p>
     <div class="cta-stack reveal">
-      <a class="btn" href="#optin">Save My Seat &mdash; Free</a>
+      <a class="btn pulse" href="#optin">Save My Seat &mdash; Free<span class="arr">&rarr;</span></a>
     </div>
     <div class="trust-logos reveal">
       <img src="https://jasonmoss.com/assets/logo-forbes-scotland.png" alt="Forbes Scotland" class="lg-forbes" loading="lazy">
@@ -775,7 +867,7 @@ footer .fine.links a:hover{color:var(--mocha);}
 <!-- ================= THE SHIFT ================= -->
 <section class="shift">
   <div class="narrow reveal">
-    <h2>An unclear message is one of the biggest things stopping clients from buying from you.</h2>
+    <h2>An <em>unclear message</em> is one of the biggest things stopping clients from buying from you.</h2>
     <p>And here&rsquo;s the real reason it&rsquo;s happening&hellip;</p>
     <p><strong>There are two parts of you fighting in your marketing.</strong></p>
     <div class="short-stack">
@@ -783,13 +875,23 @@ footer .fine.links a:hover{color:var(--mocha);}
       <p>The other has something real to say.</p>
     </div>
     <p style="margin-top:1.15em;">When either takes over, your business struggles &mdash; you either sound like everyone else, or finally sound like you and the clients you want scroll right past.</p>
+    <div class="converge reveal" aria-hidden="true">
+      <svg viewBox="0 0 640 190" fill="none">
+        <path class="p1" d="M20 34 C 230 34, 330 95, 618 95" stroke="#8C837A" stroke-width="1.5"/>
+        <path class="p2" d="M20 156 C 230 156, 330 95, 618 95" stroke="#C2A86C" stroke-width="1.5"/>
+        <circle class="merge-dot" cx="618" cy="95" r="5" fill="#C2A86C"/>
+      </svg>
+      <span class="lab l1">What your market wants to hear</span>
+      <span class="lab l2">What&rsquo;s real for you</span>
+      <span class="lab l3">Your magnetic message</span>
+    </div>
     <div class="hint">A magnetic message is what happens when you find the balance in between. And inside this masterclass, I&rsquo;ll show you how.</div>
   </div>
   <div class="wrap proof-block reveal">
     <div class="proof-strip">
-      <div class="proof-shot pw-44"><img width="993" height="626" src="assets/proof/andrew-so-easy.jpg" alt="Client messages from Andrew: I just used your sales script and sold a $4800 coaching package! I'm laughing to myself — it was so easy." loading="lazy"></div>
-      <div class="proof-shot pw-35"><img width="363" height="136" src="assets/proof/ariel-consistent.jpg" alt="Client quote: Working with Jason has single-handedly driven the most consistent results I've seen in my business since I started 3 years ago. — Ariel Naftali" loading="lazy"></div>
+      <div class="proof-shot pw-33"><img width="706" height="877" src="assets/proof/emily-50k-launch.jpg" alt="Client messages from Emily: On target for a $50k launch, $40k collected so far — 'I have been hiding big time.'" loading="lazy"></div>
       <div class="proof-shot pw-48"><img width="700" height="190" src="assets/proof/kristina-3x.png" alt="Client post from Kristina: I have earned 14,000€ in the past 3 months — in the 3 months before it was only 4,000€." loading="lazy"></div>
+      <div class="proof-shot pw-35"><img width="363" height="136" src="assets/proof/ariel-consistent.jpg" alt="Client quote: Working with Jason has single-handedly driven the most consistent results I've seen in my business since I started 3 years ago. — Ariel Naftali" loading="lazy"></div>
     </div>
     <div class="proof-cap">From clients across my programs over the years</div>
     <div class="cta-inline">
@@ -833,13 +935,13 @@ footer .fine.links a:hover{color:var(--mocha);}
         <p>This is a working session. You'll leave with real progress on your message &mdash; not just notes.</p>
       </div>
       <div class="cta-stack">
-        <a class="btn green" href="#optin">Save My Seat &mdash; Free</a>
+        <a class="btn green pulse" href="#optin">Save My Seat &mdash; Free<span class="arr">&rarr;</span></a>
       </div>
     </div>
     <div class="proof-block reveal">
       <div class="proof-strip">
-        <div class="proof-shot pw-48"><img width="700" height="155" src="assets/proof/steve-six-month-client.png" alt="Client message from Steve: I've secured my first 6 month client — more than double the price I've charged previously." loading="lazy"></div>
-        <div class="proof-shot pw-35"><img width="460" height="294" src="assets/proof/emma-referral.jpg" alt="Client post: Just sold my first coaching package — a client I worked with 3 years ago recommended me to one of her clients." loading="lazy"></div>
+        <div class="proof-shot pw-33"><img width="562" height="575" src="assets/proof/zach-4x-year.png" alt="Client message from Zach: Best month ever at $25k in December — ended the year at $160k, 4X what I did the year prior." loading="lazy"></div>
+        <div class="proof-shot pw-44"><img width="1000" height="641" src="assets/proof/karuna-15k-month.jpg" alt="Client messages from Karuna: 15k! My biggest month yet. I'm blown away." loading="lazy"></div>
         <div class="proof-shot pw-48"><img width="700" height="336" src="assets/proof/dana-10k-thursday.jpg" alt="Client message from Dana: a $10,000 payment received — 'just another Thursday.'" loading="lazy"></div>
       </div>
       <div class="proof-cap">From clients across my programs over the years</div>
