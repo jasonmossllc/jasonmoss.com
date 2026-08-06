@@ -733,47 +733,33 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 .vc-l{border:1.5px solid rgba(140,131,122,0.55);background:rgba(140,131,122,0.05);margin-right:-14%;}
 .vc-r{border:1.5px solid rgba(194,168,108,0.8);background:rgba(194,168,108,0.07);margin-left:-14%;}
 .vc span{
-  display:block;width:50%;text-align:center;
+  display:block;width:46%;text-align:center;
   font-weight:600;font-size:12.5px;line-height:1.5;
   letter-spacing:0.14em;text-transform:uppercase;
 }
-.vc-l span{margin-left:6%;color:var(--taupe);}
-.vc-r span{margin-left:auto;margin-right:6%;color:var(--gold-deep);}
+.vc-l span{margin-left:7%;color:var(--taupe);}
+.vc-r span{margin-left:auto;margin-right:7%;color:var(--gold-deep);}
 .v-lens{
   position:absolute;left:50%;top:50%;
   transform:translate(-50%,-50%);
   width:27%;height:62%;
   border-radius:50%;
-  background:radial-gradient(closest-side, rgba(194,168,108,0.55), rgba(194,168,108,0) 78%);
+  background:radial-gradient(closest-side, rgba(194,168,108,0.65), rgba(194,168,108,0) 82%);
   animation:auraPulse 5.5s ease-in-out infinite;
   pointer-events:none;
 }
-.venn-caps{position:relative;display:flex;justify-content:space-between;gap:14px;margin-top:16px;}
-.venn-caps .cap{
-  width:44%;margin:0;text-align:center;
-  font-family:var(--serif);font-style:italic;
-  font-size:13.5px;line-height:1.55;color:var(--mocha);
+.venn-merge{text-align:center;margin-top:2px;}
+.venn-merge .v-stem{
+  display:block;width:1.5px;height:30px;
+  background:linear-gradient(180deg, rgba(194,168,108,0.15), var(--gold));
+  margin:0 auto 10px;
 }
-.venn-caps .v-stem{
-  position:absolute;left:50%;top:-30px;bottom:-34px;
-  width:1.5px;background:linear-gradient(180deg, rgba(194,168,108,0), var(--gold));
-  transform:translateX(-50%);
-}
-.venn-merge{text-align:center;margin-top:40px;}
-.venn-merge .v-dot{display:block;width:9px;height:9px;border-radius:50%;background:var(--gold);margin:0 auto 12px;box-shadow:0 0 14px rgba(194,168,108,0.8);}
 .venn-merge .v-label{
   font-family:var(--serif);font-style:italic;
   font-size:clamp(18px,2.2vw,22px);color:var(--forest);margin:0;
 }
-.venn-merge .v-sub{
-  display:block;
-  font-family:var(--sans);font-style:normal;
-  font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;
-  color:var(--gold-deep);margin-top:8px;
-}
 @media (max-width:640px){
   .vc span{font-size:9.5px;letter-spacing:0.1em;}
-  .venn-caps .cap{font-size:12px;}
   /* on phones the drifting dots overlap copy and read as stray bullets */
   .hero-aura .aura-dots{display:none;}
   .hero-aura{opacity:.7;}
@@ -916,14 +902,9 @@ h2 em{font-style:italic;color:var(--gold-deep);}
         <div class="vc vc-r"><span>What&rsquo;s real for you</span></div>
         <div class="v-lens" aria-hidden="true"></div>
       </div>
-      <div class="venn-caps">
-        <p class="cap">alone, you sound like everyone&nbsp;else</p>
-        <span class="v-stem" aria-hidden="true"></span>
-        <p class="cap">alone, the right clients scroll&nbsp;past</p>
-      </div>
       <div class="venn-merge">
-        <span class="v-dot" aria-hidden="true"></span>
-        <p class="v-label">Your magnetic message<span class="v-sub">Where both are true at once</span></p>
+        <span class="v-stem" aria-hidden="true"></span>
+        <p class="v-label">Your magnetic message</p>
       </div>
     </div>
     <div class="hint">A magnetic message is what happens when you find the balance in between. And inside this masterclass, I&rsquo;ll show you how.</div>

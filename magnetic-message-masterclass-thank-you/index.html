@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>You're Registered — The Magnetic Message Masterclass</title>
-<meta name="description" content="Your seat for The Magnetic Message masterclass is saved. Here's what happens next.">
+<meta name="description" content="Your seat for The Magnetic Message masterclass is saved. Two quick things.">
 <meta name="robots" content="noindex">
 <link rel="icon" href="https://jasonmoss.com/assets/images/favicon-32x32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -31,11 +31,11 @@ body{
   font-family:var(--sans);
   font-weight:400;
   font-size:17px;
-  line-height:1.75;
+  line-height:1.7;
   color:var(--obsidian);
   background:
-    radial-gradient(1000px 560px at 50% -10%, rgba(194,168,108,0.22), rgba(194,168,108,0) 62%),
-    linear-gradient(180deg, rgba(248,246,242,0.88), rgba(248,246,242,0.93)),
+    radial-gradient(1000px 560px at 50% -10%, rgba(194,168,108,0.28), rgba(194,168,108,0) 62%),
+    linear-gradient(180deg, rgba(248,246,242,0.86), rgba(248,246,242,0.92)),
     url('/magnetic-message-masterclass/assets/section-bg-pale.jpg') top left / 1716px 916px repeat,
     var(--sand);
   min-height:100vh;
@@ -48,24 +48,31 @@ p{margin-bottom:1.1em;}
 
 header.top{
   background:var(--sand);
-  padding:16px 0;
+  padding:14px 0;
   border-bottom:1px solid rgba(91,75,63,0.14);
 }
 header.top .wrap{display:flex;align-items:center;justify-content:center;}
-header.top img{height:28px;width:auto;}
+header.top img{height:26px;width:auto;}
 
-.confirm{padding:clamp(52px,7vw,84px) 0 clamp(40px,5vw,56px);}
+@keyframes ctaGlow{
+  0%,100%{box-shadow:0 12px 34px -12px rgba(160,135,82,.6), 0 0 0 0 rgba(194,168,108,.38);}
+  50%{box-shadow:0 12px 34px -10px rgba(160,135,82,.8), 0 0 0 14px rgba(194,168,108,0);}
+}
+@keyframes nudge{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* ── compact confirmation ── */
+.confirm{padding:clamp(34px,4.5vw,52px) 0 0;}
 .panel{
   position:relative;
   background:var(--white);
   border:1px solid rgba(91,75,63,0.18);
-  padding:clamp(44px,6vw,64px) clamp(26px,6vw,68px);
-  box-shadow:0 34px 70px -40px rgba(91,75,63,0.55);
+  padding:clamp(30px,4vw,44px) clamp(24px,5vw,56px) clamp(26px,3.5vw,36px);
+  box-shadow:0 30px 60px -38px rgba(91,75,63,0.55);
   text-align:center;
 }
 .panel::before{
   content:"";
-  position:absolute;inset:10px;
+  position:absolute;inset:9px;
   border:1px solid rgba(194,168,108,0.5);
   pointer-events:none;
 }
@@ -73,96 +80,57 @@ header.top img{height:28px;width:auto;}
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:16px;
+  gap:14px;
   font-weight:600;
-  font-size:12px;
-  letter-spacing:0.3em;
+  font-size:11.5px;
+  letter-spacing:0.28em;
   text-transform:uppercase;
   color:var(--gold-deep);
-  margin-bottom:24px;
+  margin-bottom:16px;
 }
-.eyebrow::before,.eyebrow::after{content:"";width:36px;height:1px;background:var(--gold);}
-.panel h1{font-size:clamp(30px,4vw,42px);margin-bottom:14px;}
-.panel .sub{
-  max-width:480px;
-  margin:0 auto 8px;
-  color:var(--ink-soft);
-  font-size:16.5px;
-}
+.eyebrow::before,.eyebrow::after{content:"";width:32px;height:1px;background:var(--gold);}
+.panel h1{font-size:clamp(27px,3.6vw,36px);margin-bottom:10px;}
 .panel .when{
   display:inline-block;
-  margin:14px auto 0;
+  margin:2px auto 20px;
   font-weight:600;
-  font-size:13px;
-  letter-spacing:0.16em;
+  font-size:12.5px;
+  letter-spacing:0.14em;
   text-transform:uppercase;
   color:var(--mocha);
-  border-top:1px solid rgba(194,168,108,0.55);
-  border-bottom:1px solid rgba(194,168,108,0.55);
-  padding:10px 22px;
 }
-.steps{
-  max-width:520px;
-  margin:34px auto 0;
-  text-align:left;
-}
-.step{
-  display:flex;
-  gap:18px;
-  padding:16px 0;
-  border-bottom:1px solid rgba(91,75,63,0.12);
-  align-items:flex-start;
-}
-.step:last-child{border-bottom:0;}
-.step .n{
-  flex:none;
-  width:34px;height:34px;
-  border:1px solid var(--gold);
-  color:var(--gold-deep);
-  font-family:var(--serif);
-  font-style:italic;
-  font-size:17px;
-  display:flex;align-items:center;justify-content:center;
-  margin-top:3px;
-}
-.step p{margin:0;font-size:15.5px;line-height:1.65;color:var(--ink-soft);}
-.step p strong{color:var(--obsidian);font-weight:700;}
 .cal-btn{
   display:inline-block;
-  margin-top:12px;
   background:var(--gold);
   color:var(--obsidian);
   font-weight:600;
-  font-size:11.5px;
+  font-size:13.5px;
   letter-spacing:0.14em;
   text-transform:uppercase;
   text-decoration:none;
-  padding:11px 22px;
-  transition:background .25s ease;
+  padding:17px 38px;
+  transition:background .25s ease, transform .25s ease;
+  animation:ctaGlow 3.4s ease-in-out infinite;
 }
-.cal-btn:hover{background:var(--gold-dark);}
-.jm{
-  margin:38px auto 0;
-  max-width:520px;
-  display:flex;
-  gap:20px;
-  align-items:center;
-  text-align:left;
-  background:var(--sand);
-  border:1px solid rgba(91,75,63,0.14);
-  padding:18px 22px;
+.cal-btn:hover{background:var(--gold-dark);transform:translateY(-2px);}
+.panel .inbox-note{
+  margin:16px 0 0;
+  font-size:13.5px;
+  color:var(--taupe);
 }
-.jm img{
-  flex:none;
-  width:64px;height:64px;
-  object-fit:cover;
-  border-radius:50%;
+.next-cue{
+  margin:22px auto 0;
+  padding-top:16px;
+  border-top:1px solid rgba(91,75,63,0.12);
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:15.5px;
+  color:var(--gold-deep);
 }
-.jm p{margin:0;font-size:14.5px;line-height:1.6;color:var(--ink-soft);}
-.jm p .sig{font-family:var(--serif);font-style:italic;color:var(--obsidian);}
+.next-cue .arrow{display:block;margin-top:4px;font-style:normal;animation:nudge 1.8s ease-in-out infinite;}
 
-/* ── Assessment call invite ── */
-.invite-sec{padding:clamp(20px,3vw,32px) 0 clamp(64px,8vw,96px);}
+/* ── assessment call invite ── */
+.invite-sec{padding:clamp(18px,2.5vw,26px) 0 clamp(56px,7vw,84px);}
 .invite{
   position:relative;
   background:
@@ -170,71 +138,62 @@ header.top img{height:28px;width:auto;}
     url('/magnetic-message-masterclass/assets/section-bg-forest.jpg') top left / 1716px 916px repeat,
     var(--forest);
   border:1px solid rgba(194,168,108,0.35);
-  padding:clamp(44px,6vw,64px) clamp(26px,6vw,68px);
+  padding:clamp(36px,5vw,54px) clamp(24px,5.5vw,60px);
   box-shadow:0 34px 70px -40px rgba(29,31,30,0.75);
   text-align:center;
   color:var(--stone);
 }
 .invite::before{
   content:"";
-  position:absolute;inset:10px;
+  position:absolute;inset:9px;
   border:1px solid rgba(194,168,108,0.4);
   pointer-events:none;
 }
 .invite > *{position:relative;}
-.invite .eyebrow{color:var(--gold);}
+.invite .eyebrow{color:var(--gold);margin-bottom:14px;}
 .invite .eyebrow::before,.invite .eyebrow::after{background:rgba(194,168,108,0.6);}
-.invite h2{font-size:clamp(26px,3.4vw,36px);margin-bottom:22px;color:var(--sand);}
+.invite h2{font-size:clamp(24px,3.2vw,33px);margin-bottom:16px;color:var(--sand);}
+.invite h2 em{font-style:italic;color:var(--gold);}
 .invite .invite-copy{
-  max-width:560px;
-  margin:0 auto;
-  text-align:left;
+  max-width:540px;
+  margin:0 auto 6px;
+  font-size:16px;
+  line-height:1.7;
+  color:rgba(233,226,211,0.92);
 }
-.invite .invite-copy p{font-size:16px;line-height:1.75;color:rgba(233,226,211,0.92);}
-.invite .invite-copy p strong{color:var(--sand);font-weight:700;}
-.invite .invite-copy p em{font-style:italic;}
-.invite .gold-line{
-  font-family:var(--serif);
-  font-style:italic;
-  font-size:clamp(17.5px,2vw,20px);
-  line-height:1.6;
-  color:var(--gold);
-  border-left:2px solid var(--gold);
-  padding-left:20px;
-  margin:24px 0;
-}
+.invite .invite-copy strong{color:var(--sand);font-weight:700;}
 .book-label{
-  margin:30px 0 6px;
+  margin:20px 0 4px;
   font-weight:600;
-  font-size:12px;
+  font-size:11.5px;
   letter-spacing:0.22em;
   text-transform:uppercase;
   color:var(--gold);
 }
 .book-heading{
   font-family:var(--serif);
-  font-size:clamp(21px,2.4vw,26px);
+  font-size:clamp(19px,2.2vw,24px);
   color:var(--sand);
-  margin-bottom:22px;
+  margin-bottom:18px;
 }
 .calendly-wrap{
   max-width:640px;
-  margin:0 auto 20px;
+  margin:0 auto 16px;
   border:1px solid rgba(194,168,108,0.5);
   background:var(--sand);
   box-shadow:0 0 34px rgba(194,168,108,0.18);
   overflow:hidden;
 }
-.calendly-inline-widget{width:100%;height:820px;}
+.calendly-inline-widget{width:100%;height:800px;}
 .alt-time{
-  font-size:13.5px;
+  font-size:13px;
   color:rgba(233,226,211,0.72);
   max-width:400px;
   margin:0 auto;
 }
 .alt-time a{color:var(--gold);}
 
-footer{padding:0 0 44px;}
+footer{padding:0 0 40px;}
 footer .wrap{text-align:center;}
 footer img{height:22px;width:auto;opacity:0.8;}
 footer .fine{font-size:12.5px;color:var(--taupe);margin-top:12px;}
@@ -243,8 +202,8 @@ footer .fine a:hover{color:var(--mocha);}
 
 @media (max-width:640px){
   body{font-size:16px;}
-  .jm{flex-direction:row;}
-  .calendly-inline-widget{height:980px;}
+  .cal-btn{display:block;padding:17px 20px;}
+  .calendly-inline-widget{height:960px;}
 }
 </style>
 </head>
@@ -256,34 +215,19 @@ footer .fine a:hover{color:var(--mocha);}
   </div>
 </header>
 
+<!-- Compact confirmation — deliberately not a "you're done" moment.
+     Priority 1: calendar. Priority 2 (below): book the assessment call. -->
 <section class="confirm">
   <div class="wrap">
     <div class="panel">
-      <span class="eyebrow">Registration Confirmed</span>
-      <h1 id="headline">Your seat is saved.</h1>
-      <p class="sub">You're registered for <strong>The Magnetic Message</strong> &mdash; a free, live 60-minute masterclass on how to talk about your work so the right clients can't help but buy.</p>
-      <span class="when"><span class="mc-date">Wednesday, August 19</span> at <span class="mc-time">9:00 a.m. Mountain Time</span> &middot; Live on Zoom</span>
-
-      <div class="steps">
-        <div class="step">
-          <span class="n">1</span>
-          <p><strong>Add it to your calendar.</strong> Do this first, while it's in front of you. Block off the full 90 minutes &mdash; 60 minutes of teaching, then we'll keep working on real messages afterward. That last part is worth staying for.<br>
-          <a class="cal-btn" href="https://addcal.co/e/9ahw0wmcqzq6" target="_blank" rel="noopener">Add to Calendar</a></p>
-        </div>
-        <div class="step">
-          <span class="n">2</span>
-          <p><strong>Check your inbox.</strong> Your Zoom link is on its way to the email address you registered with. If it hasn't arrived in a few minutes, check your spam or promotions folder.</p>
-        </div>
-        <div class="step">
-          <span class="n">3</span>
-          <p><strong>Come live.</strong> This is a working session &mdash; we'll be working on your message together, in real time. You'll leave with real progress, not just notes... and that only happens live.</p>
-        </div>
+      <span class="eyebrow">Seat Saved &mdash; Two Quick Things</span>
+      <h1 id="headline">You're in.</h1>
+      <span class="when"><span class="mc-date">Wednesday, August 19</span> &middot; <span class="mc-time">9:00 a.m. Mountain Time</span> &middot; Live on Zoom</span>
+      <div>
+        <a class="cal-btn" href="https://addcal.co/e/9ahw0wmcqzq6" target="_blank" rel="noopener">1 &middot; Add It to Your Calendar</a>
       </div>
-
-      <div class="jm">
-        <img src="/magnetic-message-masterclass/assets/jm-headshot.png" alt="Jason Moss">
-        <p>Show up live, bring your work, and you'll leave talking about it in a way the right clients can't ignore. <span class="sig">&mdash; Jason</span></p>
-      </div>
+      <p class="inbox-note">Your Zoom link is on its way to your inbox. Come live &mdash; we'll be working on your message together.</p>
+      <p class="next-cue">Number two is the good part&hellip;<span class="arrow">&darr;</span></p>
     </div>
   </div>
 </section>
@@ -292,18 +236,11 @@ footer .fine a:hover{color:var(--mocha);}
 <section class="invite-sec">
   <div class="wrap">
     <div class="invite">
-      <span class="eyebrow">One More Thing</span>
-      <h2>Don't want to wait until August 19th?</h2>
-      <div class="invite-copy">
-        <p>On the masterclass, I'll show you how to uncover your magnetic message.</p>
-        <p>But here's something I've learned helping over 1,000 entrepreneurs: <strong>the thing you think is holding your business back usually isn't the real thing.</strong> And until you know what is, everything you try &mdash; new content, new offers, new messaging &mdash; is a guess.</p>
-        <p>That's what this call is for.</p>
-        <p>A <strong>free 20-minute business assessment</strong> &mdash; you and me, 1-on-1, on Zoom. We'll look at exactly where your business is right now, find what's actually in the way, and map your fastest path to consistent clients.</p>
-        <div class="gold-line">You'll walk out of 20 minutes knowing precisely what to focus on &mdash; before the masterclass even starts.</div>
-        <p>If it makes sense for us to work together, I'll say so. If it doesn't, I'll tell you that too. Either way, you leave with clarity.</p>
-      </div>
+      <span class="eyebrow">2 &middot; Skip the Line</span>
+      <h2>Want me to look at your business <em>before</em> the masterclass?</h2>
+      <p class="invite-copy">A <strong>free 20-minute assessment call</strong> &mdash; you and me, on Zoom. We'll find what's actually standing between you and consistent clients (it's usually not what you think), and you'll leave knowing exactly what to focus on. If we should work together, I'll say so. If not, I'll tell you that too.</p>
       <p class="book-label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
-      <h3 class="book-heading">Choose a time below.</h3>
+      <h3 class="book-heading">Grab a time below.</h3>
       <div class="calendly-wrap">
         <div id="calendlyEmbed" class="calendly-inline-widget"></div>
       </div>
@@ -339,7 +276,7 @@ footer .fine a:hover{color:var(--mocha);}
     var name = (p.get('first_name') || '').trim();
     if (name && /^[A-Za-z][A-Za-z' -]{0,30}$/.test(name)) {
       var safe = name.charAt(0).toUpperCase() + name.slice(1);
-      document.getElementById('headline').textContent = safe + ", your seat is saved.";
+      document.getElementById('headline').textContent = safe + ", you're in.";
     }
   })();
 
