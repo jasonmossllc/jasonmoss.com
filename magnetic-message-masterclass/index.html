@@ -722,23 +722,58 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 .proof-shot:hover{transform:rotate(0deg) scale(1.03);box-shadow:0 34px 62px -30px rgba(91,75,63,0.62);position:relative;z-index:2;}
 .d-card{box-shadow:0 34px 70px -40px rgba(91,75,63,0.55), 0 0 60px -20px rgba(194,168,108,0.35);}
 
-/* two voices converging into one line */
-.converge{position:relative;margin:38px 0 8px;}
-.converge svg{width:100%;height:auto;display:block;}
-.converge .p1,.converge .p2{stroke-dasharray:720;stroke-dashoffset:720;transition:stroke-dashoffset 1.8s cubic-bezier(.22,.61,.36,1) .25s;}
-.converge .merge-dot{opacity:0;transition:opacity .6s ease 1.7s;}
-.converge.visible .p1,.converge.visible .p2{stroke-dashoffset:0;}
-.converge.visible .merge-dot{opacity:1;}
-.converge .lab{
-  position:absolute;
-  font-size:11px;font-weight:600;
-  letter-spacing:0.18em;text-transform:uppercase;
+/* two voices as overlapping fields — the message lives in the overlap */
+.venn{margin:42px auto 12px;max-width:560px;}
+.venn-circles{position:relative;display:flex;justify-content:center;}
+.vc{
+  width:56%;aspect-ratio:1/1;border-radius:50%;
+  display:flex;align-items:center;
+  position:relative;flex:none;
 }
-.converge .l1{top:4%;left:3%;color:var(--taupe);}
-.converge .l2{bottom:4%;left:3%;color:var(--gold-deep);}
-.converge .l3{right:0;top:60%;color:var(--forest);text-align:right;}
+.vc-l{border:1.5px solid rgba(140,131,122,0.55);background:rgba(140,131,122,0.05);margin-right:-14%;}
+.vc-r{border:1.5px solid rgba(194,168,108,0.8);background:rgba(194,168,108,0.07);margin-left:-14%;}
+.vc span{
+  display:block;width:50%;text-align:center;
+  font-weight:600;font-size:12.5px;line-height:1.5;
+  letter-spacing:0.14em;text-transform:uppercase;
+}
+.vc-l span{margin-left:6%;color:var(--taupe);}
+.vc-r span{margin-left:auto;margin-right:6%;color:var(--gold-deep);}
+.v-lens{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:27%;height:62%;
+  border-radius:50%;
+  background:radial-gradient(closest-side, rgba(194,168,108,0.55), rgba(194,168,108,0) 78%);
+  animation:auraPulse 5.5s ease-in-out infinite;
+  pointer-events:none;
+}
+.venn-caps{position:relative;display:flex;justify-content:space-between;gap:14px;margin-top:16px;}
+.venn-caps .cap{
+  width:44%;margin:0;text-align:center;
+  font-family:var(--serif);font-style:italic;
+  font-size:13.5px;line-height:1.55;color:var(--mocha);
+}
+.venn-caps .v-stem{
+  position:absolute;left:50%;top:-30px;bottom:-34px;
+  width:1.5px;background:linear-gradient(180deg, rgba(194,168,108,0), var(--gold));
+  transform:translateX(-50%);
+}
+.venn-merge{text-align:center;margin-top:40px;}
+.venn-merge .v-dot{display:block;width:9px;height:9px;border-radius:50%;background:var(--gold);margin:0 auto 12px;box-shadow:0 0 14px rgba(194,168,108,0.8);}
+.venn-merge .v-label{
+  font-family:var(--serif);font-style:italic;
+  font-size:clamp(18px,2.2vw,22px);color:var(--forest);margin:0;
+}
+.venn-merge .v-sub{
+  display:block;
+  font-family:var(--sans);font-style:normal;
+  font-size:11px;font-weight:600;letter-spacing:0.22em;text-transform:uppercase;
+  color:var(--gold-deep);margin-top:8px;
+}
 @media (max-width:640px){
-  .converge .lab{font-size:9px;letter-spacing:0.12em;}
+  .vc span{font-size:9.5px;letter-spacing:0.1em;}
+  .venn-caps .cap{font-size:12px;}
   /* on phones the drifting dots overlap copy and read as stray bullets */
   .hero-aura .aura-dots{display:none;}
   .hero-aura{opacity:.7;}
@@ -875,15 +910,21 @@ h2 em{font-style:italic;color:var(--gold-deep);}
       <p>The other has something real to say.</p>
     </div>
     <p style="margin-top:1.15em;">When either takes over, your business struggles &mdash; you either sound like everyone else, or finally sound like you and the clients you want scroll right past.</p>
-    <div class="converge reveal" aria-hidden="true">
-      <svg viewBox="0 0 640 190" fill="none">
-        <path class="p1" d="M20 34 C 230 34, 330 95, 618 95" stroke="#8C837A" stroke-width="1.5"/>
-        <path class="p2" d="M20 156 C 230 156, 330 95, 618 95" stroke="#C2A86C" stroke-width="1.5"/>
-        <circle class="merge-dot" cx="618" cy="95" r="5" fill="#C2A86C"/>
-      </svg>
-      <span class="lab l1">What your market wants to hear</span>
-      <span class="lab l2">What&rsquo;s real for you</span>
-      <span class="lab l3">Your magnetic message</span>
+    <div class="venn reveal">
+      <div class="venn-circles">
+        <div class="vc vc-l"><span>What your market wants to hear</span></div>
+        <div class="vc vc-r"><span>What&rsquo;s real for you</span></div>
+        <div class="v-lens" aria-hidden="true"></div>
+      </div>
+      <div class="venn-caps">
+        <p class="cap">alone, you sound like everyone&nbsp;else</p>
+        <span class="v-stem" aria-hidden="true"></span>
+        <p class="cap">alone, the right clients scroll&nbsp;past</p>
+      </div>
+      <div class="venn-merge">
+        <span class="v-dot" aria-hidden="true"></span>
+        <p class="v-label">Your magnetic message<span class="v-sub">Where both are true at once</span></p>
+      </div>
     </div>
     <div class="hint">A magnetic message is what happens when you find the balance in between. And inside this masterclass, I&rsquo;ll show you how.</div>
   </div>
