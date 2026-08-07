@@ -268,7 +268,6 @@ header.top img{height:28px;width:auto;}
 }
 .letter p{color:var(--ink-soft);}
 .letter .lead-line{font-family:var(--serif);font-size:clamp(22px,2.4vw,28px);color:var(--obsidian);line-height:1.45;margin-bottom:26px;}
-.letter .short-stack p{margin-bottom:0.55em;}
 .letter .closer{
   font-family:var(--serif);
   font-style:italic;
@@ -298,7 +297,6 @@ header.top img{height:28px;width:auto;}
 .shift .narrow{position:relative;}
 .shift h2{max-width:640px;margin-bottom:30px;}
 .shift p{color:var(--ink-soft);}
-.shift .short-stack p{margin-bottom:0.55em;}
 .shift .hint{
   background:var(--white);
   border-left:2px solid var(--gold);
@@ -733,33 +731,34 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 .vc-l{border:1.5px solid rgba(140,131,122,0.55);background:rgba(140,131,122,0.05);margin-right:-14%;}
 .vc-r{border:1.5px solid rgba(194,168,108,0.8);background:rgba(194,168,108,0.07);margin-left:-14%;}
 .vc span{
-  display:block;width:46%;text-align:center;
-  font-weight:600;font-size:12.5px;line-height:1.5;
-  letter-spacing:0.14em;text-transform:uppercase;
+  display:block;width:36%;text-align:center;
+  font-weight:600;font-size:12px;line-height:1.5;
+  letter-spacing:0.12em;text-transform:uppercase;
 }
-.vc-l span{margin-left:7%;color:var(--taupe);}
-.vc-r span{margin-left:auto;margin-right:7%;color:var(--gold-deep);}
+.vc-l span{margin-left:9%;color:var(--taupe);}
+.vc-r span{margin-left:auto;margin-right:9%;color:var(--gold-deep);}
 .v-lens{
   position:absolute;left:50%;top:50%;
   transform:translate(-50%,-50%);
-  width:27%;height:62%;
+  width:30%;height:68%;
   border-radius:50%;
-  background:radial-gradient(closest-side, rgba(194,168,108,0.65), rgba(194,168,108,0) 82%);
+  background:radial-gradient(closest-side, rgba(194,168,108,0.6), rgba(194,168,108,0) 84%);
   animation:auraPulse 5.5s ease-in-out infinite;
   pointer-events:none;
 }
-.venn-merge{text-align:center;margin-top:2px;}
-.venn-merge .v-stem{
-  display:block;width:1.5px;height:30px;
-  background:linear-gradient(180deg, rgba(194,168,108,0.15), var(--gold));
-  margin:0 auto 10px;
-}
-.venn-merge .v-label{
+.v-core{
+  position:absolute;left:50%;top:50%;
+  transform:translate(-50%,-50%);
+  width:24%;
+  text-align:center;
   font-family:var(--serif);font-style:italic;
-  font-size:clamp(18px,2.2vw,22px);color:var(--forest);margin:0;
+  font-size:clamp(15px,2vw,19px);
+  line-height:1.35;
+  color:var(--forest);
 }
 @media (max-width:640px){
-  .vc span{font-size:9.5px;letter-spacing:0.1em;}
+  .vc span{font-size:9px;letter-spacing:0.08em;}
+  .v-core{font-size:12px;}
   /* on phones the drifting dots overlap copy and read as stray bullets */
   .hero-aura .aura-dots{display:none;}
   .hero-aura{opacity:.7;}
@@ -872,11 +871,9 @@ h2 em{font-style:italic;color:var(--gold-deep);}
     <p>You know what you're "supposed" to say &mdash; the hooks, the pain points, the stuff that converts.</p>
     <p>But it feels hollow. Like a costume. And it sounds like everyone else.</p>
     <p>So you delete it and write what you actually believe.</p>
-    <div class="short-stack">
-      <p>Share from your heart.</p>
-      <p>Post what feels real.</p>
-    </div>
-    <p style="margin-top:1.15em;">And then... crickets.</p>
+    <p>Share from your heart.</p>
+    <p>Post what feels real.</p>
+    <p>And then... crickets.</p>
     <p>Or worse, people who comment and tell you how inspiring you are &mdash; but never buy anything.</p>
     <p class="closer">After helping over 1,000 entrepreneurs, here&rsquo;s what I&rsquo;ve discovered&hellip;</p>
     <div class="cta-inline">
@@ -891,20 +888,15 @@ h2 em{font-style:italic;color:var(--gold-deep);}
     <h2>An <em>unclear message</em> is one of the biggest things stopping clients from buying from you.</h2>
     <p>And here&rsquo;s the real reason it&rsquo;s happening&hellip;</p>
     <p><strong>There are two parts of you fighting in your marketing.</strong></p>
-    <div class="short-stack">
-      <p>One knows what your market wants to hear.</p>
-      <p>The other has something real to say.</p>
-    </div>
-    <p style="margin-top:1.15em;">When either takes over, your business struggles &mdash; you either sound like everyone else, or finally sound like you and the clients you want scroll right past.</p>
+    <p>One knows what your market wants to hear.</p>
+    <p>The other has something real to say.</p>
+    <p>When either takes over, your business struggles &mdash; you either sound like everyone else, or finally sound like you and the clients you want scroll right past.</p>
     <div class="venn reveal">
       <div class="venn-circles">
         <div class="vc vc-l"><span>What your market wants to hear</span></div>
         <div class="vc vc-r"><span>What&rsquo;s real for you</span></div>
         <div class="v-lens" aria-hidden="true"></div>
-      </div>
-      <div class="venn-merge">
-        <span class="v-stem" aria-hidden="true"></span>
-        <p class="v-label">Your magnetic message</p>
+        <span class="v-core">Your magnetic message</span>
       </div>
     </div>
     <div class="hint">A magnetic message is what happens when you find the balance in between. And inside this masterclass, I&rsquo;ll show you how.</div>

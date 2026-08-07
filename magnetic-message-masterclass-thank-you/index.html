@@ -204,6 +204,15 @@ footer .fine a:hover{color:var(--mocha);}
   body{font-size:16px;}
   .cal-btn{display:block;padding:17px 20px;}
   .calendly-inline-widget{height:960px;}
+  /* date chip: one item per line */
+  .panel .when .sep{display:none;}
+  .panel .when .mc-date,
+  .panel .when .mc-time,
+  .panel .when .loz{display:block;line-height:1.9;}
+  /* inbox note: sentence per line */
+  .inbox-note .n1,
+  .inbox-note .n2{display:block;}
+  .inbox-note .n2{margin-top:4px;}
 }
 </style>
 </head>
@@ -222,11 +231,11 @@ footer .fine a:hover{color:var(--mocha);}
     <div class="panel">
       <span class="eyebrow">Seat Saved &mdash; Two Quick Things</span>
       <h1 id="headline">You're in.</h1>
-      <span class="when"><span class="mc-date">Wednesday, August 19</span> &middot; <span class="mc-time">9:00 a.m. Mountain Time</span> &middot; Live on Zoom</span>
+      <span class="when"><span class="mc-date">Wednesday, August 19</span><span class="sep"> &middot; </span><span class="mc-time">9:00 a.m. Mountain Time</span><span class="sep"> &middot; </span><span class="loz">Live on Zoom</span></span>
       <div>
         <a class="cal-btn" href="https://addcal.co/e/9ahw0wmcqzq6" target="_blank" rel="noopener">1 &middot; Add It to Your Calendar</a>
       </div>
-      <p class="inbox-note">Your Zoom link is on its way to your inbox. Come live &mdash; we'll be working on your message together.</p>
+      <p class="inbox-note"><span class="n1">Your Zoom link is on its way to your inbox.</span> <span class="n2">Come live &mdash; we'll be working on your message together.</span></p>
       <p class="next-cue">Number two is the good part&hellip;<span class="arrow">&darr;</span></p>
     </div>
   </div>
