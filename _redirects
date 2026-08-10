@@ -27,3 +27,6 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /bottleneck   /growth-bottleneck-quiz/?source=YouTube_Organic&ad=Growth_Bottleneck_Quiz 301
 /bottleneck/  /growth-bottleneck-quiz/?source=YouTube_Organic&ad=Growth_Bottleneck_Quiz 301
 /bottleneck/* /growth-bottleneck-quiz/:splat 301
+
+/ai-conversation-coach   https://chatgpt.com/g/g-6a7a41a9e048819188e7db5ae757a880-ai-conversation-coach-by-jason-moss   301
+/ai-conversation-coach/  https://chatgpt.com/g/g-6a7a41a9e048819188e7db5ae757a880-ai-conversation-coach-by-jason-moss   301
