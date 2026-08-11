@@ -81,7 +81,7 @@
     text-align: center;
     padding: 22px 24px 10px;
   }
-  .hero__logo { display: inline-block; width: 84px; height: auto; margin-bottom: 22px; }
+  .hero__logo { display: inline-block; width: 120px; height: auto; margin-bottom: 22px; }
   .hero__logo img { width: 100%; height: auto; }
   .hero__eyebrow {
     font-weight: 600;
@@ -98,6 +98,7 @@
     margin: 0 auto 14px;
     line-height: 1.28;
   }
+  .hero__subhead .nowrap { white-space: nowrap; }
   .hero__subhead {
     font-size: 16px;
     color: var(--earth-mocha-brown);
@@ -223,7 +224,7 @@
     align-items: center;
     justify-content: center;
     gap: 44px;
-    max-width: 620px;
+    max-width: 780px;
     margin: 0 auto;
     opacity: 0.45;
     flex-wrap: wrap;
@@ -319,9 +320,10 @@
 
   @media (max-width: 760px) {
     .hero { padding: 14px 16px 8px; }
-    .hero__logo { width: 70px; margin-bottom: 14px; }
+    .hero__logo { width: 96px; margin-bottom: 14px; }
     .hero__headline { font-size: 24px; margin-bottom: 10px; }
     .hero__subhead { font-size: 14px; margin-bottom: 18px; }
+    .hero__subhead .nowrap { white-space: normal; }
     .optin-panel::after { display: none; }
     .optin-panel__grid { grid-template-columns: 1fr; }
     /* Form first on mobile; cover follows inside the same framed panel */
@@ -354,8 +356,8 @@
     </div>
 
     <p class="hero__eyebrow">Free Guide for Coaches</p>
-    <h1 class="hero__headline">You&rsquo;re a great coach. Let&rsquo;s get you more clients.</h1>
-    <p class="hero__subhead">My free 4-step roadmap for signing 2 &ndash; 4 new clients every month &mdash; the same one I used to generate over $1&nbsp;million in sales as a coach. No fancy funnels. No dancing on reels. No DMing strangers.</p>
+    <h1 class="hero__headline">You&rsquo;re a great coach.<br>Let&rsquo;s get you more clients.</h1>
+    <p class="hero__subhead">My free 4-step roadmap for signing 2 &ndash; 4 new clients every month &mdash; the same one I used to generate over $1&nbsp;million in sales as a coach.<br><span class="nowrap">No fancy funnels. No dancing on reels. No DMing strangers.</span></p>
 
     <div class="optin-panel">
       <div class="optin-panel__grid">
