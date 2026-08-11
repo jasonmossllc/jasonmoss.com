@@ -1,239 +1,370 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>Get More Coaching Clients — Free Guide</title>
-  <meta name="description" content="Download the free Get More Clients Guide and discover a simple 4-step roadmap to sign 2 - 4 new coaching clients every month.">
-  <link rel="icon" href="/favicon.ico" sizes="48x48">
-  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:300,400,500,600,700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --obsidian: #1D1F1E;
-      --forest: #2C3F36;
-      --mocha: #5B4B3F;
-      --taupe: #8C837A;
-      --gold: #C2A86C;
-      --warm-stone: #E9E2D3;
-      --pale-sand: #F8F6F2;
-      --serif: 'Libre Baskerville', serif;
-      --sans: 'Raleway', sans-serif;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    body {
-      font-family: var(--sans);
-      color: var(--obsidian);
-      background: var(--pale-sand);
-    }
-    img { max-width: 100%; display: block; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Get More Coaching Clients — Free Guide</title>
+<meta name="description" content="Download the free Get More Clients Guide and discover a simple 4-step roadmap to sign 2 - 4 new coaching clients every month.">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal-obsidian: #1D1F1E;
+    --deep-forest-green: #2C3F36;
+    --earth-mocha-brown: #5B4B3F;
+    --slate-taupe: #8C837A;
+    --muted-gold: #C2A86C;
+    --warm-stone: #E9E2D3;
+    --pale-sand: #F8F6F2;
+    --font-headline: 'Libre Baskerville', Georgia, serif;
+    --font-body: 'Raleway', 'Helvetica Neue', sans-serif;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-    /* ── Hero ─────────────────────────────────────── */
-    .hero {
-      background:
-        radial-gradient(1100px 520px at 82% -10%, rgba(194, 168, 108, 0.16), rgba(194, 168, 108, 0) 60%),
-        linear-gradient(180deg, var(--warm-stone) 0%, var(--pale-sand) 72%);
-      border-bottom: 1px solid rgba(29, 31, 30, 0.07);
-    }
-    .hero-inner {
-      max-width: 68.75rem;
-      margin: 0 auto;
-      padding: 3.5rem 1.5rem 4.25rem;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
-      gap: 3.5rem;
-      align-items: center;
-    }
-    .hero-copy { max-width: 34rem; }
-    .kicker {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--mocha);
-      margin: 0 0 1.5rem;
-    }
-    .kicker::after {
-      content: '';
-      display: block;
-      width: 3rem;
-      height: 1px;
-      background: rgba(194, 168, 108, 0.85);
-      margin-top: 1.05rem;
-    }
-    h1 {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: 2.75rem;
-      line-height: 1.22;
-      margin: 0 0 1.1rem;
-    }
-    .subheading {
-      font-family: var(--serif);
-      font-size: 1.25rem;
-      line-height: 1.6;
-      color: var(--forest);
-      margin: 0 0 1.5rem;
-    }
-    .lead {
-      font-size: 1.0625rem;
-      line-height: 1.7;
-      color: rgba(29, 31, 30, 0.82);
-      margin: 0 0 1.75rem;
-    }
-    .bullets {
-      list-style: none;
-      margin: 0 0 2.25rem;
-      padding: 0;
-    }
-    .bullets li {
-      position: relative;
-      padding-left: 1.75rem;
-      margin-bottom: 0.85rem;
-      font-size: 1rem;
-      line-height: 1.6;
-      color: rgba(29, 31, 30, 0.85);
-    }
-    .bullets li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.62em;
-      width: 0.85rem;
-      height: 1px;
-      background: var(--gold);
-    }
-    .bullets strong { font-weight: 600; color: var(--obsidian); }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* ── Form ─────────────────────────────────────── */
-    .optin-card {
-      background: #FFFFFF;
-      border: 1px solid rgba(29, 31, 30, 0.1);
-      box-shadow: 0 18px 44px rgba(29, 31, 30, 0.09);
-      padding: 1.75rem 1.75rem 1.5rem;
-      max-width: 27rem;
-    }
-    .optin-card-title {
-      font-weight: 600;
-      font-size: 1rem;
-      margin: 0 0 1.1rem;
-      color: var(--obsidian);
-    }
-    .form-input {
-      width: 100%;
-      font-family: var(--sans);
-      font-size: 1rem;
-      color: var(--obsidian);
-      background: var(--pale-sand);
-      border: 1px solid rgba(29, 31, 30, 0.18);
-      padding: 0.9rem 1rem;
-      margin-bottom: 0.85rem;
-      border-radius: 0;
-      -webkit-appearance: none;
-    }
-    .form-input:focus {
-      outline: none;
-      border-color: var(--gold);
-      box-shadow: 0 0 0 3px rgba(194, 168, 108, 0.22);
-    }
-    .form-btn {
-      width: 100%;
-      font-family: var(--sans);
-      font-weight: 600;
-      font-size: 1rem;
-      letter-spacing: 0.02em;
-      color: var(--obsidian);
-      background: var(--gold);
-      border: none;
-      border-radius: 0;
-      padding: 1.05rem 1.25rem;
-      cursor: pointer;
-      transition: background 0.2s ease, transform 0.2s ease;
-    }
-    .form-btn:hover { background: #b89a5e; transform: translateY(-1px); }
-    .form-note {
-      font-size: 0.8125rem;
-      color: var(--taupe);
-      text-align: center;
-      margin: 0.9rem 0 0;
-      line-height: 1.5;
-    }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
-    /* ── Cover ────────────────────────────────────── */
-    .hero-cover { justify-self: center; }
-    .hero-cover img {
-      width: 100%;
-      max-width: 21.5rem;
-      border: 1px solid rgba(29, 31, 30, 0.08);
-      box-shadow: 0 26px 60px rgba(29, 31, 30, 0.22);
-    }
+  body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--charcoal-obsidian);
+    background-color: var(--pale-sand);
+  }
 
-    /* ── Footer ───────────────────────────────────── */
-    footer {
-      padding: 3rem 1.5rem 3.5rem;
-      text-align: center;
-    }
-    .foot-rule {
-      width: 3.5rem;
-      height: 1px;
-      background: rgba(194, 168, 108, 0.6);
-      margin: 0 auto 1.75rem;
-    }
-    footer img { width: 6.25rem; margin: 0 auto 1.25rem; }
-    .fine {
-      font-size: 0.8125rem;
-      color: var(--taupe);
-      line-height: 1.7;
-    }
-    .fine.links a {
-      color: var(--taupe);
-      text-decoration: none;
-      margin: 0 0.6rem;
-    }
-    .fine.links a:hover { color: var(--mocha); }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; text-decoration: none; }
 
-    @media (max-width: 860px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        gap: 2.5rem;
-        padding: 2.75rem 1.25rem 3.5rem;
-        text-align: center;
-      }
-      .hero-copy { max-width: 32rem; margin: 0 auto; }
-      .kicker::after { margin-left: auto; margin-right: auto; }
-      h1 { font-size: 2.1rem; }
-      .subheading { font-size: 1.125rem; }
-      .bullets { text-align: left; max-width: 26rem; margin-left: auto; margin-right: auto; }
-      .hero-cover { grid-row: 2; }
-      .hero-cover img { max-width: 16.5rem; }
-      .optin-card { margin: 0 auto; }
-    }
-  </style>
+  h1, h2 { font-family: var(--font-headline); font-weight: 400; line-height: 1.3; }
+
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--muted-gold);
+    color: var(--charcoal-obsidian);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.25s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+    text-align: center;
+  }
+  .btn-primary:hover {
+    background-color: #b89a5e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(194, 168, 108, 0.25);
+  }
+
+  /* ========================================
+     Hero — continuous pale texture with trust logos
+     ======================================== */
+  .bg-pale {
+    background:
+      linear-gradient(180deg, rgba(248, 246, 242, 0.80), rgba(248, 246, 242, 0.90)),
+      url('assets/section-bg-pale.jpg') center / cover no-repeat,
+      var(--pale-sand);
+  }
+  .hero {
+    background: transparent;
+    text-align: center;
+    padding: 48px 24px 24px;
+  }
+  .hero__logo { display: inline-block; width: 140px; height: auto; margin-bottom: 48px; }
+  .hero__logo img { width: 100%; height: auto; }
+  .hero__eyebrow {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a8905a;
+    margin-bottom: 20px;
+  }
+  .hero__headline {
+    font-size: 44px;
+    color: var(--charcoal-obsidian);
+    max-width: 780px;
+    margin: 0 auto 26px;
+    line-height: 1.28;
+  }
+  .hero__headline em { font-style: italic; display: block; margin-top: 6px; }
+  .hero__subhead {
+    font-size: 17px;
+    color: var(--earth-mocha-brown);
+    max-width: 620px;
+    margin: 0 auto 44px;
+    line-height: 1.75;
+  }
+
+  /* Framed guide panel: cover + form in one gold-framed card */
+  .optin-panel {
+    max-width: 780px;
+    margin: 0 auto 14px;
+    padding: 8px;
+    border: 1px solid rgba(194, 168, 108, 0.45);
+    background: rgba(248, 246, 242, 0.75);
+    box-shadow: 0 18px 60px rgba(29, 31, 30, 0.14);
+    position: relative;
+    text-align: left;
+  }
+  .optin-panel::after {
+    content: '';
+    position: absolute;
+    top: 14px;
+    left: 14px;
+    right: -14px;
+    bottom: -14px;
+    border-right: 1px solid rgba(194, 168, 108, 0.45);
+    border-bottom: 1px solid rgba(194, 168, 108, 0.45);
+    pointer-events: none;
+  }
+  .optin-panel__grid {
+    display: grid;
+    grid-template-columns: 300px minmax(0, 1fr);
+    background: var(--pale-sand);
+  }
+  .optin-panel__cover {
+    background:
+      linear-gradient(160deg, rgba(44, 63, 54, 0.92), rgba(29, 31, 30, 0.94)),
+      url('assets/section-bg-warm.jpg') center / cover no-repeat,
+      var(--deep-forest-green);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 34px 26px;
+  }
+  .optin-panel__cover img {
+    width: 100%;
+    max-width: 232px;
+    box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
+    border: 1px solid rgba(248, 246, 242, 0.18);
+  }
+  .optin-panel__form { padding: 36px 38px 32px; }
+  .optin-panel__form-title {
+    font-family: var(--font-headline);
+    font-size: 21px;
+    line-height: 1.45;
+    margin-bottom: 8px;
+  }
+  .optin-panel__form-sub {
+    font-size: 14px;
+    color: var(--earth-mocha-brown);
+    margin-bottom: 24px;
+  }
+  .form-input {
+    width: 100%;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--charcoal-obsidian);
+    background: #FFFFFF;
+    border: 1px solid rgba(29, 31, 30, 0.16);
+    padding: 15px 16px;
+    margin-bottom: 12px;
+    border-radius: 0;
+    -webkit-appearance: none;
+    transition: border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+  }
+  .form-input:focus {
+    outline: none;
+    border-color: var(--muted-gold);
+    box-shadow: 0 0 0 3px rgba(194, 168, 108, 0.2);
+  }
+  .form-btn {
+    width: 100%;
+    background-color: var(--muted-gold);
+    color: var(--charcoal-obsidian);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 17px 24px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.25s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+  }
+  .form-btn:hover {
+    background-color: #b89a5e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(194, 168, 108, 0.25);
+  }
+  .optin-panel__note {
+    font-size: 12.5px;
+    color: var(--slate-taupe);
+    margin-top: 12px;
+    text-align: center;
+  }
+  .hero__cta-micro { font-size: 13px; color: var(--slate-taupe); margin-top: 18px; }
+
+  /* Trust Logos */
+  .trust-logos { background: transparent; padding: 44px 24px 48px; text-align: center; }
+  .trust-logos__label {
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--slate-taupe);
+    margin-bottom: 20px;
+    opacity: 0.7;
+  }
+  .trust-logos__row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 44px;
+    max-width: 620px;
+    margin: 0 auto;
+    opacity: 0.45;
+    flex-wrap: wrap;
+  }
+  .trust-logos__row img { height: 22px; width: auto; object-fit: contain; filter: grayscale(100%); }
+
+  /* ========================================
+     Letter — what's inside, in Jason's voice
+     ======================================== */
+  .letter {
+    background:
+      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
+      url('assets/section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone);
+    padding: 132px 24px 96px;
+  }
+  .letter__inner {
+    max-width: 660px;
+    margin: 0 auto;
+    background: var(--pale-sand);
+    border-top: 2px solid var(--muted-gold);
+    box-shadow: 0 18px 60px rgba(29, 31, 30, 0.10);
+    padding: 0 64px 56px;
+  }
+  .letter__headshot {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: -55px auto 30px;
+    padding: 4px;
+    border: 1px solid rgba(194, 168, 108, 0.55);
+    box-shadow: 0 8px 28px rgba(29, 31, 30, 0.14);
+    background: var(--pale-sand);
+    display: block;
+  }
+  .letter__inner h2 { font-size: 28px; text-align: center; margin-bottom: 36px; }
+  .letter__inner p {
+    font-family: var(--font-headline);
+    font-size: 16px;
+    line-height: 1.85;
+    margin-bottom: 22px;
+  }
+  .letter__inner p strong { font-weight: 700; }
+  .letter__inner p em { font-style: italic; }
+  .call-list {
+    list-style: none;
+    margin: 0 0 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .call-list li {
+    position: relative;
+    padding-left: 30px;
+    font-family: var(--font-headline);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .call-list li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--muted-gold);
+  }
+  .letter__signature {
+    font-family: var(--font-headline);
+    font-style: italic;
+    font-size: 19px;
+    margin: 30px 0 0;
+  }
+  .letter__cta { text-align: center; margin-top: 40px; }
+  .letter__cta p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--earth-mocha-brown);
+    margin: 14px 0 0;
+  }
+
+  /* Footer */
+  .site-footer { background-color: var(--charcoal-obsidian); padding: 48px 24px; text-align: center; }
+  .site-footer__divider {
+    width: 100%;
+    max-width: 160px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(194, 168, 108, 0.25), transparent);
+    margin: 0 auto 44px;
+  }
+  .site-footer__logo { display: inline-block; width: 100px; margin-bottom: 24px; opacity: 0.5; }
+  .site-footer__logo img { width: 100%; height: auto; }
+  .site-footer__copy { font-size: 12px; color: rgba(140, 131, 122, 0.5); margin-bottom: 12px; }
+  .site-footer__links { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .site-footer__links a { font-size: 12px; color: rgba(140, 131, 122, 0.5); transition: color 0.25s var(--ease-out); }
+  .site-footer__links a:hover { color: var(--pale-sand); }
+  .site-footer__links span { font-size: 12px; color: rgba(140, 131, 122, 0.3); }
+
+  @media (max-width: 760px) {
+    .hero { padding: 36px 20px 20px; }
+    .hero__logo { margin-bottom: 36px; }
+    .hero__headline { font-size: 29px; }
+    .hero__subhead { font-size: 15.5px; margin-bottom: 34px; }
+    .optin-panel::after { display: none; }
+    .optin-panel__grid { grid-template-columns: 1fr; }
+    .optin-panel__cover { padding: 30px 24px; }
+    .optin-panel__cover img { max-width: 190px; }
+    .optin-panel__form { padding: 28px 22px 26px; }
+    .trust-logos__row { gap: 26px; }
+    .trust-logos__row img { height: 18px; }
+    .letter { padding: 110px 16px 72px; }
+    .letter__inner { padding: 0 26px 44px; }
+    .letter__inner h2 { font-size: 23px; }
+  }
+</style>
 </head>
 <body>
 
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-copy">
-        <p class="kicker">Free guide for coaches</p>
-        <h1>Get More Coaching&nbsp;Clients</h1>
-        <p class="subheading">Sign 2 &ndash; 4 new clients every month &mdash; without fancy funnels or spending all day on social media.</p>
-        <p class="lead">Ready to start signing high-paying coaching clients? Download my free Get More Clients Guide and discover the simple 4-step roadmap I used to generate over $1 million in sales as a coach.</p>
-        <ul class="bullets">
-          <li><strong>Get clarity on your niche</strong> &mdash; the foundation that makes everything else easier</li>
-          <li><strong>Build an irresistible, high-ticket offer</strong> your ideal clients actually want</li>
-          <li><strong>Grow an audience</strong> filled with people who are a perfect fit to work with you</li>
-          <li><strong>Turn leads into clients</strong> with an enrollment process that never feels pushy</li>
-        </ul>
+  <div class="bg-pale">
 
-        <div class="optin-card">
-          <p class="optin-card-title">Enter your name and email and I&rsquo;ll send it right over:</p>
+  <!-- Hero -->
+  <section class="hero" id="get-the-guide">
+    <div class="hero__logo" aria-label="Jason Moss">
+      <img src="assets/logo.svg" alt="Jason Moss">
+    </div>
+
+    <p class="hero__eyebrow">Free Guide for Coaches</p>
+    <h1 class="hero__headline">Get more coaching clients &mdash;<br><em>sign 2 &ndash; 4 new clients every month.</em></h1>
+
+    <p class="hero__subhead">Download my free Get More Clients Guide and discover the simple 4-step roadmap I used to generate over $1 million in sales as a coach &mdash; without fancy funnels or spending all day on social media.</p>
+
+    <div class="optin-panel">
+      <div class="optin-panel__grid">
+        <div class="optin-panel__cover">
+          <img src="assets/guide-cover.jpg" srcset="assets/guide-cover-sm.jpg 360w, assets/guide-cover.jpg 720w" sizes="232px" alt="The Get More Clients Guide" width="720" height="1019">
+        </div>
+        <div class="optin-panel__form">
+          <p class="optin-panel__form-title">Ready to start signing high&#8209;paying coaching clients?</p>
+          <p class="optin-panel__form-sub">Enter your name and email and I&rsquo;ll send the guide right over:</p>
           <form class="optin-form email-form" novalidate>
             <input type="text" name="First Name" class="form-input" placeholder="First Name" required aria-required="true">
             <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
@@ -243,25 +374,62 @@
             <div id="cf-turnstile-box" style="margin:0 auto;display:flex;align-items:center;justify-content:center;max-width:100%;"></div>
             <button type="submit" class="form-btn">Download The Free Guide</button>
           </form>
-          <p class="form-note">Free instant download. No spam &mdash; unsubscribe anytime.</p>
+          <p class="optin-panel__note">Free instant download. No spam &mdash; unsubscribe anytime.</p>
         </div>
       </div>
+    </div>
+    <p class="hero__cta-micro">Free &middot; 20 pages &middot; Takes 10 seconds to get</p>
+  </section>
 
-      <div class="hero-cover">
-        <img src="assets/guide-cover.jpg" srcset="assets/guide-cover-sm.jpg 360w, assets/guide-cover.jpg 720w" sizes="(max-width: 860px) 264px, 344px" alt="Get More Coaching Clients — free guide by Jason Moss" width="720" height="1019">
+  <!-- Trust Logos -->
+  <div class="trust-logos">
+    <p class="trust-logos__label">As Seen In</p>
+    <div class="trust-logos__row">
+      <img src="assets/logo-forbes-scotland.png" alt="Forbes">
+      <img src="assets/logo-business-insider.png" alt="Business Insider">
+      <img src="assets/logo-obo.png" alt="Online Business Owner">
+      <img src="assets/logo-entrepreneur.png" alt="Entrepreneur">
+      <img src="assets/logo-fast-company-sa.png" alt="Fast Company">
+    </div>
+  </div>
+
+  </div><!-- /.bg-pale -->
+
+  <!-- Letter: what's inside -->
+  <section class="letter">
+    <div class="letter__inner">
+      <img src="assets/jm-headshot.png" alt="Jason Moss" class="letter__headshot" width="110" height="110">
+      <h2>Getting clients isn&rsquo;t as complicated as it might seem.</h2>
+      <p>My first few years as a coach weren&rsquo;t easy &mdash; I made $4,728 my first year. But after years of trial and error, I realized attracting clients comes down to <strong>four simple steps</strong>.</p>
+      <p>Those four steps became the roadmap I used to generate over $1 million in sales as a coach &mdash; and they&rsquo;re the same steps I&rsquo;ve now shared with thousands of other coaches.</p>
+      <p>Inside this free guide, I&rsquo;ll walk you through each one:</p>
+      <ul class="call-list">
+        <li><strong>Get clarity on your niche</strong> &mdash; the foundation of your business</li>
+        <li><strong>Build an irresistible, high-ticket offer</strong> your ideal clients actually want</li>
+        <li><strong>Grow an audience</strong> filled with people who are a perfect fit to work with you</li>
+        <li><strong>Turn leads into clients</strong> with an enrollment process that never feels pushy</li>
+      </ul>
+      <p>Plus the biggest pitfalls to avoid in each step &mdash; so you can start attracting more clients ASAP.</p>
+      <p class="letter__signature">&mdash; Jason</p>
+      <div class="letter__cta">
+        <a href="#get-the-guide" class="btn-primary">Download The Free Guide</a>
+        <p>Free &middot; Instant download &middot; Unsubscribe anytime</p>
       </div>
     </div>
   </section>
 
-  <footer>
-    <div class="foot-rule"></div>
-    <img src="assets/logo-obsidian.svg" alt="Jason Moss">
-    <div class="fine links">
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="site-footer__divider"></div>
+    <div class="site-footer__logo"><img src="assets/logo.svg" alt="Jason Moss" style="filter: invert(1) brightness(1.6);"></div>
+    <p class="site-footer__copy">&copy; 2026 Jason Moss. All rights reserved.</p>
+    <div class="site-footer__links">
       <a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a>
+      <span>&middot;</span>
       <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms of Service</a>
+      <span>&middot;</span>
       <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a>
     </div>
-    <div class="fine">&copy; 2026 Jason Moss. All rights reserved.</div>
   </footer>
 
 <script src="/js/optin-shared.js"></script>

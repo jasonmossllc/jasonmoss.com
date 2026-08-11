@@ -1,224 +1,313 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
-  <title>Your Guide Is On Its Way</title>
-  <link rel="icon" href="/favicon.ico" sizes="48x48">
-  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
-  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
-  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:300,400,500,600,700&display=swap" rel="stylesheet">
-  <style>
-    :root {
-      --obsidian: #1D1F1E;
-      --forest: #2C3F36;
-      --mocha: #5B4B3F;
-      --taupe: #8C837A;
-      --gold: #C2A86C;
-      --warm-stone: #E9E2D3;
-      --pale-sand: #F8F6F2;
-      --serif: 'Libre Baskerville', serif;
-      --sans: 'Raleway', sans-serif;
-    }
-    * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    body {
-      font-family: var(--sans);
-      color: var(--obsidian);
-      background: var(--pale-sand);
-    }
-    img { max-width: 100%; display: block; }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>Your Guide Is On Its Way</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal-obsidian: #1D1F1E;
+    --deep-forest-green: #2C3F36;
+    --earth-mocha-brown: #5B4B3F;
+    --slate-taupe: #8C837A;
+    --muted-gold: #C2A86C;
+    --warm-stone: #E9E2D3;
+    --pale-sand: #F8F6F2;
+    --font-headline: 'Libre Baskerville', Georgia, serif;
+    --font-body: 'Raleway', 'Helvetica Neue', sans-serif;
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  }
 
-    .confirm {
-      background:
-        radial-gradient(1100px 520px at 50% -14%, rgba(194, 168, 108, 0.18), rgba(194, 168, 108, 0) 60%),
-        linear-gradient(180deg, var(--warm-stone) 0%, var(--pale-sand) 78%);
-      border-bottom: 1px solid rgba(29, 31, 30, 0.07);
-      text-align: center;
-      padding: 4rem 1.5rem 3.25rem;
-    }
-    .confirm-inner { max-width: 42rem; margin: 0 auto; }
-    .kicker {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.18em;
-      text-transform: uppercase;
-      color: var(--mocha);
-      margin: 0 0 1.5rem;
-    }
-    h1 {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: 2.5rem;
-      line-height: 1.25;
-      margin: 0 0 1.1rem;
-    }
-    .confirm-sub {
-      font-size: 1.0625rem;
-      line-height: 1.7;
-      color: rgba(29, 31, 30, 0.82);
-      margin: 0 auto;
-      max-width: 33rem;
-    }
-    .confirm-sub strong { font-weight: 600; }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
-    .bridge {
-      text-align: center;
-      padding: 3.5rem 1.5rem 0;
-    }
-    .bridge-inner { max-width: 44rem; margin: 0 auto; }
-    .bridge-rule {
-      width: 3.5rem;
-      height: 1px;
-      background: rgba(194, 168, 108, 0.85);
-      margin: 0 auto 2rem;
-    }
-    h2 {
-      font-family: var(--serif);
-      font-weight: 400;
-      font-size: 1.875rem;
-      line-height: 1.35;
-      margin: 0 0 1.25rem;
-    }
-    h2 em { font-style: italic; color: var(--forest); }
-    .bridge p {
-      font-size: 1.0625rem;
-      line-height: 1.7;
-      color: rgba(29, 31, 30, 0.82);
-      margin: 0 auto 1.35rem;
-      max-width: 37rem;
-    }
-    .call-points {
-      list-style: none;
-      margin: 0 auto 1.5rem;
-      padding: 0;
-      max-width: 26rem;
-      text-align: left;
-    }
-    .call-points li {
-      position: relative;
-      padding-left: 1.75rem;
-      margin-bottom: 0.8rem;
-      font-size: 1rem;
-      line-height: 1.6;
-      color: rgba(29, 31, 30, 0.85);
-    }
-    .call-points li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.62em;
-      width: 0.85rem;
-      height: 1px;
-      background: var(--gold);
-    }
-    .call-meta {
-      font-size: 0.8125rem;
-      font-weight: 600;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      color: var(--mocha);
-      margin: 2rem 0 0;
-    }
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 
-    .booking { padding: 1.5rem 1rem 3rem; }
-    .calendly-wrap {
-      width: 100%;
-      max-width: 680px;
-      margin: 0 auto 1.5rem;
-      border: 1px solid rgba(194, 168, 108, 0.45);
-      background: var(--pale-sand);
-      box-shadow: 0 0 40px rgba(194, 168, 108, 0.18);
-      overflow: hidden;
-    }
-    .calendly-inline-widget { width: 100%; height: 980px; }
-    .booking-fallback {
-      font-size: 0.875rem;
-      line-height: 1.6;
-      color: var(--taupe);
-      max-width: 26rem;
-      margin: 0 auto;
-      text-align: center;
-    }
-    .booking-fallback a { color: var(--mocha); }
+  body {
+    font-family: var(--font-body);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--charcoal-obsidian);
+    background-color: var(--pale-sand);
+  }
 
-    footer {
-      padding: 2.5rem 1.5rem 3.5rem;
-      text-align: center;
-    }
-    .foot-rule {
-      width: 3.5rem;
-      height: 1px;
-      background: rgba(194, 168, 108, 0.6);
-      margin: 0 auto 1.75rem;
-    }
-    footer img { width: 6.25rem; margin: 0 auto 1.25rem; }
-    .fine {
-      font-size: 0.8125rem;
-      color: var(--taupe);
-      line-height: 1.7;
-    }
-    .fine.links a {
-      color: var(--taupe);
-      text-decoration: none;
-      margin: 0 0.6rem;
-    }
-    .fine.links a:hover { color: var(--mocha); }
+  img { max-width: 100%; height: auto; display: block; }
+  a { color: inherit; text-decoration: none; }
 
-    @media (max-width: 640px) {
-      .confirm { padding: 3rem 1.25rem 2.5rem; }
-      h1 { font-size: 1.9rem; }
-      h2 { font-size: 1.5rem; }
-      .calendly-inline-widget { height: 840px; }
-    }
-  </style>
+  h1, h2 { font-family: var(--font-headline); font-weight: 400; line-height: 1.3; }
+
+  /* Hero — pale texture */
+  .bg-pale {
+    background:
+      linear-gradient(180deg, rgba(248, 246, 242, 0.80), rgba(248, 246, 242, 0.90)),
+      url('/get-more-clients-guide/assets/section-bg-pale.jpg') center / cover no-repeat,
+      var(--pale-sand);
+  }
+  .hero {
+    background: transparent;
+    text-align: center;
+    padding: 48px 24px 64px;
+  }
+  .hero__logo { display: inline-block; width: 140px; height: auto; margin-bottom: 48px; }
+  .hero__logo img { width: 100%; height: auto; }
+  .hero__eyebrow {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a8905a;
+    margin-bottom: 20px;
+  }
+  .hero__headline {
+    font-size: 42px;
+    color: var(--charcoal-obsidian);
+    max-width: 720px;
+    margin: 0 auto 24px;
+    line-height: 1.28;
+  }
+  .hero__subhead {
+    font-size: 17px;
+    color: var(--earth-mocha-brown);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.75;
+  }
+  .hero__subhead strong { font-weight: 600; }
+
+  /* Letter — the assessment-call pitch */
+  .letter {
+    background:
+      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
+      url('/get-more-clients-guide/assets/section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone);
+    padding: 132px 24px 96px;
+  }
+  .letter__inner {
+    max-width: 660px;
+    margin: 0 auto;
+    background: var(--pale-sand);
+    border-top: 2px solid var(--muted-gold);
+    box-shadow: 0 18px 60px rgba(29, 31, 30, 0.10);
+    padding: 0 64px 56px;
+  }
+  .letter__headshot {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin: -55px auto 30px;
+    padding: 4px;
+    border: 1px solid rgba(194, 168, 108, 0.55);
+    box-shadow: 0 8px 28px rgba(29, 31, 30, 0.14);
+    background: var(--pale-sand);
+    display: block;
+  }
+  .letter__inner h2 { font-size: 28px; text-align: center; margin-bottom: 36px; }
+  .letter__inner h2 em { font-style: italic; }
+  .letter__inner p {
+    font-family: var(--font-headline);
+    font-size: 16px;
+    line-height: 1.85;
+    margin-bottom: 22px;
+  }
+  .letter__inner p strong { font-weight: 700; }
+  .letter__inner p em { font-style: italic; }
+  .call-list {
+    list-style: none;
+    margin: 0 0 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .call-list li {
+    position: relative;
+    padding-left: 30px;
+    font-family: var(--font-headline);
+    font-size: 16px;
+    line-height: 1.7;
+  }
+  .call-list li::before {
+    content: "\2713";
+    position: absolute;
+    left: 0;
+    top: 0;
+    font-family: var(--font-body);
+    font-weight: 700;
+    color: var(--muted-gold);
+  }
+  .letter__signature {
+    font-family: var(--font-headline);
+    font-style: italic;
+    font-size: 19px;
+    margin: 30px 0 0;
+  }
+  .letter__cta { text-align: center; margin-top: 40px; }
+  .btn-primary {
+    display: inline-block;
+    background-color: var(--muted-gold);
+    color: var(--charcoal-obsidian);
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 14px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 18px 40px;
+    border: none;
+    border-radius: 0;
+    cursor: pointer;
+    transition: background-color 0.25s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
+    text-align: center;
+  }
+  .btn-primary:hover {
+    background-color: #b89a5e;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(194, 168, 108, 0.25);
+  }
+  .letter__cta p {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--earth-mocha-brown);
+    margin: 14px 0 0;
+  }
+
+  /* Booking */
+  .booking {
+    background: transparent;
+    text-align: center;
+    padding: 88px 16px 72px;
+  }
+  .booking__label {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a8905a;
+    margin-bottom: 18px;
+  }
+  .booking__heading {
+    font-size: 30px;
+    color: var(--charcoal-obsidian);
+    margin-bottom: 40px;
+    line-height: 1.35;
+  }
+  .calendly-wrap {
+    width: 100%;
+    max-width: 680px;
+    margin: 0 auto 28px;
+    border: 1px solid rgba(194, 168, 108, 0.45);
+    background: var(--pale-sand);
+    box-shadow: 0 0 40px rgba(194, 168, 108, 0.15);
+    overflow: hidden;
+  }
+  .calendly-inline-widget { width: 100%; height: 980px; }
+  .booking__fallback {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--slate-taupe);
+    max-width: 400px;
+    margin: 0 auto;
+  }
+  .booking__fallback a { color: var(--earth-mocha-brown); text-decoration: underline; }
+
+  /* Footer */
+  .site-footer { background-color: var(--charcoal-obsidian); padding: 48px 24px; text-align: center; }
+  .site-footer__divider {
+    width: 100%;
+    max-width: 160px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(194, 168, 108, 0.25), transparent);
+    margin: 0 auto 44px;
+  }
+  .site-footer__logo { display: inline-block; width: 100px; margin-bottom: 24px; opacity: 0.5; }
+  .site-footer__logo img { width: 100%; height: auto; }
+  .site-footer__copy { font-size: 12px; color: rgba(140, 131, 122, 0.5); margin-bottom: 12px; }
+  .site-footer__links { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
+  .site-footer__links a { font-size: 12px; color: rgba(140, 131, 122, 0.5); transition: color 0.25s var(--ease-out); }
+  .site-footer__links a:hover { color: var(--pale-sand); }
+  .site-footer__links span { font-size: 12px; color: rgba(140, 131, 122, 0.3); }
+
+  @media (max-width: 760px) {
+    .hero { padding: 36px 20px 52px; }
+    .hero__logo { margin-bottom: 36px; }
+    .hero__headline { font-size: 29px; }
+    .hero__subhead { font-size: 15.5px; }
+    .letter { padding: 110px 16px 72px; }
+    .letter__inner { padding: 0 26px 44px; }
+    .letter__inner h2 { font-size: 23px; }
+    .booking { padding: 64px 12px 56px; }
+    .booking__heading { font-size: 24px; margin-bottom: 30px; }
+    .calendly-inline-widget { height: 840px; }
+  }
+</style>
 </head>
 <body>
 
-  <section class="confirm">
-    <div class="confirm-inner">
-      <p class="kicker">Step 1 of 2 &mdash; complete</p>
-      <h1>Your guide is on its&nbsp;way.</h1>
-      <p class="confirm-sub">Check your inbox &mdash; the <strong>Get More Clients Guide</strong> will land there in the next few minutes. (If you don&rsquo;t see it, check your spam or promotions folder.)</p>
+  <div class="bg-pale">
+  <!-- Confirmation hero -->
+  <section class="hero">
+    <div class="hero__logo" aria-label="Jason Moss">
+      <img src="/get-more-clients-guide/assets/logo.svg" alt="Jason Moss">
     </div>
-  </section>
 
-  <section class="bridge">
-    <div class="bridge-inner">
-      <div class="bridge-rule"></div>
+    <p class="hero__eyebrow">Step 1 of 2 &mdash; Complete</p>
+    <h1 class="hero__headline">Your guide is on its way.</h1>
+    <p class="hero__subhead">Check your inbox &mdash; the <strong>Get More Clients Guide</strong> will land there in the next few minutes. If you don&rsquo;t see it, check your spam or promotions folder.</p>
+  </section>
+  </div>
+
+  <!-- Letter: the assessment-call pitch -->
+  <section class="letter">
+    <div class="letter__inner">
+      <img src="/get-more-clients-guide/assets/jm-headshot.png" alt="Jason Moss" class="letter__headshot" width="110" height="110">
       <h2>While you&rsquo;re here&hellip; want my eyes on <em>your</em> business?</h2>
-      <p>The guide will give you the roadmap. But if you want to go deeper &mdash; and map out together how to get <em>you</em> more clients &mdash; book a free 20-minute business assessment call with me below.</p>
+      <p>The guide will give you the roadmap. But if you want to go deeper &mdash; and map out together how to get <em>you</em> more clients &mdash; your next step is a <strong>free 20-minute business assessment call</strong>, one-on-one with me.</p>
       <p>On this call, we&rsquo;ll:</p>
-      <ul class="call-points">
+      <ul class="call-list">
         <li>Take a closer look at your business together</li>
         <li>Map out what&rsquo;s possible for you</li>
         <li>Get clear on what needs to shift for you to start creating it</li>
       </ul>
-      <p>If it feels like I can help on a deeper level, I&rsquo;ll share what next steps could look like. Either way, you&rsquo;ll walk away with more clarity.</p>
-      <p class="call-meta">Free &middot; 20 minutes &middot; 1-on-1 with Jason</p>
+      <p>If it feels like I can help on a deeper level, I&rsquo;ll share what next steps could look like. Either way, you&rsquo;ll walk away with more clarity than you came with.</p>
+      <p class="letter__signature">&mdash; Jason</p>
+      <div class="letter__cta">
+        <a href="#book" class="btn-primary">Book Your Free Call</a>
+        <p>I take these calls personally &mdash; it&rsquo;s you and me on the line.</p>
+      </div>
     </div>
   </section>
 
-  <section class="booking">
+  <!-- Booking -->
+  <section class="booking bg-pale" id="book">
+    <p class="booking__label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
+    <h2 class="booking__heading">Choose a time that works for you.</h2>
+
     <div class="calendly-wrap">
       <div id="calendlyEmbed" class="calendly-inline-widget"></div>
     </div>
-    <p class="booking-fallback">Can&rsquo;t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Assessment%20call%20time">Send me an email</a> and we&rsquo;ll arrange an alternate.</p>
+
+    <p class="booking__fallback">Can&rsquo;t find a time that works? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20%E2%80%94%20alternate%20time">Send me an email</a> and we&rsquo;ll arrange an alternate.</p>
   </section>
 
-  <footer>
-    <div class="foot-rule"></div>
-    <img src="/get-more-clients-guide/assets/logo-obsidian.svg" alt="Jason Moss">
-    <div class="fine links">
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="site-footer__divider"></div>
+    <div class="site-footer__logo"><img src="/get-more-clients-guide/assets/logo.svg" alt="Jason Moss" style="filter: invert(1) brightness(1.6);"></div>
+    <p class="site-footer__copy">&copy; 2026 Jason Moss. All rights reserved.</p>
+    <div class="site-footer__links">
       <a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a>
+      <span>&middot;</span>
       <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms of Service</a>
+      <span>&middot;</span>
       <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a>
     </div>
-    <div class="fine">&copy; 2026 Jason Moss. All rights reserved.</div>
   </footer>
 
   <!-- Calendly inline embed — themed to match the page, with query-param
