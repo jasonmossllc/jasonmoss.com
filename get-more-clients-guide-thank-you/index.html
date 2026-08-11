@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Your Guide Is On Its Way</title>
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:300,400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --obsidian: #1D1F1E;
+      --forest: #2C3F36;
+      --mocha: #5B4B3F;
+      --taupe: #8C837A;
+      --gold: #C2A86C;
+      --warm-stone: #E9E2D3;
+      --pale-sand: #F8F6F2;
+      --serif: 'Libre Baskerville', serif;
+      --sans: 'Raleway', sans-serif;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: var(--sans);
+      color: var(--obsidian);
+      background: var(--pale-sand);
+    }
+    img { max-width: 100%; display: block; }
+
+    .confirm {
+      background:
+        radial-gradient(1100px 520px at 50% -14%, rgba(194, 168, 108, 0.18), rgba(194, 168, 108, 0) 60%),
+        linear-gradient(180deg, var(--warm-stone) 0%, var(--pale-sand) 78%);
+      border-bottom: 1px solid rgba(29, 31, 30, 0.07);
+      text-align: center;
+      padding: 4rem 1.5rem 3.25rem;
+    }
+    .confirm-inner { max-width: 42rem; margin: 0 auto; }
+    .kicker {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      margin: 0 0 1.5rem;
+    }
+    h1 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 2.5rem;
+      line-height: 1.25;
+      margin: 0 0 1.1rem;
+    }
+    .confirm-sub {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: rgba(29, 31, 30, 0.82);
+      margin: 0 auto;
+      max-width: 33rem;
+    }
+    .confirm-sub strong { font-weight: 600; }
+
+    .bridge {
+      text-align: center;
+      padding: 3.5rem 1.5rem 0;
+    }
+    .bridge-inner { max-width: 44rem; margin: 0 auto; }
+    .bridge-rule {
+      width: 3.5rem;
+      height: 1px;
+      background: rgba(194, 168, 108, 0.85);
+      margin: 0 auto 2rem;
+    }
+    h2 {
+      font-family: var(--serif);
+      font-weight: 400;
+      font-size: 1.875rem;
+      line-height: 1.35;
+      margin: 0 0 1.25rem;
+    }
+    h2 em { font-style: italic; color: var(--forest); }
+    .bridge p {
+      font-size: 1.0625rem;
+      line-height: 1.7;
+      color: rgba(29, 31, 30, 0.82);
+      margin: 0 auto 1.35rem;
+      max-width: 37rem;
+    }
+    .call-points {
+      list-style: none;
+      margin: 0 auto 1.5rem;
+      padding: 0;
+      max-width: 26rem;
+      text-align: left;
+    }
+    .call-points li {
+      position: relative;
+      padding-left: 1.75rem;
+      margin-bottom: 0.8rem;
+      font-size: 1rem;
+      line-height: 1.6;
+      color: rgba(29, 31, 30, 0.85);
+    }
+    .call-points li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.62em;
+      width: 0.85rem;
+      height: 1px;
+      background: var(--gold);
+    }
+    .call-meta {
+      font-size: 0.8125rem;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--mocha);
+      margin: 2rem 0 0;
+    }
+
+    .booking { padding: 1.5rem 1rem 3rem; }
+    .calendly-wrap {
+      width: 100%;
+      max-width: 680px;
+      margin: 0 auto 1.5rem;
+      border: 1px solid rgba(194, 168, 108, 0.45);
+      background: var(--pale-sand);
+      box-shadow: 0 0 40px rgba(194, 168, 108, 0.18);
+      overflow: hidden;
+    }
+    .calendly-inline-widget { width: 100%; height: 980px; }
+    .booking-fallback {
+      font-size: 0.875rem;
+      line-height: 1.6;
+      color: var(--taupe);
+      max-width: 26rem;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .booking-fallback a { color: var(--mocha); }
+
+    footer {
+      padding: 2.5rem 1.5rem 3.5rem;
+      text-align: center;
+    }
+    .foot-rule {
+      width: 3.5rem;
+      height: 1px;
+      background: rgba(194, 168, 108, 0.6);
+      margin: 0 auto 1.75rem;
+    }
+    footer img { width: 6.25rem; margin: 0 auto 1.25rem; }
+    .fine {
+      font-size: 0.8125rem;
+      color: var(--taupe);
+      line-height: 1.7;
+    }
+    .fine.links a {
+      color: var(--taupe);
+      text-decoration: none;
+      margin: 0 0.6rem;
+    }
+    .fine.links a:hover { color: var(--mocha); }
+
+    @media (max-width: 640px) {
+      .confirm { padding: 3rem 1.25rem 2.5rem; }
+      h1 { font-size: 1.9rem; }
+      h2 { font-size: 1.5rem; }
+      .calendly-inline-widget { height: 840px; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="confirm">
+    <div class="confirm-inner">
+      <p class="kicker">Step 1 of 2 &mdash; complete</p>
+      <h1>Your guide is on its&nbsp;way.</h1>
+      <p class="confirm-sub">Check your inbox &mdash; the <strong>Get More Clients Guide</strong> will land there in the next few minutes. (If you don&rsquo;t see it, check your spam or promotions folder.)</p>
+    </div>
+  </section>
+
+  <section class="bridge">
+    <div class="bridge-inner">
+      <div class="bridge-rule"></div>
+      <h2>While you&rsquo;re here&hellip; want my eyes on <em>your</em> business?</h2>
+      <p>The guide will give you the roadmap. But if you want to go deeper &mdash; and map out together how to get <em>you</em> more clients &mdash; book a free 20-minute business assessment call with me below.</p>
+      <p>On this call, we&rsquo;ll:</p>
+      <ul class="call-points">
+        <li>Take a closer look at your business together</li>
+        <li>Map out what&rsquo;s possible for you</li>
+        <li>Get clear on what needs to shift for you to start creating it</li>
+      </ul>
+      <p>If it feels like I can help on a deeper level, I&rsquo;ll share what next steps could look like. Either way, you&rsquo;ll walk away with more clarity.</p>
+      <p class="call-meta">Free &middot; 20 minutes &middot; 1-on-1 with Jason</p>
+    </div>
+  </section>
+
+  <section class="booking">
+    <div class="calendly-wrap">
+      <div id="calendlyEmbed" class="calendly-inline-widget"></div>
+    </div>
+    <p class="booking-fallback">Can&rsquo;t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Assessment%20call%20time">Send me an email</a> and we&rsquo;ll arrange an alternate.</p>
+  </section>
+
+  <footer>
+    <div class="foot-rule"></div>
+    <img src="/get-more-clients-guide/assets/logo-obsidian.svg" alt="Jason Moss">
+    <div class="fine links">
+      <a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms of Service</a>
+      <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a>
+    </div>
+    <div class="fine">&copy; 2026 Jason Moss. All rights reserved.</div>
+  </footer>
+
+  <!-- Calendly inline embed — themed to match the page, with query-param
+       passthrough so links from email (name/email/utm) prefill the form. -->
+  <script>
+    (function () {
+      var base = 'https://calendly.com/jasonmoss/business-assessment-call-with-jason-moss-gen';
+      var qs = new URLSearchParams(window.location.search);
+      var params = new URLSearchParams({
+        hide_gdpr_banner: '1',
+        background_color: 'f8f6f2',
+        text_color: '1d1f1e',
+        primary_color: '2e7d54'
+      });
+      qs.forEach(function (v, k) { if (!params.has(k)) params.set(k, v); });
+      document.getElementById('calendlyEmbed').setAttribute('data-url', base + '?' + params.toString());
+      var s = document.createElement('script');
+      s.src = 'https://assets.calendly.com/assets/external/widget.js';
+      s.async = true;
+      document.head.appendChild(s);
+    })();
+  </script>
+</body>
+</html>
