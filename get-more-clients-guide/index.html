@@ -83,6 +83,14 @@
   }
   .hero__logo { display: inline-block; width: 84px; height: auto; margin-bottom: 22px; }
   .hero__logo img { width: 100%; height: auto; }
+  .hero__eyebrow {
+    font-weight: 600;
+    font-size: 11.5px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a8905a;
+    margin-bottom: 12px;
+  }
   .hero__headline {
     font-size: 34px;
     color: var(--charcoal-obsidian);
@@ -93,9 +101,9 @@
   .hero__subhead {
     font-size: 16px;
     color: var(--earth-mocha-brown);
-    max-width: 560px;
+    max-width: 620px;
     margin: 0 auto 28px;
-    line-height: 1.6;
+    line-height: 1.65;
   }
 
   /* Framed guide panel: cover + form in one gold-framed card */
@@ -142,15 +150,17 @@
     border: 1px solid rgba(248, 246, 242, 0.18);
   }
   .optin-panel__form { padding: 30px 34px 26px; align-self: center; }
-  .optin-panel__form-label {
+  .optin-panel__form-title {
     font-family: var(--font-body);
     font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #a8905a;
-    margin-bottom: 16px;
-    text-align: center;
+    font-size: 17px;
+    line-height: 1.45;
+    margin-bottom: 6px;
+  }
+  .optin-panel__form-sub {
+    font-size: 13.5px;
+    color: var(--earth-mocha-brown);
+    margin-bottom: 18px;
   }
   .form-input {
     width: 100%;
@@ -343,8 +353,9 @@
       <img src="assets/logo.svg" alt="Jason Moss">
     </div>
 
-    <h1 class="hero__headline">Sign 2 &ndash; 4 new coaching clients, every month</h1>
-    <p class="hero__subhead">The free 4-step roadmap I used to generate over $1&nbsp;million in coaching sales.</p>
+    <p class="hero__eyebrow">Free Guide for Coaches</p>
+    <h1 class="hero__headline">You&rsquo;re a great coach. Let&rsquo;s get you more clients.</h1>
+    <p class="hero__subhead">My free 4-step roadmap for signing 2 &ndash; 4 new clients every month &mdash; the same one I used to generate over $1&nbsp;million in sales as a coach. No fancy funnels. No dancing on reels. No DMing strangers.</p>
 
     <div class="optin-panel">
       <div class="optin-panel__grid">
@@ -352,7 +363,8 @@
           <img src="assets/guide-cover.jpg" srcset="assets/guide-cover-sm.jpg 360w, assets/guide-cover.jpg 720w" sizes="212px" alt="The Get More Clients Guide" width="720" height="1019">
         </div>
         <div class="optin-panel__form">
-          <p class="optin-panel__form-label">Get the free guide</p>
+          <p class="optin-panel__form-title">Ready to start signing high&#8209;paying coaching clients?</p>
+          <p class="optin-panel__form-sub">Enter your name and email and I&rsquo;ll send the guide right over:</p>
           <form class="optin-form email-form" novalidate>
             <input type="text" name="First Name" class="form-input" placeholder="First Name" required aria-required="true">
             <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
@@ -386,15 +398,15 @@
   <section class="letter">
     <div class="letter__inner">
       <img src="assets/jm-headshot.png" alt="Jason Moss" class="letter__headshot" width="104" height="104">
-      <h2>What&rsquo;s inside</h2>
-      <p class="letter__intro">The exact 4 steps that took me from $4,728 in my first year to over $1 million in coaching sales:</p>
+      <h2>What&rsquo;s inside the guide</h2>
+      <p class="letter__intro">I made $4,728 my first year as a coach. Then I figured out the 4 steps that actually attract clients &mdash; and used them to generate over $1 million in sales. Inside, I&rsquo;ll walk you through each one:</p>
       <ul class="call-list">
-        <li><strong>Nail your niche</strong> &mdash; the foundation that makes everything easier</li>
-        <li><strong>Build a high-ticket offer</strong> your ideal clients actually want</li>
-        <li><strong>Grow an audience</strong> full of perfect-fit clients</li>
-        <li><strong>Enroll new clients</strong> without ever feeling pushy</li>
+        <li><strong>Get clarity on your niche</strong> &mdash; the foundation that makes everything else easier</li>
+        <li><strong>Build an irresistible, high-ticket offer</strong> your ideal clients actually want</li>
+        <li><strong>Grow an audience</strong> filled with people who are a perfect fit to work with you</li>
+        <li><strong>Turn leads into clients</strong> with an enrollment process that never feels pushy</li>
       </ul>
-      <p class="letter__intro">Plus the biggest pitfalls to avoid at each step.</p>
+      <p class="letter__intro">Plus the biggest pitfalls to avoid in each step &mdash; so you can start attracting more clients ASAP.</p>
       <div class="letter__cta">
         <a href="#get-the-guide" class="btn-primary">Download The Free Guide</a>
         <p>Free &middot; 20 pages &middot; Instant download</p>
