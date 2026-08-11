@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --charcoal-obsidian: #1D1F1E;
@@ -44,7 +44,7 @@
 
   h1, h2 { font-family: var(--font-headline); font-weight: 400; line-height: 1.3; }
 
-  /* Hero — pale texture */
+  /* Confirmation hero */
   .bg-pale {
     background:
       linear-gradient(180deg, rgba(248, 246, 242, 0.80), rgba(248, 246, 242, 0.90)),
@@ -54,9 +54,9 @@
   .hero {
     background: transparent;
     text-align: center;
-    padding: 48px 24px 64px;
+    padding: 36px 24px 52px;
   }
-  .hero__logo { display: inline-block; width: 140px; height: auto; margin-bottom: 48px; }
+  .hero__logo { display: inline-block; width: 84px; height: auto; margin-bottom: 30px; }
   .hero__logo img { width: 100%; height: auto; }
   .hero__eyebrow {
     font-weight: 600;
@@ -64,125 +64,96 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #a8905a;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
   }
   .hero__headline {
-    font-size: 42px;
+    font-size: 38px;
     color: var(--charcoal-obsidian);
-    max-width: 720px;
-    margin: 0 auto 24px;
+    max-width: 680px;
+    margin: 0 auto 16px;
     line-height: 1.28;
   }
   .hero__subhead {
-    font-size: 17px;
+    font-size: 16px;
     color: var(--earth-mocha-brown);
-    max-width: 560px;
+    max-width: 520px;
     margin: 0 auto;
-    line-height: 1.75;
+    line-height: 1.65;
   }
-  .hero__subhead strong { font-weight: 600; }
 
-  /* Letter — the assessment-call pitch */
-  .letter {
+  /* Pitch card — compact, sits right above the calendar */
+  .pitch {
     background:
       linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
       url('/get-more-clients-guide/assets/section-bg-warm.jpg') center / cover no-repeat,
       var(--warm-stone);
-    padding: 132px 24px 96px;
+    padding: 118px 24px 84px;
   }
-  .letter__inner {
-    max-width: 660px;
+  .pitch__inner {
+    max-width: 600px;
     margin: 0 auto;
     background: var(--pale-sand);
     border-top: 2px solid var(--muted-gold);
     box-shadow: 0 18px 60px rgba(29, 31, 30, 0.10);
-    padding: 0 64px 56px;
+    padding: 0 52px 44px;
+    text-align: center;
   }
-  .letter__headshot {
-    width: 110px;
-    height: 110px;
+  .pitch__headshot {
+    width: 104px;
+    height: 104px;
     border-radius: 50%;
     object-fit: cover;
-    margin: -55px auto 30px;
+    margin: -52px auto 26px;
     padding: 4px;
     border: 1px solid rgba(194, 168, 108, 0.55);
     box-shadow: 0 8px 28px rgba(29, 31, 30, 0.14);
     background: var(--pale-sand);
     display: block;
   }
-  .letter__inner h2 { font-size: 28px; text-align: center; margin-bottom: 36px; }
-  .letter__inner h2 em { font-style: italic; }
-  .letter__inner p {
-    font-family: var(--font-headline);
-    font-size: 16px;
-    line-height: 1.85;
-    margin-bottom: 22px;
+  .pitch__inner h2 { font-size: 27px; margin-bottom: 16px; }
+  .pitch__inner h2 em { font-style: italic; }
+  .pitch__lead {
+    font-size: 15.5px;
+    color: var(--earth-mocha-brown);
+    line-height: 1.65;
+    max-width: 460px;
+    margin: 0 auto 26px;
   }
-  .letter__inner p strong { font-weight: 700; }
-  .letter__inner p em { font-style: italic; }
   .call-list {
     list-style: none;
-    margin: 0 0 22px;
+    margin: 0 auto 26px;
+    max-width: 380px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 13px;
+    text-align: left;
   }
   .call-list li {
     position: relative;
-    padding-left: 30px;
-    font-family: var(--font-headline);
-    font-size: 16px;
-    line-height: 1.7;
+    padding-left: 32px;
+    font-size: 15.5px;
+    line-height: 1.55;
   }
   .call-list li::before {
     content: "\2713";
     position: absolute;
     left: 0;
     top: 0;
-    font-family: var(--font-body);
     font-weight: 700;
     color: var(--muted-gold);
   }
-  .letter__signature {
-    font-family: var(--font-headline);
-    font-style: italic;
-    font-size: 19px;
-    margin: 30px 0 0;
-  }
-  .letter__cta { text-align: center; margin-top: 40px; }
-  .btn-primary {
-    display: inline-block;
-    background-color: var(--muted-gold);
-    color: var(--charcoal-obsidian);
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 18px 40px;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
-    transition: background-color 0.25s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
-    text-align: center;
-  }
-  .btn-primary:hover {
-    background-color: #b89a5e;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(194, 168, 108, 0.25);
-  }
-  .letter__cta p {
-    font-family: var(--font-body);
-    font-size: 13px;
-    color: var(--earth-mocha-brown);
-    margin: 14px 0 0;
+  .pitch__derisk {
+    font-size: 14.5px;
+    color: rgba(29, 31, 30, 0.75);
+    margin: 0 auto;
+    max-width: 420px;
   }
 
   /* Booking */
   .booking {
     background: transparent;
     text-align: center;
-    padding: 88px 16px 72px;
+    padding: 64px 16px 64px;
   }
   .booking__label {
     font-weight: 600;
@@ -190,18 +161,18 @@
     letter-spacing: 0.16em;
     text-transform: uppercase;
     color: #a8905a;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
   }
   .booking__heading {
-    font-size: 30px;
+    font-size: 28px;
     color: var(--charcoal-obsidian);
-    margin-bottom: 40px;
+    margin-bottom: 36px;
     line-height: 1.35;
   }
   .calendly-wrap {
     width: 100%;
     max-width: 680px;
-    margin: 0 auto 28px;
+    margin: 0 auto 24px;
     border: 1px solid rgba(194, 168, 108, 0.45);
     background: var(--pale-sand);
     box-shadow: 0 0 40px rgba(194, 168, 108, 0.15);
@@ -209,7 +180,7 @@
   }
   .calendly-inline-widget { width: 100%; height: 980px; }
   .booking__fallback {
-    font-size: 14px;
+    font-size: 13.5px;
     line-height: 1.6;
     color: var(--slate-taupe);
     max-width: 400px;
@@ -234,16 +205,19 @@
   .site-footer__links a:hover { color: var(--pale-sand); }
   .site-footer__links span { font-size: 12px; color: rgba(140, 131, 122, 0.3); }
 
-  @media (max-width: 760px) {
-    .hero { padding: 36px 20px 52px; }
-    .hero__logo { margin-bottom: 36px; }
-    .hero__headline { font-size: 29px; }
-    .hero__subhead { font-size: 15.5px; }
-    .letter { padding: 110px 16px 72px; }
-    .letter__inner { padding: 0 26px 44px; }
-    .letter__inner h2 { font-size: 23px; }
-    .booking { padding: 64px 12px 56px; }
-    .booking__heading { font-size: 24px; margin-bottom: 30px; }
+  @media (max-width: 640px) {
+    .hero { padding: 26px 20px 44px; }
+    .hero__logo { width: 72px; margin-bottom: 24px; }
+    .hero__headline { font-size: 27px; }
+    .hero__subhead { font-size: 14.5px; }
+    .pitch { padding: 100px 16px 64px; }
+    .pitch__inner { padding: 0 24px 36px; }
+    .pitch__inner h2 { font-size: 22px; }
+    .pitch__lead { font-size: 14px; }
+    .call-list li { font-size: 14.5px; }
+    .pitch__derisk { font-size: 13.5px; }
+    .booking { padding: 52px 12px 52px; }
+    .booking__heading { font-size: 22px; margin-bottom: 26px; }
     .calendly-inline-widget { height: 840px; }
   }
 </style>
@@ -259,28 +233,22 @@
 
     <p class="hero__eyebrow">Step 1 of 2 &mdash; Complete</p>
     <h1 class="hero__headline">Your guide is on its way.</h1>
-    <p class="hero__subhead">Check your inbox &mdash; the <strong>Get More Clients Guide</strong> will land there in the next few minutes. If you don&rsquo;t see it, check your spam or promotions folder.</p>
+    <p class="hero__subhead">Check your inbox &mdash; it&rsquo;ll arrive in the next few minutes. Not there? Check spam or promotions.</p>
   </section>
   </div>
 
-  <!-- Letter: the assessment-call pitch -->
-  <section class="letter">
-    <div class="letter__inner">
-      <img src="/get-more-clients-guide/assets/jm-headshot.png" alt="Jason Moss" class="letter__headshot" width="110" height="110">
-      <h2>While you&rsquo;re here&hellip; want my eyes on <em>your</em> business?</h2>
-      <p>The guide will give you the roadmap. But if you want to go deeper &mdash; and map out together how to get <em>you</em> more clients &mdash; your next step is a <strong>free 20-minute business assessment call</strong>, one-on-one with me.</p>
-      <p>On this call, we&rsquo;ll:</p>
+  <!-- Pitch: the assessment call -->
+  <section class="pitch">
+    <div class="pitch__inner">
+      <img src="/get-more-clients-guide/assets/jm-headshot.png" alt="Jason Moss" class="pitch__headshot" width="104" height="104">
+      <h2>Want my eyes on <em>your</em> business?</h2>
+      <p class="pitch__lead">Book a free 20-minute call with me and we&rsquo;ll map out &mdash; together &mdash; how to get you more clients.</p>
       <ul class="call-list">
-        <li>Take a closer look at your business together</li>
+        <li>Take a closer look at your business</li>
         <li>Map out what&rsquo;s possible for you</li>
-        <li>Get clear on what needs to shift for you to start creating it</li>
+        <li>Get clear on what needs to shift</li>
       </ul>
-      <p>If it feels like I can help on a deeper level, I&rsquo;ll share what next steps could look like. Either way, you&rsquo;ll walk away with more clarity than you came with.</p>
-      <p class="letter__signature">&mdash; Jason</p>
-      <div class="letter__cta">
-        <a href="#book" class="btn-primary">Book Your Free Call</a>
-        <p>I take these calls personally &mdash; it&rsquo;s you and me on the line.</p>
-      </div>
+      <p class="pitch__derisk">Either way, you&rsquo;ll walk away with more clarity.</p>
     </div>
   </section>
 

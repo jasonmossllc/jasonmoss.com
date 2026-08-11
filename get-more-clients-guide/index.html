@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
   :root {
     --charcoal-obsidian: #1D1F1E;
@@ -68,7 +68,7 @@
   }
 
   /* ========================================
-     Hero — centered, compact, form above the fold
+     Hero — one headline, one line, the form
      ======================================== */
   .bg-pale {
     background:
@@ -79,38 +79,29 @@
   .hero {
     background: transparent;
     text-align: center;
-    padding: 20px 24px 10px;
+    padding: 22px 24px 10px;
   }
-  .hero__logo { display: inline-block; width: 84px; height: auto; margin-bottom: 18px; }
+  .hero__logo { display: inline-block; width: 84px; height: auto; margin-bottom: 22px; }
   .hero__logo img { width: 100%; height: auto; }
-  .hero__eyebrow {
-    font-weight: 600;
-    font-size: 11.5px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #a8905a;
-    margin-bottom: 12px;
-  }
   .hero__headline {
-    font-size: 31px;
+    font-size: 34px;
     color: var(--charcoal-obsidian);
-    max-width: 800px;
-    margin: 0 auto 12px;
-    line-height: 1.3;
+    max-width: 720px;
+    margin: 0 auto 14px;
+    line-height: 1.28;
   }
-  .hero__headline em { font-style: italic; }
   .hero__subhead {
-    font-size: 15.5px;
+    font-size: 16px;
     color: var(--earth-mocha-brown);
-    max-width: 640px;
-    margin: 0 auto 24px;
-    line-height: 1.65;
+    max-width: 560px;
+    margin: 0 auto 28px;
+    line-height: 1.6;
   }
 
   /* Framed guide panel: cover + form in one gold-framed card */
   .optin-panel {
-    max-width: 780px;
-    margin: 0 auto 12px;
+    max-width: 760px;
+    margin: 0 auto;
     padding: 8px;
     border: 1px solid rgba(194, 168, 108, 0.45);
     background: rgba(248, 246, 242, 0.75);
@@ -131,7 +122,7 @@
   }
   .optin-panel__grid {
     display: grid;
-    grid-template-columns: 290px minmax(0, 1fr);
+    grid-template-columns: 280px minmax(0, 1fr);
     background: var(--pale-sand);
   }
   .optin-panel__cover {
@@ -146,21 +137,20 @@
   }
   .optin-panel__cover img {
     width: 100%;
-    max-width: 216px;
+    max-width: 212px;
     box-shadow: 0 22px 50px rgba(0, 0, 0, 0.45);
     border: 1px solid rgba(248, 246, 242, 0.18);
   }
-  .optin-panel__form { padding: 28px 32px 24px; align-self: center; }
-  .optin-panel__form-title {
-    font-family: var(--font-headline);
-    font-size: 20px;
-    line-height: 1.45;
-    margin-bottom: 6px;
-  }
-  .optin-panel__form-sub {
-    font-size: 13.5px;
-    color: var(--earth-mocha-brown);
-    margin-bottom: 18px;
+  .optin-panel__form { padding: 30px 34px 26px; align-self: center; }
+  .optin-panel__form-label {
+    font-family: var(--font-body);
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #a8905a;
+    margin-bottom: 16px;
+    text-align: center;
   }
   .form-input {
     width: 100%;
@@ -169,8 +159,8 @@
     color: var(--charcoal-obsidian);
     background: #FFFFFF;
     border: 1px solid rgba(29, 31, 30, 0.16);
-    padding: 13px 16px;
-    margin-bottom: 11px;
+    padding: 14px 16px;
+    margin-bottom: 12px;
     border-radius: 0;
     -webkit-appearance: none;
     transition: border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
@@ -189,7 +179,7 @@
     font-size: 14px;
     letter-spacing: 0.08em;
     text-transform: uppercase;
-    padding: 15px 24px;
+    padding: 16px 24px;
     border: none;
     border-radius: 0;
     cursor: pointer;
@@ -203,13 +193,12 @@
   .optin-panel__note {
     font-size: 12px;
     color: var(--slate-taupe);
-    margin-top: 10px;
+    margin-top: 12px;
     text-align: center;
   }
-  .hero__cta-micro { font-size: 12.5px; color: var(--slate-taupe); margin-top: 14px; }
 
   /* Trust Logos */
-  .trust-logos { background: transparent; padding: 40px 24px 48px; text-align: center; }
+  .trust-logos { background: transparent; padding: 44px 24px 48px; text-align: center; }
   .trust-logos__label {
     font-weight: 600;
     font-size: 11px;
@@ -232,79 +221,73 @@
   .trust-logos__row img { height: 22px; width: auto; object-fit: contain; filter: grayscale(100%); }
 
   /* ========================================
-     Letter — what's inside, in Jason's voice
+     What's inside — scannable, minimal
      ======================================== */
   .letter {
     background:
       linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
       url('assets/section-bg-warm.jpg') center / cover no-repeat,
       var(--warm-stone);
-    padding: 132px 24px 96px;
+    padding: 128px 24px 92px;
   }
   .letter__inner {
-    max-width: 660px;
+    max-width: 620px;
     margin: 0 auto;
     background: var(--pale-sand);
     border-top: 2px solid var(--muted-gold);
     box-shadow: 0 18px 60px rgba(29, 31, 30, 0.10);
-    padding: 0 64px 56px;
+    padding: 0 56px 48px;
+    text-align: center;
   }
   .letter__headshot {
-    width: 110px;
-    height: 110px;
+    width: 104px;
+    height: 104px;
     border-radius: 50%;
     object-fit: cover;
-    margin: -55px auto 30px;
+    margin: -52px auto 26px;
     padding: 4px;
     border: 1px solid rgba(194, 168, 108, 0.55);
     box-shadow: 0 8px 28px rgba(29, 31, 30, 0.14);
     background: var(--pale-sand);
     display: block;
   }
-  .letter__inner h2 { font-size: 28px; text-align: center; margin-bottom: 36px; }
-  .letter__inner p {
-    font-family: var(--font-headline);
-    font-size: 16px;
-    line-height: 1.85;
-    margin-bottom: 22px;
+  .letter__inner h2 { font-size: 27px; margin-bottom: 18px; }
+  .letter__intro {
+    font-size: 15.5px;
+    color: var(--earth-mocha-brown);
+    line-height: 1.65;
+    max-width: 460px;
+    margin: 0 auto 28px;
   }
-  .letter__inner p strong { font-weight: 700; }
-  .letter__inner p em { font-style: italic; }
   .call-list {
     list-style: none;
-    margin: 0 0 22px;
+    margin: 0 auto 26px;
+    max-width: 430px;
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 14px;
+    text-align: left;
   }
   .call-list li {
     position: relative;
-    padding-left: 30px;
-    font-family: var(--font-headline);
-    font-size: 16px;
-    line-height: 1.7;
+    padding-left: 32px;
+    font-size: 15.5px;
+    line-height: 1.55;
   }
   .call-list li::before {
     content: "\2713";
     position: absolute;
     left: 0;
     top: 0;
-    font-family: var(--font-body);
     font-weight: 700;
     color: var(--muted-gold);
   }
-  .letter__signature {
-    font-family: var(--font-headline);
-    font-style: italic;
-    font-size: 19px;
-    margin: 30px 0 0;
-  }
-  .letter__cta { text-align: center; margin-top: 40px; }
+  .call-list strong { font-weight: 600; }
+  .letter__cta { margin-top: 34px; }
   .letter__cta p {
-    font-family: var(--font-body);
-    font-size: 13px;
+    font-size: 12.5px;
     color: var(--earth-mocha-brown);
-    margin: 14px 0 0;
+    margin: 12px 0 0;
   }
 
   /* Footer */
@@ -326,27 +309,27 @@
 
   @media (max-width: 760px) {
     .hero { padding: 14px 16px 8px; }
-    .hero__logo { width: 72px; margin-bottom: 12px; }
-    .hero__eyebrow { font-size: 10.5px; margin-bottom: 8px; }
-    .hero__headline { font-size: 23px; margin-bottom: 8px; }
-    .hero__subhead { font-size: 13.5px; line-height: 1.55; margin-bottom: 16px; }
+    .hero__logo { width: 70px; margin-bottom: 14px; }
+    .hero__headline { font-size: 24px; margin-bottom: 10px; }
+    .hero__subhead { font-size: 14px; margin-bottom: 18px; }
     .optin-panel::after { display: none; }
     .optin-panel__grid { grid-template-columns: 1fr; }
     /* Form first on mobile; cover follows inside the same framed panel */
-    .optin-panel__form { order: 1; padding: 20px 18px 18px; }
+    .optin-panel__form { order: 1; padding: 22px 18px 18px; }
     .optin-panel__cover { order: 2; padding: 24px 20px; }
     .optin-panel__cover img { max-width: 168px; }
-    .optin-panel__form-title { font-size: 16.5px; text-align: center; }
-    .optin-panel__form-sub { font-size: 12px; text-align: center; margin-bottom: 12px; }
-    .form-input { padding: 11px 14px; margin-bottom: 9px; font-size: 14px; }
-    .form-btn { padding: 13px 20px; font-size: 13px; }
-    .optin-panel__note { font-size: 11px; margin-top: 8px; }
-    .trust-logos { padding: 32px 20px 38px; }
+    .optin-panel__form-label { font-size: 11px; margin-bottom: 12px; }
+    .form-input { padding: 12px 14px; margin-bottom: 10px; font-size: 14px; }
+    .form-btn { padding: 14px 20px; font-size: 13px; }
+    .optin-panel__note { font-size: 11px; margin-top: 9px; }
+    .trust-logos { padding: 34px 20px 40px; }
     .trust-logos__row { gap: 26px; }
     .trust-logos__row img { height: 18px; }
-    .letter { padding: 110px 16px 72px; }
-    .letter__inner { padding: 0 26px 44px; }
-    .letter__inner h2 { font-size: 23px; }
+    .letter { padding: 104px 16px 68px; }
+    .letter__inner { padding: 0 24px 40px; }
+    .letter__inner h2 { font-size: 22px; }
+    .letter__intro { font-size: 14px; }
+    .call-list li { font-size: 14.5px; }
   }
 </style>
 </head>
@@ -360,18 +343,16 @@
       <img src="assets/logo.svg" alt="Jason Moss">
     </div>
 
-    <p class="hero__eyebrow">Free Guide for Coaches</p>
-    <h1 class="hero__headline">Get more coaching clients &mdash; <em>sign 2&nbsp;&ndash;&nbsp;4 new clients every month.</em></h1>
-    <p class="hero__subhead">Download my free Get More Clients Guide and discover the simple 4-step roadmap I used to generate over $1 million in sales as a coach.</p>
+    <h1 class="hero__headline">Sign 2 &ndash; 4 new coaching clients, every month</h1>
+    <p class="hero__subhead">The free 4-step roadmap I used to generate over $1&nbsp;million in coaching sales.</p>
 
     <div class="optin-panel">
       <div class="optin-panel__grid">
         <div class="optin-panel__cover">
-          <img src="assets/guide-cover.jpg" srcset="assets/guide-cover-sm.jpg 360w, assets/guide-cover.jpg 720w" sizes="216px" alt="The Get More Clients Guide" width="720" height="1019">
+          <img src="assets/guide-cover.jpg" srcset="assets/guide-cover-sm.jpg 360w, assets/guide-cover.jpg 720w" sizes="212px" alt="The Get More Clients Guide" width="720" height="1019">
         </div>
         <div class="optin-panel__form">
-          <p class="optin-panel__form-title">Ready to start signing high&#8209;paying coaching clients?</p>
-          <p class="optin-panel__form-sub">Enter your name and email and I&rsquo;ll send the guide right over:</p>
+          <p class="optin-panel__form-label">Get the free guide</p>
           <form class="optin-form email-form" novalidate>
             <input type="text" name="First Name" class="form-input" placeholder="First Name" required aria-required="true">
             <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
@@ -381,11 +362,10 @@
             <div id="cf-turnstile-box" style="margin:0 auto;display:flex;align-items:center;justify-content:center;max-width:100%;"></div>
             <button type="submit" class="form-btn">Download The Free Guide</button>
           </form>
-          <p class="optin-panel__note">Free instant download. No spam &mdash; unsubscribe anytime.</p>
+          <p class="optin-panel__note">Instant download. No spam &mdash; unsubscribe anytime.</p>
         </div>
       </div>
     </div>
-    <p class="hero__cta-micro">Free &middot; 20 pages &middot; Takes 10 seconds to get</p>
   </section>
 
   <!-- Trust Logos -->
@@ -402,25 +382,22 @@
 
   </div><!-- /.bg-pale -->
 
-  <!-- Letter: what's inside -->
+  <!-- What's inside -->
   <section class="letter">
     <div class="letter__inner">
-      <img src="assets/jm-headshot.png" alt="Jason Moss" class="letter__headshot" width="110" height="110">
-      <h2>Getting clients isn&rsquo;t as complicated as it might seem.</h2>
-      <p>My first few years as a coach weren&rsquo;t easy &mdash; I made $4,728 my first year. But after years of trial and error, I realized attracting clients comes down to <strong>four simple steps</strong>.</p>
-      <p>Those four steps became the roadmap I used to generate over $1 million in sales as a coach &mdash; and they&rsquo;re the same steps I&rsquo;ve now shared with thousands of other coaches.</p>
-      <p>Inside this free guide, I&rsquo;ll walk you through each one:</p>
+      <img src="assets/jm-headshot.png" alt="Jason Moss" class="letter__headshot" width="104" height="104">
+      <h2>What&rsquo;s inside</h2>
+      <p class="letter__intro">The exact 4 steps that took me from $4,728 in my first year to over $1 million in coaching sales:</p>
       <ul class="call-list">
-        <li><strong>Get clarity on your niche</strong> &mdash; the foundation of your business</li>
-        <li><strong>Build an irresistible, high-ticket offer</strong> your ideal clients actually want</li>
-        <li><strong>Grow an audience</strong> filled with people who are a perfect fit to work with you</li>
-        <li><strong>Turn leads into clients</strong> with an enrollment process that never feels pushy</li>
+        <li><strong>Nail your niche</strong> &mdash; the foundation that makes everything easier</li>
+        <li><strong>Build a high-ticket offer</strong> your ideal clients actually want</li>
+        <li><strong>Grow an audience</strong> full of perfect-fit clients</li>
+        <li><strong>Enroll new clients</strong> without ever feeling pushy</li>
       </ul>
-      <p>Plus the biggest pitfalls to avoid in each step &mdash; so you can start attracting more clients ASAP.</p>
-      <p class="letter__signature">&mdash; Jason</p>
+      <p class="letter__intro">Plus the biggest pitfalls to avoid at each step.</p>
       <div class="letter__cta">
         <a href="#get-the-guide" class="btn-primary">Download The Free Guide</a>
-        <p>Free &middot; Instant download &middot; Unsubscribe anytime</p>
+        <p>Free &middot; 20 pages &middot; Instant download</p>
       </div>
     </div>
   </section>
