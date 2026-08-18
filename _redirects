@@ -30,3 +30,7 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 
 /ai-conversation-coach   https://chatgpt.com/g/g-6a7a41a9e048819188e7db5ae757a880-ai-conversation-coach-by-jason-moss   301
 /ai-conversation-coach/  https://chatgpt.com/g/g-6a7a41a9e048819188e7db5ae757a880-ai-conversation-coach-by-jason-moss   301
+
+# Vanity link for the Magnetic Message business assessment call
+/assessment   https://calendly.com/jasonmoss/business-assessment-call-magnetic-message        301
+/assessment/  https://calendly.com/jasonmoss/business-assessment-call-magnetic-message        301
