@@ -9,9 +9,11 @@
 //   1. Roezan contacts are keyed by phone. If the submission has no phone,
 //      look up an existing Roezan contact by email and reuse its number;
 //      if none can be found, the submission is rejected.
-//   2. Create/update the contact (name + email) with the tag.
-//   3. Apply the tag explicitly as well (belt and suspenders — matches the
-//      automation hub's proven sync behavior for existing contacts).
+//   2. Create/update the contact (name + email) with the tag AND the Main List.
+//   3. Apply the tag and the list subscription explicitly as well (belt and
+//      suspenders — matches the automation hub's proven sync behavior for
+//      existing contacts). The list matters as much as the tag: broadcasts
+//      target lists, so a listless contact receives nothing.
 // It only creates/updates the contact and tags it; it never sends an SMS.
 //
 // Verification accepts EITHER a fresh Turnstile token (standalone use) OR a
@@ -41,9 +43,16 @@ const {
 } = __internal;
 
 const ROEZAN_API_BASE = (process.env.ROEZAN_API_URL || 'https://app.roezan.com/api').replace(/\/+$/, '');
+// Every Roezan contact must land on a list. Broadcasts target lists (the API
+// has no segment targeting), so a contact created with no list is invisible to
+// every broadcast no matter which tags it carries — it silently never receives
+// anything. Roezan runs a single "Main List" (1446); override per-environment
+// if that ever changes.
+const ROEZAN_DEFAULT_LIST_ID = Number.parseInt(process.env.ROEZAN_DEFAULT_LIST_ID || '1446', 10);
 // Netlify gives synchronous functions ~10s total, and a submission can make
-// up to 3 sequential Roezan calls. Per-call timeout 3.5s with one retry, plus
-// a hard request deadline checked before every call, keeps the worst case
+// up to 3 sequential Roezan calls (the tag + list writes run in parallel, so
+// they cost one round trip, not two). Per-call timeout 3.5s with one retry,
+// plus a hard request deadline checked before every call, keeps the worst case
 // inside the budget instead of being killed by the platform.
 const ROEZAN_TIMEOUT_MS = 3500;
 const ROEZAN_RETRY_DELAYS_MS = [400];
@@ -129,7 +138,7 @@ async function syncContactToRoezan({ email, firstName, lastName, phone, tagId },
     deadline,
     body: {
       phone: resolvedPhone,
-      lists: [],
+      lists: [ROEZAN_DEFAULT_LIST_ID],
       ...(firstName ? { firstName } : {}),
       ...(lastName ? { lastName } : {}),
       ...(email ? { email } : {}),
@@ -137,11 +146,22 @@ async function syncContactToRoezan({ email, firstName, lastName, phone, tagId },
     },
   });
 
-  await roezanRequest('/integrations/contacts/tags', {
-    method: 'POST',
-    deadline,
-    body: { phone: resolvedPhone, tagIds: [tagId] },
-  });
+  // Belt and suspenders for BOTH the tag and the list. The upsert above returns
+  // 202 and applies tags/lists asynchronously, which has proven unreliable for
+  // contacts that already exist. These run in parallel so the pair costs one
+  // round trip against the request deadline rather than two.
+  await Promise.all([
+    roezanRequest('/integrations/contacts/tags', {
+      method: 'POST',
+      deadline,
+      body: { phone: resolvedPhone, tagIds: [tagId] },
+    }),
+    roezanRequest('/integrations/lists/subscribe', {
+      method: 'POST',
+      deadline,
+      body: { phone: resolvedPhone, list: ROEZAN_DEFAULT_LIST_ID },
+    }),
+  ]);
 
   return { synced: true };
 }
