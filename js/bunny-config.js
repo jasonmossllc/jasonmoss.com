@@ -477,6 +477,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "d0345e6a-21e4-41b5-b696-3a939f2aec65": {
+      "videoId": "d0345e6a-21e4-41b5-b696-3a939f2aec65",
+      "title": "The Magnetic Message Masterclass",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "f79f0527-5dd3-4950-9c44-73829f09b7ed": {
       "videoId": "hlntpnigew",
       "title": "Zach Bloom Testimonial",
