@@ -84,4 +84,15 @@
   } else {
     boot();
   }
+
+  // Some pages build their booking section in JS after this script has run
+  // (the quiz results page renders from the answers). Watch for hosts that
+  // appear later so those still get a widget. mount() is idempotent.
+  if (window.MutationObserver) {
+    try {
+      new MutationObserver(boot).observe(document.documentElement, {
+        childList: true, subtree: true
+      });
+    } catch (e) {}
+  }
 })();
