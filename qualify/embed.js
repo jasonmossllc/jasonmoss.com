@@ -47,9 +47,12 @@
     frame.title = 'Book a business assessment call';
     frame.loading = 'lazy';
     frame.setAttribute('scrolling', 'no');
+    // No height transition: an animating height can be left mid-flight (a
+    // throttled/backgrounded tab never advances it), which pins the frame at
+    // its old value and clips the widget. Snapping is also less distracting.
     frame.style.cssText =
       'width:100%;border:0;display:block;min-height:' + MIN_HEIGHT + 'px;' +
-      'height:' + MIN_HEIGHT + 'px;transition:height .3s cubic-bezier(0.16,1,0.3,1);';
+      'height:' + MIN_HEIGHT + 'px;';
     host.appendChild(frame);
 
     var lastApplied = 0;
