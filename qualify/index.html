@@ -554,8 +554,13 @@
       '<div id="cal"></div>',
       5, false
     );
+    // Calendly theming. NOTE on primary_color: the brand forest (#2C3F36) is
+    // too dark and desaturated — Calendly derives the "times available" date
+    // tint from it, and at that darkness the circles vanish against the page.
+    // #0E6B5A is the same green family, saturated enough to keep the date
+    // circles legible and still hit 5.3:1 white-on-green for the CTA.
     var url = CALENDLY +
-      '?hide_gdpr_banner=1&primary_color=2C3F36' +
+      '?hide_gdpr_banner=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=0E6B5A' +
       '&name=' + encodeURIComponent(state.first_name) +
       '&email=' + encodeURIComponent(state.email) +
       Object.keys(UTM).map(function(k){
