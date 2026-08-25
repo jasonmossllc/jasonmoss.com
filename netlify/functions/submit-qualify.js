@@ -1,10 +1,13 @@
 // Call Qualifier widget — /qualify/
 // Netlify Serverless Function
 //
-// Receives the 5-screen qualifier (revenue band, full-time, current clients,
-// goal, then name + email), validates every answer server-side, decides
-// book-vs-decline, and syncs the lead to Kit BEFORE the booking screen is
-// shown so drop-offs are still captured.
+// Receives the qualifier's three gating answers (revenue band, full-time,
+// current clients), validates them server-side and decides book-vs-decline.
+//
+// The two paths reach Kit differently. Declined people give us their details
+// in the widget, which is how they enter the Launchpad downsell. Qualified
+// people go straight to the Calendly embed without typing anything twice, so
+// their record is written from Calendly's own invitee data once they book.
 //
 // Routing (see the analysis at ~/tmp/qualify-2026): all seven historical
 // buyers were $1k-$10k/mo, full-time, with current paying clients. Under
@@ -29,15 +32,13 @@ const {
   headerValue,
   EMAIL_RE,
   findSubscriberByEmail,
-  updateSubscriber,
   corsHeaders,
 } = __internal;
 
-// Kit tags
-const TAG_SUBMITTED = 22754513; // "Qualifier Submitted"  — everyone
-const TAG_QUALIFIED = 22754514; // "Qualifier Qualified"
+// Kit tags. The flow only produces two kinds of record — someone who booked,
+// and someone who was declined — so those are the only tags it sets.
+const TAG_BOOKED = 22754514;   // "Qualifier Booked"
 const TAG_DECLINED = 22754515; // "Qualifier Declined"
-const TAG_HIGH_REV = 22754516; // "Qualifier High Revenue" — $10k+/mo
 const TAG_LAUNCHPAD_DOWNSELL = 20410106; // existing downsell tag
 
 // Kit sequence "Launchpad Downsell (Qualifier)" — 5 emails over 7 days for
@@ -88,7 +89,6 @@ const REVENUE_OK = new Set([
   '1k-5k', '5k-10k', '10k-plus',
   '1k-3k', '3k-10k', '3k-5k', '10k-25k', '25k-plus',   // retired
 ]);
-const HIGH_REVENUE = new Set(['10k-plus', '10k-25k', '25k-plus']);
 
 // How long a decline stands. Someone told "not yet" cannot re-answer their way
 // into a booking, but a business does genuinely change, so it expires.
@@ -106,12 +106,26 @@ function decide(revenue, fulltime, clients) {
   return { decision: 'book', reason: null };
 }
 
-/** Flip qualify_booked to Yes when the booking screen reports a completed booking. */
-async function markBooked(email) {
-  const subscriber = await findSubscriberByEmail(email);
-  if (!subscriber?.id) return false;
-  await updateSubscriber(subscriber.id, { email, fields: { qualify_booked: 'Yes' } });
-  return true;
+/**
+ * Look up who booked, straight from Calendly. The booking path never asks for
+ * an email in the widget, so this is where the identity comes from.
+ */
+async function fetchCalendlyInvitee(uri) {
+  const pat = process.env.CALENDLY_PAT;
+  if (!pat || !/^https:\/\/api\.calendly\.com\/scheduled_events\/[\w-]+\/invitees\/[\w-]+$/.test(uri)) {
+    return null;
+  }
+  const r = await fetch(uri, {
+    headers: { Authorization: `Bearer ${pat}` },
+    signal: AbortSignal.timeout(5000),
+  });
+  if (!r.ok) throw new Error(`Calendly invitee lookup ${r.status}`);
+  const res = (await r.json()).resource || {};
+  // The event has one invitee question, so take its answer rather than
+  // matching on wording — the label can be reworded without breaking this.
+  const qa = Array.isArray(res.questions_and_answers) ? res.questions_and_answers : [];
+  const goal = (qa[0] || {}).answer || '';
+  return { email: res.email, name: res.name, goal: String(goal).slice(0, 1000) };
 }
 
 exports.handler = async (event) => {
@@ -159,18 +173,42 @@ exports.handler = async (event) => {
     }
     const email = String(data.email).trim().toLowerCase();
 
-    // ── Booking ping from the booking screen (post-Calendly) ────────────────
-    // Deliberately opaque: never reveal whether the email exists in Kit.
+    // ── Booking confirmed in the embedded Calendly ─────────────────────────
+    // Qualified people never gave us an email here, so Calendly's invitee URI
+    // is how we find out who booked.
     if (data.action === 'booked') {
       if (cleanString(data.test, 200)) {
-        console.log('Qualifier TEST booked ping (no Kit write)', { email });
+        console.log('Qualifier TEST booked ping (no Kit write)', { uri: data.invitee_uri });
         return { statusCode: 200, headers, body: JSON.stringify({ success: true, test: true }) };
       }
       try {
-        const updated = await markBooked(email);
-        if (!updated) console.log('Booked ping for unknown subscriber', { email });
+        const invitee = await fetchCalendlyInvitee(cleanString(data.invitee_uri, 300));
+        const bookedEmail = (invitee?.email || data.email || '').trim().toLowerCase();
+        if (!bookedEmail || !EMAIL_RE.test(bookedEmail)) {
+          console.error('Booked ping without a usable email', { uri: data.invitee_uri });
+          return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+        }
+        const answers = {};
+        if (REVENUE[data.revenue]) answers.qualify_revenue = REVENUE[data.revenue];
+        if (FULLTIME[data.fulltime]) answers.qualify_fulltime = FULLTIME[data.fulltime];
+        if (CLIENTS[data.clients]) answers.qualify_clients = CLIENTS[data.clients];
+        await syncContactToKit({
+          email: bookedEmail,
+          firstName: cleanString((invitee?.name || '').split(' ')[0], 100),
+          tagIds: [TAG_BOOKED],
+          mappedFields: {},
+          overwriteFields: {
+            ...answers,
+            qualify_source: cleanString(data.source, 120) || 'direct',
+            qualify_decision: 'Book',
+            qualify_date: new Date().toISOString().slice(0, 10),
+            qualify_booked: 'Yes',
+            ...(invitee?.goal ? { qualify_goal: invitee.goal } : {}),
+          },
+          referrer: cleanString(headerValue(event.headers, 'referer'), 1000),
+        });
       } catch (error) {
-        console.error('Failed to mark qualifier booked', { email, error: kitErrorSummary(error) });
+        console.error('Failed to record Calendly booking', { error: kitErrorSummary(error) });
       }
       return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
     }
@@ -225,11 +263,9 @@ exports.handler = async (event) => {
     }
 
     const qualified = decision === 'book';
-    const highRevenue = HIGH_REVENUE.has(data.revenue);
 
     const firstName = cleanString(data.first_name, 100);
     const source = cleanString(data.source, 120) || 'direct';
-    const goal = cleanString(data.goal, 1000);
 
     // Test submissions never touch Kit — decide, report, and stop.
     //
@@ -249,9 +285,7 @@ exports.handler = async (event) => {
       };
     }
 
-    const tagIds = [TAG_SUBMITTED, qualified ? TAG_QUALIFIED : TAG_DECLINED];
-    if (highRevenue) tagIds.push(TAG_HIGH_REV);
-    if (!qualified) tagIds.push(TAG_LAUNCHPAD_DOWNSELL);
+    const tagIds = qualified ? [TAG_BOOKED] : [TAG_DECLINED, TAG_LAUNCHPAD_DOWNSELL];
 
     const submission = {
       email,
@@ -274,7 +308,6 @@ exports.handler = async (event) => {
         ...(lockedByPriorDecline ? { qualify_relocked: new Date().toISOString().slice(0, 10) } : {}),
         qualify_date: new Date().toISOString().slice(0, 10),
         ...(isTest ? { qualify_decision: `TEST — ${qualified ? 'Book' : `Decline (${reason})`}` } : {}),
-        ...(goal ? { qualify_goal: goal } : {}),
       },
       referrer: cleanString(
         headerValue(event.headers, 'referer') ||
@@ -321,4 +354,4 @@ exports.handler = async (event) => {
 };
 
 // Exposed for unit tests only; Netlify invokes .handler exclusively.
-module.exports.__test = { decide, REVENUE, FULLTIME, CLIENTS, REVENUE_OK, HIGH_REVENUE };
+module.exports.__test = { decide, REVENUE, FULLTIME, CLIENTS, REVENUE_OK };

@@ -199,9 +199,10 @@
   };
   var TEST = p('test'), FORCE = p('force'), FORCE_REASON = p('reason') || 'early';
 
-  var state = { revenue:null, fulltime:null, clients:null, goal:'',
+  var state = { revenue:null, fulltime:null, clients:null,
                 first_name:'', email:'', decided:null, reason:null };
-  var idx = 0, TOTAL = 5, locked = false, keyHandler = null;
+  var idx = 0, locked = false, keyHandler = null;
+  function total(){ return localDecision().decision === 'book' ? 3 : 4; }
 
   var el = document.getElementById('screen');
   var bar = document.getElementById('bar');
@@ -288,8 +289,9 @@
 
   function progress(step, show){
     bar.classList.toggle('hide', !show);
-    barfill.style.width = show ? Math.round((step/TOTAL)*100)+'%' : '0%';
-    steplabel.textContent = show ? ('Step ' + step + ' of ' + TOTAL) : '';
+    var t = total();
+    barfill.style.width = show ? Math.round((Math.min(step,t)/t)*100)+'%' : '0%';
+    steplabel.textContent = show ? ('Step ' + Math.min(step,t) + ' of ' + t) : '';
   }
   function paint(html, step, showProgress){
     el.innerHTML = '<div class="screen">' + html + '</div>';
@@ -341,36 +343,11 @@
     };
   }
 
-  function renderGoal(){
-    paint(
-      '<h1>What do you want to walk away with?</h1>'+
-      '<p class="sub">Optional — it’s what I’ll prepare from.</p>'+
-      '<div class="field">'+
-        '<label class="sr" for="goal">What you want to walk away with</label>'+
-        '<textarea id="goal" data-focus placeholder="A sentence is plenty…">'+esc(state.goal)+'</textarea>'+
-      '</div>'+
-      '<div class="actions">'+
-        '<button type="button" class="btn" id="go">Continue</button>'+
-        '<button type="button" class="skip" id="skip">Skip</button>'+
-        '<button type="button" class="back" id="back">&larr; Back</button>'+
-      '</div>',
-      4
-    );
-    function saveGoal(){ state.goal = document.getElementById('goal').value.trim(); next(); }
-    document.getElementById('go').addEventListener('click', saveGoal);
-    document.getElementById('skip').addEventListener('click', function(){ state.goal=''; next(); });
-    document.getElementById('back').addEventListener('click', prev);
-    document.getElementById('goal').addEventListener('keydown', function(e){
-      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') saveGoal();
-    });
-  }
-
+  // Only reached on the decline path now.
   function renderContact(){
-    var willBook = localDecision().decision === 'book';
     paint(
-      (willBook
-        ? '<p class="eyebrow">You’re a fit</p><h1>Let’s get you booked.</h1>'
-        : '<h1>Last step.</h1>')+
+      '<h1>Where should I send this?</h1>'+
+      '<p class="sub">I’ll point you to the right next step for where you are.</p>'+
       '<div class="field">'+
         '<label class="f" for="fn">First name</label>'+
         '<input type="text" id="fn" data-focus autocomplete="given-name" value="'+esc(state.first_name)+'">'+
@@ -384,11 +361,11 @@
       '<div class="ts-slot" id="ts-slot"></div>'+
       '<p class="err" id="err" role="alert"></p>'+
       '<div class="actions">'+
-        '<button type="button" class="btn" id="go">'+(willBook?'Book my time':'Continue')+'</button>'+
+        '<button type="button" class="btn" id="go">Continue</button>'+
         '<button type="button" class="back" id="back">&larr; Back</button>'+
       '</div>'+
-      '<p class="hint">I’ll send your call details, plus my emails on getting clients. Unsubscribe anytime.</p>',
-      5
+      '<p class="hint">I’ll also send my emails on getting clients. Unsubscribe anytime.</p>',
+      4
     );
     document.getElementById('go').addEventListener('click', submit);
     document.getElementById('back').addEventListener('click', prev);
@@ -452,7 +429,12 @@
     keyHandler = null; locked = false;
     save();
     if (idx < QUESTIONS.length) return renderQuestion();
-    if (idx === QUESTIONS.length) return renderGoal();
+    // Past the questions the two paths diverge. Qualified people go straight
+    // to the calendar — Calendly already asks for name, email and what they
+    // want from the call, so asking here first is duplicated typing at the
+    // exact moment they have decided to book. Declined people give us their
+    // details instead, which is the only way they reach the downsell.
+    if (localDecision().decision === 'book') return renderBooking();
     return renderContact();
   }
   document.addEventListener('keydown', function(e){ if (keyHandler && !locked) keyHandler(e); });
@@ -479,7 +461,6 @@
     }
     err.textContent = '';
     state.first_name = fn; state.email = em;
-    var restoreLabel = btn.textContent;
     btn.disabled = true; btn.textContent = 'One moment…';
 
     ensureToken(function(tok){
@@ -487,7 +468,7 @@
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({
           revenue:state.revenue, fulltime:state.fulltime, clients:state.clients,
-          goal:state.goal, first_name:fn, email:em, source:SOURCE,
+          first_name:fn, email:em, source:SOURCE,
           utm_source:UTM.utm_source, utm_medium:UTM.utm_medium, utm_campaign:UTM.utm_campaign,
           utm_content:UTM.utm_content, utm_term:UTM.utm_term,
           website: document.getElementById('website').value,
@@ -501,7 +482,7 @@
             err.innerHTML = 'Verification didn’t go through. Try again, or '+
               '<a href="https://jasonmoss.com/qualify/?source='+encodeURIComponent(SOURCE)+
               '" target="_blank" rel="noopener">open this in a new tab</a>.';
-            btn.disabled = false; btn.textContent = restoreLabel;
+            btn.disabled = false; btn.textContent = 'Continue';
             if (window.turnstile && tsWidgetId !== null){ try { window.turnstile.reset(tsWidgetId); } catch(e){} }
             return;
           }
@@ -545,28 +526,19 @@
   function renderBooking(){
     paint(
       '<p class="eyebrow">You’re a fit</p>'+
-      '<h1>Book a time that works, '+esc(state.first_name)+'.</h1>'+
-      '<p class="sub">Twenty minutes on Zoom. I’ll have read your answers before we start.</p>'+
+      '<h1>Book a time that works.</h1>'+
+      '<p class="sub">Twenty minutes on Zoom. Pick a slot and add your details — I’ll have read them before we start.</p>'+
       '<div id="cal"></div>',
       5, false
     );
     var url = CALENDLY +
       '?hide_gdpr_banner=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=0E6B5A' +
-      '&name=' + encodeURIComponent(state.first_name) +
-      '&email=' + encodeURIComponent(state.email) +
-      (state.goal ? '&a1=' + encodeURIComponent(state.goal.slice(0, 900)) : '') +
       Object.keys(UTM).map(function(k){ return UTM[k] ? '&'+k+'='+encodeURIComponent(UTM[k]) : ''; }).join('');
     function init(){
       if (!window.Calendly) return;
       window.Calendly.initInlineWidget({
         url: url,
         parentElement: document.getElementById('cal'),
-        prefill: {
-          name: state.first_name, firstName: state.first_name, email: state.email,
-          // a1 = the event's first custom question, so what they said they want
-          // to walk away with shows up on the booking and in the calendar entry.
-          customAnswers: state.goal ? { a1: state.goal } : {}
-        },
         utm: utmObject()
       });
       height();
@@ -584,13 +556,21 @@
   window.addEventListener('message', function(e){
     if (e.origin !== 'https://calendly.com') return;
     if (!e.data || typeof e.data !== 'object') return;
-    if (e.data.event === 'calendly.event_scheduled'){
-      try {
-        fetch(FN, { method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ action:'booked', email: state.email, test: TEST }) });
-      } catch(err){}
-      try { parent.postMessage({ type:'qualify:booked', source:SOURCE }, '*'); } catch(err){}
-    }
+    if (e.data.event !== 'calendly.event_scheduled') return;
+    // On the booking path we never collected an email, so we hand Calendly's
+    // invitee URI to the server, which looks up who booked and records them
+    // in Kit along with the answers they gave here.
+    var uri = '';
+    try { uri = (e.data.payload && e.data.payload.invitee && e.data.payload.invitee.uri) || ''; } catch(err){}
+    try {
+      fetch(FN, { method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          action:'booked', invitee_uri: uri, email: state.email || undefined,
+          revenue: state.revenue, fulltime: state.fulltime, clients: state.clients,
+          source: SOURCE, test: TEST
+        }) });
+    } catch(err){}
+    try { parent.postMessage({ type:'qualify:booked', source:SOURCE }, '*'); } catch(err){}
   });
 
   if (TEST){
