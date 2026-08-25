@@ -56,6 +56,9 @@ const REVENUE = {
   none: "Haven't started earning yet",
   'under-1k': 'Under $1,000/mo',
   '1k-3k': '$1,000-$3,000/mo',
+  '3k-10k': '$3,000-$10,000/mo',
+  // Retired split bands. Still accepted so a session that was half-finished
+  // when the option list changed doesn't get rejected as a forged payload.
   '3k-5k': '$3,000-$5,000/mo',
   '5k-10k': '$5,000-$10,000/mo',
   '10k-25k': '$10,000-$25,000/mo',
@@ -74,7 +77,7 @@ const CLIENTS = {
 };
 
 // Revenue bands that clear the $1k floor.
-const REVENUE_OK = new Set(['1k-3k', '3k-5k', '5k-10k', '10k-25k', '25k-plus']);
+const REVENUE_OK = new Set(['1k-3k', '3k-10k', '3k-5k', '5k-10k', '10k-25k', '25k-plus']);
 const HIGH_REVENUE = new Set(['10k-25k', '25k-plus']);
 
 /**

@@ -114,7 +114,13 @@
   .rule{height:1px;background:var(--line);margin:24px 0}
   .kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 12px}
 
-  #cal{min-height:640px;width:100%}
+  /* Calendly's inline widget sizes its iframe from the container's computed
+     HEIGHT. With only a min-height it collapses to ~150px and you get the
+     timezone row and nothing else, so this must be an explicit height. Mobile
+     needs far more room because Calendly stacks the calendar under the header. */
+  #cal{width:100%;height:720px}
+  #cal iframe{width:100%!important;height:100%!important;border:0;display:block}
+  @media (max-width:640px){ #cal{height:1120px} }
   .cal-head{margin:0 0 16px}
   .cal-head h1{margin-bottom:6px}
 
@@ -210,8 +216,7 @@
         {v:'none',      t:"I haven't started earning yet"},
         {v:'under-1k',  t:'Under $1,000/month'},
         {v:'1k-3k',     t:'$1,000 – $3,000/month'},
-        {v:'3k-5k',     t:'$3,000 – $5,000/month'},
-        {v:'5k-10k',    t:'$5,000 – $10,000/month'},
+        {v:'3k-10k',    t:'$3,000 – $10,000/month'},
         {v:'10k-25k',   t:'$10,000 – $25,000/month'},
         {v:'25k-plus',  t:'$25,000+/month'}
       ]},
@@ -504,7 +509,9 @@
 
   // Mirror of the server rule — used only if the request fails.
   function localDecision(){
-    var ok = ['1k-3k','3k-5k','5k-10k','10k-25k','25k-plus'].indexOf(state.revenue) > -1;
+    // 3k-5k / 5k-10k are the retired split bands, kept so a half-finished
+    // session restored from sessionStorage still resolves.
+    var ok = ['1k-3k','3k-10k','3k-5k','5k-10k','10k-25k','25k-plus'].indexOf(state.revenue) > -1;
     if (!ok) return { decision:'decline', reason:'early' };
     if (state.fulltime !== 'yes') return { decision:'decline', reason:'part_time' };
     if (state.clients === 'none') return { decision:'decline', reason:'no_clients' };
