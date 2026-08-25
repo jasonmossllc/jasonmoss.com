@@ -145,6 +145,25 @@
   .ts-slot{margin:2px 0 0;display:none}
   .ts-slot.show{display:block}
 
+  /* The qualifying moment. Generic praise reads automated, so the copy names
+     what they actually answered; this gives it the visual weight to match. */
+  .fit{
+    background:#fff;border:1px solid var(--line-soft);
+    border-top:3px solid var(--gold);border-radius:12px;
+    padding:26px 26px 24px;margin:0 0 26px;
+    box-shadow:0 2px 18px -10px rgba(29,31,30,.3);
+  }
+  @media (max-width:600px){ .fit{padding:22px 20px 20px} }
+  .fit-badge{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--forest);color:#fff;border-radius:999px;
+    padding:6px 14px 6px 11px;margin:0 0 14px;
+    font-size:11.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+  }
+  .fit-badge span{font-size:13px;line-height:1}
+  .fit h1{margin:0 0 10px}
+  .fit .sub{margin:0}
+
   .card{background:#fff;border:1px solid var(--line-soft);border-radius:14px;padding:32px 28px}
   @media (max-width:600px){ .card{padding:24px 20px} }
   .card h1{margin-bottom:16px}
@@ -528,9 +547,12 @@
 
   function renderBooking(){
     paint(
-      '<p class="eyebrow">You’re a fit</p>'+
-      '<h1>Book a time that works.</h1>'+
-      '<p class="sub">Twenty minutes on Zoom. Pick a slot and add your details — I’ll have read them before we start.</p>'+
+      '<div class="fit">'+
+        '<p class="fit-badge"><span aria-hidden="true">&#10003;</span> You’re a fit</p>'+
+        '<h1>This call was built for you.</h1>'+
+        '<p class="sub">You’re full-time, you’re working with clients, and you’re at the point where the right shift compounds. That’s exactly who I keep these twenty minutes for.</p>'+
+      '</div>'+
+      '<p class="sub">Pick a time below — twenty minutes, on Zoom. I’ll have read your answers before we start.</p>'+
       '<div id="cal"></div>',
       5, false
     );
