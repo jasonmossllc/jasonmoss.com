@@ -153,22 +153,34 @@
 
   /* The qualifying moment. Generic praise reads automated, so the copy names
      what they actually answered; this gives it the visual weight to match. */
+  /* The fit panel confirms and gets out of the way. The booking instruction is
+     the largest thing on the screen — it is the only action left to take. */
   .fit{
     background:#fff;border:1px solid var(--line-soft);
-    border-top:3px solid var(--gold);border-radius:12px;
-    padding:26px 26px 24px;margin:0 0 26px;
-    box-shadow:0 2px 18px -10px rgba(29,31,30,.3);
+    border-left:3px solid var(--gold);border-radius:10px;
+    padding:16px 20px;margin:0 0 26px;
+    display:flex;align-items:center;gap:14px;flex-wrap:wrap;
   }
-  @media (max-width:600px){ .fit{padding:22px 20px 20px} }
   .fit-badge{
-    display:inline-flex;align-items:center;gap:8px;
+    display:inline-flex;align-items:center;gap:7px;
     background:var(--forest);color:#fff;border-radius:999px;
-    padding:6px 14px 6px 11px;margin:0 0 14px;
-    font-size:11.5px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
+    padding:5px 13px 5px 10px;margin:0;flex:none;
+    font-size:11px;font-weight:600;letter-spacing:.13em;text-transform:uppercase;
   }
-  .fit-badge span{font-size:13px;line-height:1}
-  .fit h1{margin:0 0 10px}
-  .fit .sub{margin:0}
+  .fit-badge span{font-size:12px;line-height:1}
+  .fit p.fit-line{
+    margin:0;font-family:var(--serif);color:var(--obsidian);
+    font-size:17px;line-height:1.35;
+  }
+  .next-step{
+    display:block;font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--taupe);font-weight:600;margin:0 0 8px;
+  }
+  .book-h{
+    font-family:var(--serif);font-weight:400;color:var(--obsidian);
+    font-size:clamp(26px,6vw,34px);line-height:1.2;margin:0 0 8px;
+  }
+  .book-sub{color:var(--mocha);font-size:15px;line-height:1.5;margin:0 0 20px}
 
   .card{background:#fff;border:1px solid var(--line-soft);border-radius:14px;padding:32px 28px}
   @media (max-width:600px){ .card{padding:24px 20px} }
@@ -558,10 +570,11 @@
     paint(
       '<div class="fit">'+
         '<p class="fit-badge"><span aria-hidden="true">&#10003;</span> You’re a fit</p>'+
-        '<h1>This call was built for you.</h1>'+
-        '<p class="sub">You’re full-time, working with clients, and at the point where one shift makes a real difference. We’ll find what’s actually standing between you and consistent clients — and you’ll leave knowing exactly what to focus on.</p>'+
+        '<p class="fit-line">This call was built for you.</p>'+
       '</div>'+
-      '<p class="sub">Pick a time below. Twenty minutes, on Zoom.</p>'+
+      '<p class="next-step">Your next step</p>'+
+      '<h1 class="book-h">Pick a time below.</h1>'+
+      '<p class="book-sub">Twenty minutes, on Zoom.</p>'+
       '<div id="cal"></div>',
       5, false
     );
