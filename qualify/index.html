@@ -195,6 +195,7 @@
   }
   /* The one thing worth saying here is who is on the other side of it. */
   .book-sub{color:var(--mocha);font-size:15.5px;line-height:1.5;margin:0 0 22px}
+  .book-sub strong{color:var(--obsidian);font-weight:600}
   .cal-rule{
     border:0;height:1px;margin:0 0 6px;
     background:linear-gradient(90deg,var(--line) 0%,rgba(29,31,30,.08) 55%,rgba(29,31,30,0) 100%);
@@ -289,29 +290,28 @@
       ]}
   ];
 
-  // Each card does three things in order: name where they are, name what they
-  // actually need next, then hand them the thing that is exactly that. The
-  // middle beat is the bridge — without it this reads as a rejection.
+  // Where you are, what you need, what to do about it. Said the way you would
+  // say it to someone across a table — no cleverness, no reframing.
   var DECLINE = {
     early: {
       h: "Let's get your first clients in first.",
       body: [
-        "At this stage the thing that changes everything isn't strategy on a business that's already running. It's getting the first clients in — a clear offer, the right people in front of it, and a conversation that ends in a yes.",
-        "<strong>Launchpad is built for exactly that.</strong> It's the shortest path from where you are to clients coming in — and once they are, this call is the right one to take."
+        "You're earlier than this call is built for. It's for people who already have clients coming in and need to fix what isn't working.",
+        "What you need first is the basics — a clear offer, people to put it in front of, and knowing what to say when someone's interested. <strong>That's what Launchpad is.</strong> Start there, and book this call once you've got clients coming in."
       ]
     },
     part_time: {
       h: "The timing isn't right yet.",
       body: [
-        "You've got something real going, but you're building it around another income. What you need right now isn't more strategy — it's the foundations that make going full-time safe: an offer worth paying for, and a repeatable way to get clients.",
-        "<strong>Launchpad is designed for this exact stage.</strong> Work it in the hours you actually have, and full-time becomes a decision instead of a leap."
+        "You're building this around another income, which is a different problem than the one this call solves.",
+        "What you need is a way to get clients that fits the hours you've actually got. <strong>That's what Launchpad is for</strong> — it's self-paced, so you work it around the job. Get that running and going full-time stops being a leap."
       ]
     },
     no_clients: {
       h: "Let's fill the calendar first.",
       body: [
-        "Full-time with revenue coming in puts you ahead of most people who book this call. But you're not working with anyone right now, and everything you want next is waiting on that one gap.",
-        "<strong>Launchpad closes it.</strong> Your offer, your audience, and the enrollment conversation — in the order that actually gets clients signed. That's your next step."
+        "You're full-time with money coming in, which puts you ahead of most people who fill this out. But you're not working with anyone right now.",
+        "That's the thing to fix, and it's bigger than a twenty-minute conversation — it's your offer, who you put it in front of, and how you handle it when someone's interested. <strong>Launchpad covers all three.</strong> Start there."
       ]
     }
   };
@@ -592,7 +592,7 @@
       '</div>'+
       '<p class="next-step">Your next step</p>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
-      '<p class="book-sub">Twenty minutes, one to one with Jason — not a team member.</p>'+
+      '<p class="book-sub">Twenty minutes, one to one with <strong>Jason</strong> — not a team member.</p>'+
       '<hr class="cal-rule">'+
       '<div id="cal"></div>',
       5, false
