@@ -124,7 +124,7 @@
   }
   .btn:hover{background:var(--forest-deep)}
   .btn:disabled{opacity:.6;cursor:default}
-  .actions{display:flex;align-items:center;gap:16px;margin-top:24px;flex-wrap:wrap}
+  .actions{display:flex;align-items:center;gap:16px;margin-top:20px;flex-wrap:wrap}
   @media (max-width:600px){
     .actions{gap:10px}
     .actions .btn{width:100%;order:-1}
@@ -138,12 +138,18 @@
   .skip{text-decoration:underline;text-underline-offset:3px}
 
   .hint{font-size:13px;color:var(--taupe);margin:16px 0 0;line-height:1.5}
-  .err{color:#8C3D26;font-size:14px;margin:12px 0 0;min-height:20px;font-weight:500}
+  .err{color:#8C3D26;font-size:14px;margin:0;font-weight:500}
+  .err:empty{display:none}
   .err a{color:#8C3D26}
 
-  /* the bot check belongs in the form, above the action — never orphaned */
-  .ts-slot{margin:2px 0 0;display:none}
-  .ts-slot.show{display:block}
+  /* The bot check belongs in the form, above the action — never orphaned.
+     It must NOT be display:none while Turnstile renders into it: the widget
+     sizes itself from its container's width, and a display:none container is
+     zero-wide, so it renders too wide and gets cut off. visibility:hidden
+     keeps the box in layout at full width while staying invisible. */
+  .ts-slot{width:100%;visibility:hidden;height:0;overflow:hidden;margin:0}
+  .ts-slot.show{visibility:visible;height:auto;overflow:visible;margin:4px 0 0}
+  .ts-slot iframe{max-width:100%}
 
   /* The qualifying moment. Generic praise reads automated, so the copy names
      what they actually answered; this gives it the visual weight to match. */
@@ -253,26 +259,29 @@
       ]}
   ];
 
+  // Each card does three things in order: name where they are, name what they
+  // actually need next, then hand them the thing that is exactly that. The
+  // middle beat is the bridge — without it this reads as a rejection.
   var DECLINE = {
     early: {
       h: "Let's get your first clients in first.",
       body: [
-        "This call is a diagnostic on a business that's already running — pricing, pipeline, where the leads stall. You're earlier than that, so most of it wouldn't apply yet.",
-        "<strong>Launchpad is the better starting point.</strong> It's built for getting your offer clear and your first clients signed, without needing an audience or a funnel first."
+        "At this stage the thing that changes everything isn't strategy on a business that's already running. It's getting the first clients in — a clear offer, the right people in front of it, and a conversation that ends in a yes.",
+        "<strong>Launchpad is built for exactly that.</strong> It's the shortest path from where you are to clients coming in — and once they are, this call is the right one to take."
       ]
     },
     part_time: {
       h: "The timing isn't right yet.",
       body: [
-        "You've got something real going, but you're building it alongside a job or another main income — and that changes what actually moves the needle.",
-        "<strong>Launchpad fits where you are.</strong> It's designed to be worked in the hours you actually have, so going full-time becomes a decision rather than a leap."
+        "You've got something real going, but you're building it around another income. What you need right now isn't more strategy — it's the foundations that make going full-time safe: an offer worth paying for, and a repeatable way to get clients.",
+        "<strong>Launchpad is designed for this exact stage.</strong> Work it in the hours you actually have, and full-time becomes a decision instead of a leap."
       ]
     },
     no_clients: {
       h: "Let's fill the calendar first.",
       body: [
-        "You're full-time with revenue coming in, which puts you ahead of most people who book this. But you're not working with anyone right now, and that's the thing to fix first.",
-        "<strong>Launchpad will get you there faster</strong> than twenty minutes of talking would."
+        "Full-time with revenue coming in puts you ahead of most people who book this call. But you're not working with anyone right now, and everything you want next is waiting on that one gap.",
+        "<strong>Launchpad closes it.</strong> Your offer, your audience, and the enrollment conversation — in the order that actually gets clients signed. That's your next step."
       ]
     }
   };
