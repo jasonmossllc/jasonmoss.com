@@ -554,13 +554,19 @@
       '?hide_gdpr_banner=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=0E6B5A' +
       '&name=' + encodeURIComponent(state.first_name) +
       '&email=' + encodeURIComponent(state.email) +
+      (state.goal ? '&a1=' + encodeURIComponent(state.goal.slice(0, 900)) : '') +
       Object.keys(UTM).map(function(k){ return UTM[k] ? '&'+k+'='+encodeURIComponent(UTM[k]) : ''; }).join('');
     function init(){
       if (!window.Calendly) return;
       window.Calendly.initInlineWidget({
         url: url,
         parentElement: document.getElementById('cal'),
-        prefill: { name: state.first_name, firstName: state.first_name, email: state.email },
+        prefill: {
+          name: state.first_name, firstName: state.first_name, email: state.email,
+          // a1 = the event's first custom question, so what they said they want
+          // to walk away with shows up on the booking and in the calendar entry.
+          customAnswers: state.goal ? { a1: state.goal } : {}
+        },
         utm: utmObject()
       });
       height();

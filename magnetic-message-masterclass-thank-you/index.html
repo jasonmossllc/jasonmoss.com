@@ -176,7 +176,7 @@ header.top img{height:26px;width:auto;}
   color:var(--sand);
   margin-bottom:18px;
 }
-.calendly-wrap{
+.qualify-wrap{
   max-width:640px;
   margin:0 auto 16px;
   border:1px solid rgba(194,168,108,0.5);
@@ -184,7 +184,6 @@ header.top img{height:26px;width:auto;}
   box-shadow:0 0 34px rgba(194,168,108,0.18);
   overflow:hidden;
 }
-.calendly-inline-widget{width:100%;height:800px;}
 .alt-time{
   font-size:13px;
   color:rgba(233,226,211,0.72);
@@ -203,7 +202,6 @@ footer .fine a:hover{color:var(--mocha);}
 @media (max-width:640px){
   body{font-size:16px;}
   .cal-btn{display:block;padding:17px 20px;}
-  .calendly-inline-widget{height:960px;}
   /* date chip: one item per line */
   .panel .when .sep{display:none;}
   .panel .when .mc-date,
@@ -249,9 +247,9 @@ footer .fine a:hover{color:var(--mocha);}
       <h2>Want me to look at your business <em>before</em> the masterclass?</h2>
       <p class="invite-copy">A <strong>free 20-minute assessment call</strong> &mdash; you and me, on Zoom. We'll find what's actually standing between you and consistent clients (it's usually not what you think), and you'll leave knowing exactly what to focus on.</p>
       <p class="book-label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
-      <h3 class="book-heading">Grab a time below.</h3>
-      <div class="calendly-wrap">
-        <div id="calendlyEmbed" class="calendly-inline-widget"></div>
+      <h3 class="book-heading">Three quick questions, then pick a time.</h3>
+      <div class="qualify-wrap">
+        <div data-qualify-source="magnetic-masterclass"></div>
       </div>
       <p class="alt-time">Can&rsquo;t find a time that works? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20%E2%80%94%20alternate%20time">Send me an email</a> and we&rsquo;ll arrange one.</p>
     </div>
@@ -288,29 +286,9 @@ footer .fine a:hover{color:var(--mocha);}
       document.getElementById('headline').textContent = safe + ", you're in.";
     }
   })();
-
-  // Calendly inline embed — themed to match the page, prefilled from the
-  // registration redirect (first_name/email) so booking takes seconds.
-  (function () {
-    var base = 'https://calendly.com/jasonmoss/business-assessment-call-magnetic-message';
-    var qs = new URLSearchParams(window.location.search);
-    var params = new URLSearchParams({
-      hide_gdpr_banner: '1',
-      background_color: 'f8f6f2',
-      text_color: '1d1f1e',
-      primary_color: '2e7d54'
-    });
-    var name = (qs.get('first_name') || '').trim();
-    var email = (qs.get('email') || '').trim();
-    if (name) params.set('name', name);
-    if (email) params.set('email', email);
-    document.getElementById('calendlyEmbed').setAttribute('data-url', base + '?' + params.toString());
-    var s = document.createElement('script');
-    s.src = 'https://assets.calendly.com/assets/external/widget.js';
-    s.async = true;
-    document.head.appendChild(s);
-  })();
 </script>
+
+<script src="https://jasonmoss.com/qualify/embed.js" async></script>
 
 </body>
 </html>

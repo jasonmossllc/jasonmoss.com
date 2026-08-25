@@ -29,6 +29,19 @@
     if (medium) qs.push('utm_medium=' + encodeURIComponent(medium));
     if (campaign) qs.push('utm_campaign=' + encodeURIComponent(campaign));
 
+    // Forward the host page's own UTMs into the widget, so an ad or email link
+    // landing on the page still attributes the booking. data-qualify-* wins,
+    // and utm_source never overrides the per-page source above.
+    try {
+      var pageQs = new URLSearchParams(window.location.search);
+      ['utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
+        var v = pageQs.get(k);
+        if (v && qs.indexOf(k + '=') === -1 && !qs.some(function (x) { return x.indexOf(k + '=') === 0; })) {
+          qs.push(k + '=' + encodeURIComponent(v.slice(0, 120)));
+        }
+      });
+    } catch (e) {}
+
     var frame = document.createElement('iframe');
     frame.src = BASE + '?' + qs.join('&');
     frame.title = 'Book a business assessment call';

@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <script>
 /* FIRST thing in the document, on purpose. The results URL carries name/email so
-   this page can greet the visitor and prefill Calendly. Both are stashed on
+   this page can greet the visitor. Both are stashed on
    window and stripped from the address bar right here — before gtag loads and
    before Netlify injects GTM at the end of <head> — so no analytics tag, browser
    history entry, or shared link ever contains the visitor's personal details. */
@@ -290,8 +290,6 @@
   .bookcard p:first-of-type{ font-family:var(--serif); font-size:22px; color:var(--obsidian); }
   .bookcard .btn{ padding:22px 54px; font-size:16px; }
   .bookcard .microcta{ color:var(--taupe); margin-top:14px; text-align:center; }
-  .booked-note{ display:none; font-family:var(--serif); font-size:19px; color:var(--forest); margin:8px 0 0; }
-  .booked-note.show{ display:block; }
 
   footer{
     text-align:center; padding:54px 24px 120px; background:var(--obsidian-deep);
@@ -392,8 +390,6 @@
   (function(){
     'use strict';
 
-    var FN_URL = '/.netlify/functions/submit-bottleneck';
-    var CALENDLY_URL = 'https://calendly.com/jasonmoss/business-assessment-call-with-jason-moss';
     var ASSESSMENT_URL = '/growth-bottleneck-quiz/';
     var STORE_KEY = 'gba_v1';
 
@@ -402,7 +398,7 @@
     // out of the funnel data.
     var IS_LIVE = location.hostname === 'jasonmoss.com';
     function gtag(){ window.dataLayer.push(arguments); }
-    // The results URL carries name/email so the page can greet + prefill. Those
+    // The results URL carries name/email so the page can greet the visitor. Those
     // must never reach analytics: gtag stamps document.location onto EVERY hit,
     // including GA4's auto-fired events, which run before any code below. So we
     // pin page_location to a sanitised URL at config time.
@@ -565,11 +561,9 @@
 
     var scores = state.scores, ny = state.ny, rev = state.rev;
     var b = state.b;
-    var name = state.name, email = state.email;
+    var name = state.name;
     function sc(k){ return scores[ORDER.indexOf(k)]; }
     var bScore = sc(b);
-    var booked = false;
-    try { booked = sessionStorage.getItem('gbaBooked.' + email) === '1'; } catch(e){}
 
     // remember this render on-device, so a paramless revisit still works.
     // Merge, never clobber — the quiz page owns the rest of gba_v1 — and
@@ -968,8 +962,8 @@
         '<p>A result like this is useful. A conversation about it is more useful.</p>' +
         '<p>If you want a second set of eyes, I’d be glad to offer you a free 20-minute session — you and me, one on one. We’ll look at what’s actually going on in your business and map out exactly what needs to change.</p>' +
         '<p>It’s twenty minutes looking at your business together. If it’s clear I can help beyond that, I’ll say so. If not, you’ll still leave with a clearer picture.</p>' +
-        '<button type="button" class="btn" id="bookBtn">Book your free 20-minute session&nbsp;<span class="arr">→</span></button>' +
-        '<p class="booked-note" id="bookedNote">You’re booked. The calendar invite is in your inbox — see you there.</p>' +
+        '<p>Three quick questions first, so I can point you to the right next step.</p>' +
+        '<div data-qualify-source="bottleneck-quiz"></div>' +
         '<p class="microcta">No preparation needed. Bring your business as it is — not as you think it should be.</p>' +
       '</div></div></section>';
 
@@ -1039,7 +1033,7 @@
           var r = bookcard.getBoundingClientRect();
           cardVisible = r.top < vh && r.bottom > 0;
         }
-        if (past && !cardVisible && !booked){ bar.classList.add('show'); }
+        if (past && !cardVisible){ bar.classList.add('show'); }
         else { bar.classList.remove('show'); }
       }
     }
@@ -1057,82 +1051,15 @@
     }
     track('results_viewed', { bottleneck: b, revenue_band: rev || '' });
 
-    /* ── Calendly (same-page popup per ruling — no new tab) ─────────── */
-    var calendlyLoaded = false;
-    function loadCalendly(){
-      if (calendlyLoaded) return;
-      calendlyLoaded = true;
-      var css = document.createElement('link');
-      css.rel = 'stylesheet';
-      css.href = 'https://assets.calendly.com/assets/external/widget.css';
-      document.head.appendChild(css);
-      var s = document.createElement('script');
-      s.src = 'https://assets.calendly.com/assets/external/widget.js';
-      s.async = true;
-      document.head.appendChild(s);
-    }
-    function calendlyUrl(){
-      var u = CALENDLY_URL + '?hide_gdpr_banner=1&primary_color=2c3f36'
-            + '&utm_source=gba&utm_medium=results&utm_content=' + encodeURIComponent(b);
-      if (name)  u += '&name='  + encodeURIComponent(name);
-      if (email) u += '&email=' + encodeURIComponent(email);
-      return u;
-    }
-    function openCalendly(){
-      loadCalendly();
-      if (!window.Calendly){
-        var tries = 0;
-        var t = setInterval(function(){
-          tries += 1;
-          if (window.Calendly){ clearInterval(t); openCalendly(); }
-          else if (tries > 20){ clearInterval(t); window.open(calendlyUrl(), '_blank'); }
-        }, 250);
-        return;
-      }
-      // Calendly's `prefill` option is unreliable for PopupText embeds (it never
-      // reaches the iframe). Query-string prefill is the documented mechanism
-      // that always works, for both the embed and the new-tab fallback.
-      window.Calendly.initPopupWidget({
-        url: calendlyUrl(),
-        prefill: { name: name || '', email: email || '' }
+    /* sticky bar CTA — walk them down to the questions */
+    var stickyBookBtn = document.getElementById('stickyBookBtn');
+    if (stickyBookBtn && bookcard){
+      stickyBookBtn.addEventListener('click', function(){
+        bookcard.scrollIntoView({ behavior:'smooth' });
       });
     }
-    function showBookedNote(){
-      var note = document.getElementById('bookedNote');
-      var btn = document.getElementById('bookBtn');
-      if (note) note.classList.add('show');
-      if (btn) btn.style.display = 'none';
-      if (bar) bar.classList.remove('show');
-    }
-
-    var bookBtn = document.getElementById('bookBtn');
-    var stickyBookBtn = document.getElementById('stickyBookBtn');
-    if (bookBtn) bookBtn.addEventListener('click', openCalendly);
-    if (stickyBookBtn) stickyBookBtn.addEventListener('click', openCalendly);
-    loadCalendly();
-    if (booked) showBookedNote();
-
-    window.addEventListener('message', function(e){
-      if (e.origin.indexOf('calendly.com') === -1) return;
-      var d = e.data;
-      if (d && d.event === 'calendly.event_scheduled'){
-        booked = true;
-        try { sessionStorage.setItem('gbaBooked.' + email, '1'); } catch(err){}
-        track('call_booked', { bottleneck: b });
-        showBookedNote();
-        if (email){
-          try {
-            fetch(FN_URL, {
-              method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
-              body: JSON.stringify({ action: 'booked', email: email }),
-              keepalive: true
-            });
-          } catch(err){}
-        }
-      }
-    });
   })();
   </script>
+  <script src="https://jasonmoss.com/qualify/embed.js" async></script>
 </body>
 </html>

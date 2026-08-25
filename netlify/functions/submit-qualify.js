@@ -40,6 +40,11 @@ const TAG_DECLINED = 22754515; // "Qualifier Declined"
 const TAG_HIGH_REV = 22754516; // "Qualifier High Revenue" — $10k+/mo
 const TAG_LAUNCHPAD_DOWNSELL = 20410106; // existing downsell tag
 
+// Kit sequence "Launchpad Downsell (Qualifier)" — 5 emails over 7 days for
+// everyone we decline. Its emails stay unpublished until Jason approves them,
+// so enrolling someone here sends nothing before then.
+const DOWNSELL_SEQUENCE_ID = 2872972;
+
 // ── Test mode ───────────────────────────────────────────────────────────────
 // ?test=1 on the widget: everything is validated exactly as in production
 // (origin, honeypot, answers, Turnstile) but NOTHING is written to Kit. Safe
@@ -246,6 +251,7 @@ exports.handler = async (event) => {
       email,
       firstName,
       tagIds,
+      ...(qualified ? {} : { sequenceId: DOWNSELL_SEQUENCE_ID }),
       // Preserved (set only when blank): original attribution, plus booked so a
       // retake never resets an already-booked lead back to "No".
       mappedFields: {
