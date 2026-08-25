@@ -346,8 +346,11 @@
   // Only reached on the decline path now.
   function renderContact(){
     paint(
-      '<h1>Where should I send this?</h1>'+
-      '<p class="sub">I’ll point you to the right next step for where you are.</p>'+
+      // They have answered three questions expecting a calendar next. This has
+      // to prime that a tailored recommendation is coming — without promising
+      // a call, and without announcing the no in a form heading.
+      '<h1>One more thing.</h1>'+
+      '<p class="sub">Then I’ll show you the best next step for where you are.</p>'+
       '<div class="field">'+
         '<label class="f" for="fn">First name</label>'+
         '<input type="text" id="fn" data-focus autocomplete="given-name" value="'+esc(state.first_name)+'">'+
