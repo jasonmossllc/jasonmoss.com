@@ -606,6 +606,17 @@
 
   window.addEventListener('resize', height);
 
+  // Timers alone are not enough: on a narrow screen the first measurement can
+  // land before webfonts settle, and nothing inside the frame resizes
+  // afterwards, so the parent keeps a too-short iframe and clips the content.
+  // Observe the shell instead and re-post whenever its box actually changes.
+  if (window.ResizeObserver){
+    try { new ResizeObserver(height).observe(document.querySelector('.shell')); } catch(e){}
+  }
+  if (document.fonts && document.fonts.ready && document.fonts.ready.then){
+    document.fonts.ready.then(height).catch(function(){});
+  }
+
   if (TEST && FORCE){
     state.first_name = state.first_name || 'Preview';
     state.email = state.email || 'preview@example.com';
