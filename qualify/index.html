@@ -177,8 +177,11 @@
   }
   .fit-badge span{font-size:12px;line-height:1}
   .fit p.fit-line{
-    margin:0;font-family:var(--serif);color:var(--obsidian);
+    margin:0 0 9px;font-family:var(--serif);color:var(--obsidian);
     font-size:clamp(19px,4.4vw,23px);line-height:1.3;
+  }
+  .fit p.fit-benefit{
+    margin:0;color:var(--mocha);font-size:15px;line-height:1.55;text-wrap:pretty;
   }
   .next-step{
     display:flex;align-items:center;gap:10px;
@@ -589,6 +592,7 @@
       '<div class="fit">'+
         '<p class="fit-badge"><span aria-hidden="true">&#10003;</span> You’re a fit</p>'+
         '<p class="fit-line">This call was built for you.</p>'+
+        '<p class="fit-benefit">We’ll look at your business together and map your clearest path to more clients and income.</p>'+
       '</div>'+
       '<p class="next-step">Your next step</p>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
