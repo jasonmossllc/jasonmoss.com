@@ -55,12 +55,14 @@ const TEST_KEY = process.env.QUALIFY_TEST_KEY || '';
 const REVENUE = {
   none: "Haven't started earning yet",
   'under-1k': 'Under $1,000/mo',
+  '1k-5k': '$1,000-$5,000/mo',
+  '5k-10k': '$5,000-$10,000/mo',
+  '10k-plus': '$10,000+/mo',
+  // Retired bands from earlier versions of the option list. Still accepted so
+  // a part-finished session doesn't get rejected as a forged payload.
   '1k-3k': '$1,000-$3,000/mo',
   '3k-10k': '$3,000-$10,000/mo',
-  // Retired split bands. Still accepted so a session that was half-finished
-  // when the option list changed doesn't get rejected as a forged payload.
   '3k-5k': '$3,000-$5,000/mo',
-  '5k-10k': '$5,000-$10,000/mo',
   '10k-25k': '$10,000-$25,000/mo',
   '25k-plus': '$25,000+/mo',
 };
@@ -77,8 +79,15 @@ const CLIENTS = {
 };
 
 // Revenue bands that clear the $1k floor.
-const REVENUE_OK = new Set(['1k-3k', '3k-10k', '3k-5k', '5k-10k', '10k-25k', '25k-plus']);
-const HIGH_REVENUE = new Set(['10k-25k', '25k-plus']);
+const REVENUE_OK = new Set([
+  '1k-5k', '5k-10k', '10k-plus',
+  '1k-3k', '3k-10k', '3k-5k', '10k-25k', '25k-plus',   // retired
+]);
+const HIGH_REVENUE = new Set(['10k-plus', '10k-25k', '25k-plus']);
+
+// How long a decline stands. Someone told "not yet" cannot re-answer their way
+// into a booking, but a business does genuinely change, so it expires.
+const DECLINE_LOCK_DAYS = 90;
 
 /**
  * Book or decline, and which decline copy to show.
@@ -183,7 +192,33 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid answers' }) };
     }
 
-    const { decision, reason } = decide(data.revenue, data.fulltime, data.clients);
+    let { decision, reason } = decide(data.revenue, data.fulltime, data.clients);
+
+    // A previous decline stands for DECLINE_LOCK_DAYS regardless of what they
+    // answer this time. The client hides the questions after a decline, but
+    // that is cosmetic — a new tab clears it, so the real gate is here.
+    let lockedByPriorDecline = false;
+    if (decision === 'book' && !isTest) {
+      try {
+        const prior = await findSubscriberByEmail(email);
+        const priorDecision = prior?.fields?.qualify_decision || '';
+        const priorDate = prior?.fields?.qualify_date || '';
+        if (/^Decline/i.test(priorDecision) && priorDate) {
+          const ageDays = (Date.now() - Date.parse(priorDate + 'T00:00:00Z')) / 86400000;
+          if (Number.isFinite(ageDays) && ageDays >= 0 && ageDays < DECLINE_LOCK_DAYS) {
+            const m = /\(([a-z_]+)\)/.exec(priorDecision);
+            decision = 'decline';
+            reason = (m && m[1]) || 'early';
+            lockedByPriorDecline = true;
+            console.log('Held to prior decline', { email, ageDays: Math.round(ageDays), reason });
+          }
+        }
+      } catch (error) {
+        // A lookup failure must not block a genuine lead — fail open.
+        console.error('Prior-decline lookup failed', { error: kitErrorSummary(error) });
+      }
+    }
+
     const qualified = decision === 'book';
     const highRevenue = HIGH_REVENUE.has(data.revenue);
 
@@ -224,6 +259,7 @@ exports.handler = async (event) => {
         qualify_clients: CLIENTS[data.clients],
         qualify_source: source,
         qualify_decision: qualified ? 'Book' : `Decline (${reason})`,
+        ...(lockedByPriorDecline ? { qualify_relocked: new Date().toISOString().slice(0, 10) } : {}),
         qualify_date: new Date().toISOString().slice(0, 10),
         ...(goal ? { qualify_goal: goal } : {}),
       },

@@ -7,21 +7,21 @@
 <title>Book a Business Assessment Call — Jason Moss</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Raleway:wght@400;500;600&display=swap">
 <style>
   :root{
     --obsidian:#1D1F1E;
     --forest:#2C3F36;
-    --forest-deep:#25362E;
-    --mocha:#5B4B3F;
-    --taupe:#8C837A;
-    --gold:#C2A86C;
-    --gold-dark:#b89a5e;
-    --stone:#E9E2D3;
+    --forest-deep:#22322A;
+    --mocha:#4A3D33;      /* was #5B4B3F (4.6:1) -> 7.4:1 on sand */
+    --taupe:#6B635B;      /* was #8C837A (3.1:1, failed AA) -> 5.5:1 on sand */
+    --gold:#C2A86C;       /* decorative only: progress bar */
+    --gold-deep:#8A6E28;  /* gold that is legible as text: 4.8:1 on sand */
     --sand:#F8F6F2;
-    --line:rgba(29,31,30,.13);
+    --line:rgba(29,31,30,.22);
+    --line-soft:rgba(29,31,30,.10);
     --serif:'Libre Baskerville', Georgia, serif;
-    --sans:'Raleway','Helvetica Neue',sans-serif;
+    --sans:'Raleway','Helvetica Neue',Arial,sans-serif;
     --ease:cubic-bezier(0.16,1,0.3,1);
   }
   *{box-sizing:border-box}
@@ -30,110 +30,137 @@
     background:var(--sand);
     color:var(--obsidian);
     font-family:var(--sans);
-    font-weight:400;
-    -webkit-font-smoothing:antialiased;
+    font-size:16px;
     line-height:1.6;
+    -webkit-font-smoothing:antialiased;
+    -webkit-text-size-adjust:100%;
   }
-  .shell{max-width:640px;margin:0 auto;padding:34px 24px 44px;min-height:100vh;display:flex;flex-direction:column}
-  @media (max-width:520px){ .shell{padding:22px 18px 34px} }
 
-  /* progress */
-  .bar{height:3px;background:rgba(29,31,30,.10);border-radius:3px;overflow:hidden;flex:none}
-  .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .45s var(--ease)}
-  .bar.hide{opacity:0}
+  /* Standalone: fill the window. Framed: the parent sizes the iframe to our
+     content, so a 100vh floor would make every measurement taller than the
+     frame we are already in and the embed would grow without bound. */
+  .shell{
+    max-width:600px;margin:0 auto;
+    padding:32px 24px 48px;
+    min-height:100vh;
+    display:flex;flex-direction:column;
+  }
+  html.framed .shell{min-height:0}
+  @media (max-width:600px){ .shell{padding:20px 18px 36px} }
+
+  .bar{height:3px;background:var(--line-soft);border-radius:3px;overflow:hidden;flex:none}
+  .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .4s var(--ease)}
+  .bar.hide{visibility:hidden}
   .steplabel{
-    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe);
-    margin:12px 0 0;min-height:16px;font-weight:600;
+    font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe);
+    margin:10px 0 0;min-height:15px;font-weight:600;
   }
 
-  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:26px 0}
-  .screen{animation:rise .5s var(--ease) both}
-  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
-  @media (prefers-reduced-motion:reduce){ .screen{animation:none} .bar i{transition:none} }
+  /* Top-aligned so the question never changes position between steps. */
+  .stage{padding:32px 0 0}
+  @media (max-width:600px){ .stage{padding:24px 0 0} }
+  .screen{animation:rise .4s var(--ease) both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){
+    .screen{animation:none}
+    .bar i{transition:none}
+  }
 
   h1{
     font-family:var(--serif);font-weight:400;
-    font-size:clamp(23px,3.6vw,31px);line-height:1.3;
+    font-size:clamp(22px,5vw,29px);line-height:1.32;
     margin:0 0 10px;letter-spacing:-.01em;text-wrap:balance;
   }
-  .sub{color:var(--mocha);font-size:15px;margin:0 0 26px;max-width:46ch;font-weight:300}
+  .sub{color:var(--mocha);font-size:15px;line-height:1.55;margin:0 0 24px;text-wrap:pretty}
+  .eyebrow{
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
+    color:var(--gold-deep);font-weight:600;margin:0 0 10px;
+  }
 
-  /* options */
-  .opts{display:flex;flex-direction:column;gap:9px;margin:0;padding:0;list-style:none}
+  .opts{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
   .opt{
-    display:flex;align-items:center;gap:13px;width:100%;text-align:left;
-    background:#fff;border:1px solid var(--line);border-radius:9px;
-    padding:15px 17px;font-family:var(--sans);font-size:15.5px;color:var(--obsidian);
-    cursor:pointer;transition:border-color .18s,box-shadow .18s,transform .18s;
+    display:flex;align-items:center;gap:12px;width:100%;text-align:left;
+    background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;min-height:56px;
+    font-family:var(--sans);font-size:16px;line-height:1.35;color:var(--obsidian);
+    cursor:pointer;transition:border-color .15s,box-shadow .15s;
   }
-  .opt:hover{border-color:var(--gold);box-shadow:0 3px 14px -6px rgba(29,31,30,.22)}
-  .opt:focus-visible{outline:2px solid var(--forest);outline-offset:2px}
+  .opt:hover{border-color:var(--forest);box-shadow:0 2px 10px -4px rgba(29,31,30,.25)}
+  .opt.on{border-color:var(--forest);box-shadow:inset 0 0 0 1px var(--forest)}
   .opt .k{
-    flex:none;width:23px;height:23px;border-radius:5px;border:1px solid var(--line);
-    display:grid;place-items:center;font-size:11px;color:var(--taupe);font-weight:600;
-    transition:background .18s,color .18s,border-color .18s;
+    flex:none;width:26px;height:26px;border-radius:6px;
+    border:1px solid var(--line);display:grid;place-items:center;
+    font-size:11px;color:var(--taupe);font-weight:600;
+    transition:background .15s,color .15s,border-color .15s;
   }
-  .opt:hover .k{background:var(--gold);border-color:var(--gold);color:#fff}
-  .opt.on{border-color:var(--forest);background:#fff}
-  .opt.on .k{background:var(--forest);border-color:var(--forest);color:#fff}
+  .opt:hover .k,.opt.on .k{background:var(--forest);border-color:var(--forest);color:#fff}
 
-  /* fields */
-  label.f{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe);margin:0 0 7px;font-weight:600}
-  input[type=text],input[type=email],textarea{
-    width:100%;background:#fff;border:1px solid var(--line);border-radius:9px;
-    padding:14px 16px;font-family:var(--sans);font-size:16px;color:var(--obsidian);
-    transition:border-color .18s;
+  .field{margin:0 0 18px}
+  label.f{
+    display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
+    color:var(--taupe);margin:0 0 6px;font-weight:600;
   }
-  textarea{min-height:104px;resize:vertical;line-height:1.55}
-  input:focus,textarea:focus{outline:none;border-color:var(--forest)}
-  .fieldrow{margin:0 0 16px}
+  input[type=text],input[type=email],textarea{
+    width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;
+    padding:14px 16px;font-family:var(--sans);font-size:16px;color:var(--obsidian);
+    transition:border-color .15s,box-shadow .15s;
+  }
+  textarea{min-height:112px;resize:vertical;line-height:1.55}
+  input:focus,textarea:focus{
+    outline:none;border-color:var(--forest);box-shadow:inset 0 0 0 1px var(--forest);
+  }
+
+  .opt:focus-visible,.btn:focus-visible,.back:focus-visible,.skip:focus-visible,
+  a:focus-visible,input:focus-visible,textarea:focus-visible{
+    outline:3px solid var(--forest);outline-offset:2px;
+  }
 
   .btn{
-    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    display:inline-flex;align-items:center;justify-content:center;
     background:var(--forest);color:#fff;border:none;border-radius:999px;
-    padding:14px 30px;font-family:var(--sans);font-size:15px;font-weight:600;
-    letter-spacing:.02em;cursor:pointer;transition:background .2s,transform .2s;
-    text-decoration:none;
+    padding:0 32px;min-height:52px;
+    font-family:var(--sans);font-size:16px;font-weight:600;
+    cursor:pointer;transition:background .18s;text-decoration:none;
   }
-  .btn:hover{background:var(--forest-deep);transform:translateY(-1px)}
-  .btn:disabled{opacity:.55;cursor:default;transform:none}
-  .btn.gold{background:var(--gold);color:var(--obsidian)}
-  .btn.gold:hover{background:var(--gold-dark)}
-  .btnrow{display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap}
-  .back{background:none;border:none;color:var(--taupe);font-family:var(--sans);font-size:13.5px;cursor:pointer;padding:6px 2px}
-  .back:hover{color:var(--obsidian)}
-  .hint{font-size:12.5px;color:var(--taupe);margin:14px 0 0;font-weight:300}
-  .err{color:#9C4A34;font-size:13.5px;margin:12px 0 0;min-height:18px}
+  .btn:hover{background:var(--forest-deep)}
+  .btn:disabled{opacity:.6;cursor:default}
+  .actions{display:flex;align-items:center;gap:16px;margin-top:24px;flex-wrap:wrap}
+  @media (max-width:600px){
+    .actions{gap:10px}
+    .actions .btn{width:100%;order:-1}
+  }
+  .back,.skip{
+    background:none;border:none;color:var(--taupe);
+    font-family:var(--sans);font-size:14px;cursor:pointer;
+    padding:10px 4px;min-height:44px;
+  }
+  .back:hover,.skip:hover{color:var(--obsidian)}
+  .skip{text-decoration:underline;text-underline-offset:3px}
 
-  /* decline + booking */
-  .card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:30px 28px}
-  @media (max-width:520px){ .card{padding:24px 20px} }
-  .card h1{margin-bottom:14px}
-  .card p{color:var(--mocha);font-size:15.5px;margin:0 0 15px;font-weight:300}
-  .card p strong{font-weight:600;color:var(--obsidian)}
-  .rule{height:1px;background:var(--line);margin:24px 0}
-  .kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 12px}
+  .hint{font-size:13px;color:var(--taupe);margin:16px 0 0;line-height:1.5}
+  .err{color:#8C3D26;font-size:14px;margin:12px 0 0;min-height:20px;font-weight:500}
+  .err a{color:#8C3D26}
 
-  /* Calendly's inline widget sizes its iframe from the container's computed
-     HEIGHT. With only a min-height it collapses to ~150px and you get the
-     timezone row and nothing else, so this must be an explicit height. Mobile
-     needs far more room because Calendly stacks the calendar under the header. */
+  /* the bot check belongs in the form, above the action — never orphaned */
+  .ts-slot{margin:2px 0 0;display:none}
+  .ts-slot.show{display:block}
+
+  .card{background:#fff;border:1px solid var(--line-soft);border-radius:14px;padding:32px 28px}
+  @media (max-width:600px){ .card{padding:24px 20px} }
+  .card h1{margin-bottom:16px}
+  .card p{color:var(--mocha);font-size:16px;line-height:1.62;margin:0 0 16px}
+  .card strong{font-weight:600;color:var(--obsidian)}
+  .rule{height:1px;background:var(--line-soft);margin:26px 0}
+
   #cal{width:100%;height:720px}
   #cal iframe{width:100%!important;height:100%!important;border:0;display:block}
   @media (max-width:640px){ #cal{height:1120px} }
-  .cal-head{margin:0 0 16px}
-  .cal-head h1{margin-bottom:6px}
 
-  .ts-host{position:absolute;left:-10000px;top:0;width:320px}
-  .ts-host.show{position:static;left:auto;top:auto;width:auto;margin:4px 0 0}
-  .skip{background:none;border:none;color:var(--taupe);font-family:var(--sans);font-size:13.5px;cursor:pointer;padding:6px 2px;text-decoration:underline;text-underline-offset:3px}
-  .skip:hover{color:var(--obsidian)}
   .testbar{
-    flex:none;background:#3a2f14;color:#F2E4BE;border-radius:7px;
-    padding:9px 13px;margin:0 0 14px;font-size:12.5px;line-height:1.45;
-    display:flex;gap:9px;align-items:flex-start;
+    flex:none;background:#33291A;color:#F0E2C2;border-radius:8px;
+    padding:10px 14px;margin:0 0 16px;font-size:13px;line-height:1.5;
   }
-  .testbar b{color:#E8C979;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:11px;flex:none;padding-top:1px}
+  .testbar b{color:#E8C979;text-transform:uppercase;letter-spacing:.08em;font-size:11px}
   .testbar a{color:#E8C979}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
@@ -143,8 +170,9 @@
   <div id="testbar"></div>
   <div class="bar" id="bar"><i id="barfill"></i></div>
   <p class="steplabel" id="steplabel"></p>
-  <div class="stage"><div id="screen"></div></div>
-  <div class="ts-host" id="ts-host"></div>
+  <div class="stage">
+    <div id="screen" aria-live="polite"></div>
+  </div>
 </div>
 
 <script>
@@ -155,80 +183,48 @@
   var CALENDLY = 'https://calendly.com/jasonmoss/business-assessment-call';
   var LAUNCHPAD = 'https://jasonmoss.com/launchpad/';
   var TS_SITEKEY = '0x4AAAAAADlUEkeJ6kJ-_AML';
+  var KEY = 'jm_qualify_v2';
+  var SESSION_MAX_AGE = 30 * 60 * 1000;
 
-  // ── source / attribution ──────────────────────────────────────────────────
-  // Embed as: /qualify/?source=apply  (utm_source also accepted)
+  // Flag framing BEFORE the first measurement, so the viewport floor is off.
+  var FRAMED = (function(){ try { return window.parent !== window; } catch(e){ return true; } })();
+  if (FRAMED) document.documentElement.className += ' framed';
+
   var params = new URLSearchParams(location.search);
   function p(k){ return (params.get(k) || '').slice(0,120); }
   var SOURCE = p('source') || p('utm_source') || 'direct';
   var UTM = {
-    utm_source: SOURCE,
-    utm_medium: p('utm_medium'),
-    utm_campaign: p('utm_campaign'),
-    utm_content: p('utm_content'),
-    utm_term: p('utm_term')
+    utm_source: SOURCE, utm_medium: p('utm_medium'), utm_campaign: p('utm_campaign'),
+    utm_content: p('utm_content'), utm_term: p('utm_term')
   };
+  var TEST = p('test'), FORCE = p('force'), FORCE_REASON = p('reason') || 'early';
 
-  // ── test mode ─────────────────────────────────────────────────────────────
-  // ?test=1            -> nothing is written to Kit (still bot-checked)
-  // ?test=<secret>     -> also skips the bot check, for repeat/automated runs
-  // &force=book | &force=decline&reason=early|part_time|no_clients
-  //                    -> jump straight to an outcome screen to review copy
-  var TEST = p('test');
-  var FORCE = p('force');
-  var FORCE_REASON = p('reason') || 'early';
-  if (TEST) {
-    document.getElementById('testbar').className = 'testbar';
-    document.getElementById('testbar').innerHTML =
-      '<b>Test</b><span>Nothing is saved to your CRM. Answers here won’t create or tag a subscriber. ' +
-      '<strong>Booking a time on the calendar still creates a real Calendly event</strong> — cancel it after. ' +
-      'Jump to: <a href="?test=' + encodeURIComponent(TEST) + '&force=book">booking</a> · ' +
-      '<a href="?test=' + encodeURIComponent(TEST) + '&force=decline&reason=early">decline: early</a> · ' +
-      '<a href="?test=' + encodeURIComponent(TEST) + '&force=decline&reason=part_time">decline: part-time</a> · ' +
-      '<a href="?test=' + encodeURIComponent(TEST) + '&force=decline&reason=no_clients">decline: no clients</a></span>';
-  }
+  var state = { revenue:null, fulltime:null, clients:null, goal:'',
+                first_name:'', email:'', decided:null, reason:null };
+  var idx = 0, TOTAL = 5, locked = false, keyHandler = null;
 
-  var state = { revenue:null, fulltime:null, clients:null, goal:'', first_name:'', email:'', decision:null, reason:null };
-  var KEY = 'jm_qualify_v1';
-  function save(){
-    try { sessionStorage.setItem(KEY, JSON.stringify({ s:state, i:idx })); } catch(e){}
-  }
-  function restore(){
-    try {
-      var raw = sessionStorage.getItem(KEY);
-      if (!raw) return;
-      var d = JSON.parse(raw);
-      if (d && d.s && typeof d.i === 'number' && d.i < 5) {
-        Object.keys(state).forEach(function(k){ if (d.s[k] != null) state[k] = d.s[k]; });
-        idx = d.i;
-        // Land on the first unanswered question, never past a gap.
-        for (var qi = 0; qi < QUESTIONS.length; qi++) {
-          if (!state[QUESTIONS[qi].id]) { idx = Math.min(idx, qi); break; }
-        }
-      }
-    } catch(e){}
-  }
+  var el = document.getElementById('screen');
+  var bar = document.getElementById('bar');
+  var barfill = document.getElementById('barfill');
+  var steplabel = document.getElementById('steplabel');
 
   var QUESTIONS = [
     { id:'revenue', title:"Where's your business at right now?",
-      sub:'Roughly what it brings in each month. This is just so I can point you at the right next step — there’s no wrong answer here.',
+      sub:"There's no wrong answer — this just points you to the right next step.",
       options:[
         {v:'none',      t:"I haven't started earning yet"},
         {v:'under-1k',  t:'Under $1,000/month'},
-        {v:'1k-3k',     t:'$1,000 – $3,000/month'},
-        {v:'3k-10k',    t:'$3,000 – $10,000/month'},
-        {v:'10k-25k',   t:'$10,000 – $25,000/month'},
-        {v:'25k-plus',  t:'$25,000+/month'}
+        {v:'1k-5k',     t:'$1,000 – $5,000/month'},
+        {v:'5k-10k',    t:'$5,000 – $10,000/month'},
+        {v:'10k-plus',  t:'$10,000+/month'}
       ]},
-    { id:'fulltime', title:'Is this business your full-time focus?',
-      sub:'',
+    { id:'fulltime', title:'Is this your full-time focus?',
       options:[
-        {v:'yes',       t:"Yes — this is what I do full-time"},
+        {v:'yes',       t:'Yes, this is what I do full-time'},
         {v:'job',       t:'Not yet — I have a job or other main income'},
-        {v:'supported', t:"I'm retired or supported, and building this"}
+        {v:'supported', t:"I'm retired or supported while I build it"}
       ]},
-    { id:'clients', title:'How many paying clients are you working with right now?',
-      sub:'',
+    { id:'clients', title:'How many paying clients do you have right now?',
       options:[
         {v:'none',   t:'None right now'},
         {v:'1-2',    t:'1 – 2'},
@@ -239,76 +235,84 @@
 
   var DECLINE = {
     early: {
-      h: "Let's get you to your first clients first.",
+      h: "Let's get your first clients in first.",
       body: [
-        "Thanks for being straight with me about where things are. Based on your answers, a business assessment call isn't the best use of your time right now — and I'd rather tell you that than take the call and have us both realise it twenty minutes in.",
-        "The call is built for people who already have an offer landing and paying clients coming in, who need to make that repeatable. You're earlier than that, and the honest truth is that the work you need is different work.",
-        "<strong>Launchpad is where I'd start.</strong> It's built for exactly this stage — getting your offer clear and your first clients in the door, without needing an audience or a funnel first."
+        "This call is a diagnostic on a practice that's already running — pricing, pipeline, where the leads stall. You're earlier than that, so most of it wouldn't apply yet.",
+        "<strong>Launchpad is the better starting point.</strong> It's built for getting your offer clear and your first clients signed, without needing an audience or a funnel first."
       ]
     },
     part_time: {
-      h: "The timing isn't quite right yet.",
+      h: "The timing isn't right yet.",
       body: [
-        "You've got something real going. But you're building this alongside a job or another main income, and that changes what actually moves the needle.",
-        "The assessment call is built around the constraints of a full-time practice — pipeline, capacity, pricing, the things that bite when this is the only thing paying you. Most of what we'd cover wouldn't apply to you yet, and I'd rather not waste your twenty minutes.",
-        "<strong>Launchpad is the better fit right now.</strong> It's designed to be worked in the hours you actually have, and to get you to the point where going full-time is a decision rather than a leap."
+        "You've got something real going, but you're building it alongside a job or another main income — and that changes what actually moves the needle.",
+        "<strong>Launchpad fits where you are.</strong> It's designed to be worked in the hours you actually have, so going full-time becomes a decision rather than a leap."
       ]
     },
     no_clients: {
-      h: "Let's get clients in the door first.",
+      h: "Let's fill the calendar first.",
       body: [
-        "You've got revenue coming in and you're full-time on this, which puts you ahead of most people who book this call. But you're not working with anyone right now — and that's the thing to fix first.",
-        "The assessment call is a diagnostic on a running practice. Without live clients there isn't enough on the table for us to look at, and you'd get more out of twenty minutes of doing than twenty minutes of talking.",
-        "<strong>Launchpad will get you there faster.</strong> It's built to fill the calendar back up, and it's a better next step for you than a call would be today."
+        "You're full-time with revenue coming in, which puts you ahead of most people who book this. But you're not working with anyone right now, and that's the thing to fix first.",
+        "<strong>Launchpad will get you there faster</strong> than twenty minutes of talking would."
       ]
     }
   };
 
-  var keyHandler = null;
-  var locked = false;   // guards the auto-advance window so a fast double
-                        // input can't skip a question and leave state null
-  document.addEventListener('keydown', function(e){ if (keyHandler && !locked) keyHandler(e); });
+  function save(){
+    try { sessionStorage.setItem(KEY, JSON.stringify({ s:state, i:idx, t:Date.now() })); } catch(e){}
+  }
+  function restore(){
+    try {
+      var d = JSON.parse(sessionStorage.getItem(KEY) || 'null');
+      if (!d || !d.s) return false;
+      if (Date.now() - (d.t || 0) > SESSION_MAX_AGE){ sessionStorage.removeItem(KEY); return false; }
+      Object.keys(state).forEach(function(k){ if (d.s[k] != null) state[k] = d.s[k]; });
+      // A "no" stands. You cannot re-answer your way into a yes.
+      if (state.decided === 'decline'){ renderDecline(state.reason); return true; }
+      idx = Math.min(typeof d.i === 'number' ? d.i : 0, 4);
+      for (var q = 0; q < QUESTIONS.length; q++){
+        if (!state[QUESTIONS[q].id]){ idx = Math.min(idx, q); break; }
+      }
+    } catch(e){}
+    return false;
+  }
 
-  var el = document.getElementById('screen');
-  var barfill = document.getElementById('barfill');
-  var bar = document.getElementById('bar');
-  var steplabel = document.getElementById('steplabel');
-  var idx = 0;          // 0..2 questions, 3 goal, 4 contact
-  var TOTAL = 5;
-
-  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
-    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
-
+  var lastH = 0;
   function height(){
-    var h = document.querySelector('.shell').scrollHeight + 8;
+    var h = Math.ceil(document.querySelector('.shell').getBoundingClientRect().height) + 8;
+    if (h === lastH) return;
+    lastH = h;
     try { parent.postMessage({ type:'qualify:height', height:h }, '*'); } catch(e){}
   }
-  function progress(n, show){
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  function progress(step, show){
     bar.classList.toggle('hide', !show);
-    barfill.style.width = show ? Math.round((n/TOTAL)*100)+'%' : '0%';
-    steplabel.textContent = show ? ('Question ' + n + ' of ' + TOTAL) : '';
+    barfill.style.width = show ? Math.round((step/TOTAL)*100)+'%' : '0%';
+    steplabel.textContent = show ? ('Step ' + step + ' of ' + TOTAL) : '';
   }
-  function paint(html, step, show){
+  function paint(html, step, showProgress){
     el.innerHTML = '<div class="screen">' + html + '</div>';
-    progress(step, show !== false);
+    progress(step, showProgress !== false);
     height();
     var f = el.querySelector('[data-focus]');
-    if (f) { try { f.focus({preventScroll:true}); } catch(e){ f.focus(); } }
+    if (f){ try { f.focus({preventScroll:true}); } catch(e){ f.focus(); } }
   }
 
-  // ── question screens ──────────────────────────────────────────────────────
   function renderQuestion(){
     var q = QUESTIONS[idx];
     var opts = q.options.map(function(o,i){
-      var on = state[q.id] === o.v ? ' on' : '';
-      return '<li><button type="button" class="opt'+on+'" data-v="'+esc(o.v)+'">'+
-             '<span class="k">'+String.fromCharCode(65+i)+'</span><span>'+esc(o.t)+'</span></button></li>';
+      var on = state[q.id] === o.v;
+      return '<li><button type="button" class="opt'+(on?' on':'')+'" data-v="'+esc(o.v)+'"'+
+             ' aria-pressed="'+(on?'true':'false')+'">'+
+             '<span class="k" aria-hidden="true">'+String.fromCharCode(65+i)+'</span>'+
+             '<span>'+esc(o.t)+'</span></button></li>';
     }).join('');
     paint(
       '<h1>'+esc(q.title)+'</h1>'+
       (q.sub ? '<p class="sub">'+esc(q.sub)+'</p>' : '')+
-      '<ul class="opts">'+opts+'</ul>'+
-      (idx>0 ? '<div class="btnrow"><button type="button" class="back" id="back">&larr; Back</button></div>' : ''),
+      '<ul class="opts" role="list">'+opts+'</ul>'+
+      (idx>0 ? '<div class="actions"><button type="button" class="back" id="back">&larr; Back</button></div>' : ''),
       idx+1
     );
     el.querySelectorAll('.opt').forEach(function(b){
@@ -316,37 +320,43 @@
         if (locked) return;
         locked = true;
         state[q.id] = b.getAttribute('data-v');
-        el.querySelectorAll('.opt').forEach(function(x){ x.classList.remove('on'); });
-        b.classList.add('on');
-        setTimeout(next, 170);
+        el.querySelectorAll('.opt').forEach(function(x){
+          x.classList.remove('on'); x.setAttribute('aria-pressed','false');
+        });
+        b.classList.add('on'); b.setAttribute('aria-pressed','true');
+        setTimeout(next, 160);
       });
     });
     var back = document.getElementById('back');
     if (back) back.addEventListener('click', prev);
     keyHandler = function(e){
       if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var t = e.target && e.target.tagName;
+      if (t === 'INPUT' || t === 'TEXTAREA') return;
       var i = -1;
-      if (/^[a-gA-G]$/.test(e.key)) i = e.key.toUpperCase().charCodeAt(0) - 65;
-      else if (/^[1-7]$/.test(e.key)) i = parseInt(e.key, 10) - 1;
+      if (/^[a-zA-Z]$/.test(e.key)) i = e.key.toUpperCase().charCodeAt(0) - 65;
+      else if (/^[1-9]$/.test(e.key)) i = parseInt(e.key,10) - 1;
       var btns = el.querySelectorAll('.opt');
-      if (i >= 0 && i < btns.length) { e.preventDefault(); btns[i].click(); }
+      if (i >= 0 && i < btns.length){ e.preventDefault(); btns[i].click(); }
     };
   }
 
   function renderGoal(){
     paint(
-      '<h1>What’s the one thing you want to walk away with?</h1>'+
-      '<p class="sub">A few words is plenty — it’s what I’ll prepare from. Optional.</p>'+
-      '<div class="fieldrow"><textarea id="goal" data-focus placeholder="The thing that would make this call worth it&hellip;">'+esc(state.goal)+'</textarea></div>'+
-      '<div class="btnrow"><button type="button" class="btn" id="go">Continue</button>'+
-      '<button type="button" class="skip" id="skip">Skip this</button>'+
-      '<button type="button" class="back" id="back">&larr; Back</button></div>',
+      '<h1>What do you want to walk away with?</h1>'+
+      '<p class="sub">Optional — it’s what I’ll prepare from.</p>'+
+      '<div class="field">'+
+        '<label class="sr" for="goal">What you want to walk away with</label>'+
+        '<textarea id="goal" data-focus placeholder="A sentence is plenty…">'+esc(state.goal)+'</textarea>'+
+      '</div>'+
+      '<div class="actions">'+
+        '<button type="button" class="btn" id="go">Continue</button>'+
+        '<button type="button" class="skip" id="skip">Skip</button>'+
+        '<button type="button" class="back" id="back">&larr; Back</button>'+
+      '</div>',
       4
     );
-    function saveGoal(){
-      state.goal = document.getElementById('goal').value.trim();
-      next();
-    }
+    function saveGoal(){ state.goal = document.getElementById('goal').value.trim(); next(); }
     document.getElementById('go').addEventListener('click', saveGoal);
     document.getElementById('skip').addEventListener('click', function(){ state.goal=''; next(); });
     document.getElementById('back').addEventListener('click', prev);
@@ -356,192 +366,174 @@
   }
 
   function renderContact(){
-    // We already know the outcome client-side, so qualified people get an
-    // affirming screen instead of one more anonymous gate. This is the step
-    // good leads are most likely to abandon.
     var willBook = localDecision().decision === 'book';
-    onContactScreen = true;
     paint(
       (willBook
-        ? '<p class="kicker">You’re a fit</p><h1>Good — let’s get you booked.</h1>'+
-          '<p class="sub">Just your name and email, then pick a time that works.</p>'
-        : '<h1>Last thing — who are you?</h1>'+
-          '<p class="sub">So I know who I’m talking to.</p>')+
-      '<div class="fieldrow"><label class="f" for="fn">First name</label>'+
-      '<input type="text" id="fn" data-focus autocomplete="given-name" value="'+esc(state.first_name)+'"></div>'+
-      '<div class="fieldrow"><label class="f" for="em">Email address</label>'+
-      '<input type="email" id="em" autocomplete="email" inputmode="email" value="'+esc(state.email)+'"></div>'+
+        ? '<p class="eyebrow">You’re a fit</p><h1>Let’s get you booked.</h1>'
+        : '<h1>Last step.</h1>')+
+      '<div class="field">'+
+        '<label class="f" for="fn">First name</label>'+
+        '<input type="text" id="fn" data-focus autocomplete="given-name" value="'+esc(state.first_name)+'">'+
+      '</div>'+
+      '<div class="field">'+
+        '<label class="f" for="em">Email</label>'+
+        '<input type="email" id="em" autocomplete="email" inputmode="email" value="'+esc(state.email)+'">'+
+      '</div>'+
       '<div class="sr"><label for="website">Leave this empty</label>'+
       '<input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>'+
-      '<p class="err" id="err"></p>'+
-      '<div class="btnrow"><button type="button" class="btn" id="go">'+(willBook?'Pick my time':'Continue')+'</button>'+
-      '<button type="button" class="back" id="back">&larr; Back</button></div>'+
-      '<p class="hint">No spam — I’ll only use this to follow up on what you asked for.</p>',
+      '<div class="ts-slot" id="ts-slot"></div>'+
+      '<p class="err" id="err" role="alert"></p>'+
+      '<div class="actions">'+
+        '<button type="button" class="btn" id="go">'+(willBook?'Book my time':'Continue')+'</button>'+
+        '<button type="button" class="back" id="back">&larr; Back</button>'+
+      '</div>'+
+      '<p class="hint">I’ll send your call details, plus occasional emails on getting clients. Unsubscribe anytime.</p>',
       5
     );
     document.getElementById('go').addEventListener('click', submit);
     document.getElementById('back').addEventListener('click', prev);
-    document.getElementById('em').addEventListener('keydown', function(e){ if (e.key === 'Enter') submit(); });
-    document.getElementById('fn').addEventListener('keydown', function(e){ if (e.key === 'Enter') document.getElementById('em').focus(); });
-    syncTsVisibility();
+    document.getElementById('fn').addEventListener('keydown', function(e){
+      if (e.key === 'Enter'){ e.preventDefault(); document.getElementById('em').focus(); }
+    });
+    document.getElementById('em').addEventListener('keydown', function(e){
+      if (e.key === 'Enter'){ e.preventDefault(); submit(); }
+    });
+    mountTurnstile();
   }
 
-  // ── Turnstile ─────────────────────────────────────────────────────────────
   var tsWidgetId = null;
-  var tsNeedsInteraction = false;
-  var onContactScreen = false;
-  var tsHost = document.getElementById('ts-host');
-  function syncTsVisibility(){
-    var show = tsNeedsInteraction && onContactScreen && !tsToken();
-    tsHost.classList.toggle('show', show);
-    height();
-  }
-  // Mounted at boot into a host OUTSIDE #screen, so the challenge is already
-  // solved by the time anyone reaches the email step. If Turnstile decides it
-  // needs interaction it becomes visible; otherwise nobody ever sees it.
   function mountTurnstile(){
+    var slot = document.getElementById('ts-slot');
+    if (!slot) return;
+    tsWidgetId = null;
     function render(){
-      if (!window.turnstile || tsWidgetId !== null) return;
+      if (!window.turnstile || !document.getElementById('ts-slot')) return;
       try {
-        tsWidgetId = window.turnstile.render(tsHost, {
+        tsWidgetId = window.turnstile.render(slot, {
           sitekey: TS_SITEKEY, theme:'light', size:'flexible',
-          callback: function(){ tsNeedsInteraction = false; syncTsVisibility(); },
-          'before-interactive-callback': function(){ tsNeedsInteraction = true; syncTsVisibility(); },
-          'error-callback': function(){ tsNeedsInteraction = true; syncTsVisibility(); }
+          callback: function(){ slot.classList.remove('show'); height(); },
+          'before-interactive-callback': function(){ slot.classList.add('show'); height(); },
+          'error-callback': function(){ slot.classList.add('show'); height(); }
         });
       } catch(e){}
     }
-    if (window.turnstile) { render(); return; }
-    if (!document.getElementById('ts-script')) {
+    if (window.turnstile){ render(); return; }
+    if (!document.getElementById('ts-script')){
       var sc = document.createElement('script');
       sc.id = 'ts-script';
       sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
-      sc.async = true; sc.defer = true;
-      sc.onload = render;
+      sc.async = true; sc.defer = true; sc.onload = render;
       document.head.appendChild(sc);
+    } else {
+      var n = 0, iv = setInterval(function(){
+        if (window.turnstile || ++n > 40){ clearInterval(iv); render(); }
+      }, 150);
     }
   }
   function tsToken(){
     try { return (tsWidgetId !== null && window.turnstile) ? window.turnstile.getResponse(tsWidgetId) : ''; }
     catch(e){ return ''; }
   }
-  // Reveal the challenge only if we still have no token when it's needed.
   function ensureToken(cb){
-    if (TEST && TEST !== '1') return cb(tsToken());   // secret test key: server skips the check
-    if (tsToken()) return cb(tsToken());
-    tsNeedsInteraction = true; syncTsVisibility();
-    var tries = 0;
-    var iv = setInterval(function(){
-      var t = tsToken();
-      if (t || ++tries > 20) { clearInterval(iv); cb(t); }
+    if (TEST && TEST !== '1') return cb(tsToken());
+    var t = tsToken();
+    if (t) return cb(t);
+    var slot = document.getElementById('ts-slot');
+    if (slot){ slot.classList.add('show'); height(); }
+    var n = 0, iv = setInterval(function(){
+      var tok = tsToken();
+      if (tok || ++n > 20){ clearInterval(iv); cb(tok); }
     }, 200);
   }
 
-  // ── navigation ────────────────────────────────────────────────────────────
   function next(){ idx++; route(); }
-  function prev(){ if (idx > 0) { idx--; route(); } }
-  function willBookNow(){ return localDecision().decision === 'book'; }
-
+  function prev(){ if (idx > 0){ idx--; route(); } }
   function route(){
-    keyHandler = null;
-    locked = false;
-    onContactScreen = false;
+    keyHandler = null; locked = false;
     save();
     if (idx < QUESTIONS.length) return renderQuestion();
     if (idx === QUESTIONS.length) return renderGoal();
     return renderContact();
   }
+  document.addEventListener('keydown', function(e){ if (keyHandler && !locked) keyHandler(e); });
 
-  // ── submit ────────────────────────────────────────────────────────────────
-  function submit(){
-    // Defensive: if any gating answer is missing (fast double-tap, restored
-    // half-finished session), go back and collect it rather than sending a
-    // payload the server will reject.
-    for (var qi = 0; qi < QUESTIONS.length; qi++) {
-      if (!state[QUESTIONS[qi].id]) { idx = qi; route(); return; }
-    }
-    var fn = document.getElementById('fn').value.trim();
-    var em = document.getElementById('em').value.trim();
-    var err = document.getElementById('err');
-    var btn = document.getElementById('go');
-    if (!fn) { err.textContent = 'Please add your first name.'; return; }
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) { err.textContent = 'That email doesn’t look right.'; return; }
-    err.textContent = '';
-    state.first_name = fn; state.email = em;
-    btn.disabled = true; btn.textContent = 'One moment…';
-    var restore = willBookNow() ? 'Pick my time' : 'Continue';
-
-    var payload = {
-      revenue: state.revenue, fulltime: state.fulltime, clients: state.clients,
-      goal: state.goal, first_name: fn, email: em,
-      source: SOURCE,
-      utm_source: UTM.utm_source, utm_medium: UTM.utm_medium, utm_campaign: UTM.utm_campaign,
-      utm_content: UTM.utm_content, utm_term: UTM.utm_term,
-      website: document.getElementById('website').value,
-      turnstile_token: '',
-      test: TEST
-    };
-
-    ensureToken(function(tok){
-    payload.turnstile_token = tok;
-    fetch(FN, {
-      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
-    })
-    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, j:j}; }); })
-    .then(function(res){
-      if (!res.ok) {
-        // Client-side fallback so a backend hiccup never traps the lead.
-        if (res.j && res.j.error === 'Verification failed') {
-          err.innerHTML = 'Verification didn’t go through. Try again, or ' +
-            '<a href="https://jasonmoss.com/qualify/?source=' + encodeURIComponent(SOURCE) +
-            '" target="_blank" rel="noopener">open this in a new tab</a>.';
-          btn.disabled = false; btn.textContent = restore;
-          if (window.turnstile && tsWidgetId !== null) { try { window.turnstile.reset(tsWidgetId); } catch(e){} }
-          return;
-        }
-        return finish(localDecision());
-      }
-      finish({ decision: res.j.decision || localDecision().decision, reason: res.j.reason || localDecision().reason });
-    })
-    .catch(function(){ finish(localDecision()); });
-    });
-  }
-
-  // Mirror of the server rule — used only if the request fails.
   function localDecision(){
-    // 3k-5k / 5k-10k are the retired split bands, kept so a half-finished
-    // session restored from sessionStorage still resolves.
-    var ok = ['1k-3k','3k-10k','3k-5k','5k-10k','10k-25k','25k-plus'].indexOf(state.revenue) > -1;
-    if (!ok) return { decision:'decline', reason:'early' };
+    if (['1k-5k','5k-10k','10k-plus'].indexOf(state.revenue) === -1) return { decision:'decline', reason:'early' };
     if (state.fulltime !== 'yes') return { decision:'decline', reason:'part_time' };
     if (state.clients === 'none') return { decision:'decline', reason:'no_clients' };
     return { decision:'book', reason:null };
   }
 
+  function submit(){
+    for (var q = 0; q < QUESTIONS.length; q++){
+      if (!state[QUESTIONS[q].id]){ idx = q; route(); return; }
+    }
+    var fn = document.getElementById('fn').value.trim();
+    var em = document.getElementById('em').value.trim();
+    var err = document.getElementById('err');
+    var btn = document.getElementById('go');
+    if (btn.disabled) return;
+    if (!fn){ err.textContent = 'Please add your first name.'; document.getElementById('fn').focus(); return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)){
+      err.textContent = 'That email doesn’t look right.'; document.getElementById('em').focus(); return;
+    }
+    err.textContent = '';
+    state.first_name = fn; state.email = em;
+    var restoreLabel = btn.textContent;
+    btn.disabled = true; btn.textContent = 'One moment…';
+
+    ensureToken(function(tok){
+      fetch(FN, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          revenue:state.revenue, fulltime:state.fulltime, clients:state.clients,
+          goal:state.goal, first_name:fn, email:em, source:SOURCE,
+          utm_source:UTM.utm_source, utm_medium:UTM.utm_medium, utm_campaign:UTM.utm_campaign,
+          utm_content:UTM.utm_content, utm_term:UTM.utm_term,
+          website: document.getElementById('website').value,
+          turnstile_token: tok, test: TEST
+        })
+      })
+      .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, j:j}; }); })
+      .then(function(res){
+        if (!res.ok){
+          if (res.j && res.j.error === 'Verification failed'){
+            err.innerHTML = 'Verification didn’t go through. Try again, or '+
+              '<a href="https://jasonmoss.com/qualify/?source='+encodeURIComponent(SOURCE)+
+              '" target="_blank" rel="noopener">open this in a new tab</a>.';
+            btn.disabled = false; btn.textContent = restoreLabel;
+            if (window.turnstile && tsWidgetId !== null){ try { window.turnstile.reset(tsWidgetId); } catch(e){} }
+            return;
+          }
+          return finish(localDecision());
+        }
+        finish({ decision: res.j.decision || localDecision().decision, reason: res.j.reason });
+      })
+      .catch(function(){ finish(localDecision()); });
+    });
+  }
+
   function finish(res){
-    state.decision = res.decision; state.reason = res.reason;
+    state.decided = res.decision; state.reason = res.reason;
+    save();
     if (res.decision === 'book') renderBooking(); else renderDecline(res.reason);
   }
 
-  // ── outcomes ──────────────────────────────────────────────────────────────
   function renderDecline(reason){
-    onContactScreen = false; tsHost.classList.remove('show');
     var d = DECLINE[reason] || DECLINE.early;
     paint(
       '<div class="card">'+
-        '<p class="kicker">A straight answer</p>'+
         '<h1>'+esc(d.h)+'</h1>'+
         d.body.map(function(x){ return '<p>'+x+'</p>'; }).join('')+
         '<div class="rule"></div>'+
-        '<a class="btn gold" href="'+LAUNCHPAD+'?utm_source='+encodeURIComponent(SOURCE)+'&utm_medium=qualifier&utm_campaign=decline_'+encodeURIComponent(reason||'early')+'" target="_top" rel="noopener">Take a look at Launchpad &rarr;</a>'+
+        '<a class="btn" href="'+LAUNCHPAD+'?utm_source='+encodeURIComponent(SOURCE)+
+          '&utm_medium=qualifier&utm_campaign=decline_'+encodeURIComponent(reason||'early')+
+          '" target="_top" rel="noopener">See Launchpad &rarr;</a>'+
       '</div>',
       5, false
     );
-    height();
   }
 
-  // Only send UTM keys that actually have a value — empty ones pollute the
-  // booking URL and Calendly's own attribution.
   function utmObject(){
     var map = { utm_source:'utmSource', utm_medium:'utmMedium', utm_campaign:'utmCampaign',
                 utm_content:'utmContent', utm_term:'utmTerm' };
@@ -551,29 +543,18 @@
   }
 
   function renderBooking(){
-    onContactScreen = false; tsHost.classList.remove('show');
     paint(
-      '<div class="cal-head">'+
-        '<p class="kicker">You’re a fit</p>'+
-        '<h1>Grab a time that works, '+esc(state.first_name)+'.</h1>'+
-        '<p class="sub">Twenty minutes, on Zoom. Come as you are — I’ll have read your answers before we start.</p>'+
-      '</div>'+
+      '<p class="eyebrow">You’re a fit</p>'+
+      '<h1>Book a time that works, '+esc(state.first_name)+'.</h1>'+
+      '<p class="sub">Twenty minutes on Zoom. I’ll have read your answers before we start.</p>'+
       '<div id="cal"></div>',
       5, false
     );
-    // Calendly theming. NOTE on primary_color: the brand forest (#2C3F36) is
-    // too dark and desaturated — Calendly derives the "times available" date
-    // tint from it, and at that darkness the circles vanish against the page.
-    // #0E6B5A is the same green family, saturated enough to keep the date
-    // circles legible and still hit 5.3:1 white-on-green for the CTA.
     var url = CALENDLY +
       '?hide_gdpr_banner=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=0E6B5A' +
       '&name=' + encodeURIComponent(state.first_name) +
       '&email=' + encodeURIComponent(state.email) +
-      Object.keys(UTM).map(function(k){
-        return UTM[k] ? '&' + k + '=' + encodeURIComponent(UTM[k]) : '';
-      }).join('');
-
+      Object.keys(UTM).map(function(k){ return UTM[k] ? '&'+k+'='+encodeURIComponent(UTM[k]) : ''; }).join('');
     function init(){
       if (!window.Calendly) return;
       window.Calendly.initInlineWidget({
@@ -584,39 +565,46 @@
       });
       height();
     }
-    if (window.Calendly) { init(); }
+    if (window.Calendly) init();
     else {
       var s = document.createElement('script');
       s.src = 'https://assets.calendly.com/assets/external/widget.js';
       s.async = true; s.onload = init;
       document.head.appendChild(s);
     }
-    setTimeout(height, 900);
-    setTimeout(height, 2200);
+    setTimeout(height, 900); setTimeout(height, 2400);
   }
 
-  // Calendly booking confirmation -> flip qualify_booked to Yes.
   window.addEventListener('message', function(e){
+    if (e.origin !== 'https://calendly.com') return;
     if (!e.data || typeof e.data !== 'object') return;
-    if (e.data.event === 'calendly.event_scheduled') {
+    if (e.data.event === 'calendly.event_scheduled'){
       try {
-        fetch(FN, {
-          method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ action:'booked', email: state.email, test: TEST })
-        });
+        fetch(FN, { method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ action:'booked', email: state.email, test: TEST }) });
       } catch(err){}
       try { parent.postMessage({ type:'qualify:booked', source:SOURCE }, '*'); } catch(err){}
     }
   });
 
+  if (TEST){
+    var tb = document.getElementById('testbar');
+    tb.className = 'testbar';
+    tb.innerHTML = '<b>Test</b> — nothing is saved to your CRM. '+
+      '<strong>Booking a time still creates a real Calendly event.</strong> Jump to: '+
+      '<a href="?test='+encodeURIComponent(TEST)+'&force=book">booking</a> · '+
+      '<a href="?test='+encodeURIComponent(TEST)+'&force=decline&reason=early">early</a> · '+
+      '<a href="?test='+encodeURIComponent(TEST)+'&force=decline&reason=part_time">part-time</a> · '+
+      '<a href="?test='+encodeURIComponent(TEST)+'&force=decline&reason=no_clients">no clients</a>';
+  }
+
   window.addEventListener('resize', height);
-  mountTurnstile();
-  if (TEST && FORCE) {
+
+  if (TEST && FORCE){
     state.first_name = state.first_name || 'Preview';
     state.email = state.email || 'preview@example.com';
     if (FORCE === 'book') renderBooking(); else renderDecline(FORCE_REASON);
-  } else {
-    restore();
+  } else if (!restore()){
     route();
   }
   setTimeout(height, 400);

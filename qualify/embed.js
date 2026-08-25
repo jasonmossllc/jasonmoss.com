@@ -39,11 +39,17 @@
       'height:' + MIN_HEIGHT + 'px;transition:height .3s cubic-bezier(0.16,1,0.3,1);';
     host.appendChild(frame);
 
+    var lastApplied = 0;
     window.addEventListener('message', function (e) {
       if (!e.data || typeof e.data !== 'object') return;
       if (e.source !== frame.contentWindow) return;
+      if (e.origin !== new URL(BASE).origin) return;
       if (e.data.type === 'qualify:height') {
         var h = Math.max(MIN_HEIGHT, Math.round(e.data.height) || MIN_HEIGHT);
+        // Never re-apply the same height: resizing the frame fires a resize
+        // inside it, which reports again. Without this the pair can oscillate.
+        if (h === lastApplied) return;
+        lastApplied = h;
         frame.style.height = h + 'px';
       }
       if (e.data.type === 'qualify:booked' && window.dataLayer) {
