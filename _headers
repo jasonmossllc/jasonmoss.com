@@ -8,3 +8,11 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Permissions-Policy: camera=(), microphone=(), geolocation=()
   Strict-Transport-Security: max-age=31536000; includeSubDomains
+
+# The qualifier is an embeddable widget, so it must be framable. X-Frame-Options
+# has no allow-list value, but CSP frame-ancestors takes precedence over it in
+# every browser that supports both — so this scopes framing to our own
+# properties without weakening the SAMEORIGIN default for the rest of the site.
+# Add another origin here if the widget ever goes on a page we don't host.
+/qualify/*
+  Content-Security-Policy: frame-ancestors 'self' https://jasonmoss.com https://*.jasonmoss.com https://*.netlify.app
