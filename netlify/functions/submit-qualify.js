@@ -232,7 +232,13 @@ exports.handler = async (event) => {
     const goal = cleanString(data.goal, 1000);
 
     // Test submissions never touch Kit — decide, report, and stop.
-    if (isTest) {
+    //
+    // Exception: `kit:"1"` alongside a VALID QUALIFY_TEST_KEY runs the real Kit
+    // write, so the sync and sequence enrollment can actually be exercised
+    // before launch. It needs the same secret that bypasses Turnstile, so it is
+    // no weaker than that; ?test=1 alone can never reach Kit.
+    const testWritesToKit = trustedTest && String(data.kit || '') === '1';
+    if (isTest && !testWritesToKit) {
       console.log('Qualifier TEST submission (no Kit write)', {
         email, source: cleanString(data.source, 120), decision, reason, trustedTest,
       });
@@ -267,6 +273,7 @@ exports.handler = async (event) => {
         qualify_decision: qualified ? 'Book' : `Decline (${reason})`,
         ...(lockedByPriorDecline ? { qualify_relocked: new Date().toISOString().slice(0, 10) } : {}),
         qualify_date: new Date().toISOString().slice(0, 10),
+        ...(isTest ? { qualify_decision: `TEST — ${qualified ? 'Book' : `Decline (${reason})`}` } : {}),
         ...(goal ? { qualify_goal: goal } : {}),
       },
       referrer: cleanString(
