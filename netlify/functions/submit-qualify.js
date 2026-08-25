@@ -40,6 +40,16 @@ const TAG_DECLINED = 22754515; // "Qualifier Declined"
 const TAG_HIGH_REV = 22754516; // "Qualifier High Revenue" — $10k+/mo
 const TAG_LAUNCHPAD_DOWNSELL = 20410106; // existing downsell tag
 
+// ── Test mode ───────────────────────────────────────────────────────────────
+// ?test=1 on the widget: everything is validated exactly as in production
+// (origin, honeypot, answers, Turnstile) but NOTHING is written to Kit. Safe
+// for anyone to hit — it grants no bypass, so it can't be used to flood us.
+//
+// ?test=<QUALIFY_TEST_KEY>: additionally skips the Turnstile requirement, so
+// automated/repeat testing works. The key lives in a Netlify env var and is
+// the only thing that can bypass a bot guard.
+const TEST_KEY = process.env.QUALIFY_TEST_KEY || '';
+
 // ── Allowed answers. Anything outside these maps is a forged payload. ────────
 // Values double as the human-readable string written to Kit.
 const REVENUE = {
@@ -135,6 +145,10 @@ exports.handler = async (event) => {
     // ── Booking ping from the booking screen (post-Calendly) ────────────────
     // Deliberately opaque: never reveal whether the email exists in Kit.
     if (data.action === 'booked') {
+      if (cleanString(data.test, 200)) {
+        console.log('Qualifier TEST booked ping (no Kit write)', { email });
+        return { statusCode: 200, headers, body: JSON.stringify({ success: true, test: true }) };
+      }
       try {
         const updated = await markBooked(email);
         if (!updated) console.log('Booked ping for unknown subscriber', { email });
@@ -150,10 +164,16 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid name' }) };
     }
 
-    const ts = await verifyTurnstile(data.turnstile_token, ip);
-    if (ts.block) {
-      console.log('Blocked: forged/invalid Turnstile token', { ip });
-      return { statusCode: 403, headers, body: JSON.stringify({ error: 'Verification failed' }) };
+    const testParam = cleanString(data.test, 200);
+    const isTest = !!testParam;
+    const trustedTest = !!TEST_KEY && testParam === TEST_KEY;
+
+    if (!trustedTest) {
+      const ts = await verifyTurnstile(data.turnstile_token, ip);
+      if (ts.block) {
+        console.log('Blocked: forged/invalid Turnstile token', { ip });
+        return { statusCode: 403, headers, body: JSON.stringify({ error: 'Verification failed' }) };
+      }
     }
 
     if (!REVENUE[data.revenue] || !FULLTIME[data.fulltime] || !CLIENTS[data.clients]) {
@@ -167,6 +187,18 @@ exports.handler = async (event) => {
     const firstName = cleanString(data.first_name, 100);
     const source = cleanString(data.source, 120) || 'direct';
     const goal = cleanString(data.goal, 1000);
+
+    // Test submissions never touch Kit — decide, report, and stop.
+    if (isTest) {
+      console.log('Qualifier TEST submission (no Kit write)', {
+        email, source: cleanString(data.source, 120), decision, reason, trustedTest,
+      });
+      return {
+        statusCode: 200,
+        headers,
+        body: JSON.stringify({ success: true, test: true, kit: 'skipped', decision, reason }),
+      };
+    }
 
     const tagIds = [TAG_SUBMITTED, qualified ? TAG_QUALIFIED : TAG_DECLINED];
     if (highRevenue) tagIds.push(TAG_HIGH_REV);

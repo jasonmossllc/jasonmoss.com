@@ -122,11 +122,19 @@
   .ts-host.show{position:static;left:auto;top:auto;width:auto;margin:4px 0 0}
   .skip{background:none;border:none;color:var(--taupe);font-family:var(--sans);font-size:13.5px;cursor:pointer;padding:6px 2px;text-decoration:underline;text-underline-offset:3px}
   .skip:hover{color:var(--obsidian)}
+  .testbar{
+    flex:none;background:#3a2f14;color:#F2E4BE;border-radius:7px;
+    padding:9px 13px;margin:0 0 14px;font-size:12.5px;line-height:1.45;
+    display:flex;gap:9px;align-items:flex-start;
+  }
+  .testbar b{color:#E8C979;font-weight:600;letter-spacing:.06em;text-transform:uppercase;font-size:11px;flex:none;padding-top:1px}
+  .testbar a{color:#E8C979}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 </style>
 </head>
 <body>
 <div class="shell">
+  <div id="testbar"></div>
   <div class="bar" id="bar"><i id="barfill"></i></div>
   <p class="steplabel" id="steplabel"></p>
   <div class="stage"><div id="screen"></div></div>
@@ -154,6 +162,25 @@
     utm_content: p('utm_content'),
     utm_term: p('utm_term')
   };
+
+  // ── test mode ─────────────────────────────────────────────────────────────
+  // ?test=1            -> nothing is written to Kit (still bot-checked)
+  // ?test=<secret>     -> also skips the bot check, for repeat/automated runs
+  // &force=book | &force=decline&reason=early|part_time|no_clients
+  //                    -> jump straight to an outcome screen to review copy
+  var TEST = p('test');
+  var FORCE = p('force');
+  var FORCE_REASON = p('reason') || 'early';
+  if (TEST) {
+    document.getElementById('testbar').className = 'testbar';
+    document.getElementById('testbar').innerHTML =
+      '<b>Test</b><span>Nothing is saved to your CRM. Answers here won’t create or tag a subscriber. ' +
+      '<strong>Booking a time on the calendar still creates a real Calendly event</strong> — cancel it after. ' +
+      'Jump to: <a href="?test=' + encodeURIComponent(TEST) + '&force=book">booking</a> · ' +
+      '<a href="?test=' + encodeURIComponent(TEST) + '&force=decline&reason=early">decline: early</a> · ' +
+      '<a href="?test=' + encodeURIComponent(TEST) + '&force=decline&reason=part_time">decline: part-time</a> · ' +
+      '<a href="?test=' + encodeURIComponent(TEST) + '&force=decline&reason=no_clients">decline: no clients</a></span>';
+  }
 
   var state = { revenue:null, fulltime:null, clients:null, goal:'', first_name:'', email:'', decision:null, reason:null };
   var KEY = 'jm_qualify_v1';
@@ -395,6 +422,7 @@
   }
   // Reveal the challenge only if we still have no token when it's needed.
   function ensureToken(cb){
+    if (TEST && TEST !== '1') return cb(tsToken());   // secret test key: server skips the check
     if (tsToken()) return cb(tsToken());
     tsNeedsInteraction = true; syncTsVisibility();
     var tries = 0;
@@ -445,7 +473,8 @@
       utm_source: UTM.utm_source, utm_medium: UTM.utm_medium, utm_campaign: UTM.utm_campaign,
       utm_content: UTM.utm_content, utm_term: UTM.utm_term,
       website: document.getElementById('website').value,
-      turnstile_token: ''
+      turnstile_token: '',
+      test: TEST
     };
 
     ensureToken(function(tok){
@@ -561,7 +590,7 @@
       try {
         fetch(FN, {
           method:'POST', headers:{'Content-Type':'application/json'},
-          body: JSON.stringify({ action:'booked', email: state.email })
+          body: JSON.stringify({ action:'booked', email: state.email, test: TEST })
         });
       } catch(err){}
       try { parent.postMessage({ type:'qualify:booked', source:SOURCE }, '*'); } catch(err){}
@@ -570,8 +599,14 @@
 
   window.addEventListener('resize', height);
   mountTurnstile();
-  restore();
-  route();
+  if (TEST && FORCE) {
+    state.first_name = state.first_name || 'Preview';
+    state.email = state.email || 'preview@example.com';
+    if (FORCE === 'book') renderBooking(); else renderDecline(FORCE_REASON);
+  } else {
+    restore();
+    route();
+  }
   setTimeout(height, 400);
 })();
 </script>
