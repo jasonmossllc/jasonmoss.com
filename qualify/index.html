@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Book a Business Assessment Call — Jason Moss</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap">
+<style>
+  :root{
+    --obsidian:#1D1F1E;
+    --forest:#2C3F36;
+    --forest-deep:#25362E;
+    --mocha:#5B4B3F;
+    --taupe:#8C837A;
+    --gold:#C2A86C;
+    --gold-dark:#b89a5e;
+    --stone:#E9E2D3;
+    --sand:#F8F6F2;
+    --line:rgba(29,31,30,.13);
+    --serif:'Libre Baskerville', Georgia, serif;
+    --sans:'Raleway','Helvetica Neue',sans-serif;
+    --ease:cubic-bezier(0.16,1,0.3,1);
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    background:var(--sand);
+    color:var(--obsidian);
+    font-family:var(--sans);
+    font-weight:400;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.6;
+  }
+  .shell{max-width:640px;margin:0 auto;padding:34px 24px 44px;min-height:100vh;display:flex;flex-direction:column}
+  @media (max-width:520px){ .shell{padding:22px 18px 34px} }
+
+  /* progress */
+  .bar{height:3px;background:rgba(29,31,30,.10);border-radius:3px;overflow:hidden;flex:none}
+  .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .45s var(--ease)}
+  .bar.hide{opacity:0}
+  .steplabel{
+    font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--taupe);
+    margin:12px 0 0;min-height:16px;font-weight:600;
+  }
+
+  .stage{flex:1;display:flex;flex-direction:column;justify-content:center;padding:26px 0}
+  .screen{animation:rise .5s var(--ease) both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  @media (prefers-reduced-motion:reduce){ .screen{animation:none} .bar i{transition:none} }
+
+  h1{
+    font-family:var(--serif);font-weight:400;
+    font-size:clamp(23px,3.6vw,31px);line-height:1.3;
+    margin:0 0 10px;letter-spacing:-.01em;text-wrap:balance;
+  }
+  .sub{color:var(--mocha);font-size:15px;margin:0 0 26px;max-width:46ch;font-weight:300}
+
+  /* options */
+  .opts{display:flex;flex-direction:column;gap:9px;margin:0;padding:0;list-style:none}
+  .opt{
+    display:flex;align-items:center;gap:13px;width:100%;text-align:left;
+    background:#fff;border:1px solid var(--line);border-radius:9px;
+    padding:15px 17px;font-family:var(--sans);font-size:15.5px;color:var(--obsidian);
+    cursor:pointer;transition:border-color .18s,box-shadow .18s,transform .18s;
+  }
+  .opt:hover{border-color:var(--gold);box-shadow:0 3px 14px -6px rgba(29,31,30,.22)}
+  .opt:focus-visible{outline:2px solid var(--forest);outline-offset:2px}
+  .opt .k{
+    flex:none;width:23px;height:23px;border-radius:5px;border:1px solid var(--line);
+    display:grid;place-items:center;font-size:11px;color:var(--taupe);font-weight:600;
+    transition:background .18s,color .18s,border-color .18s;
+  }
+  .opt:hover .k{background:var(--gold);border-color:var(--gold);color:#fff}
+  .opt.on{border-color:var(--forest);background:#fff}
+  .opt.on .k{background:var(--forest);border-color:var(--forest);color:#fff}
+
+  /* fields */
+  label.f{display:block;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--taupe);margin:0 0 7px;font-weight:600}
+  input[type=text],input[type=email],textarea{
+    width:100%;background:#fff;border:1px solid var(--line);border-radius:9px;
+    padding:14px 16px;font-family:var(--sans);font-size:16px;color:var(--obsidian);
+    transition:border-color .18s;
+  }
+  textarea{min-height:104px;resize:vertical;line-height:1.55}
+  input:focus,textarea:focus{outline:none;border-color:var(--forest)}
+  .fieldrow{margin:0 0 16px}
+
+  .btn{
+    display:inline-flex;align-items:center;justify-content:center;gap:9px;
+    background:var(--forest);color:#fff;border:none;border-radius:999px;
+    padding:14px 30px;font-family:var(--sans);font-size:15px;font-weight:600;
+    letter-spacing:.02em;cursor:pointer;transition:background .2s,transform .2s;
+    text-decoration:none;
+  }
+  .btn:hover{background:var(--forest-deep);transform:translateY(-1px)}
+  .btn:disabled{opacity:.55;cursor:default;transform:none}
+  .btn.gold{background:var(--gold);color:var(--obsidian)}
+  .btn.gold:hover{background:var(--gold-dark)}
+  .btnrow{display:flex;align-items:center;gap:14px;margin-top:22px;flex-wrap:wrap}
+  .back{background:none;border:none;color:var(--taupe);font-family:var(--sans);font-size:13.5px;cursor:pointer;padding:6px 2px}
+  .back:hover{color:var(--obsidian)}
+  .hint{font-size:12.5px;color:var(--taupe);margin:14px 0 0;font-weight:300}
+  .err{color:#9C4A34;font-size:13.5px;margin:12px 0 0;min-height:18px}
+
+  /* decline + booking */
+  .card{background:#fff;border:1px solid var(--line);border-radius:13px;padding:30px 28px}
+  @media (max-width:520px){ .card{padding:24px 20px} }
+  .card h1{margin-bottom:14px}
+  .card p{color:var(--mocha);font-size:15.5px;margin:0 0 15px;font-weight:300}
+  .card p strong{font-weight:600;color:var(--obsidian)}
+  .rule{height:1px;background:var(--line);margin:24px 0}
+  .kicker{font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);font-weight:600;margin:0 0 12px}
+
+  #cal{min-height:640px;width:100%}
+  .cal-head{margin:0 0 16px}
+  .cal-head h1{margin-bottom:6px}
+
+  .ts-host{flex:none;margin:0;height:0;overflow:hidden;opacity:0;transition:opacity .25s var(--ease)}
+  .ts-host.show{height:auto;overflow:visible;opacity:1;margin:2px 0 0}
+  .skip{background:none;border:none;color:var(--taupe);font-family:var(--sans);font-size:13.5px;cursor:pointer;padding:6px 2px;text-decoration:underline;text-underline-offset:3px}
+  .skip:hover{color:var(--obsidian)}
+  .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+</style>
+</head>
+<body>
+<div class="shell">
+  <div class="bar" id="bar"><i id="barfill"></i></div>
+  <p class="steplabel" id="steplabel"></p>
+  <div class="stage"><div id="screen"></div></div>
+  <div class="ts-host" id="ts-host"></div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var FN = '/.netlify/functions/submit-qualify';
+  var CALENDLY = 'https://calendly.com/jasonmoss/business-assessment-call';
+  var LAUNCHPAD = 'https://jasonmoss.com/launchpad/';
+  var TS_SITEKEY = '0x4AAAAAADlUEkeJ6kJ-_AML';
+
+  // ── source / attribution ──────────────────────────────────────────────────
+  // Embed as: /qualify/?source=apply  (utm_source also accepted)
+  var params = new URLSearchParams(location.search);
+  function p(k){ return (params.get(k) || '').slice(0,120); }
+  var SOURCE = p('source') || p('utm_source') || 'direct';
+  var UTM = {
+    utm_source: SOURCE,
+    utm_medium: p('utm_medium'),
+    utm_campaign: p('utm_campaign'),
+    utm_content: p('utm_content'),
+    utm_term: p('utm_term')
+  };
+
+  var state = { revenue:null, fulltime:null, clients:null, goal:'', first_name:'', email:'', decision:null, reason:null };
+  var KEY = 'jm_qualify_v1';
+  function save(){
+    try { sessionStorage.setItem(KEY, JSON.stringify({ s:state, i:idx })); } catch(e){}
+  }
+  function restore(){
+    try {
+      var raw = sessionStorage.getItem(KEY);
+      if (!raw) return;
+      var d = JSON.parse(raw);
+      if (d && d.s && typeof d.i === 'number' && d.i < 5) {
+        Object.keys(state).forEach(function(k){ if (d.s[k] != null) state[k] = d.s[k]; });
+        idx = d.i;
+        // Land on the first unanswered question, never past a gap.
+        for (var qi = 0; qi < QUESTIONS.length; qi++) {
+          if (!state[QUESTIONS[qi].id]) { idx = Math.min(idx, qi); break; }
+        }
+      }
+    } catch(e){}
+  }
+
+  var QUESTIONS = [
+    { id:'revenue', title:"Where's your business at right now?",
+      sub:'Roughly what it brings in each month. This is just so I can point you at the right next step — there’s no wrong answer here.',
+      options:[
+        {v:'none',      t:"I haven't started earning yet"},
+        {v:'under-1k',  t:'Under $1,000/month'},
+        {v:'1k-3k',     t:'$1,000 – $3,000/month'},
+        {v:'3k-5k',     t:'$3,000 – $5,000/month'},
+        {v:'5k-10k',    t:'$5,000 – $10,000/month'},
+        {v:'10k-25k',   t:'$10,000 – $25,000/month'},
+        {v:'25k-plus',  t:'$25,000+/month'}
+      ]},
+    { id:'fulltime', title:'Is this business your full-time focus?',
+      sub:'',
+      options:[
+        {v:'yes',       t:"Yes — this is what I do full-time"},
+        {v:'job',       t:'Not yet — I have a job or other main income'},
+        {v:'supported', t:"I'm retired or supported, and building this"}
+      ]},
+    { id:'clients', title:'How many paying clients are you working with right now?',
+      sub:'',
+      options:[
+        {v:'none',   t:'None right now'},
+        {v:'1-2',    t:'1 – 2'},
+        {v:'3-5',    t:'3 – 5'},
+        {v:'6-plus', t:'6 or more'}
+      ]}
+  ];
+
+  var DECLINE = {
+    early: {
+      h: "Let's get you to your first clients first.",
+      body: [
+        "Thanks for being straight with me about where things are. Based on your answers, a business assessment call isn't the best use of your time right now — and I'd rather tell you that than take the call and have us both realise it twenty minutes in.",
+        "The call is built for people who already have an offer landing and paying clients coming in, who need to make that repeatable. You're earlier than that, and the honest truth is that the work you need is different work.",
+        "<strong>Launchpad is where I'd start.</strong> It's built for exactly this stage — getting your offer clear and your first clients in the door, without needing an audience or a funnel first."
+      ]
+    },
+    part_time: {
+      h: "The timing isn't quite right yet.",
+      body: [
+        "You've got something real going. But you're building this alongside a job or another main income, and that changes what actually moves the needle.",
+        "The assessment call is built around the constraints of a full-time practice — pipeline, capacity, pricing, the things that bite when this is the only thing paying you. Most of what we'd cover wouldn't apply to you yet, and I'd rather not waste your twenty minutes.",
+        "<strong>Launchpad is the better fit right now.</strong> It's designed to be worked in the hours you actually have, and to get you to the point where going full-time is a decision rather than a leap."
+      ]
+    },
+    no_clients: {
+      h: "Let's get clients in the door first.",
+      body: [
+        "You've got revenue coming in and you're full-time on this, which puts you ahead of most people who book this call. But you're not working with anyone right now — and that's the thing to fix first.",
+        "The assessment call is a diagnostic on a running practice. Without live clients there isn't enough on the table for us to look at, and you'd get more out of twenty minutes of doing than twenty minutes of talking.",
+        "<strong>Launchpad will get you there faster.</strong> It's built to fill the calendar back up, and it's a better next step for you than a call would be today."
+      ]
+    }
+  };
+
+  var keyHandler = null;
+  var locked = false;   // guards the auto-advance window so a fast double
+                        // input can't skip a question and leave state null
+  document.addEventListener('keydown', function(e){ if (keyHandler && !locked) keyHandler(e); });
+
+  var el = document.getElementById('screen');
+  var barfill = document.getElementById('barfill');
+  var bar = document.getElementById('bar');
+  var steplabel = document.getElementById('steplabel');
+  var idx = 0;          // 0..2 questions, 3 goal, 4 contact
+  var TOTAL = 5;
+
+  function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g, function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
+
+  function height(){
+    var h = document.querySelector('.shell').scrollHeight + 8;
+    try { parent.postMessage({ type:'qualify:height', height:h }, '*'); } catch(e){}
+  }
+  function progress(n, show){
+    bar.classList.toggle('hide', !show);
+    barfill.style.width = show ? Math.round((n/TOTAL)*100)+'%' : '0%';
+    steplabel.textContent = show ? ('Question ' + n + ' of ' + TOTAL) : '';
+  }
+  function paint(html, step, show){
+    el.innerHTML = '<div class="screen">' + html + '</div>';
+    progress(step, show !== false);
+    height();
+    var f = el.querySelector('[data-focus]');
+    if (f) { try { f.focus({preventScroll:true}); } catch(e){ f.focus(); } }
+  }
+
+  // ── question screens ──────────────────────────────────────────────────────
+  function renderQuestion(){
+    var q = QUESTIONS[idx];
+    var opts = q.options.map(function(o,i){
+      var on = state[q.id] === o.v ? ' on' : '';
+      return '<li><button type="button" class="opt'+on+'" data-v="'+esc(o.v)+'">'+
+             '<span class="k">'+String.fromCharCode(65+i)+'</span><span>'+esc(o.t)+'</span></button></li>';
+    }).join('');
+    paint(
+      '<h1>'+esc(q.title)+'</h1>'+
+      (q.sub ? '<p class="sub">'+esc(q.sub)+'</p>' : '')+
+      '<ul class="opts">'+opts+'</ul>'+
+      (idx>0 ? '<div class="btnrow"><button type="button" class="back" id="back">&larr; Back</button></div>' : ''),
+      idx+1
+    );
+    el.querySelectorAll('.opt').forEach(function(b){
+      b.addEventListener('click', function(){
+        if (locked) return;
+        locked = true;
+        state[q.id] = b.getAttribute('data-v');
+        el.querySelectorAll('.opt').forEach(function(x){ x.classList.remove('on'); });
+        b.classList.add('on');
+        setTimeout(next, 170);
+      });
+    });
+    var back = document.getElementById('back');
+    if (back) back.addEventListener('click', prev);
+    keyHandler = function(e){
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var i = -1;
+      if (/^[a-gA-G]$/.test(e.key)) i = e.key.toUpperCase().charCodeAt(0) - 65;
+      else if (/^[1-7]$/.test(e.key)) i = parseInt(e.key, 10) - 1;
+      var btns = el.querySelectorAll('.opt');
+      if (i >= 0 && i < btns.length) { e.preventDefault(); btns[i].click(); }
+    };
+  }
+
+  function renderGoal(){
+    paint(
+      '<h1>What’s the one thing you want to walk away with?</h1>'+
+      '<p class="sub">A few words is plenty — it’s what I’ll prepare from. Optional.</p>'+
+      '<div class="fieldrow"><textarea id="goal" data-focus placeholder="The thing that would make this call worth it&hellip;">'+esc(state.goal)+'</textarea></div>'+
+      '<div class="btnrow"><button type="button" class="btn" id="go">Continue</button>'+
+      '<button type="button" class="skip" id="skip">Skip this</button>'+
+      '<button type="button" class="back" id="back">&larr; Back</button></div>',
+      4
+    );
+    function saveGoal(){
+      state.goal = document.getElementById('goal').value.trim();
+      next();
+    }
+    document.getElementById('go').addEventListener('click', saveGoal);
+    document.getElementById('skip').addEventListener('click', function(){ state.goal=''; next(); });
+    document.getElementById('back').addEventListener('click', prev);
+    document.getElementById('goal').addEventListener('keydown', function(e){
+      if ((e.metaKey || e.ctrlKey) && e.key === 'Enter') saveGoal();
+    });
+  }
+
+  function renderContact(){
+    // We already know the outcome client-side, so qualified people get an
+    // affirming screen instead of one more anonymous gate. This is the step
+    // good leads are most likely to abandon.
+    var willBook = localDecision().decision === 'book';
+    paint(
+      (willBook
+        ? '<p class="kicker">You’re a fit</p><h1>Good — let’s get you booked.</h1>'+
+          '<p class="sub">Just your name and email, then pick a time that works.</p>'
+        : '<h1>Last thing — who are you?</h1>'+
+          '<p class="sub">So I know who I’m talking to.</p>')+
+      '<div class="fieldrow"><label class="f" for="fn">First name</label>'+
+      '<input type="text" id="fn" data-focus autocomplete="given-name" value="'+esc(state.first_name)+'"></div>'+
+      '<div class="fieldrow"><label class="f" for="em">Email address</label>'+
+      '<input type="email" id="em" autocomplete="email" inputmode="email" value="'+esc(state.email)+'"></div>'+
+      '<div class="sr"><label for="website">Leave this empty</label>'+
+      '<input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>'+
+      '<p class="err" id="err"></p>'+
+      '<div class="btnrow"><button type="button" class="btn" id="go">'+(willBook?'Pick my time':'Continue')+'</button>'+
+      '<button type="button" class="back" id="back">&larr; Back</button></div>'+
+      '<p class="hint">No spam — I’ll only use this to follow up on what you asked for.</p>',
+      5
+    );
+    document.getElementById('go').addEventListener('click', submit);
+    document.getElementById('back').addEventListener('click', prev);
+    document.getElementById('em').addEventListener('keydown', function(e){ if (e.key === 'Enter') submit(); });
+    document.getElementById('fn').addEventListener('keydown', function(e){ if (e.key === 'Enter') document.getElementById('em').focus(); });
+  }
+
+  // ── Turnstile ─────────────────────────────────────────────────────────────
+  var tsWidgetId = null;
+  var tsHost = document.getElementById('ts-host');
+  // Mounted at boot into a host OUTSIDE #screen, so the challenge is already
+  // solved by the time anyone reaches the email step. If Turnstile decides it
+  // needs interaction it becomes visible; otherwise nobody ever sees it.
+  function mountTurnstile(){
+    function render(){
+      if (!window.turnstile || tsWidgetId !== null) return;
+      try {
+        tsWidgetId = window.turnstile.render(tsHost, {
+          sitekey: TS_SITEKEY, theme:'light', size:'flexible',
+          callback: function(){ tsHost.classList.remove('show'); height(); },
+          'before-interactive-callback': function(){ tsHost.classList.add('show'); height(); },
+          'error-callback': function(){ tsHost.classList.add('show'); height(); }
+        });
+      } catch(e){}
+    }
+    if (window.turnstile) { render(); return; }
+    if (!document.getElementById('ts-script')) {
+      var sc = document.createElement('script');
+      sc.id = 'ts-script';
+      sc.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+      sc.async = true; sc.defer = true;
+      sc.onload = render;
+      document.head.appendChild(sc);
+    }
+  }
+  function tsToken(){
+    try { return (tsWidgetId !== null && window.turnstile) ? window.turnstile.getResponse(tsWidgetId) : ''; }
+    catch(e){ return ''; }
+  }
+  // Reveal the challenge only if we still have no token when it's needed.
+  function ensureToken(cb){
+    if (tsToken()) return cb(tsToken());
+    tsHost.classList.add('show'); height();
+    var tries = 0;
+    var iv = setInterval(function(){
+      var t = tsToken();
+      if (t || ++tries > 20) { clearInterval(iv); cb(t); }
+    }, 200);
+  }
+
+  // ── navigation ────────────────────────────────────────────────────────────
+  function next(){ idx++; route(); }
+  function prev(){ if (idx > 0) { idx--; route(); } }
+  function willBookNow(){ return localDecision().decision === 'book'; }
+
+  function route(){
+    keyHandler = null;
+    locked = false;
+    save();
+    if (idx < QUESTIONS.length) return renderQuestion();
+    if (idx === QUESTIONS.length) return renderGoal();
+    return renderContact();
+  }
+
+  // ── submit ────────────────────────────────────────────────────────────────
+  function submit(){
+    // Defensive: if any gating answer is missing (fast double-tap, restored
+    // half-finished session), go back and collect it rather than sending a
+    // payload the server will reject.
+    for (var qi = 0; qi < QUESTIONS.length; qi++) {
+      if (!state[QUESTIONS[qi].id]) { idx = qi; route(); return; }
+    }
+    var fn = document.getElementById('fn').value.trim();
+    var em = document.getElementById('em').value.trim();
+    var err = document.getElementById('err');
+    var btn = document.getElementById('go');
+    if (!fn) { err.textContent = 'Please add your first name.'; return; }
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(em)) { err.textContent = 'That email doesn’t look right.'; return; }
+    err.textContent = '';
+    state.first_name = fn; state.email = em;
+    btn.disabled = true; btn.textContent = 'One moment…';
+    var restore = willBookNow() ? 'Pick my time' : 'Continue';
+
+    var payload = {
+      revenue: state.revenue, fulltime: state.fulltime, clients: state.clients,
+      goal: state.goal, first_name: fn, email: em,
+      source: SOURCE,
+      utm_source: UTM.utm_source, utm_medium: UTM.utm_medium, utm_campaign: UTM.utm_campaign,
+      utm_content: UTM.utm_content, utm_term: UTM.utm_term,
+      website: document.getElementById('website').value,
+      turnstile_token: ''
+    };
+
+    ensureToken(function(tok){
+    payload.turnstile_token = tok;
+    fetch(FN, {
+      method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)
+    })
+    .then(function(r){ return r.json().catch(function(){ return {}; }).then(function(j){ return {ok:r.ok, j:j}; }); })
+    .then(function(res){
+      if (!res.ok) {
+        // Client-side fallback so a backend hiccup never traps the lead.
+        if (res.j && res.j.error === 'Verification failed') {
+          err.innerHTML = 'Verification didn’t go through. Try again, or ' +
+            '<a href="https://jasonmoss.com/qualify/?source=' + encodeURIComponent(SOURCE) +
+            '" target="_blank" rel="noopener">open this in a new tab</a>.';
+          btn.disabled = false; btn.textContent = restore;
+          if (window.turnstile && tsWidgetId !== null) { try { window.turnstile.reset(tsWidgetId); } catch(e){} }
+          return;
+        }
+        return finish(localDecision());
+      }
+      finish({ decision: res.j.decision || localDecision().decision, reason: res.j.reason || localDecision().reason });
+    })
+    .catch(function(){ finish(localDecision()); });
+    });
+  }
+
+  // Mirror of the server rule — used only if the request fails.
+  function localDecision(){
+    var ok = ['1k-3k','3k-5k','5k-10k','10k-25k','25k-plus'].indexOf(state.revenue) > -1;
+    if (!ok) return { decision:'decline', reason:'early' };
+    if (state.fulltime !== 'yes') return { decision:'decline', reason:'part_time' };
+    if (state.clients === 'none') return { decision:'decline', reason:'no_clients' };
+    return { decision:'book', reason:null };
+  }
+
+  function finish(res){
+    state.decision = res.decision; state.reason = res.reason;
+    if (res.decision === 'book') renderBooking(); else renderDecline(res.reason);
+  }
+
+  // ── outcomes ──────────────────────────────────────────────────────────────
+  function renderDecline(reason){
+    tsHost.classList.remove('show');
+    var d = DECLINE[reason] || DECLINE.early;
+    paint(
+      '<div class="card">'+
+        '<p class="kicker">A straight answer</p>'+
+        '<h1>'+esc(d.h)+'</h1>'+
+        d.body.map(function(x){ return '<p>'+x+'</p>'; }).join('')+
+        '<div class="rule"></div>'+
+        '<a class="btn gold" href="'+LAUNCHPAD+'?utm_source='+encodeURIComponent(SOURCE)+'&utm_medium=qualifier&utm_campaign=decline_'+encodeURIComponent(reason||'early')+'" target="_top" rel="noopener">Take a look at Launchpad &rarr;</a>'+
+      '</div>',
+      5, false
+    );
+    height();
+  }
+
+  // Only send UTM keys that actually have a value — empty ones pollute the
+  // booking URL and Calendly's own attribution.
+  function utmObject(){
+    var map = { utm_source:'utmSource', utm_medium:'utmMedium', utm_campaign:'utmCampaign',
+                utm_content:'utmContent', utm_term:'utmTerm' };
+    var out = {};
+    Object.keys(map).forEach(function(k){ if (UTM[k]) out[map[k]] = UTM[k]; });
+    return out;
+  }
+
+  function renderBooking(){
+    tsHost.classList.remove('show');
+    paint(
+      '<div class="cal-head">'+
+        '<p class="kicker">You’re a fit</p>'+
+        '<h1>Grab a time that works, '+esc(state.first_name)+'.</h1>'+
+        '<p class="sub">Twenty minutes, on Zoom. Come as you are — I’ll have read your answers before we start.</p>'+
+      '</div>'+
+      '<div id="cal"></div>',
+      5, false
+    );
+    var url = CALENDLY +
+      '?hide_gdpr_banner=1&primary_color=2C3F36' +
+      '&name=' + encodeURIComponent(state.first_name) +
+      '&email=' + encodeURIComponent(state.email) +
+      Object.keys(UTM).map(function(k){
+        return UTM[k] ? '&' + k + '=' + encodeURIComponent(UTM[k]) : '';
+      }).join('');
+
+    function init(){
+      if (!window.Calendly) return;
+      window.Calendly.initInlineWidget({
+        url: url,
+        parentElement: document.getElementById('cal'),
+        prefill: { name: state.first_name, firstName: state.first_name, email: state.email },
+        utm: utmObject()
+      });
+      height();
+    }
+    if (window.Calendly) { init(); }
+    else {
+      var s = document.createElement('script');
+      s.src = 'https://assets.calendly.com/assets/external/widget.js';
+      s.async = true; s.onload = init;
+      document.head.appendChild(s);
+    }
+    setTimeout(height, 900);
+    setTimeout(height, 2200);
+  }
+
+  // Calendly booking confirmation -> flip qualify_booked to Yes.
+  window.addEventListener('message', function(e){
+    if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.event === 'calendly.event_scheduled') {
+      try {
+        fetch(FN, {
+          method:'POST', headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({ action:'booked', email: state.email })
+        });
+      } catch(err){}
+      try { parent.postMessage({ type:'qualify:booked', source:SOURCE }, '*'); } catch(err){}
+    }
+  });
+
+  window.addEventListener('resize', height);
+  mountTurnstile();
+  restore();
+  route();
+  setTimeout(height, 400);
+})();
+</script>
+</body>
+</html>
