@@ -118,8 +118,8 @@
   .cal-head{margin:0 0 16px}
   .cal-head h1{margin-bottom:6px}
 
-  .ts-host{flex:none;margin:0;height:0;overflow:hidden;opacity:0;transition:opacity .25s var(--ease)}
-  .ts-host.show{height:auto;overflow:visible;opacity:1;margin:2px 0 0}
+  .ts-host{position:absolute;left:-10000px;top:0;width:320px}
+  .ts-host.show{position:static;left:auto;top:auto;width:auto;margin:4px 0 0}
   .skip{background:none;border:none;color:var(--taupe);font-family:var(--sans);font-size:13.5px;cursor:pointer;padding:6px 2px;text-decoration:underline;text-underline-offset:3px}
   .skip:hover{color:var(--obsidian)}
   .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -328,6 +328,7 @@
     // affirming screen instead of one more anonymous gate. This is the step
     // good leads are most likely to abandon.
     var willBook = localDecision().decision === 'book';
+    onContactScreen = true;
     paint(
       (willBook
         ? '<p class="kicker">You’re a fit</p><h1>Good — let’s get you booked.</h1>'+
@@ -350,11 +351,19 @@
     document.getElementById('back').addEventListener('click', prev);
     document.getElementById('em').addEventListener('keydown', function(e){ if (e.key === 'Enter') submit(); });
     document.getElementById('fn').addEventListener('keydown', function(e){ if (e.key === 'Enter') document.getElementById('em').focus(); });
+    syncTsVisibility();
   }
 
   // ── Turnstile ─────────────────────────────────────────────────────────────
   var tsWidgetId = null;
+  var tsNeedsInteraction = false;
+  var onContactScreen = false;
   var tsHost = document.getElementById('ts-host');
+  function syncTsVisibility(){
+    var show = tsNeedsInteraction && onContactScreen && !tsToken();
+    tsHost.classList.toggle('show', show);
+    height();
+  }
   // Mounted at boot into a host OUTSIDE #screen, so the challenge is already
   // solved by the time anyone reaches the email step. If Turnstile decides it
   // needs interaction it becomes visible; otherwise nobody ever sees it.
@@ -364,9 +373,9 @@
       try {
         tsWidgetId = window.turnstile.render(tsHost, {
           sitekey: TS_SITEKEY, theme:'light', size:'flexible',
-          callback: function(){ tsHost.classList.remove('show'); height(); },
-          'before-interactive-callback': function(){ tsHost.classList.add('show'); height(); },
-          'error-callback': function(){ tsHost.classList.add('show'); height(); }
+          callback: function(){ tsNeedsInteraction = false; syncTsVisibility(); },
+          'before-interactive-callback': function(){ tsNeedsInteraction = true; syncTsVisibility(); },
+          'error-callback': function(){ tsNeedsInteraction = true; syncTsVisibility(); }
         });
       } catch(e){}
     }
@@ -387,7 +396,7 @@
   // Reveal the challenge only if we still have no token when it's needed.
   function ensureToken(cb){
     if (tsToken()) return cb(tsToken());
-    tsHost.classList.add('show'); height();
+    tsNeedsInteraction = true; syncTsVisibility();
     var tries = 0;
     var iv = setInterval(function(){
       var t = tsToken();
@@ -403,6 +412,7 @@
   function route(){
     keyHandler = null;
     locked = false;
+    onContactScreen = false;
     save();
     if (idx < QUESTIONS.length) return renderQuestion();
     if (idx === QUESTIONS.length) return renderGoal();
@@ -479,7 +489,7 @@
 
   // ── outcomes ──────────────────────────────────────────────────────────────
   function renderDecline(reason){
-    tsHost.classList.remove('show');
+    onContactScreen = false; tsHost.classList.remove('show');
     var d = DECLINE[reason] || DECLINE.early;
     paint(
       '<div class="card">'+
@@ -505,7 +515,7 @@
   }
 
   function renderBooking(){
-    tsHost.classList.remove('show');
+    onContactScreen = false; tsHost.classList.remove('show');
     paint(
       '<div class="cal-head">'+
         '<p class="kicker">You’re a fit</p>'+
