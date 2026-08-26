@@ -62,7 +62,13 @@
   /* Top-aligned so the question never changes position between steps. */
   .stage{padding:32px 0 0}
   @media (max-width:600px){ .stage{padding:24px 0 0} }
-  .screen{animation:rise .4s var(--ease) both}
+  /* The container is focused programmatically after each transition so screen
+     readers follow the change. iOS Safari paints its default focus ring on
+     that, boxing the whole question in blue - the container is not
+     interactive, so no ring. Buttons and inputs keep their focus-visible
+     styles. */
+  .screen{animation:rise .4s var(--ease) both;outline:none}
+  .opt{-webkit-tap-highlight-color:transparent}
   @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
   @media (prefers-reduced-motion:reduce){
     .screen{animation:none}
