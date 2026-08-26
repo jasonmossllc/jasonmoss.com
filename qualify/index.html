@@ -72,6 +72,13 @@
     margin:0 0 10px;letter-spacing:-.01em;text-wrap:balance;
   }
   .sub{color:var(--mocha);font-size:15px;line-height:1.55;margin:0 0 24px;text-wrap:pretty}
+  /* The questions have titles of different lengths and only the first has a
+     subtitle, so the options started at a different height on each one and the
+     tap targets moved under your thumb. qhead is locked to the tallest of the
+     three (measured at runtime, so it stays right at every width). */
+  .qhead{min-height:var(--qhead-h,auto)}
+  .qhead h1{margin-bottom:0}
+  .qhead .sub{margin-bottom:0}
   .eyebrow{
     font-size:11px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--gold-deep);font-weight:600;margin:0 0 10px;
@@ -373,7 +380,31 @@
     if (f){ try { f.focus({preventScroll:true}); } catch(e){ f.focus(); } }
   }
 
+  // Measure every question's header at the current width and lock the block to
+  // the tallest, so the option list starts at the same y on all three.
+  var headW = 0;
+  function lockHeaderHeight(){
+    if (!el || !el.clientWidth) return;
+    if (el.clientWidth === headW) return;
+    headW = el.clientWidth;
+    var probe = document.createElement('div');
+    probe.style.cssText = 'position:absolute;left:-99999px;top:0;visibility:hidden;pointer-events:none;width:'+headW+'px';
+    document.body.appendChild(probe);
+    var max = 0;
+    try {
+      for (var i = 0; i < QUESTIONS.length; i++){
+        var q = QUESTIONS[i];
+        probe.innerHTML = '<div class="qhead" style="min-height:0"><h1>'+esc(q.title)+'</h1>'+
+          (q.sub ? '<p class="sub">'+esc(q.sub)+'</p>' : '')+'</div>';
+        max = Math.max(max, probe.firstChild.offsetHeight);
+      }
+    } catch(e){}
+    document.body.removeChild(probe);
+    if (max > 0) document.documentElement.style.setProperty('--qhead-h', (max + 24) + 'px');
+  }
+
   function renderQuestion(){
+    lockHeaderHeight();
     var q = QUESTIONS[idx];
     var opts = q.options.map(function(o,i){
       var on = state[q.id] === o.v;
@@ -383,8 +414,8 @@
              '<span>'+esc(o.t)+'</span></button></li>';
     }).join('');
     paint(
-      '<h1>'+esc(q.title)+'</h1>'+
-      (q.sub ? '<p class="sub">'+esc(q.sub)+'</p>' : '')+
+      '<div class="qhead"><h1>'+esc(q.title)+'</h1>'+
+      (q.sub ? '<p class="sub">'+esc(q.sub)+'</p>' : '')+'</div>'+
       '<ul class="opts" role="list">'+opts+'</ul>'+
       (idx>0 ? '<div class="actions"><button type="button" class="back" id="back">&larr; Back</button></div>' : ''),
       idx+1
@@ -665,7 +696,13 @@
       '<a href="?test='+encodeURIComponent(TEST)+'&force=decline&reason=no_clients">no clients</a>';
   }
 
-  window.addEventListener('resize', height);
+  window.addEventListener('resize', function(){
+    // A width change invalidates the locked header height.
+    if (idx < QUESTIONS.length && el.querySelector('.qhead')){
+      headW = 0; lockHeaderHeight();
+    }
+    height();
+  });
 
   // Timers alone are not enough: on a narrow screen the first measurement can
   // land before webfonts settle, and nothing inside the frame resizes
