@@ -199,6 +199,14 @@
   /* The one thing worth saying here is who is on the other side of it. */
   .book-sub{color:var(--mocha);font-size:15.5px;line-height:1.5;margin:0 0 22px}
   .book-sub strong{color:var(--obsidian);font-weight:600}
+  /* Sits under the calendar: the only remaining objection at this point is
+     "none of these times work", so answer it where it comes up. */
+  .cal-foot{
+    margin:18px 0 0;padding-top:16px;border-top:1px solid var(--line-soft);
+    color:var(--taupe);font-size:14px;line-height:1.55;text-wrap:pretty;
+  }
+  .cal-foot a{color:var(--forest);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  .cal-foot a:hover{color:var(--obsidian)}
   .cal-rule{
     border:0;height:1px;margin:0 0 6px;
     background:linear-gradient(90deg,var(--line) 0%,rgba(29,31,30,.08) 55%,rgba(29,31,30,0) 100%);
@@ -598,7 +606,8 @@
       '<h1 class="book-h">Pick a time below.</h1>'+
       '<p class="book-sub">Twenty minutes, one to one with <strong>Jason</strong> — not a team member.</p>'+
       '<hr class="cal-rule">'+
-      '<div id="cal"></div>',
+      '<div id="cal"></div>'+
+      '<p class="cal-foot">Can\u2019t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20%E2%80%94%20alternate%20time">Tap here to send me an email</a> and we\u2019ll arrange an alternate.</p>',
       5, false
     );
     var url = CALENDLY +
