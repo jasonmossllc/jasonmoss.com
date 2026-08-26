@@ -226,8 +226,6 @@
     letter-spacing:-.01em;text-align:center;
   }
   /* After the calendar, where an alternative to the listed times belongs. */
-  #cal{min-height:640px}
-  #cal iframe{width:100%!important;border:0;display:block}
   .cal-alt{
     margin:26px 0 0;padding:16px 18px;text-align:center;
     border:1px solid var(--line-soft);border-radius:10px;background:rgba(255,255,255,.55);
@@ -243,9 +241,14 @@
   .card strong{font-weight:600;color:var(--obsidian)}
   .rule{height:1px;background:var(--line-soft);margin:26px 0}
 
-  #cal{width:100%;height:720px}
+  /* Fallback height only. Once Calendly reports a plausible content height,
+     fitCalendly sets an inline height that wins over this, which both removes
+     the dead space under a short step and stops the taller booking-form step
+     scrolling inside its own frame (that inner scroll swallows touch and makes
+     the submit button unreachable on a phone). */
+  #cal{width:100%;height:760px;min-height:560px}
   #cal iframe{width:100%!important;height:100%!important;border:0;display:block}
-  @media (max-width:640px){ #cal{height:1120px} }
+  @media (max-width:640px){ #cal{height:1040px} }
 
   .testbar{
     flex:none;background:#33291A;color:#F0E2C2;border-radius:8px;
@@ -685,9 +688,13 @@
   // becomes unreachable. Growing the container to Calendly's reported content
   // height removes the inner scroll entirely: the page scrolls instead.
   var calH = 0;
+  var CAL_MIN_TRUSTED = 420;
   function fitCalendly(px){
     var h = parseInt(px, 10);
-    if (!(h > 0) || h === calH) return;
+    // Calendly emits transient nonsense while a step renders - a real 26px was
+    // observed mid-load. Applying that collapses the calendar to nothing, so
+    // anything shorter than a plausible calendar is ignored.
+    if (!(h >= CAL_MIN_TRUSTED) || h === calH) return;
     calH = h;
     var cal = document.getElementById('cal');
     if (!cal) return;
