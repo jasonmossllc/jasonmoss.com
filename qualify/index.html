@@ -172,16 +172,13 @@
   .fit-badge{
     display:inline-flex;align-items:center;gap:7px;
     background:var(--forest);color:#fff;border-radius:999px;
-    padding:5px 13px 5px 10px;margin:0 0 12px;
+    padding:5px 13px 5px 10px;margin:0 0 13px;
     font-size:10.5px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;
   }
   .fit-badge span{font-size:12px;line-height:1}
-  .fit p.fit-line{
-    margin:0 0 9px;font-family:var(--serif);color:var(--obsidian);
-    font-size:clamp(19px,4.4vw,23px);line-height:1.3;
-  }
   .fit p.fit-benefit{
-    margin:0;color:var(--mocha);font-size:15px;line-height:1.55;text-wrap:pretty;
+    margin:0;color:var(--mocha);line-height:1.5;text-wrap:pretty;
+    font-size:clamp(16.5px,3.7vw,18.5px);
   }
   .next-step{
     display:flex;align-items:center;gap:10px;
@@ -599,8 +596,7 @@
     paint(
       '<div class="fit">'+
         '<p class="fit-badge"><span aria-hidden="true">&#10003;</span> You’re a fit</p>'+
-        '<p class="fit-line">This call was built for you.</p>'+
-        '<p class="fit-benefit">Let’s look at your business together and map out a clear path to more clients and income.</p>'+
+        '<p class="fit-benefit">Let’s look at your business and map out a clear path to more clients and income together.</p>'+
       '</div>'+
       '<p class="next-step">Your next step</p>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
