@@ -20,6 +20,7 @@
 // every public endpoint on this site behaves identically.
 const { __internal } = require('./submit-contact.js');
 const {
+  kitRequest,
   enqueueOptin,
   isQueueableKitError,
   kitErrorSummary,
@@ -132,6 +133,23 @@ async function fetchCalendlyInvitee(uri) {
   return { email: res.email, name: res.name, goal: String(goal).slice(0, 1000) };
 }
 
+// Best-effort: a failure here must never cost the booking, so every step is
+// logged and swallowed.
+async function undoDecline(subscriberId, email) {
+  for (const tagId of [TAG_DECLINED, TAG_LAUNCHPAD_DOWNSELL]) {
+    try {
+      await kitRequest(`/v4/tags/${tagId}/subscribers/${subscriberId}`, { method: 'DELETE' });
+    } catch (error) {
+      console.error('Rescue: could not remove decline tag', { tagId, email, error: kitErrorSummary(error) });
+    }
+  }
+  try {
+    await kitRequest(`/v4/sequences/${DOWNSELL_SEQUENCE_ID}/subscribers/${subscriberId}`, { method: 'DELETE' });
+  } catch (error) {
+    console.error('Rescue: could not unenroll from the downsell', { email, error: kitErrorSummary(error) });
+  }
+}
+
 exports.handler = async (event) => {
   const headers = corsHeaders(event);
   if (event.httpMethod === 'OPTIONS') {
@@ -212,7 +230,13 @@ exports.handler = async (event) => {
           },
           referrer: cleanString(headerValue(event.headers, 'referer'), 1000),
         };
-        await syncContactToKit(bookedSubmission);
+        const synced = await syncContactToKit(bookedSubmission);
+        if (rescued && synced && synced.subscriberId) {
+          // They were declined before and are now booked. Leaving the decline
+          // tags and the downsell sequence in place would keep sending "you're
+          // not ready yet" emails to someone holding a confirmed call.
+          await undoDecline(synced.subscriberId, bookedEmail);
+        }
       } catch (error) {
         if (isQueueableKitError(error) && bookedSubmission) {
           try {

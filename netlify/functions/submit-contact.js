@@ -757,6 +757,8 @@ exports.handler = async (event) => {
 // Exposed for unit tests only; Netlify invokes .handler exclusively.
 module.exports.__test = { looksLikeBotName, maxConsonantRun, originAllowed, EMAIL_RE };
 module.exports.__internal = {
+  // Needed by submit-qualify.js to undo a decline when someone is rescued.
+  kitRequest,
   enqueueOptin,
   getOptinQueueStore,
   isQueueableKitError,
