@@ -340,19 +340,23 @@
   // These render at the most exposed moment in the flow - right after someone
   // honestly answered a money question. No verdicts, no "this is for people
   // further along than you". Name what they DO need, then hand it to them.
+  // The person on this screen came to book twenty minutes with Jason. The card
+  // has to hold that moment before redirecting it: acknowledge what they came
+  // for, give the honest read, name what they need, then hand them the thing
+  // built for exactly that. Same bridge the first downsell email makes.
   var DECLINE = {
     early: {
-      h: "Start where it counts.",
+      h: "Here’s my honest read.",
       body: [
-        "You don’t need a diagnosis call yet — you need your first clients coming in. That takes three things: a clear offer, the right people seeing it, and knowing what to say when someone’s interested.",
-        "<strong>Launchpad walks you through all three, in order.</strong> Start there. And once clients are coming in, come back and book this call — it’ll be worth far more to you then."
+        "You came here to book a call with me — and based on where you’re at, a call isn’t the best next step right now. What you need first is your first clients coming in: a clear offer, the right people seeing it, and knowing what to say when someone’s interested.",
+        "<strong>Launchpad is designed to help you solve exactly that.</strong> It’s the best next step I can point you to right now — and once clients are coming in, come back and book this call. It’ll be worth far more to you then."
       ]
     },
     part_time: {
-      h: "Built around your life.",
+      h: "Here’s my honest read.",
       body: [
-        "You’re building this alongside another income, so the thing that helps most isn’t a strategy call — it’s a repeatable way to get clients that fits the hours you actually have.",
-        "<strong>That’s exactly what Launchpad is built for.</strong> It’s self-paced, so it works around whatever else is on your plate. And when you’re ready to go full-time, the clients will already be coming."
+        "You came here to book a call with me — and based on where you’re at, a call isn’t the best next step right now. You’re building this alongside another income, and what you need most is a repeatable way to get clients that fits the hours you’ve actually got.",
+        "<strong>Launchpad is designed for exactly that.</strong> It’s self-paced, built to work around whatever else is on your plate — the best next step I can point you to right now. And when you’re ready to go full-time, the clients will already be coming."
       ]
     }
   };
