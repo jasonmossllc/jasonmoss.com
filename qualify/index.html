@@ -298,7 +298,7 @@
   };
   var TEST = p('test'), FORCE = p('force'), FORCE_REASON = p('reason') || 'early';
 
-  var state = { revenue:null, fulltime:null, clients:null, afford:null,
+  var state = { revenue:null, fulltime:null, afford:null,
                 first_name:'', email:'', decided:null, reason:null };
   var idx = 0, locked = false, keyHandler = null;
   // The denominator must not move. It used to be derived from a decision
@@ -327,13 +327,6 @@
         {v:'job',       t:'Not yet — I have a job or other main income'},
         {v:'supported', t:"I'm retired or supported while I build it"}
       ]},
-    { id:'clients', title:'How many paying clients do you have right now?',
-      options:[
-        {v:'none',   t:'None right now'},
-        {v:'1-2',    t:'1 – 2'},
-        {v:'3-5',    t:'3 – 5'},
-        {v:'6-plus', t:'6 or more'}
-      ]}
   ];
 
   // Where you are, what you need, what to do about it. Said the way you would
@@ -351,13 +344,6 @@
       body: [
         "You're building this around another income, which is a different problem than the one this call solves.",
         "What you need is a way to get clients that fits the hours you've actually got. <strong>That's what Launchpad is for.</strong> It's self-paced, so you work it around whatever else is on your plate. Get that running and going full-time stops being a leap."
-      ]
-    },
-    no_clients: {
-      h: "Let's fill the calendar first.",
-      body: [
-        "You're full-time with money coming in, which puts you ahead of most people who fill this out. But you're not working with anyone right now.",
-        "That's the thing to fix, and it's bigger than a twenty-minute conversation — it's your offer, who you put it in front of, and how you handle it when someone's interested. <strong>Launchpad covers all three.</strong> Start there."
       ]
     }
   };
@@ -475,7 +461,7 @@
     };
   }
 
-  // Shown only to people the three questions would decline.
+  // Shown only to people the two questions would decline.
   function renderAfford(){
     paint(
       '<h1>One last question.</h1>'+
@@ -519,7 +505,7 @@
   // Only reached on the decline path now.
   function renderContact(){
     paint(
-      // They have answered three questions expecting a calendar next. This has
+      // They have answered the questions expecting a calendar next. This has
       // to prime that a tailored recommendation is coming — without promising
       // a call, and without announcing the no in a form heading.
       '<h1>One more thing.</h1>'+
@@ -632,7 +618,6 @@
   function localDecision(){
     if (REVENUE_OK.indexOf(state.revenue) === -1) return { decision:'decline', reason:'early' };
     if (state.fulltime !== 'yes') return { decision:'decline', reason:'part_time' };
-    if (state.clients === 'none') return { decision:'decline', reason:'no_clients' };
     return { decision:'book', reason:null };
   }
 
@@ -660,8 +645,7 @@
       fetch(FN, {
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({
-          revenue:state.revenue, fulltime:state.fulltime, clients:state.clients,
-          afford:state.afford,
+          revenue:state.revenue, fulltime:state.fulltime, afford:state.afford,
           first_name:fn, email:em, source:SOURCE,
           utm_source:UTM.utm_source, utm_medium:UTM.utm_medium, utm_campaign:UTM.utm_campaign,
           utm_content:UTM.utm_content, utm_term:UTM.utm_term,
@@ -797,7 +781,7 @@
           // No email here on purpose: whoever booked is resolved server-side
           // from the Calendly invitee URI, which cannot be forged.
           action:'booked', invitee_uri: uri, afford: state.afford,
-          revenue: state.revenue, fulltime: state.fulltime, clients: state.clients,
+          revenue: state.revenue, fulltime: state.fulltime,
           source: SOURCE, test: TEST
         }) }).catch(function(){});
     } catch(err){}
@@ -814,8 +798,7 @@
       '<strong>Booking a time still creates a real Calendly event.</strong> Jump to: '+
       '<a href="?test='+encodeURIComponent(TEST)+'&force=book">booking</a> · '+
       '<a href="?test='+encodeURIComponent(TEST)+'&force=decline&reason=early">early</a> · '+
-      '<a href="?test='+encodeURIComponent(TEST)+'&force=decline&reason=part_time">part-time</a> · '+
-      '<a href="?test='+encodeURIComponent(TEST)+'&force=decline&reason=no_clients">no clients</a>';
+      '<a href="?test='+encodeURIComponent(TEST)+'&force=decline&reason=part_time">part-time</a>';
   }
 
   window.addEventListener('resize', function(){

@@ -102,10 +102,11 @@ const DECLINE_LOCK_DAYS = 90;
  * Precedence matters: the reason shown is the earliest-stage one that applies,
  * so someone pre-revenue AND part-time hears the pre-revenue message.
  */
-function decide(revenue, fulltime, clients) {
+// The clients question was retired: across 79 backtested calls it removed
+// nobody the revenue and full-time gates had not already removed.
+function decide(revenue, fulltime) {
   if (!REVENUE_OK.has(revenue)) return { decision: 'decline', reason: 'early' };
   if (fulltime !== 'yes') return { decision: 'decline', reason: 'part_time' };
-  if (clients === 'none') return { decision: 'decline', reason: 'no_clients' };
   return { decision: 'book', reason: null };
 }
 
@@ -252,11 +253,11 @@ exports.handler = async (event) => {
       }
     }
 
-    if (!REVENUE[data.revenue] || !FULLTIME[data.fulltime] || !CLIENTS[data.clients]) {
+    if (!REVENUE[data.revenue] || !FULLTIME[data.fulltime]) {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid answers' }) };
     }
 
-    let { decision, reason } = decide(data.revenue, data.fulltime, data.clients);
+    let { decision, reason } = decide(data.revenue, data.fulltime);
 
     // A previous decline stands for DECLINE_LOCK_DAYS regardless of what they
     // answer this time.
@@ -329,7 +330,7 @@ exports.handler = async (event) => {
       overwriteFields: {
         qualify_revenue: REVENUE[data.revenue],
         qualify_fulltime: FULLTIME[data.fulltime],
-        qualify_clients: CLIENTS[data.clients],
+        ...(CLIENTS[data.clients] ? { qualify_clients: CLIENTS[data.clients] } : {}),
         qualify_source: source,
         // The widget and embed.js both collect these; without writing them
         // here, campaign attribution for every declined lead was discarded.
