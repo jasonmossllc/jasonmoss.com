@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<title>Book a Business Assessment Call — Jason Moss</title>
+<title>Book a Business Assessment Call - Jason Moss</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Raleway:wght@400;500;600&display=swap">
@@ -248,7 +248,7 @@
      the submit button unreachable on a phone). */
   #cal{width:100%;height:760px;min-height:560px}
   #cal iframe{width:100%!important;height:100%!important;border:0;display:block}
-  @media (max-width:640px){ #cal{height:1040px} }
+  @media (max-width:600px){ #cal{height:1040px} }
 
   .testbar{
     flex:none;background:#33291A;color:#F0E2C2;border-radius:8px;
@@ -296,7 +296,10 @@
   var state = { revenue:null, fulltime:null, clients:null,
                 first_name:'', email:'', decided:null, reason:null };
   var idx = 0, locked = false, keyHandler = null;
-  function total(){ return localDecision().decision === 'book' ? 3 : 4; }
+  // The denominator must not move. It used to be derived from a decision
+  // computed on partly-answered state, so it flipped from 4 to 3 mid-flow and
+  // the bar read "Step 3 of 3" - 100% - on a question not yet answered.
+  function total(){ return QUESTIONS.length; }
 
   var el = document.getElementById('screen');
   var bar = document.getElementById('bar');
@@ -309,8 +312,8 @@
       options:[
         {v:'none',      t:"I haven't started earning yet"},
         {v:'under-1k',  t:'Under $1,000/month'},
-        {v:'1k-5k',     t:'$1,000 – $5,000/month'},
-        {v:'5k-10k',    t:'$5,000 – $10,000/month'},
+        {v:'1k-5k',     t:'$1,000 – $4,999/month'},
+        {v:'5k-10k',    t:'$5,000 – $9,999/month'},
         {v:'10k-plus',  t:'$10,000+/month'}
       ]},
     { id:'fulltime', title:'Is this your full-time focus?',
@@ -332,17 +335,17 @@
   // say it to someone across a table — no cleverness, no reframing.
   var DECLINE = {
     early: {
-      h: "Let's get your first clients in first.",
+      h: "Let's get your revenue up first.",
       body: [
-        "You're earlier than this call is built for. It's for people who already have clients coming in and need to fix what isn't working.",
-        "What you need first is the basics - a clear offer, people to put it in front of, and knowing what to say when someone's interested. <strong>That's what Launchpad is.</strong> Start there, and book this call once you've got clients coming in."
+        "You're earlier than this call is built for. It's for people already past $1,000 a month who need to fix what isn't working.",
+        "What you need first is the basics - a clear offer, people to put it in front of, and knowing what to say when someone's interested. <strong>That's what Launchpad is.</strong> Start there, and book this call once you're past that."
       ]
     },
     part_time: {
       h: "The timing isn't right yet.",
       body: [
         "You're building this around another income, which is a different problem than the one this call solves.",
-        "What you need is a way to get clients that fits the hours you've actually got. <strong>That's what Launchpad is for.</strong> It's self-paced, so you work it around the job. Get that running and going full-time stops being a leap."
+        "What you need is a way to get clients that fits the hours you've actually got. <strong>That's what Launchpad is for.</strong> It's self-paced, so you work it around whatever else is on your plate. Get that running and going full-time stops being a leap."
       ]
     },
     no_clients: {
@@ -383,18 +386,21 @@
   function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,function(c){
     return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]; }); }
 
-  function progress(step, show){
+  function progress(step, show, label){
     bar.classList.toggle('hide', !show);
     var t = total();
-    barfill.style.width = show ? Math.round((Math.min(step,t)/t)*100)+'%' : '0%';
-    steplabel.textContent = show ? ('Step ' + Math.min(step,t) + ' of ' + t) : '';
+    var pct = label ? 100 : Math.round((Math.min(step,t)/t)*100);
+    barfill.style.width = show ? pct+'%' : '0%';
+    steplabel.textContent = show ? (label || ('Step ' + Math.min(step,t) + ' of ' + t)) : '';
   }
-  function paint(html, step, showProgress){
-    el.innerHTML = '<div class="screen">' + html + '</div>';
-    progress(step, showProgress !== false);
+  function paint(html, step, showProgress, label){
+    el.innerHTML = '<div class="screen" tabindex="-1">' + html + '</div>';
+    progress(step, showProgress !== false, label);
     height();
-    var f = el.querySelector('[data-focus]');
-    if (f){ try { f.focus({preventScroll:true}); } catch(e){ f.focus(); } }
+    // Focus the field if there is one, otherwise the screen itself, so a
+    // screen reader announces the new screen instead of staying put.
+    var f = el.querySelector('[data-focus]') || el.firstChild;
+    if (f){ try { f.focus({preventScroll:true}); } catch(e){ try { f.focus(); } catch(e2){} } }
   }
 
   // Measure every question's header at the current width and lock the block to
@@ -434,7 +440,7 @@
       '<div class="qhead"><h1>'+esc(q.title)+'</h1>'+
       (q.sub ? '<p class="sub">'+esc(q.sub)+'</p>' : '')+'</div>'+
       '<ul class="opts" role="list">'+opts+'</ul>'+
-      (idx>0 ? '<div class="actions"><button type="button" class="back" id="back">&larr; Back</button></div>' : ''),
+      (idx>0 ? '<div class="actions"><button type="button" class="back" id="back"><span aria-hidden="true">&larr;</span> Back</button></div>' : ''),
       idx+1
     );
     el.querySelectorAll('.opt').forEach(function(b){
@@ -479,16 +485,16 @@
         '<label class="f" for="em">Email</label>'+
         '<input type="email" id="em" autocomplete="email" inputmode="email" value="'+esc(state.email)+'">'+
       '</div>'+
-      '<div class="sr"><label for="website">Leave this empty</label>'+
+      '<div class="sr" aria-hidden="true"><label for="website">Leave this empty</label>'+
       '<input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>'+
       '<div class="ts-slot" id="ts-slot"></div>'+
       '<p class="err" id="err" role="alert"></p>'+
       '<div class="actions">'+
         '<button type="button" class="btn" id="go">Continue</button>'+
-        '<button type="button" class="back" id="back">&larr; Back</button>'+
+        '<button type="button" class="back" id="back"><span aria-hidden="true">&larr;</span> Back</button>'+
       '</div>'+
       '<p class="hint">I’ll also send my emails on getting clients. Unsubscribe anytime.</p>',
-      4
+      4, true, 'Last step'
     );
     document.getElementById('go').addEventListener('click', submit);
     document.getElementById('back').addEventListener('click', prev);
@@ -575,6 +581,9 @@
     }
     var fn = document.getElementById('fn').value.trim();
     var em = document.getElementById('em').value.trim();
+    // Read now, not inside the async callback below: if the screen re-renders
+    // while the token resolves, that element is gone and the submit throws.
+    var hp = document.getElementById('website').value;
     var err = document.getElementById('err');
     var btn = document.getElementById('go');
     if (btn.disabled) return;
@@ -594,7 +603,7 @@
           first_name:fn, email:em, source:SOURCE,
           utm_source:UTM.utm_source, utm_medium:UTM.utm_medium, utm_campaign:UTM.utm_campaign,
           utm_content:UTM.utm_content, utm_term:UTM.utm_term,
-          website: document.getElementById('website').value,
+          website: hp,
           turnstile_token: tok, test: TEST
         })
       })
@@ -632,7 +641,7 @@
         '<div class="rule"></div>'+
         '<a class="btn" href="'+LAUNCHPAD+'?utm_source='+encodeURIComponent(SOURCE)+
           '&utm_medium=qualifier&utm_campaign=decline_'+encodeURIComponent(reason||'early')+
-          '" target="_top" rel="noopener">See Launchpad &rarr;</a>'+
+          '" target="_top" rel="noopener">See Launchpad <span aria-hidden="true">&rarr;</span></a>'+
       '</div>',
       5, false
     );
@@ -656,11 +665,11 @@
       '</div>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
       '<div id="cal"></div>'+
-      '<p class="cal-alt">Can\u2019t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20%E2%80%94%20alternate%20time">Tap here to send me an email</a> and we\u2019ll arrange an alternate.</p>',
+      '<p class="cal-alt">Can\u2019t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20-%20alternate%20time">Tap here to send me an email</a> and we\u2019ll arrange an alternate.</p>',
       5, false
     );
     var url = CALENDLY +
-      '?hide_gdpr_banner=1&hide_event_type_details=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=0E6B5A' +
+      '?hide_gdpr_banner=1&hide_event_type_details=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=2C3F36' +
       Object.keys(UTM).map(function(k){ return UTM[k] ? '&'+k+'='+encodeURIComponent(UTM[k]) : ''; }).join('');
     calH = 0;
     function init(){

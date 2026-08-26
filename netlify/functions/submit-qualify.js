@@ -254,8 +254,14 @@ exports.handler = async (event) => {
     let { decision, reason } = decide(data.revenue, data.fulltime, data.clients);
 
     // A previous decline stands for DECLINE_LOCK_DAYS regardless of what they
-    // answer this time. The client hides the questions after a decline, but
-    // that is cosmetic — a new tab clears it, so the real gate is here.
+    // answer this time.
+    //
+    // Scope, honestly: this only fires for a submission that reaches the server
+    // with a qualifying answer set, and the widget never POSTs on the book path
+    // (it renders Calendly straight from the client-side decision). So today
+    // this is defence in depth against a changed client, not the live gate the
+    // flow relies on. It could not be airtight regardless - the Calendly event
+    // URL is publicly bookable on its own.
     let lockedByPriorDecline = false;
     if (decision === 'book' && !isTest) {
       try {
