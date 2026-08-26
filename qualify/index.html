@@ -163,69 +163,80 @@
 
   /* The qualifying moment. Generic praise reads automated, so the copy names
      what they actually answered; this gives it the visual weight to match. */
-  /* Booking screen, two zones. The fit panel is the moment — small, warm, gold
-     — and then it stops. The instruction below it is the largest thing on the
-     screen, because picking a time is the only thing left to do. A hairline
-     closes the zone and hands off to the calendar. */
+  /* ── Booking screen ─────────────────────────────────────────────────────
+     Four beats in order: you're a fit (the moment), what we'll do (the
+     promise), who you're meeting (the face), the one action left. Every beat
+     is centred, symmetric, and separated by the same rhythm, so it reads as
+     one designed screen instead of stacked fragments. */
   .fit{
     position:relative;overflow:hidden;text-align:center;
     background:linear-gradient(158deg,#FFFFFF 0%,#FCFAF6 55%,#F7F3EA 100%);
-    border:1px solid var(--line-soft);border-radius:12px;
-    padding:22px 24px;margin:0 0 32px;
+    border:1px solid var(--line-soft);border-radius:14px;
+    padding:26px 24px 24px;margin:0 0 28px;
     box-shadow:0 1px 2px rgba(29,31,30,.04),0 16px 34px -26px rgba(29,31,30,.45);
   }
-  /* Embedded, this sits inside the host page's own card. Drop the lift so it
-     reads as one surface instead of a box in a box. */
+  /* Embedded it sits inside the host page's own card - drop the lift so it
+     doesn't read as a box inside a box. */
   html.framed .fit{box-shadow:none}
   .fit::before{
     content:"";position:absolute;top:0;left:0;right:0;height:3px;
-    background:linear-gradient(90deg,var(--gold) 0%,rgba(190,158,96,.22) 100%);
+    background:linear-gradient(90deg,rgba(190,158,96,.2) 0%,var(--gold) 50%,rgba(190,158,96,.2) 100%);
   }
-  @media (max-width:600px){ .fit{padding:20px} }
-  /* This is the moment. It reads as a stamp, not a form label - so it gets
-     real size and weight, without another word of copy. */
+  @media (max-width:600px){ .fit{padding:22px 18px 20px} }
   .fit-badge{
     display:inline-flex;align-items:center;gap:9px;
     background:var(--forest);color:#fff;border-radius:999px;
-    padding:9px 20px 9px 16px;margin:0 0 15px;
+    padding:9px 20px 9px 16px;margin:0 0 16px;
     font-size:12.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
     box-shadow:0 6px 16px -8px rgba(20,49,40,.6);
   }
   .fit-badge span{font-size:15px;line-height:1}
   .fit p.fit-benefit{
-    margin:0;color:var(--mocha);line-height:1.5;text-wrap:pretty;
+    margin:0 auto;max-width:34ch;color:var(--mocha);line-height:1.5;text-wrap:pretty;
     font-size:clamp(16.5px,3.7vw,18.5px);
   }
+
+  /* Who you're meeting. A portrait only earns its place next to the claim it
+     backs up, so the face and the words are a single unit, centred together. */
+  .host-row{
+    display:flex;align-items:center;justify-content:center;gap:14px;margin:0 0 28px;
+  }
+  .host-row img{
+    width:56px;height:56px;flex:none;border-radius:50%;object-fit:cover;
+    border:2px solid #fff;box-shadow:0 4px 14px -6px rgba(29,31,30,.5);
+  }
+  .host-copy{margin:0;text-align:left;line-height:1.4}
+  .host-copy b{display:block;color:var(--obsidian);font-size:15.5px;font-weight:600}
+  .host-copy span{display:block;color:var(--taupe);font-size:13.5px;margin-top:3px}
+  @media (max-width:360px){
+    .host-row{gap:11px}
+    .host-copy span{font-size:12.5px}
+  }
+
+  /* Rules on both sides. One rule on a centred label reads as a mistake. */
   .next-step{
-    display:flex;align-items:center;justify-content:center;gap:10px;
+    display:flex;align-items:center;justify-content:center;gap:12px;
     font-size:11px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--taupe);font-weight:600;margin:0 0 10px;
   }
-  .next-step::before{
+  .next-step::before,.next-step::after{
     content:"";width:22px;height:2px;flex:none;border-radius:2px;background:var(--gold);
   }
   .book-h{
     font-family:var(--serif);font-weight:400;color:var(--obsidian);
-    font-size:clamp(28px,6.6vw,38px);line-height:1.16;margin:0 0 18px;
+    font-size:clamp(28px,6.6vw,38px);line-height:1.16;margin:0 0 14px;
     letter-spacing:-.01em;text-align:center;
   }
-  /* The one thing worth saying here is who is on the other side of it. */
-  .book-sub{color:var(--mocha);font-size:15.5px;line-height:1.5;margin:0 0 7px}
-  .book-sub strong{color:var(--obsidian);font-weight:600}
-  /* Answers the "none of those times work" objection before they hit the
-     calendar. Left-aligned with the copy above it, and quieter than the
-     sub-line so it never competes with picking a time. */
   .cal-alt{
-    /* A footnote: detached from the line above by its own gap, a decisive step
-       down in size, and no bold anywhere to pull the eye off the calendar. */
-    margin:14px 0 22px;color:var(--taupe);line-height:1.45;text-wrap:pretty;
-    font-size:12.5px;font-style:italic;letter-spacing:.005em;text-align:center;
+    margin:0 0 24px;color:var(--taupe);line-height:1.45;text-wrap:pretty;
+    font-size:12.5px;font-style:italic;text-align:center;
   }
   .cal-alt a{color:var(--taupe);font-weight:400;text-decoration:underline;text-underline-offset:2px}
   .cal-alt a:hover{color:var(--forest)}
+  /* Fades at both ends, like everything else on a centred screen. */
   .cal-rule{
     border:0;height:1px;margin:0 0 6px;
-    background:linear-gradient(90deg,var(--line) 0%,rgba(29,31,30,.08) 55%,rgba(29,31,30,0) 100%);
+    background:linear-gradient(90deg,rgba(29,31,30,0) 0%,rgba(29,31,30,.13) 50%,rgba(29,31,30,0) 100%);
   }
 
   .card{background:#fff;border:1px solid var(--line-soft);border-radius:14px;padding:32px 28px}
@@ -294,7 +305,7 @@
 
   var QUESTIONS = [
     { id:'revenue', title:"Where's your business at right now?",
-      sub:"There's no wrong answer — this just points you to the right next step.",
+      sub:"There's no wrong answer. This just points you to the right next step.",
       options:[
         {v:'none',      t:"I haven't started earning yet"},
         {v:'under-1k',  t:'Under $1,000/month'},
@@ -305,7 +316,7 @@
     { id:'fulltime', title:'Is this your full-time focus?',
       options:[
         {v:'yes',       t:'Yes, this is what I do full-time'},
-        {v:'job',       t:'Not yet — I have a job or other main income'},
+        {v:'job',       t:'Not yet, I have a job or other main income'},
         {v:'supported', t:"I'm retired or supported while I build it"}
       ]},
     { id:'clients', title:'How many paying clients do you have right now?',
@@ -324,21 +335,21 @@
       h: "Let's get your first clients in first.",
       body: [
         "You're earlier than this call is built for. It's for people who already have clients coming in and need to fix what isn't working.",
-        "What you need first is the basics — a clear offer, people to put it in front of, and knowing what to say when someone's interested. <strong>That's what Launchpad is.</strong> Start there, and book this call once you've got clients coming in."
+        "What you need first is the basics - a clear offer, people to put it in front of, and knowing what to say when someone's interested. <strong>That's what Launchpad is.</strong> Start there, and book this call once you've got clients coming in."
       ]
     },
     part_time: {
       h: "The timing isn't right yet.",
       body: [
         "You're building this around another income, which is a different problem than the one this call solves.",
-        "What you need is a way to get clients that fits the hours you've actually got. <strong>That's what Launchpad is for</strong> — it's self-paced, so you work it around the job. Get that running and going full-time stops being a leap."
+        "What you need is a way to get clients that fits the hours you've actually got. <strong>That's what Launchpad is for.</strong> It's self-paced, so you work it around the job. Get that running and going full-time stops being a leap."
       ]
     },
     no_clients: {
       h: "Let's fill the calendar first.",
       body: [
         "You're full-time with money coming in, which puts you ahead of most people who fill this out. But you're not working with anyone right now.",
-        "That's the thing to fix, and it's bigger than a twenty-minute conversation — it's your offer, who you put it in front of, and how you handle it when someone's interested. <strong>Launchpad covers all three.</strong> Start there."
+        "That's the thing to fix, and it's bigger than a twenty-minute conversation: it's your offer, who you put it in front of, and how you handle it when someone's interested. <strong>Launchpad covers all three.</strong> Start there."
       ]
     }
   };
@@ -638,13 +649,16 @@
   function renderBooking(){
     paint(
       '<div class="fit">'+
-        '<p class="fit-badge"><span aria-hidden="true">&#10003;</span> You’re a fit</p>'+
-        '<p class="fit-benefit">Let’s look at your business and map out a clear path to more clients and income together.</p>'+
+        '<p class="fit-badge"><span aria-hidden="true">&#10003;</span> You\u2019re a fit</p>'+
+        '<p class="fit-benefit">Let\u2019s look at your business and map out a clear path to more clients and income together.</p>'+
+      '</div>'+
+      '<div class="host-row">'+
+        '<img src="/qualify/jason.jpg" width="56" height="56" alt="" decoding="async">'+
+        '<p class="host-copy"><b>Jason Moss</b>'+
+        '<span>Twenty minutes, one to one. Not a team member.</span></p>'+
       '</div>'+
       '<p class="next-step">Your next step</p>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
-      '<img class="host" src="/qualify/jason.jpg" width="64" height="64" alt="Jason Moss" decoding="async">'+
-      '<p class="book-sub">Twenty minutes, one to one with <strong>Jason</strong> — not a team member.</p>'+
       '<p class="cal-alt">Can\u2019t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20%E2%80%94%20alternate%20time">Tap here to send me an email</a> and we\u2019ll arrange an alternate.</p>'+
       '<hr class="cal-rule">'+
       '<div id="cal"></div>',
@@ -695,7 +709,7 @@
   if (TEST){
     var tb = document.getElementById('testbar');
     tb.className = 'testbar';
-    tb.innerHTML = '<b>Test</b> — nothing is saved to your CRM. '+
+    tb.innerHTML = '<b>Test</b> - nothing is saved to your CRM. '+
       '<strong>Booking a time still creates a real Calendly event.</strong> Jump to: '+
       '<a href="?test='+encodeURIComponent(TEST)+'&force=book">booking</a> · '+
       '<a href="?test='+encodeURIComponent(TEST)+'&force=decline&reason=early">early</a> · '+
