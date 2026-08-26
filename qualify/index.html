@@ -200,13 +200,13 @@
      calendar. Left-aligned with the copy above it, and quieter than the
      sub-line so it never competes with picking a time. */
   .cal-alt{
-    margin:0 0 20px;color:var(--taupe);line-height:1.5;text-wrap:pretty;
-    /* Deliberately an aside, not a sibling of the line above it: italic and a
-       clear step down in size, so the difference reads as intent. */
-    font-size:13.5px;font-style:italic;
+    /* A footnote: detached from the line above by its own gap, a decisive step
+       down in size, and no bold anywhere to pull the eye off the calendar. */
+    margin:15px 0 22px;color:var(--taupe);line-height:1.45;text-wrap:pretty;
+    font-size:12.5px;font-style:italic;letter-spacing:.005em;
   }
-  .cal-alt a{color:var(--forest);font-weight:600;text-decoration:underline;text-underline-offset:2px}
-  .cal-alt a:hover{color:var(--obsidian)}
+  .cal-alt a{color:var(--taupe);font-weight:400;text-decoration:underline;text-underline-offset:2px}
+  .cal-alt a:hover{color:var(--forest)}
   .cal-rule{
     border:0;height:1px;margin:0 0 6px;
     background:linear-gradient(90deg,var(--line) 0%,rgba(29,31,30,.08) 55%,rgba(29,31,30,0) 100%);
