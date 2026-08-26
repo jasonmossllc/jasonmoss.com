@@ -219,6 +219,8 @@
     letter-spacing:-.01em;text-align:center;
   }
   /* After the calendar, where an alternative to the listed times belongs. */
+  #cal{min-height:640px}
+  #cal iframe{width:100%!important;border:0;display:block}
   .cal-alt{
     margin:26px 0 0;padding:16px 18px;text-align:center;
     border:1px solid var(--line-soft);border-radius:10px;background:rgba(255,255,255,.55);
@@ -650,6 +652,7 @@
     var url = CALENDLY +
       '?hide_gdpr_banner=1&hide_event_type_details=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=0E6B5A' +
       Object.keys(UTM).map(function(k){ return UTM[k] ? '&'+k+'='+encodeURIComponent(UTM[k]) : ''; }).join('');
+    calH = 0;
     function init(){
       if (!window.Calendly) return;
       window.Calendly.initInlineWidget({
@@ -669,9 +672,31 @@
     setTimeout(height, 900); setTimeout(height, 2400);
   }
 
+  // Calendly's iframe defaults to a fixed height and scrolls its own content
+  // when the form step is taller. On a touch screen that inner scroll swallows
+  // the gesture, so the page behind it will not move and the submit button
+  // becomes unreachable. Growing the container to Calendly's reported content
+  // height removes the inner scroll entirely: the page scrolls instead.
+  var calH = 0;
+  function fitCalendly(px){
+    var h = parseInt(px, 10);
+    if (!(h > 0) || h === calH) return;
+    calH = h;
+    var cal = document.getElementById('cal');
+    if (!cal) return;
+    cal.style.height = h + 'px';
+    var f = cal.querySelector('iframe');
+    if (f){ f.style.height = h + 'px'; f.setAttribute('scrolling', 'no'); }
+    height();
+  }
+
   window.addEventListener('message', function(e){
     if (e.origin !== 'https://calendly.com') return;
     if (!e.data || typeof e.data !== 'object') return;
+    if (e.data.event === 'calendly.page_height'){
+      fitCalendly(e.data.payload && e.data.payload.height);
+      return;
+    }
     if (e.data.event !== 'calendly.event_scheduled') return;
     // On the booking path we never collected an email, so we hand Calendly's
     // invitee URI to the server, which looks up who booked and records them
