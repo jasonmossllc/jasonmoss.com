@@ -164,80 +164,61 @@
   /* The qualifying moment. Generic praise reads automated, so the copy names
      what they actually answered; this gives it the visual weight to match. */
   /* ── Booking screen ─────────────────────────────────────────────────────
-     Four beats in order: you're a fit (the moment), what we'll do (the
-     promise), who you're meeting (the face), the one action left. Every beat
-     is centred, symmetric, and separated by the same rhythm, so it reads as
-     one designed screen instead of stacked fragments. */
+     One descent, four beats: you qualified -> what the call does for you ->
+     the details -> pick a time. The details are a single metadata line, not a
+     byline block: a portrait plus a name plus a disclaimer read as a business
+     card dropped into the middle of a booking flow. */
   .fit{
     position:relative;overflow:hidden;text-align:center;
     background:linear-gradient(158deg,#FFFFFF 0%,#FCFAF6 55%,#F7F3EA 100%);
     border:1px solid var(--line-soft);border-radius:14px;
-    padding:26px 24px 24px;margin:0 0 28px;
+    padding:32px 26px 24px;margin:0 0 32px;
     box-shadow:0 1px 2px rgba(29,31,30,.04),0 16px 34px -26px rgba(29,31,30,.45);
   }
-  /* Embedded it sits inside the host page's own card - drop the lift so it
-     doesn't read as a box inside a box. */
   html.framed .fit{box-shadow:none}
   .fit::before{
     content:"";position:absolute;top:0;left:0;right:0;height:3px;
     background:linear-gradient(90deg,rgba(190,158,96,.2) 0%,var(--gold) 50%,rgba(190,158,96,.2) 100%);
   }
-  @media (max-width:600px){ .fit{padding:22px 18px 20px} }
+  @media (max-width:600px){ .fit{padding:26px 20px 20px} }
   .fit-badge{
     display:inline-flex;align-items:center;gap:9px;
     background:var(--forest);color:#fff;border-radius:999px;
-    padding:9px 20px 9px 16px;margin:0 0 16px;
+    padding:9px 20px 9px 16px;margin:0 0 18px;
     font-size:12.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
     box-shadow:0 6px 16px -8px rgba(20,49,40,.6);
   }
   .fit-badge span{font-size:15px;line-height:1}
   .fit p.fit-benefit{
-    margin:0 auto;max-width:34ch;color:var(--mocha);line-height:1.5;text-wrap:pretty;
+    margin:0 auto;max-width:32ch;color:var(--mocha);line-height:1.5;text-wrap:pretty;
     font-size:clamp(16.5px,3.7vw,18.5px);
   }
-
-  /* Who you're meeting. A portrait only earns its place next to the claim it
-     backs up, so the face and the words are a single unit, centred together. */
-  .host-row{
-    display:flex;align-items:center;justify-content:center;gap:14px;margin:0 0 28px;
+  /* The details, as one line. The face rides inside it so there is a person
+     attached to the call without a card announcing him. */
+  .meta{
+    display:flex;align-items:center;justify-content:center;gap:9px;flex-wrap:wrap;
+    margin:20px auto 0;padding-top:18px;max-width:26rem;
+    border-top:1px solid var(--line-soft);
+    color:var(--mocha);font-size:14px;line-height:1.5;
   }
-  .host-row img{
-    width:56px;height:56px;flex:none;border-radius:50%;object-fit:cover;
-    border:2px solid #fff;box-shadow:0 4px 14px -6px rgba(29,31,30,.5);
+  .meta img{
+    width:30px;height:30px;flex:none;border-radius:50%;object-fit:cover;
+    border:2px solid #fff;box-shadow:0 2px 8px -3px rgba(29,31,30,.55);
   }
-  .host-copy{margin:0;text-align:left;line-height:1.4}
-  .host-copy b{display:block;color:var(--obsidian);font-size:15.5px;font-weight:600}
-  .host-copy span{display:block;color:var(--taupe);font-size:13.5px;margin-top:3px}
-  @media (max-width:360px){
-    .host-row{gap:11px}
-    .host-copy span{font-size:12.5px}
-  }
-
-  /* Rules on both sides. One rule on a centred label reads as a mistake. */
-  .next-step{
-    display:flex;align-items:center;justify-content:center;gap:12px;
-    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--taupe);font-weight:600;margin:0 0 10px;
-  }
-  .next-step::before,.next-step::after{
-    content:"";width:22px;height:2px;flex:none;border-radius:2px;background:var(--gold);
-  }
+  .meta b{color:var(--obsidian);font-weight:600}
   .book-h{
     font-family:var(--serif);font-weight:400;color:var(--obsidian);
-    font-size:clamp(28px,6.6vw,38px);line-height:1.16;margin:0 0 14px;
+    font-size:clamp(28px,6.6vw,38px);line-height:1.16;margin:0 0 22px;
     letter-spacing:-.01em;text-align:center;
   }
+  /* After the calendar, where an alternative to the listed times belongs. */
   .cal-alt{
-    margin:0 0 24px;color:var(--taupe);line-height:1.45;text-wrap:pretty;
-    font-size:12.5px;font-style:italic;text-align:center;
+    margin:26px 0 0;padding:16px 18px;text-align:center;
+    border:1px solid var(--line-soft);border-radius:10px;background:rgba(255,255,255,.55);
+    color:var(--mocha);font-size:14px;line-height:1.55;text-wrap:pretty;
   }
-  .cal-alt a{color:var(--taupe);font-weight:400;text-decoration:underline;text-underline-offset:2px}
-  .cal-alt a:hover{color:var(--forest)}
-  /* Fades at both ends, like everything else on a centred screen. */
-  .cal-rule{
-    border:0;height:1px;margin:0 0 6px;
-    background:linear-gradient(90deg,rgba(29,31,30,0) 0%,rgba(29,31,30,.13) 50%,rgba(29,31,30,0) 100%);
-  }
+  .cal-alt a{color:var(--forest);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  .cal-alt a:hover{color:var(--obsidian)}
 
   .card{background:#fff;border:1px solid var(--line-soft);border-radius:14px;padding:32px 28px}
   @media (max-width:600px){ .card{padding:24px 20px} }
@@ -651,17 +632,12 @@
       '<div class="fit">'+
         '<p class="fit-badge"><span aria-hidden="true">&#10003;</span> You\u2019re a fit</p>'+
         '<p class="fit-benefit">Let\u2019s look at your business and map out a clear path to more clients and income together.</p>'+
+        '<p class="meta"><img src="/qualify/jason.jpg" width="30" height="30" alt="" decoding="async">'+
+        '20 minutes \u00b7 on Zoom \u00b7 one-to-one with <b>Jason</b></p>'+
       '</div>'+
-      '<div class="host-row">'+
-        '<img src="/qualify/jason.jpg" width="56" height="56" alt="" decoding="async">'+
-        '<p class="host-copy"><b>Jason Moss</b>'+
-        '<span>Twenty minutes, one to one. Not a team member.</span></p>'+
-      '</div>'+
-      '<p class="next-step">Your next step</p>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
-      '<p class="cal-alt">Can\u2019t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20%E2%80%94%20alternate%20time">Tap here to send me an email</a> and we\u2019ll arrange an alternate.</p>'+
-      '<hr class="cal-rule">'+
-      '<div id="cal"></div>',
+      '<div id="cal"></div>'+
+      '<p class="cal-alt">Can\u2019t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20%E2%80%94%20alternate%20time">Tap here to send me an email</a> and we\u2019ll arrange an alternate.</p>',
       5, false
     );
     var url = CALENDLY +
