@@ -225,6 +225,12 @@
     border:1px solid var(--line-soft);background:#fff;
     color:var(--mocha);font-size:14px;line-height:1.5;text-align:center;
   }
+  .override{
+    margin:22px 0 0;padding-top:18px;border-top:1px solid var(--line-soft);
+    color:var(--taupe);font-size:13.5px;line-height:1.55;text-wrap:pretty;
+  }
+  .override a{color:var(--forest);font-weight:600;text-decoration:underline;text-underline-offset:2px}
+  .override a:hover{color:var(--obsidian)}
   .cal-alt{
     margin:26px 0 0;padding:16px 18px;text-align:center;
     border:1px solid var(--line-soft);border-radius:10px;background:rgba(255,255,255,.55);
@@ -653,6 +659,12 @@
         '<a class="btn" href="'+LAUNCHPAD+'?utm_source='+encodeURIComponent(SOURCE)+
           '&utm_medium=qualifier&utm_campaign=decline_'+encodeURIComponent(reason||'early')+
           '" target="_top" rel="noopener">See Launchpad <span aria-hidden="true">&rarr;</span></a>'+
+        // An established operator starting something new looks identical to a
+        // beginner on these three questions. Writing the email is itself the
+        // signal, so this stays a self-select rather than another question.
+        '<p class="override">Already built a business, and starting this one '+
+        'from scratch? That\u2019s a different situation than this page can read. '+
+        '<a href="' + MAILTO + '">Email me and say so</a> - I\u2019ll take a look myself.</p>'+
       '</div>',
       5, false
     );
