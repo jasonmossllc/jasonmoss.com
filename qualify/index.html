@@ -168,7 +168,7 @@
      screen, because picking a time is the only thing left to do. A hairline
      closes the zone and hands off to the calendar. */
   .fit{
-    position:relative;overflow:hidden;
+    position:relative;overflow:hidden;text-align:center;
     background:linear-gradient(158deg,#FFFFFF 0%,#FCFAF6 55%,#F7F3EA 100%);
     border:1px solid var(--line-soft);border-radius:12px;
     padding:22px 24px;margin:0 0 32px;
@@ -197,7 +197,7 @@
     font-size:clamp(16.5px,3.7vw,18.5px);
   }
   .next-step{
-    display:flex;align-items:center;gap:10px;
+    display:flex;align-items:center;justify-content:center;gap:10px;
     font-size:11px;letter-spacing:.16em;text-transform:uppercase;
     color:var(--taupe);font-weight:600;margin:0 0 10px;
   }
@@ -206,8 +206,8 @@
   }
   .book-h{
     font-family:var(--serif);font-weight:400;color:var(--obsidian);
-    font-size:clamp(28px,6.6vw,38px);line-height:1.16;margin:0 0 10px;
-    letter-spacing:-.01em;
+    font-size:clamp(28px,6.6vw,38px);line-height:1.16;margin:0 0 18px;
+    letter-spacing:-.01em;text-align:center;
   }
   /* The one thing worth saying here is who is on the other side of it. */
   .book-sub{color:var(--mocha);font-size:15.5px;line-height:1.5;margin:0 0 7px}
@@ -218,8 +218,8 @@
   .cal-alt{
     /* A footnote: detached from the line above by its own gap, a decisive step
        down in size, and no bold anywhere to pull the eye off the calendar. */
-    margin:15px 0 22px;color:var(--taupe);line-height:1.45;text-wrap:pretty;
-    font-size:12.5px;font-style:italic;letter-spacing:.005em;
+    margin:14px 0 22px;color:var(--taupe);line-height:1.45;text-wrap:pretty;
+    font-size:12.5px;font-style:italic;letter-spacing:.005em;text-align:center;
   }
   .cal-alt a{color:var(--taupe);font-weight:400;text-decoration:underline;text-underline-offset:2px}
   .cal-alt a:hover{color:var(--forest)}
@@ -643,6 +643,7 @@
       '</div>'+
       '<p class="next-step">Your next step</p>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
+      '<img class="host" src="/qualify/jason.jpg" width="64" height="64" alt="Jason Moss" loading="lazy">'+
       '<p class="book-sub">Twenty minutes, one to one with <strong>Jason</strong> — not a team member.</p>'+
       '<p class="cal-alt">Can\u2019t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20%E2%80%94%20alternate%20time">Tap here to send me an email</a> and we\u2019ll arrange an alternate.</p>'+
       '<hr class="cal-rule">'+
