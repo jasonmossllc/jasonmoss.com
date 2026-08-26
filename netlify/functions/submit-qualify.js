@@ -39,7 +39,10 @@ const {
 // and someone who was declined — so those are the only tags it sets.
 const TAG_BOOKED = 22754514;   // "Qualifier Booked"
 const TAG_DECLINED = 22754515; // "Qualifier Declined"
-const TAG_LAUNCHPAD_DOWNSELL = 20410106; // existing downsell tag
+const TAG_LAUNCHPAD_DOWNSELL = 20410106;
+// Someone the three questions would have declined, who said the investment is
+// doable and booked anyway. Tagged separately so the rescue can be measured.
+const TAG_RESCUED = 22757768; // existing downsell tag
 
 // Kit sequence "Launchpad Downsell (Qualifier)" — 5 emails over 7 days for
 // everyone we decline. Its emails stay unpublished until Jason approves them,
@@ -178,6 +181,7 @@ exports.handler = async (event) => {
       }
       // Declared outside the try so the catch can hand it to the retry queue.
       let bookedSubmission = null;
+      const rescued = String(data.afford || '') === 'yes';
       try {
         const invitee = await fetchCalendlyInvitee(cleanString(data.invitee_uri, 300));
         // Identity comes from Calendly only. Accepting a caller-supplied
@@ -194,12 +198,13 @@ exports.handler = async (event) => {
         bookedSubmission = {
           email: bookedEmail,
           firstName: cleanString((invitee?.name || '').split(' ')[0], 100),
-          tagIds: [TAG_BOOKED],
+          tagIds: rescued ? [TAG_BOOKED, TAG_RESCUED] : [TAG_BOOKED],
           mappedFields: {},
           overwriteFields: {
             ...answers,
             qualify_source: cleanString(data.source, 120) || 'direct',
-            qualify_decision: 'Book',
+            qualify_decision: rescued ? 'Book (rescued)' : 'Book',
+            ...(rescued ? { qualify_afford: 'Yes' } : {}),
             qualify_date: new Date().toISOString().slice(0, 10),
             qualify_booked: 'Yes',
             ...(invitee?.goal ? { qualify_goal: invitee.goal } : {}),
@@ -333,6 +338,9 @@ exports.handler = async (event) => {
         ...(cleanString(data.utm_content, 200) ? { qualify_utm_content: cleanString(data.utm_content, 200) } : {}),
         ...(cleanString(data.utm_term, 200) ? { qualify_utm_term: cleanString(data.utm_term, 200) } : {}),
         qualify_decision: qualified ? 'Book' : `Decline (${reason})`,
+        ...(data.afford === 'yes' || data.afford === 'no'
+          ? { qualify_afford: data.afford === 'yes' ? 'Yes' : 'Not right now' }
+          : {}),
         ...(lockedByPriorDecline ? { qualify_relocked: new Date().toISOString().slice(0, 10) } : {}),
         qualify_date: new Date().toISOString().slice(0, 10),
         ...(isTest ? { qualify_decision: `TEST — ${qualified ? 'Book' : `Decline (${reason})`}` } : {}),

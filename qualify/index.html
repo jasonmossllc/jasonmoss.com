@@ -231,6 +231,10 @@
   }
   .override a{color:var(--forest);font-weight:600;text-decoration:underline;text-underline-offset:2px}
   .override a:hover{color:var(--obsidian)}
+  .afford-q{
+    margin:0 0 18px;color:var(--obsidian);font-weight:600;
+    font-size:clamp(17px,3.8vw,19px);line-height:1.35;
+  }
   .cal-alt{
     margin:26px 0 0;padding:16px 18px;text-align:center;
     border:1px solid var(--line-soft);border-radius:10px;background:rgba(255,255,255,.55);
@@ -300,7 +304,7 @@
   };
   var TEST = p('test'), FORCE = p('force'), FORCE_REASON = p('reason') || 'early';
 
-  var state = { revenue:null, fulltime:null, clients:null,
+  var state = { revenue:null, fulltime:null, clients:null, afford:null,
                 first_name:'', email:'', decided:null, reason:null };
   var idx = 0, locked = false, keyHandler = null;
   // The denominator must not move. It used to be derived from a decision
@@ -477,6 +481,47 @@
     };
   }
 
+  // Shown only to people the three questions would decline.
+  function renderAfford(){
+    paint(
+      '<h1>One last question.</h1>'+
+      '<p class="sub">This call is free, and you\u2019ll leave with something useful '+
+      'either way. If it\u2019s clear I can help you beyond it, working with me runs '+
+      'between $5,000 and $15,000, with payment plans from $1,250 a month.</p>'+
+      '<p class="afford-q">Is that doable for you right now?</p>'+
+      '<ul class="opts" role="list">'+
+        '<li><button type="button" class="opt" data-v="yes">'+
+          '<span class="k" aria-hidden="true">A</span><span>Yes, that\u2019s doable</span></button></li>'+
+        '<li><button type="button" class="opt" data-v="no">'+
+          '<span class="k" aria-hidden="true">B</span><span>Not right now</span></button></li>'+
+      '</ul>'+
+      '<div class="actions"><button type="button" class="back" id="back">'+
+        '<span aria-hidden="true">&larr;</span> Back</button></div>',
+      4, true, 'Last step'
+    );
+    el.querySelectorAll('.opt').forEach(function(b){
+      b.addEventListener('click', function(){
+        if (locked) return;
+        locked = true;
+        state.afford = b.getAttribute('data-v');
+        b.classList.add('on'); b.setAttribute('aria-pressed','true');
+        setTimeout(route, 160);
+      });
+    });
+    var back = document.getElementById('back');
+    if (back) back.addEventListener('click', function(){ state.afford = null; idx = QUESTIONS.length - 1; route(); });
+    keyHandler = function(e){
+      if (e.metaKey || e.ctrlKey || e.altKey) return;
+      var t = e.target && e.target.tagName;
+      if (t === 'INPUT' || t === 'TEXTAREA') return;
+      var i = -1;
+      if (/^[a-zA-Z]$/.test(e.key)) i = e.key.toUpperCase().charCodeAt(0) - 65;
+      else if (/^[1-9]$/.test(e.key)) i = parseInt(e.key,10) - 1;
+      var btns = el.querySelectorAll('.opt');
+      if (i >= 0 && i < btns.length){ e.preventDefault(); btns[i].click(); }
+    };
+  }
+
   // Only reached on the decline path now.
   function renderContact(){
     paint(
@@ -577,6 +622,11 @@
     // exact moment they have decided to book. Declined people give us their
     // details instead, which is the only way they reach the downsell.
     if (localDecision().decision === 'book') return renderBooking();
+    // Everyone here is about to be turned away. Asking about the investment at
+    // this point cannot cost a booking - they were not getting one - and it
+    // catches the established operator whose "right now" reads like a beginner.
+    if (!state.afford) return renderAfford();
+    if (state.afford === 'yes') return renderBooking();
     return renderContact();
   }
   document.addEventListener('keydown', function(e){ if (keyHandler && !locked) keyHandler(e); });
@@ -617,6 +667,7 @@
         method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({
           revenue:state.revenue, fulltime:state.fulltime, clients:state.clients,
+          afford:state.afford,
           first_name:fn, email:em, source:SOURCE,
           utm_source:UTM.utm_source, utm_medium:UTM.utm_medium, utm_campaign:UTM.utm_campaign,
           utm_content:UTM.utm_content, utm_term:UTM.utm_term,
@@ -758,7 +809,7 @@
         body: JSON.stringify({
           // No email here on purpose: whoever booked is resolved server-side
           // from the Calendly invitee URI, which cannot be forged.
-          action:'booked', invitee_uri: uri,
+          action:'booked', invitee_uri: uri, afford: state.afford,
           revenue: state.revenue, fulltime: state.fulltime, clients: state.clients,
           source: SOURCE, test: TEST
         }) }).catch(function(){});
