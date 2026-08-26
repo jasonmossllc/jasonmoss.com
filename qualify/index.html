@@ -204,6 +204,9 @@
     border-top:1px solid var(--line-soft);
     color:var(--mocha);font-size:14px;line-height:1.5;text-align:left;
   }
+  /* Each fragment stays whole; the line may only break at a separator. Without
+     this "one-to-one" split across two lines on a narrow screen. */
+  .meta i{font-style:normal;white-space:nowrap}
   .meta span{text-wrap:pretty}
   .meta img{
     width:30px;height:30px;flex:none;border-radius:50%;object-fit:cover;
@@ -637,7 +640,7 @@
         '<p class="fit-badge"><span aria-hidden="true">&#10003;</span> You\u2019re a fit</p>'+
         '<p class="fit-benefit">Let\u2019s look at your business and map out a clear path to more clients and income together.</p>'+
         '<p class="meta"><img src="/qualify/jason.jpg" width="30" height="30" alt="" decoding="async">'+
-        '<span>20 minutes \u00b7 on Zoom \u00b7 one-to-one with <b>Jason</b></span></p>'+
+        '<span><i class="nb">20 minutes</i> \u00b7 <i class="nb">on Zoom</i> \u00b7 <i class="nb">one-to-one with <b>Jason</b></i></span></p>'+
       '</div>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
       '<div id="cal"></div>'+
