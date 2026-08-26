@@ -82,10 +82,6 @@
   .qhead{min-height:var(--qhead-h,auto)}
   .qhead h1{margin-bottom:0}
   .qhead .sub{margin-bottom:0}
-  .eyebrow{
-    font-size:11px;letter-spacing:.16em;text-transform:uppercase;
-    color:var(--gold-deep);font-weight:600;margin:0 0 10px;
-  }
 
   .opts{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
   .opt{
@@ -117,18 +113,17 @@
     display:block;font-size:12px;letter-spacing:.08em;text-transform:uppercase;
     color:var(--taupe);margin:0 0 6px;font-weight:600;
   }
-  input[type=text],input[type=email],textarea{
+  input[type=text],input[type=email]{
     width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;
     padding:14px 16px;font-family:var(--sans);font-size:16px;color:var(--obsidian);
     transition:border-color .15s,box-shadow .15s;
   }
-  textarea{min-height:112px;resize:vertical;line-height:1.55}
-  input:focus,textarea:focus{
+  input:focus{
     outline:none;border-color:var(--forest);box-shadow:inset 0 0 0 1px var(--forest);
   }
 
-  .opt:focus-visible,.btn:focus-visible,.back:focus-visible,.skip:focus-visible,
-  a:focus-visible,input:focus-visible,textarea:focus-visible{
+  .opt:focus-visible,.btn:focus-visible,.back:focus-visible,
+  a:focus-visible,input:focus-visible{
     outline:3px solid var(--forest);outline-offset:2px;
   }
 
@@ -146,13 +141,12 @@
     .actions{gap:10px}
     .actions .btn{width:100%;order:-1}
   }
-  .back,.skip{
+  .back{
     background:none;border:none;color:var(--taupe);
     font-family:var(--sans);font-size:14px;cursor:pointer;
     padding:10px 4px;min-height:44px;
   }
-  .back:hover,.skip:hover{color:var(--obsidian)}
-  .skip{text-decoration:underline;text-underline-offset:3px}
+  .back:hover{color:var(--obsidian)}
 
   .hint{font-size:13px;color:var(--taupe);margin:16px 0 0;line-height:1.5}
   .err{color:#8C3D26;font-size:14px;margin:0;font-weight:500}
@@ -213,7 +207,7 @@
   }
   /* Each fragment stays whole; the line may only break at a separator. Without
      this "one-to-one" split across two lines on a narrow screen. */
-  .meta i{font-style:normal;white-space:nowrap}
+  .meta .nb{font-style:normal;white-space:nowrap}
   .meta span{text-wrap:pretty}
   .meta img{
     width:30px;height:30px;flex:none;border-radius:50%;object-fit:cover;
@@ -226,6 +220,11 @@
     letter-spacing:-.01em;text-align:center;
   }
   /* After the calendar, where an alternative to the listed times belongs. */
+  .rebook{
+    margin:0 0 20px;padding:12px 16px;border-radius:10px;
+    border:1px solid var(--line-soft);background:#fff;
+    color:var(--mocha);font-size:14px;line-height:1.5;text-align:center;
+  }
   .cal-alt{
     margin:26px 0 0;padding:16px 18px;text-align:center;
     border:1px solid var(--line-soft);border-radius:10px;background:rgba(255,255,255,.55);
@@ -247,7 +246,9 @@
      scrolling inside its own frame (that inner scroll swallows touch and makes
      the submit button unreachable on a phone). */
   #cal{width:100%;height:760px;min-height:560px}
-  #cal iframe{width:100%!important;height:100%!important;border:0;display:block}
+  /* No !important on height: fitCalendly writes an inline height on the
+     iframe, and an author !important would silently beat it. */
+  #cal iframe{width:100%!important;height:100%;border:0;display:block}
   @media (max-width:600px){ #cal{height:1040px} }
 
   .testbar{
@@ -368,6 +369,7 @@
       Object.keys(state).forEach(function(k){ if (d.s[k] != null) state[k] = d.s[k]; });
       // A "no" stands. You cannot re-answer your way into a yes.
       if (state.decided === 'decline'){ renderDecline(state.reason); return true; }
+      if (state.decided === 'book'){ renderBooking(true); return true; }
       idx = Math.min(typeof d.i === 'number' ? d.i : 0, 4);
       for (var q = 0; q < QUESTIONS.length; q++){
         if (!state[QUESTIONS[q].id]){ idx = Math.min(idx, q); break; }
@@ -485,8 +487,8 @@
         '<label class="f" for="em">Email</label>'+
         '<input type="email" id="em" autocomplete="email" inputmode="email" value="'+esc(state.email)+'">'+
       '</div>'+
-      '<div class="sr" aria-hidden="true"><label for="website">Leave this empty</label>'+
-      '<input type="text" id="website" name="website" tabindex="-1" autocomplete="off"></div>'+
+      '<div class="sr" aria-hidden="true"><label for="contact_notes">Leave this empty</label>'+
+      '<input type="text" id="contact_notes" name="contact_notes" tabindex="-1" autocomplete="one-time-code"></div>'+
       '<div class="ts-slot" id="ts-slot"></div>'+
       '<p class="err" id="err" role="alert"></p>'+
       '<div class="actions">'+
@@ -513,13 +515,18 @@
     if (!slot) return;
     tsWidgetId = null;
     function render(){
-      if (!window.turnstile || !document.getElementById('ts-slot')) return;
+      if (!window.turnstile) return;
+      // Re-resolve rather than trusting the closure: if the person went Back
+      // and returned while the script was loading, `slot` is now detached and
+      // rendering into it would strand submit with an unsolvable widget.
+      var live = document.getElementById('ts-slot');
+      if (!live || !document.body.contains(live)) return;
       try {
-        tsWidgetId = window.turnstile.render(slot, {
+        tsWidgetId = window.turnstile.render(live, {
           sitekey: TS_SITEKEY, theme:'light', size:'flexible',
-          callback: function(){ slot.classList.remove('show'); height(); },
-          'before-interactive-callback': function(){ slot.classList.add('show'); height(); },
-          'error-callback': function(){ slot.classList.add('show'); height(); }
+          callback: function(){ live.classList.remove('show'); height(); },
+          'before-interactive-callback': function(){ live.classList.add('show'); height(); },
+          'error-callback': function(){ live.classList.add('show'); height(); }
         });
       } catch(e){}
     }
@@ -568,8 +575,12 @@
   }
   document.addEventListener('keydown', function(e){ if (keyHandler && !locked) keyHandler(e); });
 
+  // Must match REVENUE_OK in submit-qualify.js, retired bands included. If the
+  // client declines a band the server accepts, a restored session gets asked
+  // for an email and is then flipped to the calendar by the server's verdict.
+  var REVENUE_OK = ['1k-5k','5k-10k','10k-plus','1k-3k','3k-10k','3k-5k','10k-25k','25k-plus'];
   function localDecision(){
-    if (['1k-5k','5k-10k','10k-plus'].indexOf(state.revenue) === -1) return { decision:'decline', reason:'early' };
+    if (REVENUE_OK.indexOf(state.revenue) === -1) return { decision:'decline', reason:'early' };
     if (state.fulltime !== 'yes') return { decision:'decline', reason:'part_time' };
     if (state.clients === 'none') return { decision:'decline', reason:'no_clients' };
     return { decision:'book', reason:null };
@@ -583,7 +594,7 @@
     var em = document.getElementById('em').value.trim();
     // Read now, not inside the async callback below: if the screen re-renders
     // while the token resolves, that element is gone and the submit throws.
-    var hp = document.getElementById('website').value;
+    var hp = document.getElementById('contact_notes').value;
     var err = document.getElementById('err');
     var btn = document.getElementById('go');
     if (btn.disabled) return;
@@ -633,7 +644,7 @@
   }
 
   function renderDecline(reason){
-    var d = DECLINE[reason] || DECLINE.early;
+    var d = Object.prototype.hasOwnProperty.call(DECLINE, reason) ? DECLINE[reason] : DECLINE.early;
     paint(
       '<div class="card">'+
         '<h1>'+esc(d.h)+'</h1>'+
@@ -655,8 +666,11 @@
     return out;
   }
 
-  function renderBooking(){
+  function renderBooking(already){
     paint(
+      (already ? '<p class="rebook">You\u2019ve already booked this call. '+
+        'Only pick another time if you need to change it.</p>' : '')+
+
       '<div class="fit">'+
         '<p class="fit-badge"><span aria-hidden="true">&#10003;</span> You\u2019re a fit</p>'+
         '<p class="fit-benefit">Let\u2019s look at your business and map out a clear path to more clients and income together.</p>'+
@@ -736,6 +750,9 @@
           source: SOURCE, test: TEST
         }) }).catch(function(){});
     } catch(err){}
+    // Remember it, so a reload does not hand them a fresh calendar and let
+    // them book a second time.
+    state.decided = 'book'; state.reason = null; save();
     try { parent.postMessage({ type:'qualify:booked', source:SOURCE }, '*'); } catch(err){}
   });
 
@@ -766,7 +783,15 @@
     try { new ResizeObserver(height).observe(document.querySelector('.shell')); } catch(e){}
   }
   if (document.fonts && document.fonts.ready && document.fonts.ready.then){
-    document.fonts.ready.then(height).catch(function(){});
+  // Re-measure once the real fonts land: the lock was computed with fallback
+  // metrics, and a serif that wraps a title differently would reintroduce the
+  // very misalignment this exists to prevent.
+  if (document.fonts && document.fonts.ready){
+    document.fonts.ready.then(function(){
+      if (idx < QUESTIONS.length && el.querySelector('.qhead')){ headW = 0; lockHeaderHeight(); }
+      height();
+    });
+  }
   }
 
   if (TEST && FORCE){

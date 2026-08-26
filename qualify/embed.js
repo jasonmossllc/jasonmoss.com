@@ -36,7 +36,9 @@
       var pageQs = new URLSearchParams(window.location.search);
       ['utm_medium', 'utm_campaign', 'utm_content', 'utm_term'].forEach(function (k) {
         var v = pageQs.get(k);
-        if (v && qs.indexOf(k + '=') === -1 && !qs.some(function (x) { return x.indexOf(k + '=') === 0; })) {
+        // qs is an array of "key=value" strings, so only the prefix test below
+        // does real work here.
+        if (v && !qs.some(function (x) { return x.indexOf(k + '=') === 0; })) {
           qs.push(k + '=' + encodeURIComponent(v.slice(0, 120)));
         }
       });

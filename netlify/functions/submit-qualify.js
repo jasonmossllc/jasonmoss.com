@@ -326,6 +326,12 @@ exports.handler = async (event) => {
         qualify_fulltime: FULLTIME[data.fulltime],
         qualify_clients: CLIENTS[data.clients],
         qualify_source: source,
+        // The widget and embed.js both collect these; without writing them
+        // here, campaign attribution for every declined lead was discarded.
+        ...(cleanString(data.utm_medium, 200) ? { qualify_utm_medium: cleanString(data.utm_medium, 200) } : {}),
+        ...(cleanString(data.utm_campaign, 200) ? { qualify_utm_campaign: cleanString(data.utm_campaign, 200) } : {}),
+        ...(cleanString(data.utm_content, 200) ? { qualify_utm_content: cleanString(data.utm_content, 200) } : {}),
+        ...(cleanString(data.utm_term, 200) ? { qualify_utm_term: cleanString(data.utm_term, 200) } : {}),
         qualify_decision: qualified ? 'Book' : `Decline (${reason})`,
         ...(lockedByPriorDecline ? { qualify_relocked: new Date().toISOString().slice(0, 10) } : {}),
         qualify_date: new Date().toISOString().slice(0, 10),
