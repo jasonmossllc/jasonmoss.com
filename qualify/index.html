@@ -720,10 +720,12 @@
     try {
       fetch(FN, { method:'POST', headers:{'Content-Type':'application/json'},
         body: JSON.stringify({
-          action:'booked', invitee_uri: uri, email: state.email || undefined,
+          // No email here on purpose: whoever booked is resolved server-side
+          // from the Calendly invitee URI, which cannot be forged.
+          action:'booked', invitee_uri: uri,
           revenue: state.revenue, fulltime: state.fulltime, clients: state.clients,
           source: SOURCE, test: TEST
-        }) });
+        }) }).catch(function(){});
     } catch(err){}
     try { parent.postMessage({ type:'qualify:booked', source:SOURCE }, '*'); } catch(err){}
   });

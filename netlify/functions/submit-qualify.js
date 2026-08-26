@@ -168,11 +168,6 @@ exports.handler = async (event) => {
       return { statusCode: 403, headers, body: JSON.stringify({ error: 'Forbidden' }) };
     }
 
-    if (!data.email || !EMAIL_RE.test(String(data.email).trim())) {
-      return { statusCode: 400, headers, body: JSON.stringify({ error: 'A valid email is required' }) };
-    }
-    const email = String(data.email).trim().toLowerCase();
-
     // ── Booking confirmed in the embedded Calendly ─────────────────────────
     // Qualified people never gave us an email here, so Calendly's invitee URI
     // is how we find out who booked.
@@ -181,9 +176,13 @@ exports.handler = async (event) => {
         console.log('Qualifier TEST booked ping (no Kit write)', { uri: data.invitee_uri });
         return { statusCode: 200, headers, body: JSON.stringify({ success: true, test: true }) };
       }
+      // Declared outside the try so the catch can hand it to the retry queue.
+      let bookedSubmission = null;
       try {
         const invitee = await fetchCalendlyInvitee(cleanString(data.invitee_uri, 300));
-        const bookedEmail = (invitee?.email || data.email || '').trim().toLowerCase();
+        // Identity comes from Calendly only. Accepting a caller-supplied
+        // address here would let anyone tag an arbitrary subscriber as booked.
+        const bookedEmail = (invitee?.email || '').trim().toLowerCase();
         if (!bookedEmail || !EMAIL_RE.test(bookedEmail)) {
           console.error('Booked ping without a usable email', { uri: data.invitee_uri });
           return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
@@ -192,7 +191,7 @@ exports.handler = async (event) => {
         if (REVENUE[data.revenue]) answers.qualify_revenue = REVENUE[data.revenue];
         if (FULLTIME[data.fulltime]) answers.qualify_fulltime = FULLTIME[data.fulltime];
         if (CLIENTS[data.clients]) answers.qualify_clients = CLIENTS[data.clients];
-        await syncContactToKit({
+        bookedSubmission = {
           email: bookedEmail,
           firstName: cleanString((invitee?.name || '').split(' ')[0], 100),
           tagIds: [TAG_BOOKED],
@@ -206,12 +205,29 @@ exports.handler = async (event) => {
             ...(invitee?.goal ? { qualify_goal: invitee.goal } : {}),
           },
           referrer: cleanString(headerValue(event.headers, 'referer'), 1000),
-        });
+        };
+        await syncContactToKit(bookedSubmission);
       } catch (error) {
-        console.error('Failed to record Calendly booking', { error: kitErrorSummary(error) });
+        if (isQueueableKitError(error) && bookedSubmission) {
+          try {
+            const queueKey = await enqueueOptin(bookedSubmission, error);
+            console.error('Queued Calendly booking after transient Kit failure', {
+              queueKey, error: kitErrorSummary(error),
+            });
+          } catch (queueError) {
+            console.error('Failed to queue Calendly booking', { error: kitErrorSummary(queueError) });
+          }
+        } else {
+          console.error('Failed to record Calendly booking', { error: kitErrorSummary(error) });
+        }
       }
       return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
     }
+
+    if (!data.email || !EMAIL_RE.test(String(data.email).trim())) {
+      return { statusCode: 400, headers, body: JSON.stringify({ error: 'A valid email is required' }) };
+    }
+    const email = String(data.email).trim().toLowerCase();
 
     // ── Full qualifier submission ───────────────────────────────────────────
     if (looksLikeBotName(data.first_name)) {
