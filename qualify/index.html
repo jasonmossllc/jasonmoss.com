@@ -200,7 +200,10 @@
      calendar. Left-aligned with the copy above it, and quieter than the
      sub-line so it never competes with picking a time. */
   .cal-alt{
-    margin:0 0 20px;color:var(--taupe);font-size:14px;line-height:1.55;text-wrap:pretty;
+    margin:0 0 20px;color:var(--taupe);line-height:1.5;text-wrap:pretty;
+    /* Deliberately an aside, not a sibling of the line above it: italic and a
+       clear step down in size, so the difference reads as intent. */
+    font-size:13.5px;font-style:italic;
   }
   .cal-alt a{color:var(--forest);font-weight:600;text-decoration:underline;text-underline-offset:2px}
   .cal-alt a:hover{color:var(--obsidian)}
