@@ -986,9 +986,7 @@
         website: (document.querySelector('#qForm input[name="website"]') || {}).value || ''
       };
       if (latestAd) payload.latest_ad = latestAd;
-      // Untagged arrivals are organic by definition; original_source is only
-      // ever filled server-side when currently blank, so this never clobbers.
-      payload.latest_source = latestSource || 'Organic';
+      if (latestSource) payload.latest_source = latestSource;
       for (var n = 1; n <= 5; n++){ payload['q' + n] = state.answers['q' + n]; }
 
       var subController = new AbortController();

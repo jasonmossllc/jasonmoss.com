@@ -233,10 +233,6 @@
             var extra = config.extraPayload(form) || {};
             for (var k in extra) { if (Object.prototype.hasOwnProperty.call(extra, k)) payload[k] = extra[k]; }
           }
-          // First-touch attribution must never be blank: untagged arrivals
-          // (no ?source= on the page) are organic by definition, and Kit's
-          // original_source is only ever filled when currently blank.
-          if (!payload.latest_source) payload.latest_source = 'Organic';
           payload.turnstile_token = window.getTurnstileToken();
           payload.website = honeypot;
 
