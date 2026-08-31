@@ -36,6 +36,19 @@ const {
   corsHeaders,
 } = __internal;
 
+// The qualifier widget sends `source` (not `latest_source`), so map it across
+// for the fill-only-if-blank original_source write. The widget's own fallback
+// is 'direct' (no ?source= on the page), which for first-touch purposes means
+// they came to the site qualifier on their own — recorded as 'Website'.
+function attributionFields(data) {
+  const source = cleanString(data.source, 120);
+  return cleanMappedFieldValues({
+    latest_ad: data.latest_ad,
+    latest_source: cleanString(data.latest_source, 500)
+      || (source && source !== 'direct' ? source : 'Website'),
+  });
+}
+
 // Kit tags. The flow only produces two kinds of record — someone who booked,
 // and someone who was declined — so those are the only tags it sets.
 const TAG_BOOKED = 22754514;   // "Qualifier Booked"
@@ -218,7 +231,9 @@ exports.handler = async (event) => {
           email: bookedEmail,
           firstName: cleanString((invitee?.name || '').split(' ')[0], 100),
           tagIds: rescued ? [TAG_BOOKED, TAG_RESCUED] : [TAG_BOOKED],
-          mappedFields: {},
+          // First-touch attribution for people the Calendly webhook would
+          // otherwise create sourceless (fill-only-if-blank, never clobbers).
+          mappedFields: attributionFields(data),
           overwriteFields: {
             ...answers,
             qualify_source: cleanString(data.source, 120) || 'direct',
@@ -347,7 +362,7 @@ exports.handler = async (event) => {
       // Preserved (set only when blank): original attribution, plus booked so a
       // retake never resets an already-booked lead back to "No".
       mappedFields: {
-        ...cleanMappedFieldValues(data),
+        ...attributionFields(data),
         qualify_booked: 'No',
       },
       // Always take the latest submission's answers.
