@@ -34,3 +34,7 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 # Vanity link for the Magnetic Message business assessment call
 /assessment   https://calendly.com/jasonmoss/business-assessment-call-magnetic-message        301
 /assessment/  https://calendly.com/jasonmoss/business-assessment-call-magnetic-message        301
+
+# Vanity link for the Alignment Call direct booking page
+/call         https://calendly.com/jasonmoss/alignment-call                                    301
+/call/        https://calendly.com/jasonmoss/alignment-call                                    301
