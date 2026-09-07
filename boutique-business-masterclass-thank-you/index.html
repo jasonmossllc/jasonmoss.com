@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Registered — The Boutique Business Masterclass</title>
+<meta name="description" content="Your spot for The Boutique Business masterclass is saved. Two quick things.">
+<meta name="robots" content="noindex">
+<link rel="icon" href="https://jasonmoss.com/assets/images/favicon-32x32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --obsidian:#1D1F1E;
+  --forest:#2C3F36;
+  --mocha:#5B4B3F;
+  --taupe:#8C837A;
+  --gold:#C2A86C;
+  --gold-dark:#b89a5e;
+  --gold-deep:#A08752;
+  --stone:#E9E2D3;
+  --sand:#F8F6F2;
+  --white:#FFFFFF;
+  --ink-soft:#3E413F;
+  --serif:'Libre Baskerville', Georgia, serif;
+  --sans:'Raleway', 'Helvetica Neue', sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+  font-family:var(--sans);
+  font-weight:400;
+  font-size:17px;
+  line-height:1.7;
+  color:var(--obsidian);
+  background:
+    radial-gradient(1000px 560px at 50% -10%, rgba(194,168,108,0.28), rgba(194,168,108,0) 62%),
+    linear-gradient(180deg, rgba(248,246,242,0.86), rgba(248,246,242,0.92)),
+    url('/boutique-business-masterclass/assets/section-bg-pale.jpg') top left / 1716px 916px repeat,
+    var(--sand);
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;}
+h1,h2,h3{font-family:var(--serif);font-weight:400;line-height:1.3;}
+p{margin-bottom:1.1em;}
+.wrap{max-width:820px;margin:0 auto;padding:0 24px;}
+
+header.top{
+  background:var(--sand);
+  padding:14px 0;
+  border-bottom:1px solid rgba(91,75,63,0.14);
+}
+header.top .wrap{display:flex;align-items:center;justify-content:center;}
+header.top img{height:26px;width:auto;}
+
+@keyframes ctaGlow{
+  0%,100%{box-shadow:0 12px 34px -12px rgba(160,135,82,.6), 0 0 0 0 rgba(194,168,108,.38);}
+  50%{box-shadow:0 12px 34px -10px rgba(160,135,82,.8), 0 0 0 14px rgba(194,168,108,0);}
+}
+@keyframes nudge{0%,100%{transform:translateY(0);}50%{transform:translateY(6px);}}
+
+/* ── compact confirmation ── */
+.confirm{padding:clamp(34px,4.5vw,52px) 0 0;}
+.panel{
+  position:relative;
+  background:var(--white);
+  border:1px solid rgba(91,75,63,0.18);
+  padding:clamp(30px,4vw,44px) clamp(24px,5vw,56px) clamp(26px,3.5vw,36px);
+  box-shadow:0 30px 60px -38px rgba(91,75,63,0.55);
+  text-align:center;
+}
+.panel::before{
+  content:"";
+  position:absolute;inset:9px;
+  border:1px solid rgba(194,168,108,0.5);
+  pointer-events:none;
+}
+.eyebrow{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:14px;
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:0.28em;
+  text-transform:uppercase;
+  color:var(--gold-deep);
+  margin-bottom:16px;
+}
+.eyebrow::before,.eyebrow::after{content:"";width:32px;height:1px;background:var(--gold);}
+.panel h1{font-size:clamp(27px,3.6vw,36px);margin-bottom:10px;}
+.panel .when{
+  display:inline-block;
+  margin:2px auto 20px;
+  font-weight:600;
+  font-size:12.5px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  color:var(--mocha);
+}
+.cal-btn{
+  display:inline-block;
+  background:var(--gold);
+  color:var(--obsidian);
+  font-weight:600;
+  font-size:13.5px;
+  letter-spacing:0.14em;
+  text-transform:uppercase;
+  text-decoration:none;
+  padding:17px 38px;
+  transition:background .25s ease, transform .25s ease;
+  animation:ctaGlow 3.4s ease-in-out infinite;
+}
+.cal-btn:hover{background:var(--gold-dark);transform:translateY(-2px);}
+.panel .inbox-note{
+  margin:16px 0 0;
+  font-size:13.5px;
+  color:var(--taupe);
+}
+.next-cue{
+  margin:22px auto 0;
+  padding-top:16px;
+  border-top:1px solid rgba(91,75,63,0.12);
+  font-family:var(--serif);
+  font-style:italic;
+  font-size:15.5px;
+  color:var(--gold-deep);
+}
+.next-cue .arrow{display:block;margin-top:4px;font-style:normal;animation:nudge 1.8s ease-in-out infinite;}
+
+/* ── assessment call invite ── */
+.invite-sec{padding:clamp(18px,2.5vw,26px) 0 clamp(56px,7vw,84px);}
+.invite{
+  position:relative;
+  background:
+    linear-gradient(180deg, rgba(44,63,54,0.92), rgba(36,53,48,0.96)),
+    url('/boutique-business-masterclass/assets/section-bg-forest.jpg') top left / 1716px 916px repeat,
+    var(--forest);
+  border:1px solid rgba(194,168,108,0.35);
+  padding:clamp(36px,5vw,54px) clamp(24px,5.5vw,60px);
+  box-shadow:0 34px 70px -40px rgba(29,31,30,0.75);
+  text-align:center;
+  color:var(--stone);
+}
+.invite::before{
+  content:"";
+  position:absolute;inset:9px;
+  border:1px solid rgba(194,168,108,0.4);
+  pointer-events:none;
+}
+.invite > *{position:relative;}
+.invite .eyebrow{color:var(--gold);margin-bottom:14px;}
+.invite .eyebrow::before,.invite .eyebrow::after{background:rgba(194,168,108,0.6);}
+.invite h2{font-size:clamp(24px,3.2vw,33px);margin-bottom:16px;color:var(--sand);}
+.invite h2 em{font-style:italic;color:var(--gold);}
+.invite .invite-copy{
+  max-width:540px;
+  margin:0 auto 6px;
+  font-size:16px;
+  line-height:1.7;
+  color:rgba(233,226,211,0.92);
+}
+.invite .invite-copy strong{color:var(--sand);font-weight:700;}
+.book-label{
+  margin:20px 0 4px;
+  font-weight:600;
+  font-size:11.5px;
+  letter-spacing:0.22em;
+  text-transform:uppercase;
+  color:var(--gold);
+}
+.book-heading{
+  font-family:var(--serif);
+  font-size:clamp(19px,2.2vw,24px);
+  color:var(--sand);
+  margin-bottom:18px;
+}
+.qualify-wrap{
+  max-width:640px;
+  margin:0 auto 16px;
+  border:1px solid rgba(194,168,108,0.5);
+  background:var(--sand);
+  box-shadow:0 0 34px rgba(194,168,108,0.18);
+  overflow:hidden;
+}
+
+footer{padding:0 0 40px;}
+footer .wrap{text-align:center;}
+footer img{height:22px;width:auto;opacity:0.8;}
+footer .fine{font-size:12.5px;color:var(--taupe);margin-top:12px;}
+footer .fine a{color:var(--taupe);text-decoration:none;margin:0 8px;}
+footer .fine a:hover{color:var(--mocha);}
+
+@media (max-width:640px){
+  body{font-size:16px;}
+  .cal-btn{display:block;padding:17px 20px;}
+  /* date chip: one item per line */
+  .panel .when .sep{display:none;}
+  .panel .when .mc-date,
+  .panel .when .mc-time,
+  .panel .when .loz{display:block;line-height:1.9;}
+  /* inbox note: sentence per line */
+  .inbox-note .n1,
+  .inbox-note .n2{display:block;}
+  .inbox-note .n2{margin-top:4px;}
+}
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <img src="/boutique-business-masterclass/assets/logo-obsidian.svg" alt="Jason Moss">
+  </div>
+</header>
+
+<!-- Compact confirmation — deliberately not a "you're done" moment.
+     Priority 1: calendar. Priority 2 (below): book the assessment call. -->
+<section class="confirm">
+  <div class="wrap">
+    <div class="panel">
+      <span class="eyebrow">Spot Saved &mdash; Two Quick Things</span>
+      <h1 id="headline">You're in.</h1>
+      <span class="when"><span class="mc-date">Wednesday, September 23</span><span class="sep"> &middot; </span><span class="mc-time">9:00 a.m. Mountain Time</span><span class="sep"> &middot; </span><span class="loz">Live on Zoom</span></span>
+      <div>
+        <a class="cal-btn" href="https://addcal.co/e/07a5klg85uus" target="_blank" rel="noopener">1 &middot; Add It to Your Calendar</a>
+      </div>
+      <p class="inbox-note"><span class="n1">Your Zoom link is on its way to your inbox.</span> <span class="n2">Come live &mdash; we go 9:00 to 10:30, and the second half is where I take your questions.</span></p>
+      <p class="next-cue">Number two is the good part&hellip;<span class="arrow">&darr;</span></p>
+    </div>
+  </div>
+</section>
+
+<!-- ── Business assessment call invite ── -->
+<section class="invite-sec">
+  <div class="wrap">
+    <div class="invite">
+      <span class="eyebrow">2 &middot; Skip the Line</span>
+      <h2>Want me to look at your business <em>before</em> the masterclass?</h2>
+      <p class="invite-copy">A <strong>free 20-minute assessment call</strong> &mdash; you and me, on Zoom. We'll find what's actually standing between you and consistent clients (it's usually not what you think), and you'll leave knowing exactly what to focus on.</p>
+      <p class="book-label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
+      <h3 class="book-heading">Start with two quick questions.</h3>
+      <div class="qualify-wrap">
+        <div data-qualify-source="boutique-masterclass"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <img src="/boutique-business-masterclass/assets/logo-obsidian.svg" alt="Jason Moss">
+    <div class="fine">
+      <a href="https://jasonmoss.com/privacy/" target="_blank" rel="noopener">Privacy Policy</a>
+      <a href="https://jasonmoss.com/terms/" target="_blank" rel="noopener">Terms of Service</a>
+      <a href="https://jasonmoss.com/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a>
+    </div>
+    <div class="fine">&copy; 2026 Jason Moss. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+  // Event config: keep in sync with /boutique-business-masterclass/
+  window.MC_EVENT = {
+    date: 'Wednesday, September 23',
+    time: '9:00 a.m. Mountain Time'
+  };
+  document.querySelectorAll('.mc-date').forEach(function(el){ el.textContent = window.MC_EVENT.date; });
+  document.querySelectorAll('.mc-time').forEach(function(el){ el.textContent = window.MC_EVENT.time; });
+
+  // Personalize with first name from the registration redirect
+  (function(){
+    var p = new URLSearchParams(window.location.search);
+    var name = (p.get('first_name') || '').trim();
+    if (name && /^[A-Za-z][A-Za-z' -]{0,30}$/.test(name)) {
+      var safe = name.charAt(0).toUpperCase() + name.slice(1);
+      document.getElementById('headline').textContent = safe + ", you're in.";
+    }
+  })();
+</script>
+
+<script src="https://jasonmoss.com/qualify/embed.js" async></script>
+
+</body>
+</html>
