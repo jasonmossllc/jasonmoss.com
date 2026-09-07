@@ -669,8 +669,7 @@ footer .fine.links a:hover{color:var(--mocha);}
 /* ── boutique treatment ─────────────────────────────────────────────
    The page should feel like a pull, not a pitch: a slow-breathing gold
    field behind the hero, a shimmer riding the word "Boutique", CTAs that
-   glow like something charged, and a fine hairline frame
-   around the hero. All CSS/SVG — no libraries. */
+   glow like something charged, and nothing else. All CSS/SVG — no libraries. */
 @keyframes auraPulse{0%,100%{opacity:.5;}50%{opacity:.95;}}
 @keyframes auraSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 @keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
@@ -721,57 +720,15 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 .d-card{box-shadow:0 34px 70px -40px rgba(91,75,63,0.55), 0 0 60px -20px rgba(194,168,108,0.35);}
 
 .hero h1 .title-rest em{display:block;white-space:normal;}
-/* quote cards (from the testimonial wall) sit alongside the screenshots */
-.quote-card{
-  flex:0 1 auto;width:30%;
-  background:var(--white);
-  border:1px solid rgba(91,75,63,0.14);
-  border-top:2px solid var(--gold);
-  padding:26px 24px 22px;
-  box-shadow:0 26px 50px -32px rgba(91,75,63,0.5);
-  text-align:center;
-}
-.quote-card img{
-  width:92px;height:92px;border-radius:50%;object-fit:cover;
-  border:2px solid var(--gold);
-  box-shadow:0 0 0 5px rgba(194,168,108,0.14);
-  margin:0 auto 16px;display:block;
-}
-.quote-card .q{
-  font-family:var(--serif);font-style:italic;
-  font-size:16.5px;line-height:1.55;color:var(--forest);
-  margin:0 0 12px;
-}
-.quote-card .q-name{
-  display:block;font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-deep);
-}
-@media (max-width:640px){.quote-card{width:100%;}}
-/* "in their words" note: one quiet line */
-.wall .wall-note{max-width:none;margin:14px auto clamp(36px,4vw,48px);font-size:13px;letter-spacing:0.04em;color:var(--taupe);}
+@media (max-width:640px){.hero h1 .title-rest em{display:inline;}}
+/* boutique hero: no orbit rings, just the soft gold glow */
+.hero-aura{display:none;}
+/* "in their words": eyebrow a touch larger, one plain line under it */
+.wall .sec-head .eyebrow{font-size:14px;}
+.wall .wall-note{max-width:none;margin:18px auto clamp(36px,4vw,48px);font-size:17px;line-height:1.6;color:var(--ink-soft);}
 /* sticky bar: fully hidden until it slides in (no bleed-through shadow at the top) */
 .sticky-cta{visibility:hidden;pointer-events:none;transition:transform .4s cubic-bezier(.22,.61,.36,1), visibility 0s .4s;}
 .sticky-cta.show{visibility:visible;pointer-events:auto;transition:transform .4s cubic-bezier(.22,.61,.36,1), visibility 0s;}
-/* boutique hero: no orbit rings — a quiet gold glow and a fine hairline frame */
-.hero-aura{display:none;}
-.hero::after{
-  content:"";
-  position:absolute;inset:26px;
-  border:1px solid rgba(194,168,108,0.42);
-  pointer-events:none;
-  z-index:1;
-}
-.hero::before{
-  content:"";
-  position:absolute;inset:32px;
-  border:1px solid rgba(194,168,108,0.18);
-  pointer-events:none;
-  z-index:1;
-}
-@media (max-width:640px){
-  .hero::after{inset:12px;}
-  .hero::before{display:none;}
-}
-@media (max-width:640px){.hero h1 .title-rest em{display:inline;}}
 .shift .eyebrow + h2{margin-top:22px;max-width:none;font-size:clamp(26px,2.7vw,34px);}
 @media (max-width:640px){
   /* on phones the drifting dots overlap copy and read as stray bullets */
@@ -888,16 +845,8 @@ h2 em{font-style:italic;color:var(--gold-deep);}
   </div>
   <div class="wrap proof-block reveal">
     <div class="proof-strip">
-      <div class="quote-card">
-        <img src="assets/proof/kimberly-irving.jpg" alt="Kimberly Irving" width="360" height="360" loading="lazy">
-        <p class="q">&ldquo;Made $60k coaching mostly part-time &mdash; and quit her full-time job.&rdquo;</p>
-        <span class="q-name">Kimberly Irving</span>
-      </div>
-      <div class="quote-card">
-        <img src="assets/proof/carlyn-rae-wei.jpg" alt="Carlyn Rae Wei" width="360" height="360" loading="lazy">
-        <p class="q">&ldquo;Doubled her rates and started signing dream clients in 10 weeks.&rdquo;</p>
-        <span class="q-name">Carlyn Rae Wei</span>
-      </div>
+      <div class="proof-shot pw-48"><img width="700" height="155" src="assets/proof/steve-six-month-client.png" alt="Client message from Steve Bradshaw: I've secured my first 6 month client! More than double the price I've charged previously too. It's 100% been your overall support and process that has helped me shift to this higher model." loading="lazy"></div>
+      <div class="proof-shot pw-44"><img width="820" height="313" src="assets/proof/josefine-three-clients.png" alt="Client email from Josefine: closed 3 new clients this week, all for my 4-month group coaching program, one of them VIP — in total 10.2k." loading="lazy"></div>
       <div class="proof-shot pw-35"><img width="363" height="136" src="assets/proof/ariel-consistent.jpg" alt="Client quote: Working with Jason has single-handedly driven the most consistent results I've seen in my business since I started 3 years ago. — Ariel Naftali" loading="lazy"></div>
     </div>
     <div class="proof-cap">From clients across my programs over the years</div>
@@ -982,7 +931,7 @@ h2 em{font-style:italic;color:var(--gold-deep);}
     <div class="sec-head reveal">
       <span class="eyebrow center lined">In Their Words</span>
     </div>
-    <p class="wall-note reveal">From clients I&rsquo;ve worked with over the years &mdash; not from this masterclass.</p>
+    <p class="wall-note reveal">From clients I&rsquo;ve worked with over the years.</p>
     <iframe
       id="testimonialto-jason-moss-testimonials-tag-all-light"
       src="https://embed-v2.testimonial.to/w/jason-moss-testimonials/?theme=light&card=base&loadMore=on&initialCount=20&tag=all"
