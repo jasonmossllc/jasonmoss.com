@@ -669,8 +669,8 @@ footer .fine.links a:hover{color:var(--mocha);}
 /* ── boutique treatment ─────────────────────────────────────────────
    The page should feel like a pull, not a pitch: a slow-breathing gold
    field behind the hero, a shimmer riding the word "Boutique", CTAs that
-   glow like something charged, and the crowd-vs-ten visual
-   doing the math. All CSS/SVG — no libraries. */
+   glow like something charged, and a fine hairline frame
+   around the hero. All CSS/SVG — no libraries. */
 @keyframes auraPulse{0%,100%{opacity:.5;}50%{opacity:.95;}}
 @keyframes auraSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
 @keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
@@ -720,31 +720,60 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 .proof-shot:hover{transform:rotate(0deg) scale(1.03);box-shadow:0 34px 62px -30px rgba(91,75,63,0.62);position:relative;z-index:2;}
 .d-card{box-shadow:0 34px 70px -40px rgba(91,75,63,0.55), 0 0 60px -20px rgba(194,168,108,0.35);}
 
-/* thousands vs. ten — the boutique math, drawn */
-.seats{margin:44px auto 14px;max-width:640px;display:grid;grid-template-columns:1.25fr auto 1fr;gap:18px;align-items:end;}
-.seats-vs{align-self:center;}
-.seats-col{text-align:center;}
-.seats-label{display:block;margin-top:16px;font-weight:600;font-size:11.5px;line-height:1.5;letter-spacing:0.14em;text-transform:uppercase;}
-.crowd{display:grid;grid-template-columns:repeat(12,1fr);gap:7px;max-width:250px;margin:0 auto;}
-.crowd i{display:block;aspect-ratio:1/1;border-radius:50%;background:rgba(140,131,122,0.32);}
-.crowd i:nth-child(3n){background:rgba(140,131,122,0.22);}
-.crowd i:nth-child(5n){background:rgba(140,131,122,0.4);}
-.seats .c-l .seats-label{color:var(--taupe);}
-.ten{display:grid;grid-template-columns:repeat(5,1fr);gap:11px;max-width:200px;margin:0 auto;}
-.ten i{display:block;aspect-ratio:1/1;border-radius:50%;background:radial-gradient(circle at 35% 35%, #E7CF92, var(--gold) 55%, var(--gold-deep));box-shadow:0 0 0 3px rgba(194,168,108,0.14), 0 0 22px rgba(194,168,108,0.55);animation:auraPulse 5.5s ease-in-out infinite;}
-.ten i:nth-child(2n){animation-delay:-1.6s;}
-.ten i:nth-child(3n){animation-delay:-3.1s;}
-.seats .c-r .seats-label{color:var(--gold-deep);}
-.seats-vs{font-family:var(--serif);font-style:italic;font-size:clamp(16px,2vw,20px);color:var(--forest);padding:0 4px;}
-.seats-vs::before,.seats-vs::after{content:"";display:block;width:1px;height:26px;background:rgba(194,168,108,0.6);margin:0 auto 8px;}
-.seats-vs::after{margin:8px auto 0;}
 .hero h1 .title-rest em{display:block;white-space:normal;}
-@media (max-width:640px){.hero h1 .title-rest em{display:inline;}}
-.shift .eyebrow + h2{margin-top:22px;max-width:none;}
+/* quote cards (from the testimonial wall) sit alongside the screenshots */
+.quote-card{
+  flex:0 1 auto;width:30%;
+  background:var(--white);
+  border:1px solid rgba(91,75,63,0.14);
+  border-top:2px solid var(--gold);
+  padding:26px 24px 22px;
+  box-shadow:0 26px 50px -32px rgba(91,75,63,0.5);
+  text-align:center;
+}
+.quote-card img{
+  width:92px;height:92px;border-radius:50%;object-fit:cover;
+  border:2px solid var(--gold);
+  box-shadow:0 0 0 5px rgba(194,168,108,0.14);
+  margin:0 auto 16px;display:block;
+}
+.quote-card .q{
+  font-family:var(--serif);font-style:italic;
+  font-size:16.5px;line-height:1.55;color:var(--forest);
+  margin:0 0 12px;
+}
+.quote-card .q-name{
+  display:block;font-weight:600;font-size:11px;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold-deep);
+}
+@media (max-width:640px){.quote-card{width:100%;}}
+/* "in their words" note: one quiet line */
+.wall .wall-note{max-width:none;margin:14px auto clamp(36px,4vw,48px);font-size:13px;letter-spacing:0.04em;color:var(--taupe);}
+/* sticky bar: fully hidden until it slides in (no bleed-through shadow at the top) */
+.sticky-cta{visibility:hidden;pointer-events:none;transition:transform .4s cubic-bezier(.22,.61,.36,1), visibility 0s .4s;}
+.sticky-cta.show{visibility:visible;pointer-events:auto;transition:transform .4s cubic-bezier(.22,.61,.36,1), visibility 0s;}
+/* boutique hero: no orbit rings — a quiet gold glow and a fine hairline frame */
+.hero-aura{display:none;}
+.hero::after{
+  content:"";
+  position:absolute;inset:26px;
+  border:1px solid rgba(194,168,108,0.42);
+  pointer-events:none;
+  z-index:1;
+}
+.hero::before{
+  content:"";
+  position:absolute;inset:32px;
+  border:1px solid rgba(194,168,108,0.18);
+  pointer-events:none;
+  z-index:1;
+}
 @media (max-width:640px){
-  .seats{grid-template-columns:1fr;gap:22px;max-width:300px;}
-  .seats-vs::before,.seats-vs::after{display:none;}
-  .crowd{max-width:220px;}
+  .hero::after{inset:12px;}
+  .hero::before{display:none;}
+}
+@media (max-width:640px){.hero h1 .title-rest em{display:inline;}}
+.shift .eyebrow + h2{margin-top:22px;max-width:none;font-size:clamp(26px,2.7vw,34px);}
+@media (max-width:640px){
   /* on phones the drifting dots overlap copy and read as stray bullets */
   .hero-aura .aura-dots{display:none;}
   .hero-aura{opacity:.7;}
@@ -808,21 +837,6 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 
 <!-- ================= HERO ================= -->
 <section class="hero">
-  <svg class="hero-aura" viewBox="0 0 800 800" aria-hidden="true" fill="none">
-    <g stroke="#C2A86C">
-      <circle cx="400" cy="400" r="150" stroke-opacity="0.30"/>
-      <circle cx="400" cy="400" r="238" stroke-opacity="0.21"/>
-      <circle cx="400" cy="400" r="322" stroke-opacity="0.13"/>
-      <circle cx="400" cy="400" r="396" stroke-opacity="0.07"/>
-    </g>
-    <g class="aura-dots" fill="#A08752">
-      <circle cx="400" cy="162" r="3.5" fill-opacity="0.75"/>
-      <circle cx="618" cy="493" r="2.8" fill-opacity="0.55"/>
-      <circle cx="196" cy="524" r="2.4" fill-opacity="0.5"/>
-      <circle cx="704" cy="298" r="2" fill-opacity="0.4"/>
-      <circle cx="118" cy="286" r="2" fill-opacity="0.4"/>
-    </g>
-  </svg>
   <div class="wrap">
     <div class="host reveal">
       <img src="assets/jm-headshot.png" alt="Jason Moss" width="402" height="402">
@@ -870,23 +884,20 @@ h2 em{font-style:italic;color:var(--gold-deep);}
     <h2>A handful of clients. Deep, personal work. <em>A really great living.</em></h2>
     <p>Not a bigger audience. Not a content machine. Not one more offer.</p>
     <p><strong>A small number of people you do your best work with &mdash; who pay you well for it.</strong></p>
-    <div class="seats reveal" aria-hidden="true">
-      <div class="seats-col c-l">
-        <div class="crowd"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <span class="seats-label">Building for thousands</span>
-      </div>
-      <div class="seats-vs">vs.</div>
-      <div class="seats-col c-r">
-        <div class="ten"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div>
-        <span class="seats-label">A great living around ten</span>
-      </div>
-    </div>
     <div class="hint">Inside this free masterclass, I&rsquo;ll show you how to build yours.</div>
   </div>
   <div class="wrap proof-block reveal">
     <div class="proof-strip">
-      <div class="proof-shot pw-33"><img width="706" height="877" src="assets/proof/emily-50k-launch.jpg" alt="Client messages from Emily: On target for a $50k launch, $40k collected so far — 'I have been hiding big time.'" loading="lazy"></div>
-      <div class="proof-shot pw-48"><img width="700" height="190" src="assets/proof/kristina-3x.png" alt="Client post from Kristina: I have earned 14,000€ in the past 3 months — in the 3 months before it was only 4,000€." loading="lazy"></div>
+      <div class="quote-card">
+        <img src="assets/proof/kimberly-irving.jpg" alt="Kimberly Irving" width="360" height="360" loading="lazy">
+        <p class="q">&ldquo;Made $60k coaching mostly part-time &mdash; and quit her full-time job.&rdquo;</p>
+        <span class="q-name">Kimberly Irving</span>
+      </div>
+      <div class="quote-card">
+        <img src="assets/proof/carlyn-rae-wei.jpg" alt="Carlyn Rae Wei" width="360" height="360" loading="lazy">
+        <p class="q">&ldquo;Doubled her rates and started signing dream clients in 10 weeks.&rdquo;</p>
+        <span class="q-name">Carlyn Rae Wei</span>
+      </div>
       <div class="proof-shot pw-35"><img width="363" height="136" src="assets/proof/ariel-consistent.jpg" alt="Client quote: Working with Jason has single-handedly driven the most consistent results I've seen in my business since I started 3 years ago. — Ariel Naftali" loading="lazy"></div>
     </div>
     <div class="proof-cap">From clients across my programs over the years</div>
@@ -909,7 +920,6 @@ h2 em{font-style:italic;color:var(--gold-deep);}
       <div class="discover-item"><span class="num">03</span><strong>What makes your work worth paying a premium for</strong> &mdash; without adding more calls, more content, or more clients.</div>
       <div class="discover-item"><span class="num">04</span><strong>What to do instead of chasing reach</strong> to help a small number of people go from &ldquo;I&rsquo;ve never heard of you&rdquo; to &ldquo;How can we work together?&rdquo;</div>
     </div>
-    <p class="working-note reveal">Free and live on Zoom. Bring your numbers &mdash; the math is simpler than you think.</p>
     <div class="cta-inline reveal">
       <a class="btn" href="#optin">Save My Free Spot</a>
     </div>
@@ -972,7 +982,7 @@ h2 em{font-style:italic;color:var(--gold-deep);}
     <div class="sec-head reveal">
       <span class="eyebrow center lined">In Their Words</span>
     </div>
-    <p class="wall-note reveal">These testimonials are from clients I've worked with across various programs over the years &mdash; who integrated many of the same principles I'll be teaching on this masterclass.</p>
+    <p class="wall-note reveal">From clients I&rsquo;ve worked with over the years &mdash; not from this masterclass.</p>
     <iframe
       id="testimonialto-jason-moss-testimonials-tag-all-light"
       src="https://embed-v2.testimonial.to/w/jason-moss-testimonials/?theme=light&card=base&loadMore=on&initialCount=20&tag=all"
