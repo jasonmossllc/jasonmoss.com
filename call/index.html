@@ -57,15 +57,14 @@
   .hero__logo img { width: 100%; height: auto; }
 
   .hero__grid {
-    max-width: 1120px;
+    max-width: 680px;
     margin: 0 auto;
     display: grid;
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
-    gap: 56px;
-    align-items: start;
+    grid-template-columns: 1fr;
+    gap: 34px;
   }
 
-  .hero__copy { padding-top: 10px; }
+  .hero__copy { text-align: center; }
   .hero__headshot {
     width: 128px;
     height: 128px;
@@ -75,17 +74,18 @@
     border: 1px solid rgba(194, 168, 108, 0.65);
     box-shadow: 0 10px 32px rgba(29, 31, 30, 0.16);
     background: var(--pale-sand);
-    margin-bottom: 26px;
+    margin: 0 auto 22px;
   }
   .hero__eyebrow {
     font-weight: 600; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
     color: #a8905a; margin-bottom: 16px;
   }
-  .hero__headline { font-size: 40px; line-height: 1.24; margin-bottom: 18px; color: var(--charcoal-obsidian); }
+  .hero__headline { font-size: 38px; line-height: 1.26; margin: 0 auto 16px; max-width: 640px; color: var(--charcoal-obsidian); }
   .hero__headline em { font-style: italic; }
-  .hero__lead { font-size: 17px; line-height: 1.7; color: var(--earth-mocha-brown); margin-bottom: 28px; max-width: 480px; text-wrap: pretty; }
+  .hero__lead { font-size: 17px; line-height: 1.7; color: var(--earth-mocha-brown); margin: 0 auto; max-width: 520px; text-wrap: pretty; }
   .hero__lead strong { font-weight: 600; color: var(--charcoal-obsidian); }
 
+  .hero__copy .hero__steps, .hero__copy .hero__note, .hero__copy .hero__sig, .hero__lead-desk { display: none; }
   .hero__steps { list-style: none; margin: 0 0 26px; padding: 0; max-width: 480px; display: flex; flex-direction: column; gap: 14px; }
   .hero__steps li {
     position: relative; padding-left: 30px;
@@ -135,7 +135,7 @@
       linear-gradient(180deg, rgba(248, 246, 242, 0.92), rgba(248, 246, 242, 0.92)),
       url('/apply/section-bg-pale.jpg') center / cover no-repeat,
       var(--pale-sand);
-    padding: 64px 24px 44px;
+    padding: 44px 24px 44px;
     text-align: center;
   }
   .trust__label { font-weight: 600; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--slate-taupe); margin-bottom: 18px; opacity: 0.7; }
@@ -218,20 +218,16 @@
     .hero { padding: 24px 16px 0; }
     .hero__top { margin-bottom: 22px; }
     .hero__logo { width: 96px; }
-    .hero__grid { grid-template-columns: 1fr; gap: 28px; }
-    .hero__copy { text-align: center; padding-top: 0; }
+    .hero__grid { gap: 26px; }
     .hero__headshot { width: 100px; height: 100px; margin: 0 auto 18px; }
     .hero__eyebrow { font-size: 11px; margin-bottom: 12px; }
     .hero__headline { font-size: 29px; margin-bottom: 12px; }
     .hero__lead { font-size: 15px; margin: 0 auto 0; }
-    /* on mobile the steps + note move below the card */
-    .hero__steps, .hero__note, .hero__sig, .hero__lead-desk { display: none; }
     .card { margin: 0 4px; }
     .card::after { top: 8px; left: 8px; right: -8px; bottom: -8px; }
     .card__head { padding: 20px 18px 18px; }
     .card__title { font-size: 21px; }
 
-    .hero__after { display: block; }
     .trust { padding: 40px 20px 30px; }
     .trust__row { gap: 20px; flex-wrap: wrap; }
     .trust__row img { height: 16px; }
@@ -249,11 +245,10 @@
     .btn-primary { width: 100%; max-width: 360px; font-size: 12px; letter-spacing: 0.05em; padding: 16px 24px; }
     .site-footer { padding: 44px 20px 56px; }
   }
-  /* Mobile-only reassurance block under the card */
-  .hero__after { padding: 26px 20px 0; max-width: 520px; margin: 0 auto; }
+  /* Reassurance block under the card (all sizes) */
+  .hero__after { display: block; padding: 34px 20px 0; max-width: 520px; margin: 0 auto; }
   .hero__after .hero__steps { display: flex; margin: 0 auto 22px; text-align: left; }
   .hero__after .hero__note, .hero__after .hero__sig { display: block; margin-left: auto; margin-right: auto; text-align: center; }
-  @media (min-width: 901px) { .hero__after { display: none !important; } }
 </style>
 </head>
 <body>
@@ -271,14 +266,6 @@
         <h1 class="hero__headline">Let's find the #1 thing to focus on <em>to bring more clients in the door.</em></h1>
         <p class="hero__lead">One-on-one with me over Zoom. <strong>No pitch.</strong><span class="hero__lead-desk"> Here's how it goes:</span></p>
 
-        <ul class="hero__steps">
-          <li>You tell me where you're at.<span>What you're selling, how clients are finding you, and where things feel stuck.</span></li>
-          <li>I ask a few questions.<span>After 1,000+ of these conversations, I can usually see the bottleneck pretty fast.</span></li>
-          <li>I tell you what I'd focus on.<span>The one thing I'd do first in your business right now to bring more clients in.</span></li>
-        </ul>
-
-        <p class="hero__note">If I think I can help you on a deeper level, I'll let you know. If not, you walk away with a clear next step and twenty minutes well spent.</p>
-        <p class="hero__sig">&mdash; Jason</p>
       </div>
 
       <div class="card" id="book">
