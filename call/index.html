@@ -35,321 +35,178 @@
     --font-body: 'Raleway', 'Helvetica Neue', sans-serif;
     --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
   }
-
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--charcoal-obsidian);
-    background-color: var(--pale-sand);
-  }
-
+  html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { font-family: var(--font-body); font-weight: 400; font-size: 16px; line-height: 1.7; color: var(--charcoal-obsidian); background-color: var(--pale-sand); }
   img { max-width: 100%; display: block; }
   a { color: inherit; text-decoration: none; }
-
-  h1, h2 {
-    font-family: var(--font-headline);
-    font-weight: 400;
-    line-height: 1.3;
-  }
+  h1, h2, h3 { font-family: var(--font-headline); font-weight: 400; line-height: 1.3; }
 
   /* ========================================
-     Hero — short. The page's job is the widget right below it.
+     Hero — you on the left, the two questions on the right
      ======================================== */
-  .bg-pale {
+  .hero {
     background:
-      linear-gradient(180deg, rgba(248, 246, 242, 0.80), rgba(248, 246, 242, 0.90)),
+      linear-gradient(180deg, rgba(248, 246, 242, 0.82), rgba(248, 246, 242, 0.92)),
       url('/apply/section-bg-pale.jpg') center / cover no-repeat,
       var(--pale-sand);
+    padding: 36px 24px 0;
   }
-  .hero {
-    background: transparent;
-    text-align: center;
-    padding: 40px 24px 44px;
-  }
-  .hero__logo {
-    display: inline-block;
-    width: 120px;
-    height: auto;
-    margin-bottom: 34px;
-  }
+  .hero__top { text-align: center; margin-bottom: 36px; }
+  .hero__logo { display: inline-block; width: 118px; }
   .hero__logo img { width: 100%; height: auto; }
-  .hero__eyebrow {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #a8905a;
-    margin-bottom: 18px;
-  }
-  .hero__headline {
-    font-size: 40px;
-    color: var(--charcoal-obsidian);
-    max-width: 760px;
-    margin: 0 auto 20px;
-    line-height: 1.28;
-  }
-  .hero__headline em { font-style: italic; }
-  .hero__subhead {
-    font-size: 17px;
-    color: var(--earth-mocha-brown);
-    max-width: 600px;
-    margin: 0 auto;
-    line-height: 1.75;
-    text-wrap: pretty;
-  }
-  .hero__subhead strong { font-weight: 600; color: var(--charcoal-obsidian); }
 
-  /* ========================================
-     Booking — directly under the hero
-     ======================================== */
-  .booking {
-    background:
-      linear-gradient(180deg, rgba(44, 63, 54, 0.85), rgba(36, 53, 48, 0.94)),
-      url('/apply/section-bg-forest.jpg') center / cover no-repeat,
-      var(--deep-forest-green);
-    padding: 56px 24px 64px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
+  .hero__grid {
+    max-width: 1120px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+    gap: 56px;
+    align-items: start;
   }
-  .booking::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(194, 168, 108, 0.10) 0%, transparent 60%);
+
+  .hero__copy { padding-top: 10px; }
+  .hero__headshot {
+    width: 128px;
+    height: 128px;
+    border-radius: 50%;
+    object-fit: cover;
+    padding: 4px;
+    border: 1px solid rgba(194, 168, 108, 0.65);
+    box-shadow: 0 10px 32px rgba(29, 31, 30, 0.16);
+    background: var(--pale-sand);
+    margin-bottom: 26px;
+  }
+  .hero__eyebrow {
+    font-weight: 600; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #a8905a; margin-bottom: 16px;
+  }
+  .hero__headline { font-size: 40px; line-height: 1.24; margin-bottom: 18px; color: var(--charcoal-obsidian); }
+  .hero__headline em { font-style: italic; }
+  .hero__lead { font-size: 17px; line-height: 1.7; color: var(--earth-mocha-brown); margin-bottom: 28px; max-width: 480px; text-wrap: pretty; }
+  .hero__lead strong { font-weight: 600; color: var(--charcoal-obsidian); }
+
+  .hero__steps { list-style: none; margin: 0 0 26px; padding: 0; max-width: 480px; display: flex; flex-direction: column; gap: 14px; }
+  .hero__steps li {
+    position: relative; padding-left: 30px;
+    font-family: var(--font-headline); font-size: 16px; line-height: 1.55; color: var(--charcoal-obsidian);
+  }
+  .hero__steps li::before {
+    content: "\2713"; position: absolute; left: 0; top: 0;
+    font-family: var(--font-body); font-weight: 700; color: var(--muted-gold);
+  }
+  .hero__steps li span { display: block; font-family: var(--font-body); font-size: 14px; color: var(--earth-mocha-brown); line-height: 1.6; margin-top: 2px; }
+
+  .hero__note {
+    font-family: var(--font-headline); font-style: italic; font-size: 15px; line-height: 1.7;
+    color: var(--charcoal-obsidian); max-width: 480px; padding-top: 20px;
+    border-top: 1px solid rgba(194, 168, 108, 0.4);
+  }
+  .hero__sig { font-family: var(--font-headline); font-style: italic; font-size: 16px; margin-top: 8px; }
+
+  /* The card: framed, dark header, widget inside */
+  .card {
+    background: var(--pale-sand);
+    border: 1px solid rgba(194, 168, 108, 0.5);
+    box-shadow: 0 24px 70px rgba(29, 31, 30, 0.14);
+    position: relative;
+  }
+  .card::after {
+    content: ''; position: absolute; top: 12px; left: 12px; right: -12px; bottom: -12px;
+    border-right: 1px solid rgba(194, 168, 108, 0.45); border-bottom: 1px solid rgba(194, 168, 108, 0.45);
     pointer-events: none;
   }
-  .booking > * { position: relative; }
-  .booking__label {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted-gold);
-    margin-bottom: 12px;
-  }
-  .booking__heading {
-    font-size: 30px;
-    color: var(--pale-sand);
-    margin-bottom: 30px;
-    line-height: 1.35;
-  }
-  .qualify-wrap {
-    width: 100%;
-    max-width: 680px;
-    margin: 0 auto;
-    border: 1px solid rgba(194, 168, 108, 0.45);
-    background: var(--pale-sand);
-    box-shadow: 0 0 40px rgba(194, 168, 108, 0.15);
-    overflow: hidden;
-  }
-  .booking__micro {
-    font-family: var(--font-body);
-    font-size: 13px;
-    color: rgba(248, 246, 242, 0.6);
-    margin-top: 18px;
-  }
-
-  /* ========================================
-     What happens on the call — three steps
-     ======================================== */
-  .how {
+  .card__head {
     background:
-      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
-      url('/apply/section-bg-warm.jpg') center / cover no-repeat,
-      var(--warm-stone);
-    padding: 80px 24px 84px;
+      linear-gradient(180deg, rgba(44, 63, 54, 0.92), rgba(36, 53, 48, 0.97)),
+      url('/apply/section-bg-forest.jpg') center / cover no-repeat,
+      var(--deep-forest-green);
+    padding: 26px 28px 24px;
+    text-align: center;
   }
-  .how__inner { max-width: 880px; margin: 0 auto; text-align: center; }
-  .how__inner h2 { font-size: 30px; color: var(--charcoal-obsidian); margin-bottom: 44px; }
-  .how__grid {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 22px;
-    text-align: left;
+  .card__label { font-weight: 600; font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted-gold); margin-bottom: 8px; }
+  .card__title { font-size: 24px; color: var(--pale-sand); line-height: 1.3; }
+  .card__body { background: var(--pale-sand); }
+  .card__micro { text-align: center; font-size: 12px; color: var(--slate-taupe); padding: 12px 20px 16px; }
+
+  /* Trust logos strip */
+  .trust {
+    background:
+      linear-gradient(180deg, rgba(248, 246, 242, 0.92), rgba(248, 246, 242, 0.92)),
+      url('/apply/section-bg-pale.jpg') center / cover no-repeat,
+      var(--pale-sand);
+    padding: 64px 24px 44px;
+    text-align: center;
   }
-  .how__step {
-    background: var(--pale-sand);
-    border-top: 2px solid var(--muted-gold);
-    box-shadow: 0 6px 28px rgba(29, 31, 30, 0.05);
-    padding: 26px 26px 28px;
-  }
-  .how__num {
-    font-family: var(--font-headline);
-    font-size: 13px;
-    letter-spacing: 0.14em;
-    color: #a8905a;
-    margin-bottom: 12px;
-  }
-  .how__step h3 {
-    font-family: var(--font-headline);
-    font-weight: 400;
-    font-size: 19px;
-    line-height: 1.4;
-    color: var(--charcoal-obsidian);
-    margin-bottom: 10px;
-  }
-  .how__step p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--earth-mocha-brown);
-  }
-  .how__note {
-    font-family: var(--font-headline);
-    font-style: italic;
-    font-size: 17px;
-    color: var(--charcoal-obsidian);
-    margin-top: 40px;
-    line-height: 1.7;
-  }
-  .how__note-sig {
-    font-family: var(--font-headline);
-    font-style: italic;
-    font-size: 17px;
-    color: var(--charcoal-obsidian);
-    margin-top: 10px;
-  }
+  .trust__label { font-weight: 600; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--slate-taupe); margin-bottom: 18px; opacity: 0.7; }
+  .trust__row { display: flex; align-items: center; justify-content: center; gap: 44px; max-width: 620px; margin: 0 auto; opacity: 0.45; }
+  .trust__row img { height: 22px; width: auto; object-fit: contain; filter: grayscale(100%); }
 
   /* ========================================
      Testimonials — video cards (same as /apply)
      ======================================== */
   .testimonials {
-    background: transparent;
-    padding: 84px 24px 76px;
+    background:
+      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
+      url('/apply/section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone);
+    padding: 84px 24px 84px;
   }
-  .testimonials__header { text-align: center; margin-bottom: 48px; }
+  .testimonials__header { text-align: center; margin-bottom: 44px; }
   .testimonials__header h2 { font-size: 30px; color: var(--charcoal-obsidian); }
-  .testimonials__grid {
-    max-width: 1060px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    align-items: stretch;
-  }
+  .testimonials__grid { max-width: 1060px; margin: 0 auto; display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: stretch; }
   .testimonial-card {
-    background-color: #fff;
-    border: 1px solid rgba(194, 168, 108, 0.25);
-    border-top: 2px solid var(--muted-gold);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 6px 28px rgba(29, 31, 30, 0.05);
+    background-color: #fff; border: 1px solid rgba(194, 168, 108, 0.25); border-top: 2px solid var(--muted-gold);
+    display: flex; flex-direction: column; overflow: hidden; box-shadow: 0 6px 28px rgba(29, 31, 30, 0.05);
     transition: box-shadow 0.4s var(--ease-out), transform 0.4s var(--ease-out);
   }
-  .testimonial-card:hover {
-    box-shadow: 0 8px 40px rgba(29, 31, 30, 0.08);
-    transform: translateY(-2px);
-  }
+  .testimonial-card:hover { box-shadow: 0 8px 40px rgba(29, 31, 30, 0.08); transform: translateY(-2px); }
   .testimonial-card__video { width: 100%; position: relative; }
   .jm-responsive-padding { padding: 56.25% 0 0 0; position: relative; }
   .jm-responsive-wrapper { height: 100%; left: 0; position: absolute; top: 0; width: 100%; }
-  .testimonial-card__body {
-    padding: 26px 28px 30px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-  .testimonial-card__accent {
-    width: 40px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--muted-gold), rgba(194, 168, 108, 0.3));
-    margin-bottom: 16px;
-  }
-  .testimonial-card__blurb {
-    font-family: var(--font-headline);
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--charcoal-obsidian);
-    margin-bottom: 18px;
-  }
-  .testimonial-card__name {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--slate-taupe);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: auto;
-  }
+  .testimonial-card__body { padding: 26px 28px 30px; display: flex; flex-direction: column; flex: 1; }
+  .testimonial-card__accent { width: 40px; height: 2px; background: linear-gradient(90deg, var(--muted-gold), rgba(194, 168, 108, 0.3)); margin-bottom: 16px; }
+  .testimonial-card__blurb { font-family: var(--font-headline); font-size: 18px; line-height: 1.6; color: var(--charcoal-obsidian); margin-bottom: 18px; }
+  .testimonial-card__name { font-size: 11px; font-weight: 600; color: var(--slate-taupe); letter-spacing: 0.12em; text-transform: uppercase; margin-top: auto; }
+  .mid-cta { display: none; }
 
-  /* Back-to-booking CTA between testimonials and the wall */
-  .btn-primary {
-    display: inline-block;
-    background-color: var(--muted-gold);
-    color: var(--charcoal-obsidian);
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 18px 40px;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
-    transition: background-color 0.25s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
-    text-align: center;
-  }
-  .btn-primary:hover {
-    background-color: #b89a5e;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(194, 168, 108, 0.25);
-  }
-  .mid-cta { text-align: center; padding: 8px 24px 0; }
-  .mid-cta p { font-size: 13px; color: var(--slate-taupe); margin-top: 14px; }
-
-  /* ========================================
-     Wall of Love — testimonial.to embed
-     ======================================== */
-  .wall-of-love { padding: 84px 24px 96px; }
-  .wall-of-love__header { text-align: center; margin-bottom: 48px; }
+  /* Wall of Love */
+  .wall-of-love { padding: 84px 24px 88px; }
+  .wall-of-love__header { text-align: center; margin-bottom: 44px; }
   .wall-of-love__header h2 { font-size: 30px; color: var(--charcoal-obsidian); }
   .wall-of-love__embed { max-width: 1200px; margin: 0 auto; }
   .wall-of-love__embed iframe { opacity: 0; transition: opacity 0.6s ease-out; }
   .wall-of-love__embed iframe.loaded { opacity: 1; }
 
-  /* ========================================
-     Footer
-     ======================================== */
-  .site-footer {
-    background-color: var(--charcoal-obsidian);
-    padding: 48px 24px 48px;
-    text-align: center;
+  /* Closing band */
+  .btn-primary {
+    display: inline-block; background-color: var(--muted-gold); color: var(--charcoal-obsidian);
+    font-weight: 600; font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase;
+    padding: 18px 40px; border: none; border-radius: 0; cursor: pointer; text-align: center;
+    transition: background-color 0.25s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
   }
-  .site-footer__divider {
-    width: 100%;
-    max-width: 160px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(194, 168, 108, 0.25), transparent);
-    margin: 0 auto 44px;
+  .btn-primary:hover { background-color: #b89a5e; transform: translateY(-1px); box-shadow: 0 4px 20px rgba(194, 168, 108, 0.25); }
+  .closing {
+    background:
+      linear-gradient(180deg, rgba(44, 63, 54, 0.88), rgba(36, 53, 48, 0.95)),
+      url('/apply/section-bg-forest.jpg') center / cover no-repeat,
+      var(--deep-forest-green);
+    padding: 72px 24px; text-align: center;
   }
-  .site-footer__logo { display: inline-block; width: 100px; height: auto; margin-bottom: 24px; opacity: 0.5; }
+  .closing h2 { font-size: 30px; color: var(--pale-sand); margin-bottom: 10px; }
+  .closing p { color: rgba(248, 246, 242, 0.7); margin-bottom: 28px; font-size: 15px; }
+
+  /* Footer */
+  .site-footer { background-color: var(--charcoal-obsidian); padding: 48px 24px; text-align: center; }
+  .site-footer__divider { max-width: 160px; height: 1px; background: linear-gradient(90deg, transparent, rgba(194, 168, 108, 0.25), transparent); margin: 0 auto 44px; }
+  .site-footer__logo { display: inline-block; width: 100px; margin-bottom: 24px; opacity: 0.5; }
   .site-footer__logo img { width: 100%; height: auto; }
-  .site-footer__copy { font-family: var(--font-body); font-size: 12px; color: rgba(140, 131, 122, 0.5); margin-bottom: 12px; }
+  .site-footer__copy { font-size: 12px; color: rgba(140, 131, 122, 0.5); margin-bottom: 12px; }
   .site-footer__links { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-  .site-footer__links a {
-    font-family: var(--font-body);
-    font-size: 12px;
-    color: rgba(140, 131, 122, 0.5);
-    transition: color 0.25s var(--ease-out);
-  }
+  .site-footer__links a { font-size: 12px; color: rgba(140, 131, 122, 0.5); transition: color 0.25s var(--ease-out); }
   .site-footer__links a:hover { color: var(--pale-sand); }
   .site-footer__links span { font-size: 12px; color: rgba(140, 131, 122, 0.3); }
 
-  /* Scroll reveals */
   .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.7s ease-out, transform 0.7s ease-out; }
   .reveal.visible { opacity: 1; transform: none; }
   @media (prefers-reduced-motion: reduce) { .reveal { opacity: 1; transform: none; transition: none; } }
@@ -357,90 +214,103 @@
   /* ========================================
      Responsive
      ======================================== */
-  @media (max-width: 768px) {
-    .hero { padding: 24px 20px 30px; }
-    .hero__logo { width: 96px; margin-bottom: 22px; }
+  @media (max-width: 900px) {
+    .hero { padding: 24px 16px 0; }
+    .hero__top { margin-bottom: 22px; }
+    .hero__logo { width: 96px; }
+    .hero__grid { grid-template-columns: 1fr; gap: 28px; }
+    .hero__copy { text-align: center; padding-top: 0; }
+    .hero__headshot { width: 100px; height: 100px; margin: 0 auto 18px; }
     .hero__eyebrow { font-size: 11px; margin-bottom: 12px; }
-    .hero__headline { font-size: 28px; margin-bottom: 14px; line-height: 1.32; }
-    .hero__subhead { font-size: 15px; }
+    .hero__headline { font-size: 29px; margin-bottom: 12px; }
+    .hero__lead { font-size: 15px; margin: 0 auto 0; }
+    /* on mobile the steps + note move below the card */
+    .hero__steps, .hero__note, .hero__sig, .hero__lead-desk { display: none; }
+    .card { margin: 0 4px; }
+    .card::after { top: 8px; left: 8px; right: -8px; bottom: -8px; }
+    .card__head { padding: 20px 18px 18px; }
+    .card__title { font-size: 21px; }
 
-    .booking { padding: 40px 12px 44px; }
-    .booking__heading { font-size: 24px; margin-bottom: 22px; }
-    .booking__micro { font-size: 12px; }
+    .hero__after { display: block; }
+    .trust { padding: 40px 20px 30px; }
+    .trust__row { gap: 20px; flex-wrap: wrap; }
+    .trust__row img { height: 16px; }
 
-    .how { padding: 56px 20px 60px; }
-    .how__inner h2 { font-size: 25px; margin-bottom: 28px; }
-    .how__grid { grid-template-columns: 1fr; gap: 16px; }
-    .how__step { padding: 22px 22px 24px; }
-    .how__note { font-size: 16px; margin-top: 30px; }
-
-    .testimonials { padding: 56px 20px 48px; }
-    .testimonials__header { margin-bottom: 32px; }
+    .testimonials { padding: 56px 20px 56px; }
+    .testimonials__header { margin-bottom: 30px; }
     .testimonials__header h2 { font-size: 25px; }
     .testimonials__grid { grid-template-columns: 1fr; gap: 20px; }
     .testimonial-card__body { padding: 22px 24px 26px; }
     .testimonial-card__blurb { font-size: 16px; }
-
-    .btn-primary { width: 100%; max-width: 360px; font-size: 12px; letter-spacing: 0.05em; padding: 16px 24px; }
-
-    .wall-of-love { padding: 56px 16px 64px; }
-    .wall-of-love__header { margin-bottom: 32px; }
+    .wall-of-love { padding: 56px 16px 60px; }
     .wall-of-love__header h2 { font-size: 25px; }
-
+    .closing { padding: 56px 20px; }
+    .closing h2 { font-size: 25px; }
+    .btn-primary { width: 100%; max-width: 360px; font-size: 12px; letter-spacing: 0.05em; padding: 16px 24px; }
     .site-footer { padding: 44px 20px 56px; }
-    .site-footer__logo { width: 90px; }
   }
+  /* Mobile-only reassurance block under the card */
+  .hero__after { padding: 26px 20px 0; max-width: 520px; margin: 0 auto; }
+  .hero__after .hero__steps { display: flex; margin: 0 auto 22px; text-align: left; }
+  .hero__after .hero__note, .hero__after .hero__sig { display: block; margin-left: auto; margin-right: auto; text-align: center; }
+  @media (min-width: 901px) { .hero__after { display: none !important; } }
 </style>
 </head>
 <body>
 
-  <!-- Hero -->
-  <div class="bg-pale">
+  <!-- Hero: copy left, two questions right -->
   <section class="hero" id="hero">
-    <div class="hero__logo" aria-label="Jason Moss">
-      <img src="/apply/logo.svg" alt="Jason Moss" style="width:100%;height:auto;">
+    <div class="hero__top">
+      <div class="hero__logo" aria-label="Jason Moss"><img src="/apply/logo.svg" alt="Jason Moss"></div>
     </div>
 
-    <p class="hero__eyebrow">Free 20-Minute Business Assessment</p>
-    <h1 class="hero__headline">Let's find the #1 thing to focus on <em>to bring more clients in the door.</em></h1>
+    <div class="hero__grid">
+      <div class="hero__copy">
+        <img src="/apply/jm-headshot.png" alt="Jason Moss" class="hero__headshot" width="128" height="128">
+        <p class="hero__eyebrow">Free 20-Minute Business Assessment</p>
+        <h1 class="hero__headline">Let's find the #1 thing to focus on <em>to bring more clients in the door.</em></h1>
+        <p class="hero__lead">One-on-one with me over Zoom. <strong>No pitch.</strong><span class="hero__lead-desk"> Here's how it goes:</span></p>
 
-    <p class="hero__subhead">One-on-one with me over Zoom. <strong>No pitch</strong> &mdash; and if I think I can help you on a deeper level, I'll let you know.</p>
-  </section>
-  </div>
+        <ul class="hero__steps">
+          <li>You tell me where you're at.<span>What you're selling, how clients are finding you, and where things feel stuck.</span></li>
+          <li>I ask a few questions.<span>After 1,000+ of these conversations, I can usually see the bottleneck pretty fast.</span></li>
+          <li>I tell you what I'd focus on.<span>The one thing I'd do first in your business right now to bring more clients in.</span></li>
+        </ul>
 
-  <!-- Booking — the reason the page exists, so it comes first -->
-  <section class="booking" id="book">
-    <p class="booking__label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
-    <h2 class="booking__heading">Start with two quick questions.</h2>
-
-    <div class="qualify-wrap" id="qualifyWrap"></div>
-
-    <p class="booking__micro">Takes about 30 seconds to book</p>
-  </section>
-
-  <!-- What happens on the call -->
-  <section class="how" id="how">
-    <div class="how__inner">
-      <h2>What happens on the call</h2>
-      <div class="how__grid">
-        <div class="how__step reveal">
-          <p class="how__num">01</p>
-          <h3>You tell me where you're at.</h3>
-          <p>What you're selling, how clients are finding you right now, and where things feel stuck.</p>
-        </div>
-        <div class="how__step reveal">
-          <p class="how__num">02</p>
-          <h3>I ask a few questions.</h3>
-          <p>I've done this with over 1,000 entrepreneurs, so I can usually see the bottleneck pretty fast.</p>
-        </div>
-        <div class="how__step reveal">
-          <p class="how__num">03</p>
-          <h3>I tell you what I'd focus on.</h3>
-          <p>Exactly what I'd do first in your business right now to bring more clients in the door.</p>
-        </div>
+        <p class="hero__note">If I think I can help you on a deeper level, I'll let you know. If not, you walk away with a clear next step and twenty minutes well spent.</p>
+        <p class="hero__sig">&mdash; Jason</p>
       </div>
-      <p class="how__note">If it makes sense to talk about working together, we can. If not, you walk away with a clear next step and twenty minutes well spent.</p>
-      <p class="how__note-sig">&mdash; Jason</p>
+
+      <div class="card" id="book">
+        <div class="card__head">
+          <p class="card__label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
+          <h2 class="card__title">Start with two quick questions.</h2>
+        </div>
+        <div class="card__body" id="qualifyWrap"></div>
+        <p class="card__micro">Takes about 30 seconds to book</p>
+      </div>
+    </div>
+
+    <!-- Mobile only: the reassurance moves under the card -->
+    <div class="hero__after">
+      <ul class="hero__steps">
+        <li>You tell me where you're at.<span>What you're selling, how clients are finding you, and where things feel stuck.</span></li>
+        <li>I ask a few questions.<span>After 1,000+ of these conversations, I can usually see the bottleneck pretty fast.</span></li>
+        <li>I tell you what I'd focus on.<span>The one thing I'd do first in your business right now to bring more clients in.</span></li>
+      </ul>
+      <p class="hero__note">If I think I can help you on a deeper level, I'll let you know. If not, you walk away with a clear next step and twenty minutes well spent.</p>
+      <p class="hero__sig">&mdash; Jason</p>
+    </div>
+
+    <div class="trust">
+      <p class="trust__label">As Seen In</p>
+      <div class="trust__row">
+        <img src="/apply/logo-forbes-scotland.png" alt="Forbes">
+        <img src="/apply/logo-business-insider.png" alt="Business Insider">
+        <img src="/apply/logo-obo.png" alt="Online Business Owner">
+        <img src="/apply/logo-entrepreneur.png" alt="Entrepreneur">
+        <img src="/apply/logo-fast-company-sa.png" alt="Fast Company">
+      </div>
     </div>
   </section>
 
@@ -497,10 +367,6 @@
       </div>
     </div>
 
-    <div class="mid-cta" style="margin-top:44px;">
-      <a href="#book" class="btn-primary">Book Your Free Call</a>
-      <p>Free &middot; 20 minutes &middot; No pitch</p>
-    </div>
   </section>
 
   <!-- Wall of Love -->
@@ -520,6 +386,13 @@
         onload="this.classList.add('loaded')"
       ></iframe>
     </div>
+  </section>
+
+  <!-- Closing band -->
+  <section class="closing">
+    <h2>Ready when you are.</h2>
+    <p>Free &middot; 20 minutes &middot; No pitch</p>
+    <a href="#book" class="btn-primary">Book Your Free Call</a>
   </section>
 
   <!-- Footer -->
