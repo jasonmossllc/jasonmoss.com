@@ -21,7 +21,7 @@
       font-family: 'Raleway', sans-serif;
       font-weight: 400;
       color: #F8F6F2;
-      background: rgb(48, 59, 51);
+      background: rgb(31, 45, 38);
     }
     img { max-width: 100%; display: block; }
 
@@ -39,8 +39,13 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgb(40, 54, 47);
-      opacity: 0.64;
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 26, 22, 0.50) 0%,
+        rgba(18, 26, 22, 0.68) 38%,
+        rgba(18, 26, 22, 0.62) 78%,
+        rgba(18, 26, 22, 0.45) 100%
+      );
       pointer-events: none;
     }
     .page-inner {
@@ -220,9 +225,9 @@
     }
     .quote-card {
       margin: 0;
-      border: 1px solid rgb(78, 92, 78);
+      border: 1px solid rgba(248, 246, 242, 0.12);
       border-radius: 0.75rem;
-      background: rgb(56, 71, 62);
+      background: rgba(18, 26, 22, 0.42);
       padding: 1.375rem 1.75rem 1.5rem;
       text-align: left;
     }
@@ -274,8 +279,13 @@
       content: "";
       position: absolute;
       inset: 0;
-      background: rgb(40, 54, 47);
-      opacity: 0.64;
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 26, 22, 0.50) 0%,
+        rgba(18, 26, 22, 0.68) 38%,
+        rgba(18, 26, 22, 0.62) 78%,
+        rgba(18, 26, 22, 0.45) 100%
+      );
       pointer-events: none;
     }
     .qualify-inner {
@@ -359,11 +369,11 @@
       font-family: 'Raleway', sans-serif;
       font-size: 0.6875rem;
       line-height: 0.9625rem;
-      color: rgb(96, 112, 103);
+      color: rgba(248, 246, 242, 0.32);
       text-align: center;
     }
     .page-footer p { margin: 0; }
-    .page-footer a { color: rgb(96, 112, 103); text-decoration: none; }
+    .page-footer a { color: rgba(248, 246, 242, 0.38); text-decoration: none; }
     .page-footer a:hover { text-decoration: underline; }
 
     @media (min-width: 768px) {
