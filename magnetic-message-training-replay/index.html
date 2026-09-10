@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Magnetic Message Training</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:400,500,600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: rgb(48, 59, 51);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       PAGE SHELL (single continuous background)
+       ===================================== */
+    .page {
+      position: relative;
+      background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 1.75rem 1.25rem 3rem;
+      color: #F8F6F2;
+      overflow: visible;
+    }
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgb(40, 54, 47);
+      opacity: 0.64;
+      pointer-events: none;
+    }
+    .page-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* -- Heading "You're In." -- */
+    .page-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+      color: #F8F6F2;
+      margin: 0 0 1rem;
+    }
+    .page-heading em { font-style: italic; }
+    .page-heading .gold { color: #C2A86C; }
+
+    /* -- Description -- */
+    .page-desc {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.5938rem;
+      color: #E9E2D3;
+      margin: 0 0 2rem;
+      max-width: 19.5rem;
+    }
+    .page-desc strong { font-weight: 700; }
+    .page-desc span { display: block; }
+
+    /* -- Training list (mobile card / desktop row) -- */
+    .training-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      color: #C2A86C;
+      margin: 0 0 0.75rem;
+      text-align: left;
+    }
+    .training {
+      width: 100%;
+      max-width: 21.5rem;
+      margin: -0.5rem 0 2rem;
+      padding: 1.25rem 2rem 1.5rem 1.75rem;
+      border: 1px solid rgb(78, 92, 78);
+      border-radius: 0.75rem;
+      background: rgb(56, 71, 62);
+    }
+    .training-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: left;
+    }
+    .training-list li {
+      position: relative;
+      padding-left: 1.25rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.875rem;
+      line-height: 1.225rem;
+      font-weight: 400;
+      color: #E9E2D3;
+    }
+    .training-list li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.25rem;
+      width: 0.75rem;
+      height: 0.75rem;
+      background-color: #C2A86C;
+      -webkit-mask: url('assets/images/arrow-gold.svg') no-repeat center/contain;
+              mask: url('assets/images/arrow-gold.svg') no-repeat center/contain;
+    }
+
+    /* -- Video -- */
+    .page-video {
+      width: 100%;
+      max-width: 22.5rem;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.35);
+      position: relative;
+      z-index: 2;
+      margin-top: 1rem;
+    }
+
+    /* -- Sub-headline below video -- */
+    .page-sub {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9125rem;
+      line-height: 1.4625rem;
+      color: #E9E2D3;
+      margin: 2.5rem 0 2rem;
+      max-width: 21.8rem;
+    }
+    .page-sub em { font-style: italic; }
+    .page-sub .gold { color: #C2A86C; }
+
+    /* -- CTA (scrolls to the booking section below) -- */
+    .page-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #C2A86C;
+      color: #000000;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.975rem;
+      line-height: 120%;
+      letter-spacing: 0.02em;
+      width: 19.5rem;
+      max-width: 100%;
+      height: 3.78rem;
+      border-radius: 0;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .page-cta:hover { background: #A7915D; }
+    .page-cta-note {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8125rem;
+      line-height: 1.2rem;
+      color: rgba(233, 226, 211, 0.7);
+      margin: 0.875rem 0 0;
+    }
+
+    /* -- Divider between watch + book -- */
+    .book-divider {
+      width: 100%;
+      max-width: 44.5625rem;
+      border: 0;
+      border-top: 1px solid rgb(77, 88, 77);
+      margin: 4rem auto 3.5rem;
+    }
+
+    /* =====================================
+       BOOKING SECTION (the next step, on-page)
+       ===================================== */
+    .book {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      scroll-margin-top: 1.25rem;
+    }
+    .headshot {
+      width: 7.5rem;
+      height: 7.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+      margin: 0 auto 1.25rem;
+      display: block;
+      padding: 0.3rem;
+      border: 1px solid rgba(194, 168, 108, 0.45);
+      box-shadow: 0 0 24px rgba(194, 168, 108, 0.12);
+    }
+    .book-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #C2A86C;
+      margin: 0 0 0.75rem;
+    }
+    .book-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.1rem;
+      color: #F8F6F2;
+      margin: 0 0 1.5rem;
+      max-width: 22rem;
+      text-wrap: balance;
+    }
+    .book-heading em { font-style: italic; }
+    .book-heading .gold { color: #C2A86C; }
+
+    /* -- Letter-style copy -- */
+    .page-copy {
+      max-width: 25.5rem;
+      margin: 0 0 2.5rem;
+      text-align: left;
+    }
+    .page-copy p {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.65rem;
+      color: #E9E2D3;
+      margin: 0 0 1.25rem;
+    }
+    .page-copy p:last-child { margin-bottom: 0; }
+    .page-copy em { font-style: italic; }
+    .page-copy strong { font-weight: 700; color: #F8F6F2; }
+    .call-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+    .call-list li {
+      position: relative;
+      padding-left: 1.625rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.9375rem;
+      line-height: 1.65rem;
+      color: #E9E2D3;
+    }
+    .call-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      color: #C2A86C;
+    }
+
+    /* -- Testimonials -- */
+    .quotes {
+      width: 100%;
+      max-width: 25.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 0 0 3rem;
+    }
+    .quote-card {
+      margin: 0;
+      border: 1px solid rgb(78, 92, 78);
+      border-radius: 0.75rem;
+      background: rgb(56, 71, 62);
+      padding: 1.375rem 1.75rem 1.5rem;
+      text-align: left;
+    }
+    .quote-card::before {
+      content: "\201C";
+      display: block;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.75rem;
+      line-height: 1;
+      height: 1.375rem;
+      color: #C2A86C;
+      margin-bottom: 0.625rem;
+    }
+    .quote-card p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: #E9E2D3;
+      margin: 0 0 1rem;
+    }
+    .quote-byline { display: flex; align-items: center; gap: 0.75rem; }
+    .quote-byline img {
+      width: 2.625rem;
+      height: 2.625rem;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #C2A86C;
+    }
+    .quote-card cite {
+      display: block;
+      font-family: 'Raleway', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: #C2A86C;
+      white-space: nowrap;
+    }
+    .results-note {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.75rem;
+      line-height: 1.15rem;
+      color: rgba(233, 226, 211, 0.55);
+      max-width: 25.5rem;
+      margin: -2rem 0 3rem;
+    }
+
+    /* -- Qualifier + Calendly (self-resizing iframe) -- */
+    .qualify-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.375rem;
+      line-height: 1.85rem;
+      color: #F8F6F2;
+      margin: 0 0 1.5rem;
+      max-width: 24rem;
+    }
+    .qualify-wrap {
+      width: 100%;
+      max-width: 42rem;
+      border: 1px solid rgba(194, 168, 108, 0.45);
+      border-radius: 0.75rem;
+      background: #F8F6F2;
+      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.2);
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+    }
+
+    /* -- Footer -- */
+    .page-footer {
+      margin-top: 5rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.6875rem;
+      line-height: 0.9625rem;
+      color: rgb(61, 75, 68);
+      text-align: center;
+    }
+    .page-footer p { margin: 0; }
+    .page-footer a { color: rgb(61, 75, 68); text-decoration: none; }
+    .page-footer a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .page {
+        background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 2.375rem 1.8125rem 4rem;
+      }
+      .page-heading { font-size: 2.1875rem; line-height: 2.625rem; margin-bottom: 1.25rem; }
+      .page-desc { font-size: 1.0625rem; line-height: 1.8063rem; max-width: 26rem; margin-bottom: 2rem; }
+      .training-label { display: none; }
+      .training {
+        width: 100%;
+        max-width: 44.5625rem;
+        padding: 1rem 0 1rem;
+        border: 0;
+        background: transparent;
+        margin: 0 auto 2rem;
+        border-top: 1px solid rgb(77, 88, 77);
+        border-bottom: 1px solid rgb(77, 88, 77);
+        border-radius: 0;
+      }
+      .training-list {
+        flex-direction: row;
+        justify-content: space-between;
+        gap: 2rem;
+        text-align: center;
+        counter-reset: training-item;
+      }
+      .training-list li {
+        flex: 1;
+        padding-left: 0;
+        padding-top: 1.5rem;
+        font-size: 0.8125rem;
+        line-height: 1.2rem;
+        color: #E9E2D3;
+        position: relative;
+      }
+      .training-list li + li::after {
+        content: "";
+        position: absolute;
+        left: -1rem;
+        top: 0.5rem;
+        width: 1px;
+        height: 5.8125rem;
+        background: rgb(77, 88, 77);
+      }
+      .training-list li::before {
+        content: counter(training-item, lower-roman);
+        counter-increment: training-item;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        height: auto;
+        background: none;
+        background-color: transparent;
+        -webkit-mask: none;
+                mask: none;
+        font-family: 'Libre Baskerville', serif;
+        font-style: italic;
+        font-weight: 400;
+        color: #C2A86C;
+        font-size: 0.6875rem;
+        line-height: 1.1rem;
+      }
+      .page-video { max-width: 42.9375rem; aspect-ratio: auto; height: 23.8125rem; }
+      .page-sub { font-size: 1rem; line-height: 1.7rem; max-width: 30rem; margin: 2rem 0 1.5rem; }
+      .page-cta { font-size: 1rem; width: 25.3125rem; }
+      .book-divider { margin: 4.5rem auto 4rem; }
+      .headshot { width: 8.375rem; height: 8.375rem; }
+      .book-heading { font-size: 2rem; line-height: 2.55rem; max-width: 34rem; margin-bottom: 1.75rem; }
+      .page-copy { max-width: 34rem; margin-bottom: 3rem; }
+      .page-copy p { font-size: 1.0625rem; line-height: 1.85rem; }
+      .call-list li { font-size: 1.0625rem; line-height: 1.85rem; }
+      .quotes {
+        max-width: 60rem;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 1.25rem;
+        margin-bottom: 3.5rem;
+      }
+      .quote-card { flex: 1; display: flex; flex-direction: column; padding: 1.25rem 1.75rem 1.375rem; }
+      .quote-card::before { font-size: 2.5rem; height: 1.25rem; margin-bottom: 0.5rem; }
+      .quote-card p { font-size: 0.875rem; line-height: 1.55rem; margin-bottom: 1rem; }
+      .quote-byline { margin-top: auto; }
+      .results-note { margin: -2.5rem 0 3.5rem; max-width: 40rem; }
+      .qualify-heading { font-size: 1.5rem; line-height: 2.05rem; }
+      .page-footer { max-width: 40.1875rem; margin: 5rem auto 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page">
+    <div class="page-inner">
+
+      <!-- ============================================
+          WATCH
+          ============================================ -->
+      <h1 class="page-heading"><em><span class="gold">You're In.</span></em></h1>
+      <p class="page-desc"><span>You&rsquo;re about to see why your message isn&rsquo;t converting, and what it should say instead.</span><span><strong>Tap for sound to begin.</strong></span></p>
+
+      <div class="training">
+        <p class="training-label">INSIDE THIS TRAINING</p>
+        <ul class="training-list">
+          <li>Why you can be great at what you do and still struggle to get clients</li>
+          <li>The &ldquo;inside-out problem&rdquo; that keeps your message from landing</li>
+          <li>The two voices inside your marketing: the copywriter and the artist</li>
+          <li>Jason&rsquo;s own five-year swing between the two, and what it cost</li>
+          <li>The one-line framework for what your message should actually say</li>
+        </ul>
+      </div>
+
+      <div class="page-video" style="overflow:hidden;">
+        <video class="jm-player" data-bunny-id="18675f28-4732-4b19-be4d-7abf7e84c2e6" data-video-id="18675f28-4732-4b19-be4d-7abf7e84c2e6" data-autoplay="true" muted playsinline crossorigin="anonymous"></video>
+      </div>
+
+      <p class="page-sub">The training showed you where your message breaks down. <em><span class="gold">A free business assessment</span></em> is where we find the one thing actually holding your client flow back.</p>
+
+      <a class="page-cta" href="#book">Book Your Free 20-Min Business Assessment</a>
+      <p class="page-cta-note">Free &middot; 20 minutes &middot; 1-on-1 with Jason</p>
+
+      <hr class="book-divider">
+
+      <!-- ============================================
+          BOOK (the next step, embedded on this page)
+          ============================================ -->
+      <div class="book" id="book">
+        <img src="assets/images/jm-headshot.webp" alt="Jason Moss" class="headshot" width="134" height="134" loading="lazy">
+        <p class="book-label">Your Next Step</p>
+        <h2 class="book-heading">Let&rsquo;s find the one thing <em><span class="gold">actually</span></em> holding your client flow back.</h2>
+
+        <div class="page-copy">
+          <p>If the training landed, you can probably see it now: your message is over-weighted on the copywriter, or on the artist. The harder question is what to do about it, and whether your message is even the piece that&rsquo;s in the way.</p>
+          <p>Over the past few years, I&rsquo;ve supported more than a thousand entrepreneurs, helping them get more clients in a way that actually feels like <em>them</em>.</p>
+          <p>If that&rsquo;s what you want, your next step is a <strong>free 20-minute business assessment call</strong>, one-on-one with me over Zoom. On that call, we&rsquo;ll:</p>
+          <ul class="call-list">
+            <li>Look at your marketing, your sales, your niche and your offers</li>
+            <li>Figure out what&rsquo;s actually in the way of you getting more clients</li>
+            <li>Get clear on the one thing to shift or focus on next</li>
+          </ul>
+          <p>If it feels like I can help on a deeper level, I&rsquo;ll share what that could look like. Either way, you&rsquo;ll leave knowing exactly what to focus on.</p>
+          <p>These calls are completely free, and I keep a limited number on my calendar. First come, first served.</p>
+        </div>
+
+        <div class="quotes">
+          <blockquote class="quote-card">
+            <p>From $2k to $260k in sales, while cutting my hours in half.</p>
+            <div class="quote-byline">
+              <img src="assets/images/meaghan.jpg" alt="Meaghan Long" width="42" height="42" loading="lazy" decoding="async">
+              <cite>Meaghan Long</cite>
+            </div>
+          </blockquote>
+          <blockquote class="quote-card">
+            <p>Never experienced financial success like this in my life.</p>
+            <div class="quote-byline">
+              <img src="assets/images/zach.jpg" alt="Zach Bloom" width="42" height="42" loading="lazy" decoding="async">
+              <cite>Zach Bloom</cite>
+            </div>
+          </blockquote>
+          <blockquote class="quote-card">
+            <p>I created a multi-seven-figure business that wasn&rsquo;t in alignment&hellip; Jason is helping me build something that actually feels good.</p>
+            <div class="quote-byline">
+              <img src="assets/images/emily.jpg" alt="Emily Hill" width="42" height="42" loading="lazy" decoding="async">
+              <cite>Emily Hill</cite>
+            </div>
+          </blockquote>
+        </div>
+        <p class="results-note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
+
+        <p class="book-label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
+        <h2 class="qualify-heading">Start with two quick questions.</h2>
+
+        <div class="qualify-wrap">
+          <div data-qualify-source="magnetic-training"></div>
+        </div>
+      </div>
+
+      <div class="page-footer">
+        <p>&copy; Jason Moss LLC. All rights reserved</p>
+        <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+        <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+        <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+        <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bunny video tracking: this funnel fires the watch webhook at 50% (site default is 75%), like the resonance replay -->
+  <script>window.JM_TRACK_THRESHOLD = 0.5;</script>
+  <script src="/js/bunny-tracking.js" defer></script>
+  <script src="/js/bunny-embeds.js" defer></script>
+
+  <!-- Call qualifier: two questions, then Calendly (self-resizing iframe). Source lands on Kit (qualify_source) + Calendly utm_source. -->
+  <script src="https://jasonmoss.com/qualify/embed.js" async></script>
+</body>
+</html>

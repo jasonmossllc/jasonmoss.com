@@ -25,6 +25,7 @@
 import { writeFileSync, readFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 import { dirname, join } from 'node:path';
+import { homedir } from 'node:os';
 
 const LIB = process.env.BUNNY_WEBSITE_LIBRARY_ID;
 const KEY = process.env.BUNNY_WEBSITE_STREAM_API_KEY;
@@ -92,8 +93,18 @@ async function main() {
 
   // Map Bunny guid -> original Wistia hashed_id (the tracking video_id), if the
   // migration manifest is present. New videos with no mapping default to guid.
-  const mapPath = join(root, '..', 'tmp', 'wistia-bunny-migration', 'manifests', 'website_map.json');
-  if (existsSync(mapPath)) {
+  // The manifest lives at ~/tmp/wistia-bunny-migration regardless of where this
+  // checkout sits (~/jasonmoss.com vs ~/tmp/jasonmoss.com), so try both.
+  const mapCandidates = [
+    join(root, '..', 'tmp', 'wistia-bunny-migration', 'manifests', 'website_map.json'),
+    join(homedir(), 'tmp', 'wistia-bunny-migration', 'manifests', 'website_map.json'),
+  ];
+  const mapPath = mapCandidates.find((p) => existsSync(p));
+  if (!mapPath) {
+    console.warn('WARNING: website_map.json not found; tracking video ids would fall back to guids. Aborting.');
+    process.exit(3);
+  }
+  {
     try {
       const wmap = JSON.parse(readFileSync(mapPath, 'utf8'));
       for (const [vid, o] of Object.entries(wmap)) {

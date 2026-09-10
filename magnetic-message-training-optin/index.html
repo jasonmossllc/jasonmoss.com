@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Magnetic Message Training</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <!-- LCP candidates: the hero texture and the loop poster -->
+  <link rel="preload" as="image" href="assets/images/loop-poster.jpg">
+  <link rel="preload" as="image" href="assets/images/hero-bg.webp">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic|Raleway:400,500,600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: rgb(31, 45, 38);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       SECTION 1: HERO (kicker + headline + video loop)
+       ===================================== */
+    .hero {
+      position: relative;
+      background: url('assets/images/hero-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 26, 22, 0.50) 0%,
+        rgba(18, 26, 22, 0.68) 38%,
+        rgba(18, 26, 22, 0.62) 78%,
+        rgba(18, 26, 22, 0.45) 100%
+      );
+      z-index: 1;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 3.25rem 1.25rem 3.5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-kicker {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.8125rem;
+      line-height: 1.225rem;
+      color: #9A9791;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: 0 0 1.75rem;
+    }
+    .hero-kicker .nowrap { white-space: nowrap; }
+    .hero-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.75rem;
+      line-height: 2.3rem;
+      color: #F8F6F2;
+      margin: 0 0 1rem;
+      max-width: 23.75rem;
+      text-wrap: balance;
+    }
+    .hero-heading em { font-style: italic; }
+    .hero-heading .gold { color: #C2A86C; }
+    .hero-subheading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-style: italic;
+      font-size: 1.1875rem;
+      line-height: 1.75rem;
+      color: #E9E2D3;
+      margin: 0 0 2rem;
+      max-width: 21.125rem;
+    }
+
+    /* -- The looping preview card (whole card opens the opt-in) -- */
+    .loop-card {
+      position: relative;
+      display: block;
+      width: 100%;
+      max-width: 22.5rem;
+      aspect-ratio: 16 / 9;
+      padding: 0;
+      margin: 0;
+      border: 1px solid rgba(194, 168, 108, 0.45);
+      border-radius: 0.25rem;
+      background: #000;
+      overflow: hidden;
+      cursor: pointer;
+      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.35), 0 1.25rem 2.75rem rgba(0, 0, 0, 0.35);
+      -webkit-tap-highlight-color: transparent;
+      transition: transform 0.3s ease-out, box-shadow 0.3s ease-out;
+    }
+    .loop-card:hover, .loop-card:focus-visible {
+      transform: translateY(-2px);
+      box-shadow: 0 0 40px 0 rgba(194, 168, 108, 0.5), 0 1.5rem 3rem rgba(0, 0, 0, 0.4);
+    }
+    .loop-card:focus-visible { outline: 2px solid #C2A86C; outline-offset: 3px; }
+    .loop-card video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .loop-card::after {
+      /* soft vignette so the play button always reads */
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.22) 0%, rgba(0, 0, 0, 0) 60%);
+      pointer-events: none;
+    }
+    .loop-play {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 4.25rem;
+      height: 4.25rem;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: rgba(194, 168, 108, 0.96);
+      box-shadow: 0 0.5rem 1.75rem rgba(0, 0, 0, 0.45), 0 0 0 0 rgba(194, 168, 108, 0.55);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+      animation: play-pulse 2.6s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+      transition: transform 0.25s ease-out, background 0.25s ease-out;
+    }
+    .loop-card:hover .loop-play { transform: translate(-50%, -50%) scale(1.06); background: #E0C68A; }
+    .loop-play svg { width: 1.5rem; height: 1.5rem; margin-left: 0.25rem; fill: #1D1F1E; }
+    @keyframes play-pulse {
+      0%, 100% { box-shadow: 0 0.5rem 1.75rem rgba(0, 0, 0, 0.45), 0 0 0 0 rgba(194, 168, 108, 0.55); }
+      50%      { box-shadow: 0 0.5rem 1.75rem rgba(0, 0, 0, 0.45), 0 0 0 0.9rem rgba(194, 168, 108, 0); }
+    }
+    .loop-pill {
+      position: absolute;
+      top: 0.75rem;
+      left: 0.75rem;
+      z-index: 2;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4em;
+      padding: 0.4em 0.7em;
+      border-radius: 0.25rem;
+      background: rgba(20, 20, 22, 0.72);
+      color: #F8F6F2;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.6875rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .loop-pill::before {
+      content: '';
+      width: 0.45em; height: 0.45em; border-radius: 50%;
+      background: #C2A86C;
+    }
+    .hero-caption {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.4rem;
+      color: #D5D4D3;
+      margin: 1.5rem 0 0;
+    }
+    .hero-caption strong { font-weight: 600; color: #F8F6F2; }
+
+    @media (min-width: 768px) {
+      .hero {
+        background: url('assets/images/hero-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+      }
+      .hero-inner {
+        max-width: 60rem;
+        padding: 4.5rem 1.8125rem 4.75rem;
+      }
+      .hero-kicker {
+        font-size: 0.9375rem;
+        line-height: 1.5rem;
+        margin-bottom: 2.25rem;
+      }
+      .hero-heading {
+        font-size: 2.625rem;
+        line-height: 3.25rem;
+        max-width: 46rem;
+        margin-bottom: 1.25rem;
+      }
+      .hero-subheading {
+        font-size: 1.5rem;
+        line-height: 2.1rem;
+        max-width: 42.875rem;
+        margin-bottom: 2.75rem;
+      }
+      .loop-card { max-width: 42rem; border-radius: 0.375rem; }
+      .loop-play { width: 5.5rem; height: 5.5rem; }
+      .loop-play svg { width: 2rem; height: 2rem; margin-left: 0.3rem; }
+      .loop-pill { top: 1rem; left: 1rem; font-size: 0.75rem; }
+      .hero-caption { font-size: 1.0625rem; line-height: 1.55rem; margin-top: 1.75rem; }
+    }
+
+    /* =====================================
+       SECTION 2: WHAT'S INSIDE (BENEFITS + CTA + FOOTER)
+       ===================================== */
+    .optin {
+      background: rgb(248, 246, 242);
+      color: #1D1F1E;
+      display: flex;
+    }
+    .optin-inner {
+      max-width: 25rem;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+    .optin-kicker {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.6rem;
+      color: #907740;
+      margin: 0 0 2.25rem;
+      letter-spacing: 0.04em;
+    }
+
+    /* Benefits list: editorial numbered treatment (mirrors the resonance opt-in) */
+    .benefits {
+      width: 100%;
+      max-width: 22.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      text-align: left;
+      border-top: 1px solid #E0D8C4;
+    }
+    .benefit:first-child { border-top: 0; padding-top: 0.5rem; }
+    .benefit:last-child { padding-bottom: 0.5rem; }
+    .benefit-number {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.875rem;
+      line-height: 1;
+      color: #C2A86C;
+      flex-shrink: 0;
+      min-width: 2.25rem;
+      letter-spacing: -0.01em;
+      padding-top: 0.125rem;
+    }
+    .benefit-text { display: flex; flex-direction: column; gap: 0.375rem; flex: 1; }
+    .benefit-headline {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 1.55rem;
+      color: #1D1F1E;
+      margin: 0;
+    }
+    .benefit-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.55rem;
+      color: #5A5F5C;
+      margin: 0;
+    }
+    .benefit-divider {
+      width: 22.5rem;
+      max-width: 100%;
+      border: 0;
+      border-top: 1px solid #E9E2D3;
+      margin: 2.25rem auto 0;
+    }
+
+    /* CTA block */
+    .optin-cta-wrap {
+      width: 100%;
+      max-width: 22.5rem;
+      margin-top: 2.25rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .optin-btn {
+      width: 100%;
+      background: #2C3E2D;
+      border: none;
+      border-radius: 0.25rem;
+      color: #F7F4ED;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.875rem, 4vw, 1.0625rem);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      padding: 1.375rem 0.5rem;
+      cursor: pointer;
+      box-shadow: 0 0.75rem 1.75rem rgba(29, 31, 30, 0.14);
+      transition: background-color 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .optin-btn:hover { background: #1E2B24; transform: translateY(-1px); }
+    .optin-subtext {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.3125rem;
+      color: #5A5F5C;
+      margin: 1.125rem 0 0;
+      max-width: 20rem;
+    }
+    .optin-subtext strong { font-weight: 600; color: #1D1F1E; }
+
+    /* Footer */
+    .optin-footer {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.625rem;
+      line-height: 1rem;
+      color: rgba(126, 131, 129, 0.48);
+      max-width: 23.75rem;
+      margin-top: auto;
+      padding-top: 3rem;
+    }
+    .optin-footer p { margin: 0; white-space: nowrap; }
+    .optin-footer a { color: rgba(126, 131, 129, 0.54); text-decoration: none; }
+    .optin-footer a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .optin-inner { max-width: 50rem; padding: 4rem 1.8125rem 2.75rem; }
+      .optin-kicker { font-size: 1.125rem; line-height: 1.8rem; margin-bottom: 2.5rem; }
+      .benefits { max-width: 38rem; }
+      .benefit { gap: 1.75rem; padding: 1.875rem 0; }
+      .benefit:first-child { padding-top: 0.75rem; }
+      .benefit:last-child { padding-bottom: 0.75rem; }
+      .benefit-number { font-size: 2.625rem; min-width: 3rem; padding-top: 0.25rem; }
+      .benefit-headline { font-size: 1.3125rem; line-height: 1.75rem; }
+      .benefit-body { font-size: 1.125rem; line-height: 1.7rem; }
+      .benefit-divider { width: 40.9375rem; margin-top: 2.75rem; }
+      .optin-cta-wrap { max-width: 26rem; margin-top: 2.75rem; }
+      .optin-btn { font-size: 1.125rem; padding: 1.25rem 3rem; }
+      .optin-subtext { font-size: 1rem; line-height: 1.4rem; max-width: 35.625rem; }
+      .optin-footer { font-size: 0.6875rem; line-height: 1.1rem; max-width: 40.1875rem; padding-top: 4rem; }
+    }
+
+    /* =====================================
+       TWO-STEP OPT-IN MODAL
+       ===================================== */
+    .optin-modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      background: rgba(18, 26, 22, 0.78);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      overflow-y: auto;
+      padding: 1.125rem;
+    }
+    .optin-modal.is-open { display: flex; }
+    .optin-modal-content {
+      position: relative;
+      width: 100%;
+      max-width: 27rem;
+      margin: auto;
+      background: rgba(255, 255, 255, 0.97);
+      border: 1px solid rgba(221, 219, 211, 0.7);
+      border-radius: 0.375rem;
+      padding: 2rem 1.5rem 1.75rem;
+      box-shadow: 0 1.5rem 4rem rgba(0, 0, 0, 0.45), 0 0.25rem 0.75rem rgba(0, 0, 0, 0.2);
+      text-align: center;
+      color: #1D1F1E;
+    }
+    .optin-modal-close {
+      position: absolute;
+      top: 0.75rem; right: 0.75rem;
+      width: 2rem; height: 2rem;
+      border: 0;
+      background: transparent;
+      color: rgba(29, 31, 30, 0.55);
+      font-size: 1.5rem;
+      line-height: 1;
+      cursor: pointer;
+      padding: 0;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .optin-modal-close:hover { background: rgba(91, 75, 63, 0.08); color: #1D1F1E; }
+    .optin-modal-kicker {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.6875rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #907740;
+      margin: 0 0 0.75rem;
+    }
+    .optin-modal-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: clamp(1.375rem, 5.8vw, 1.6875rem);
+      line-height: 1.25;
+      color: #1D1F1E;
+      max-width: 21rem;
+      margin: 0 auto 0.625rem;
+    }
+    .optin-modal-lead {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.9375rem;
+      line-height: 1.5;
+      color: #5A5F5C;
+      max-width: 22rem;
+      margin: 0 auto 1rem;
+    }
+    .optin-form { display: flex; flex-direction: column; gap: 0.5rem; text-align: left; }
+    .optin-form .form-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #C4B99A;
+      border-radius: 0;
+      background: transparent;
+      padding: 1rem 0 0.875rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: #2E3A2E;
+      outline: none;
+      box-shadow: none;
+      transition: border-color 0.3s ease;
+    }
+    .optin-form .form-input::placeholder {
+      color: #8A917E;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1rem;
+      opacity: 1;
+    }
+    .optin-form .form-input:focus { border-bottom-color: #B8962E; }
+    .optin-form .form-btn {
+      margin-top: 1.25rem;
+      width: 100%;
+      background: #2C3E2D;
+      border: none;
+      border-radius: 0.25rem;
+      color: #F7F4ED;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.8125rem, 4vw, 1.0625rem);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      padding: 1.375rem 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .optin-form .form-btn:hover { background: #1E2B24; transform: translateY(-1px); }
+    .optin-modal-subtext {
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.8125rem;
+      line-height: 1.45;
+      color: #7E8381;
+      margin: 0.875rem 0 0;
+    }
+    @media (min-width: 768px) {
+      .optin-modal-content { max-width: 30rem; padding: 2.5rem 2.75rem 2.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ============================================
+      SECTION 1: HERO
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">Free Training for Coaches, Consultants <span class="nowrap">&amp;&nbsp;Service Providers</span></p>
+
+      <h1 class="hero-heading">Your message might be the <span class="gold"><em>#1&nbsp;thing</em></span> stopping you from getting more clients.</h1>
+
+      <h2 class="hero-subheading">Let&rsquo;s fix yours in under 10 minutes.</h2>
+
+      <button type="button" class="loop-card js-open-optin" aria-label="Watch the free training">
+        <video autoplay muted loop playsinline preload="metadata" poster="assets/images/loop-poster.jpg" aria-hidden="true" tabindex="-1">
+          <source src="assets/images/loop.mp4" type="video/mp4">
+        </video>
+        <span class="loop-pill">Free Training &middot; 9 Min</span>
+        <span class="loop-play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" focusable="false"><path d="M7 4.5v15l12-7.5z"/></svg>
+        </span>
+      </button>
+
+      <p class="hero-caption"><strong>Tap to watch.</strong> Free, instant access.</p>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: WHAT'S INSIDE
+      ============================================ -->
+  <section class="optin" id="optin">
+    <div class="optin-inner">
+      <p class="optin-kicker">INSIDE THIS FREE TRAINING</p>
+
+      <div class="benefits">
+        <div class="benefit">
+          <span class="benefit-number">01</span>
+          <div class="benefit-text">
+            <p class="benefit-headline">Why your current message isn&rsquo;t converting</p>
+            <p class="benefit-body">the &ldquo;inside-out problem&rdquo; that makes great work invisible to the exact people who need it</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-number">02</span>
+          <div class="benefit-text">
+            <p class="benefit-headline">The two voices competing inside your marketing</p>
+            <p class="benefit-body">the copywriter and the artist, and how to tell which one you&rsquo;re over-weighted on</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-number">03</span>
+          <div class="benefit-text">
+            <p class="benefit-headline">What your message should actually say</p>
+            <p class="benefit-body">a simple framework that connects the outcome your clients want to the truth only you see</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="benefit-divider">
+
+      <div class="optin-cta-wrap">
+        <button type="button" class="optin-btn js-open-optin">Get Instant Access</button>
+        <p class="optin-subtext">Free. Instant access. <br class="mobile-only">Unsubscribe anytime.</p>
+      </div>
+
+      <div class="optin-footer">
+        <p>&copy; Jason Moss LLC. All rights reserved</p>
+        <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+        <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+        <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+        <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================
+      TWO-STEP OPT-IN MODAL
+      ============================================ -->
+  <div class="optin-modal" id="optinModal" role="dialog" aria-modal="true" aria-labelledby="optinModalHeading">
+    <div class="optin-modal-content">
+      <button type="button" class="optin-modal-close" aria-label="Close" id="optinModalClose">&times;</button>
+      <p class="optin-modal-kicker">Free 9-Minute Training</p>
+      <h3 class="optin-modal-heading" id="optinModalHeading">Watch The Magnetic Message Training</h3>
+      <p class="optin-modal-lead">Enter your name and email below and I&rsquo;ll take you straight to the training.</p>
+      <form class="optin-form email-form" novalidate>
+        <input type="text" name="First name" class="form-input" placeholder="First name" required aria-required="true" autocomplete="given-name">
+        <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true" autocomplete="email">
+        <!-- Honeypot: hidden from humans; bots fill it and get rejected server-side -->
+        <input type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+        <!-- Cloudflare Turnstile (interaction-only: invisible unless a challenge is required) -->
+        <div id="cf-turnstile-box" style="margin:0 auto 12px;display:flex;justify-content:center;max-width:100%;"></div>
+        <button type="submit" class="form-btn">Watch the Training Now</button>
+      </form>
+      <p class="optin-modal-subtext">Instant access. No spam. Unsubscribe anytime.</p>
+    </div>
+  </div>
+
+  <!-- Form JS: Turnstile + ZeroBounce validation + submit to Kit + email passthrough -->
+  <script src="/js/optin-shared.js"></script>
+  <script>
+  (function() {
+    'use strict';
+
+    var modal = document.getElementById('optinModal');
+    var modalClose = document.getElementById('optinModalClose');
+    var form = document.querySelector('.email-form');
+    if (!modal || !form) return;
+
+    // Read ad/source params from the URL on page load (only forwarded if present)
+    var urlParams = new URLSearchParams(window.location.search);
+    var latestAd = (urlParams.get('ad') || '').trim();
+    var latestSource = (urlParams.get('source') || '').trim();
+
+    function openModal() {
+      modal.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      var first = form.querySelector('input[type="text"]');
+      if (first) setTimeout(function () { first.focus(); }, 50);
+    }
+    function closeModal() {
+      modal.classList.remove('is-open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.js-open-optin').forEach(function (el) {
+      el.addEventListener('click', function (e) { e.preventDefault(); openModal(); });
+    });
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', function (e) { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) closeModal();
+    });
+    // Deep link straight into the form (e.g. from an email): ?modal or #optin-form
+    if (urlParams.has('modal') || window.location.hash === '#optin-form') openModal();
+
+    // Respect reduced-motion: show the poster frame instead of the loop.
+    try {
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        var v = document.querySelector('.loop-card video');
+        if (v) { v.pause(); v.removeAttribute('autoplay'); }
+      }
+    } catch (e) {}
+
+    JMOptin.init({
+      kitTagId: 23281601, // Kit: Magnetic Message Training (Cold Traffic)
+      extraPayload: function () {
+        var extra = {};
+        if (latestAd) extra.latest_ad = latestAd;
+        if (latestSource) extra.latest_source = latestSource;
+        return extra;
+      },
+      redirect: function (ctx) {
+        return '/optin-thank-you?redirect=magnetic-message-training-replay&email=' + encodeURIComponent(ctx.email);
+      }
+    });
+  })();
+  </script>
+
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstile&render=explicit" async defer></script>
+</body>
+</html>

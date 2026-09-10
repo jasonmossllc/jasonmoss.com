@@ -484,6 +484,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "18675f28-4732-4b19-be4d-7abf7e84c2e6": {
+      "videoId": "18675f28-4732-4b19-be4d-7abf7e84c2e6",
+      "title": "The Magnetic Message Training Cut",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "f79f0527-5dd3-4950-9c44-73829f09b7ed": {
       "videoId": "hlntpnigew",
       "title": "Zach Bloom Testimonial",
