@@ -547,8 +547,21 @@
       if (e) { e.preventDefault(); e.stopPropagation(); }
       try { plyr.muted = false; } catch (x) {}
       try { plyr.volume = 1; } catch (x) {}
-      try { plyr.currentTime = 0; } catch (x) {} // restart from the beginning with sound
-      try { var r = plyr.play(); if (r && r.catch) r.catch(function () {}); } catch (x) {}
+      // Unmuted play() must run inside the tap's user gesture. Do that FIRST,
+      // then restart from the beginning once playback has resumed: on iOS a
+      // seek issued before play() can leave the element paused (the pending
+      // seek interrupts the play request), which made the viewer tap twice.
+      var restarted = false;
+      function restart() {
+        if (restarted) return;
+        restarted = true;
+        try { plyr.currentTime = 0; } catch (x) {} // restart from the beginning with sound
+      }
+      try {
+        var r = plyr.play();
+        if (r && r.then) { r.then(restart, restart); } else { restart(); }
+      } catch (x) { restart(); }
+      window.setTimeout(restart, 400); // belt and braces if the promise never settles
       try { plyr.toggleCaptions(false); } catch (x) {}
       retire();
     }
