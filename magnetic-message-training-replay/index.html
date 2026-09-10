@@ -282,7 +282,6 @@
       margin-top: 2.25rem;
       text-decoration: none;
       padding: 0.5rem 1rem;
-      animation: chevron-breathe 2.9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
       transition: opacity 0.25s ease-out;
     }
     .scroll-cue:hover { opacity: 0.85; }
@@ -294,12 +293,17 @@
       text-transform: uppercase;
       color: #907740;
     }
-    .scroll-cue-chevron { width: 2.5rem; height: auto; display: block; }
+    .scroll-cue-chevron {
+      width: 2.5rem;
+      height: auto;
+      display: block;
+      animation: chevron-breathe 2.9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
     @keyframes chevron-breathe {
       0%, 100% { transform: translateY(0); opacity: 1; }
       50% { transform: translateY(0.5rem); opacity: 0.74; }
     }
-    @media (prefers-reduced-motion: reduce) { .scroll-cue { animation: none; } }
+    @media (prefers-reduced-motion: reduce) { .scroll-cue-chevron { animation: none; } }
 
     /* -- Qualify panel: dark ground so the form is the destination -- */
     .qualify-section {
