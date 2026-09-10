@@ -543,8 +543,12 @@
       btn.classList.add('is-hiding');
       window.setTimeout(function () { if (btn.parentNode) btn.parentNode.removeChild(btn); }, 300);
     }
+    var fired = false;
     function unmute(e) {
-      if (e) { e.preventDefault(); e.stopPropagation(); }
+      if (fired) return;
+      fired = true;
+      if (e && e.cancelable) { try { e.preventDefault(); } catch (x) {} }
+      if (e) { try { e.stopPropagation(); } catch (x) {} }
       try { plyr.muted = false; } catch (x) {}
       try { plyr.volume = 1; } catch (x) {}
       // Unmuted play() must run inside the tap's user gesture. Do that FIRST,
@@ -565,7 +569,32 @@
       try { plyr.toggleCaptions(false); } catch (x) {}
       retire();
     }
+    // Pointer/mouse path.
     btn.addEventListener('click', unmute);
+    // Touch path: iOS Safari swallows the click after a tap whose touch made
+    // the page change (Plyr reveals the control bar on touchstart), so the
+    // first tap only ever showed the playbar and a second tap was needed.
+    // Act on the tap itself. touchend is a user gesture for media playback,
+    // and preventDefault stops the synthesized click from double-firing.
+    var touchStart = null;
+    btn.addEventListener('touchstart', function (e) {
+      e.stopPropagation(); // don't let Plyr toggle controls on this touch
+      var t = e.changedTouches && e.changedTouches[0];
+      touchStart = t ? { x: t.clientX, y: t.clientY } : null;
+    }, { passive: true });
+    btn.addEventListener('touchmove', function (e) {
+      var t = e.changedTouches && e.changedTouches[0];
+      if (touchStart && t && (Math.abs(t.clientX - touchStart.x) > 12 || Math.abs(t.clientY - touchStart.y) > 12)) {
+        touchStart = null; // it was a scroll/drag, not a tap
+      }
+    }, { passive: true });
+    btn.addEventListener('touchend', function (e) {
+      if (!touchStart) return; // moved: let the page scroll, don't unmute
+      touchStart = null;
+      e.preventDefault();
+      e.stopPropagation();
+      unmute(e);
+    }, { passive: false });
     container.appendChild(btn);
 
     // If sound comes on by some means OTHER than the overlay (e.g. the keyboard
