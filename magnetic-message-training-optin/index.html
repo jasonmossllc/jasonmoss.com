@@ -665,6 +665,13 @@
       document.body.style.overflow = 'hidden';
       var first = form.querySelector('input[type="text"]');
       if (first) setTimeout(function () { first.focus(); }, 50);
+      // Warm both serverless functions now so the eventual submit doesn't pay
+      // their cold-start on the click.
+      try {
+        ['verify-email', 'submit-contact'].forEach(function (fn) {
+          fetch('/.netlify/functions/' + fn, { method: 'OPTIONS', keepalive: true }).catch(function () {});
+        });
+      } catch (e) {}
       // The Turnstile widget was rendered while the modal was display:none, so
       // it may not have minted a token yet. Kick it now so the token is ready
       // by the time the visitor finishes typing, instead of on the first click.
@@ -700,6 +707,7 @@
 
     JMOptin.init({
       kitTagId: 23281601, // Kit: Magnetic Message Training (Cold Traffic)
+      fastRedirectMs: 1500, // don't hold the visitor for the full Kit sync; see js/optin-shared.js
       extraPayload: function () {
         var extra = {};
         if (latestAd) extra.latest_ad = latestAd;

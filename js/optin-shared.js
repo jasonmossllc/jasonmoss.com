@@ -14,6 +14,8 @@
  *     roezanTagId: 1626,                                // also sync to Roezan (needs phone: true)
  *     validate: function (form) { return '' or 'msg' }, // extra page-specific validation
  *     extraPayload: function (form) { return {...}; },  // extra Kit payload fields (latest_ad etc.)
+ *     fastRedirectMs: 1500,                              // optional: redirect this soon even if the Kit
+ *                                                       // submit hasn't answered yet (see below)
  *   });
  *
  * The Cloudflare api.js tag must come AFTER this file:
@@ -246,19 +248,39 @@
           // never block a lead on our own infrastructure hiccups.
           var scRes = null;
           var scData = null;
+          // fastRedirectMs: pages that don't need the Kit response (no Roezan
+          // pass, no attribution readback) can stop waiting after this many ms.
+          // By then the request has long been sent, so the function completes
+          // server-side regardless; only the 4xx retry prompt is forfeited when
+          // the server is slower than this, and rejections normally answer in
+          // well under a second because they short-circuit before any Kit call.
+          var fastMs = (typeof config.fastRedirectMs === 'number' && config.fastRedirectMs > 0) ? config.fastRedirectMs : 0;
+          var fastRedirect = false;
           try {
-            scRes = await Promise.race([
-              fetch('/.netlify/functions/submit-contact', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(payload),
-                keepalive: true
-              }),
+            var submitFetch = fetch('/.netlify/functions/submit-contact', {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload),
+              keepalive: true
+            });
+            var racers = [
+              submitFetch,
               new Promise(function (resolve, reject) { setTimeout(function () { reject(new Error('submit-contact timeout')); }, 8000); })
-            ]);
-            try { scData = await scRes.json(); } catch (e) {}
+            ];
+            if (fastMs) racers.push(new Promise(function (resolve) { setTimeout(function () { resolve('fast'); }, fastMs); }));
+            var raced = await Promise.race(racers);
+            if (raced === 'fast') {
+              fastRedirect = true;
+            } else {
+              scRes = raced;
+              try { scData = await scRes.json(); } catch (e) {}
+            }
           } catch (err) {
             console.error('Kit submit error:', err);
+          }
+          if (fastRedirect) {
+            window.location.href = config.redirect({ firstName: firstName, email: email, form: form });
+            return;
           }
 
           if (scRes && scRes.status >= 400 && scRes.status < 500) {
