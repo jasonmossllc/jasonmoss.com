@@ -665,6 +665,14 @@
       document.body.style.overflow = 'hidden';
       var first = form.querySelector('input[type="text"]');
       if (first) setTimeout(function () { first.focus(); }, 50);
+      // The Turnstile widget was rendered while the modal was display:none, so
+      // it may not have minted a token yet. Kick it now so the token is ready
+      // by the time the visitor finishes typing, instead of on the first click.
+      try {
+        if (window.turnstile && window.__tsWidgetId != null && !window.getTurnstileToken()) {
+          window.turnstile.reset(window.__tsWidgetId);
+        }
+      } catch (e) {}
     }
     function closeModal() {
       modal.classList.remove('is-open');
