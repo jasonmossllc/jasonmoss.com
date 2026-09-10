@@ -321,9 +321,41 @@
       margin-bottom: 1.75rem;
     }
 
+    /* -- Press strip (same treatment as the opt-in hero) -- */
+    .press {
+      width: 100%;
+      max-width: 22.5rem;
+      margin-top: 2.75rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(248, 246, 242, 0.12);
+    }
+    .press-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.625rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(248, 246, 242, 0.42);
+      margin: 0 0 1rem;
+    }
+    .press-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.875rem 1.5rem;
+    }
+    .press-row img {
+      height: 1.0625rem;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.5;
+    }
+
     /* -- Footer -- */
     .page-footer {
-      margin-top: 5rem;
+      margin-top: 3.5rem;
       font-family: 'Raleway', sans-serif;
       font-size: 0.6875rem;
       line-height: 0.9625rem;
@@ -342,6 +374,10 @@
       .book-section { padding: 5rem 1.8125rem 4.5rem; }
       .qualify-section { padding: 5rem 1.8125rem 3rem; }
       .qualify-face { width: 5.25rem; height: 5.25rem; margin-bottom: 1.125rem; }
+      .press { max-width: 44rem; margin-top: 3.25rem; }
+      .press-label { font-size: 0.6875rem; margin-bottom: 1.125rem; }
+      .press-row { gap: 1rem 2.5rem; flex-wrap: nowrap; }
+      .press-row img { height: 1.375rem; }
       .page-heading { font-size: 2.1875rem; line-height: 2.625rem; margin-bottom: 1.25rem; }
       .page-desc { font-size: 1.0625rem; line-height: 1.8063rem; max-width: 34rem; margin-bottom: 2rem; }
       .page-video { max-width: 42.9375rem; aspect-ratio: auto; height: 23.8125rem; }
@@ -451,6 +487,17 @@
               <cite>Emily Hill</cite>
             </div>
           </blockquote>
+        </div>
+
+        <div class="press">
+          <p class="press-label">As Seen In</p>
+          <div class="press-row">
+            <img src="/assets/logo-forbes-scotland.png" alt="Forbes" width="233" height="63" loading="lazy" decoding="async">
+            <img src="/assets/logo-entrepreneur.png" alt="Entrepreneur" width="356" height="74" loading="lazy" decoding="async">
+            <img src="/assets/logo-fast-company-sa.png" alt="Fast Company" width="347" height="71" loading="lazy" decoding="async">
+            <img src="/assets/logo-business-insider.png" alt="Business Insider" width="516" height="49" loading="lazy" decoding="async">
+            <img src="/assets/logo-obo.png" alt="Online Business Owner" width="200" height="74" loading="lazy" decoding="async">
+          </div>
         </div>
 
       <div class="page-footer">
