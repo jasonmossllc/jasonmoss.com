@@ -31,7 +31,7 @@
     .page {
       position: relative;
       background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
-      padding: 1.75rem 1.25rem 3rem;
+      padding: 1.75rem 1.25rem 3.25rem;
       color: #F8F6F2;
       overflow: visible;
     }
@@ -112,24 +112,28 @@
     }
     .page-cta:hover { background: #A7915D; }
 
-    /* -- Divider between watch + book -- */
-    .book-divider {
-      width: 100%;
-      max-width: 44.5625rem;
-      border: 0;
-      border-top: 1px solid rgb(77, 88, 77);
-      margin: 4rem auto 3.5rem;
-    }
-
     /* =====================================
-       BOOKING SECTION (the next step, on-page)
+       BOOKING SECTION (light ground, its own destination)
        ===================================== */
+    .book-section {
+      background: rgb(248, 246, 242);
+      color: #1D1F1E;
+      padding: 3.5rem 1.25rem 2rem;
+      scroll-margin-top: 0;
+    }
+    .book-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
     .book {
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: center;
-      scroll-margin-top: 1.25rem;
     }
     .book-lead {
       font-family: 'Libre Baskerville', serif;
@@ -137,7 +141,7 @@
       font-weight: 400;
       font-size: 1.25rem;
       line-height: 1.6rem;
-      color: #C2A86C;
+      color: #907740;
       margin: 0 0 0.75rem;
     }
     .book-label {
@@ -147,7 +151,7 @@
       line-height: 1.125rem;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: #C2A86C;
+      color: #907740;
       margin: 0 0 0.75rem;
     }
     .book-heading {
@@ -155,13 +159,13 @@
       font-weight: 400;
       font-size: 1.625rem;
       line-height: 2.1rem;
-      color: #F8F6F2;
+      color: #1D1F1E;
       margin: 0 0 1.5rem;
       max-width: 22rem;
       text-wrap: balance;
     }
     .book-heading em { font-style: italic; }
-    .book-heading .gold { color: #C2A86C; }
+    .book-heading .gold { color: #A08752; }
 
     /* -- Letter-style copy -- */
     .page-copy {
@@ -174,12 +178,12 @@
       font-weight: 400;
       font-size: 0.9375rem;
       line-height: 1.65rem;
-      color: #E9E2D3;
+      color: #3E413F;
       margin: 0 0 1.25rem;
     }
     .page-copy p:last-child { margin-bottom: 0; }
     .page-copy em { font-style: italic; }
-    .page-copy strong { font-weight: 700; color: #F8F6F2; }
+    .page-copy strong { font-weight: 700; color: #1D1F1E; }
     .call-list {
       list-style: none;
       padding: 0;
@@ -194,7 +198,7 @@
       font-family: 'Libre Baskerville', serif;
       font-size: 0.9375rem;
       line-height: 1.65rem;
-      color: #E9E2D3;
+      color: #3E413F;
     }
     .call-list li::before {
       content: "\2713";
@@ -203,7 +207,7 @@
       top: 0;
       font-family: 'Raleway', sans-serif;
       font-weight: 600;
-      color: #C2A86C;
+      color: #A08752;
     }
 
     /* -- Testimonials -- */
@@ -217,9 +221,9 @@
     }
     .quote-card {
       margin: 0;
-      border: 1px solid rgb(78, 92, 78);
+      border: 1px solid #DDDBD3;
       border-radius: 0.75rem;
-      background: rgb(56, 71, 62);
+      background: #F0EDE4;
       padding: 1.375rem 1.75rem 1.5rem;
       text-align: left;
     }
@@ -238,7 +242,7 @@
       font-style: italic;
       font-size: 0.875rem;
       line-height: 1.5rem;
-      color: #E9E2D3;
+      color: #4F5050;
       margin: 0 0 1rem;
     }
     .quote-byline { display: flex; align-items: center; gap: 0.75rem; }
@@ -256,14 +260,14 @@
       font-weight: 600;
       font-size: 0.75rem;
       letter-spacing: 0.04em;
-      color: #C2A86C;
+      color: #907740;
       white-space: nowrap;
     }
     .results-note {
       font-family: 'Raleway', sans-serif;
       font-size: 0.75rem;
       line-height: 1.15rem;
-      color: rgba(233, 226, 211, 0.55);
+      color: rgba(60, 60, 60, 0.6);
       max-width: 25.5rem;
       margin: -2rem 0 3rem;
     }
@@ -274,17 +278,17 @@
       font-weight: 400;
       font-size: 1.375rem;
       line-height: 1.85rem;
-      color: #F8F6F2;
+      color: #1D1F1E;
       margin: 0 0 1.5rem;
       max-width: 24rem;
     }
     .qualify-wrap {
       width: 100%;
       max-width: 42rem;
-      border: 1px solid rgba(194, 168, 108, 0.45);
+      border: 1px solid rgba(221, 219, 211, 0.9);
       border-radius: 0.75rem;
-      background: #F8F6F2;
-      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.2);
+      background: #FFFFFF;
+      box-shadow: 0 1.25rem 2.75rem rgba(29, 31, 30, 0.10), 0 0.25rem 0.75rem rgba(93, 93, 93, 0.06);
       overflow: hidden;
       margin-bottom: 1.75rem;
     }
@@ -295,23 +299,23 @@
       font-family: 'Raleway', sans-serif;
       font-size: 0.6875rem;
       line-height: 0.9625rem;
-      color: rgb(61, 75, 68);
+      color: rgba(126, 131, 129, 0.6);
       text-align: center;
     }
     .page-footer p { margin: 0; }
-    .page-footer a { color: rgb(61, 75, 68); text-decoration: none; }
+    .page-footer a { color: rgba(126, 131, 129, 0.7); text-decoration: none; }
     .page-footer a:hover { text-decoration: underline; }
 
     @media (min-width: 768px) {
       .page {
         background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
-        padding: 2.375rem 1.8125rem 4rem;
+        padding: 2.375rem 1.8125rem 4.5rem;
       }
+      .book-section { padding: 5rem 1.8125rem 2.75rem; }
       .page-heading { font-size: 2.1875rem; line-height: 2.625rem; margin-bottom: 1.25rem; }
       .page-desc { font-size: 1.0625rem; line-height: 1.8063rem; max-width: 34rem; margin-bottom: 2rem; }
       .page-video { max-width: 42.9375rem; aspect-ratio: auto; height: 23.8125rem; }
       .page-cta { font-size: 1.0625rem; max-width: 26rem; height: 3.875rem; margin-top: 2.5rem; }
-      .book-divider { margin: 4.5rem auto 4rem; }
       .book-lead { font-size: 1.5rem; line-height: 1.9rem; margin-bottom: 1rem; }
       .book-heading { font-size: 2rem; line-height: 2.55rem; max-width: 34rem; margin-bottom: 1.75rem; }
       .page-copy { max-width: 34rem; margin-bottom: 3rem; }
@@ -351,13 +355,15 @@
       </div>
 
       <a class="page-cta" href="#book">Book Your Free Business Assessment With Me</a>
+    </div>
+  </section>
 
-      <hr class="book-divider">
-
-      <!-- ============================================
-          BOOK (the next step, embedded on this page)
-          ============================================ -->
-      <div class="book" id="book">
+  <!-- ============================================
+      BOOK (the next step, on its own light ground)
+      ============================================ -->
+  <section class="book-section" id="book">
+    <div class="book-inner">
+      <div class="book">
         <p class="book-lead">Your next step?</p>
         <h2 class="book-heading">Let&rsquo;s find the one thing <em><span class="gold">actually</span></em> holding you back from more clients.</h2>
 
