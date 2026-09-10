@@ -70,7 +70,8 @@
       text-transform: uppercase;
       margin: 0 0 1.75rem;
     }
-    .hero-kicker .nowrap { white-space: nowrap; }
+    .hero-kicker .nowrap,
+    .hero-subheading .nowrap { white-space: nowrap; }
     .hero-heading {
       font-family: 'Libre Baskerville', serif;
       font-weight: 400;
@@ -179,15 +180,37 @@
       width: 0.45em; height: 0.45em; border-radius: 50%;
       background: #C2A86C;
     }
+    .hero-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      max-width: 22.5rem;
+      height: 3.75rem;
+      margin: 1.5rem 0 0;
+      background: #C2A86C;
+      color: #1D1F1E;
+      border: 0;
+      border-radius: 0.25rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.9375rem, 4vw, 1.0625rem);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      cursor: pointer;
+      box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.35);
+      transition: background-color 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .hero-btn:hover { background: #E0C68A; transform: translateY(-1px); }
+    .hero-btn:focus-visible { outline: 2px solid #F8F6F2; outline-offset: 3px; }
     .hero-caption {
       font-family: 'Raleway', sans-serif;
       font-weight: 400;
-      font-size: 0.9375rem;
-      line-height: 1.4rem;
+      font-size: 0.875rem;
+      line-height: 1.3rem;
       color: #D5D4D3;
-      margin: 1.5rem 0 0;
+      margin: 1rem 0 0;
     }
-    .hero-caption strong { font-weight: 600; color: #F8F6F2; }
 
     @media (min-width: 768px) {
       .hero {
@@ -218,7 +241,8 @@
       .loop-play { width: 5.5rem; height: 5.5rem; }
       .loop-play svg { width: 2rem; height: 2rem; margin-left: 0.3rem; }
       .loop-pill { top: 1rem; left: 1rem; font-size: 0.75rem; }
-      .hero-caption { font-size: 1.0625rem; line-height: 1.55rem; margin-top: 1.75rem; }
+      .hero-btn { max-width: 26rem; height: 3.875rem; font-size: 1.125rem; margin-top: 1.75rem; }
+      .hero-caption { font-size: 0.9375rem; line-height: 1.4rem; margin-top: 1rem; }
     }
 
     /* =====================================
@@ -508,7 +532,7 @@
 
       <h1 class="hero-heading">Is your message <span class="gold"><em>costing you clients?</em></span></h1>
 
-      <h2 class="hero-subheading">Find out and fix yours in under 10&nbsp;minutes.</h2>
+      <h2 class="hero-subheading">Find out and fix yours <span class="nowrap">in under 10&nbsp;minutes.</span></h2>
 
       <button type="button" class="loop-card js-open-optin" aria-label="Watch the free training">
         <video autoplay muted loop playsinline preload="metadata" poster="assets/images/loop-poster.jpg" aria-hidden="true" tabindex="-1">
@@ -520,7 +544,8 @@
         </span>
       </button>
 
-      <p class="hero-caption"><strong>Tap to watch.</strong> Free, instant access.</p>
+      <button type="button" class="hero-btn js-open-optin">Watch the Free Training</button>
+      <p class="hero-caption">Free. Instant access.</p>
     </div>
   </section>
 
@@ -535,22 +560,22 @@
         <div class="benefit">
           <span class="benefit-number">01</span>
           <div class="benefit-text">
-            <p class="benefit-headline">Why your current message isn&rsquo;t converting</p>
-            <p class="benefit-body">the &ldquo;inside-out problem&rdquo; that makes great work invisible to the exact people who need it</p>
+            <p class="benefit-headline">Why people aren&rsquo;t buying&nbsp;- even when they need your help</p>
+            <p class="benefit-body">The #1 messaging mistake that keeps potential clients from seeing the value of your work.</p>
           </div>
         </div>
         <div class="benefit">
           <span class="benefit-number">02</span>
           <div class="benefit-text">
-            <p class="benefit-headline">The two voices competing inside your marketing</p>
-            <p class="benefit-body">the copywriter and the artist, and how to tell which one you&rsquo;re over-weighted on</p>
+            <p class="benefit-headline">How to make your message sell without sounding like everyone else</p>
+            <p class="benefit-body">The two ingredients that help people connect with you&nbsp;- and see why they should hire you.</p>
           </div>
         </div>
         <div class="benefit">
           <span class="benefit-number">03</span>
           <div class="benefit-text">
-            <p class="benefit-headline">What your message should actually say</p>
-            <p class="benefit-body">a simple framework that connects the outcome your clients want to the truth only you see</p>
+            <p class="benefit-headline">What to say so more people want to work with you</p>
+            <p class="benefit-body">A simple framework to turn what makes your work different into a clear reason to buy.</p>
           </div>
         </div>
       </div>
