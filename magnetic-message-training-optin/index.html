@@ -201,10 +201,46 @@
       margin: 1rem 0 0;
     }
 
+    /* -- Trust strip: press logos, knocked to white and dimmed so they read as texture -- */
+    .hero-trust {
+      width: 100%;
+      max-width: 22.5rem;
+      margin-top: 2.5rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(248, 246, 242, 0.12);
+    }
+    .hero-trust-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.625rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: rgba(248, 246, 242, 0.42);
+      margin: 0 0 1rem;
+    }
+    .hero-trust-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 0.875rem 1.5rem;
+    }
+    .hero-trust-row img {
+      height: 1.0625rem;
+      width: auto;
+      object-fit: contain;
+      filter: brightness(0) invert(1);
+      opacity: 0.5;
+    }
+
     @media (min-width: 768px) {
       .hero {
         background: url('assets/images/hero-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
       }
+      .hero-trust { max-width: 44rem; margin-top: 2.75rem; padding-top: 1.5rem; }
+      .hero-trust-label { font-size: 0.6875rem; margin-bottom: 1.125rem; }
+      .hero-trust-row { gap: 1rem 2.5rem; flex-wrap: nowrap; }
+      .hero-trust-row img { height: 1.375rem; }
       .hero-inner {
         max-width: 60rem;
         padding: 3rem 1.8125rem 4rem;
@@ -518,6 +554,17 @@
 
       <button type="button" class="hero-btn js-open-optin">Watch the Free Training</button>
       <p class="hero-caption">Get instant access.</p>
+
+      <div class="hero-trust">
+        <p class="hero-trust-label">As Seen In</p>
+        <div class="hero-trust-row">
+          <img src="/assets/logo-forbes-scotland.png" alt="Forbes" width="233" height="63" loading="lazy" decoding="async">
+          <img src="/assets/logo-entrepreneur.png" alt="Entrepreneur" width="356" height="74" loading="lazy" decoding="async">
+          <img src="/assets/logo-fast-company-sa.png" alt="Fast Company" width="347" height="71" loading="lazy" decoding="async">
+          <img src="/assets/logo-business-insider.png" alt="Business Insider" width="516" height="49" loading="lazy" decoding="async">
+          <img src="/assets/logo-obo.png" alt="Online Business Owner" width="200" height="74" loading="lazy" decoding="async">
+        </div>
+      </div>
     </div>
   </section>
 
