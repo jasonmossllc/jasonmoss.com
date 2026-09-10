@@ -183,20 +183,6 @@
   .how__cta { margin-top: 36px; }
   .mid-cta p { font-size: 13px; color: var(--slate-taupe); margin-top: 14px; }
 
-  /* Wall of Love */
-  .wall-of-love {
-    background:
-      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
-      url('/apply/section-bg-warm.jpg') center / cover no-repeat,
-      var(--warm-stone);
-    padding: 8px 24px 72px;
-  }
-  .wall-of-love__header { text-align: center; margin-bottom: 44px; }
-  .wall-of-love__header h2 { font-size: 30px; color: var(--charcoal-obsidian); }
-  .wall-of-love__embed { max-width: 1200px; margin: 0 auto; }
-  .wall-of-love__embed iframe { opacity: 0; transition: opacity 0.6s ease-out; }
-  .wall-of-love__embed iframe.loaded { opacity: 1; }
-
   /* Closing band */
   .btn-primary {
     display: inline-block; background-color: var(--muted-gold); color: var(--charcoal-obsidian);
@@ -267,8 +253,6 @@
     .testimonials__grid { grid-template-columns: 1fr; gap: 20px; }
     .testimonial-card__body { padding: 22px 24px 26px; }
     .testimonial-card__blurb { font-size: 16px; }
-    .wall-of-love { padding: 0 12px 48px; }
-    .wall-of-love__header h2 { font-size: 25px; }
     .closing { padding: 56px 20px; }
     .closing h2 { font-size: 25px; }
     .btn-primary { width: 100%; max-width: 360px; font-size: 12px; letter-spacing: 0.05em; padding: 16px 24px; }
@@ -411,23 +395,6 @@
 
   </section>
 
-  <!-- Wall of Love -->
-  <section class="wall-of-love" id="wall-of-love">
-    <div class="wall-of-love__embed">
-      <iframe
-        id="testimonialto-jason-moss-testimonials-tag-all-light"
-        src="https://embed-v2.testimonial.to/w/jason-moss-testimonials/?theme=light&card=base&loadMore=on&initialCount=20&tag=all"
-        frameborder="0"
-        scrolling="no"
-        width="100%"
-        style="min-height: 800px;"
-        loading="lazy"
-        onload="this.classList.add('loaded')"
-      ></iframe>
-    </div>
-    <p class="results-note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
-  </section>
-
   <!-- Closing band -->
   <section class="closing">
     <h2>Ready when you are.</h2>
@@ -477,10 +444,6 @@
   <!-- Bunny testimonial players (managed in jasonmoss.com repo) -->
   <script src="/js/bunny-tracking.js" async></script>
   <script src="/js/bunny-embeds.js" defer></script>
-
-  <!-- Wall of Love embed resizer -->
-  <script type="text/javascript" src="https://embed-v2.testimonial.to/js/iframeResizer.min.js"></script>
-  <script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, '#testimonialto-jason-moss-testimonials-tag-all-light');</script>
 
   <!-- Call qualifier — two questions, then booking (self-resizing) -->
   <script src="https://jasonmoss.com/qualify/embed.js" async></script>
