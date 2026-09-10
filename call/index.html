@@ -50,7 +50,7 @@
       linear-gradient(180deg, rgba(248, 246, 242, 0.82), rgba(248, 246, 242, 0.92)),
       url('/apply/section-bg-pale.jpg') center / cover no-repeat,
       var(--pale-sand);
-    padding: 56px 24px 64px;
+    padding: 56px 24px 48px;
   }
   .hero__top { text-align: center; margin-bottom: 36px; }
   .hero__logo { display: inline-block; width: 118px; }
@@ -140,13 +140,7 @@
   .how__sig { font-family: var(--font-headline); font-style: italic; font-size: 17px; margin-top: 10px; }
 
   /* Trust logos strip */
-  .trust-wrap {
-    background:
-      linear-gradient(180deg, rgba(248, 246, 242, 0.92), rgba(248, 246, 242, 0.92)),
-      url('/apply/section-bg-pale.jpg') center / cover no-repeat,
-      var(--pale-sand);
-  }
-  .trust { padding: 52px 24px 52px; text-align: center; }
+  .trust { padding: 56px 24px 8px; text-align: center; }
   .trust__label { font-weight: 600; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--slate-taupe); margin-bottom: 18px; opacity: 0.7; }
   .trust__row { display: flex; align-items: center; justify-content: center; gap: 44px; max-width: 620px; margin: 0 auto; opacity: 0.45; }
   .trust__row img { height: 22px; width: auto; object-fit: contain; filter: grayscale(100%); }
@@ -156,9 +150,9 @@
      ======================================== */
   .testimonials {
     background:
-      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
-      url('/apply/section-bg-warm.jpg') center / cover no-repeat,
-      var(--warm-stone);
+      linear-gradient(180deg, rgba(248, 246, 242, 0.88), rgba(248, 246, 242, 0.94)),
+      url('/apply/section-bg-pale.jpg') center / cover no-repeat,
+      var(--pale-sand);
     padding: 84px 24px 84px;
   }
   .testimonials__header { text-align: center; margin-bottom: 44px; }
@@ -181,7 +175,13 @@
   .mid-cta p { font-size: 13px; color: var(--slate-taupe); margin-top: 14px; }
 
   /* Wall of Love */
-  .wall-of-love { padding: 84px 24px 88px; }
+  .wall-of-love {
+    background:
+      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
+      url('/apply/section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone);
+    padding: 84px 24px 88px;
+  }
   .wall-of-love__header { text-align: center; margin-bottom: 44px; }
   .wall-of-love__header h2 { font-size: 30px; color: var(--charcoal-obsidian); }
   .wall-of-love__embed { max-width: 1200px; margin: 0 auto; }
@@ -225,7 +225,7 @@
      Responsive
      ======================================== */
   @media (max-width: 900px) {
-    .hero { padding: 40px 16px 44px; }
+    .hero { padding: 40px 16px 36px; }
     .hero__top { margin-bottom: 22px; }
     .hero__logo { width: 96px; }
     .hero__grid { gap: 26px; }
@@ -246,7 +246,7 @@
     .how__list h3 { font-size: 17px; }
     .how__list p { font-size: 14px; }
     .how__note { font-size: 15px; }
-    .trust { padding: 40px 20px 36px; }
+    .trust { padding: 40px 20px 4px; }
     .trust__row { gap: 20px; flex-wrap: wrap; }
     .trust__row img { height: 16px; }
 
@@ -323,18 +323,6 @@
     </div>
   </section>
 
-  <div class="trust-wrap">
-    <div class="trust">
-      <p class="trust__label">As Seen In</p>
-      <div class="trust__row">
-        <img src="/apply/logo-forbes-scotland.png" alt="Forbes">
-        <img src="/apply/logo-business-insider.png" alt="Business Insider">
-        <img src="/apply/logo-obo.png" alt="Online Business Owner">
-        <img src="/apply/logo-entrepreneur.png" alt="Entrepreneur">
-        <img src="/apply/logo-fast-company-sa.png" alt="Fast Company">
-      </div>
-    </div>
-  </div>
 
   <!-- Testimonials -->
   <section class="testimonials" id="testimonials">
