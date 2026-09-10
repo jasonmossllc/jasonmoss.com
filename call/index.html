@@ -50,7 +50,7 @@
       linear-gradient(180deg, rgba(248, 246, 242, 0.82), rgba(248, 246, 242, 0.92)),
       url('/apply/section-bg-pale.jpg') center / cover no-repeat,
       var(--pale-sand);
-    padding: 56px 24px 0;
+    padding: 56px 24px 64px;
   }
   .hero__top { text-align: center; margin-bottom: 36px; }
   .hero__logo { display: inline-block; width: 118px; }
@@ -85,24 +85,6 @@
   .hero__lead { font-size: 17px; line-height: 1.7; color: var(--earth-mocha-brown); margin: 0 auto; max-width: 520px; text-wrap: pretty; }
   .hero__lead strong { font-weight: 600; color: var(--charcoal-obsidian); }
 
-  .hero__copy .hero__steps, .hero__copy .hero__note, .hero__copy .hero__sig, .hero__lead-desk { display: none; }
-  .hero__steps { list-style: none; margin: 0 0 26px; padding: 0; max-width: 480px; display: flex; flex-direction: column; gap: 14px; }
-  .hero__steps li {
-    position: relative; padding-left: 30px;
-    font-family: var(--font-headline); font-size: 16px; line-height: 1.55; color: var(--charcoal-obsidian);
-  }
-  .hero__steps li::before {
-    content: "\2713"; position: absolute; left: 0; top: 0;
-    font-family: var(--font-body); font-weight: 700; color: var(--muted-gold);
-  }
-  .hero__steps li span { display: block; font-family: var(--font-body); font-size: 14px; color: var(--earth-mocha-brown); line-height: 1.6; margin-top: 2px; }
-
-  .hero__note {
-    font-family: var(--font-headline); font-style: italic; font-size: 15px; line-height: 1.7;
-    color: var(--charcoal-obsidian); max-width: 480px; padding-top: 20px;
-    border-top: 1px solid rgba(194, 168, 108, 0.4);
-  }
-  .hero__sig { font-family: var(--font-headline); font-style: italic; font-size: 16px; margin-top: 8px; }
 
   /* The card: framed, dark header, widget inside */
   .card {
@@ -129,15 +111,42 @@
   .card__body { background: var(--pale-sand); }
   .card__micro { text-align: center; font-size: 12px; color: var(--slate-taupe); padding: 12px 20px 16px; }
 
+  /* ========================================
+     How it works — its own warm section
+     ======================================== */
+  .how {
+    background:
+      linear-gradient(180deg, rgba(233, 226, 211, 0.82), rgba(233, 226, 211, 0.92)),
+      url('/apply/section-bg-warm.jpg') center / cover no-repeat,
+      var(--warm-stone);
+    padding: 80px 24px 84px;
+  }
+  .how__inner { max-width: 560px; margin: 0 auto; text-align: center; }
+  .how__eyebrow { font-weight: 600; font-size: 12px; letter-spacing: 0.16em; text-transform: uppercase; color: #a8905a; margin-bottom: 14px; }
+  .how__title { font-size: 30px; color: var(--charcoal-obsidian); margin-bottom: 38px; }
+  .how__list { list-style: none; margin: 0 0 34px; padding: 0; display: flex; flex-direction: column; gap: 22px; text-align: left; }
+  .how__list li { display: grid; grid-template-columns: 44px 1fr; gap: 16px; align-items: start; }
+  .how__num {
+    font-family: var(--font-headline); font-size: 13px; letter-spacing: 0.14em; color: #a8905a;
+    padding-top: 6px; border-top: 1px solid rgba(194, 168, 108, 0.55);
+  }
+  .how__list h3 { font-size: 19px; line-height: 1.35; color: var(--charcoal-obsidian); margin-bottom: 4px; }
+  .how__list p { font-size: 15px; line-height: 1.6; color: var(--earth-mocha-brown); }
+  .how__note {
+    font-family: var(--font-headline); font-style: italic; font-size: 16px; line-height: 1.75;
+    color: var(--charcoal-obsidian); max-width: 480px; margin: 0 auto; padding-top: 26px;
+    border-top: 1px solid rgba(194, 168, 108, 0.4);
+  }
+  .how__sig { font-family: var(--font-headline); font-style: italic; font-size: 17px; margin-top: 10px; }
+
   /* Trust logos strip */
-  .trust {
+  .trust-wrap {
     background:
       linear-gradient(180deg, rgba(248, 246, 242, 0.92), rgba(248, 246, 242, 0.92)),
       url('/apply/section-bg-pale.jpg') center / cover no-repeat,
       var(--pale-sand);
-    padding: 44px 24px 44px;
-    text-align: center;
   }
+  .trust { padding: 52px 24px 52px; text-align: center; }
   .trust__label { font-weight: 600; font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--slate-taupe); margin-bottom: 18px; opacity: 0.7; }
   .trust__row { display: flex; align-items: center; justify-content: center; gap: 44px; max-width: 620px; margin: 0 auto; opacity: 0.45; }
   .trust__row img { height: 22px; width: auto; object-fit: contain; filter: grayscale(100%); }
@@ -216,7 +225,7 @@
      Responsive
      ======================================== */
   @media (max-width: 900px) {
-    .hero { padding: 40px 16px 0; }
+    .hero { padding: 40px 16px 44px; }
     .hero__top { margin-bottom: 22px; }
     .hero__logo { width: 96px; }
     .hero__grid { gap: 26px; }
@@ -230,7 +239,14 @@
     .card__title { font-size: 20px; white-space: nowrap; letter-spacing: -0.01em; }
     @media (max-width: 350px) { .card__title { font-size: 17px; } }
 
-    .trust { padding: 40px 20px 30px; }
+    .how { padding: 56px 20px 60px; }
+    .how__title { font-size: 24px; margin-bottom: 28px; }
+    .how__list { gap: 18px; }
+    .how__list li { grid-template-columns: 38px 1fr; gap: 12px; }
+    .how__list h3 { font-size: 17px; }
+    .how__list p { font-size: 14px; }
+    .how__note { font-size: 15px; }
+    .trust { padding: 40px 20px 36px; }
     .trust__row { gap: 20px; flex-wrap: wrap; }
     .trust__row img { height: 16px; }
 
@@ -247,10 +263,6 @@
     .btn-primary { width: 100%; max-width: 360px; font-size: 12px; letter-spacing: 0.05em; padding: 16px 24px; }
     .site-footer { padding: 44px 20px 56px; }
   }
-  /* Reassurance block under the card (all sizes) */
-  .hero__after { display: block; padding: 34px 20px 0; max-width: 520px; margin: 0 auto; }
-  .hero__after .hero__steps { display: flex; margin: 0 auto 22px; text-align: left; }
-  .hero__after .hero__note, .hero__after .hero__sig { display: block; margin-left: auto; margin-right: auto; text-align: center; }
 </style>
 </head>
 <body>
@@ -275,17 +287,43 @@
       </div>
     </div>
 
-    <!-- Mobile only: the reassurance moves under the card -->
-    <div class="hero__after">
-      <ul class="hero__steps">
-        <li>You tell me where you're at.<span>What you're selling, how clients are finding you, and where things feel stuck.</span></li>
-        <li>I ask a few questions.<span>After 1,000+ clients, I can usually see the bottleneck pretty fast.</span></li>
-        <li>I tell you what I'd focus on.<span>The one thing I'd shift first in your business right now to bring more clients in.</span></li>
-      </ul>
-      <p class="hero__note">If I think I can help you on a deeper level, I'll let you know. If not, you walk away with a clear next step and twenty minutes well spent.</p>
-      <p class="hero__sig">&mdash; Jason</p>
-    </div>
 
+  </section>
+
+  <!-- How it works -->
+  <section class="how" id="how">
+    <div class="how__inner">
+      <p class="how__eyebrow">How it works</p>
+      <h2 class="how__title">Twenty minutes, three parts.</h2>
+      <ol class="how__list">
+        <li class="reveal">
+          <span class="how__num">01</span>
+          <div>
+            <h3>You tell me where you're at.</h3>
+            <p>What you're selling, how clients find you, where it feels stuck.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="how__num">02</span>
+          <div>
+            <h3>I ask a few questions.</h3>
+            <p>After 1,000+ clients, I can usually spot the bottleneck fast.</p>
+          </div>
+        </li>
+        <li class="reveal">
+          <span class="how__num">03</span>
+          <div>
+            <h3>I tell you what I'd shift first.</h3>
+            <p>The one move to bring more clients in the door.</p>
+          </div>
+        </li>
+      </ol>
+      <p class="how__note">If I think I can help you on a deeper level, I'll let you know. If not, you walk away with a clear next step and twenty minutes well spent.</p>
+      <p class="how__sig">&mdash; Jason</p>
+    </div>
+  </section>
+
+  <div class="trust-wrap">
     <div class="trust">
       <p class="trust__label">As Seen In</p>
       <div class="trust__row">
@@ -296,7 +334,7 @@
         <img src="/apply/logo-fast-company-sa.png" alt="Fast Company">
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- Testimonials -->
   <section class="testimonials" id="testimonials">
