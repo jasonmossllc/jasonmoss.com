@@ -36,7 +36,3 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /assessment/  https://calendly.com/jasonmoss/business-assessment-call-magnetic-message        301
 
 # Vanity link for the Alignment Call direct booking page
-
-# Short link used inside Meta retargeting ad copy (keeps attribution on the /call page)
-/book         /call/?source=meta_retarget&utm_medium=retargeting&utm_campaign=book_a_call&utm_content=text   302
-/book/        /call/?source=meta_retarget&utm_medium=retargeting&utm_campaign=book_a_call&utm_content=text   302
