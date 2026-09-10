@@ -117,7 +117,7 @@
     .book-section {
       background: rgb(248, 246, 242);
       color: #1D1F1E;
-      padding: 3.5rem 1.25rem 2rem;
+      padding: 3.5rem 1.25rem 3rem;
       scroll-margin-top: 0;
     }
     .book-inner {
@@ -169,7 +169,7 @@
     /* -- Letter-style copy -- */
     .page-copy {
       max-width: 25.5rem;
-      margin: 0 0 2.5rem;
+      margin: 0;
       text-align: left;
     }
     .page-copy p {
@@ -220,9 +220,9 @@
     }
     .quote-card {
       margin: 0;
-      border: 1px solid #DDDBD3;
+      border: 1px solid rgb(78, 92, 78);
       border-radius: 0.75rem;
-      background: #F0EDE4;
+      background: rgb(56, 71, 62);
       padding: 1.375rem 1.75rem 1.5rem;
       text-align: left;
     }
@@ -241,7 +241,7 @@
       font-style: italic;
       font-size: 0.875rem;
       line-height: 1.5rem;
-      color: #4F5050;
+      color: #E9E2D3;
       margin: 0 0 1rem;
     }
     .quote-byline { display: flex; align-items: center; gap: 0.75rem; }
@@ -259,17 +259,35 @@
       font-weight: 600;
       font-size: 0.75rem;
       letter-spacing: 0.04em;
-      color: #907740;
+      color: #C2A86C;
       white-space: nowrap;
     }
-    .results-note {
-      font-family: 'Raleway', sans-serif;
-      font-size: 0.75rem;
-      line-height: 1.15rem;
-      color: rgba(60, 60, 60, 0.6);
-      max-width: 25.5rem;
-      margin: 1rem 0 0;
+
+    /* -- Qualify panel: dark ground so the form is the destination -- */
+    .qualify-section {
+      position: relative;
+      background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 3.5rem 1.25rem 2.5rem;
+      color: #F8F6F2;
     }
+    .qualify-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: rgb(40, 54, 47);
+      opacity: 0.64;
+      pointer-events: none;
+    }
+    .qualify-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .qualify-section .book-label { color: #C2A86C; }
 
     /* -- Qualifier + Calendly (self-resizing iframe) -- */
     .qualify-heading {
@@ -277,17 +295,17 @@
       font-weight: 400;
       font-size: 1.375rem;
       line-height: 1.85rem;
-      color: #1D1F1E;
+      color: #F8F6F2;
       margin: 0 0 1.5rem;
       max-width: 24rem;
     }
     .qualify-wrap {
       width: 100%;
       max-width: 42rem;
-      border: 1px solid rgba(221, 219, 211, 0.9);
+      border: 1px solid rgba(194, 168, 108, 0.45);
       border-radius: 0.75rem;
-      background: #FFFFFF;
-      box-shadow: 0 1.25rem 2.75rem rgba(29, 31, 30, 0.10), 0 0.25rem 0.75rem rgba(93, 93, 93, 0.06);
+      background: #F8F6F2;
+      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.2);
       overflow: hidden;
       margin-bottom: 1.75rem;
     }
@@ -298,11 +316,11 @@
       font-family: 'Raleway', sans-serif;
       font-size: 0.6875rem;
       line-height: 0.9625rem;
-      color: rgba(126, 131, 129, 0.6);
+      color: rgb(96, 112, 103);
       text-align: center;
     }
     .page-footer p { margin: 0; }
-    .page-footer a { color: rgba(126, 131, 129, 0.7); text-decoration: none; }
+    .page-footer a { color: rgb(96, 112, 103); text-decoration: none; }
     .page-footer a:hover { text-decoration: underline; }
 
     @media (min-width: 768px) {
@@ -310,14 +328,15 @@
         background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
         padding: 3.25rem 1.8125rem 4.5rem;
       }
-      .book-section { padding: 5rem 1.8125rem 2.75rem; }
+      .book-section { padding: 5rem 1.8125rem 4.5rem; }
+      .qualify-section { padding: 5rem 1.8125rem 3rem; }
       .page-heading { font-size: 2.1875rem; line-height: 2.625rem; margin-bottom: 1.25rem; }
       .page-desc { font-size: 1.0625rem; line-height: 1.8063rem; max-width: 34rem; margin-bottom: 2rem; }
       .page-video { max-width: 42.9375rem; aspect-ratio: auto; height: 23.8125rem; }
       .page-cta { font-size: 1rem; width: 25.3125rem; margin-top: 2.5rem; }
       .book-lead { font-size: 1.5rem; line-height: 1.9rem; margin-bottom: 1rem; }
       .book-heading { font-size: 2rem; line-height: 2.55rem; max-width: 34rem; margin-bottom: 1.75rem; }
-      .page-copy { max-width: 34rem; margin-bottom: 3rem; }
+      .page-copy { max-width: 40rem; }
       .page-copy p { font-size: 1.0625rem; line-height: 1.85rem; }
       .call-list li { font-size: 1.0625rem; line-height: 1.85rem; }
       .quotes {
@@ -328,10 +347,10 @@
         margin-top: 3rem;
       }
       .quote-card { flex: 1; display: flex; flex-direction: column; padding: 1.25rem 1.75rem 1.375rem; }
+      .qualify-section { background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed; }
       .quote-card::before { font-size: 2.5rem; height: 1.25rem; margin-bottom: 0.5rem; }
       .quote-card p { font-size: 0.875rem; line-height: 1.55rem; margin-bottom: 1rem; }
       .quote-byline { margin-top: auto; }
-      .results-note { margin: 1.125rem 0 0; max-width: 40rem; }
       .qualify-heading { font-size: 1.5rem; line-height: 2.05rem; }
       .page-footer { max-width: 40.1875rem; margin: 5rem auto 0; }
     }
@@ -380,6 +399,17 @@
         </div>
 
 
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+      QUALIFY (two questions, then Calendly) on its own dark panel
+      ============================================ -->
+  <section class="qualify-section">
+    <div class="qualify-inner">
         <p class="book-label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
         <h2 class="qualify-heading">Start with two quick questions.</h2>
 
@@ -409,9 +439,6 @@
             </div>
           </blockquote>
         </div>
-        <p class="results-note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
-
-      </div>
 
       <div class="page-footer">
         <p>&copy; Jason Moss LLC. All rights reserved</p>
