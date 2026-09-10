@@ -54,36 +54,25 @@
       z-index: 2;
       max-width: 25rem;
       margin: 0 auto;
-      padding: 3.25rem 1.25rem 3.5rem;
+      padding: 3.75rem 1.25rem 3.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
       text-align: center;
     }
-    .hero-kicker {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 500;
-      font-size: 0.8125rem;
-      line-height: 1.225rem;
-      color: #9A9791;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin: 0 0 1.75rem;
-    }
-    .hero-kicker .nowrap,
     .hero-subheading .nowrap { white-space: nowrap; }
     .hero-heading {
       font-family: 'Libre Baskerville', serif;
       font-weight: 400;
-      font-size: 1.75rem;
-      line-height: 2.3rem;
+      font-size: clamp(1.5rem, 7vw, 1.75rem);
+      line-height: 1.32;
       color: #F8F6F2;
       margin: 0 0 1rem;
       max-width: 23.75rem;
-      text-wrap: balance;
     }
     .hero-heading em { font-style: italic; }
-    .hero-heading .gold { color: #C2A86C; }
+    /* The question lands on its own line: white setup, gold payoff. */
+    .hero-heading .gold { color: #C2A86C; display: block; }
     .hero-subheading {
       font-family: 'Libre Baskerville', serif;
       font-weight: 400;
@@ -218,16 +207,11 @@
       }
       .hero-inner {
         max-width: 60rem;
-        padding: 4.5rem 1.8125rem 4.75rem;
-      }
-      .hero-kicker {
-        font-size: 0.9375rem;
-        line-height: 1.5rem;
-        margin-bottom: 2.25rem;
+        padding: 5rem 1.8125rem 4.75rem;
       }
       .hero-heading {
-        font-size: 2.625rem;
-        line-height: 3.25rem;
+        font-size: 2.75rem;
+        line-height: 1.25;
         max-width: 46rem;
         margin-bottom: 1.25rem;
       }
@@ -283,42 +267,33 @@
     }
     .benefit {
       display: flex;
-      align-items: flex-start;
-      gap: 1rem;
-      padding: 1.5rem 0;
+      align-items: center;
+      gap: 1.125rem;
+      padding: 1.25rem 0;
       text-align: left;
       border-top: 1px solid #E0D8C4;
     }
-    .benefit:first-child { border-top: 0; padding-top: 0.5rem; }
-    .benefit:last-child { padding-bottom: 0.5rem; }
+    .benefit:first-child { border-top: 0; padding-top: 0.25rem; }
+    .benefit:last-child { padding-bottom: 0.25rem; }
     .benefit-number {
       font-family: 'Libre Baskerville', serif;
       font-style: italic;
       font-weight: 400;
-      font-size: 1.875rem;
+      font-size: 1.75rem;
       line-height: 1;
       color: #C2A86C;
       flex-shrink: 0;
       min-width: 2.25rem;
       letter-spacing: -0.01em;
-      padding-top: 0.125rem;
     }
-    .benefit-text { display: flex; flex-direction: column; gap: 0.375rem; flex: 1; }
     .benefit-headline {
       font-family: 'Raleway', sans-serif;
       font-weight: 600;
-      font-size: 1.125rem;
-      line-height: 1.55rem;
+      font-size: 1.0625rem;
+      line-height: 1.5rem;
       color: #1D1F1E;
       margin: 0;
-    }
-    .benefit-body {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 400;
-      font-size: 1rem;
-      line-height: 1.55rem;
-      color: #5A5F5C;
-      margin: 0;
+      text-wrap: balance;
     }
     .benefit-divider {
       width: 22.5rem;
@@ -384,12 +359,11 @@
       .optin-inner { max-width: 50rem; padding: 4rem 1.8125rem 2.75rem; }
       .optin-kicker { font-size: 1.125rem; line-height: 1.8rem; margin-bottom: 2.5rem; }
       .benefits { max-width: 38rem; }
-      .benefit { gap: 1.75rem; padding: 1.875rem 0; }
-      .benefit:first-child { padding-top: 0.75rem; }
-      .benefit:last-child { padding-bottom: 0.75rem; }
-      .benefit-number { font-size: 2.625rem; min-width: 3rem; padding-top: 0.25rem; }
-      .benefit-headline { font-size: 1.3125rem; line-height: 1.75rem; }
-      .benefit-body { font-size: 1.125rem; line-height: 1.7rem; }
+      .benefit { gap: 1.75rem; padding: 1.5rem 0; }
+      .benefit:first-child { padding-top: 0.5rem; }
+      .benefit:last-child { padding-bottom: 0.5rem; }
+      .benefit-number { font-size: 2.375rem; min-width: 3rem; }
+      .benefit-headline { font-size: 1.25rem; line-height: 1.7rem; }
       .benefit-divider { width: 40.9375rem; margin-top: 2.75rem; }
       .optin-cta-wrap { max-width: 26rem; margin-top: 2.75rem; }
       .optin-btn { font-size: 1.125rem; padding: 1.25rem 3rem; }
@@ -528,9 +502,7 @@
       ============================================ -->
   <section class="hero">
     <div class="hero-inner">
-      <p class="hero-kicker">Free Training for Coaches, Consultants <span class="nowrap">&amp;&nbsp;Service Providers</span></p>
-
-      <h1 class="hero-heading">Is your message <span class="gold"><em>costing you clients?</em></span></h1>
+      <h1 class="hero-heading">Coaches, is your message <span class="gold"><em>costing you clients?</em></span></h1>
 
       <h2 class="hero-subheading">Find out and fix yours <span class="nowrap">in under 10&nbsp;minutes.</span></h2>
 
@@ -545,7 +517,7 @@
       </button>
 
       <button type="button" class="hero-btn js-open-optin">Watch the Free Training</button>
-      <p class="hero-caption">Free. Instant access.</p>
+      <p class="hero-caption">Get instant access.</p>
     </div>
   </section>
 
@@ -559,24 +531,15 @@
       <div class="benefits">
         <div class="benefit">
           <span class="benefit-number">01</span>
-          <div class="benefit-text">
-            <p class="benefit-headline">Why people aren&rsquo;t buying&mdash;even when they need your help</p>
-            <p class="benefit-body">The #1 messaging mistake that keeps potential clients from seeing the value of your work.</p>
-          </div>
+          <p class="benefit-headline">Why people aren&rsquo;t buying&mdash;even when they need your help</p>
         </div>
         <div class="benefit">
           <span class="benefit-number">02</span>
-          <div class="benefit-text">
-            <p class="benefit-headline">How to make your message sell without sounding like everyone else</p>
-            <p class="benefit-body">The two ingredients that help people connect with you&mdash;and see why they should hire you.</p>
-          </div>
+          <p class="benefit-headline">How to make your message sell without sounding like every other coach</p>
         </div>
         <div class="benefit">
           <span class="benefit-number">03</span>
-          <div class="benefit-text">
-            <p class="benefit-headline">What to say so more people want to work with you</p>
-            <p class="benefit-body">A simple framework to turn what makes your work different into a clear reason to buy.</p>
-          </div>
+          <p class="benefit-headline">What to say so more people want to work with you</p>
         </div>
       </div>
 
