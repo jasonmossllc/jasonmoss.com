@@ -637,9 +637,10 @@
   // client declines a band the server accepts, a restored session gets asked
   // for an email and is then flipped to the calendar by the server's verdict.
   var REVENUE_OK = ['1k-5k','5k-10k','10k-plus','1k-3k','3k-10k','3k-5k','10k-25k','25k-plus'];
+  // Revenue is the only gate (since 2026-09-20). The full-time answer is still
+  // captured for Kit and the calendar prep line but never declines anyone.
   function localDecision(){
     if (REVENUE_OK.indexOf(state.revenue) === -1) return { decision:'decline', reason:'early' };
-    if (state.fulltime !== 'yes') return { decision:'decline', reason:'part_time' };
     return { decision:'book', reason:null };
   }
 

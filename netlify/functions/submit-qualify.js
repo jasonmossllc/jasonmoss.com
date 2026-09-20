@@ -117,9 +117,12 @@ const DECLINE_LOCK_DAYS = 90;
  */
 // The clients question was retired: across 79 backtested calls it removed
 // nobody the revenue and full-time gates had not already removed.
-function decide(revenue, fulltime) {
+// Gate on revenue only. The full-time question is still asked and recorded
+// (Kit field + calendar prep line) but no longer declines anyone: since
+// 2026-09-20 an established side-business owner at $1k+/mo books. The
+// 'part_time' decline copy stays only for the ?force= preview links.
+function decide(revenue, fulltime) { // eslint-disable-line no-unused-vars
   if (!REVENUE_OK.has(revenue)) return { decision: 'decline', reason: 'early' };
-  if (fulltime !== 'yes') return { decision: 'decline', reason: 'part_time' };
   return { decision: 'book', reason: null };
 }
 
@@ -314,10 +317,13 @@ exports.handler = async (event) => {
         const priorDate = prior?.fields?.qualify_date || '';
         if (/^Decline/i.test(priorDecision) && priorDate) {
           const ageDays = (Date.now() - Date.parse(priorDate + 'T00:00:00Z')) / 86400000;
-          if (Number.isFinite(ageDays) && ageDays >= 0 && ageDays < DECLINE_LOCK_DAYS) {
-            const m = /\(([a-z_]+)\)/.exec(priorDecision);
+          const m = /\(([a-z_]+)\)/.exec(priorDecision);
+          const priorReason = (m && m[1]) || 'early';
+          // A 'part_time' decline was issued under a rule that no longer
+          // exists, so it must not hold anyone back now.
+          if (priorReason !== 'part_time' && Number.isFinite(ageDays) && ageDays >= 0 && ageDays < DECLINE_LOCK_DAYS) {
             decision = 'decline';
-            reason = (m && m[1]) || 'early';
+            reason = priorReason;
             lockedByPriorDecline = true;
             console.log('Held to prior decline', { email, ageDays: Math.round(ageDays), reason });
           }
