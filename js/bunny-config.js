@@ -470,6 +470,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "3fcd4fe3-9a1b-4197-b032-2084453a4039": {
+      "videoId": "3fcd4fe3-9a1b-4197-b032-2084453a4039",
+      "title": "The Boutique Business Masterclass",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "9deaf01b-c1ad-48c3-839c-68e0941ed875": {
       "videoId": "9deaf01b-c1ad-48c3-839c-68e0941ed875",
       "title": "The Client Engine Masterclass",

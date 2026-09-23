@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>The Boutique Business &mdash; Replay</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:400,500,600&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: rgb(31, 45, 38);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       PAGE SHELL (single continuous background)
+       ===================================== */
+    .page {
+      position: relative;
+      background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 3.25rem 1.25rem 3.5rem;
+      color: #F8F6F2;
+      overflow: visible;
+    }
+    .page::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 26, 22, 0.50) 0%,
+        rgba(18, 26, 22, 0.68) 38%,
+        rgba(18, 26, 22, 0.62) 78%,
+        rgba(18, 26, 22, 0.45) 100%
+      );
+      pointer-events: none;
+    }
+    .page-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    /* -- Heading -- */
+    .page-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.875rem;
+      line-height: 2.25rem;
+      color: #F8F6F2;
+      margin: 0 0 1rem;
+      max-width: 22rem;
+    }
+    .page-heading em { font-style: italic; }
+    .page-heading .gold { color: #C2A86C; }
+
+    /* -- Description -- */
+    .page-desc {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.5938rem;
+      color: #E9E2D3;
+      margin: 0 0 2rem;
+      max-width: 19.5rem;
+    }
+    .page-desc strong { font-weight: 700; }
+
+    /* -- Video -- */
+    .page-video {
+      width: 100%;
+      max-width: 22.5rem;
+      aspect-ratio: 16 / 9;
+      border: 0;
+      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.35);
+      position: relative;
+      z-index: 2;
+      margin-top: 0.25rem;
+    }
+
+    /* -- CTA (scrolls to the booking section below) -- */
+    .page-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: #C2A86C;
+      color: #000000;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.975rem;
+      line-height: 120%;
+      letter-spacing: 0.02em;
+      width: 19.5rem;
+      max-width: 100%;
+      height: 3.78rem;
+      border-radius: 0;
+      text-decoration: none;
+      transition: background 0.2s;
+      margin-top: 2.25rem;
+    }
+    .page-cta:hover { background: #A7915D; }
+
+    /* =====================================
+       BOOKING SECTION (light ground, its own destination)
+       ===================================== */
+    .book-section {
+      background:
+        linear-gradient(180deg, rgba(248, 246, 242, 0.84), rgba(248, 246, 242, 0.92)),
+        url('assets/images/section-bg-pale.webp') center / 1200px auto repeat,
+        rgb(248, 246, 242);
+      border-top: 1px solid rgba(194, 168, 108, 0.45);
+      border-bottom: 1px solid rgba(194, 168, 108, 0.3);
+      color: #1D1F1E;
+      padding: 3.5rem 1.25rem 3rem;
+      scroll-margin-top: 0;
+    }
+    .book-inner {
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .book {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .book-lead {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.25rem;
+      line-height: 1.6rem;
+      color: #907740;
+      margin: 0 0 0.75rem;
+    }
+    .book-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      line-height: 1.125rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #907740;
+      margin: 0 0 0.75rem;
+    }
+    .book-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.625rem;
+      line-height: 2.1rem;
+      color: #1D1F1E;
+      margin: 0 0 1.5rem;
+      max-width: 22rem;
+      text-wrap: balance;
+    }
+    .book-heading em { font-style: italic; }
+    .book-heading .gold { color: #A08752; }
+
+    /* -- Letter-style copy -- */
+    .page-copy {
+      max-width: 25.5rem;
+      margin: 0;
+      text-align: left;
+    }
+    .page-copy p {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.65rem;
+      color: #3E413F;
+      margin: 0 0 1.25rem;
+    }
+    .page-copy p:last-child { margin-bottom: 0; }
+    .page-copy em { font-style: italic; }
+    .page-copy strong { font-weight: 700; color: #1D1F1E; }
+    .call-list {
+      list-style: none;
+      padding: 0;
+      margin: 0 0 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.625rem;
+    }
+    .call-list li {
+      position: relative;
+      padding-left: 1.625rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 0.9375rem;
+      line-height: 1.65rem;
+      color: #3E413F;
+    }
+    .call-list li::before {
+      content: "\2713";
+      position: absolute;
+      left: 0;
+      top: 0;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      color: #A08752;
+    }
+
+    /* -- Testimonials -- */
+    .quotes {
+      width: 100%;
+      max-width: 42rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      margin: 2.5rem 0 0;
+    }
+    .quote-card {
+      margin: 0;
+      border: 1px solid rgba(194, 168, 108, 0.22);
+      border-radius: 0.75rem;
+      background: rgba(248, 246, 242, 0.05);
+      padding: 1.375rem 1.75rem 1.5rem;
+      text-align: left;
+    }
+    .quote-card::before {
+      content: "\201C";
+      display: block;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 2.75rem;
+      line-height: 1;
+      height: 1.375rem;
+      color: #C2A86C;
+      margin-bottom: 0.625rem;
+    }
+    .quote-card p {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 0.875rem;
+      line-height: 1.5rem;
+      color: #E9E2D3;
+      margin: 0 0 1rem;
+    }
+    .quote-byline { display: flex; align-items: center; gap: 0.75rem; }
+    .quote-byline img {
+      width: 2.625rem;
+      height: 2.625rem;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 1px solid #C2A86C;
+    }
+    .quote-card cite {
+      display: block;
+      font-family: 'Raleway', sans-serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 0.75rem;
+      letter-spacing: 0.04em;
+      color: #C2A86C;
+      white-space: nowrap;
+    }
+
+    /* -- Scroll cue at the end of the letter: points at the booking panel -- */
+    .scroll-cue {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.75rem;
+      margin-top: 2.25rem;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      transition: opacity 0.25s ease-out;
+    }
+    .scroll-cue:hover { opacity: 0.85; }
+    .scroll-cue-label {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.6875rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #907740;
+    }
+    .scroll-cue-chevron {
+      width: 2.5rem;
+      height: auto;
+      display: block;
+      animation: chevron-breathe 2.9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+    }
+    @keyframes chevron-breathe {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(0.5rem); opacity: 0.74; }
+    }
+    @media (prefers-reduced-motion: reduce) { .scroll-cue-chevron { animation: none; } }
+
+    /* -- Qualify panel: dark ground so the form is the destination -- */
+    .qualify-section {
+      position: relative;
+      background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
+      padding: 3.5rem 1.25rem 2.5rem;
+      color: #F8F6F2;
+    }
+    .qualify-section::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 26, 22, 0.50) 0%,
+        rgba(18, 26, 22, 0.68) 38%,
+        rgba(18, 26, 22, 0.62) 78%,
+        rgba(18, 26, 22, 0.45) 100%
+      );
+      pointer-events: none;
+    }
+    .qualify-inner {
+      position: relative;
+      max-width: 60rem;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .qualify-section .book-label { color: #C2A86C; }
+    .qualify-face {
+      width: 4.5rem;
+      height: 4.5rem;
+      border-radius: 50%;
+      object-fit: cover;
+      padding: 0.2rem;
+      border: 1px solid rgba(194, 168, 108, 0.55);
+      box-shadow: 0 0 22px rgba(194, 168, 108, 0.14);
+      margin: 0 auto 1rem;
+      display: block;
+    }
+
+    /* -- Qualifier + Calendly (self-resizing iframe) -- */
+    .qualify-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.375rem;
+      line-height: 1.85rem;
+      color: #F8F6F2;
+      margin: 0 0 1.5rem;
+      max-width: 24rem;
+    }
+    .qualify-wrap {
+      width: 100%;
+      max-width: 42rem;
+      border: 1px solid rgba(194, 168, 108, 0.45);
+      border-radius: 0.75rem;
+      background: #F8F6F2;
+      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.2);
+      overflow: hidden;
+      margin-bottom: 1.75rem;
+    }
+
+
+    /* -- Footer -- */
+    .page-footer {
+      margin-top: 4rem;
+      font-family: 'Raleway', sans-serif;
+      font-size: 0.6875rem;
+      line-height: 0.9625rem;
+      color: rgba(248, 246, 242, 0.32);
+      text-align: center;
+    }
+    .page-footer p { margin: 0; }
+    .page-footer a { color: rgba(248, 246, 242, 0.38); text-decoration: none; }
+    .page-footer a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .page {
+        background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        padding: 3.25rem 1.8125rem 4.5rem;
+      }
+      .book-section { padding: 5rem 1.8125rem 4.5rem; }
+      .qualify-section { padding: 5rem 1.8125rem 3rem; }
+      .scroll-cue { margin-top: 2.75rem; }
+      .scroll-cue-chevron { width: 3rem; }
+      .qualify-face { width: 5.25rem; height: 5.25rem; margin-bottom: 1.125rem; }
+      .page-heading { font-size: 2.1875rem; line-height: 2.625rem; margin-bottom: 1.25rem; max-width: 40rem; }
+      .page-desc { font-size: 1.0625rem; line-height: 1.8063rem; max-width: 34rem; margin-bottom: 2rem; }
+      .page-video { max-width: 42.9375rem; aspect-ratio: auto; height: 23.8125rem; }
+      .page-cta { font-size: 1rem; width: 25.3125rem; margin-top: 2.5rem; }
+      .book-lead { font-size: 1.5rem; line-height: 1.9rem; margin-bottom: 1rem; }
+      .book-heading { font-size: 2rem; line-height: 2.55rem; max-width: 34rem; margin-bottom: 1.75rem; }
+      .page-copy { max-width: 40rem; }
+      .page-copy p { font-size: 1.0625rem; line-height: 1.85rem; }
+      .call-list li { font-size: 1.0625rem; line-height: 1.85rem; }
+      .quotes {
+        max-width: 42rem;
+        flex-direction: row;
+        align-items: stretch;
+        gap: 1.25rem;
+        margin-top: 3rem;
+      }
+      .quote-card { flex: 1; display: flex; flex-direction: column; padding: 1.25rem 1.75rem 1.375rem; }
+      .qualify-section { background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed; }
+      .quote-card::before { font-size: 2.5rem; height: 1.25rem; margin-bottom: 0.5rem; }
+      .quote-card p { font-size: 0.875rem; line-height: 1.55rem; margin-bottom: 1rem; }
+      .quote-byline { margin-top: auto; }
+      .qualify-heading { font-size: 1.5rem; line-height: 2.05rem; }
+      .page-footer { max-width: 40.1875rem; margin: 5rem auto 0; }
+    }
+  </style>
+</head>
+<body>
+
+  <section class="page">
+    <div class="page-inner">
+
+      <!-- ============================================
+          WATCH
+          ============================================ -->
+      <h1 class="page-heading">Build For Ten Clients,<br><em><span class="gold">Not A Thousand.</span></em></h1>
+      <p class="page-desc">Inside this replay: the four pillars of the boutique business, and why doing less, exceptionally well, is how you stand out. <strong>Tap for sound to begin.</strong></p>
+
+
+      <div class="page-video" style="overflow:hidden;">
+        <video class="jm-player" data-bunny-id="3fcd4fe3-9a1b-4197-b032-2084453a4039" data-video-id="3fcd4fe3-9a1b-4197-b032-2084453a4039" data-autoplay="true" muted playsinline crossorigin="anonymous"></video>
+      </div>
+
+      <a class="page-cta" href="#book">Book Your Free 1-on-1 Call With Me</a>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+      BOOK (the next step, on its own light ground)
+      ============================================ -->
+  <section class="book-section" id="book">
+    <div class="book-inner">
+      <div class="book">
+        <p class="book-lead">Your next step?</p>
+        <h2 class="book-heading">Let&rsquo;s map out your <em><span class="gold">boutique</span></em> business, together.</h2>
+
+        <div class="page-copy">
+          <p>If the training landed, you&rsquo;ve seen the model: a minimum viable goal, offer, marketing and conversion engine. The harder question is what that looks like in <em>your</em> business, and what to change first.</p>
+          <p>I&rsquo;ve been building businesses online for twenty years, and I&rsquo;ve helped more than a thousand coaches along the way. These days I keep a small roster of one-to-one clients, and I work with them in the trenches.</p>
+          <p>If you want help applying this, your next step is a <strong>free 20-minute call</strong>, one-on-one with me over Zoom. On that call, we&rsquo;ll:</p>
+          <ul class="call-list">
+            <li>Look at where your business is today and where you want it to go</li>
+            <li>Figure out what actually needs to shift to close that gap</li>
+            <li>Get clear on your first move toward a business that&rsquo;s profitable and sustainable</li>
+          </ul>
+          <p>This isn&rsquo;t a sales call. If I think I can help on a deeper level, I&rsquo;ll let you know at the end. Either way, you&rsquo;ll walk away with more clarity than you came with.</p>
+        </div>
+
+        <a class="scroll-cue" href="#qualify" aria-label="Scroll down to book your call">
+          <span class="scroll-cue-label">Book your call below</span>
+          <img class="scroll-cue-chevron" src="assets/images/chevron-down.png" srcset="assets/images/chevron-down.png 1x, assets/images/chevron-down@2x.png 2x" alt="" width="58" height="33">
+        </a>
+
+
+
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ============================================
+      QUALIFY (two questions, then Calendly) on its own dark panel
+      ============================================ -->
+  <section class="qualify-section" id="qualify">
+    <div class="qualify-inner">
+        <img src="assets/images/jm-headshot.webp" alt="Jason Moss" class="qualify-face" width="134" height="134" loading="lazy" decoding="async">
+        <p class="book-label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
+        <h2 class="qualify-heading">Start with two quick questions.</h2>
+
+        <div class="qualify-wrap">
+          <div data-qualify-source="boutique-business"></div>
+        </div>
+        <div class="quotes">
+          <blockquote class="quote-card">
+            <p>From $2k to $260k in sales, while cutting my hours in half.</p>
+            <div class="quote-byline">
+              <img src="assets/images/meaghan.jpg" alt="Meaghan Long" width="42" height="42" loading="lazy" decoding="async">
+              <cite>Meaghan Long</cite>
+            </div>
+          </blockquote>
+          <blockquote class="quote-card">
+            <p>Never experienced financial success like this in my life.</p>
+            <div class="quote-byline">
+              <img src="assets/images/zach.jpg" alt="Zach Bloom" width="42" height="42" loading="lazy" decoding="async">
+              <cite>Zach Bloom</cite>
+            </div>
+          </blockquote>
+        </div>
+
+
+      <div class="page-footer">
+        <p>&copy; Jason Moss LLC. All rights reserved</p>
+        <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+        <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+        <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+        <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bunny video tracking: this funnel fires the watch webhook at 50% (site default is 75%), like the resonance replay -->
+  <script>window.JM_TRACK_THRESHOLD = 0.5;</script>
+  <script src="/js/bunny-tracking.js" defer></script>
+  <script src="/js/bunny-embeds.js" defer></script>
+
+  <!-- Call qualifier: two questions, then Calendly (self-resizing iframe). Source lands on Kit (qualify_source) + Calendly utm_source. -->
+  <script src="https://jasonmoss.com/qualify/embed.js" async></script>
+</body>
+</html>
