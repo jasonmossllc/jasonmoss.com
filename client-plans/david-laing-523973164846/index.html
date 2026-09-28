@@ -1,0 +1,732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<title>Conditions for Allowing — Strategy Plan</title>
+
+
+<style>
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+
+  :root{
+    --obsidian:#1D1F1E;
+    --forest:#2C3F36;
+    --mocha:#5B4B3F;
+    --taupe:#8C837A;
+    --gold:#C2A86C;
+    --stone:#E9E2D3;
+    --sand:#F8F6F2;
+    --paper:#FBF9F4;
+    --bg:#E7E1D4;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--obsidian);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(1rem,0.94rem + 0.3vw,1.15rem);
+    line-height:1.78;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  ::selection{background:var(--gold);color:var(--obsidian);}
+
+  p{margin:0 0 1.15em 0;text-wrap:pretty;}
+  strong{font-weight:600;color:var(--obsidian);}
+  em{font-style:italic;}
+
+  /* ---------- COVER / HERO ---------- */
+  .cover{
+    position:relative;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    min-height:100vh;
+    min-height:100svh;
+    padding:clamp(28px,4vw,56px) clamp(24px,6vw,84px);
+    color:var(--sand);
+    background:
+      radial-gradient(120% 80% at 82% 12%,rgba(194,168,108,.14),transparent 52%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    overflow:hidden;
+  }
+  .cover .logo{
+    width:clamp(150px,16vw,196px);
+    display:block;
+    align-self:start;
+  }
+  .cover .cover-mid{
+    align-self:center;
+    max-width:780px;
+    padding:clamp(24px,5vw,40px) 0;
+  }
+  .cover .eyebrow{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(.7rem,.66rem + .15vw,.82rem);
+    line-height:1.4;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:clamp(18px,2.5vw,26px);
+  }
+  .cover h1{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(2.6rem,1.7rem + 4.4vw,5rem);
+    line-height:1.06;
+    letter-spacing:-.01em;
+    color:var(--sand);
+    margin-bottom:clamp(22px,3vw,32px);
+    text-wrap:balance;
+  }
+  .cover .rule{
+    width:68px;height:2px;
+    background:var(--gold);
+    margin-bottom:clamp(22px,3vw,32px);
+  }
+  .cover .sub{
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:clamp(1.05rem,1rem + .45vw,1.4rem);
+    line-height:1.7;
+    color:var(--stone);
+    max-width:620px;
+  }
+  .cover .foot{
+    align-self:end;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:18px;
+    padding-top:22px;
+    border-top:1px solid rgba(233,226,211,.18);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(.78rem,.74rem + .12vw,.9rem);
+    letter-spacing:.05em;
+    color:var(--stone);
+  }
+  .cover .foot .r{color:var(--gold);white-space:nowrap;}
+  .cover .foot .who{font-weight:600;color:var(--sand);}
+
+  /* ---------- BODY CONTENT (floating paper) ---------- */
+  main.doc{
+    position:relative;
+    z-index:2;
+    max-width:920px;
+    margin:clamp(-96px,-7vw,-52px) auto clamp(56px,8vw,104px);
+    padding:clamp(44px,6vw,92px) clamp(26px,5.5vw,84px);
+    background:var(--paper);
+    border-radius:clamp(10px,1.4vw,18px);
+    box-shadow:
+      0 40px 80px -40px rgba(29,31,30,.5),
+      0 2px 10px rgba(29,31,30,.05);
+  }
+
+  .section{margin-top:clamp(44px,6vw,80px);}
+  main.doc > .section:first-child{margin-top:0;}
+  .section + .section{
+    padding-top:clamp(44px,6vw,80px);
+    border-top:1px solid rgba(29,31,30,.09);
+  }
+  main.doc > .section:first-child{margin-top:0;}
+
+  .sechead{margin-bottom:6px;}
+  .sec-num,.note-head{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.74rem;
+    line-height:1.4;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h2{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(1.7rem,1.25rem + 1.9vw,2.55rem);
+    line-height:1.18;
+    letter-spacing:-.01em;
+    color:var(--obsidian);
+    margin-bottom:6px;
+    text-wrap:balance;
+  }
+  .h2-rule{
+    width:54px;height:3px;
+    background:var(--gold);
+    margin:18px 0 22px 0;
+  }
+
+  h3{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(1.1rem,1rem + .4vw,1.32rem);
+    line-height:1.4;
+    color:var(--forest);
+    margin:clamp(28px,3.5vw,40px) 0 10px 0;
+  }
+  h3:first-of-type{margin-top:clamp(18px,2.5vw,26px);}
+
+  .lead{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:clamp(1.18rem,1.05rem + .55vw,1.5rem);
+    line-height:1.6;
+    color:var(--mocha);
+    margin-bottom:4px;
+  }
+
+  ul,ol{margin:14px 0 22px 0;padding-left:0;list-style:none;}
+  li{
+    position:relative;
+    padding-left:26px;
+    margin-bottom:12px;
+  }
+  ul li::before{
+    content:"";
+    position:absolute;
+    left:3px;top:.62em;
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+  ol{counter-reset:ol;}
+  ol li{padding-left:34px;counter-increment:ol;}
+  ol li::before{
+    content:counter(ol);
+    position:absolute;
+    left:0;top:.02em;
+    font-family:'Raleway',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    line-height:1.55;
+    color:var(--gold);
+  }
+
+  .callout{
+    background:linear-gradient(180deg,#EFEADC 0%,var(--stone) 100%);
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:clamp(20px,3vw,30px) clamp(22px,3.4vw,34px);
+    margin:26px 0 28px 0;
+    box-shadow:0 14px 30px -22px rgba(29,31,30,.45);
+  }
+  .callout p{
+    font-family:'Libre Baskerville',serif;
+    font-style:italic;
+    font-size:clamp(1.08rem,1rem + .4vw,1.28rem);
+    line-height:1.62;
+    color:var(--obsidian);
+    margin:0;
+  }
+  .callout p + p{margin-top:12px;}
+
+  /* ---------- 90 DAY PLAN ---------- */
+  .phase{
+    margin-bottom:24px;
+    border:1px solid rgba(29,31,30,.08);
+    border-radius:12px;
+    background:#fff;
+    overflow:hidden;
+    box-shadow:0 20px 44px -32px rgba(29,31,30,.4);
+  }
+  .phase:last-child{margin-bottom:0;}
+  .phase-head{
+    background:linear-gradient(135deg,#33473C,#283831);
+    color:var(--sand);
+    padding:clamp(16px,2.4vw,22px) clamp(22px,3.2vw,30px);
+  }
+  .phase-head .tag{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.72rem;
+    line-height:1.3;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:7px;
+  }
+  .phase-head .ttl{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.2rem,1.05rem + .55vw,1.5rem);
+    line-height:1.3;
+    color:var(--sand);
+  }
+  .phase-body{padding:clamp(22px,3vw,30px) clamp(22px,3.2vw,32px) clamp(14px,2vw,20px);}
+  .phase-body ol{margin:0;}
+  .phase-body ol li{margin-bottom:16px;}
+  .phase-body ol li strong{color:var(--forest);}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:left;
+    color:var(--sand);
+    background:
+      radial-gradient(120% 70% at 18% 88%,rgba(194,168,108,.13),transparent 55%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    padding:clamp(72px,11vw,150px) clamp(24px,6vw,84px);
+    overflow:hidden;
+  }
+  .closing > *{width:100%;max-width:680px;}
+  .closing .note-head{color:var(--gold);margin-bottom:14px;}
+  .closing h2{color:var(--sand);}
+  .closing .h2-rule{background:var(--gold);}
+  .closing p{
+    color:var(--stone);
+    font-size:clamp(1.02rem,.96rem + .35vw,1.18rem);
+    line-height:1.75;
+    margin-bottom:15px;
+  }
+  .closing strong{color:var(--sand);}
+  .closing .sign{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.15rem,1.05rem + .4vw,1.35rem);
+    line-height:1.5;
+    color:var(--sand);
+    margin-top:34px;
+  }
+  .closing .sign span{
+    display:block;
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:.86rem;
+    line-height:1.5;
+    letter-spacing:.05em;
+    color:var(--gold);
+    margin-top:12px;
+  }
+
+  /* ---------- SMALL SCREENS ---------- */
+  @media (max-width:600px){
+    body{line-height:1.7;}
+    .cover{min-height:100svh;}
+    .cover .foot{flex-direction:column;gap:6px;align-items:flex-start;padding-bottom:64px;}
+    main.doc{
+      margin:-44px 14px clamp(40px,8vw,64px);
+      border-radius:14px;
+      padding:40px 22px;
+    }
+  }
+
+  /* ---------- PRINT (retain clean PDF export) ---------- */
+  @media print{
+    body{background:#fff;}
+    .cover,.closing{min-height:auto;}
+    main.doc{
+      max-width:none;margin:0;padding:14mm 16mm;
+      box-shadow:none;border-radius:0;background:#fff;
+    }
+    .section + .section{border-top:0;}
+    .phase,.callout{box-shadow:none;break-inside:avoid;}
+    .sechead{break-after:avoid;}
+    h3{break-after:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section class="cover">
+  <img class="logo" src="assets/logo-light.svg" alt="Jason Moss">
+  <div class="cover-mid">
+    <div class="eyebrow">Business Strategy Plan</div>
+    <h1>Conditions for Allowing</h1>
+    <div class="rule"></div>
+    <div class="sub">A clear-eyed look at where your business is, the biggest opportunities I see, and a 90-day plan to act on them — built from my review of your business, your assessment, and the notes I recorded going through everything.</div>
+  </div>
+  <div class="foot">
+    <span class="l">Prepared for <span class="who">David Laing</span></span>
+    <span class="r">September 2026</span>
+  </div>
+</section>
+
+<main class="doc">
+
+<!-- ===================== 1. PERSONAL NOTE ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="note-head">A note before we begin</div>
+    <h2>How this was made</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Hey David —</p>
+  <p>One thing before you read any of this.</p>
+  <p>I used AI to help me organize my notes and shape them into something clean you can actually move through. It looks tidy because I wanted it to be easy to read... not because a machine decided what your business needs.</p>
+  <p>The thinking is mine. I went through your assessment responses, your funnel, your ads, the e-mails people receive from you, your numbers in detail and I recorded what I saw as I went. Every recommendation in here traces back to something I said in those notes. This isn't a template with your name dropped in. It's my read on <em>your</em> business, made readable.</p>
+  <p>You told me what a win looks like for you: <em>"I need to know exactly what I need to do to get me to that next level... I'm not just experimenting."</em> That's what this is meant to be.</p>
+  <p>Read it slowly. Some of it will land as relief. Some of it will sting a little. Both are useful.</p>
+  <p>Let's get into it.</p>
+</section>
+
+<!-- ===================== 2. WHERE YOU ARE NOW ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 02</div>
+    <h2>Where you are right now</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You've built something most businesses never get: a front end that pays for itself. The gap is everything between the book and the sale.</p>
+  </div>
+
+  <p>Let me start with what's true and good, because there's a lot of it and I don't want it to get buried under the rest.</p>
+
+  <h3>What's working</h3>
+  <p><strong>Your funnel self-liquidates.</strong> I want you to understand how rare this is. The vast majority of businesses lose money on the front end and hope to make it back on the back end. You recoup your ad spend on day zero. Over the last 30 days you spent £2,356 on ads and the book, the Starter Kit and the Toolkit brought back £2,387. That is a machine that builds an audience for free. Roughly 1,300 book buyers since December. Around 155 new buyers a month at about £15 each. Most people would spend years trying to build what you already have running.</p>
+  <p><strong>Your story is the centrepiece, and it should be.</strong> "Stop Fighting. Start Allowing." The barbershop. 200mg of Sertraline and inpatient ERP. Six hours at the mirror. Trapped in the work toilets. A business led by your own journey through severe OCD and out the other side is something almost nobody in your market can copy. You've made it the spine of your ads and your emails, and that's exactly right. It's someone personally identifying with your story that creates the pull toward you. Keep leaning into it.</p>
+  <p><strong>You have real proof.</strong> Two programme clients have met the definition of complete recovery they wrote themselves before starting. Seventeen high-ticket clients and about £51K in revenue in nine months, from a standing start, while you were still employed for the first four of them. The programme is 11 of 12 seats full. You said you feel yourself "transitioning away from being a complete beginner to being more established." I agree. You're there.</p>
+  <p><strong>You can build.</strong> Your own portal, your own reporting, your own app, a CRM that actually tells you what's happening. You told me "my background is in systems, not sales." Hold that sentence. It's the most important thing you wrote in the whole assessment, and we're going to come back to it.</p>
+
+  <h3>What's holding you back</h3>
+  <p>The short version: the front end works and the back end is where the money is, and the bridge between them is broken.</p>
+  <p>Here's what that bridge looks like today. Someone sees a cold ad, buys a £4.99 book they haven't read yet, and within a minute is on a confirmation page being asked to watch a seven-minute video about a £4,000 programme before they're allowed to book a call. That's a very abrupt ascension for cold traffic, and the numbers show it. About 12% of buyers book a call. Around 29% of the people who do book are lost at the video gate. Of the 40 calls you held in the last 90 days, 32 were marked "not ready" and 5 closed. That's a 12.5% close rate, and it's low.</p>
+  <p>Underneath that, a handful of things are quietly capping you:</p>
+  <ul>
+    <li><strong>The emails barely invite anyone to talk to you.</strong> Welcome email one mentions the free call in a single bullet, with "no rush." Emails two through six don't mention it at all. Your first broadcast to mention the call was the tenth one you sent, and it produced no bookings. Nothing goes to non-buyers after the cart sequence ends on day 14.</li>
+    <li><strong>You're feeding the machine too cautiously.</strong> £55 a day into a funnel that pays for itself, at a frequency of 1.8, with one ad carrying 94% of the spend. I know why you pulled back. We'll fix why.</li>
+    <li><strong>You have too many offers.</strong> A book, a Starter Kit, a Toolkit, an Allowing Session that has never sold, a Recovery Circle that has effectively closed, a Bespoke tier with one client, the Implementation Programme, an app launching in October, a free community, a second business, and a research institute. For a business at your stage, that's too many doors.</li>
+    <li><strong>Your time is going to the wrong place.</strong> Sixty-five hours a week, all 28 of the last 28 days. About 22 of those hours go to building the portal and app and running your AI workspaces. About four go to marketing. About one goes to sales prep. "Every decision waits on me."</li>
+    <li><strong>Cash is tight and lumpy.</strong> Thin reserves, high-interest debt, income that depends on one or two closes a month, one client in seven paying in full, and about £15K contracted but not yet collected. The instalments already booked run down from October to January unless new clients replace them.</li>
+  </ul>
+  <p>None of this is a talent problem or a product problem. It's a bridge problem and a selling problem. Both are fixable, and both are the kind of thing that moves fast once you turn toward them.</p>
+
+  <div class="callout">
+    <p>You have a funnel that builds an audience for free. What's missing is the bridge from that audience into a conversation with you, and what happens once you're in that conversation. That gap is most of this plan.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. BIGGEST OPPORTUNITIES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 03</div>
+    <h2>The biggest opportunities I see</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">If you only focus on a few things over the next 90 days, focus on these. In this order.</p>
+  </div>
+
+  <h3>1. Step on the gas on the front end</h3>
+  <p>This is the easiest money in your business right now, and you're leaving it on the table. When a funnel recoups 100% of ad spend on day zero, every pound you put in comes back with a buyer attached. Those are essentially free leads. I think you're being too conservative here, and I know the reason: you've been hesitant to scale the front end because the back end isn't dialled in yet.</p>
+  <p>Two things in response. First, there's no reason not to. Even with the back end as it is, you're still making money on some of those leads. Your total return over the last 30 days was 2.59x. If you can build an audience for free, you have to step on the gas. Second, more volume through the funnel is exactly what makes the back end easier to fix. More buyers means more calls, faster data, quicker tests on the conversion path. The more people moving through, the faster we can optimise for profit.</p>
+  <p>The reason your last attempt at scaling didn't hold is important. You bumped one ad from roughly £75 to £100 a day and front-end return dropped to 0.69. Your market is small. When you push spend through a single creative, frequency climbs, the ad fatigues, and return falls. The fix isn't to spend less. It's to go horizontal: a handful of new creative variations that Meta can rotate, so you can raise spend while keeping fatigue down. Then step the budget up 15 to 20 percent every 14 days, watching frequency on each ad, frequency on the campaign, and front-end return. I'm fine with you losing a little on the front end. Keep climbing until you see a real drop in front-end profitability, not a wobble.</p>
+
+  <h3>2. Build a real bridge into a conversation with you</h3>
+  <p>I don't have your full call-uptake metrics, but this is almost certainly where your biggest opportunity sits. Right now you're trying to sell a £4,000 programme cold, to someone who bought a book minutes ago and hasn't read it, through a seven-minute video most people will never watch. That's not a bridge. It's a cliff.</p>
+  <p>We need to stair-step the journey from cold to conversation, with more respect for the specific moment someone is in and how warm they actually are when they meet your pitch. The two moves I'd make: take the heavy qualification out of the path and invite people into a short, low-friction 15-minute session that's about assessing their situation, not about the programme. And get them to read the book and then into a live event, which is going to be your single best conversion vehicle into a call because of the intimacy it creates. Both of those are cheaper, warmer, and far more respectful of where a new buyer actually is.</p>
+  <p>And the email nurture needs to do its actual job. Once someone has bought the book, your number one job from an ascension standpoint is to get them on a call or into a live event. That means far more invites, including standalone emails about the value of the conversation itself. Right now that job is almost entirely absent from the sequence.</p>
+
+  <h3>3. Learn to sell the £4K programme</h3>
+  <p>You wrote something honest in your assessment: <em>"It might be that... I don't know how to sell a group program to people."</em> I want to unpack that with you, because I think it's one of the biggest gaps in the business. My sense is that it lives in three places: how you position the programme, how you talk about it, and how you lead someone through the sales conversation itself.</p>
+  <p>A 12.5% close rate tells me we need better qualification, better selling, or both. We should be at double that as a minimum. I'm going to give you my sales process and my script, and we're going to do a session together that's solely about sales. That includes the languaging for collecting more cash up front. One client in seven paying in full and 32% of contracted value collected tells me there's a lot of room here. You should be closer to 50% of revenue collected up front.</p>
+
+  <h3>4. Give Meta the right signal again</h3>
+  <p>Since the health-category restriction in July, Meta hasn't been able to see your purchases, so your ad set optimises on people filling in the first step of the checkout. Meta will happily find you thousands of people who type a name and an email. That's not who we want. Your click-to-buyer rate halved after the restriction, and I don't think that's a coincidence.</p>
+  <p>The workaround is simple: fire a server-side opt-in event for people who have actually purchased, so Meta thinks it's an opt-in and optimises toward it. Give the algorithm the real action we want and let it optimise against that, not against form fills. It's an easy fix and I think it moves your return on ad spend meaningfully.</p>
+
+  <h3>5. Simplify to two offers</h3>
+  <p>For the stage you're at, you have way too many offers. The fastest path to £15K a month is to focus on selling the £4K programme. By far. Hands down. From a revenue standpoint, the app is likely a distraction. So is the group membership. So is the second business, and so is the Institute for now. I'd go deep in one vertical before going horizontal. You'll get to £50K a month far faster by doing one thing extremely well than by doing five things at once.</p>
+
+  <div class="callout">
+    <p>£15K a month is four programme sales a month. Not a new app. Not a second business. Not a better portal. Four conversations a month that end in yes.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. WHAT NEEDS TO SHIFT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 04</div>
+    <h2>What needs to shift first</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Before any tactic in this plan works, these have to move. They're not to-dos. They're the ground the to-dos stand on.</p>
+  </div>
+
+  <h3>From builder to seller</h3>
+  <p>This is the big one, so I'm going to be direct about it.</p>
+  <p>Look at where your hours go. Eleven a week directing the build of the portal and the app. Eleven running your AI workspaces. Eight and a half on framework and teaching material. Four on marketing. One on sales. You told me "my background is in systems, not sales," and your calendar agrees with you. You've spent the last few months tinkering and building instead of doing the thing that actually makes money, which is having conversations with people and getting on calls.</p>
+  <p>I want to say this with care, because I've watched a lot of capable people do exactly this. Building feels like movement. It produces something you can see. But in reality, it's a convenient way to hide. The portal doesn't need to be better. The app doesn't need to launch to hit £15K. The thing that's going to make you money is getting on calls, learning how to sell, and making offers. That needs to be the core of the business, not building the best system.</p>
+  <p>The systems you've built are enough. More than enough. The next chapter is you, out from behind the screen, talking to the people your funnel is already bringing you.</p>
+
+  <h3>From conservative to committed on spend</h3>
+  <p>You have a rare asset and you're treating it like a risk. A self-liquidating front end is permission to spend. Until the front end stops paying for itself, keep feeding it. Losing a little on the front end while the back end catches up is fine. Starving it while you perfect the back end is the expensive choice.</p>
+
+  <h3>From the "not ready" to the ready</h3>
+  <p>Thirty-two of your last forty calls were marked "not ready," and I can see the pull to design something for them: a mid-tier, a group offer between £97 and £4,000, a ladder they can climb. I want to be clear: this is a trap. I've seen it many times. The revenue you'll generate from selling to the not-ready pales in comparison to what you'll generate from the small number of people who are ready. The work is to qualify better for those people, build a better bridge into your sales process, and get better at selling to them in a way that makes £4K feel like a no-brainer. Not to build a smaller thing for everyone else.</p>
+
+  <h3>From many doors to two</h3>
+  <p>Your "Working with David" page lists three routes in. Your funnel has a bump, an upsell, a free call, a paid session and a community. There's an app coming and a second business in the wings. Every one of those was built with good reasons, and every one of them splits your attention and your buyer's. For now, there is the book, and there is the programme. That's the business.</p>
+
+  <h3>From abrupt to stair-stepped</h3>
+  <p>You know this better than anyone: you can't force your way past a Protector. The same is true of a buyer. Someone who bought a £4.99 book from a cold ad thirty seconds ago is not ready to hear what a £4,000 programme costs. The whole journey from cold to conversation needs to be rebuilt around the level of warmth someone actually has at each step, with a lower-friction door at every stage.</p>
+
+  <div class="callout">
+    <p>You wrote: "From that perspective of the 15K a month profit business owner, it makes sense to invest that 10K." That business owner spends most of their week in conversations, not in code. Start living there now.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. POSITIONING & MESSAGING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 05</div>
+    <h2>Positioning &amp; messaging</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Your story is the magnet. Your mechanism is the manual. Right now, the manual is doing the magnet's job.</p>
+  </div>
+
+  <h3>Keep your story at the centre</h3>
+  <p>The core of your positioning is right and I'm not going to touch it. "OCD isn't a broken brain. It's a part of you trying to protect you." Complete recovery, not management. A coach who lived it, not a therapist describing it. The ads that work best are you, walking, talking to camera, saying "stop fighting, start allowing." That's the voice. Everything below is about getting more of the right people to feel it.</p>
+
+  <h3>The 80/20 flip</h3>
+  <p>Good marketing spends about 80% of its space on the pain (what's wrong) and the desire (what's possible), and about 20% on the path for bridging the gap. Right now you're flipped.</p>
+  <p>Look at your landing page. After a strong open ("Sound familiar?" is good, it meets someone in the ten seconds of peace before it hits), the page goes deep: "The Discovery That Changed Everything," the wound and the part that guards it, the Exile, the Protector, the Self, the shame and the fright, why it's the hardest simple thing, what happens when one heals, the symptom was never the thought. It's thorough and it's well written. It's also a lot of education for someone arriving from a Meta ad with a very short attention span, and it may actually be overwhelming.</p>
+  <p>Your ads do the same thing. Four of the six explain "four conflicts running as two pairs... the shame-fright constellation... the marginalisation-resentment constellation, felt as a bubbling agitation high in the back of the chest." That's the manual. On a cold ad, the manual is not what makes someone stop scrolling.</p>
+  <p>There's a version of this where the depth is right: if your market is sophisticated and has already tried several things, they need to see a unique mechanism to believe you. You do sell to people who've done ERP, CBT and medication, so some of that is earned. But I'd at least test a variant of the landing page that is half the length, spends most of its space meeting them in the pain and showing them what's possible on the other side, and keeps the process to a fraction of what it is now. I'm not certain it will lift conversion. I think it's worth finding out, and the test is cheap.</p>
+
+  <h3>The order bump and the upsell</h3>
+  <p>These are small, and they compound across every buyer, and they're what lets you spend more on the front end. So they're worth getting right.</p>
+  <p>Your bump headline reads: "Yes, upgrade my order with The Starter Kit — only £27." That's a feature. It tells me nothing about what I'm getting or why it matters to me. The body copy underneath is better ("start applying the framework the day you finish the book") but the headline is doing the selling and the headline isn't selling. I want benefit-led copy here: what changes for the reader, not what's in the box.</p>
+  <p>The upsell video sounds like it was written by Claude. It's clever in the way AI is clever: "one thing, and I only offer it here," "the honest version." Clever isn't clear. It takes far too long to get to the tangible return on £97 and why someone should buy it right now, which is why three buyers in 155 took it. A 1.9% take rate on a one-click upsell is a copy problem, not a product problem. This is one of the things I want us to spend a working session on: your landing page copy and the whole front-end upsell flow, so we squeeze everything we can out of the traffic you're already paying for.</p>
+
+  <h3>How you talk about the programme</h3>
+  <p>This is the piece of positioning that matters most and shows up least on any page. You told me you don't know how to sell a group programme. I don't think that's a confidence issue. I think it's that the programme has never been positioned in a way that makes its value obvious before the price lands. Right now the price arrives in a seven-minute video before anyone has felt what the programme would change for them. We're going to rebuild how you frame it, how you talk about it, and how you lead the conversation toward it, together, in the sales session. That's where the close rate moves.</p>
+
+  <div class="callout">
+    <p>Eighty percent of the space on what's wrong and what's possible. Twenty percent on how. Your story, not your model, is what makes someone stop and say "that's me."</p>
+  </div>
+</section>
+
+<!-- ===================== 6. OFFERS & PRICING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 06</div>
+    <h2>Offers &amp; pricing</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">For where you are, you have too many offers. Two is the number.</p>
+  </div>
+
+  <h3>The two that matter</h3>
+  <p><strong>The book</strong> is the front door. It works. Leave the price where it is, keep the bump and the upsell in place (with better copy), and let it keep building your audience.</p>
+  <p><strong>The £4K programme</strong> is the business. It's 69% of your revenue over the last 90 days and it's the thing that gets you to £15K a month. You said in your assessment that you need to make the group programme the offer you send emails to, and that the two weekly group calls you already run are the start of it. I agree. That's the offer. Sell it, and sell it well.</p>
+
+  <h3>What to park</h3>
+  <p>I'd treat everything else as noise for the next 90 days.</p>
+  <ul>
+    <li><strong>The app.</strong> It launches around 6 October, and I know how much has gone into it. Let it exist. Don't let it become the focus. From a revenue standpoint it's a distraction from the thing that actually pays.</li>
+    <li><strong>The Recovery Circle.</strong> Two active members, eight churned, a third of its charges refunded, no rebill since August. It's closed as a revenue line. Let it be closed.</li>
+    <li><strong>The Allowing Session and Bespoke Recovery.</strong> Zero sales and one sale respectively. Neither needs to be on the front of your site right now. The "Working with David" page currently opens with the £147 session and tells people the way in is "not to have a sales call about it." That's a different strategy than the one we're building, and it pulls in a different direction.</li>
+    <li><strong>The second business and the Institute.</strong> The client-acquisition system for practitioners and the research institute are both real ideas. Both come after £15K a month, not before. You've already parked the Institute on purpose. Park the second business the same way.</li>
+  </ul>
+
+  <h3>Pricing and cash</h3>
+  <p>The price stays at £4,000. What changes is how much of it you collect up front. One in seven paying in full and 32% of contracted value collected means a quarter of your payment attempts fail, you spend energy chasing retries, and your income moves in £667 steps. I'll give you the languaging for asking for more up front on the call. The target is about 50% of revenue collected at the point of sale. That single shift does more for your cash position than any subscription you could cut.</p>
+
+  <h3>What not to build</h3>
+  <p>Don't build a mid-tier for the "not ready." Don't build a ladder from £97 to £4,000. Those are offers designed around the people who won't buy, and they cost you the attention that belongs to the people who will. Better qualification, a better bridge, and better selling. That's the offer strategy.</p>
+</section>
+
+<!-- ===================== 7. MARKETING & CONTENT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 07</div>
+    <h2>Marketing &amp; content strategy</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Paid front end, scaled properly. Email as your main channel. Social in maintenance. One live event a month.</p>
+  </div>
+
+  <h3>Meta: scale horizontally, not vertically</h3>
+  <p>Three moves, in order.</p>
+  <ul>
+    <li><strong>Fix the signal.</strong> Send the server-side opt-in event on purchase so Meta optimises toward buyers, not form fills. Do this first, before you add spend, so the algorithm is learning from the right thing as volume grows.</li>
+    <li><strong>Add creative.</strong> All six of your ads were made on the same day in August and one of them carries 94% of the spend. Record a handful of new variations in the format that's proven to work for you: you, outdoors, walking, talking to camera. Same story, different angles and openings. The point is to give Meta something to rotate so frequency stays down as spend goes up.</li>
+    <li><strong>Step the budget.</strong> Raise it 15 to 20 percent every 14 days. Watch frequency on each ad, frequency on the campaign, and front-end return. Keep going until front-end profitability drops in a way that holds, not for a day. This is a small market and you'll find the ceiling. I want you to find it, not guess at it from £55 a day.</li>
+  </ul>
+
+  <h3>Email: this is where your marketing energy goes</h3>
+  <p>I'd double down on the list. Hard. You have about 1,250 buyers reading at 30 to 51% opens and more than 3,000 contacts in the CRM, and you're sending twice a week. That's low. I'd be at three to five emails a week, and that's a far better use of your time than chasing visibility on organic social.</p>
+  <p>Two things need to change about what those emails do. First, they need to invite. Your broadcast philosophy is "deposits, not pitches," and the deposits are good: your earthquake email, your "isn't this just ERP" email, the six hours at the mirror. Keep them. But your welcome sequence promises "no pitch buried in them" and then never invites anyone to talk to you, and your first broadcast door came ten sends in. From here, the call and the live event are the door, and the door gets opened often, in dedicated emails that talk about what the conversation is for and what it's worth.</p>
+  <p>I want to be straight about what's underneath this, because it isn't a tactics problem. It's a mindset thing. You are hesitant to pitch. It's in the welcome sequence ("no pitch buried in them"). It's in the one door email you've sent, which apologises its way to the link ("if it's not the moment, ignore this one"). It's in a broadcast philosophy that treats an invitation as something to be rationed.</p>
+  <p>Here's the reframe I want you to sit with. The people on your list are suffering. They bought a book about OCD because they want help, and most of them have been told for years that managing it is the ceiling. You are not doing them a service by holding back the thing that would actually help them. It's the opposite. Every time you soften, hedge, or apologise for the offer, you withhold the thing of real value from someone who came to you looking for it. Be far more direct and assertive about how you can help them at a deeper level. That's the act of service. The silence isn't.</p>
+  <div class="callout">
+    <p>You're not doing anyone an act of service by not pitching. You're withholding the one thing of real value from people who are asking for it.</p>
+  </div>
+  <p>Second, send to non-buyers too. There's no reason to leave them out. Someone who filled in the checkout and didn't buy is currently dropped after day 14. Put them on the same list, send them the same stories, and invite them to the same events.</p>
+
+  <h3>A live event, once a month</h3>
+  <p>This is your single best conversion vehicle into a call. A masterclass or a live training, to the whole list, once a month. Higher intimacy than any email. People hear your voice, watch you work, ask questions, and feel what it would be like to be in a room with you. Then the next step from the event is a conversation. Your Friday Instagram Live is a good instinct in this direction. The event I'm talking about lives on the list, not on Instagram, and it has an invitation at the end.</p>
+
+  <h3>Organic social: maintenance mode</h3>
+  <p>Instagram and YouTube Shorts are not where your growth is going to come from, and I don't want you spending real energy there. Treat them as maintenance: two or three posts a week, enough that when someone lands on your profile after seeing an ad or reading the book, it looks like you're alive and active. That's the whole job.</p>
+
+  <h3>YouTube long-form: worth a closer look, later</h3>
+  <p>Your two long-form videos, "You've Been Lied To About OCD" and "The Root of OCD," have pulled a few hundred views each with nothing behind them. Long-form organic on YouTube is the one channel I'd want to take a closer look at from a reach perspective. Not now. Once the bridge and the sale are working, it's the next place to look.</p>
+
+  <h3>A note on your stated order</h3>
+  <p>You wrote that your next pieces of work are ads automation, then AI SEO, then social channels. None of those is the list, the call, or the sale. I'd reorder it entirely. The list and the conversation come first. Everything else waits.</p>
+</section>
+
+<!-- ===================== 8. SYSTEMS & OPERATIONS ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 08</div>
+    <h2>Systems &amp; operations</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You've built enough. The one system that's missing is the one that gets people talking to you.</p>
+  </div>
+
+  <h3>The two-step call process</h3>
+  <p>Replace the gated 45-minute call with a two-step process.</p>
+  <ul>
+    <li><strong>Step one: a 15-minute session.</strong> Low friction, no video gate, no seven-minute pitch before someone can book. Don't make it about the programme. Make it about assessing their situation and helping them see their next step and what they're missing. It doubles as your qualification call, which is why it protects your time and lifts your close rate at the same time.</li>
+    <li><strong>Step two: a 45-minute discovery call.</strong> Only for the people who are a genuine fit for a sales conversation. This is where the programme is positioned and sold, using the process and script I'll give you.</li>
+  </ul>
+  <p>The seven-minute "before we speak" video goes. You're using it to disqualify, and it's disqualifying nearly a third of the people who want to talk to you. Qualification happens in the 15 minutes, in a conversation, where you can hear where someone actually is.</p>
+
+  <h3>The confirmation page</h3>
+  <p>Keep an invitation on this page. Just change what it's inviting to. Right now a buyer lands here and is asked to watch seven minutes about a £4,000 programme before they're allowed to book anything. Replace that with a simple, ungated invitation to the 15-minute session, sitting alongside the book download and the community invite. No video gate, no price, no programme pitch. Just a short call to work out where they are and what they're missing. Someone who's ready to talk can book on the spot. Someone who isn't loses nothing, and the same invitation keeps showing up in the emails and at the live event.</p>
+  <p>Five of your last seven programme clients bought the book first, a median of 33 days before they paid. That's who this page is for. The 15-minute session is the first step on that path, not the close.</p>
+
+  <h3>The Meta purchase signal</h3>
+  <p>The server-side event for purchasers, sent as an opt-in event so Meta accepts it. This is a systems task and it's squarely in your wheelhouse. It's also the last piece of funnel plumbing I want you building for a while.</p>
+
+  <h3>Your week</h3>
+  <p>The biggest operational change in this plan is where your hours go, and it's the one that will feel the most uncomfortable.</p>
+  <p>Cap the building. The portal, the app, the AI workspaces: the 22 hours a week that currently go there get cut to a fraction, and the hours come back to conversations. Calls, follow-ups, outreach to people already in your world, writing emails that invite, hosting the live event. Making offers. If a week goes by and most of it went into code, that week went into hiding.</p>
+  <p>I'm not asking you to stop being good at systems. I'm asking you to notice that the system is built, and that the business is now waiting on you to sell what it delivers.</p>
+
+  <h3>One question I want you to bring to our call</h3>
+  <p>You wrote: "The 1:1s are meant to be 30 minutes and run to an hour." I'm curious about this. Is it a boundary thing? What's causing them to run over? A 1:1 that doubles in length for 11 clients is a lot of hours, and I'd rather understand what's happening in the room than guess.</p>
+
+  <h3>Hiring</h3>
+  <p>You mentioned hiring comes after £15K. Agreed. Nothing in this plan needs a team member. It needs you, on calls.</p>
+</section>
+
+<!-- ===================== 9. PORTAL RESOURCES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 09</div>
+    <h2>Resources from the portal</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Two things from me, and two sessions with me. In this order.</p>
+  </div>
+
+  <h3>1. My sales process and script</h3>
+  <p>This is the direct answer to the close rate. Go through the sales training in the portal and get the script in front of you before our sales session, so we're working from a shared structure rather than building one from scratch on the call. Start using it on your very next discovery call. Don't wait until you feel ready. The script is what gets you there.</p>
+
+  <h3>2. A working session on sales</h3>
+  <p>A session with me solely on selling: how you position the programme, how you talk about it, how you lead the conversation, and the languaging for collecting more cash up front. This is the highest-leverage hour in the whole plan. Book it early in the second month, once the 15-minute sessions are flowing and you've had a few discovery calls to bring to it.</p>
+
+  <h3>3. A working session on the front end</h3>
+  <p>A deep dive into your landing page copy and the upsell flow: the half-length variant, the bump headline, the upsell video. Small changes that compound across every buyer and let you spend more. Bring your current numbers so we can see what moves.</p>
+
+  <h3>4. Live event resources</h3>
+  <p>When you reach your first masterclass, I'll walk you into the resources for it at the right moment rather than handing them to you now. Structure, the invitation at the end, and how the event hands people into the 15-minute session.</p>
+</section>
+
+<!-- ===================== 10. 90-DAY PLAN ===================== -->
+<section class="section break">
+  <div class="sechead">
+    <div class="sec-num">Section 10</div>
+    <h2>Your 90-day action plan</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">This is the payoff. Concrete enough to start Monday. Sequenced on purpose, so don't reorder it.</p>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 1–30</span>
+      <span class="ttl">Foundation — fix the signal, open the bridge, clear the deck</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Fix the Meta optimisation event in week one.</strong> Send a server-side opt-in event for actual purchasers and point the ad set at it, so Meta optimises toward buyers instead of checkout step one. Do this before you touch the budget.</li>
+        <li><strong>Record a batch of new ad variations and start stepping the budget.</strong> Same format that works (you, outdoors, walking, to camera), new openings and angles. Get them recorded before you move on 27 October. Launch them alongside Script 1, then raise the budget 15 to 20 percent every 14 days, watching per-ad frequency, campaign frequency and front-end return.</li>
+        <li><strong>Replace the gated 45-minute call with a 15-minute session.</strong> Take the seven-minute video off the confirmation page and put an ungated invitation to the 15-minute session in its place, next to the book download and the community invite. Then repeat that invitation in dedicated emails.</li>
+        <li><strong>Rewrite the welcome sequence to invite, and go to three to five emails a week.</strong> Keep the story emails. Add standalone emails about the conversation and what it's for. Send to buyers and non-buyers alike, and stop dropping non-buyers on day 14.</li>
+        <li><strong>Clear the deck to two offers.</strong> Book and programme. Take the Allowing Session, the Circle and Bespoke off the front of the site. Let the app launch without becoming the focus. Park the second business alongside the Institute.</li>
+        <li><strong>Rebuild your week.</strong> Cap build and AI-workspace time hard. Block daily time for calls, follow-ups and outreach to people already in your world. This starts now, not after the move.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 31–60</span>
+      <span class="ttl">Implementation — learn the sale, run the first event</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Go through the sales training and script, then do the sales session with me.</strong> Run the two-step process on every call from here: 15 minutes to assess and qualify, 45 minutes to sell to the people who fit. Bring your first few discovery calls to the session.</li>
+        <li><strong>Start asking for cash up front on every close.</strong> Use the languaging from the session. Target roughly 50% of revenue collected at the point of sale.</li>
+        <li><strong>Host your first live masterclass to the list.</strong> Invite buyers and non-buyers. Teach from your story, work something live, and end with an invitation to the 15-minute session. Put the second one on the calendar before the first one ends.</li>
+        <li><strong>Do the front-end working session with me and ship the tests.</strong> The half-length landing page variant, the benefit-led bump headline, and a rewritten upsell video that gets to the point. Run the landing page as a split test against the current page.</li>
+        <li><strong>Keep stepping the budget.</strong> Second and third increases. If frequency on the main ad climbs past where it is now, add another creative batch rather than pulling spend.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 61–90</span>
+      <span class="ttl">Momentum — scale what's working, protect the focus</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Keep climbing on spend until the front end tells you to stop.</strong> Continue the 14-day steps. Fresh creative as needed. You're looking for a sustained drop in front-end profitability, not a bad day.</li>
+        <li><strong>Run the second live event and lock in the monthly rhythm.</strong> The event, the follow-up emails, and the 15-minute sessions it produces become a repeating cycle.</li>
+        <li><strong>Review the numbers that matter.</strong> Buyer-to-call rate, show rate, close rate (25% is the floor we're aiming past), cash collected up front, front-end return. Refine the emails, the event and the call from real data.</li>
+        <li><strong>Take a closer look at YouTube long-form.</strong> Once the bridge and the sale are working, this is the next channel worth examining for reach. Not before.</li>
+        <li><strong>Hold the line.</strong> No new offers. No second business. No new build projects. Until you're at £15K a month, the answer to every new idea is "after."</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== CLOSING ===================== -->
+<section class="closing">
+  <div class="sechead">
+    <div class="note-head">Before you go</div>
+    <h2>One last thing</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>This is a roadmap, not a rulebook. The sequence matters: the signal, then the bridge, then the sale, then scale. How it feels in practice is yours to shape. If something isn't landing, that's information. Bring it to me.</p>
+  <p>I want to say the core of it one more time. You have the foundations of a good business. A funnel that builds an audience for free, a story nobody can copy, and proof that the work works. The gap is the bridge into a conversation with you and what happens inside that conversation. Everything in this plan is one idea wearing ten hats: get out from behind the screen, get in front of the people your funnel is already bringing you, and learn to make the offer.</p>
+  <p>You're moving countries in the middle of this. That's fine. The plan is built to survive it, because most of it is conversations and emails, not infrastructure. Just don't let the move become the reason the building starts again.</p>
+  <p>I think there's a clear path here to £15K a month at a minimum, and I'm excited to walk with you and help you bring that next chapter of the business to life. When you hit something, a call that rattled you, an email that won't come together, a number that doesn't make sense, that's exactly when to reach out. Not after you've figured it out alone.</p>
+  <div class="sign">— Jason
+  <span>Telegram @jasonmossofficial &nbsp;·&nbsp; jason@jasonmoss.com</span>
+  </div>
+</section>
+
+</body>
+</html>
