@@ -30,46 +30,6 @@
 <meta name="twitter:title" content="Jason Moss — Helping entrepreneurs grow from peace, not pressure.">
 <meta name="twitter:description" content="Jason Moss helps entrepreneurs grow with more revenue, clarity, and peace through intuitive leadership, aligned profitability, and resonance marketing.">
 <meta name="twitter:image" content="https://jasonmoss.com/assets/images/featured.jpg">
-<link rel="stylesheet" href="/css/site.css">
-<!-- JSON-LD Structured Data -->
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Person",
-      "name": "Jason Moss",
-      "url": "https://jasonmoss.com",
-      "image": "https://jasonmoss.com/assets/images/featured.jpg",
-      "jobTitle": "Business Coach & Mentor",
-      "description": "Jason Moss helps entrepreneurs grow with more revenue, clarity, and peace through intuitive leadership, aligned profitability, and resonance marketing.",
-      "sameAs": [
-        "https://www.youtube.com/@jasonmossofficial",
-        "https://www.instagram.com/jasonmossofficial/"
-      ]
-    },
-    {
-      "@type": "ProfessionalService",
-      "name": "Jason Moss",
-      "url": "https://jasonmoss.com",
-      "logo": "https://jasonmoss.com/assets/images/logo-black.png",
-      "image": "https://jasonmoss.com/assets/images/featured.jpg",
-      "description": "Mentorship, programs, and teaching to help entrepreneurs release pressure and overthinking so they can lead with clearer intuition and experience more freedom, revenue, and ease.",
-      "founder": {
-        "@type": "Person",
-        "name": "Jason Moss"
-      },
-      "areaServed": "Worldwide",
-      "serviceType": ["Business Coaching", "Mentorship", "Entrepreneurship Programs"]
-    },
-    {
-      "@type": "WebSite",
-      "name": "Jason Moss",
-      "url": "https://jasonmoss.com"
-    }
-  ]
-}
-</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
@@ -114,19 +74,19 @@
 }
 </script>
 <style>
-.hero{position:relative;min-height:900px;color:var(--sand);display:flex;flex-direction:column;background:#33362f}
+.hero{position:relative;min-height:100vh;min-height:100svh;color:var(--sand);display:flex;flex-direction:column;background:#33362f}
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:62% 40%}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,26,22,.42) 0,rgba(22,26,22,0) 170px),linear-gradient(90deg,rgba(22,26,22,.78) 0%,rgba(22,26,22,.5) 38%,rgba(22,26,22,0) 66%),linear-gradient(0deg,rgba(22,26,22,.7) 0%,rgba(22,26,22,0) 30%)}
 .hero .hdr{color:var(--sand)}
 .hero .eyebrow{color:#D8C08A;max-width:470px}
-.hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:center;max-width:1312px;width:100%;margin:0 auto;padding:40px 56px 60px}
-.hero-copy{max-width:720px;display:flex;flex-direction:column;gap:30px}
-.hero-copy .h1{color:var(--sand);font-size:76px}
-.hero-copy .lede{color:rgba(248,246,242,.85);max-width:500px}
+.hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:center;max-width:1312px;width:100%;margin:0 auto;padding:clamp(8px,3vh,40px) 56px clamp(12px,4vh,60px)}
+.hero-copy{max-width:max(440px,47vw);display:flex;flex-direction:column;gap:clamp(10px,2.8vh,30px)}
+.hero-copy .h1{color:var(--sand);font-size:clamp(32px,min(4.3vw,7.6vh),88px);line-height:1.08}
+.hero-copy .lede{color:rgba(248,246,242,.85);max-width:500px;font-size:clamp(15px,2vh,19px)}
 .hero-ctas{display:flex;align-items:center;gap:36px;flex-wrap:wrap;margin-top:6px}
-.hero-press{position:relative;z-index:2;max-width:1312px;width:100%;margin:0 auto;padding:30px 56px 40px;display:flex;align-items:center;gap:48px}
+.hero-press{position:relative;z-index:2;max-width:1312px;width:100%;margin:0 auto;padding:clamp(10px,2.6vh,30px) 56px clamp(14px,3.6vh,40px);display:flex;align-items:center;gap:48px}
 .hero-press .label{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(248,246,242,.6);white-space:nowrap}
-.hero-press .press{flex:1;border-top:1px solid rgba(248,246,242,.18);padding-top:26px}
+.hero-press .press{flex:1;border-top:1px solid rgba(248,246,242,.18);padding-top:clamp(12px,2.4vh,26px)}
 .recog{display:grid;grid-template-columns:5fr 6fr;gap:96px;align-items:start}
 .recog .big{font-family:'Libre Baskerville',serif;font-size:40px;line-height:1.35;color:var(--obs);margin-top:28px}
 .recog .big em{color:var(--mocha)}
@@ -168,6 +128,23 @@
 .closer{position:relative;padding:180px 0;text-align:center;color:var(--sand);background-size:cover;background-position:center}
 .closer::before{content:"";position:absolute;inset:0;background:rgba(22,30,25,.55)}
 .closer .inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:32px}
+@media (min-width:901px){
+  .hero .hdr,.hero-body,.hero-press{max-width:none;padding-left:clamp(56px,7vw,220px);padding-right:clamp(56px,7vw,220px)}
+  .hero .hdr{padding-top:clamp(12px,2.6vh,26px);padding-bottom:clamp(12px,2.6vh,26px)}
+  .hero .ln{display:block;white-space:nowrap}
+  .hero-press{gap:clamp(20px,3vw,48px)}
+  .hero-press .press{flex-wrap:nowrap;gap:clamp(16px,2.6vw,40px)}
+  .hero-press .press img{height:clamp(15px,1.55vw,24px)}
+}
+@media (min-width:901px) and (max-height:560px){
+  .hero .eyebrow{display:none}
+  .hero-ctas .btn{min-height:46px;padding:12px 26px}
+  .hero-ctas{gap:4px 28px}
+  .hero-ctas .tlink{padding:6px 0}
+}
+@media (min-width:901px) and (max-height:640px){
+  .hero-copy .lede{display:none}
+}
 @media (max-width:900px){
   .hero{min-height:0;background:var(--forest-deep)}
   .hero-bg{bottom:auto;height:500px;background-position:64% 35%}
@@ -186,8 +163,6 @@
 }
 @media (min-width:901px) and (max-width:1200px){
   .hero-bg{background-position:30% 40%}
-  .hero-copy{max-width:600px}
-  .hero-copy .h1{font-size:62px}
   .recog{gap:64px}
   .recog .big{font-size:34px}
   .method-grid,.story{gap:64px}
@@ -226,7 +201,7 @@
   <div class="hero-body">
     <div class="hero-copy">
       <div class="eyebrow light">Business mentor for coaches, consultants &amp; service‑based founders</div>
-      <h1 class="h1">Helping entrepreneurs grow from <span class="gold-it">peace, not pressure.</span></h1>
+      <h1 class="h1"><span class="ln">Helping entrepreneurs</span> <span class="ln">grow from <span class="gold-it">peace,</span></span> <span class="ln gold-it">not pressure.</span></h1>
       <p class="lede">After 20 years of growing businesses… and supporting 1,000+ entrepreneurs… I’ve learned that sustainable growth begins on the inside.</p>
       <div class="hero-ctas">
         <a class="btn btn-gold" href="/apply">Explore working together</a>
