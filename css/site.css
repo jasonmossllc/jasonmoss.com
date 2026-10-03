@@ -132,6 +132,7 @@ body{margin:0}
 .jm a,.ftr a,.mobile-menu a,.btn,.chip,.opt,.menu-btn,.menu-close{transition:color .28s ease,background-color .28s ease,border-color .28s ease,box-shadow .28s ease,opacity .28s ease,transform .28s ease}
 @media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
 @media (prefers-reduced-motion:reduce){.jm a,.ftr a,.mobile-menu a,.btn{transition:none}}
+.ftr-min .credit{display:block;margin:8px 0 0;text-align:center}
 
 /* players + mobile menu (production) */
 .vid-player{aspect-ratio:16/9;background:#1D1F1E}
