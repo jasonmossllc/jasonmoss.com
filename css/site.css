@@ -27,7 +27,7 @@ body{margin:0}
 .lede{font-size:19px;line-height:1.75;color:var(--ink-soft);font-weight:400}
 .muted{color:var(--ink-soft)}
 .small{font-size:14px}
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Raleway',sans-serif;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;padding:19px 38px;min-height:56px;border:0;border-radius:0;cursor:pointer;transition:background .2s,transform .2s}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Raleway',sans-serif;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;padding:19px 38px;min-height:56px;border:0;border-radius:0;cursor:pointer}
 .jm .btn-gold,.btn-gold{background:var(--gold);color:var(--obs)}
 .btn-gold:hover{background:#b89a5e;transform:translateY(-1px)}
 .jm .btn-ghost{background:transparent;color:var(--obs);box-shadow:inset 0 0 0 1px rgba(29,31,30,.35)}
@@ -124,6 +124,14 @@ body{margin:0}
 .skip-link:focus{top:12px}
 :focus-visible{outline:2px solid var(--gold);outline-offset:3px}
 
+/* Photo credit: a whisper in the legal line */
+.ftr .credit{margin-left:14px;font-size:11px;letter-spacing:.03em;color:rgba(248,246,242,.32);white-space:nowrap}
+@media (max-width:900px){.ftr .credit{display:block;margin:6px 0 0}}
+
+/* Elegant interactions: quick fades on hover instead of instant colour flips; smooth in-page scrolling */
+.jm a,.ftr a,.mobile-menu a,.btn,.chip,.opt,.menu-btn,.menu-close{transition:color .28s ease,background-color .28s ease,border-color .28s ease,box-shadow .28s ease,opacity .28s ease,transform .28s ease}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+@media (prefers-reduced-motion:reduce){.jm a,.ftr a,.mobile-menu a,.btn{transition:none}}
 
 /* players + mobile menu (production) */
 .vid-player{aspect-ratio:16/9;background:#1D1F1E}
