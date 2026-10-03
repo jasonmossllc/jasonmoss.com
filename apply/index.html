@@ -47,6 +47,7 @@
 .three .pc-body{padding:24px 26px 26px;display:flex;flex-direction:column;gap:12px}
 .three .quote{font-size:18px}
 .qual{padding:128px 0}
+.ap-close{padding:120px 0}
 .embed-shot{position:relative;max-width:1136px;margin:0 auto;height:1800px;overflow:hidden}
 .embed-shot img{width:100%}
 .embed-shot .ws-mob{display:none}
@@ -78,6 +79,7 @@
   .letter{padding:72px 24px 40px;font-size:16px}
   .letter .hs{left:24px}
   .qual{padding:80px 0}
+  .ap-close{padding:80px 0}
   .qcard{padding:32px 22px}
 }
 @media (max-width:700px){
@@ -179,6 +181,15 @@
   </div>
 </section>
 
+<section class="bg-tex-forest-soft ap-close on-dark paper" id="closer">
+  <div class="wrap" style="display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center">
+    <div class="eyebrow center">Free · 20 minutes · 1-on-1 with Jason</div>
+    <h2 class="h2">Clarity starts with a <span class="gold-it">conversation.</span></h2>
+    <p style="max-width:520px;color:rgba(248,246,242,.78)">Book a free 20-minute business assessment call. We’ll look at your business together and map out your clearest path to more clients.</p>
+    <a class="btn btn-gold" href="#book">Book your free call</a>
+  </div>
+</section>
+
 <footer class="ftr ftr-min"><div class="wrap"><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"><div class="ftr-base"><span>&copy; Jason Moss LLC. All rights reserved.</span><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav></div></div></footer>
 </div>
 <script src="/js/site.js" defer></script>
@@ -196,14 +207,14 @@
 <script>
 (function () {
   /* Sticky CTA (mobile): visible once past the hero, whenever the booking section is not on screen
-     (so it shows above the qualifier and again over the wall of love below it) */
+     (so it shows above the qualifier and again over the wall of love; hidden while the closing CTA is visible) */
   var hero = document.getElementById('hero'), cta = document.getElementById('stickyCta'), book = document.getElementById('book');
   if (!hero || !cta) return;
   function check() {
     var past = hero.getBoundingClientRect().bottom < 0;
-    var b = book ? book.getBoundingClientRect() : null;
-    var bookOnScreen = b ? (b.top < window.innerHeight && b.bottom > 0) : false;
-    cta.classList.toggle('sticky-cta--visible', past && !bookOnScreen);
+    function onScreen(el) { if (!el) return false; var r = el.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; }
+    var busy = onScreen(book) || onScreen(document.getElementById('closer'));
+    cta.classList.toggle('sticky-cta--visible', past && !busy);
   }
   window.addEventListener('resize', check, { passive: true });
   window.addEventListener('scroll', check, { passive: true });
