@@ -47,6 +47,7 @@
 .three .pc-body{padding:24px 26px 26px;display:flex;flex-direction:column;gap:12px}
 .three .quote{font-size:18px}
 .qual{padding:128px 0}
+.ap-close{padding:120px 0}
 .embed-shot{position:relative;max-width:1136px;margin:0 auto;height:1800px;overflow:hidden}
 .embed-shot img{width:100%}
 .embed-shot .ws-mob{display:none}
@@ -63,14 +64,22 @@
 .mini .msg{background:#FBFAF7;border:1px solid var(--line);padding:16px}
 .mini .msg img{width:100%}
 @media (max-width:900px){
-  .ap-hero{padding:40px 0 48px}
+  .ap-hero{padding:24px 0 48px}
+  .ap-hero .ap-top{padding:0 0 32px!important}
   .ap-grid,.three,.mini{grid-template-columns:1fr;gap:40px}
-  .ap-copy .h1{font-size:40px}
-  .ap-grid .frame{order:-1}
+  .ap-grid{gap:44px}
+  .ap-copy{gap:20px}
+  .ap-copy .h1{font-size:clamp(32px,9vw,40px)}
+  .ap-copy .lede{font-size:16.5px}
+  .ap-micro{gap:6px 16px}
+  /* photo comes after the pitch + button, landscape crop on his face and shoulders */
+  .ap-grid .frame{max-width:100%;margin-right:12px}
+  .ap-photo{aspect-ratio:4/3;object-position:62% 30%}
   .press-row{flex-direction:column;gap:18px;margin-top:56px}
   .letter{padding:72px 24px 40px;font-size:16px}
   .letter .hs{left:24px}
   .qual{padding:80px 0}
+  .ap-close{padding:80px 0}
   .qcard{padding:32px 22px}
 }
 @media (max-width:700px){
@@ -168,7 +177,16 @@
       <h2 class="h2">What people are saying</h2>
       <p class="disclaimer">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
     </div>
-    <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
+    <div class="jm-testimonials" data-layout="grid" data-initial="20" data-infinite="0"></div>
+  </div>
+</section>
+
+<section class="bg-tex-forest-soft ap-close on-dark paper" id="closer">
+  <div class="wrap" style="display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center">
+    <div class="eyebrow center">Free · 20 minutes · 1-on-1 with Jason</div>
+    <h2 class="h2">Clarity starts with a <span class="gold-it">conversation.</span></h2>
+    <p style="max-width:520px;color:rgba(248,246,242,.78)">Book a free 20-minute business assessment call. We’ll look at your business together and map out your clearest path to more clients.</p>
+    <a class="btn btn-gold" href="#book">Book your free call</a>
   </div>
 </section>
 
@@ -179,7 +197,8 @@
 .qualify-wrap{width:100%;max-width:680px;margin:48px auto 0;border:1px solid rgba(194,168,108,.45);background:var(--sand);box-shadow:0 0 40px rgba(194,168,108,.15);overflow:hidden}
 .sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--sand);padding:14px 20px;box-shadow:0 -2px 12px rgba(29,31,30,.08);z-index:50;text-align:center;transform:translateY(100%);transition:transform .35s ease-out}
 .sticky-cta--visible{transform:translateY(0)}
-.sticky-cta .btn{width:100%;max-width:360px;min-height:50px;padding:14px 24px;font-size:12px}
+.sticky-cta,.sticky-cta *{box-sizing:border-box}
+.sticky-cta .btn{width:100%;max-width:360px;min-height:50px;padding:14px 20px;font-size:12px;letter-spacing:.12em;text-decoration:none;white-space:nowrap}
 @media (max-width:900px){.sticky-cta{display:block}.ftr-min{padding-bottom:96px}}
 </style>
 <div class="sticky-cta" id="stickyCta"><a href="#book" class="btn btn-gold">Book your free call</a></div>
@@ -188,14 +207,17 @@
 <script src="https://jasonmoss.com/qualify/embed.js" async></script>
 <script>
 (function () {
-  /* Sticky CTA: visible between the hero and the booking section (mobile) */
+  /* Sticky CTA (mobile): visible once past the hero, whenever the booking section is not on screen
+     (so it shows above the qualifier and again over the wall of love; hidden while the closing CTA is visible) */
   var hero = document.getElementById('hero'), cta = document.getElementById('stickyCta'), book = document.getElementById('book');
   if (!hero || !cta) return;
   function check() {
     var past = hero.getBoundingClientRect().bottom < 0;
-    var before = (book ? book.getBoundingClientRect().top : 99999) > window.innerHeight;
-    cta.classList.toggle('sticky-cta--visible', past && before);
+    function onScreen(el) { if (!el) return false; var r = el.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; }
+    var busy = onScreen(book) || onScreen(document.getElementById('closer'));
+    cta.classList.toggle('sticky-cta--visible', past && !busy);
   }
+  window.addEventListener('resize', check, { passive: true });
   window.addEventListener('scroll', check, { passive: true });
   check();
 })();

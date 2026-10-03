@@ -26,9 +26,10 @@
 .pf{display:flex;align-items:center;gap:12px;min-height:56px;padding:8px 18px;border:1px solid rgba(248,246,242,.3);color:var(--sand);font-size:14px;font-weight:600;letter-spacing:.06em;transition:background .2s}
 .pf:hover{background:rgba(248,246,242,.08)}
 .pf small{display:block;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:rgba(248,246,242,.6);font-weight:600;line-height:1.2}
-.pf span{line-height:1.25}
+.pf span{line-height:1.25;white-space:nowrap}
 .latest{display:grid;grid-template-columns:7fr 4fr;gap:64px;align-items:center}
 .latest .vid{aspect-ratio:16/9}
+.latest .play{left:auto;top:auto;right:18px;bottom:18px;transform:none}
 .latest-copy{display:flex;flex-direction:column;gap:20px}
 .meta{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe)}
 .eps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px 32px;margin-top:56px}
@@ -46,6 +47,7 @@
   .platforms{grid-template-columns:1fr}
   .eps{grid-template-columns:1fr}
   .resonate{grid-template-columns:1fr;padding:40px 26px;gap:28px;text-align:left}
+  .resonate .btn{white-space:nowrap;letter-spacing:.08em;padding:18px 16px}
 }
 @media (min-width:901px) and (max-width:1200px){
   .pod-grid{gap:64px}
