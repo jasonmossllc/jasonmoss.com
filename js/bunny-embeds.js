@@ -389,7 +389,7 @@
         // .jm-minimal.plyr--stopped CSS rule). Compact = no volume slider /
         // settings / quality, which would cram a small player.
         controls: minimal
-          ? ['play-large', 'play', 'progress', 'current-time', 'mute', 'fullscreen']
+          ? ['play-large', 'play', 'progress', 'current-time', 'mute', 'captions', 'fullscreen']
           : ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
         settings: settingsMenu,
         i18n: { qualityLabel: { 0: 'Auto' } },

@@ -49,11 +49,33 @@
   .resonate{grid-template-columns:1fr;padding:40px 26px;gap:28px;text-align:left}
   .resonate .btn{white-space:nowrap;letter-spacing:.08em;padding:18px 16px}
 }
+/* Desktop: header + hero fill exactly one screen, full width with the homepage's proportional side spacing;
+   cover art and type scale with the window's width and height */
+@media (min-width:901px){
+  /* header is a fixed var(--hdr-h) tall on desktop (+1px border) */
+  .pod-hero{min-height:calc(100vh - var(--hdr-h) - 1px);min-height:calc(100svh - var(--hdr-h) - 1px);display:flex;align-items:center;padding:clamp(28px,6vh,96px) 0}
+  .pod-hero>.wrap{max-width:none;width:100%;padding-left:clamp(56px,7vw,220px);padding-right:clamp(56px,7vw,220px)}
+  .pod-grid{grid-template-columns:auto minmax(0,1fr);gap:clamp(48px,6vw,160px)}
+  .pod-grid .frame{width:min(36vw,62vh)}
+  .pod-copy{gap:clamp(14px,2.8vh,34px);max-width:min(1000px,46vw)}
+  .pod-copy .eyebrow{font-size:clamp(12px,.62vw,17px)}
+  .pod-copy .h1{font-size:clamp(46px,min(5.6vw,10.5vh),120px)}
+  .pod-copy .lede{font-size:clamp(16px,min(1.3vw,2.3vh),32px)}
+  .pod-copy>p:not(.lede){font-size:clamp(15px,min(1.02vw,1.9vh),26px)}
+  .platforms{gap:clamp(10px,.7vw,18px)}
+  .pf{min-height:clamp(50px,min(3.4vw,6.4vh),86px);font-size:clamp(13px,.78vw,20px);padding:8px clamp(14px,1.1vw,28px);gap:clamp(10px,.7vw,18px)}
+  .pf small{font-size:clamp(10px,.52vw,13px)}
+  .pf svg{width:clamp(20px,1.25vw,32px);height:auto}
+}
+@media (min-width:901px) and (max-aspect-ratio:1/1){
+  .pod-hero{min-height:0}
+}
 @media (min-width:901px) and (max-width:1200px){
-  .pod-grid{gap:64px}
-  .pod-copy .h1{font-size:64px}
   .platforms{grid-template-columns:1fr 1fr}
   .platforms .pf:last-child{grid-column:1/-1}
+}
+@media (min-width:901px) and (max-height:700px){
+  .pod-copy>p:not(.lede){display:none}
 }
 @media (min-width:601px) and (max-width:900px){
   .eps{grid-template-columns:repeat(2,minmax(0,1fr));gap:36px 20px}
@@ -69,14 +91,17 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+
 <div class="jm">
-<div class="hdr-solid-wrap"><div class="hdr"><a href="/" aria-label="Jason Moss home"><img class="logo" src="/assets/images/logo.svg" alt="Jason Moss" width="140" height="31"></a><nav class="nav" aria-label="Main"><a href="/resonance-masterclass-optin?source=Website">Masterclass</a><a href="/transmission" class="cur" aria-current="page">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply">Work together</a></nav><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button></div></div>
+<div class="hdr-solid-wrap"><div class="hdr"><a href="/" aria-label="Jason Moss home"><img class="logo" src="/assets/images/logo.svg" alt="Jason Moss" width="140" height="31"></a><nav class="nav" aria-label="Main"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission/" class="cur" aria-current="page">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply/">Work together</a></nav><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button></div></div>
 <div class="mobile-menu" id="mobileMenu" hidden>
   <button class="menu-close" id="menuClose" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  <nav aria-label="Mobile"><a href="/resonance-masterclass-optin?source=Website">Masterclass</a><a href="/transmission" class="cur" aria-current="page">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply">Work together</a></nav>
+  <nav aria-label="Mobile"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission/" class="cur" aria-current="page">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply/">Work together</a></nav>
 </div>
+<main id="main">
 
-<section class="bg-tex-forest pod-hero on-dark paper">
+<section class="bg-tex-forest pod-hero hero-fw on-dark paper">
   <div class="wrap pod-grid">
     <div class="frame"><img class="cover" src="/transmission/assets/images/transmission-cover.jpg" alt="The Transmission with Jason Moss cover art"></div>
     <div class="pod-copy">
@@ -116,7 +141,7 @@
       <a class="ep ep-item" href="https://www.youtube.com/watch?v=A0LNCk77czo&amp;list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="https://i.ytimg.com/vi/A0LNCk77czo/maxresdefault.jpg" alt="" loading="lazy"><span class="play sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span></div><span class="meta">Sep 15</span><h3>How to Create a Landing Page That Converts (Step by Step)</h3></a>
       <a class="ep ep-item" href="https://www.youtube.com/watch?v=Ljm_3bA8lzA&amp;list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="https://i.ytimg.com/vi/Ljm_3bA8lzA/maxresdefault.jpg" alt="" loading="lazy"><span class="play sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span></div><span class="meta">Sep 14</span><h3>How to Make Money from Consulting (My 3-Part Strategy)</h3></a>
       <a class="ep ep-item" href="https://www.youtube.com/watch?v=0lP1252IuOA&amp;list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="https://i.ytimg.com/vi/0lP1252IuOA/maxresdefault.jpg" alt="" loading="lazy"><span class="play sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span></div><span class="meta">Sep 7</span><h3>How to Get Clients Without Ads (Even With No Audience)</h3></a>
-      <a class="ep" href="https://www.youtube.com/playlist?list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="/assets/images/featured.jpg" loading="lazy" alt="" style="object-position:50% 30%"></div><span class="meta">Subscribe</span><h3>Never miss an episode. Follow on Spotify, Apple Podcasts, or YouTube.</h3></a>
+      <a class="ep" href="https://www.youtube.com/playlist?list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="/assets/images/featured.jpg" loading="lazy" alt="" style="object-position:50% 30%"></div><span class="meta">Subscribe</span><h3>Never miss an episode. Subscribe to The Transmission on YouTube.</h3></a>
     </div>
   </div>
 </section>
@@ -129,11 +154,12 @@
         <h2 class="h2" style="font-size:30px">If this work has been <span class="brass-it">resonating…</span></h2>
         <p class="muted">And you feel ready for real, personalized support, book a free 20-minute business assessment with me. We’ll explore where you are, what you’re building, and whether working together feels aligned for both of us.</p>
       </div>
-      <a class="btn btn-gold" href="/apply" data-pass-params>Explore working together</a>
+      <a class="btn btn-gold" href="/apply/" data-pass-params>Explore working together</a>
     </div>
   </div>
 </section>
 
+</main>
 <footer class="ftr"><div class="wrap">
 <div class="ftr-grid">
   <div><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"><p style="max-width:320px">Business mentorship for coaches, consultants, and service-based business owners.</p><div class="social">
@@ -141,29 +167,34 @@
 <a href="https://www.instagram.com/jasonmossofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></a>
 <a href="mailto:jason@jasonmoss.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13"/><path d="M3.5 6l8.5 7 8.5-7"/></svg></a>
 </div></div>
-  <div><h4>Explore</h4><ul><li><a href="/resonance-masterclass-optin?source=Website">Masterclass</a></li><li><a href="/transmission">The Transmission</a></li><li><a href="/testimonials/">Breakthroughs</a></li></ul></div>
-  <div><h4>Work together</h4><ul><li><a href="/apply">Free assessment call</a></li></ul></div>
-  <div><h4>Contact</h4><ul><li><a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a></li></ul></div>
+  <div><p class="ftr-h">Explore</p><ul><li><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a></li><li><a href="/transmission/">The Transmission</a></li><li><a href="/testimonials/">Breakthroughs</a></li></ul></div>
+  <div><p class="ftr-h">Work together</p><ul><li><a href="/apply/">Free assessment call</a></li></ul></div>
+  <div><p class="ftr-h">Contact</p><ul><li><a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a></li></ul></div>
 </div>
 <div class="ftr-base"><span>&copy; Jason Moss LLC. All rights reserved.</span><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav></div>
 </div></footer>
 </div>
 <script src="/js/site.js" defer></script>
+<style>.eps-pending .latest,.eps-pending #eps{opacity:0}.latest,#eps{transition:opacity .35s ease}</style>
 <script>
 /* Episodes update themselves from the Transmission YouTube playlist (netlify/functions/podcast-episodes.js).
    The HTML above is a working fallback if the feed is unreachable. */
 (function () {
   var MONTHS = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-  function longDate(d) { return MONTHS[d.getUTCMonth()] + ' ' + d.getUTCDate() + ', ' + d.getUTCFullYear(); }
-  function shortDate(d) { return MONTHS[d.getUTCMonth()].slice(0, 3) + ' ' + d.getUTCDate(); }
+  function longDate(d) { return MONTHS[d.getMonth()] + ' ' + d.getDate() + ', ' + d.getFullYear(); }
+  function shortDate(d) { return MONTHS[d.getMonth()].slice(0, 3) + ' ' + d.getDate(); }
   function url(id) { return 'https://www.youtube.com/watch?v=' + encodeURIComponent(id) + '&list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd'; }
   function thumb(img, id) {
     img.onerror = function () { img.onerror = null; img.src = 'https://i.ytimg.com/vi/' + id + '/hqdefault.jpg'; };
     img.src = 'https://i.ytimg.com/vi/' + id + '/maxresdefault.jpg';
   }
+  var root = document.documentElement;
+  root.classList.add('eps-pending');
+  var reveal = function () { root.classList.remove('eps-pending'); };
+  setTimeout(reveal, 2500);
   fetch('/.netlify/functions/podcast-episodes').then(function (r) { return r.ok ? r.json() : null; }).then(function (data) {
     var eps = data && data.episodes;
-    if (!eps || !eps.length) return;
+    if (!eps || !eps.length) { reveal(); return; }
     var latest = eps[0];
     thumb(document.getElementById('latestImg'), latest.id);
     document.getElementById('latestTitle').textContent = latest.title;
@@ -179,7 +210,8 @@
       tile.querySelector('.meta').textContent = shortDate(new Date(ep.published));
       tile.querySelector('h3').textContent = ep.title;
     });
-  }).catch(function () {});
+    reveal();
+  }).catch(reveal);
 })();
 /* URL params -> CTA link (kept from the previous page) */
 (function () {
