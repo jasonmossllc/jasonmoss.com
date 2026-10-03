@@ -28,596 +28,57 @@
 <meta name="twitter:title" content="Privacy Policy — Jason Moss">
 <meta name="twitter:description" content="Privacy Policy for jasonmoss.com.">
 <meta name="twitter:image" content="https://jasonmoss.com/assets/images/featured.jpg">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
 <style>
-/* ============================================
-   RESET & BASE
-   ============================================ */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --charcoal: #1D1F1E;
-  --forest: #2C3F36;
-  --mocha: #5B4B3F;
-  --mocha-light: #695b50;
-  --taupe: #8C837A;
-  --gold: #C2A86C;
-  --bone: #E9E2D3;
-  --sand: #F8F6F2;
-  --white: #FFFFFF;
-  --font-serif: 'Libre Baskerville', Georgia, serif;
-  --font-sans: 'Raleway', 'Helvetica Neue', sans-serif;
-  --font-script: 'Dancing Script', cursive;
-  --max-width: 1200px;
-  --max-width-wide: 1400px;
-  --header-height: 80px;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  font-family: var(--font-sans);
-  font-weight: 400;
-  font-size: clamp(16px, 1.25vw, 19px);
-  line-height: 1.7;
-  color: var(--charcoal);
-  background: var(--white);
-  overflow-x: hidden;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 40px);
-}
-
-/* ============================================
-   TYPOGRAPHY
-   ============================================ */
-h1, h2, h3, h4 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 1.3;
-}
-
-.btn-primary {
-  display: inline-block;
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--gold);
-  color: var(--charcoal);
-  padding: 18px 40px;
-  border-radius: 0;
-  transition: background 0.3s ease, transform 0.2s ease;
-  text-align: center;
-}
-
-.btn-primary:hover {
-  background: #b89a5e;
-  transform: translateY(-1px);
-}
-
-/* ============================================
-   HEADER
-   ============================================ */
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1100;
-  height: var(--header-height);
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.site-header.scrolled {
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
-}
-
-.header-inner {
-  max-width: var(--max-width-wide);
-  margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-logo img {
-  height: 36px;
-  width: auto;
-}
-
-.nav-desktop {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.nav-desktop a {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--charcoal);
-  transition: color 0.2s ease;
-  position: relative;
-}
-
-.nav-desktop a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.3s ease;
-}
-
-.nav-desktop a:hover::after {
-  width: 100%;
-}
-
-.nav-desktop a:hover {
-  color: var(--mocha);
-}
-
-.nav-cta {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: var(--gold);
-  color: var(--charcoal);
-  padding: 12px 24px;
-  transition: background 0.3s ease;
-}
-
-.nav-cta:hover {
-  background: #b89a5e;
-}
-
-/* Hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-  z-index: 1100;
-}
-
-.hamburger span {
-  display: block;
-  width: 28px;
-  height: 2px;
-  background: var(--charcoal);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.hamburger.active span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
-
-/* Mobile Menu */
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--sand);
-  z-index: 1050;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.mobile-menu.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-.mobile-menu a {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  color: var(--charcoal);
-  transition: color 0.2s ease;
-}
-
-.mobile-menu a:hover {
-  color: var(--gold);
-}
-
-.mobile-menu .nav-cta {
-  margin-top: 12px;
-  font-size: 13px;
-  padding: 14px 32px;
-}
-
-/* ============================================
-   LEGAL PAGE CONTENT
-   ============================================ */
-.legal-page {
-  background: var(--sand);
-  padding-top: calc(var(--header-height) + 80px);
-  padding-bottom: 100px;
-}
-
-.legal-page .legal-inner {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 0 40px;
-}
-
-.legal-page h1 {
-  font-family: var(--font-serif);
-  font-size: clamp(32px, 4vw, 48px);
-  font-weight: 400;
-  color: var(--mocha);
-  margin-bottom: 48px;
-  text-align: center;
-}
-
-.legal-page h2 {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  font-weight: 400;
-  color: var(--mocha);
-  margin-top: 48px;
-  margin-bottom: 16px;
-}
 
-.legal-page h3 {
-  font-family: var(--font-serif);
-  font-size: 18px;
-  font-weight: 400;
-  color: var(--mocha);
-  margin-top: 32px;
-  margin-bottom: 12px;
-}
-
-.legal-page p {
-  font-family: var(--font-sans);
-  font-size: 16px;
-  font-weight: 400;
-  line-height: 1.8;
-  color: var(--charcoal);
-  margin-bottom: 20px;
-}
-
-.legal-page a {
-  color: var(--gold);
-  text-decoration: underline;
-  text-underline-offset: 2px;
-  transition: color 0.2s ease;
-}
-
-.legal-page a:hover {
-  color: #b89a5e;
-}
-
-.legal-page ul {
-  list-style: disc;
-  padding-left: 24px;
-  margin-bottom: 20px;
-}
-
-.legal-page ul li {
-  font-family: var(--font-sans);
-  font-size: 16px;
-  line-height: 1.8;
-  color: var(--charcoal);
-  margin-bottom: 8px;
-}
-
-.legal-page strong {
-  font-weight: 600;
-}
-
-/* ============================================
-   FOOTER
-   ============================================ */
-.footer-upper {
-  background: var(--sand);
-  padding: 48px 0;
-  border-top: 1px solid var(--bone);
-}
-
-.footer-upper-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.footer-logo img {
-  height: 30px;
-  width: auto;
-}
-
-.footer-nav {
-  display: flex;
-  gap: 28px;
-}
-
-.footer-nav a {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--charcoal);
-  transition: color 0.2s ease;
-}
-
-.footer-nav a:hover {
-  color: var(--gold);
-}
-
-.footer-lower {
-  background: var(--forest);
-  padding: 36px 0;
-}
-
-.footer-lower-inner {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.footer-legal p {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  color: var(--bone);
-  line-height: 1.7;
-  opacity: 0.6;
-}
-
-.footer-legal a {
-  color: var(--bone);
-  text-decoration: none;
-  text-underline-offset: 2px;
-  transition: color 0.2s ease;
-}
-
-.footer-legal a:hover {
-  color: var(--gold);
-}
-
-.footer-legal-links {
-  margin-top: 8px;
-}
-
-.footer-legal-links a {
-  margin-right: 14px;
-  font-size: 11px;
-  opacity: 0.55;
-  letter-spacing: 0.01em;
-  transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.footer-legal-links a:hover {
-  opacity: 1;
-}
-
-.footer-social {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.footer-social a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  transition: opacity 0.3s ease;
-}
-
-.footer-social a:hover {
-  opacity: 1;
-}
-
-.footer-social a svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--bone);
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.footer-social a:hover svg {
-  opacity: 0.8;
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-@media (max-width: 1023px) {
-  .container {
-    padding: 0 28px;
-  }
-
-  .header-inner {
-    padding: 0 28px;
-  }
-
-  .nav-desktop {
-    display: none;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  .footer-upper-inner {
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
-  }
-
-  .footer-nav {
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .footer-lower-inner {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .footer-social {
-    margin-top: 8px;
-  }
-}
-
-@media (max-width: 767px) {
-  :root {
-    --header-height: 68px;
-  }
-
-  .container {
-    padding: 0 20px;
-  }
-
-  .header-inner {
-    padding: 0 20px;
-  }
-
-  .header-logo img {
-    height: 28px;
-  }
-
-  .legal-page .legal-inner {
-    padding: 0 20px;
-  }
-
-  .legal-page {
-    padding-top: calc(var(--header-height) + 48px);
-    padding-bottom: 64px;
-  }
-
-  .legal-page h1 {
-    font-size: 28px;
-    margin-bottom: 32px;
-  }
-
-  .legal-page h2 {
-    font-size: 20px;
-    margin-top: 36px;
-  }
-
-  .btn-primary {
-    padding: 14px 28px;
-    font-size: 13px;
-  }
-}
-
-/* Ultrawide */
-@media (min-width: 2200px) {
-  :root {
-    --max-width: 1400px;
-    --max-width-wide: 1600px;
-  }
-}
+.legal-hero{padding:96px 0 56px}
+.legal-hero .wrap-narrow{display:flex;flex-direction:column;gap:20px;max-width:872px}
+.legal-hero .h1{font-size:clamp(38px,4.4vw,60px)}
+.legal-body{background:var(--sand);padding:72px 0 128px}
+.legal{max-width:872px;margin:0 auto;padding:0 56px;color:var(--ink-soft);font-size:17px;line-height:1.85}
+.legal>p:first-child{margin-top:0}
+.legal p{margin:0 0 20px}
+.legal h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:26px;line-height:1.3;color:var(--obs);margin:60px 0 18px;padding-top:28px;border-top:1px solid var(--line)}
+.legal h3{font-family:'Raleway',sans-serif;font-weight:600;font-size:18px;color:var(--obs);margin:32px 0 10px}
+.legal ul,.legal ol{margin:0 0 22px;padding-left:22px}
+.legal li{margin:0 0 10px}
+.legal li::marker{color:var(--gold)}
+.legal strong{color:var(--ink);font-weight:600}
+.legal a{color:var(--brass);text-decoration:underline;text-decoration-color:rgba(117,90,38,.35);text-underline-offset:3px}
+.legal a:hover{text-decoration-color:currentColor}
+@media (max-width:900px){
+  .legal-hero{padding:56px 0 36px}
+  .legal-body{padding:48px 0 88px}
+  .legal{padding:0 22px;font-size:16px}
+  .legal h2{font-size:22px;margin:44px 0 14px;padding-top:22px}
+}
+
+.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/paper-pale.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
+@media (max-width:700px){.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
 </style>
 </head>
 <body>
-
-<!-- ==========================================
-     HEADER
-     ========================================== -->
-<header class="site-header" id="siteHeader">
-  <div class="header-inner">
-    <a href="/" class="header-logo" aria-label="Jason Moss — Home">
-      <img src="../assets/images/logo-black.png" alt="Jason Moss" width="500" height="113">
-    </a>
-    <nav class="nav-desktop">
-      <a href="/resonance-masterclass-optin?source=Website">Masterclass</a>
-      <a href="/transmission">Podcast</a>
-      <a href="/testimonials/">Breakthroughs</a>
-      <a href="/apply" class="nav-cta">Work Together</a>
-    </nav>
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="/resonance-masterclass-optin?source=Website">Masterclass</a>
-  <a href="/transmission">Podcast</a>
-  <a href="/testimonials/">Breakthroughs</a>
-  <a href="/apply" class="nav-cta">Work Together</a>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="jm">
+<div class="hdr-solid-wrap"><div class="hdr"><a href="/" aria-label="Jason Moss home"><img class="logo" src="/assets/images/logo.svg" alt="Jason Moss" width="140" height="31"></a><nav class="nav" aria-label="Main"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply">Work together</a></nav><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button></div></div>
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <button class="menu-close" id="menuClose" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <nav aria-label="Mobile"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply">Work together</a></nav>
 </div>
 
-<!-- ==========================================
-     PRIVACY POLICY CONTENT
-     ========================================== -->
-<main class="legal-page">
-  <div class="legal-inner">
-    <h1>Privacy Policy</h1>
-
-    <p>Jason Moss LLC ("Company", "we", or "us") respects your privacy and is committed to protecting it through this Privacy Policy.</p>
+<main id="main">
+<section class="legal-hero bg-tex-sand paper">
+  <div class="wrap-narrow">
+    <div class="eyebrow">Legal</div>
+    <h1 class="h1">Privacy Policy</h1>
+  </div>
+</section>
+<section class="legal-body">
+  <div class="legal">
+<p>Jason Moss LLC ("Company", "we", or "us") respects your privacy and is committed to protecting it through this Privacy Policy.</p>
 
     <p>This Privacy Policy governs your access to and use of jasonmoss.com, including any content, functionality and services offered on or through jasonmoss.com (the "Website"), whether as a guest or a registered user.</p>
 
@@ -753,96 +214,22 @@ h1, h2, h3, h4 {
 
     <p>Effective as of May 9, 2022</p>
   </div>
+</section>
 </main>
-
-<!-- ==========================================
-     FOOTER
-     ========================================== -->
-<footer>
-  <div class="footer-upper">
-    <div class="container">
-      <div class="footer-upper-inner">
-        <a href="/" class="footer-logo" aria-label="Jason Moss — Home">
-          <img src="../assets/images/logo-black.png" alt="Jason Moss" width="500" height="113">
-        </a>
-        <nav class="footer-nav">
-          <a href="/resonance-masterclass-optin?source=Website">Masterclass</a>
-          <a href="/transmission">Podcast</a>
-          <a href="/testimonials/">Breakthroughs</a>
-        </nav>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-lower">
-    <div class="container">
-      <div class="footer-lower-inner">
-        <div class="footer-legal">
-          <p>&copy; Jason Moss LLC. All rights reserved.</p>
-          <div class="footer-legal-links">
-            <a href="/privacy/">Privacy Policy</a>
-            <a href="/terms/">Terms &amp; Conditions</a>
-            <a href="/earnings-disclaimer/">Earnings Disclaimer</a>
-          </div>
-        </div>
-        <div class="footer-social">
-          <!-- YouTube -->
-          <a href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          </a>
-          <!-- Instagram -->
-          <a href="https://www.instagram.com/jasonmossofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-          </a>
-          <!-- Email -->
-          <a href="mailto:jason@jasonmoss.com" aria-label="Email">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- ==========================================
-     SCRIPTS
-     ========================================== -->
-<script>
-// Sticky header scroll effect
-const header = document.getElementById('siteHeader');
-let lastScroll = 0;
-
-window.addEventListener('scroll', () => {
-  const scrollY = window.scrollY;
-  if (scrollY > 40) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-  lastScroll = scrollY;
-}, { passive: true });
-
-// Hamburger menu toggle
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('active');
-  hamburger.setAttribute('aria-expanded', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-
-// Close mobile menu on link click
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('active');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  });
-});
-</script>
-
+<footer class="ftr"><div class="wrap">
+<div class="ftr-grid">
+  <div><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"><p style="max-width:320px">Business mentorship for coaches, consultants, and service-based business owners.</p><div class="social">
+<a href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10 9.2v5.6l4.8-2.8z"/></svg></a>
+<a href="https://www.instagram.com/jasonmossofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></a>
+<a href="mailto:jason@jasonmoss.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13"/><path d="M3.5 6l8.5 7 8.5-7"/></svg></a>
+</div></div>
+  <div><p class="ftr-h">Explore</p><ul><li><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a></li><li><a href="/transmission">The Transmission</a></li><li><a href="/testimonials/">Breakthroughs</a></li></ul></div>
+  <div><p class="ftr-h">Work together</p><ul><li><a href="/apply">Free assessment call</a></li></ul></div>
+  <div><p class="ftr-h">Contact</p><ul><li><a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a></li></ul></div>
+</div>
+<div class="ftr-base"><span>&copy; Jason Moss LLC. All rights reserved.</span><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav></div>
+</div></footer>
+</div>
+<script src="/js/site.js" defer></script>
 </body>
 </html>
