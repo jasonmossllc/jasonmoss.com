@@ -22,7 +22,10 @@ function memStore() {
   return {
     m,
     async get(k) { return m.has(k) ? m.get(k) : null; },
-    async setJSON(k, v) { m.set(k, v); },
+    async setJSON(k, v, opts = {}) {
+      if (opts.onlyIfNew && m.has(k)) return { modified: false };
+      m.set(k, v); return { modified: true };
+    },
   };
 }
 const brokenStore = { async get() { throw new Error('blobs down'); }, async setJSON() { throw new Error('blobs down'); } };
@@ -52,12 +55,23 @@ for (const tok of ['', null, undefined]) {
   let admitted = 0;
   for (let i = 0; i < TOKENLESS_DAILY_CAP + 10; i++) if ((await admit_(`10.0.${i >> 8}.${i & 255}`, st, now)).admit) admitted++;
   check('daily cap holds across IPs', admitted === TOKENLESS_DAILY_CAP, admitted);
-  // checkTurnstile uses the real clock, so fill today's counter directly.
-  st.m.set(`day/${new Date().toISOString().slice(0, 10)}`, TOKENLESS_DAILY_CAP);
+  // checkTurnstile uses the real clock, so mark today's window full directly.
+  st.m.set(`day/${new Date().toISOString().slice(0, 10)}/full`, { at: 1 });
   const r2 = await check_('', '9.9.9.8', st);
   check('full lane blocks with verification_required', r2.block === true && r2.error === 'verification_required', r2);
   const tomorrow = await admit_('9.9.9.7', st, new Date(Date.now() + 86400000));
   check('daily cap resets next day', tomorrow.admit === true, tomorrow);
+}
+
+// Concurrent requests can't share a slot (create-only writes are atomic).
+{
+  const st = memStore(); const now = new Date('2026-10-02T15:10:00Z');
+  const results = await Promise.all(Array.from({ length: TOKENLESS_DAILY_CAP + 15 }, (_, i) => admitTokenless(`11.0.0.${i}`, st, now)));
+  const slots = results.filter(r => r.admit).map(r => r.used);
+  check('concurrent admissions never exceed the cap', slots.length === TOKENLESS_DAILY_CAP, slots.length);
+  check('concurrent admissions get distinct slots', new Set(slots).size === slots.length, slots);
+  const after = await admit_('11.0.1.1', st, now);
+  check('full marker short-circuits', after.admit === false && st.m.has('day/2026-10-02/full'), after);
 }
 
 // Store outage fails CLOSED (old strict behavior), never open.
