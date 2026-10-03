@@ -923,16 +923,7 @@ footer .fine.links a:hover{color:var(--mocha);}
       <span class="eyebrow center lined">In Their Words</span>
     </div>
     <p class="wall-note reveal">These testimonials are from clients I've worked with across various programs over the years &mdash; who integrated many of the same principles I'll be teaching on this masterclass.</p>
-    <iframe
-      id="testimonialto-jason-moss-testimonials-tag-all-light"
-      src="https://embed-v2.testimonial.to/w/jason-moss-testimonials/?theme=light&card=base&loadMore=on&initialCount=20&tag=all"
-      frameborder="0"
-      scrolling="no"
-      width="100%"
-      style="min-height:820px;"
-      loading="lazy"
-      title="Client testimonials"
-    ></iframe>
+    <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
     <div class="cta-stack reveal">
       <a class="btn" href="#optin">Save My Seat &mdash; Free</a>
       <span class="btn-note"><span class="mc-date">Tuesday, July 21</span> at <span class="mc-time">10:00 a.m. Mountain Time</span> &mdash; Free 60-Minute Live Masterclass</span>
@@ -1108,8 +1099,7 @@ if(params.has('static')){
 </script>
 
 <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstile&render=explicit" async defer></script>
-<script type="text/javascript" src="https://embed-v2.testimonial.to/js/iframeResizer.min.js"></script>
-<script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, '#testimonialto-jason-moss-testimonials-tag-all-light');</script>
 
+<script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>

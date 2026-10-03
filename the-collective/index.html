@@ -1213,8 +1213,8 @@
       }
 
       .proof-inner {
-        max-width: 60rem;
-        padding: 6.375rem 0 5rem;
+        max-width: 72rem;
+        padding: 6.375rem 1.5rem 5rem;
       }
 
       .proof-heading {
@@ -1225,7 +1225,8 @@
       }
 
       .proof-iframe {
-        width: 60rem;
+        width: 100%;
+        max-width: 69rem;
         height: 50rem;
       }
 
@@ -1786,9 +1787,7 @@
     <div class="proof-inner">
       <h1 class="proof-heading">Proof of what's possible...<br>even before <em>The Collective</em>.</h1>
 
-      <iframe class="proof-iframe"
-        src="https://embed-v2.testimonial.to/w/jason-moss-testimonials?animated=on&theme=light&shadowColor=e7d8ac&speed=1&tag=all"
-        title="Client Testimonials" scrolling="no"></iframe>
+      <div class="jm-testimonials proof-iframe" data-layout="scroll" data-height="800" data-shadow="e7d8ac"></div>
     </div>
   </section>
 
@@ -1835,6 +1834,7 @@
     </div>
   </footer>
   <script src="/js/bunny-embeds.js" defer></script>
+<script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 
 </html>

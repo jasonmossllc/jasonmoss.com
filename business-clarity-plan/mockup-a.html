@@ -1354,21 +1354,21 @@ body::before {
     <div class="video-testimonial-grid">
       <div class="video-testimonial-card fade-in">
         <div class="video-wrap">
-          <iframe src="https://embed-v2.testimonial.to/v/386321d6-0a00-4dcd-a879-707db74d99a3/" title="Meaghan Long testimonial video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" onload="this.classList.add('loaded')"></iframe>
+          <div class="jm-testimonials" data-layout="video" data-id="3aa9cc7b-438a-4f22-89a0-d0ff995997b9" style="position:absolute;inset:0"></div>
         </div>
         <h3 class="vt-name">Meaghan Long</h3>
         <p class="vt-result">Refined her offer, cut her hours in half, and now brings in $20k+ months with space to exhale.</p>
       </div>
       <div class="video-testimonial-card fade-in">
         <div class="video-wrap">
-          <iframe src="https://embed-v2.testimonial.to/v/4f9e9e7c-5269-45a7-b445-a3789b0e5347/" title="Zach Bloom testimonial video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" onload="this.classList.add('loaded')"></iframe>
+          <div class="jm-testimonials" data-layout="video" data-id="4f9e9e7c-5269-45a7-b445-a3789b0e5347" style="position:absolute;inset:0"></div>
         </div>
         <h3 class="vt-name">Zach Bloom</h3>
         <p class="vt-result">Simplified his model and had his most spacious and profitable year ever — with more clarity, less noise.</p>
       </div>
       <div class="video-testimonial-card fade-in">
         <div class="video-wrap">
-          <iframe src="https://embed-v2.testimonial.to/v/a89aa735-1860-4735-a43a-cab257f17d2c/" title="Federica Prayer testimonial video" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen loading="lazy" onload="this.classList.add('loaded')"></iframe>
+          <div class="jm-testimonials" data-layout="video" data-id="3b98b30c-5119-4ee6-b449-2ac10df5759c" style="position:absolute;inset:0"></div>
         </div>
         <h3 class="vt-name">Federica Prayer</h3>
         <p class="vt-result">Raised her rates and hit her highest month ever with more ease.</p>
@@ -1545,21 +1545,14 @@ body::before {
   </div>
 </section>
 
-<!-- More Testimonials (testimonial.to embed) -->
+<!-- More Testimonials (self-hosted embed) -->
 <section class="testimonials-wall">
   <div style="max-width: 1200px; margin: 0 auto; padding: 0 24px;">
     <span class="label fade-in" style="display: block; text-align: center;">Client Testimonials</span>
     <div class="accent-line" style="margin-left: auto; margin-right: auto;"></div>
     <h2 class="fade-in" style="text-align: center; margin-bottom: 48px;">More stories from past clients.</h2>
     <div class="fade-in">
-      <iframe
-        id="testimonialto-jason-moss-testimonials-tag-all-light"
-        src="https://embed-v2.testimonial.to/w/jason-moss-testimonials/?theme=light&card=base&loadMore=on&initialCount=20&tag=all"
-        frameborder="0"
-        scrolling="no"
-        width="100%"
-        style="border: none; min-height: 600px; margin-bottom: -50px;"
-      ></iframe>
+      <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
     </div>
   </div>
 </section>
@@ -1617,10 +1610,7 @@ document.querySelectorAll('.faq-question').forEach(q => {
 });
 </script>
 
-<script src="https://embed-v2.testimonial.to/js/iframeResizer.min.js"></script>
-<script>
-  iFrameResize({log: false, checkOrigin: false}, '#testimonialto-jason-moss-testimonials-tag-all-light');
-</script>
 
+<script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>

@@ -2031,16 +2031,7 @@ footer .links a{margin:0 12px;}
       <span class="eyebrow center lined">In Their Words</span>
     </div>
     <p class="wall-note reveal">These testimonials are from clients I've worked with across various programs over the years &mdash; who integrated many of the same principles I'll be teaching inside The Aligned Client Engine.</p>
-    <iframe
-      id="testimonialto-jason-moss-testimonials-tag-all-light"
-      src="https://embed-v2.testimonial.to/w/jason-moss-testimonials/?theme=light&card=base&loadMore=on&initialCount=20&tag=all"
-      frameborder="0"
-      scrolling="no"
-      width="100%"
-      style="min-height:820px;"
-      loading="lazy"
-      title="Client testimonials"
-    ></iframe>
+    <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
     <div class="cta-stack center reveal" style="margin-top:clamp(48px,5vw,68px);">
       <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
       <span class="btn-note">or 3 payments of $367</span>
@@ -2128,8 +2119,7 @@ addEventListener('scroll', syncBar, {passive:true});
 addEventListener('resize', syncBar, {passive:true});
 syncBar();
 </script>
-<script type="text/javascript" src="https://embed-v2.testimonial.to/js/iframeResizer.min.js"></script>
-<script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, '#testimonialto-jason-moss-testimonials-tag-all-light');</script>
 
+<script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>
