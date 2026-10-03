@@ -1,5 +1,6 @@
 body{margin:0}
-.jm{--obs:#1D1F1E;--forest:#2C3F36;--forest-deep:#1F2D26;--mocha:#5B4B3F;--taupe:#8C837A;--gold:#C2A86C;--brass:#8A6E35;--stone:#E9E2D3;--sand:#F8F6F2;--ink:#2E2C2A;--ink-soft:#57514B;--line:rgba(91,75,63,.18);
+:root{--obs:#1D1F1E;--forest:#2C3F36;--forest-deep:#1F2D26;--mocha:#5B4B3F;--taupe:#8C837A;--gold:#C2A86C;--brass:#8A6E35;--stone:#E9E2D3;--sand:#F8F6F2;--ink:#2E2C2A;--ink-soft:#57514B;--line:rgba(91,75,63,.18)}
+.jm{
   font-family:'Raleway',sans-serif;color:var(--ink);background:var(--sand);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .jm *{box-sizing:border-box}
 .jm img{display:block;max-width:100%}
@@ -27,7 +28,7 @@ body{margin:0}
 .muted{color:var(--ink-soft)}
 .small{font-size:14px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:'Raleway',sans-serif;font-weight:600;font-size:14px;letter-spacing:.14em;text-transform:uppercase;padding:19px 38px;min-height:56px;border:0;border-radius:0;cursor:pointer;transition:background .2s,transform .2s}
-.jm .btn-gold{background:var(--gold);color:var(--obs)}
+.jm .btn-gold,.btn-gold{background:var(--gold);color:var(--obs)}
 .btn-gold:hover{background:#b89a5e;transform:translateY(-1px)}
 .jm .btn-ghost{background:transparent;color:var(--obs);box-shadow:inset 0 0 0 1px rgba(29,31,30,.35)}
 .btn-ghost-light{background:transparent;color:var(--sand);box-shadow:inset 0 0 0 1px rgba(248,246,242,.45)}
@@ -104,6 +105,12 @@ body{margin:0}
 @media (min-width:601px) and (max-width:900px){
   .frame{max-width:460px}
 }
+/* Large monitors: scale everything below the hero proportionally, so a big screen
+   shows the same composition as 1440px, just larger (no tiny column in empty space). */
+@media (min-width:1600px){.jm>section:not(.hero),.jm>footer,.jm>.hdr-solid-wrap{zoom:1.1}}
+@media (min-width:1900px){.jm>section:not(.hero),.jm>footer,.jm>.hdr-solid-wrap{zoom:1.22}}
+@media (min-width:2300px){.jm>section:not(.hero),.jm>footer,.jm>.hdr-solid-wrap{zoom:1.4}}
+@media (min-width:3000px){.jm>section:not(.hero),.jm>footer,.jm>.hdr-solid-wrap{zoom:1.75}}
 
 /* players + mobile menu (production) */
 .vid-player{aspect-ratio:16/9;background:#1D1F1E}

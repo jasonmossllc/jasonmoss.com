@@ -63,10 +63,17 @@
 .mini .msg{background:#FBFAF7;border:1px solid var(--line);padding:16px}
 .mini .msg img{width:100%}
 @media (max-width:900px){
-  .ap-hero{padding:40px 0 48px}
+  .ap-hero{padding:24px 0 48px}
+  .ap-hero .ap-top{padding:0 0 32px!important}
   .ap-grid,.three,.mini{grid-template-columns:1fr;gap:40px}
-  .ap-copy .h1{font-size:40px}
-  .ap-grid .frame{order:-1}
+  .ap-grid{gap:44px}
+  .ap-copy{gap:20px}
+  .ap-copy .h1{font-size:clamp(32px,9vw,40px)}
+  .ap-copy .lede{font-size:16.5px}
+  .ap-micro{gap:6px 16px}
+  /* photo comes after the pitch + button, landscape crop on his face and shoulders */
+  .ap-grid .frame{max-width:100%;margin-right:12px}
+  .ap-photo{aspect-ratio:4/3;object-position:62% 30%}
   .press-row{flex-direction:column;gap:18px;margin-top:56px}
   .letter{padding:72px 24px 40px;font-size:16px}
   .letter .hs{left:24px}
@@ -188,14 +195,17 @@
 <script src="https://jasonmoss.com/qualify/embed.js" async></script>
 <script>
 (function () {
-  /* Sticky CTA: visible between the hero and the booking section (mobile) */
+  /* Sticky CTA (mobile): visible once past the hero, whenever the booking section is not on screen
+     (so it shows above the qualifier and again over the wall of love below it) */
   var hero = document.getElementById('hero'), cta = document.getElementById('stickyCta'), book = document.getElementById('book');
   if (!hero || !cta) return;
   function check() {
     var past = hero.getBoundingClientRect().bottom < 0;
-    var before = (book ? book.getBoundingClientRect().top : 99999) > window.innerHeight;
-    cta.classList.toggle('sticky-cta--visible', past && before);
+    var b = book ? book.getBoundingClientRect() : null;
+    var bookOnScreen = b ? (b.top < window.innerHeight && b.bottom > 0) : false;
+    cta.classList.toggle('sticky-cta--visible', past && !bookOnScreen);
   }
+  window.addEventListener('resize', check, { passive: true });
   window.addEventListener('scroll', check, { passive: true });
   check();
 })();
