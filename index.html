@@ -83,7 +83,7 @@
 .hero-bg{background-image:url(/assets/images/hero/hero-1600.jpg);background-image:image-set(url(/assets/images/hero/hero-1600.avif) type("image/avif"),url(/assets/images/hero/hero-1600.webp) type("image/webp"),url(/assets/images/hero/hero-1600.jpg) type("image/jpeg"))}
 @media (min-width:701px){.hero-bg{background-image:url(/assets/images/hero/hero-2400.jpg);background-image:image-set(url(/assets/images/hero/hero-2400.avif) type("image/avif"),url(/assets/images/hero/hero-2400.webp) type("image/webp"),url(/assets/images/hero/hero-2400.jpg) type("image/jpeg"))}}
 @media (min-width:1600px),(min-width:1100px) and (min-resolution:1.5dppx){.hero-bg{background-image:url(/assets/images/hero/hero-3200.jpg);background-image:image-set(url(/assets/images/hero/hero-3200.avif) type("image/avif"),url(/assets/images/hero/hero-3200.webp) type("image/webp"),url(/assets/images/hero/hero-3200.jpg) type("image/jpeg"))}}
-.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,28,23,.55) 0,rgba(32,28,23,0) 200px),linear-gradient(90deg,rgba(32,28,23,.78) 0%,rgba(32,28,23,.5) 38%,rgba(32,28,23,0) 66%),linear-gradient(0deg,rgba(32,28,23,.7) 0%,rgba(32,28,23,0) 30%),radial-gradient(ellipse 70% 60% at 82% 8%,rgba(233,218,186,.22),rgba(233,218,186,0) 70%)}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,28,23,.55) 0,rgba(32,28,23,0) 200px),linear-gradient(90deg,rgba(32,28,23,.78) 0%,rgba(32,28,23,.5) 38%,rgba(32,28,23,0) 66%),linear-gradient(0deg,rgba(32,28,23,.7) 0%,rgba(32,28,23,0) 30%),radial-gradient(ellipse 70% 60% at 82% 8%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
 .hero .hdr{color:var(--sand)}
 .hero .eyebrow{color:#D8C08A;max-width:470px}
 .hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:center;max-width:1312px;width:100%;margin:0 auto;padding:clamp(8px,3vh,40px) 56px clamp(12px,4vh,60px)}
@@ -133,7 +133,7 @@
 .path-body .h3{font-size:24px}
 .path-body .tlink{margin-top:auto;align-self:flex-start;color:var(--brass)}
 .closer{position:relative;padding:180px 0;text-align:center;color:var(--sand);background-size:cover;background-position:center}
-.closer::before{content:"";position:absolute;inset:0;background:rgba(22,30,25,.55)}
+.closer::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,30,25,.22),rgba(22,30,25,.34))}
 .closer .inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:32px}
 @media (min-width:901px){
   .hero .hdr,.hero-body,.hero-press{max-width:none;padding-left:clamp(56px,7vw,220px);padding-right:clamp(56px,7vw,220px)}
@@ -147,7 +147,7 @@
 @media (min-width:901px) and (max-aspect-ratio:1/1){
   .hero{background:#201C17}
   .hero-bg{bottom:auto;height:46vh;background-position:66% 80%}
-  .hero-shade{bottom:auto;height:46vh;background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 22%,rgba(32,28,23,0) 60%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.22),rgba(233,218,186,0) 70%)}
+  .hero-shade{bottom:auto;height:46vh;background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 22%,rgba(32,28,23,0) 60%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
   .hero-body{align-items:flex-end;padding-top:40vh}
   .hero-copy{max-width:min(640px,80vw)}
   .hero-copy .h1{font-size:clamp(36px,6vw,64px)}
@@ -164,7 +164,7 @@
 @media (max-width:900px){
   .hero{min-height:0;background:#201C17}
   .hero-bg{bottom:auto;height:500px;background-position:64% 35%}
-  .hero-shade{bottom:auto;height:500px;background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 25%,rgba(32,28,23,0) 50%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.22),rgba(233,218,186,0) 70%)}
+  .hero-shade{bottom:auto;height:500px;background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 25%,rgba(32,28,23,0) 50%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
   .hero-body{align-items:flex-end;padding:400px 22px 28px}
   .hero-copy .h1{font-size:44px}
   .hero-ctas{gap:18px}
