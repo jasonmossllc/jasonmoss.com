@@ -1487,6 +1487,14 @@
         height: 4.875rem;
       }
     }
+  
+    /* Results disclaimer above the testimonial wall (same style as the grid-wall pages) */
+    .results-note{max-width:48rem;margin:16px auto 0;text-align:center;font-family:'Libre Baskerville',Georgia,serif;font-style:italic;font-weight:400;font-size:14.5px;line-height:1.7;letter-spacing:0;color:#8C837A;text-wrap:balance}
+    @media (max-width:600px){.results-note{font-size:13.5px;max-width:21rem;margin-top:12px}}
+    .proof-heading:has(+ .results-note){margin-bottom:0}
+    .proof .results-note,.testimonial-to .results-note{margin:14px auto clamp(28px,4vw,40px)}
+    .testimonial-to .results-note{margin-top:0}
+    .proof .results-note{color:#6b5d4a} /* warm brown reads clearly on the gold proof background */
   </style>
 </head>
 
@@ -1786,6 +1794,7 @@
   <section class="proof">
     <div class="proof-inner">
       <h1 class="proof-heading">Proof of what's possible...<br>even before <em>The Collective</em>.</h1>
+      <p class="results-note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
 
       <div class="jm-testimonials proof-iframe" data-layout="scroll" data-height="800" data-shadow="e7d8ac"></div>
     </div>
