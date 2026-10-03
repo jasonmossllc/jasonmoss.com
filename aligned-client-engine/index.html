@@ -1311,6 +1311,12 @@ footer .links a{margin:0 12px;}
   .btn{padding:19px 28px;font-size:13.5px;width:100%;letter-spacing:0.1em;}
   .cta-stack{width:100%;}
 }
+
+/* Results disclaimer: a quiet italic caption that belongs to the heading above the wall */
+.results-note{max-width:48rem;margin:16px auto 0;text-align:center;font-family:'Libre Baskerville',Georgia,serif;font-style:italic;font-weight:400;font-size:14.5px;line-height:1.7;letter-spacing:0;color:#8C837A;text-wrap:balance}
+@media (max-width:600px){.results-note{font-size:13.5px;max-width:21rem;margin-top:12px}}
+.wall .wall-note:has(+ .results-note){margin-bottom:0}
+.wall .results-note{margin:14px auto clamp(44px,5vw,60px)}
 </style>
 </head>
 <body>
@@ -2030,7 +2036,8 @@ footer .links a{margin:0 12px;}
     <div class="sec-head reveal">
       <span class="eyebrow center lined">In Their Words</span>
     </div>
-    <p class="wall-note reveal">These testimonials are from clients I've worked with across various programs over the years &mdash; who integrated many of the same principles I'll be teaching inside The Aligned Client Engine.<span style="display:block;margin-top:12px;font-size:13px;line-height:1.5;color:rgba(60,60,60,.62)">These are individual client experiences. Results vary and no specific outcome is guaranteed.</span></p>
+    <p class="wall-note reveal">These testimonials are from clients I've worked with across various programs over the years &mdash; who integrated many of the same principles I'll be teaching inside The Aligned Client Engine.</p>
+    <p class="results-note reveal">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
     <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
     <div class="cta-stack center reveal" style="margin-top:clamp(48px,5vw,68px);">
       <a class="btn" href="https://checkout.jasonmoss.com/checkout/the-aligned-client-engine">Join the Aligned Client Engine &mdash; $997</a>
