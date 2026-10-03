@@ -322,7 +322,6 @@ h1, h2, h3, h4 {
 /* ============================================
    TESTIMONIALS WIDGET
    ============================================ */
-.results-note { max-width: 720px; margin: 0 auto 32px; text-align: center; font-size: 13px; line-height: 1.5; color: rgba(60,60,60,0.62); }
 .testimonials-widget {
   background: var(--sand);
   padding: 0 0 120px;
@@ -588,6 +587,11 @@ h1, h2, h3, h4 {
     --max-width-wide: 1600px;
   }
 }
+
+/* Results disclaimer: a quiet italic caption that belongs to the heading above the wall */
+.results-note{max-width:34rem;margin:16px auto 0;text-align:center;font-family:'Libre Baskerville',Georgia,serif;font-style:italic;font-weight:400;font-size:14.5px;line-height:1.7;letter-spacing:0;color:#8C837A;text-wrap:balance}
+@media (max-width:600px){.results-note{font-size:13.5px;max-width:21rem;margin-top:12px}}
+.page-headline .results-note{margin-top:18px}
 </style>
 </head>
 <body>
@@ -628,6 +632,7 @@ h1, h2, h3, h4 {
 <section class="page-headline">
   <div class="container">
     <h1 class="fade-in">Client Breakthroughs</h1>
+    <p class="results-note fade-in">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
   </div>
 </section>
 
@@ -636,7 +641,6 @@ h1, h2, h3, h4 {
      ========================================== -->
 <section class="testimonials-widget">
   <div class="container">
-    <p class="results-note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
     <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
   </div>
 </section>

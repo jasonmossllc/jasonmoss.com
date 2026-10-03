@@ -299,7 +299,6 @@
   }
   .testimonials__header { text-align: center; margin-bottom: 52px; }
   .testimonials__header h2 { font-size: 30px; color: var(--charcoal-obsidian); }
-.results-note { max-width: 720px; margin: 22px auto 0; text-align: center; font-size: 13px; line-height: 1.5; color: rgba(60,60,60,0.62); }
   .testimonials__grid {
     max-width: 1060px;
     margin: 0 auto;
@@ -537,6 +536,12 @@
 
     .sticky-cta { display: block; }
   }
+
+/* Results disclaimer: a quiet italic caption that belongs to the heading above the wall */
+.results-note{max-width:34rem;margin:16px auto 0;text-align:center;font-family:'Libre Baskerville',Georgia,serif;font-style:italic;font-weight:400;font-size:14.5px;line-height:1.7;letter-spacing:0;color:#8C837A;text-wrap:balance}
+@media (max-width:600px){.results-note{font-size:13.5px;max-width:21rem;margin-top:12px}}
+.testimonials-grid + .results-note, section > .results-note{margin-top:28px}
+.wall-of-love__header .results-note{margin-top:14px}
 </style>
 </head>
 <body>
