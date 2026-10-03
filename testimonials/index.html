@@ -636,15 +636,7 @@ h1, h2, h3, h4 {
      ========================================== -->
 <section class="testimonials-widget">
   <div class="container">
-    <iframe
-      id="testimonialto-jason-moss-testimonials-tag-all-light"
-      src="https://embed-v2.testimonial.to/w/jason-moss-testimonials/?theme=light&card=base&loadMore=on&initialCount=20&tag=all"
-      frameborder="0"
-      scrolling="no"
-      width="100%"
-      style="min-height: 800px;"
-      onload="this.classList.add('loaded')"
-    ></iframe>
+    <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
     <p class="results-note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
   </div>
 </section>
@@ -715,8 +707,6 @@ h1, h2, h3, h4 {
 <!-- ==========================================
      SCRIPTS
      ========================================== -->
-<script type="text/javascript" src="https://embed-v2.testimonial.to/js/iframeResizer.min.js"></script>
-<script type="text/javascript">iFrameResize({log: false, checkOrigin: false}, '#testimonialto-jason-moss-testimonials-tag-all-light');</script>
 
 <script>
 // Hamburger menu toggle
@@ -758,5 +748,6 @@ document.querySelectorAll('.fade-in').forEach(el => {
 });
 </script>
 
+<script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>
