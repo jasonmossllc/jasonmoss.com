@@ -30,728 +30,122 @@
 <meta name="twitter:title" content="Client Breakthroughs — Jason Moss">
 <meta name="twitter:description" content="Hear from entrepreneurs who've grown with more revenue, clarity, and ease through working with Jason Moss.">
 <meta name="twitter:image" content="https://jasonmoss.com/assets/images/featured.jpg">
-
+<link rel="stylesheet" href="/css/site.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
 <style>
-/* ============================================
-   RESET & BASE
-   ============================================ */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-:root {
-  --charcoal: #1D1F1E;
-  --forest: #2C3F36;
-  --mocha: #5B4B3F;
-  --mocha-light: #695b50;
-  --taupe: #8C837A;
-  --gold: #C2A86C;
-  --bone: #E9E2D3;
-  --sand: #F8F6F2;
-  --white: #FFFFFF;
-  --font-serif: 'Libre Baskerville', Georgia, serif;
-  --font-sans: 'Raleway', 'Helvetica Neue', sans-serif;
-  --font-script: 'Dancing Script', cursive;
-  --max-width: 1200px;
-  --max-width-wide: 1400px;
-  --header-height: 80px;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-body {
-  font-family: var(--font-sans);
-  font-weight: 400;
-  font-size: clamp(16px, 1.25vw, 19px);
-  line-height: 1.7;
-  color: var(--charcoal);
-  background: var(--white);
-  overflow-x: hidden;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-}
-
-.container {
-  max-width: var(--max-width);
-  margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 40px);
-}
-
-/* ============================================
-   TYPOGRAPHY
-   ============================================ */
-h1, h2, h3, h4 {
-  font-family: var(--font-serif);
-  font-weight: 400;
-  line-height: 1.3;
-}
-
-.btn-primary {
-  display: inline-block;
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 15px;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  background: var(--gold);
-  color: var(--charcoal);
-  padding: 18px 40px;
-  border-radius: 0;
-  transition: background 0.3s ease, transform 0.2s ease;
-  text-align: center;
-}
-
-.btn-primary:hover {
-  background: #b89a5e;
-  transform: translateY(-1px);
-}
-
-/* ============================================
-   SCROLL ANIMATIONS
-   ============================================ */
-.fade-in {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-}
-
-.fade-in.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ============================================
-   HEADER
-   ============================================ */
-.site-header {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 1100;
-  height: var(--header-height);
-  display: flex;
-  align-items: center;
-  background: rgba(255, 255, 255, 0.97);
-  box-shadow: 0 1px 12px rgba(0, 0, 0, 0.06);
-  transition: background 0.3s ease, box-shadow 0.3s ease;
-}
-
-.header-inner {
-  max-width: var(--max-width-wide);
-  margin: 0 auto;
-  padding: 0 clamp(20px, 4vw, 48px);
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.header-logo img {
-  height: 36px;
-  width: auto;
-}
-
-.nav-desktop {
-  display: flex;
-  align-items: center;
-  gap: 32px;
-}
-
-.nav-desktop a {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: var(--charcoal);
-  transition: color 0.2s ease;
-  position: relative;
-}
-
-.nav-desktop a::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.3s ease;
-}
-
-.nav-desktop a:hover::after {
-  width: 100%;
-}
-
-.nav-desktop a:hover {
-  color: var(--mocha);
-}
-
-.nav-cta {
-  font-family: var(--font-sans);
-  font-weight: 600;
-  font-size: 14px;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  background: var(--gold);
-  color: var(--charcoal);
-  padding: 12px 24px;
-  transition: background 0.3s ease;
-}
-
-.nav-cta:hover {
-  background: #b89a5e;
-}
-
-/* Hamburger */
-.hamburger {
-  display: none;
-  flex-direction: column;
-  justify-content: center;
-  gap: 6px;
-  width: 28px;
-  height: 28px;
-  cursor: pointer;
-  z-index: 1100;
-}
-
-.hamburger span {
-  display: block;
-  width: 28px;
-  height: 2px;
-  background: var(--charcoal);
-  transition: transform 0.3s ease, opacity 0.3s ease;
-}
-
-.hamburger.active span:nth-child(1) {
-  transform: translateY(8px) rotate(45deg);
-}
-
-.hamburger.active span:nth-child(2) {
-  opacity: 0;
-}
-
-.hamburger.active span:nth-child(3) {
-  transform: translateY(-8px) rotate(-45deg);
-}
-
-/* Mobile Menu */
-.mobile-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: var(--sand);
-  z-index: 1050;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 28px;
-  opacity: 0;
-  visibility: hidden;
-  transition: opacity 0.4s ease, visibility 0.4s ease;
-}
-
-.mobile-menu.open {
-  opacity: 1;
-  visibility: visible;
-}
-
-.mobile-menu a {
-  font-family: var(--font-serif);
-  font-size: 22px;
-  color: var(--charcoal);
-  transition: color 0.2s ease;
-}
-
-.mobile-menu a:hover {
-  color: var(--gold);
-}
-
-.mobile-menu .nav-cta {
-  margin-top: 12px;
-  font-size: 13px;
-  padding: 14px 32px;
-}
-
-/* ============================================
-   PAGE HEADLINE
-   ============================================ */
-.page-headline {
-  background: var(--sand);
-  padding-top: calc(var(--header-height) + 80px);
-  padding-bottom: 64px;
-  text-align: center;
-}
-
-.page-headline h1 {
-  font-family: var(--font-serif);
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 400;
-  color: var(--mocha);
-}
-
-/* ============================================
-   TESTIMONIALS WIDGET
-   ============================================ */
-.testimonials-widget {
-  background: var(--sand);
-  padding: 0 0 120px;
-}
-
-.testimonials-widget .container {
-  max-width: 1600px;
-  padding: 0 24px;
-}
-
-.testimonials-widget iframe {
-  border-radius: 4px;
-  opacity: 0;
-  transition: opacity 0.6s ease-out;
-}
-
-.testimonials-widget iframe.loaded {
-  opacity: 1;
-}
-
-/* ============================================
-   BOTTOM CTA
-   ============================================ */
-.bottom-cta {
-  position: relative;
-  padding: 200px 0;
-  text-align: center;
-  overflow: hidden;
-}
-
-.bottom-cta-bg {
-  position: absolute;
-  inset: 0;
-  z-index: 0;
-}
-
-.bottom-cta-bg img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.bottom-cta-overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(248, 246, 242, 0.75);
-  z-index: 1;
-}
-
-.bottom-cta .container {
-  position: relative;
-  z-index: 2;
-}
-
-.bottom-cta h2 {
-  font-family: var(--font-serif);
-  font-size: clamp(30px, 3.5vw, 46px);
-  line-height: 1.25;
-  color: var(--mocha);
-  margin-bottom: 40px;
-  max-width: 600px;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* ============================================
-   FOOTER
-   ============================================ */
-.footer-upper {
-  background: var(--sand);
-  padding: 48px 0;
-  border-top: 1px solid var(--bone);
-}
-
-.footer-upper-inner {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.footer-logo img {
-  height: 30px;
-  width: auto;
-}
-
-.footer-nav {
-  display: flex;
-  gap: 28px;
-}
-
-.footer-nav a {
-  font-family: var(--font-sans);
-  font-size: 14px;
-  font-weight: 500;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-  color: var(--charcoal);
-  transition: color 0.2s ease;
-}
-
-.footer-nav a:hover {
-  color: var(--gold);
-}
-
-.footer-lower {
-  background: var(--forest);
-  padding: 36px 0;
-}
-
-.footer-lower-inner {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-}
-
-.footer-legal p {
-  font-family: var(--font-sans);
-  font-size: 12px;
-  color: var(--bone);
-  line-height: 1.7;
-  opacity: 0.6;
-}
-
-.footer-legal a {
-  color: var(--bone);
-  text-decoration: none;
-  text-underline-offset: 2px;
-  transition: color 0.2s ease;
-}
-
-.footer-legal a:hover {
-  color: var(--gold);
-}
-
-.footer-legal-links {
-  margin-top: 8px;
-}
-
-.footer-legal-links a {
-  margin-right: 14px;
-  font-size: 11px;
-  opacity: 0.55;
-  letter-spacing: 0.01em;
-  transition: opacity 0.2s ease, color 0.2s ease;
-}
-
-.footer-legal-links a:hover {
-  opacity: 1;
-}
-
-.footer-social {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.footer-social a {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  transition: opacity 0.3s ease;
-}
-
-.footer-social a:hover {
-  opacity: 1;
-}
-
-.footer-social a svg {
-  width: 18px;
-  height: 18px;
-  fill: var(--bone);
-  opacity: 0.6;
-  transition: opacity 0.3s ease;
-}
-
-.footer-social a:hover svg {
-  opacity: 0.8;
-}
-
-/* ============================================
-   RESPONSIVE
-   ============================================ */
-@media (max-width: 1023px) {
-  .container {
-    padding: 0 28px;
-  }
-
-  .header-inner {
-    padding: 0 28px;
-  }
-
-  .nav-desktop {
-    display: none;
-  }
-
-  .hamburger {
-    display: flex;
-  }
-
-  .footer-upper-inner {
-    flex-direction: column;
-    gap: 24px;
-    align-items: flex-start;
-  }
-
-  .footer-nav {
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-
-  .footer-lower-inner {
-    flex-direction: column;
-    gap: 24px;
-  }
-
-  .footer-social {
-    margin-top: 8px;
-  }
-}
-
-@media (max-width: 767px) {
-  :root {
-    --header-height: 68px;
-  }
-
-  .container {
-    padding: 0 20px;
-  }
-
-  .header-inner {
-    padding: 0 20px;
-  }
-
-  .header-logo img {
-    height: 28px;
-  }
-
-  .page-headline {
-    padding-top: calc(var(--header-height) + 56px);
-    padding-bottom: 48px;
-  }
-
-  .testimonials-widget {
-    padding: 0 0 80px;
-  }
-
-  .bottom-cta {
-    padding: 120px 0;
-  }
-
-  .btn-primary {
-    padding: 14px 28px;
-    font-size: 13px;
-  }
-}
-
-/* Ultrawide */
-@media (min-width: 2200px) {
-  :root {
-    --max-width: 1400px;
-    --max-width-wide: 1600px;
-  }
-}
-
-/* Results disclaimer: a quiet italic caption that belongs to the heading above the wall */
-.results-note{max-width:48rem;margin:16px auto 0;text-align:center;font-family:'Libre Baskerville',Georgia,serif;font-style:italic;font-weight:400;font-size:14.5px;line-height:1.7;letter-spacing:0;color:#8C837A;text-wrap:balance}
-@media (max-width:600px){.results-note{font-size:13.5px;max-width:21rem;margin-top:12px}}
-.page-headline .results-note{margin-top:18px}
+.bt-hero{padding:112px 0 64px;text-align:center}
+.embed-shot{position:relative;max-width:1136px;margin:0 auto;height:2200px;overflow:hidden}
+.embed-shot img{width:100%}
+.embed-shot .ws-mob{display:none}
+.embed-shot::after{content:"";position:absolute;left:0;right:0;bottom:0;height:420px;background:linear-gradient(180deg,rgba(248,246,242,0),#F8F6F2)}
+.bt-hero .h1{font-size:72px}
+.stats{display:flex;justify-content:center;gap:0;margin-top:56px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:28px 56px;display:flex;flex-direction:column;gap:4px;align-items:center}
+.stat+.stat{border-left:1px solid var(--line)}
+.stat b{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;color:var(--obs);line-height:1.2}
+.stat span{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe)}
+.feature{display:grid;grid-template-columns:7fr 5fr;background:var(--forest-deep);color:var(--sand)}
+.feature .vid{min-height:520px}
+.feature-copy{padding:64px;display:flex;flex-direction:column;justify-content:center;gap:24px;background-size:cover}
+.feature-copy .quote{color:var(--sand);font-size:34px;line-height:1.38}
+.filters{display:flex;gap:10px;justify-content:center;margin:96px 0 48px;flex-wrap:wrap}
+.chip{min-height:46px;padding:0 24px;border:1px solid var(--line);background:transparent;font-family:'Raleway',sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-soft);cursor:pointer}
+.chip.on{background:var(--obs);color:var(--sand);border-color:var(--obs)}
+.wall{columns:3;column-gap:28px}
+.wall>*{break-inside:avoid;margin-bottom:28px;display:block}
+.wall .vid{aspect-ratio:16/10}
+.wall .vid.tall{aspect-ratio:9/14}
+.wall .pc-body{padding:24px 26px 26px;display:flex;flex-direction:column;gap:12px}
+.wall .quote{font-size:18px}
+.msg{background:#FBFAF7;border:1px solid var(--line);padding:18px}
+.msg img{width:100%;border:1px solid rgba(0,0,0,.06)}
+.msg .cap{display:flex;align-items:center;gap:10px;margin-top:14px;font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe)}
+.msg .cap::before{content:"";width:18px;height:1px;background:var(--gold)}
+.more{display:flex;justify-content:center;margin-top:24px}
+.bt-cta{display:grid;grid-template-columns:1fr 1fr;min-height:560px}
+.bt-cta-img{background-size:cover;background-position:50% 45%}
+.bt-cta-copy{padding:96px;display:flex;flex-direction:column;justify-content:center;gap:28px;background-size:cover}
+@media (max-width:900px){
+  .bt-hero{padding:64px 0 44px}
+  .wall-sec{padding-top:28px!important}
+  .embed-shot{height:1300px}
+  .bt-hero .h1{font-size:46px}
+  .stats{flex-direction:column}
+  .stat+.stat{border-left:0;border-top:1px solid var(--line)}
+  .feature,.bt-cta{grid-template-columns:1fr}
+  .feature .vid{min-height:240px;aspect-ratio:16/10}
+  .feature-copy{padding:40px 22px}
+  .feature-copy .quote{font-size:24px}
+  .wall{columns:1}
+  .bt-cta-img{min-height:300px}
+  .bt-cta-copy{padding:72px 22px}
+}
+@media (max-width:700px){
+  .embed-shot{margin:0 -22px;height:1300px}
+  .embed-shot .ws-desk{display:none}
+  .embed-shot .ws-mob{display:block}
+}
+.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/paper-pale.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
+@media (max-width:700px){.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
+.bg-lifestyle-4{background-image:url(/assets/images/lifestyle-4.jpg)}
+.bg-tex-forest{background-color:#2C3F36;background-image:url(/assets/textures/grain-dark-soft.png),linear-gradient(180deg,rgba(44,63,54,0.25),rgba(44,63,54,0.35)),url(/assets/textures/paper-forest.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
+@media (max-width:700px){.bg-tex-forest{background-color:#2C3F36;background-image:url(/assets/textures/grain-dark-soft.png),linear-gradient(180deg,rgba(44,63,54,0.25),rgba(44,63,54,0.35)),url(/assets/textures/tile-forest.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
 </style>
 </head>
 <body>
-
-<!-- ==========================================
-     HEADER
-     ========================================== -->
-<header class="site-header" id="siteHeader">
-  <div class="header-inner">
-    <a href="/" class="header-logo" aria-label="Jason Moss — Home">
-      <img src="../assets/images/logo-black.png" alt="Jason Moss" width="500" height="113">
-    </a>
-    <nav class="nav-desktop">
-      <a href="/resonance-masterclass-optin?source=Website">Masterclass</a>
-      <a href="/transmission">Podcast</a>
-      <a href="/testimonials/">Breakthroughs</a>
-      <a href="/apply" class="nav-cta">Work Together</a>
-    </nav>
-    <button class="hamburger" id="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
-    </button>
-  </div>
-</header>
-
-<!-- Mobile Menu -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="/resonance-masterclass-optin?source=Website">Masterclass</a>
-  <a href="/transmission">Podcast</a>
-  <a href="/testimonials/">Breakthroughs</a>
-  <a href="/apply" class="nav-cta">Work Together</a>
+<div class="jm">
+<div class="hdr-solid-wrap"><div class="hdr"><a href="/" aria-label="Jason Moss home"><img class="logo" src="/assets/images/logo.svg" alt="Jason Moss" width="140" height="31"></a><nav class="nav" aria-label="Main"><a href="/resonance-masterclass-optin?source=Website">Masterclass</a><a href="/transmission">Podcast</a><a href="/testimonials/" class="cur" aria-current="page">Breakthroughs</a><a class="btn btn-gold" href="/apply">Work together</a></nav><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button></div></div>
+<div class="mobile-menu" id="mobileMenu" hidden>
+  <button class="menu-close" id="menuClose" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  <nav aria-label="Mobile"><a href="/resonance-masterclass-optin?source=Website">Masterclass</a><a href="/transmission">Podcast</a><a href="/testimonials/" class="cur" aria-current="page">Breakthroughs</a><a class="btn btn-gold" href="/apply">Work together</a></nav>
 </div>
 
-<!-- ==========================================
-     PAGE HEADLINE
-     ========================================== -->
-<section class="page-headline">
-  <div class="container">
-    <h1 class="fade-in">Client Breakthroughs</h1>
-    <p class="results-note fade-in">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
+<section class="bg-tex-sand bt-hero paper">
+  <div class="wrap-narrow" style="max-width:1100px;display:flex;flex-direction:column;align-items:center;gap:26px">
+    <div class="eyebrow center">Client breakthroughs</div>
+    <h1 class="h1">Growth that <span class="brass-it">feels like you.</span></h1>
+    <p class="lede" style="max-width:620px">Stories from coaches, consultants, and service-based business owners I’ve supported over the years.</p>
+    <p class="disclaimer">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
   </div>
 </section>
 
-<!-- ==========================================
-     TESTIMONIALS WIDGET
-     ========================================== -->
-<section class="testimonials-widget">
-  <div class="container">
+<section class="wall-sec" style="background:var(--sand);padding:40px 0 120px">
+  <div class="wrap" style="max-width:1248px">
     <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
   </div>
 </section>
 
-<!-- ==========================================
-     BOTTOM CTA
-     ========================================== -->
-<section class="bottom-cta">
-  <div class="bottom-cta-bg">
-    <img src="../assets/images/cta-light.jpg" alt="" loading="lazy" aria-hidden="true">
-  </div>
-  <div class="bottom-cta-overlay"></div>
-  <div class="container">
-    <h2 class="fade-in">Ready to scale with more spaciousness and ease?</h2>
-    <a href="/resonance-masterclass-optin?source=Website" class="btn-primary fade-in">Resonance Masterclass</a>
+<section class="bt-cta">
+  <div class="bg-lifestyle-4 bt-cta-img"></div>
+  <div class="bg-tex-forest bt-cta-copy on-dark">
+    <div class="eyebrow">Your story is next</div>
+    <h2 class="h2">Ready to grow with more <span class="gold-it">spaciousness and ease?</span></h2>
+    <p>Start with a free 20-minute business assessment, one-on-one with me.</p>
+    <div style="display:flex;gap:28px;align-items:center;flex-wrap:wrap">
+      <a class="btn btn-gold" href="/apply">Book your free call</a>
+      <a class="tlink" href="/resonance-masterclass-optin?source=Website" style="color:var(--sand)">Or watch the masterclass</a>
+    </div>
   </div>
 </section>
 
-<!-- ==========================================
-     FOOTER
-     ========================================== -->
-<footer>
-  <div class="footer-upper">
-    <div class="container">
-      <div class="footer-upper-inner">
-        <a href="/" class="footer-logo" aria-label="Jason Moss — Home">
-          <img src="../assets/images/logo-black.png" alt="Jason Moss" width="500" height="113">
-        </a>
-        <nav class="footer-nav">
-          <a href="/resonance-masterclass-optin?source=Website">Masterclass</a>
-          <a href="/transmission">Podcast</a>
-          <a href="/testimonials/">Breakthroughs</a>
-        </nav>
-      </div>
-    </div>
-  </div>
-
-  <div class="footer-lower">
-    <div class="container">
-      <div class="footer-lower-inner">
-        <div class="footer-legal">
-          <p>&copy; Jason Moss LLC. All rights reserved.</p>
-          <div class="footer-legal-links">
-            <a href="/privacy/">Privacy Policy</a>
-            <a href="/terms/">Terms &amp; Conditions</a>
-            <a href="/earnings-disclaimer/">Earnings Disclaimer</a>
-          </div>
-        </div>
-        <div class="footer-social">
-          <!-- YouTube -->
-          <a href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-          </a>
-          <!-- Instagram -->
-          <a href="https://www.instagram.com/jasonmossofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-          </a>
-          <!-- Email -->
-          <a href="mailto:jason@jasonmoss.com" aria-label="Email">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</footer>
-
-<!-- ==========================================
-     SCRIPTS
-     ========================================== -->
-
-<script>
-// Hamburger menu toggle
-const hamburger = document.getElementById('hamburger');
-const mobileMenu = document.getElementById('mobileMenu');
-
-hamburger.addEventListener('click', () => {
-  const isOpen = mobileMenu.classList.toggle('open');
-  hamburger.classList.toggle('active');
-  hamburger.setAttribute('aria-expanded', isOpen);
-  document.body.style.overflow = isOpen ? 'hidden' : '';
-});
-
-// Close mobile menu on link click
-mobileMenu.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    mobileMenu.classList.remove('open');
-    hamburger.classList.remove('active');
-    hamburger.setAttribute('aria-expanded', 'false');
-    document.body.style.overflow = '';
-  });
-});
-
-// Scroll-triggered fade-in animations
-const fadeObserver = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      fadeObserver.unobserve(entry.target);
-    }
-  });
-}, {
-  threshold: 0.12,
-  rootMargin: '0px 0px -40px 0px'
-});
-
-document.querySelectorAll('.fade-in').forEach(el => {
-  fadeObserver.observe(el);
-});
-</script>
-
+<footer class="ftr"><div class="wrap">
+<div class="ftr-grid">
+  <div><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"><p style="max-width:320px">Business mentorship for coaches, consultants, and service-based business owners.</p><div class="social">
+<a href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="2.5" y="5.5" width="19" height="13" rx="3.5"/><path d="M10 9.2v5.6l4.8-2.8z"/></svg></a>
+<a href="https://www.instagram.com/jasonmossofficial/" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4"><rect x="3.5" y="3.5" width="17" height="17" rx="4.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.2" cy="6.8" r=".6" fill="currentColor"/></svg></a>
+<a href="mailto:jason@jasonmoss.com" aria-label="Email"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"><rect x="3" y="5.5" width="18" height="13"/><path d="M3.5 6l8.5 7 8.5-7"/></svg></a>
+</div></div>
+  <div><h4>Explore</h4><ul><li><a href="/resonance-masterclass-optin?source=Website">Masterclass</a></li><li><a href="/transmission">The Transmission</a></li><li><a href="/testimonials/">Breakthroughs</a></li></ul></div>
+  <div><h4>Work together</h4><ul><li><a href="/apply">Free assessment call</a></li></ul></div>
+  <div><h4>Contact</h4><ul><li><a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a></li></ul></div>
+</div>
+<div class="ftr-base"><span>&copy; Jason Moss LLC. All rights reserved.</span><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav></div>
+</div></footer>
+</div>
+<script src="/js/site.js" defer></script>
 <script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>
