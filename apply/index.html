@@ -18,737 +18,189 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Book a Free Business Assessment Call — Jason Moss">
 <meta name="twitter:description" content="Book a free 20-minute business assessment call with Jason Moss. We'll look at your business together and map out your clearest path to more clients.">
+<link rel="stylesheet" href="/css/site.css">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
 <style>
-  :root {
-    --charcoal-obsidian: #1D1F1E;
-    --deep-forest-green: #2C3F36;
-    --earth-mocha-brown: #5B4B3F;
-    --slate-taupe: #8C837A;
-    --muted-gold: #C2A86C;
-    --warm-stone: #E9E2D3;
-    --pale-sand: #F8F6F2;
-    --font-headline: 'Libre Baskerville', Georgia, serif;
-    --font-body: 'Raleway', 'Helvetica Neue', sans-serif;
-    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
-
-  html {
-    scroll-behavior: smooth;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  body {
-    font-family: var(--font-body);
-    font-weight: 400;
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--charcoal-obsidian);
-    background-color: var(--pale-sand);
-  }
-
-  img { max-width: 100%; display: block; }
-  a { color: inherit; text-decoration: none; }
-
-  h1, h2 {
-    font-family: var(--font-headline);
-    font-weight: 400;
-    line-height: 1.3;
-  }
-
-  /* Buttons */
-  .btn-primary {
-    display: inline-block;
-    background-color: var(--muted-gold);
-    color: var(--charcoal-obsidian);
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 14px;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    padding: 18px 40px;
-    border: none;
-    border-radius: 0;
-    cursor: pointer;
-    transition: background-color 0.25s var(--ease-out), transform 0.25s var(--ease-out), box-shadow 0.25s var(--ease-out);
-    text-decoration: none;
-    text-align: center;
-  }
-  .btn-primary:hover {
-    background-color: #b89a5e;
-    transform: translateY(-1px);
-    box-shadow: 0 4px 20px rgba(194, 168, 108, 0.25);
-  }
-
-  .container { max-width: 800px; margin: 0 auto; padding: 0 24px; }
-
-  /* ========================================
-     Hero — shares one continuous pale texture with trust logos
-     ======================================== */
-  .bg-pale {
-    background:
-      linear-gradient(180deg, rgba(248, 246, 242, 0.80), rgba(248, 246, 242, 0.90)),
-      url('section-bg-pale.jpg') center / cover no-repeat,
-      var(--pale-sand);
-  }
-  .hero {
-    background: transparent;
-    text-align: center;
-    padding: 48px 24px 24px;
-  }
-  .hero__logo {
-    display: inline-block;
-    width: 140px;
-    height: auto;
-    margin-bottom: 48px;
-  }
-  .hero__logo img { width: 100%; height: auto; }
-  .hero__eyebrow {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: #a8905a;
-    margin-bottom: 20px;
-  }
-  .hero__headline {
-    font-size: 44px;
-    color: var(--charcoal-obsidian);
-    max-width: 780px;
-    margin: 0 auto 26px;
-    line-height: 1.28;
-  }
-  .hero__headline em {
-    font-style: italic;
-    display: block;
-    margin-top: 6px;
-  }
-  .hero__subhead {
-    font-size: 17px;
-    color: var(--earth-mocha-brown);
-    max-width: 600px;
-    margin: 0 auto 40px;
-    line-height: 1.75;
-    font-weight: 400;
-    text-wrap: pretty; /* no single-word last line on narrow screens */
-  }
-  .hero__portrait {
-    max-width: 720px;
-    margin: 0 auto 44px;
-    padding: 8px;
-    border: 1px solid rgba(194, 168, 108, 0.45);
-    background: rgba(248, 246, 242, 0.75);
-    box-shadow: 0 18px 60px rgba(29, 31, 30, 0.14);
-    position: relative;
-  }
-  .hero__portrait::after {
-    content: '';
-    position: absolute;
-    top: 14px;
-    left: 14px;
-    right: -14px;
-    bottom: -14px;
-    border-right: 1px solid rgba(194, 168, 108, 0.45);
-    border-bottom: 1px solid rgba(194, 168, 108, 0.45);
-    pointer-events: none;
-  }
-  .hero__portrait img {
-    width: 100%;
-    height: auto;
-    aspect-ratio: 16 / 9;
-    object-fit: cover;
-  }
-  .hero__cta-micro {
-    font-size: 13px;
-    color: var(--slate-taupe);
-    margin-top: 14px;
-  }
-
-  /* Trust Logos */
-  .trust-logos {
-    background: transparent;
-    padding: 36px 24px 44px;
-    text-align: center;
-  }
-  .trust-logos__label {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 11px;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--slate-taupe);
-    margin-bottom: 20px;
-    opacity: 0.7;
-  }
-  .trust-logos__row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 44px;
-    max-width: 620px;
-    margin: 0 auto;
-    opacity: 0.45;
-  }
-  .trust-logos__row img {
-    height: 22px;
-    width: auto;
-    object-fit: contain;
-    filter: grayscale(100%);
-  }
-
-  /* ========================================
-     Letter — the pitch, in Jason's voice
-     ======================================== */
-  .letter {
-    background:
-      linear-gradient(180deg, rgba(233, 226, 211, 0.80), rgba(233, 226, 211, 0.90)),
-      url('section-bg-warm.jpg') center / cover no-repeat,
-      var(--warm-stone);
-    padding: 132px 24px 88px;
-  }
-  .letter__inner {
-    max-width: 660px;
-    margin: 0 auto;
-    background: var(--pale-sand);
-    border-top: 2px solid var(--muted-gold);
-    box-shadow: 0 18px 60px rgba(29, 31, 30, 0.10);
-    padding: 0 64px 56px;
-  }
-  .letter__headshot {
-    width: 110px;
-    height: 110px;
-    border-radius: 50%;
-    object-fit: cover;
-    margin: -55px auto 30px;
-    padding: 4px;
-    border: 1px solid rgba(194, 168, 108, 0.55);
-    box-shadow: 0 8px 28px rgba(29, 31, 30, 0.14);
-    background: var(--pale-sand);
-    display: block;
-  }
-  .letter__inner p.letter__signature {
-    font-family: var(--font-headline);
-    font-style: italic;
-    font-size: 19px;
-    color: var(--charcoal-obsidian);
-    margin: 30px 0 0;
-  }
-  .letter__inner h2 {
-    font-size: 28px;
-    text-align: center;
-    margin-bottom: 36px;
-    color: var(--charcoal-obsidian);
-  }
-  .letter__inner p {
-    font-family: var(--font-headline);
-    font-size: 16px;
-    line-height: 1.85;
-    color: var(--charcoal-obsidian);
-    margin-bottom: 22px;
-  }
-  .letter__inner p strong { font-weight: 700; }
-  .letter__inner p em { font-style: italic; }
-  .call-list {
-    list-style: none;
-    padding: 0;
-    margin: 0 0 22px;
-    display: flex;
-    flex-direction: column;
-    gap: 12px;
-  }
-  .call-list li {
-    position: relative;
-    padding-left: 30px;
-    font-family: var(--font-headline);
-    font-size: 16px;
-    line-height: 1.7;
-    color: var(--charcoal-obsidian);
-  }
-  .call-list li::before {
-    content: "\2713";
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-family: var(--font-body);
-    font-weight: 700;
-    color: var(--muted-gold);
-  }
-  .letter__cta {
-    text-align: center;
-    margin-top: 40px;
-  }
-  .letter__cta p {
-    font-family: var(--font-body);
-    font-size: 13px;
-    color: var(--earth-mocha-brown);
-    margin: 14px 0 0;
-  }
-
-  /* ========================================
-     Testimonials — video cards
-     ======================================== */
-  .testimonials {
-    background: transparent;
-    padding: 88px 24px 80px;
-  }
-  .testimonials__header { text-align: center; margin-bottom: 52px; }
-  .testimonials__header h2 { font-size: 30px; color: var(--charcoal-obsidian); }
-  .testimonials__grid {
-    max-width: 1060px;
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 24px;
-    align-items: stretch;
-  }
-  .testimonial-card {
-    background-color: #fff;
-    border: 1px solid rgba(194, 168, 108, 0.25);
-    border-top: 2px solid var(--muted-gold);
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-    box-shadow: 0 6px 28px rgba(29, 31, 30, 0.05);
-    transition: box-shadow 0.4s var(--ease-out), transform 0.4s var(--ease-out);
-  }
-  .testimonial-card:hover {
-    box-shadow: 0 8px 40px rgba(29, 31, 30, 0.08);
-    transform: translateY(-2px);
-  }
-  .testimonial-card__video { width: 100%; position: relative; }
-  .jm-responsive-padding {
-    padding: 56.25% 0 0 0;
-    position: relative;
-  }
-  .jm-responsive-wrapper {
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-  }
-  .testimonial-card__body {
-    padding: 26px 28px 30px;
-    display: flex;
-    flex-direction: column;
-    flex: 1;
-  }
-  .testimonial-card__accent {
-    width: 40px;
-    height: 2px;
-    background: linear-gradient(90deg, var(--muted-gold), rgba(194, 168, 108, 0.3));
-    margin-bottom: 16px;
-  }
-  .testimonial-card__blurb {
-    font-family: var(--font-headline);
-    font-weight: 400;
-    font-size: 18px;
-    line-height: 1.6;
-    color: var(--charcoal-obsidian);
-    margin-bottom: 18px;
-  }
-  .testimonial-card__name {
-    font-family: var(--font-body);
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--slate-taupe);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-top: auto;
-  }
-
-  /* ========================================
-     Wall of Love — self-hosted testimonials embed
-     ======================================== */
-  .wall-of-love {
-    padding: 88px 24px 96px;
-  }
-  .wall-of-love__header { text-align: center; margin-bottom: 48px; }
-  .wall-of-love__header h2 { font-size: 30px; color: var(--charcoal-obsidian); }
-  .wall-of-love__embed {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  .wall-of-love__embed iframe {
-    opacity: 0;
-    transition: opacity 0.6s ease-out;
-  }
-  .wall-of-love__embed iframe.loaded { opacity: 1; }
-
-  /* ========================================
-     Booking — the destination
-     ======================================== */
-  .booking {
-    background:
-      linear-gradient(180deg, rgba(44, 63, 54, 0.85), rgba(36, 53, 48, 0.94)),
-      url('section-bg-forest.jpg') center / cover no-repeat,
-      var(--deep-forest-green);
-    padding: 96px 24px 88px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .booking::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: radial-gradient(ellipse at 50% 0%, rgba(194, 168, 108, 0.10) 0%, transparent 60%);
-    pointer-events: none;
-  }
-  .booking > * { position: relative; }
-  .booking__label {
-    font-family: var(--font-body);
-    font-weight: 600;
-    font-size: 12px;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--muted-gold);
-    margin-bottom: 14px;
-  }
-  .booking__heading {
-    font-size: 32px;
-    color: var(--pale-sand);
-    margin-bottom: 40px;
-    line-height: 1.35;
-  }
-  .qualify-wrap {
-    width: 100%;
-    max-width: 680px;
-    margin: 0 auto 28px;
-    border: 1px solid rgba(194, 168, 108, 0.45);
-    background: var(--pale-sand);
-    box-shadow: 0 0 40px rgba(194, 168, 108, 0.15);
-    overflow: hidden;
-  }
-
-  /* ========================================
-     Footer
-     ======================================== */
-  .site-footer {
-    background-color: var(--charcoal-obsidian);
-    padding: 48px 24px 48px;
-    text-align: center;
-  }
-  .site-footer__divider {
-    width: 100%;
-    max-width: 160px;
-    height: 1px;
-    background: linear-gradient(90deg, transparent, rgba(194, 168, 108, 0.25), transparent);
-    margin: 0 auto 44px;
-  }
-  .site-footer__logo { display: inline-block; width: 100px; height: auto; margin-bottom: 24px; opacity: 0.5; }
-  .site-footer__logo img { width: 100%; height: auto; }
-  .site-footer__copy { font-family: var(--font-body); font-size: 12px; color: rgba(140, 131, 122, 0.5); margin-bottom: 12px; }
-  .site-footer__links { display: flex; justify-content: center; gap: 8px; flex-wrap: wrap; }
-  .site-footer__links a {
-    font-family: var(--font-body);
-    font-size: 12px;
-    color: rgba(140, 131, 122, 0.5);
-    transition: color 0.25s var(--ease-out);
-  }
-  .site-footer__links a:hover { color: var(--pale-sand); }
-  .site-footer__links span { font-size: 12px; color: rgba(140, 131, 122, 0.3); }
-
-  /* ========================================
-     Scroll reveals
-     ======================================== */
-  .reveal {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.7s ease-out, transform 0.7s ease-out;
-  }
-  .reveal.visible {
-    opacity: 1;
-    transform: none;
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .reveal { opacity: 1; transform: none; transition: none; }
-  }
-
-  /* ========================================
-     Sticky Mobile CTA
-     ======================================== */
-  .sticky-cta {
-    display: none;
-    position: fixed;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    background-color: var(--pale-sand);
-    padding: 14px 20px;
-    box-shadow: 0 -2px 12px rgba(29, 31, 30, 0.08);
-    z-index: 1000;
-    text-align: center;
-    transform: translateY(100%);
-    transition: transform 0.35s var(--ease-out);
-  }
-  .sticky-cta--visible { transform: translateY(0); }
-  .sticky-cta .btn-primary { width: 100%; max-width: 360px; padding: 14px 28px; font-size: 12px; }
-
-  /* ========================================
-     Responsive
-     ======================================== */
-  @media (max-width: 768px) {
-    .btn-primary { width: 100%; max-width: 360px; font-size: 12px; letter-spacing: 0.05em; padding: 16px 24px; }
-
-    .hero { padding: 28px 20px 20px; }
-    .hero__logo { width: 100px; margin-bottom: 28px; }
-    .hero__eyebrow { font-size: 11px; margin-bottom: 14px; }
-    .hero__headline { font-size: 30px; margin-bottom: 18px; line-height: 1.32; }
-    .hero__subhead { font-size: 15px; margin-bottom: 28px; }
-    .hero__portrait { padding: 6px; margin-bottom: 32px; }
-    .hero__portrait::after { top: 10px; left: 10px; right: -10px; bottom: -10px; }
-
-    .trust-logos { padding: 24px 20px 32px; }
-    .trust-logos__row { gap: 20px; flex-wrap: wrap; }
-    .trust-logos__row img { height: 16px; }
-
-    .letter { padding: 104px 20px 60px; }
-    .letter__inner { padding: 0 26px 40px; }
-    .letter__headshot { width: 96px; height: 96px; margin: -48px auto 26px; }
-    .letter__inner h2 { font-size: 24px; margin-bottom: 28px; }
-    .letter__inner p { font-size: 15px; }
-    .letter__inner p.letter__signature { font-size: 17px; }
-    .call-list li { font-size: 15px; }
-
-    .testimonials { padding: 60px 20px 56px; }
-    .testimonials__header { margin-bottom: 36px; }
-    .testimonials__header h2 { font-size: 25px; }
-    .testimonials__grid { grid-template-columns: 1fr; gap: 20px; }
-    .testimonial-card__body { padding: 22px 24px 26px; }
-    .testimonial-card__blurb { font-size: 16px; }
-
-    .wall-of-love { padding: 60px 16px 64px; }
-    .wall-of-love__header { margin-bottom: 32px; }
-    .wall-of-love__header h2 { font-size: 25px; }
-
-    .booking { padding: 64px 16px 60px; }
-    .booking__heading { font-size: 25px; margin-bottom: 30px; }
-
-    .site-footer { padding: 44px 20px 80px; }
-    .site-footer__logo { width: 90px; }
-
-    .sticky-cta { display: block; }
-  }
-
-/* Results disclaimer: a quiet italic caption that belongs to the heading above the wall */
-.results-note{max-width:48rem;margin:16px auto 0;text-align:center;font-family:'Libre Baskerville',Georgia,serif;font-style:italic;font-weight:400;font-size:14.5px;line-height:1.7;letter-spacing:0;color:#8C837A;text-wrap:balance}
-@media (max-width:600px){.results-note{font-size:13.5px;max-width:21rem;margin-top:12px}}
-.testimonials-grid + .results-note, section > .results-note{margin-top:28px}
-.wall-of-love__header .results-note{margin-top:14px}
+.ap-top{display:flex;justify-content:center;padding:30px 0 0}
+.ap-top img{height:30px;width:auto}
+.ap-hero{padding:72px 0 64px}
+.ap-grid{display:grid;grid-template-columns:7fr 5fr;gap:80px;align-items:center}
+.ap-copy{display:flex;flex-direction:column;gap:28px}
+.ap-copy .h1{font-size:58px}
+.ap-micro{font-size:13px;color:var(--taupe);display:flex;gap:18px;flex-wrap:wrap}
+.ap-micro span{display:inline-flex;align-items:center;gap:8px}
+.ap-micro span::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--gold)}
+.ap-photo{aspect-ratio:4/5;object-fit:cover;width:100%;object-position:58% 50%}
+.press-row{display:flex;align-items:center;gap:48px;margin-top:88px;padding-top:30px;border-top:1px solid var(--line)}
+.press-row .label{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--taupe);white-space:nowrap}
+.letter{max-width:760px;margin:0 auto;background:#FBFAF7;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(91,75,63,.35);padding:80px 88px;position:relative;font-family:'Libre Baskerville',serif;font-size:17px;line-height:1.85;color:#3A3633}
+.letter::before{content:"";position:absolute;left:0;top:0;width:100%;height:2px;background:var(--gold)}
+.letter .hs{width:84px;height:84px;border-radius:50%;object-fit:cover;position:absolute;top:-42px;left:88px;border:3px solid #FBFAF7;box-shadow:0 0 0 1px var(--gold)}
+.letter p+p{margin-top:20px}
+.letter ul{list-style:none;padding:0;margin:20px 0;display:flex;flex-direction:column;gap:10px}
+.letter li{display:grid;grid-template-columns:28px 1fr}
+.letter li::before{content:"✓";color:var(--gold)}
+.three{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:56px}
+.three .vid{aspect-ratio:16/10}
+.three .pc-body{padding:24px 26px 26px;display:flex;flex-direction:column;gap:12px}
+.three .quote{font-size:18px}
+.qual{padding:128px 0}
+.embed-shot{position:relative;max-width:1136px;margin:0 auto;height:1800px;overflow:hidden}
+.embed-shot img{width:100%}
+.embed-shot .ws-mob{display:none}
+.embed-shot::after{content:"";position:absolute;left:0;right:0;bottom:0;height:380px;background:linear-gradient(180deg,rgba(248,246,242,0),#F8F6F2)}
+.qcard h3{color:var(--obs)}
+.qcard{max-width:640px;margin:48px auto 0;background:#FBFAF7;padding:48px 52px 52px;color:var(--ink)}
+.qbar{height:2px;background:var(--stone);margin-bottom:14px}
+.qbar i{display:block;width:50%;height:100%;background:var(--gold)}
+.opt{display:flex;align-items:center;gap:16px;min-height:58px;padding:0 20px;border:1px solid var(--line);background:#fff;font-size:16px;width:100%;text-align:left;font-family:'Raleway',sans-serif;color:var(--ink);cursor:pointer}
+.opt:hover{border-color:var(--gold)}
+.opt kbd{font-family:'Raleway',sans-serif;width:28px;height:28px;display:inline-flex;align-items:center;justify-content:center;border:1px solid var(--line);font-size:12px;color:var(--taupe)}
+.opts{display:flex;flex-direction:column;gap:10px;margin-top:28px}
+.mini{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px;margin-top:56px;align-items:start}
+.mini .msg{background:#FBFAF7;border:1px solid var(--line);padding:16px}
+.mini .msg img{width:100%}
+@media (max-width:900px){
+  .ap-hero{padding:40px 0 48px}
+  .ap-grid,.three,.mini{grid-template-columns:1fr;gap:40px}
+  .ap-copy .h1{font-size:40px}
+  .ap-grid .frame{order:-1}
+  .press-row{flex-direction:column;gap:18px;margin-top:56px}
+  .letter{padding:72px 24px 40px;font-size:16px}
+  .letter .hs{left:24px}
+  .qual{padding:80px 0}
+  .qcard{padding:32px 22px}
+}
+@media (max-width:700px){
+  .embed-shot{margin:0 -22px;height:1300px}
+  .embed-shot .ws-desk{display:none}
+  .embed-shot .ws-mob{display:block}
+}
+@media (min-width:601px) and (max-width:900px){
+  .three,.mini{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+  .three .pc-body{padding:20px 18px 22px}
+  .three .quote{font-size:16px}
+}
+.bg-tex-sand-soft{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.5),rgba(248,246,242,0.6)),url(/assets/textures/paper-pale.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
+@media (max-width:700px){.bg-tex-sand-soft{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.5),rgba(248,246,242,0.6)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
+.bg-tex-stone-soft{background-color:#E9E2D3;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(233,226,211,0.52),rgba(233,226,211,0.62)),url(/assets/textures/paper-warm.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
+@media (max-width:700px){.bg-tex-stone-soft{background-color:#E9E2D3;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(233,226,211,0.52),rgba(233,226,211,0.62)),url(/assets/textures/tile-warm.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
+.bg-tex-forest-soft{background-color:#2C3F36;background-image:linear-gradient(180deg,rgba(44,63,54,0.45),rgba(44,63,54,0.55)),url(/assets/textures/paper-forest.jpg);background-size:auto,cover;background-repeat:no-repeat,no-repeat;background-position:0 0,center}
+@media (max-width:700px){.bg-tex-forest-soft{background-color:#2C3F36;background-image:linear-gradient(180deg,rgba(44,63,54,0.45),rgba(44,63,54,0.55)),url(/assets/textures/tile-forest.jpg);background-size:auto,520px 520px;background-repeat:no-repeat,repeat;background-position:0 0,0 0}}
 </style>
 </head>
 <body>
+<div class="jm">
 
-  <!-- Hero + Trust Logos share one continuous pale texture (no seam) -->
-  <div class="bg-pale">
-
-  <!-- Hero -->
-  <section class="hero" id="hero">
-    <div class="hero__logo" aria-label="Jason Moss">
-      <img src="logo.svg" alt="Jason Moss" style="width:100%;height:auto;">
+<section class="bg-tex-sand-soft ap-hero paper" id="hero">
+  <div class="wrap">
+    <div class="ap-top" style="justify-content:flex-start;padding:0 0 56px"><img src="/assets/images/logo.svg" alt="Jason Moss" width="140" height="31"></div>
+    <div class="ap-grid">
+      <div class="ap-copy">
+        <div class="eyebrow">Free 20-minute business assessment</div>
+        <h1 class="h1">Let’s get you more clients — <span class="brass-it">in a way that feels like you.</span></h1>
+        <p class="lede">Book a free 20-minute business assessment call, one-on-one with me. We’ll look at your business together and map out your clearest path to more clients.</p>
+        <div style="display:flex;flex-direction:column;gap:16px;align-items:flex-start">
+          <a class="btn btn-gold" href="#book">Book your free call</a>
+          <div class="ap-micro"><span>Free</span><span>20 minutes</span><span>Takes 30 seconds to book</span></div>
+        </div>
+      </div>
+      <div class="frame"><img class="ap-photo" src="/assets/images/lifestyle-4.jpg" alt="Jason Moss"></div>
     </div>
-
-    <p class="hero__eyebrow">Free 20-Minute Business Assessment</p>
-    <h1 class="hero__headline">Let's get you more clients —<br><em>in a way that feels like you.</em></h1>
-
-    <p class="hero__subhead">Book a free 20-minute business assessment call, one-on-one with me. We'll look at your business together and map out your clearest path to more clients.</p>
-
-    <div class="hero__portrait">
-      <img src="/assets/images/lifestyle-4.jpg" alt="Jason Moss" width="1920" height="1080">
-    </div>
-
-    <a href="#book" class="btn-primary">Book Your Free Call</a>
-    <p class="hero__cta-micro">Free &middot; 20 minutes &middot; Takes 30 seconds to book</p>
-  </section>
-
-  <!-- Trust Logos -->
-  <div class="trust-logos">
-    <p class="trust-logos__label">As Seen In</p>
-    <div class="trust-logos__row">
-      <img src="logo-forbes-scotland.png" alt="Forbes">
-      <img src="logo-business-insider.png" alt="Business Insider">
-      <img src="logo-obo.png" alt="Online Business Owner">
-      <img src="logo-entrepreneur.png" alt="Entrepreneur">
-      <img src="logo-fast-company-sa.png" alt="Fast Company">
+    <div class="press-row">
+      <span class="label">As seen in</span>
+      <div class="press" style="flex:1">
+        <img src="/assets/logo-forbes-scotland.png" alt="Forbes"><img src="/assets/logo-business-insider.png" alt="Business Insider"><img src="/assets/logo-obo.png" alt="Online Business Owner"><img src="/assets/logo-entrepreneur.png" alt="Entrepreneur"><img src="/assets/logo-fast-company-sa.png" alt="Fast Company">
+      </div>
     </div>
   </div>
+</section>
 
-  </div><!-- /.bg-pale -->
-
-  <!-- Letter -->
-  <section class="letter" id="letter">
-    <div class="letter__inner reveal">
-      <img src="jm-headshot.png" alt="Jason Moss" class="letter__headshot" width="110" height="110">
-      <h2>Clarity starts with a conversation.</h2>
-      <p>Over the past few years, I've supported more than 1,000 entrepreneurs &mdash; coaches, consultants, and service-based business owners at every stage of the journey.</p>
-      <p>Almost all of them came to me working through some version of the same two challenges: <strong>attracting the right people</strong>&hellip; and <strong>turning that attention into paying clients.</strong></p>
-      <p>If that's where you are, your next step is a <strong>free 20-minute business assessment call</strong>, one-on-one with me.</p>
-      <p>On that call, we'll:</p>
-      <ul class="call-list">
-        <li>Take a closer look at your business together</li>
-        <li>Map out what's possible for you</li>
-        <li>Get clear on what needs to shift for you to start signing more clients</li>
-      </ul>
-      <p>If it feels like I can help on a deeper level, I'll share what next steps could look like. Either way, you'll walk away with more clarity than you came with.</p>
-      <p class="letter__signature">&mdash; Jason</p>
-      <div class="letter__cta">
-        <a href="#book" class="btn-primary">Book Your Free Call</a>
-        <p>I take these calls personally &mdash; it's you and me together.</p>
+<section class="bg-tex-stone-soft section paper" style="padding-top:150px">
+  <div class="wrap">
+    <div class="letter">
+      <img class="hs" src="/apply/jm-headshot.png" alt="Jason Moss">
+      <h2 class="h2" style="font-size:32px;margin-bottom:28px">Clarity starts with a conversation.</h2>
+      <p>Over the past few years, I’ve supported more than 1,000 entrepreneurs — coaches, consultants, and service-based business owners at every stage of the journey.</p>
+      <p>Almost all of them came to me working through some version of the same two challenges: <strong>attracting the right people…</strong> and <strong>turning that attention into paying clients.</strong></p>
+      <p>If that’s where you are, your next step is a <strong>free 20-minute business assessment call</strong>, one-on-one with me.</p>
+      <p>On that call, we’ll:</p>
+      <ul><li>Take a closer look at your business together</li><li>Map out what’s possible for you</li><li>Get clear on what needs to shift for you to start signing more clients</li></ul>
+      <p>If it feels like I can help on a deeper level, I’ll share what next steps could look like. Either way, you’ll walk away with more clarity than you came with.</p>
+      <p style="font-family:'Caveat',cursive;font-size:36px;color:var(--mocha);margin-top:28px;line-height:1">— Jason</p>
+      <div style="display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:44px;font-family:'Raleway',sans-serif">
+        <a class="btn btn-gold" href="#book">Book your free call</a>
+        <span style="font-size:13px;color:var(--taupe)">I take these calls personally — it’s you and me together.</span>
       </div>
     </div>
-  </section>
-
-  <!-- Testimonials -->
-  <section class="testimonials" id="testimonials">
-    <div class="testimonials__header">
-      <h2>Stories from entrepreneurs like you</h2>
-    </div>
-
-    <div class="testimonials__grid">
-      <div class="testimonial-card reveal">
-        <div class="testimonial-card__video">
-          <div class="jm-responsive-padding">
-            <div class="jm-responsive-wrapper">
-              <video class="jm-player" data-bunny-id="f79f0527-5dd3-4950-9c44-73829f09b7ed" data-video-id="hlntpnigew" data-autoplay="false" playsinline crossorigin="anonymous"></video>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card__body">
-          <div class="testimonial-card__accent"></div>
-          <p class="testimonial-card__blurb">Made $160k and 4X'd his business in only a year.</p>
-          <p class="testimonial-card__name">Zach Bloom</p>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal">
-        <div class="testimonial-card__video">
-          <div class="jm-responsive-padding">
-            <div class="jm-responsive-wrapper">
-              <video class="jm-player" data-bunny-id="5a38c245-f511-48e5-8ffb-b4efd1e4168d" data-video-id="g8055phors" data-autoplay="false" playsinline crossorigin="anonymous"></video>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card__body">
-          <div class="testimonial-card__accent"></div>
-          <p class="testimonial-card__blurb">From $2k to $260k while cutting her hours in half.</p>
-          <p class="testimonial-card__name">Meaghan Long</p>
-        </div>
-      </div>
-
-      <div class="testimonial-card reveal">
-        <div class="testimonial-card__video">
-          <div class="jm-responsive-padding">
-            <div class="jm-responsive-wrapper">
-              <video class="jm-player" data-bunny-id="98ad4391-4cb4-4e8b-8a1f-3a8adfacddd2" data-video-id="x0tlj5qthd" data-autoplay="false" playsinline crossorigin="anonymous"></video>
-            </div>
-          </div>
-        </div>
-        <div class="testimonial-card__body">
-          <div class="testimonial-card__accent"></div>
-          <p class="testimonial-card__blurb">Hit her first 16k month &mdash; and it was easy.</p>
-          <p class="testimonial-card__name">Federica Prayer</p>
-        </div>
-      </div>
-    </div>
-    <p class="results-note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
-  </section>
-
-  <!-- Booking -->
-  <section class="booking" id="book">
-    <p class="booking__label">Free &middot; 20 Minutes &middot; 1-on-1 With Jason</p>
-    <h2 class="booking__heading">Start with two quick questions.</h2>
-
-    <div class="qualify-wrap">
-      <div data-qualify-source="apply"></div>
-    </div>
-
-  </section>
-
-  <!-- Wall of Love -->
-  <section class="wall-of-love" id="wall-of-love">
-    <div class="wall-of-love__header">
-      <h2>What people are saying</h2>
-      <p class="results-note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
-    </div>
-    <div class="wall-of-love__embed">
-      <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer class="site-footer">
-    <div class="site-footer__divider"></div>
-    <div class="site-footer__logo" aria-label="Jason Moss">
-      <img src="logo-light.svg" alt="Jason Moss" style="width:100%;height:auto;">
-    </div>
-    <p class="site-footer__copy">&copy; Jason Moss LLC. All rights reserved.</p>
-    <div class="site-footer__links">
-      <a href="/privacy/" target="_blank" rel="noopener noreferrer">Privacy Policy</a>
-      <span>|</span>
-      <a href="/terms/" target="_blank" rel="noopener noreferrer">Terms &amp; Conditions</a>
-      <span>|</span>
-      <a href="/earnings-disclaimer/" target="_blank" rel="noopener noreferrer">Earnings Disclaimer</a>
-    </div>
-  </footer>
-
-  <!-- Sticky Mobile CTA -->
-  <div class="sticky-cta" id="stickyCta">
-    <a href="#book" class="btn-primary">Book Your Free Call</a>
   </div>
+</section>
 
-  <!-- Bunny engagement tracking (managed in jasonmoss.com repo) -->
-  <script src="/js/bunny-tracking.js" async></script>
-  <script src="/js/bunny-embeds.js" defer></script>
+<section class="section" style="background:var(--sand)">
+  <div class="wrap">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center">
+      <div class="eyebrow center">Client breakthroughs</div>
+      <h2 class="h2">Stories from entrepreneurs <span class="brass-it">like you.</span></h2>
+    </div>
+    <div class="three">
+      <div class="card"><div class="vid vid-player"><video class="jm-player" data-bunny-id="f79f0527-5dd3-4950-9c44-73829f09b7ed" data-video-id="hlntpnigew" data-autoplay="false" playsinline crossorigin="anonymous"></video></div><div class="pc-body"><p class="quote">“Made $160k and 4X’d his business in only a year.”</p><span class="name">Zach Bloom</span></div></div>
+      <div class="card"><div class="vid vid-player"><video class="jm-player" data-bunny-id="5a38c245-f511-48e5-8ffb-b4efd1e4168d" data-video-id="g8055phors" data-autoplay="false" playsinline crossorigin="anonymous"></video></div><div class="pc-body"><p class="quote">“From $2k to $260k while cutting her hours in half.”</p><span class="name">Meaghan Long</span></div></div>
+      <div class="card"><div class="vid vid-player"><video class="jm-player" data-bunny-id="98ad4391-4cb4-4e8b-8a1f-3a8adfacddd2" data-video-id="x0tlj5qthd" data-autoplay="false" playsinline crossorigin="anonymous"></video></div><div class="pc-body"><p class="quote">“Hit her first 16k month — and it was easy.”</p><span class="name">Federica Prayer</span></div></div>
+    </div>
+    <p class="disclaimer" style="text-align:center;margin-top:36px">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
+  </div>
+</section>
 
-  <!-- Wall of Love embed resizer -->
+<section class="bg-tex-forest-soft qual on-dark paper" id="book">
+  <div class="wrap">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:20px;text-align:center">
+      <div class="eyebrow center">Free · 20 minutes · 1-on-1 with Jason</div>
+      <h2 class="h2">Start with two quick questions.</h2>
+    </div>
+    <div class="qualify-wrap"><div data-qualify-source="apply"></div></div>
+</section>
 
-  <!-- Call qualifier — two questions, then booking (self-resizing) -->
-  <script src="https://jasonmoss.com/qualify/embed.js" async></script>
+<section style="background:var(--sand);padding:120px 0 120px">
+  <div class="wrap" style="max-width:1248px">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;margin-bottom:56px">
+      <h2 class="h2">What people are saying</h2>
+      <p class="disclaimer">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
+    </div>
+    <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
+  </div>
+</section>
 
-  <script>
-    (function() {
-      /* Sticky CTA — visible between hero and booking section */
-      var hero = document.getElementById('hero');
-      var stickyCta = document.getElementById('stickyCta');
-      var booking = document.getElementById('book');
-      if (!hero || !stickyCta) return;
-      function checkScroll() {
-        var heroBottom = hero.getBoundingClientRect().bottom;
-        var bookingTop = booking ? booking.getBoundingClientRect().top : 99999;
-        var windowHeight = window.innerHeight;
-        if (heroBottom < 0 && bookingTop > windowHeight) {
-          stickyCta.classList.add('sticky-cta--visible');
-        } else {
-          stickyCta.classList.remove('sticky-cta--visible');
-        }
-      }
-      window.addEventListener('scroll', checkScroll, { passive: true });
-      checkScroll();
-
-      /* Scroll reveals */
-      var revealEls = document.querySelectorAll('.reveal');
-      if ('IntersectionObserver' in window) {
-        var revealObserver = new IntersectionObserver(function(entries) {
-          entries.forEach(function(entry) {
-            if (entry.isIntersecting) {
-              entry.target.classList.add('visible');
-              revealObserver.unobserve(entry.target);
-            }
-          });
-        }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
-        revealEls.forEach(function(el) { revealObserver.observe(el); });
-      } else {
-        revealEls.forEach(function(el) { el.classList.add('visible'); });
-      }
-    })();
-  </script>
+<footer class="ftr ftr-min"><div class="wrap"><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"><div class="ftr-base"><span>&copy; Jason Moss LLC. All rights reserved.</span><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav></div></div></footer>
+</div>
+<script src="/js/site.js" defer></script>
+<style>
+.qualify-wrap{width:100%;max-width:680px;margin:48px auto 0;border:1px solid rgba(194,168,108,.45);background:var(--sand);box-shadow:0 0 40px rgba(194,168,108,.15);overflow:hidden}
+.sticky-cta{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--sand);padding:14px 20px;box-shadow:0 -2px 12px rgba(29,31,30,.08);z-index:50;text-align:center;transform:translateY(100%);transition:transform .35s ease-out}
+.sticky-cta--visible{transform:translateY(0)}
+.sticky-cta .btn{width:100%;max-width:360px;min-height:50px;padding:14px 24px;font-size:12px}
+@media (max-width:900px){.sticky-cta{display:block}.ftr-min{padding-bottom:96px}}
+</style>
+<div class="sticky-cta" id="stickyCta"><a href="#book" class="btn btn-gold">Book your free call</a></div>
+<script src="/js/bunny-tracking.js" async></script>
+<script src="/js/bunny-embeds.js" defer></script>
+<script src="https://jasonmoss.com/qualify/embed.js" async></script>
+<script>
+(function () {
+  /* Sticky CTA: visible between the hero and the booking section (mobile) */
+  var hero = document.getElementById('hero'), cta = document.getElementById('stickyCta'), book = document.getElementById('book');
+  if (!hero || !cta) return;
+  function check() {
+    var past = hero.getBoundingClientRect().bottom < 0;
+    var before = (book ? book.getBoundingClientRect().top : 99999) > window.innerHeight;
+    cta.classList.toggle('sticky-cta--visible', past && before);
+  }
+  window.addEventListener('scroll', check, { passive: true });
+  check();
+})();
+</script>
 <script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>
