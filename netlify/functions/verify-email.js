@@ -23,7 +23,7 @@ const { __internal } = require('./submit-contact.js');
 // drift between functions. Origin/Referer are spoofable, so originAllowed is
 // paired with the per-IP rate limit and the daily credit cap below — all
 // three gate the paid lookup.
-const { originAllowed, corsHeaders } = __internal;
+const { originAllowed, corsHeaders, connectBlobs } = __internal;
 
 const HARD_BLOCK_SUB_STATUSES = new Set(['disposable', 'toxic']);
 
@@ -67,6 +67,7 @@ function rateLimited(ip) {
 }
 
 exports.handler = async (event) => {
+  connectBlobs(event);
   const headers = corsHeaders(event);
 
   // Handle preflight

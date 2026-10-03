@@ -84,7 +84,8 @@ async function processQueuedOptins() {
   return { processed, succeeded, retained, failed };
 }
 
-exports.handler = schedule('* * * * *', async () => {
+exports.handler = schedule('* * * * *', async (event) => {
+  __internal.connectBlobs(event);
   const result = await processQueuedOptins();
   console.log('Processed Kit opt-in queue', result);
   return {

@@ -21,6 +21,7 @@
 // submit-contact.js so every public endpoint stays identical in behavior.
 const { __internal } = require('./submit-contact.js');
 const {
+  connectBlobs,
   enqueueOptin,
   isQueueableKitError,
   kitErrorSummary,
@@ -192,6 +193,7 @@ async function markBooked(email) {
 }
 
 exports.handler = async (event) => {
+  connectBlobs(event);
   const headers = corsHeaders(event);
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };

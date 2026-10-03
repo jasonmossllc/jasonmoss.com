@@ -324,6 +324,19 @@ function kitErrorSummary(error) {
   };
 }
 
+// Every function here uses the Lambda-compatible `exports.handler` signature,
+// where Netlify Blobs is NOT configured automatically: a handler must pass its
+// event to connectLambda before any getStore call, or every Blobs read/write
+// throws (MissingBlobsEnvironmentError). Without this the Kit retry queue, the
+// ZeroBounce daily cap and the tokenless lane all silently failed.
+function connectBlobs(event) {
+  try {
+    require('@netlify/blobs').connectLambda(event);
+  } catch (e) {
+    console.error('Netlify Blobs connect failed:', e?.message || e);
+  }
+}
+
 // ── TOKENLESS LANE ─────────────────────────────────────────────────────────
 // A visitor whose browser can't run Turnstile (ad/privacy blockers, some in-app
 // browsers, a Cloudflare widget error) never gets a token. Blocking a missing
@@ -685,6 +698,7 @@ function corsHeaders(event) {
 }
 
 exports.handler = async (event) => {
+  connectBlobs(event);
   const headers = corsHeaders(event);
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
@@ -838,6 +852,7 @@ module.exports.__internal = {
   // endpoint runs the exact same bot guards and Kit plumbing.
   verifyTurnstile,
   checkTurnstile,
+  connectBlobs,
   originAllowed,
   looksLikeBotName,
   cleanString,

@@ -20,6 +20,7 @@
 // every public endpoint on this site behaves identically.
 const { __internal } = require('./submit-contact.js');
 const {
+  connectBlobs,
   kitRequest,
   enqueueOptin,
   isQueueableKitError,
@@ -163,6 +164,7 @@ async function undoDecline(subscriberId, email) {
 }
 
 exports.handler = async (event) => {
+  connectBlobs(event);
   const headers = corsHeaders(event);
   if (event.httpMethod === 'OPTIONS') {
     return { statusCode: 200, headers, body: '' };
