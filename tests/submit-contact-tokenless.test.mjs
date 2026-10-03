@@ -23,8 +23,7 @@ function memStore() {
     m,
     async get(k) { return m.has(k) ? m.get(k) : null; },
     async setJSON(k, v, opts = {}) {
-      if (opts.onlyIfNew && m.has(k)) return { modified: false };
-      m.set(k, v); return { modified: true };
+      m.set(k, v);
     },
   };
 }
@@ -55,23 +54,21 @@ for (const tok of ['', null, undefined]) {
   let admitted = 0;
   for (let i = 0; i < TOKENLESS_DAILY_CAP + 10; i++) if ((await admit_(`10.0.${i >> 8}.${i & 255}`, st, now)).admit) admitted++;
   check('daily cap holds across IPs', admitted === TOKENLESS_DAILY_CAP, admitted);
-  // checkTurnstile uses the real clock, so mark today's window full directly.
-  st.m.set(`day/${new Date().toISOString().slice(0, 10)}/full`, { at: 1 });
+  // checkTurnstile uses the real clock, so fill today's counter directly.
+  st.m.set(`day/${new Date().toISOString().slice(0, 10)}`, TOKENLESS_DAILY_CAP);
   const r2 = await check_('', '9.9.9.8', st);
   check('full lane blocks with verification_required', r2.block === true && r2.error === 'verification_required', r2);
   const tomorrow = await admit_('9.9.9.7', st, new Date(Date.now() + 86400000));
   check('daily cap resets next day', tomorrow.admit === true, tomorrow);
 }
 
-// Concurrent requests can't share a slot (create-only writes are atomic).
+// In-memory limit closes the lane for one source even if Blobs reads lag
+// (a store that always reads 0, i.e. maximally stale).
 {
-  const st = memStore(); const now = new Date('2026-10-02T15:10:00Z');
-  const results = await Promise.all(Array.from({ length: TOKENLESS_DAILY_CAP + 15 }, (_, i) => admitTokenless(`11.0.0.${i}`, st, now)));
-  const slots = results.filter(r => r.admit).map(r => r.used);
-  check('concurrent admissions never exceed the cap', slots.length === TOKENLESS_DAILY_CAP, slots.length);
-  check('concurrent admissions get distinct slots', new Set(slots).size === slots.length, slots);
-  const after = await admit_('11.0.1.1', st, now);
-  check('full marker short-circuits', after.admit === false && st.m.has('day/2026-10-02/full'), after);
+  const stale = { async get() { return null; }, async setJSON() {} };
+  let admitted = 0;
+  for (let i = 0; i < TOKENLESS_PER_IP_PER_HOUR + 5; i++) if ((await admit_('12.0.0.1', stale, new Date('2026-10-02T15:10:00Z'))).admit) admitted++;
+  check('in-memory per-IP limit holds when Blobs reads are stale', admitted === TOKENLESS_PER_IP_PER_HOUR, admitted);
 }
 
 // Store outage fails CLOSED (old strict behavior), never open.

@@ -361,31 +361,40 @@ function getTokenlessStore() {
   return blobStore(TOKENLESS_STORE);
 }
 
-// Counters are exact without strong reads (which connectLambda can't provide):
-// each admission claims the next numbered slot with a create-only write
-// (onlyIfNew), which Blobs applies atomically, so concurrent requests can't
-// both take slot N. A `full` marker short-circuits once a window is used up,
-// so a flood costs one read per request instead of a walk over every slot.
-async function claimSlot(st, prefix, cap) {
-  if (await st.get(`${prefix}/full`)) return 0;
-  for (let n = 1; n <= cap; n++) {
-    const res = await st.setJSON(`${prefix}/${n}`, { at: Date.now() }, { onlyIfNew: true });
-    if (res && res.modified) return n;
-  }
-  await st.setJSON(`${prefix}/full`, { at: Date.now() });
-  return 0;
+// Counters live in Blobs. Reads there are eventually consistent (edge-cached
+// for a short window) and Netlify enforces neither strong reads nor
+// create-only writes for these functions, so under a fast burst the shared
+// counts can lag and briefly admit more than the cap before closing. The
+// in-memory per-instance limit below catches a single source hammering one
+// warm instance immediately; the Blobs counts catch everything else within
+// that short lag. Both are checked; either one closing the lane is enough.
+const memHits = new Map();
+function memLimited(bucket) {
+  const used = memHits.get(bucket) || 0;
+  if (used >= TOKENLESS_PER_IP_PER_HOUR) return true;
+  if (memHits.size > 5000) memHits.clear(); // crude memory bound
+  memHits.set(bucket, used + 1);
+  return false;
 }
 
 async function admitTokenless(ip, store, now = new Date()) {
   try {
-    const st = store || await getTokenlessStore();
     const iso = now.toISOString();
     const ipHash = crypto.createHash('sha256').update(String(ip || 'unknown')).digest('hex').slice(0, 16);
-    const ipSlot = await claimSlot(st, `ip/${iso.slice(0, 13)}/${ipHash}`, TOKENLESS_PER_IP_PER_HOUR);
-    if (!ipSlot) return { admit: false, reason: 'ip_cap' };
-    const daySlot = await claimSlot(st, `day/${iso.slice(0, 10)}`, TOKENLESS_DAILY_CAP);
-    if (!daySlot) return { admit: false, reason: 'daily_cap' };
-    return { admit: true, used: daySlot };
+    const dayKey = `day/${iso.slice(0, 10)}`;
+    const ipKey = `ip/${iso.slice(0, 13)}/${ipHash}`;
+    if (memLimited(ipKey)) return { admit: false, reason: 'ip_cap' };
+    const st = store || await getTokenlessStore();
+    const [dayRaw, ipRaw] = await Promise.all([
+      st.get(dayKey, { type: 'json' }),
+      st.get(ipKey, { type: 'json' }),
+    ]);
+    const dayUsed = Number(dayRaw) || 0;
+    const ipUsed = Number(ipRaw) || 0;
+    if (dayUsed >= TOKENLESS_DAILY_CAP) return { admit: false, reason: 'daily_cap', used: dayUsed };
+    if (ipUsed >= TOKENLESS_PER_IP_PER_HOUR) return { admit: false, reason: 'ip_cap', used: ipUsed };
+    await Promise.all([st.setJSON(dayKey, dayUsed + 1), st.setJSON(ipKey, ipUsed + 1)]);
+    return { admit: true, used: dayUsed + 1 };
   } catch (e) {
     console.error('Tokenless lane store error (lane closed):', e?.message || e);
     return { admit: false, reason: 'store_error' };
