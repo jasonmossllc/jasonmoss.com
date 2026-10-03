@@ -30,10 +30,12 @@
 <meta name="twitter:title" content="Jason Moss — Helping entrepreneurs grow from peace, not pressure.">
 <meta name="twitter:description" content="Jason Moss helps entrepreneurs grow with more revenue, clarity, and peace through intuitive leadership, aligned profitability, and resonance marketing.">
 <meta name="twitter:image" content="https://jasonmoss.com/assets/images/featured.jpg">
-<link rel="preload" as="image" href="/assets/images/hero-mountain.jpg" fetchpriority="high">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" href="/assets/images/hero/hero-1600.avif" media="(max-width:700px)">
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" href="/assets/images/hero/hero-2400.avif" media="(min-width:701px) and (max-width:1099px), (min-width:1100px) and (max-width:1599px) and (max-resolution:1.49dppx)">
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" href="/assets/images/hero/hero-3200.avif" media="(min-width:1600px), (min-width:1100px) and (min-resolution:1.5dppx)">
 <link rel="stylesheet" href="/css/site.css">
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
@@ -75,16 +77,20 @@
 }
 </script>
 <style>
-.hero{position:relative;min-height:100vh;min-height:100svh;color:var(--sand);display:flex;flex-direction:column;background:#33362f}
+.hero{position:relative;min-height:100vh;min-height:100svh;color:var(--sand);display:flex;flex-direction:column;background:#201C17}
 .hero-bg{position:absolute;inset:0;background-size:cover;background-position:62% 100%}
-.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(22,26,22,.55) 0,rgba(22,26,22,0) 200px),linear-gradient(90deg,rgba(22,26,22,.78) 0%,rgba(22,26,22,.5) 38%,rgba(22,26,22,0) 66%),linear-gradient(0deg,rgba(22,26,22,.7) 0%,rgba(22,26,22,0) 30%)}
+/* Hero photo: each screen gets only the size it needs, in the smallest format it supports (AVIF > WebP > JPEG) */
+.hero-bg{background-image:url(/assets/images/hero/hero-1600.jpg);background-image:image-set(url(/assets/images/hero/hero-1600.avif) type("image/avif"),url(/assets/images/hero/hero-1600.webp) type("image/webp"),url(/assets/images/hero/hero-1600.jpg) type("image/jpeg"))}
+@media (min-width:701px){.hero-bg{background-image:url(/assets/images/hero/hero-2400.jpg);background-image:image-set(url(/assets/images/hero/hero-2400.avif) type("image/avif"),url(/assets/images/hero/hero-2400.webp) type("image/webp"),url(/assets/images/hero/hero-2400.jpg) type("image/jpeg"))}}
+@media (min-width:1600px),(min-width:1100px) and (min-resolution:1.5dppx){.hero-bg{background-image:url(/assets/images/hero/hero-3200.jpg);background-image:image-set(url(/assets/images/hero/hero-3200.avif) type("image/avif"),url(/assets/images/hero/hero-3200.webp) type("image/webp"),url(/assets/images/hero/hero-3200.jpg) type("image/jpeg"))}}
+.hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,28,23,.55) 0,rgba(32,28,23,0) 200px),linear-gradient(90deg,rgba(32,28,23,.78) 0%,rgba(32,28,23,.5) 38%,rgba(32,28,23,0) 66%),linear-gradient(0deg,rgba(32,28,23,.7) 0%,rgba(32,28,23,0) 30%),radial-gradient(ellipse 70% 60% at 82% 8%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
 .hero .hdr{color:var(--sand)}
 .hero .eyebrow{color:#D8C08A;max-width:470px}
 .hero-body{position:relative;z-index:2;flex:1;display:flex;align-items:center;max-width:1312px;width:100%;margin:0 auto;padding:clamp(8px,3vh,40px) 56px clamp(12px,4vh,60px)}
 .hero-copy{max-width:max(430px,43vw);display:flex;flex-direction:column;gap:clamp(10px,2.8vh,30px)}
 .hero-copy .h1{color:var(--sand);font-size:clamp(32px,min(3.95vw,7.6vh),88px);line-height:1.08}
 .hero-copy .lede{color:rgba(248,246,242,.85);max-width:500px;font-size:clamp(15px,2vh,19px)}
-.hero-ctas{display:flex;align-items:center;gap:36px;flex-wrap:wrap;margin-top:6px}
+.hero-ctas{display:flex;align-items:center;gap:36px;flex-wrap:wrap;margin-top:clamp(4px,1.4vh,16px)}
 .hero-press{position:relative;z-index:2;max-width:1312px;width:100%;margin:0 auto;padding:clamp(10px,2.6vh,30px) 56px clamp(14px,3.6vh,40px);display:flex;align-items:center;gap:48px}
 .hero-press .label{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(248,246,242,.6);white-space:nowrap}
 .hero-press .press{flex:1;border-top:1px solid rgba(248,246,242,.18);padding-top:clamp(12px,2.4vh,26px)}
@@ -127,7 +133,7 @@
 .path-body .h3{font-size:24px}
 .path-body .tlink{margin-top:auto;align-self:flex-start;color:var(--brass)}
 .closer{position:relative;padding:180px 0;text-align:center;color:var(--sand);background-size:cover;background-position:center}
-.closer::before{content:"";position:absolute;inset:0;background:rgba(22,30,25,.55)}
+.closer::before{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(16,30,22,.48),rgba(16,30,22,.58))}
 .closer .inner{position:relative;display:flex;flex-direction:column;align-items:center;gap:32px}
 @media (min-width:901px){
   .hero .hdr,.hero-body,.hero-press{max-width:none;padding-left:clamp(56px,7vw,220px);padding-right:clamp(56px,7vw,220px)}
@@ -139,9 +145,9 @@
 }
 /* tall/portrait large screens (e.g. iPad Pro upright): stack like phones, photo on top */
 @media (min-width:901px) and (max-aspect-ratio:1/1){
-  .hero{background:var(--forest-deep)}
+  .hero{background:#201C17}
   .hero-bg{bottom:auto;height:46vh;background-position:66% 80%}
-  .hero-shade{bottom:auto;height:46vh;background:linear-gradient(180deg,rgba(22,26,22,.45) 0,rgba(31,45,38,0) 22%,rgba(31,45,38,0) 60%,#1F2D26 100%)}
+  .hero-shade{bottom:auto;height:46vh;background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 22%,rgba(32,28,23,0) 60%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
   .hero-body{align-items:flex-end;padding-top:40vh}
   .hero-copy{max-width:min(640px,80vw)}
   .hero-copy .h1{font-size:clamp(36px,6vw,64px)}
@@ -156,9 +162,9 @@
   .hero-copy .lede{display:none}
 }
 @media (max-width:900px){
-  .hero{min-height:0;background:var(--forest-deep)}
+  .hero{min-height:0;background:#201C17}
   .hero-bg{bottom:auto;height:500px;background-position:64% 35%}
-  .hero-shade{bottom:auto;height:500px;background:linear-gradient(180deg,rgba(22,26,22,.45) 0,rgba(31,45,38,0) 25%,rgba(31,45,38,0) 50%,#1F2D26 100%)}
+  .hero-shade{bottom:auto;height:500px;background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 25%,rgba(32,28,23,0) 50%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
   .hero-body{align-items:flex-end;padding:400px 22px 28px}
   .hero-copy .h1{font-size:44px}
   .hero-ctas{gap:18px}
@@ -178,6 +184,9 @@
   .method-grid,.story{gap:64px}
 }
 @media (min-width:601px) and (max-width:900px){
+  .hero-bg,.hero-shade{height:68vw!important}
+  .hero-bg{background-position:62% 72%!important}
+  .hero-body{padding-top:calc(68vw - 90px)!important}
   .proof,.paths{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
   .proof .pc-body,.path-body{padding:22px 20px 24px}
   .pc-body .quote{font-size:17px}
@@ -189,12 +198,11 @@
   .recog .big{font-size:26px}
   .closer .h2{font-size:32px!important}
 }
-.bg-hero-mountain{background-image:url(/assets/images/hero-mountain.jpg)}
 .bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/paper-pale.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
 @media (max-width:700px){.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
 .bg-tex-forest{background-color:#2C3F36;background-image:url(/assets/textures/grain-dark-soft.png),linear-gradient(180deg,rgba(44,63,54,0.25),rgba(44,63,54,0.35)),url(/assets/textures/paper-forest.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
 @media (max-width:700px){.bg-tex-forest{background-color:#2C3F36;background-image:url(/assets/textures/grain-dark-soft.png),linear-gradient(180deg,rgba(44,63,54,0.25),rgba(44,63,54,0.35)),url(/assets/textures/tile-forest.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
-.bg-forest-bg{background-image:url(/assets/images/forest-bg.jpg)}
+.bg-forest-bg{background-image:url(/assets/images/graded/forest-bg.jpg)}
 </style>
 </head>
 <body>
@@ -204,7 +212,7 @@
 
 <main id="main">
 <header class="hero">
-  <div class="bg-hero-mountain hero-bg"></div>
+  <div class="hero-bg"></div>
   <div class="hero-shade"></div>
   <div class="hdr"><a href="/" aria-label="Jason Moss home"><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"></a><nav class="nav" aria-label="Main"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission/">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply/">Work together</a></nav><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button></div>
 <div class="mobile-menu" id="mobileMenu" hidden>
@@ -218,7 +226,6 @@
       <p class="lede">After 20 years of growing businesses… and supporting 1,000+ entrepreneurs… I’ve learned that sustainable growth begins on the inside.</p>
       <div class="hero-ctas">
         <a class="btn btn-gold" href="/apply/">Explore working together</a>
-        <a class="tlink" href="/resonance-masterclass-optin/?source=Website" style="color:var(--sand)">Watch the free masterclass <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
       </div>
     </div>
   </div>
@@ -251,7 +258,7 @@
 
 <section class="bg-tex-forest method on-dark paper">
   <div class="wrap method-grid">
-  <div class="frame"><img class="method-img" src="/assets/images/lifestyle-4.jpg" alt="Jason Moss in the mountains at golden hour"></div>
+  <div class="frame"><img class="method-img" src="/assets/images/graded/lifestyle-4.jpg" alt="Jason Moss in the mountains at golden hour"></div>
   <div class="method-copy">
     <div class="eyebrow">The approach</div>
     <h2 class="h2">Growth begins where <span class="gold-it">effort ends.</span></h2>
@@ -285,7 +292,7 @@
 
 <section class="section">
   <div class="wrap story">
-    <div class="frame"><img class="story-img" src="/assets/images/lifestyle-1.jpg" alt="Jason Moss in the mountains"></div>
+    <div class="frame"><img class="story-img" src="/assets/images/graded/lifestyle-1.jpg" alt="Jason Moss in the mountains"></div>
     <div class="story-copy">
       <div class="eyebrow">My story</div>
       <h2 class="h2" style="margin-bottom:8px">Business is one of the most <span class="brass-it">honest mirrors</span> we have.</h2>
@@ -306,15 +313,15 @@
     </div>
     <div class="paths">
       <a class="path" href="/resonance-masterclass-optin/?source=Website">
-        <div class="path-img"><img src="/assets/images/lifestyle-2.jpg" alt=""><span class="path-tag">Free</span></div>
+        <div class="path-img"><img src="/assets/images/graded/lifestyle-2.jpg" alt=""></div>
         <div class="path-body"><h3 class="h3">The Resonance Masterclass</h3><p class="muted">A free training on growing a business that feels like you.</p><span class="tlink">Watch now</span></div>
       </a>
       <a class="path" href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer">
-        <div class="path-img"><img src="/assets/images/lifestyle-3.jpg" alt="" style="object-position:18% 50%"><span class="path-tag">YouTube</span></div>
-        <div class="path-body"><h3 class="h3">The YouTube channel</h3><p class="muted">Free videos on attracting clients and growing a business that feels like you.</p><span class="tlink">Watch on YouTube</span></div>
+        <div class="path-img"><img src="/assets/images/graded/lifestyle-3.jpg" alt="" style="object-position:18% 50%"></div>
+        <div class="path-body"><h3 class="h3">YouTube channel</h3><p class="muted">Free videos on attracting clients and growing a business that feels like you.</p><span class="tlink">Watch on YouTube</span></div>
       </a>
       <a class="path" href="/apply/">
-        <div class="path-img"><img src="/assets/images/featured.jpg" alt="" style="object-position:47% 30%"><span class="path-tag">1:1</span></div>
+        <div class="path-img"><img src="/assets/images/graded/featured.jpg" alt="" style="object-position:47% 30%"></div>
         <div class="path-body"><h3 class="h3">Work together</h3><p class="muted">Start with a free 20-minute business assessment, one-on-one with me.</p><span class="tlink">Book your call</span></div>
       </a>
     </div>
@@ -341,7 +348,7 @@
   <div><p class="ftr-h">Work together</p><ul><li><a href="/apply/">Free assessment call</a></li></ul></div>
   <div><p class="ftr-h">Contact</p><ul><li><a href="mailto:jason@jasonmoss.com">jason@jasonmoss.com</a></li></ul></div>
 </div>
-<div class="ftr-base"><span>&copy; Jason Moss LLC. All rights reserved.</span><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav></div>
+<div class="ftr-base"><span>&copy; Jason Moss LLC. All rights reserved. <span class="credit">Select photography by Kate Milford</span></span><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav></div>
 </div></footer>
 </div>
 <script src="/js/site.js" defer></script>

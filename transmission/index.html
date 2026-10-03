@@ -29,6 +29,8 @@
 .pf span{line-height:1.25;white-space:nowrap}
 .latest{display:grid;grid-template-columns:7fr 4fr;gap:64px;align-items:center}
 .latest .vid{aspect-ratio:16/9}
+/* YouTube thumbnails ship with a 1px black column on each edge — trim it */
+.latest .vid img,.ep .vid img{transform:scale(1.012)}
 .latest .play{left:auto;top:auto;right:18px;bottom:18px;transform:none}
 .latest-copy{display:flex;flex-direction:column;gap:20px}
 .meta{font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--taupe)}
@@ -103,7 +105,7 @@
 
 <section class="bg-tex-forest pod-hero hero-fw on-dark paper">
   <div class="wrap pod-grid">
-    <div class="frame"><img class="cover" src="/transmission/assets/images/transmission-cover.jpg" alt="The Transmission with Jason Moss cover art"></div>
+    <div class="frame"><img class="cover" src="/assets/images/graded/transmission-cover.jpg" alt="The Transmission with Jason Moss cover art"></div>
     <div class="pod-copy">
       <div class="eyebrow">The podcast</div>
       <h1 class="h1">The <span class="gold-it">Transmission</span></h1>
@@ -141,7 +143,7 @@
       <a class="ep ep-item" href="https://www.youtube.com/watch?v=A0LNCk77czo&amp;list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="https://i.ytimg.com/vi/A0LNCk77czo/maxresdefault.jpg" alt="" loading="lazy"><span class="play sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span></div><span class="meta">Sep 15</span><h3>How to Create a Landing Page That Converts (Step by Step)</h3></a>
       <a class="ep ep-item" href="https://www.youtube.com/watch?v=Ljm_3bA8lzA&amp;list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="https://i.ytimg.com/vi/Ljm_3bA8lzA/maxresdefault.jpg" alt="" loading="lazy"><span class="play sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span></div><span class="meta">Sep 14</span><h3>How to Make Money from Consulting (My 3-Part Strategy)</h3></a>
       <a class="ep ep-item" href="https://www.youtube.com/watch?v=0lP1252IuOA&amp;list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="https://i.ytimg.com/vi/0lP1252IuOA/maxresdefault.jpg" alt="" loading="lazy"><span class="play sm"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg></span></div><span class="meta">Sep 7</span><h3>How to Get Clients Without Ads (Even With No Audience)</h3></a>
-      <a class="ep" href="https://www.youtube.com/playlist?list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="/assets/images/featured.jpg" loading="lazy" alt="" style="object-position:50% 30%"></div><span class="meta">Subscribe</span><h3>Never miss an episode. Subscribe to The Transmission on YouTube.</h3></a>
+      <a class="ep" href="https://www.youtube.com/playlist?list=PLXo1Z9T72vaKc7fuaBdhcYkdyczEKhCEd" target="_blank" rel="noopener noreferrer"><div class="vid"><img src="/assets/images/graded/featured.jpg" loading="lazy" alt="" style="object-position:50% 30%"></div><span class="meta">Subscribe</span><h3>Never miss an episode. Subscribe to The Transmission on YouTube.</h3></a>
     </div>
   </div>
 </section>
@@ -149,7 +151,7 @@
 <section class="section-sm" style="padding-top:40px;padding-bottom:120px;background:var(--sand)">
   <div class="wrap">
     <div class="resonate">
-      <img src="/apply/jm-headshot.png" alt="Jason Moss">
+      <img src="/assets/images/graded/headshot.webp" alt="Jason Moss">
       <div style="display:flex;flex-direction:column;gap:12px">
         <h2 class="h2" style="font-size:30px">If this work has been <span class="brass-it">resonating…</span></h2>
         <p class="muted">And you feel ready for real, personalized support, book a free 20-minute business assessment with me. We’ll explore where you are, what you’re building, and whether working together feels aligned for both of us.</p>
