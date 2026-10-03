@@ -23,7 +23,7 @@ const { __internal } = require('./submit-contact.js');
 // drift between functions. Origin/Referer are spoofable, so originAllowed is
 // paired with the per-IP rate limit and the daily credit cap below — all
 // three gate the paid lookup.
-const { originAllowed, corsHeaders, connectBlobs } = __internal;
+const { originAllowed, corsHeaders, connectBlobs, blobStore } = __internal;
 
 const HARD_BLOCK_SUB_STATUSES = new Set(['disposable', 'toxic']);
 
@@ -34,8 +34,7 @@ const HARD_BLOCK_SUB_STATUSES = new Set(['disposable', 'toxic']);
 const ZB_DAILY_CAP = Number.parseInt(process.env.ZB_DAILY_CAP || '500', 10);
 async function underDailyCap() {
   try {
-    const { getStore } = require('@netlify/blobs');
-    const store = getStore({ name: 'zb-usage' });
+    const store = await blobStore('zb-usage');
     const key = new Date().toISOString().slice(0, 10);
     const used = (await store.get(key, { type: 'json' })) || 0;
     if (used >= ZB_DAILY_CAP) {

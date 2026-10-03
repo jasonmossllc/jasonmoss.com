@@ -324,17 +324,22 @@ function kitErrorSummary(error) {
   };
 }
 
-// Every function here uses the Lambda-compatible `exports.handler` signature,
-// where Netlify Blobs is NOT configured automatically: a handler must pass its
-// event to connectLambda before any getStore call, or every Blobs read/write
-// throws (MissingBlobsEnvironmentError). Without this the Kit retry queue, the
-// ZeroBounce daily cap and the tokenless lane all silently failed.
+// Netlify Blobs access for every function here. Two traps, both of which kept
+// Blobs silently broken (Kit retry queue, ZeroBounce cap, tokenless lane):
+//  - require('@netlify/blobs') throws on Netlify's Node runtime (its CJS build
+//    requires an ESM-only dependency), so it must be loaded with import().
+//  - these are Lambda-compatible `exports.handler` functions, where Blobs is
+//    not configured automatically: the handler's event must be passed to
+//    connectLambda before getStore. Each handler calls connectBlobs(event)
+//    first; Lambda runs one event per instance, so holding it here is safe.
+let blobsEvent = null;
 function connectBlobs(event) {
-  try {
-    require('@netlify/blobs').connectLambda(event);
-  } catch (e) {
-    console.error('Netlify Blobs connect failed:', e?.message || e);
-  }
+  blobsEvent = event;
+}
+async function blobStore(name) {
+  const blobs = await import('@netlify/blobs');
+  if (blobsEvent) blobs.connectLambda(blobsEvent);
+  return blobs.getStore({ name });
 }
 
 // ── TOKENLESS LANE ─────────────────────────────────────────────────────────
@@ -353,13 +358,12 @@ const TOKENLESS_DAILY_CAP = Number.parseInt(process.env.TOKENLESS_DAILY_CAP || '
 const TOKENLESS_PER_IP_PER_HOUR = Number.parseInt(process.env.TOKENLESS_PER_IP_PER_HOUR || '3', 10);
 
 function getTokenlessStore() {
-  const { getStore } = require('@netlify/blobs');
-  return getStore({ name: TOKENLESS_STORE });
+  return blobStore(TOKENLESS_STORE);
 }
 
 async function admitTokenless(ip, store, now = new Date()) {
   try {
-    const st = store || getTokenlessStore();
+    const st = store || await getTokenlessStore();
     const iso = now.toISOString();
     const dayKey = `day/${iso.slice(0, 10)}`;
     const ipHash = crypto.createHash('sha256').update(String(ip || 'unknown')).digest('hex').slice(0, 16);
@@ -406,8 +410,7 @@ async function checkTurnstile(token, ip, tokenlessStore) {
 }
 
 function getOptinQueueStore() {
-  const { getStore } = require('@netlify/blobs');
-  return getStore({ name: KIT_OPTIN_QUEUE_STORE });
+  return blobStore(KIT_OPTIN_QUEUE_STORE);
 }
 
 function optinQueueKey(email) {
@@ -417,7 +420,7 @@ function optinQueueKey(email) {
 }
 
 async function enqueueOptin(submission, error) {
-  const store = getOptinQueueStore();
+  const store = await getOptinQueueStore();
   const queuedSubmission = {
     ...submission,
     ...(error?.submissionPatch || {}),
@@ -853,6 +856,7 @@ module.exports.__internal = {
   verifyTurnstile,
   checkTurnstile,
   connectBlobs,
+  blobStore,
   originAllowed,
   looksLikeBotName,
   cleanString,

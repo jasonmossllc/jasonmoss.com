@@ -18,7 +18,7 @@ async function moveToFailed(store, key, item, error) {
 }
 
 async function processQueuedOptins() {
-  const store = __internal.getOptinQueueStore();
+  const store = await __internal.getOptinQueueStore();
   const batchSize = Number.isSafeInteger(QUEUE_BATCH_SIZE) && QUEUE_BATCH_SIZE > 0
     ? QUEUE_BATCH_SIZE
     : 10;
