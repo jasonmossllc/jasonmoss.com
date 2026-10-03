@@ -1,5 +1,5 @@
 body{margin:0}
-:root{--obs:#1D1F1E;--forest:#2C3F36;--forest-deep:#1F2D26;--mocha:#5B4B3F;--taupe:#8C837A;--gold:#C2A86C;--brass:#8A6E35;--stone:#E9E2D3;--sand:#F8F6F2;--ink:#2E2C2A;--ink-soft:#57514B;--line:rgba(91,75,63,.18)}
+:root{--obs:#1D1F1E;--forest:#2C3F36;--forest-deep:#1F2D26;--mocha:#5B4B3F;--taupe:#6E665E;--gold:#C2A86C;--brass:#755A26;--stone:#E9E2D3;--sand:#F8F6F2;--ink:#2E2C2A;--ink-soft:#57514B;--line:rgba(91,75,63,.18)}
 .jm{
   font-family:'Raleway',sans-serif;color:var(--ink);background:var(--sand);font-size:17px;line-height:1.75;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 .jm *{box-sizing:border-box}
@@ -70,7 +70,7 @@ body{margin:0}
 /* footer */
 .ftr{background:var(--obs);color:rgba(248,246,242,.7);padding:96px 0 40px;font-size:15px}
 .ftr-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px}
-.ftr h4{font-family:'Raleway',sans-serif;font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 20px}
+.ftr .ftr-h{font-family:'Raleway',sans-serif;font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 20px}
 .ftr ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .ftr .logo{height:30px;width:auto;margin-bottom:24px}
 .ftr-base{margin-top:72px;padding-top:28px;border-top:1px solid rgba(248,246,242,.12);display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap;font-size:13px;color:rgba(248,246,242,.5)}
@@ -107,10 +107,23 @@ body{margin:0}
 }
 /* Large monitors: scale everything below the hero proportionally, so a big screen
    shows the same composition as 1440px, just larger (no tiny column in empty space). */
-@media (min-width:1600px){.jm>section:not(.hero),.jm>footer,.jm>.hdr-solid-wrap{zoom:1.1}}
-@media (min-width:1900px){.jm>section:not(.hero),.jm>footer,.jm>.hdr-solid-wrap{zoom:1.22}}
-@media (min-width:2300px){.jm>section:not(.hero),.jm>footer,.jm>.hdr-solid-wrap{zoom:1.4}}
-@media (min-width:3000px){.jm>section:not(.hero),.jm>footer,.jm>.hdr-solid-wrap{zoom:1.75}}
+@media (min-width:1600px){.jm>section:not(.hero):not(.hero-fw),.jm>main>section:not(.hero):not(.hero-fw),.jm>footer{zoom:1.1}}
+@media (min-width:1900px){.jm>section:not(.hero):not(.hero-fw),.jm>main>section:not(.hero):not(.hero-fw),.jm>footer{zoom:1.22}}
+@media (min-width:2300px){.jm>section:not(.hero):not(.hero-fw),.jm>main>section:not(.hero):not(.hero-fw),.jm>footer{zoom:1.4}}
+@media (min-width:3000px){.jm>section:not(.hero):not(.hero-fw),.jm>main>section:not(.hero):not(.hero-fw),.jm>footer{zoom:1.75}}
+/* Header: identical position and scale on every page — full width, proportional side spacing, grows on big screens */
+@media (min-width:901px){
+  :root{--hdr-h:clamp(100px,5.7vw,128px)}
+  .hdr-solid-wrap .hdr{height:var(--hdr-h);padding-top:0;padding-bottom:0}
+  .hdr{max-width:none;padding-left:clamp(56px,7vw,220px);padding-right:clamp(56px,7vw,220px)}
+  .hdr .logo{height:clamp(30px,1.75vw,46px)}
+  .nav{font-size:clamp(13px,.72vw,18px);gap:clamp(32px,2.6vw,64px)}
+  .nav .btn{font-size:clamp(12px,.68vw,17px);padding:clamp(14px,.9vw,22px) clamp(26px,1.7vw,42px);min-height:clamp(46px,2.9vw,70px)}
+}
+.skip-link{position:absolute;left:12px;top:-60px;z-index:200;background:var(--obs);color:var(--sand);padding:12px 18px;font-family:'Raleway',sans-serif;font-weight:600;font-size:14px;text-decoration:none}
+.skip-link:focus{top:12px}
+:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+
 
 /* players + mobile menu (production) */
 .vid-player{aspect-ratio:16/9;background:#1D1F1E}

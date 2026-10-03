@@ -12,10 +12,11 @@
 <meta property="og:title" content="Book a Free Business Assessment Call — Jason Moss">
 <meta property="og:description" content="Book a free 20-minute business assessment call with Jason Moss. We'll look at your business together and map out your clearest path to more clients.">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://jasonmoss.com/apply">
+<meta property="og:url" content="https://jasonmoss.com/apply/">
 <link rel="canonical" href="https://jasonmoss.com/apply/">
 <meta property="og:image" content="https://jasonmoss.com/assets/images/featured.jpg">
-<meta name="twitter:card" content="summary">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://jasonmoss.com/assets/images/featured.jpg">
 <meta name="twitter:title" content="Book a Free Business Assessment Call — Jason Moss">
 <meta name="twitter:description" content="Book a free 20-minute business assessment call with Jason Moss. We'll look at your business together and map out your clearest path to more clients.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -101,7 +102,10 @@
 </style>
 </head>
 <body>
+<a class="skip-link" href="#main">Skip to content</a>
+
 <div class="jm">
+<main id="main">
 
 <section class="bg-tex-sand-soft ap-hero paper" id="hero">
   <div class="wrap">
@@ -190,6 +194,7 @@
   </div>
 </section>
 
+</main>
 <footer class="ftr ftr-min"><div class="wrap"><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"><div class="ftr-base"><span>&copy; Jason Moss LLC. All rights reserved.</span><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav></div></div></footer>
 </div>
 <script src="/js/site.js" defer></script>
@@ -201,7 +206,7 @@
 .sticky-cta .btn{width:100%;max-width:360px;min-height:50px;padding:14px 20px;font-size:12px;letter-spacing:.12em;text-decoration:none;white-space:nowrap}
 @media (max-width:900px){.sticky-cta{display:block}.ftr-min{padding-bottom:96px}}
 </style>
-<div class="sticky-cta" id="stickyCta"><a href="#book" class="btn btn-gold">Book your free call</a></div>
+<div class="sticky-cta" id="stickyCta" inert aria-hidden="true"><a href="#book" class="btn btn-gold">Book your free call</a></div>
 <script src="/js/bunny-tracking.js" async></script>
 <script src="/js/bunny-embeds.js" defer></script>
 <script src="https://jasonmoss.com/qualify/embed.js" async></script>
@@ -215,7 +220,10 @@
     var past = hero.getBoundingClientRect().bottom < 0;
     function onScreen(el) { if (!el) return false; var r = el.getBoundingClientRect(); return r.top < window.innerHeight && r.bottom > 0; }
     var busy = onScreen(book) || onScreen(document.getElementById('closer'));
-    cta.classList.toggle('sticky-cta--visible', past && !busy);
+    var show = past && !busy;
+    cta.classList.toggle('sticky-cta--visible', show);
+    cta.inert = !show;
+    if (show) cta.removeAttribute('aria-hidden'); else cta.setAttribute('aria-hidden', 'true');
   }
   window.addEventListener('resize', check, { passive: true });
   window.addEventListener('scroll', check, { passive: true });

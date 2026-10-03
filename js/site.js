@@ -19,6 +19,14 @@
     a.addEventListener('click', function () { setOpen(false); });
   });
   document.addEventListener('keydown', function (e) {
-    if (e.key === 'Escape' && !menu.hasAttribute('hidden')) setOpen(false);
+    if (menu.hasAttribute('hidden')) return;
+    if (e.key === 'Escape') { setOpen(false); return; }
+    if (e.key !== 'Tab') return;
+    // keep keyboard focus inside the open menu
+    var f = menu.querySelectorAll('a[href], button');
+    if (!f.length) return;
+    var first = f[0], last = f[f.length - 1];
+    if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+    else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
   });
 })();
