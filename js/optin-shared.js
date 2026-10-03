@@ -79,7 +79,12 @@
       window.__tsWidgetId = window.turnstile.render('#cf-turnstile-box', {
         sitekey: TURNSTILE_SITEKEY,
         appearance: 'interaction-only',
-        'before-interactive-callback': reserveTurnstile
+        'before-interactive-callback': reserveTurnstile,
+        // A widget error or unsupported browser means no token is coming:
+        // flag it so the submit gate sends without one instead of waiting.
+        callback: function () { window.__tsFailed = false; },
+        'error-callback': function () { window.__tsFailed = true; },
+        'unsupported-callback': function () { window.__tsFailed = true; }
       });
       window.addEventListener('resize', function () {
         var b = document.getElementById('cf-turnstile-box');
@@ -90,44 +95,61 @@
 
   /* ── Submit gate ────────────────────────────────────────────────────────
    * Capture phase + stopImmediatePropagation runs BEFORE the page's submit
-   * handler, so nothing is sent until the visitor is verified. The widget is
-   * invisible (interaction-only), so a missing token is almost always a
-   * token that hasn't minted yet or has expired — not something the visitor
-   * can act on. So: let field errors surface first (checkValidity), and on a
-   * missing token re-run the challenge and retry the submit automatically.
-   * Only ask the visitor to act if Cloudflare actually shows an interactive
-   * challenge (data-reserved=1 means it painted). */
+   * handler, so the submit waits briefly for a Turnstile token. The widget is
+   * invisible (interaction-only), so a missing token is almost always one that
+   * hasn't minted yet: let field errors surface first (checkValidity), re-run
+   * the challenge, and resubmit as soon as the token lands.
+   *
+   * It never blocks a real visitor for good. Some browsers can't run Turnstile
+   * at all (ad/privacy blockers, some in-app browsers, widget errors); after a
+   * short wait the gate lets the submit through without a token, and the
+   * server admits it through its capped tokenless lane (submit-contact.js,
+   * TOKENLESS LANE). If Cloudflare shows an interactive challenge, the visitor
+   * is asked once to complete it; a second click goes through regardless. */
+  var TOKEN_WAIT_MS = 4000;
   (function () {
     var retrying = false;
+    var bypass = false;
+    var asked = false;
+    function challengeShown() {
+      var b = document.getElementById('cf-turnstile-box');
+      return !!(b && b.getAttribute('data-reserved') === '1');
+    }
+    function resubmit(form) {
+      if (form && typeof form.requestSubmit === 'function') form.requestSubmit();
+      else if (form) form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
+    }
     function gate(e) {
       var form = e.currentTarget;
-      var tok = window.getTurnstileToken();
-      if (tok) return;
+      if (bypass) { bypass = false; return; }
+      if (window.getTurnstileToken()) return;
       if (form && typeof form.checkValidity === 'function' && !form.checkValidity()) return;
       e.preventDefault();
       e.stopImmediatePropagation();
       if (retrying) return;
+      if (challengeShown() && !asked) {
+        asked = true;
+        alert('Please complete the quick verification check, then click the button again.');
+        return;
+      }
       retrying = true;
-      try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (_) {}
+      var btn = form ? form.querySelector('.form-btn') : null;
+      var label = btn ? btn.textContent : '';
+      if (btn) btn.textContent = 'One moment…';
+      if (!window.__tsFailed && !challengeShown()) {
+        try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (_) {}
+      }
       var waited = 0;
       var poll = setInterval(function () {
         waited += 250;
-        if (window.getTurnstileToken()) {
-          clearInterval(poll); retrying = false;
-          if (form && typeof form.requestSubmit === 'function') form.requestSubmit();
-          else if (form) form.dispatchEvent(new Event('submit', { bubbles: true, cancelable: true }));
-          return;
-        }
-        var b = document.getElementById('cf-turnstile-box');
-        if (b && b.getAttribute('data-reserved') === '1') {
-          clearInterval(poll); retrying = false;
-          alert('Please complete the verification below, then submit again.');
-          return;
-        }
-        if (waited >= 6000) {
-          clearInterval(poll); retrying = false;
-          alert('Verification is taking a moment — please try submitting again.');
-        }
+        var tok = window.getTurnstileToken();
+        var giveUp = window.__tsFailed || waited >= TOKEN_WAIT_MS;
+        if (!tok && !giveUp) return;
+        clearInterval(poll);
+        retrying = false;
+        if (btn) btn.textContent = label;
+        if (!tok) bypass = true;   // no token is coming: send without one
+        resubmit(form);
       }, 250);
     }
     function wire() { document.querySelectorAll('.email-form').forEach(function (f) { f.addEventListener('submit', gate, true); }); }
@@ -283,6 +305,14 @@
             return;
           }
 
+          if (scRes && scRes.status === 403 && scData && scData.error === 'verification_required') {
+            // No token and the server's tokenless lane is closed (its daily
+            // cap is full, e.g. during a bot flood). Ask for the challenge.
+            try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (e) {}
+            alert("We couldn't verify your browser. Please complete the verification check if one appears, or try again in a few minutes.");
+            restore();
+            return;
+          }
           if (scRes && scRes.status >= 400 && scRes.status < 500) {
             // Rejected outright (most often an expired Turnstile token after
             // idling on the form). Re-run the invisible widget so the next

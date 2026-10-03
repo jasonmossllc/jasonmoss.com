@@ -16,7 +16,7 @@ const {
   isQueueableKitError,
   kitErrorSummary,
   syncContactToKit,
-  verifyTurnstile,
+  checkTurnstile,
   originAllowed,
   looksLikeBotName,
   cleanString,
@@ -163,10 +163,9 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid name' }) };
     }
 
-    const ts = await verifyTurnstile(data.turnstile_token, ip);
+    const ts = await checkTurnstile(data.turnstile_token, ip);
     if (ts.block) {
-      console.log('Blocked: forged/invalid Turnstile token', { ip });
-      return { statusCode: 403, headers, body: JSON.stringify({ error: 'Verification failed' }) };
+      return { statusCode: 403, headers, body: JSON.stringify({ error: ts.error }) };
     }
 
     // Validate answers. Q1 must be "yes" — a "no" routes to the off-ramp and

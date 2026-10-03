@@ -880,13 +880,16 @@
     // measures 0px tall, so a painted widget overflows the page flow. Render
     // interaction-only (invisible unless a challenge is actually needed) and
     // reserve its known 300x65 size right before it paints.
-    var tsWidgetId = null, tsLoading = false;
+    var tsWidgetId = null, tsLoading = false, tsFailed = false;
     function tsRenderOptions(){
       return { sitekey: TURNSTILE_SITEKEY, theme:'dark', appearance:'interaction-only',
         'before-interactive-callback': function(){
           var box = document.getElementById('cf-turnstile-box');
           if (box) box.style.minHeight = '71px';
-        } };
+        },
+        callback: function(){ tsFailed = false; },
+        'error-callback': function(){ tsFailed = true; },
+        'unsupported-callback': function(){ tsFailed = true; } };
     }
     function renderTurnstile(){
       tsWidgetId = null;
@@ -919,6 +922,19 @@
         if (window.turnstile && tsWidgetId !== null) return window.turnstile.getResponse(tsWidgetId) || '';
       } catch(e){}
       return '';
+    }
+    // Wait up to 4s for a token, then go without one: browsers that can't run
+    // Turnstile are admitted by the server's capped tokenless lane
+    // (submit-contact.js, TOKENLESS LANE) rather than locked out.
+    function awaitTurnstileToken(){
+      return new Promise(function(resolve){
+        var waited = 0;
+        (function check(){
+          var tok = turnstileToken();
+          if (tok || tsFailed || waited >= 4000) return resolve(tok);
+          waited += 250; setTimeout(check, 250);
+        })();
+      });
     }
 
     /* ─────────────────────────── submit ─────────────────────────── */
@@ -977,12 +993,13 @@
 
       btn.innerHTML = 'Reading your answers…';
       state.name = name; state.email = email; persist();
+      var tsToken = await awaitTurnstileToken();
 
       var payload = {
         first_name: name,
         email: email,
         revenue: state.answers.revenue,
-        turnstile_token: turnstileToken(),
+        turnstile_token: tsToken,
         website: (document.querySelector('#qForm input[name="website"]') || {}).value || ''
       };
       if (latestAd) payload.latest_ad = latestAd;
@@ -1022,7 +1039,7 @@
         btn.disabled = false;
         btn.innerHTML = SUBMIT_LABEL;
         try { if (window.turnstile && tsWidgetId !== null) window.turnstile.reset(tsWidgetId); } catch(e){}
-        showErr(err && err.message === 'Verification failed'
+        showErr(err && (err.message === 'Verification failed' || err.message === 'verification_required')
           ? 'Verification failed — give it a second and try again.'
           : 'Something went wrong sending your answers. Please try again.');
       });

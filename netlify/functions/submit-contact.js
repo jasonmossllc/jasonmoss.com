@@ -7,16 +7,20 @@
 //                             before applying signup tags. Defaults to 9576424.
 //   KIT_QUEUE_BATCH_SIZE  - optional max queued opt-ins to retry per minute.
 //   TURNSTILE_SECRET_KEY  - Cloudflare Turnstile SECRET key (optional).
-//                           When set, every submission MUST carry a valid
-//                           Turnstile token or it is rejected. Leave it unset
+//                           When set, a submitted token MUST verify or it is
+//                           rejected; a missing token goes through the capped
+//                           tokenless lane (see TOKENLESS LANE). Leave it unset
 //                           and Turnstile is dormant (the other guards still run).
+//   TOKENLESS_DAILY_CAP   - optional, site-wide tokenless opt-ins per UTC day (25).
+//   TOKENLESS_PER_IP_PER_HOUR - optional, tokenless opt-ins per IP per hour (3).
 //
 // ── BOT PROTECTION ─────────────────────────────────────────────────────────
 // This endpoint is public, so it is the real gate against opt-in spam. Layered:
 //   1. Honeypot field ("website")     — silently drop if a bot fills it.
 //   2. Origin/Referer allowlist       — must come from a jasonmoss.com page.
 //   3. Email + first-name validation  — reject malformed / gibberish junk.
-//   4. Cloudflare Turnstile           — verify the token server-side (primary).
+//   4. Cloudflare Turnstile           — verify the token server-side (primary);
+//      no token at all -> small capped lane instead of a hard block.
 // Client-side checks alone are bypassable (bots POST straight to this URL),
 // so all of these run here, server-side, regardless of the page.
 //
@@ -318,6 +322,74 @@ function kitErrorSummary(error) {
     message: error?.message || String(error),
     status: error?.status || null,
   };
+}
+
+// ── TOKENLESS LANE ─────────────────────────────────────────────────────────
+// A visitor whose browser can't run Turnstile (ad/privacy blockers, some in-app
+// browsers, a Cloudflare widget error) never gets a token. Blocking a missing
+// token outright locked those real people out of every opt-in, so a missing
+// token is accepted, but only through a small capped lane: at most
+// TOKENLESS_PER_IP_PER_HOUR per visitor and TOKENLESS_DAILY_CAP site-wide per
+// UTC day, after the honeypot/origin/email/name guards have already passed. A
+// bot flood that skips Turnstile fills the cap and the endpoint is strict again
+// (missing token = 403) for the rest of the day. Forged/replayed tokens never
+// reach this lane; verifyTurnstile still blocks them. Fails CLOSED: if the
+// counter store errors, the lane is shut (the old strict behavior), never open.
+const TOKENLESS_STORE = 'tokenless-optins';
+const TOKENLESS_DAILY_CAP = Number.parseInt(process.env.TOKENLESS_DAILY_CAP || '25', 10);
+const TOKENLESS_PER_IP_PER_HOUR = Number.parseInt(process.env.TOKENLESS_PER_IP_PER_HOUR || '3', 10);
+
+function getTokenlessStore() {
+  const { getStore } = require('@netlify/blobs');
+  return getStore({ name: TOKENLESS_STORE });
+}
+
+async function admitTokenless(ip, store, now = new Date()) {
+  try {
+    const st = store || getTokenlessStore();
+    const iso = now.toISOString();
+    const dayKey = `day/${iso.slice(0, 10)}`;
+    const ipHash = crypto.createHash('sha256').update(String(ip || 'unknown')).digest('hex').slice(0, 16);
+    const ipKey = `ip/${iso.slice(0, 13)}/${ipHash}`;
+    const [dayRaw, ipRaw] = await Promise.all([
+      st.get(dayKey, { type: 'json' }),
+      st.get(ipKey, { type: 'json' }),
+    ]);
+    const dayUsed = Number(dayRaw) || 0;
+    const ipUsed = Number(ipRaw) || 0;
+    if (dayUsed >= TOKENLESS_DAILY_CAP) return { admit: false, reason: 'daily_cap', used: dayUsed };
+    if (ipUsed >= TOKENLESS_PER_IP_PER_HOUR) return { admit: false, reason: 'ip_cap', used: ipUsed };
+    await Promise.all([st.setJSON(dayKey, dayUsed + 1), st.setJSON(ipKey, ipUsed + 1)]);
+    return { admit: true, used: dayUsed + 1 };
+  } catch (e) {
+    console.error('Tokenless lane store error (lane closed):', e?.message || e);
+    return { admit: false, reason: 'store_error' };
+  }
+}
+
+// The one Turnstile rule every public form endpoint runs:
+//  - token submitted -> must verify (forged/replayed = bot = block; fails open
+//    only on our own config/outage, see verifyTurnstile)
+//  - no token -> the visitor's browser couldn't run Turnstile -> capped
+//    tokenless lane (see TOKENLESS LANE)
+// Returns { block, error } where error is the 403 body's `error` value.
+async function checkTurnstile(token, ip, tokenlessStore) {
+  const hasToken = token != null && token !== '';
+  if (!hasToken && process.env.TURNSTILE_SECRET_KEY) {
+    const lane = await admitTokenless(ip, tokenlessStore);
+    if (!lane.admit) {
+      console.log('Blocked: no Turnstile token, tokenless lane closed', { ip, reason: lane.reason, used: lane.used });
+      return { block: true, error: 'verification_required' };
+    }
+    console.log('Accepted without Turnstile token (tokenless lane)', { ip, used: lane.used, cap: TOKENLESS_DAILY_CAP });
+    return { block: false };
+  }
+  const ts = await verifyTurnstile(token, ip);
+  if (ts.block) {
+    console.log('Blocked: forged/invalid Turnstile token', { ip });
+    return { block: true, error: 'Verification failed' };
+  }
+  return { block: false };
 }
 
 function getOptinQueueStore() {
@@ -664,12 +736,10 @@ exports.handler = async (event) => {
       return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid name' }) };
     }
 
-    // 5) Cloudflare Turnstile — blocks missing, forged, or replayed tokens
-    //    (bots). It only fails open on our own config/outage (see verifyTurnstile).
-    const ts = await verifyTurnstile(data.turnstile_token, ip);
+    // 5) Cloudflare Turnstile (see checkTurnstile).
+    const ts = await checkTurnstile(data.turnstile_token, ip);
     if (ts.block) {
-      console.log('Blocked: forged/invalid Turnstile token', { ip });
-      return { statusCode: 403, headers, body: JSON.stringify({ error: 'Verification failed' }) };
+      return { statusCode: 403, headers, body: JSON.stringify({ error: ts.error }) };
     }
 
     // ── Passed all checks — create/update the subscriber in Kit ──────────────
@@ -755,7 +825,7 @@ exports.handler = async (event) => {
 };
 
 // Exposed for unit tests only; Netlify invokes .handler exclusively.
-module.exports.__test = { looksLikeBotName, maxConsonantRun, originAllowed, EMAIL_RE };
+module.exports.__test = { looksLikeBotName, maxConsonantRun, originAllowed, EMAIL_RE, admitTokenless, checkTurnstile, TOKENLESS_DAILY_CAP, TOKENLESS_PER_IP_PER_HOUR };
 module.exports.__internal = {
   // Needed by submit-qualify.js to undo a decline when someone is rescued.
   kitRequest,
@@ -767,6 +837,7 @@ module.exports.__internal = {
   // Shared with sibling form functions (submit-assessment.js) so every public
   // endpoint runs the exact same bot guards and Kit plumbing.
   verifyTurnstile,
+  checkTurnstile,
   originAllowed,
   looksLikeBotName,
   cleanString,

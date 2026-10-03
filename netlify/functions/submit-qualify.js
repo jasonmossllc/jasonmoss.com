@@ -25,7 +25,7 @@ const {
   isQueueableKitError,
   kitErrorSummary,
   syncContactToKit,
-  verifyTurnstile,
+  checkTurnstile,
   originAllowed,
   looksLikeBotName,
   cleanString,
@@ -284,10 +284,9 @@ exports.handler = async (event) => {
     const trustedTest = !!TEST_KEY && testParam === TEST_KEY;
 
     if (!trustedTest) {
-      const ts = await verifyTurnstile(data.turnstile_token, ip);
+      const ts = await checkTurnstile(data.turnstile_token, ip);
       if (ts.block) {
-        console.log('Blocked: forged/invalid Turnstile token', { ip });
-        return { statusCode: 403, headers, body: JSON.stringify({ error: 'Verification failed' }) };
+        return { statusCode: 403, headers, body: JSON.stringify({ error: ts.error }) };
       }
     }
 
