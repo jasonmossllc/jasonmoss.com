@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<title>Modernacy — Strategy Plan</title>
+
+
+<style>
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+
+  :root{
+    --obsidian:#1D1F1E;
+    --forest:#2C3F36;
+    --mocha:#5B4B3F;
+    --taupe:#8C837A;
+    --gold:#C2A86C;
+    --stone:#E9E2D3;
+    --sand:#F8F6F2;
+    --paper:#FBF9F4;
+    --bg:#E7E1D4;
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+
+  html{
+    scroll-behavior:smooth;
+    -webkit-text-size-adjust:100%;
+    text-size-adjust:100%;
+  }
+
+  body{
+    background:var(--bg);
+    color:var(--obsidian);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(1rem,0.94rem + 0.3vw,1.15rem);
+    line-height:1.78;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+  }
+
+  ::selection{background:var(--gold);color:var(--obsidian);}
+
+  p{margin:0 0 1.15em 0;text-wrap:pretty;}
+  strong{font-weight:600;color:var(--obsidian);}
+  em{font-style:italic;}
+
+  /* ---------- COVER / HERO ---------- */
+  .cover{
+    position:relative;
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    min-height:100vh;
+    min-height:100svh;
+    padding:clamp(28px,4vw,56px) clamp(24px,6vw,84px);
+    color:var(--sand);
+    background:
+      radial-gradient(120% 80% at 82% 12%,rgba(194,168,108,.14),transparent 52%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    overflow:hidden;
+  }
+  .cover .logo{
+    width:clamp(150px,16vw,196px);
+    display:block;
+    align-self:start;
+  }
+  .cover .cover-mid{
+    align-self:center;
+    max-width:780px;
+    padding:clamp(24px,5vw,40px) 0;
+  }
+  .cover .eyebrow{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(.7rem,.66rem + .15vw,.82rem);
+    line-height:1.4;
+    letter-spacing:.34em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:clamp(18px,2.5vw,26px);
+  }
+  .cover h1{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(2.6rem,1.7rem + 4.4vw,5rem);
+    line-height:1.06;
+    letter-spacing:-.01em;
+    color:var(--sand);
+    margin-bottom:clamp(22px,3vw,32px);
+    text-wrap:balance;
+  }
+  .cover .rule{
+    width:68px;height:2px;
+    background:var(--gold);
+    margin-bottom:clamp(22px,3vw,32px);
+  }
+  .cover .sub{
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:clamp(1.05rem,1rem + .45vw,1.4rem);
+    line-height:1.7;
+    color:var(--stone);
+    max-width:620px;
+  }
+  .cover .foot{
+    align-self:end;
+    display:flex;
+    justify-content:space-between;
+    align-items:baseline;
+    gap:18px;
+    padding-top:22px;
+    border-top:1px solid rgba(233,226,211,.18);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(.78rem,.74rem + .12vw,.9rem);
+    letter-spacing:.05em;
+    color:var(--stone);
+  }
+  .cover .foot .r{color:var(--gold);white-space:nowrap;}
+  .cover .foot .who{font-weight:600;color:var(--sand);}
+
+  /* ---------- BODY CONTENT (floating paper) ---------- */
+  main.doc{
+    position:relative;
+    z-index:2;
+    max-width:920px;
+    margin:clamp(-96px,-7vw,-52px) auto clamp(56px,8vw,104px);
+    padding:clamp(44px,6vw,92px) clamp(26px,5.5vw,84px);
+    background:var(--paper);
+    border-radius:clamp(10px,1.4vw,18px);
+    box-shadow:
+      0 40px 80px -40px rgba(29,31,30,.5),
+      0 2px 10px rgba(29,31,30,.05);
+  }
+
+  .section{margin-top:clamp(44px,6vw,80px);}
+  main.doc > .section:first-child{margin-top:0;}
+  .section + .section{
+    padding-top:clamp(44px,6vw,80px);
+    border-top:1px solid rgba(29,31,30,.09);
+  }
+  main.doc > .section:first-child{margin-top:0;}
+
+  .sechead{margin-bottom:6px;}
+  .sec-num,.note-head{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.74rem;
+    line-height:1.4;
+    letter-spacing:.28em;
+    text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:14px;
+  }
+  h2{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-size:clamp(1.7rem,1.25rem + 1.9vw,2.55rem);
+    line-height:1.18;
+    letter-spacing:-.01em;
+    color:var(--obsidian);
+    margin-bottom:6px;
+    text-wrap:balance;
+  }
+  .h2-rule{
+    width:54px;height:3px;
+    background:var(--gold);
+    margin:18px 0 22px 0;
+  }
+
+  h3{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:clamp(1.1rem,1rem + .4vw,1.32rem);
+    line-height:1.4;
+    color:var(--forest);
+    margin:clamp(28px,3.5vw,40px) 0 10px 0;
+  }
+  h3:first-of-type{margin-top:clamp(18px,2.5vw,26px);}
+
+  .lead{
+    font-family:'Libre Baskerville',serif;
+    font-weight:400;
+    font-style:italic;
+    font-size:clamp(1.18rem,1.05rem + .55vw,1.5rem);
+    line-height:1.6;
+    color:var(--mocha);
+    margin-bottom:4px;
+  }
+
+  ul,ol{margin:14px 0 22px 0;padding-left:0;list-style:none;}
+  li{
+    position:relative;
+    padding-left:26px;
+    margin-bottom:12px;
+  }
+  ul li::before{
+    content:"";
+    position:absolute;
+    left:3px;top:.62em;
+    width:6px;height:6px;
+    background:var(--gold);
+    transform:rotate(45deg);
+  }
+  ol{counter-reset:ol;}
+  ol li{padding-left:34px;counter-increment:ol;}
+  ol li::before{
+    content:counter(ol);
+    position:absolute;
+    left:0;top:.02em;
+    font-family:'Raleway',sans-serif;
+    font-weight:700;
+    font-size:.85rem;
+    line-height:1.55;
+    color:var(--gold);
+  }
+
+  .callout{
+    background:linear-gradient(180deg,#EFEADC 0%,var(--stone) 100%);
+    border-left:4px solid var(--gold);
+    border-radius:6px;
+    padding:clamp(20px,3vw,30px) clamp(22px,3.4vw,34px);
+    margin:26px 0 28px 0;
+    box-shadow:0 14px 30px -22px rgba(29,31,30,.45);
+  }
+  .callout p{
+    font-family:'Libre Baskerville',serif;
+    font-style:italic;
+    font-size:clamp(1.08rem,1rem + .4vw,1.28rem);
+    line-height:1.62;
+    color:var(--obsidian);
+    margin:0;
+  }
+  .callout p + p{margin-top:12px;}
+
+  /* ---------- 90 DAY PLAN ---------- */
+  .phase{
+    margin-bottom:24px;
+    border:1px solid rgba(29,31,30,.08);
+    border-radius:12px;
+    background:#fff;
+    overflow:hidden;
+    box-shadow:0 20px 44px -32px rgba(29,31,30,.4);
+  }
+  .phase:last-child{margin-bottom:0;}
+  .phase-head{
+    background:linear-gradient(135deg,#33473C,#283831);
+    color:var(--sand);
+    padding:clamp(16px,2.4vw,22px) clamp(22px,3.2vw,30px);
+  }
+  .phase-head .tag{
+    font-family:'Raleway',sans-serif;
+    font-weight:600;
+    font-size:.72rem;
+    line-height:1.3;
+    letter-spacing:.26em;
+    text-transform:uppercase;
+    color:var(--gold);
+    display:block;
+    margin-bottom:7px;
+  }
+  .phase-head .ttl{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.2rem,1.05rem + .55vw,1.5rem);
+    line-height:1.3;
+    color:var(--sand);
+  }
+  .phase-body{padding:clamp(22px,3vw,30px) clamp(22px,3.2vw,32px) clamp(14px,2vw,20px);}
+  .phase-body ol{margin:0;}
+  .phase-body ol li{margin-bottom:16px;}
+  .phase-body ol li strong{color:var(--forest);}
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    position:relative;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    text-align:left;
+    color:var(--sand);
+    background:
+      radial-gradient(120% 70% at 18% 88%,rgba(194,168,108,.13),transparent 55%),
+      linear-gradient(158deg,#34483D 0%,#2C3F36 52%,#212C25 100%);
+    padding:clamp(72px,11vw,150px) clamp(24px,6vw,84px);
+    overflow:hidden;
+  }
+  .closing > *{width:100%;max-width:680px;}
+  .closing .note-head{color:var(--gold);margin-bottom:14px;}
+  .closing h2{color:var(--sand);}
+  .closing .h2-rule{background:var(--gold);}
+  .closing p{
+    color:var(--stone);
+    font-size:clamp(1.02rem,.96rem + .35vw,1.18rem);
+    line-height:1.75;
+    margin-bottom:15px;
+  }
+  .closing strong{color:var(--sand);}
+  .closing .sign{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.15rem,1.05rem + .4vw,1.35rem);
+    line-height:1.5;
+    color:var(--sand);
+    margin-top:34px;
+  }
+  .closing .sign span{
+    display:block;
+    font-family:'Raleway',sans-serif;
+    font-weight:300;
+    font-size:.86rem;
+    line-height:1.5;
+    letter-spacing:.05em;
+    color:var(--gold);
+    margin-top:12px;
+  }
+
+  /* ---------- SMALL SCREENS ---------- */
+  @media (max-width:600px){
+    body{line-height:1.7;}
+    .cover{min-height:100svh;}
+    .cover .foot{flex-direction:column;gap:6px;align-items:flex-start;}
+    main.doc{
+      margin:-44px 14px clamp(40px,8vw,64px);
+      border-radius:14px;
+      padding:40px 22px;
+    }
+  }
+
+  /* ---------- PRINT (retain clean PDF export) ---------- */
+  @media print{
+    body{background:#fff;}
+    .cover,.closing{min-height:auto;}
+    main.doc{
+      max-width:none;margin:0;padding:14mm 16mm;
+      box-shadow:none;border-radius:0;background:#fff;
+    }
+    .section + .section{border-top:0;}
+    .phase,.callout{box-shadow:none;break-inside:avoid;}
+    .sechead{break-after:avoid;}
+    h3{break-after:avoid;}
+  }
+</style>
+</head>
+
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section class="cover">
+  <img class="logo" src="assets/logo-light.svg" alt="Jason Moss">
+  <div class="cover-mid">
+    <div class="eyebrow">Business Strategy Plan</div>
+    <h1>Modernacy</h1>
+    <div class="rule"></div>
+    <div class="sub">A clear-eyed look at where your business is, the biggest opportunities I see, and a 90-day plan to act on them — built from my review of your business, your assessment, and the notes I recorded going through everything.</div>
+  </div>
+  <div class="foot">
+    <span class="l">Prepared for <span class="who">Sina Khoshbayan</span></span>
+    <span class="r">October 2026</span>
+  </div>
+</section>
+
+<main class="doc">
+
+<!-- ===================== 1. PERSONAL NOTE ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="note-head">A note before we begin</div>
+    <h2>How this was made</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Hey Sina —</p>
+  <p>One thing before you read any of this.</p>
+  <p>I used AI to help me organize my notes and shape them into something clean you can actually move through. It reads tidy because I wanted it to be easy to read... not because a machine decided what Modernacy needs.</p>
+  <p>The thinking is mine. I went through your assessment line by line, your website, both Instagram accounts and the YouTube channel, and I recorded what I saw as I went. Every recommendation in here traces back to something I said in those notes. This isn't a template with your name dropped in. It's my read on <em>your</em> business, made readable.</p>
+  <p>You told me you respond best to coaching that's <em>"direct and honest, and that pushes me toward action over more planning."</em> Good. That's how this is written.</p>
+  <p>Read it slowly. Some of it will land as relief. Some of it will sting a little. Both are useful.</p>
+  <p>Let's get into it.</p>
+</section>
+
+<!-- ===================== 2. WHERE YOU ARE NOW ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 02</div>
+    <h2>Where you are right now</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You built a profitable, well-run practice by taking the work that came through the door. That's exactly what got you here. It's also exactly what's capping you now.</p>
+  </div>
+
+  <p>Let me start with what's true and good, because there's a lot of it and I don't want it to get buried under the rest.</p>
+
+  <h3>What's working</h3>
+  <p><strong>You built something real, and you built it lean.</strong> You started the practice in 2020 because the job market had dried up, and it was profitable early. Six years later there are seven or eight of you, most of the team remote, averaging about $20K a month with about $15K of it profit. Expenses around $5K. No business debt. Car paid off, land paid off, $30K to $50K set aside for the cabin. I want you to see that clearly, because it's the thing that gives you room to make the moves in this plan without panic. Most people in your position don't have that room.</p>
+  <p><strong>You have a design philosophy with teeth.</strong> <em>"We're not chasing 'luxury.' We're after functionality and efficiency."</em> <em>"A house built today can't, and shouldn't, fake that."</em> <em>"Architects shouldn't add cost to a project. We should save it."</em> Most firms your size have a style. You have a point of view, and you can say it in plain English. That's rarer than you think, and it's the raw material for everything in Section 05.</p>
+  <p><strong>You close.</strong> Seventy to eighty percent of the people you meet in person become clients. Once you're in the room, the sales process works. Your referral clients have also been your most aligned clients. I'm not inclined to make major changes to that part of the business right now, and I'll come back to the one caveat.</p>
+  <p><strong>You've already proven you can operationalize.</strong> The Mayan Pools work is 60% of your revenue and, in your words, it <em>"now runs well with minimal involvement from me."</em> Amir leads it, the drafting team delivers it, there's an intake form and a shared communication platform behind it. That's not a side detail. That's the template for the rest of the firm, and we're going to use it.</p>
+  <p><strong>The reels on your personal account are good.</strong> I like them. <em>"Once you learn to see architecture, you can't unsee it."</em> The window grids. Compression and expansion. <em>"Every site is different. So the house should be too."</em> That's a person with a real perspective, talking to camera, explaining how buildings actually work. Hold on to that. We're going to put it to work.</p>
+  <p><strong>You already know what the next chapter is.</strong> You wrote <em>"it all runs through me."</em> You wrote <em>"I'm moving from someone who does everything to someone who leads."</em> You rated your mindset an 8 or 9 and then named your own blind spots without flinching. That self-awareness matters more than any tactic in here.</p>
+
+  <h3>What's holding you back</h3>
+  <p>The short version: you're a craftsman running a business, and those are two completely different skills.</p>
+  <p>I don't mean that in a negative way. You're really good at a specific craft, and you're now operating a company that runs on that craft. That's where almost every entrepreneur starts, and it's a great place to start. It generally gets you to somewhere around six figures. Then it starts to break down. Here's what the breakdown looks like today:</p>
+  <ul>
+    <li><strong>Nobody can say who Modernacy is for.</strong> When I asked you to define your niche, you answered by describing what makes your work unique. That's positioning, and it's valuable. But it isn't a who. Your About page says you focus on <em>"homes, boutique commercial spaces, and the occasional passion project that just feels right."</em> Your Work page spans Atlanta, Costa Rica, Alaska, Ghana and Tanzania. Meanwhile the work that actually pays the team, pool drawings, custom homes for builders and developers, restaurants and medical offices and boutique stores, barely appears anywhere. There's even a tab of logo design. Add it up and what a stranger sees is a studio that will take just about any project.</li>
+    <li><strong>There's no marketing process.</strong> Your words, not mine: <em>"Honestly, we don't have a real marketing process yet."</em> Almost every lead is a referral. The Modernacy Instagram has 22 posts, 211 followers and hasn't posted since November 2024. The YouTube channel has four rendering walkthroughs from 2023. The personal reels are the one living thing, and you told me they <em>"aren't aimed at a specific client."</em> One to two hours a week goes to marketing. Referrals have kept you busy, and they've also kept you dependent on whatever walks in.</li>
+    <li><strong>The website stands at a distance.</strong> The homepage is an animated logo and two words: Work and About. There is no sentence about who you serve or why someone should hire you. The Work page shows ten small black-and-white thumbnails. The single most powerful thing you have, the spaces themselves, is the thing the site shows smallest. The About page lists four people, and Amir isn't one of them. I don't feel the humans behind the work when I visit. I feel a business holding itself at arm's length.</li>
+    <li><strong>Everything runs through you.</strong> Fifty-six to fifty-nine hours a week. Fifteen on design. Eight reviewing the team's work. Eight to ten on site. Six coordinating. Six on email. Four on admin. Time tracking lives in individual spreadsheets you cross-reference by hand to invoice. <em>"Apart from production and drafting, I handle almost everything myself."</em> You're the bottleneck, and the business can't grow past the hours you have.</li>
+    <li><strong>Price is where you're losing.</strong> Since you raised your rates toward $10 to $12 a square foot, you've been <em>"losing noticeably more leads than before."</em> You're being compared against stock plans and low-cost architects who reuse designs. And you wrote <em>"my confidence in pricing can improve."</em> We'll look at this from two angles, because it's not only a sales problem.</li>
+    <li><strong>Sixty percent of revenue comes from one client at $70 an hour,</strong> with rework from late input that wears on the team. It's stable, and it's also concentration.</li>
+    <li><strong>The partner question is open.</strong> You see Amir running the design side while you lead the build side, and you wrote <em>"I'm not sure yet whether he wants to join the construction journey the same way."</em> That's a foundational question, not a someday question.</li>
+  </ul>
+  <p>None of this is a talent problem or a quality problem. It's a positioning problem, a marketing problem, and an operating problem. All three are fixable, and they're fixable in a specific order. That order is this plan.</p>
+
+  <div class="callout">
+    <p>Until someone can say in one sentence who Modernacy is for, there is no marketing strategy to build, no premium to command, and no business to hand off. That one question is where we start.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. BIGGEST OPPORTUNITIES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 03</div>
+    <h2>The biggest opportunities I see</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">If you only focus on a few things over the next 90 days, focus on these. In this order.</p>
+  </div>
+
+  <h3>1. Decide who this is for</h3>
+  <p>This is the first thing we address, on our first call, and it's the foundation everything else stands on. Not just psychographically, the values this person holds, but concretely: what type of project are they building? What's their role, a homeowner, a developer, a builder, a business owner opening a space? What's their budget? Where are they in the process when they find you? Right now we don't have a clear answer to any of that.</p>
+  <p>When you booked our first call, you wrote that your number one challenge was <em>"finding and closing the RIGHT clients."</em> I agree. And "right" has to be defined before it can be found. Our entire marketing strategy begins with answering this question. The specialists are the ones who get paid more, and you can't specialize in ten things.</p>
+
+  <h3>2. Turn your philosophy into a position</h3>
+  <p>Simple forms. Clean lines. Very little decoration. Materials and construction methods that shape the design instead of hiding behind it, set against luxury, bloated design that masks what things are made of and costs more than it should. Those are genuinely unique ideas, and they're a decent foundation to build on.</p>
+  <p>What's missing is the clear articulation: how, specifically, is the work you do different from what other studios offer, and why should someone hire you over them? I think we're part way there. The rest gets built after the who, because the articulation changes depending on who's listening. This is what lets you charge for what you do. The difference between a firm at $10 a square foot and a firm at $40 isn't the quality of the work. It's how it's positioned.</p>
+
+  <h3>3. Put your face on the brand</h3>
+  <p>Right now the personal brand of Sina and the business of Modernacy live on separate platforms. I think that's a mistake, and it's one of the strongest moves available to you right now. One of the most powerful differentiators you have in business is the ability to put a face to a brand. Merge the two, so that Modernacy's platform becomes a way of showing not just the work you do, but the people behind it and the perspective that shapes every decision in your design process.</p>
+  <p>This is an extension of your unique value proposition, another layer on top of it. People don't do business with faceless brands. They do business with people. The more you let your humanity lead in the marketing, the more room you give someone to feel a deeper resonance with what you do before they ever see a proposal. I want to work with you on anchoring this into a social and content strategy that lets you stand out and land on a deeper level with the people you're here to serve.</p>
+
+  <h3>4. Build a real marketing engine, and use referrals on purpose in the meantime</h3>
+  <p>There isn't a marketing process today, and I'm not going to pretend we can design one yet. The right activities vary widely depending on who the niche actually is. So the sequence is: once the who is clear, we anchor it into a specific set of marketing activities you can use to get in front of those people, build relationships with them, and create sales conversations where you explore how you can help on a deeper level. That's the longer-term play, and it's the engine that produces the clients you actually want.</p>
+  <p>In the meantime, if short-term revenue is a priority, I think there's untapped potential in your existing network. Referrals have been your best source of aligned clients. We can leverage them more fully and more deliberately to create opportunities and build runway while the engine gets built. The difference is between waiting for "do you know a good architect?" and asking specific people for specific introductions once you know exactly who you're looking for.</p>
+
+  <h3>5. Get out of the weeds</h3>
+  <p>You're the bottleneck because everything runs through you. This is the classic technician-turned-owner problem, and the way out isn't working harder. It's two things in order. First, narrow the lane. You can't build systems that let less skilled people do high-quality work when you're serving too many different groups; it becomes impossible to specialize your approach. Second, once the marketing strategy is in place, we extricate you from the doing and move you into an owner's mindset, where your focus is building process and systems so you can get out of the weeds and onto the big picture.</p>
+  <p>You're already on track with this. Mayan Pools runs without you. The constraint is that the rest of the offering is too broad to operationalize the same way. Sort that out, and we come back and replicate what you did with the pool work across everything else.</p>
+
+  <div class="callout">
+    <p>$50K to $80K a month isn't a bigger version of today's business. It's a narrower one. A specialist, with a face, that the right people seek out and pay accordingly.</p>
+  </div>
+</section>
+
+<!-- ===================== 4. WHAT NEEDS TO SHIFT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 04</div>
+    <h2>What needs to shift first</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Before any tactic in this plan works, these have to move. They're not to-dos. They're the ground the to-dos stand on.</p>
+  </div>
+
+  <h3>From craftsman to owner</h3>
+  <p>This is the big one. Your biggest opportunity, at the highest level, is developing and cultivating the business side of your skill set to complement the architectural and design skills you already have. They are two different skills, and the tension between them is what you're feeling right now.</p>
+  <p>There's a book I want you to read in the first thirty days: <em>The E-Myth</em>, by Michael Gerber. It's about exactly this transition, the mindset of business ownership versus craftsmanship, and why so many technicians get stuck between the two. Its core idea is the one I'd tattoo on this plan: your job is to build systems that allow people less skilled than you to do high-quality work, rather than making yourself indispensable.</p>
+
+  <h3>From "what makes us unique" to "who is it for"</h3>
+  <p>On our first call I described the two sides of messaging as the artist and the copywriter. The artist is your design philosophy, and yours is strong. The copywriter asks a colder question: what problem are we solving, for which group of people, who will actually pay for it? You said it yourself on that call: <em>"I need to go back from the artist towards the copywriter more to find a better balance."</em> That's the shift. The artist doesn't go anywhere. The copywriter finally gets a seat.</p>
+
+  <h3>From catch-all to specialist</h3>
+  <p>Right now you're serving several different groups of people, selling design work into completely different niches. Until this business stops being a catch-all that serves everyone who comes in the door, it will never be known for, and stand for, something powerfully enough to command the premium rates you want to charge. That's the core thing that stands out to me looking at the business.</p>
+  <p>Narrowing the service offering considerably is going to feel like risk. We'll talk through the transition period and how to do it in a way that doesn't put the business at risk. But the direction isn't negotiable if you want $10 to $12 a foot to be the floor and not the ceiling.</p>
+
+  <h3>From faceless to human</h3>
+  <p>The site and the firm's feed show buildings. The personal account shows a person. The business needs both in the same place. This isn't a nice-to-have on top of the strategy; it's part of the differentiation itself.</p>
+
+  <h3>From doing to leading</h3>
+  <p>You wrote it better than I could: <em>"I'm moving from someone who does everything to someone who leads, from solving problems on paper to building on site, and from taking whatever work comes to choosing the clients and projects that fit."</em> And then this, which is the honest part: <em>"A lot of what holds me back, like hesitating on pricing, holding on to tasks, and letting uncertainty take up space in my mind, comes from still operating as the earlier version of myself."</em></p>
+  <p>Hold that. Every time you're about to redline a drawing yourself, chase an invoice yourself, or coordinate a consultant call yourself, ask which version of you is doing it.</p>
+
+  <h3>On pricing confidence, and on the partnership</h3>
+  <p>Two more things that need to move early, and both are conversations rather than tactics. You've mentioned confidence around pricing more than once. <em>"I want to feel more confident in our work and our pricing."</em> I want to understand what actually stops you from feeling that your higher rates are more than worth it for clients. There's mindset work for us to do there, and I want to explore it with you directly.</p>
+  <p>And the roles between you and Amir. Who owns what, what he wants from the design-build move, what you each hold. My sense is this is a foundational piece that needs to be addressed early in our work together, because it sets the foundation we build everything else on.</p>
+
+  <div class="callout">
+    <p>You wrote: "I can probably benefit from less planning and overthinking and more action, moving forward before I have everything figured out." Yes. This plan is sequenced so you can act on it before every question is answered.</p>
+  </div>
+</section>
+
+<!-- ===================== 5. POSITIONING & MESSAGING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 05</div>
+    <h2>Positioning &amp; messaging</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You have an artist's position. The copywriter hasn't shown up yet. The next 90 days are about getting the two into the same room.</p>
+  </div>
+
+  <h3>What your copy says right now</h3>
+  <p>Here's what a stranger reads today. The site's description tag: <em>"Architecture and graphic design company based in Atlanta, GA."</em> The About page: <em>"We're Modernacy, a small Atlanta-based architecture and design studio that focuses on homes, boutique commercial spaces, and the occasional passion project that just feels right,"</em> followed by <em>"modern, soulful design – clean lines married to warm textures, homes that feel timeless instead of trendy."</em> The Instagram bio: <em>"Efficiency, Accuracy, Delicacy, Modernacy."</em></p>
+  <p>Those sentences could sit on a thousand studio websites. They describe a style. They don't say who it's for, what problem it solves, or why anyone should pay more for it. Compare them with what you wrote in your assessment, which has an edge the site is missing: <em>"Much of American residential design today imitates homes built 100 years ago and expresses a history that isn't there."</em> That sentence makes someone either lean in or leave. That's what positioning does.</p>
+  <p>One small thing that tells the whole story: the last posts on the Modernacy feed carry <em>#luxuryhomes</em> and <em>#dreamhomes</em> in the hashtags. You told me <em>"we're not chasing luxury."</em> Your feed says you are. Nobody has made the decision yet about what Modernacy stands for, so the copy defaults to what everyone else says.</p>
+
+  <h3>The order: who, then what's different, then why you</h3>
+  <p>Positioning is built in a sequence, and skipping the first step is why the rest has stayed vague. First the who: the project type, the role, the budget, where they are in the process when they find you. Then what makes the work different, specifically, from what the other studios in Atlanta offer. Then why someone should hire you over them. We do the first on calls one and two. The second and third we work on together once the first is settled, because the articulation genuinely changes depending on who's listening. A developer activating a lot and a couple building a house on land they've owned for years do not need the same sentence.</p>
+
+  <h3>The raw material we already have</h3>
+  <p>On our first call, when you described what you're not, I said it sounded like you're the anti-farmhouse guys. If someone wants another replica of a house that's pretending to be a hundred years old, you're not their people. If they want a building that's honest about what it's made of, simple in form, and designed by someone who'd rather remove cost than add it, you are. Add the line from your assessment, <em>"designed and built by the same team,"</em> and you have the bones of a position that nobody else in your market is standing on.</p>
+  <p>That's raw material, not final copy. The exact words get sharpened after the who. But I want you to notice how different it feels from "modern, soulful design."</p>
+
+  <h3>Why this is also the answer to price</h3>
+  <p>Here's what I said on the call and I'll say it again here, because it's the hinge of the whole plan. If you raise your prices but don't raise your positioning to match, people see you in the same bar you were in at $5 a foot, now asking for twice as much, and they walk. That's what's been happening since you raised rates. The people coming through the door aren't seeing you as differentiated enough, so they treat you as a commodity and shop you against stock plans. That's a marketing problem, and positioning is the fix.</p>
+
+  <h3>And the face is part of it</h3>
+  <p>Merging your personal brand into Modernacy isn't a separate project from positioning. It's another layer of it. The perspective in your reels, the way you explain compression and expansion or why a site should shape a house, is the unique point of view that makes the position believable. A position stated by a logo is a claim. The same position stated by the person who holds it, on camera, week after week, is proof.</p>
+
+  <div class="callout">
+    <p>Not another farmhouse replica. Buildings that are honest about what they're made of, simple in form, designed by people who'd rather save you money than spend it, and built by the same team that drew them. If that's what you want, you've found your people. If it isn't, you haven't. (A starting frame to refine together, not final copy.)</p>
+  </div>
+</section>
+
+<!-- ===================== 6. OFFERS & PRICING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 06</div>
+    <h2>Offers &amp; pricing</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Three lines of business, three different buyers. A boutique firm has one.</p>
+  </div>
+
+  <h3>What you sell today</h3>
+  <p>Pool construction drawings for Mayan Pools, about 60% of revenue, billed at $70 an hour, run by Amir and the drafting team. Custom residential, about 20%, priced per square foot, historically $5 to $6 and recently raised toward $10 to $12, with a 20% retainer and phase billing. Commercial and office, about 20%, same structure. And, on the website, a Visual tab of logo design work. That's three distinct groups of people buying design work for completely different reasons, plus a fourth thing.</p>
+  <p>Your delivery is working. Clients are happy, refunds almost never happen, cash flow is steady because of the retainer and phase billing. I'm not here to fix what isn't broken. But the shape of the offer suite is the core issue in the business, and it has to change: from a catch-all general-service design firm to a highly specialized, narrowly defined boutique firm that delivers solutions to a very specific group of people in a highly differentiated way, with prices that match the caliber of specialty work you do.</p>
+
+  <h3>How we decide what to narrow to</h3>
+  <p>I don't want to guess at this, and I don't want you to either. What I need from you, before our first call, is a breakdown of the clients you've worked with over the past year by line of business: what percentage of revenue is pool work, what percentage is residential, what percentage is commercial, and anything else that's in there. Hours too, if you can get them.</p>
+  <p>It may be that we trim things down and focus on what's bringing in 80% of the revenue, so the transition is a simplification rather than a leap. It may be that the numbers tell us something else. Either way the breakdown is what lets us plan a transition that doesn't put the business at risk. We'll work through it on the first or second call, once the who is clear.</p>
+
+  <h3>Where design-build and the cabins fit</h3>
+  <p>Your highest vision is clear and I'm holding it as a key point for us: move further into design-build, starting with cabins, with the first one already underway in North Georgia. <em>"I get much more satisfaction from solving them on the job site and watching things come to life than from solving them on paper."</em> I take that seriously. Where design-build sits in the narrowed offering, and on what timeline, is something we decide together after the who and the breakdown, not before. What I can tell you now is that "designed and built by the same team" is one of the most differentiated things you've said, and the narrowing we do should move you toward it, not away from it.</p>
+
+  <h3>Pricing</h3>
+  <p>I agree with you about raising your rates and becoming more selective, and I don't want you to retreat on price because leads got harder. The path to being paid a premium is to narrow your focus, define a specific who, and articulate a unique value proposition that lets Modernacy become a highly specialized solution provider for a narrower slice of clients. That's how you get paid premium for what you do. Not by explaining the price better. By being the kind of firm the price makes sense for.</p>
+  <p>You wrote <em>"we need to price for the value we deliver, not just the hours we put in."</em> Yes. And you can only do that once the value is defined for a specific person.</p>
+
+  <h3>The sales conversation</h3>
+  <p>Given your close rate, I'm not inclined to make major changes to the sales process right now. The caveat is this: that number was built on referral leads, which arrive warm. We'll want to watch whether it holds up with non-referral leads, which are harder to close. If it slips, we go in and address the gaps.</p>
+  <p>That said, the fact that you're losing noticeably more leads since raising prices tells me one of two things is happening. Either people aren't seeing you as differentiated enough, so they treat you as a commodity, which is a marketing problem and the main focus of this plan. Or the sales process isn't developing and articulating the value in a way that justifies the higher rate. After looking closely, I'm not convinced it's only the first one. So I want to reserve one of our sessions for sales coaching, where I can look at how you actually run a lead from first text to signed proposal, find the gaps, and help you communicate the value in a way that makes more people want to say yes.</p>
+  <p>One thing I'll offer now, so you can start noticing it on your next site meeting. The key isn't primarily communicating value. It's asking the right questions, so the person across from you articulates the gap themselves: what the problem is, what they want, and the distance between those two points. Then you reflect what you do back to them in a way that lets them see your work as the bridge across that gap. Great sales conversations at higher prices aren't about talking better. They're about asking questions that help people sell themselves. Your instinct to qualify before site visits and to get value on the table before price comes up is right. We'll build on it in that session.</p>
+
+  <div class="callout">
+    <p>The key to higher pricing isn't a better explanation of your value. It's better questions, so the person across the table names the gap themselves and sees your work as the bridge.</p>
+  </div>
+</section>
+
+<!-- ===================== 7. MARKETING & CONTENT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 07</div>
+    <h2>Marketing &amp; content strategy</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">There is no marketing process today. We don't build one until the who is clear. Then we build exactly one, and we put your face on it.</p>
+  </div>
+
+  <h3>Where things stand</h3>
+  <p>You described it accurately: marketing that happens by accident. Referrals bring nearly everything. The firm's Instagram went quiet almost two years ago. The YouTube channel has four videos from 2023 and 322 total views. Your personal reels are the one thing that's alive, eight of them since <em>"To new beginnings"</em> last November, pulling anywhere from a few hundred views to over eight thousand, and I've already told you I like them. But they're aimed at nobody in particular, by your own description, and one to two hours a week is going to marketing in total. Referrals have kept you busy and profitable. They've also left you, in your words, <em>"exposed when the market slows down."</em></p>
+
+  <h3>The sequence, and why I'm not naming channels yet</h3>
+  <p>What I see from the marketing side is simple. One: get clear on who your ideal clients are. Two: get clear on what makes your work uniquely different and what your value proposition actually is. Three: anchor that into a marketing engine we can use to get in front of those people at scale, along with refreshing the website and rolling in a new social strategy that carries that newfound clarity.</p>
+  <p>I'm deliberately not telling you which activities to run yet, because the right ones depend entirely on who the who turns out to be. The way you reach developers is not the way you reach a couple with land in the mountains, and neither is the way you reach a business owner opening a restaurant. Once we've answered that question on our first calls, we'll define a specific set of activities to get in front of these people, build relationships with them, and create sales conversations. That becomes your marketing process. Intentional and consistent, like you asked for.</p>
+
+  <h3>Merge the two accounts into one brand</h3>
+  <p>The most concrete marketing move in this plan is the one from Section 03: bring Sina and Modernacy together. Modernacy's platform stops being a quiet portfolio of renderings and becomes the place where the work, the people, and the perspective live together. The reels you're already making are the start of that. What changes is that they get pointed at the who, they live where the business lives, and they show the people behind the buildings, not just the buildings.</p>
+  <p>You said your team could help with content if there were a direction, and that there are people on it who are good with video. Once the who and the position are set, there's a direction. I want to work with you on anchoring all of this into a content strategy that lets you stand out and resonate on a deeper level with the people you're here to serve.</p>
+
+  <h3>The website, after the clarity</h3>
+  <p>The site needs the same treatment, and it comes second, after the who and the value proposition, because rewriting it before then would just be prettier vagueness. When we get there: the copy, starting with the Vision section, rewritten to reflect who the firm is for and what makes it different. The images of the spaces you've designed front and center, large and in color, not small and black-and-white. More of you and the people behind the work, so the site feels human instead of held at a distance. And the kind of work you want more of shown clearly, which the site isn't doing today.</p>
+
+  <h3>Referrals, on purpose, for runway</h3>
+  <p>While the engine gets built, use what already works. Your network has produced your best clients. Once the who is defined, go back through it deliberately: past clients, the builders and developers who've sent you work, the collaborators listed on your own About page. Ask specific people for specific introductions to the kind of client you've now defined. This is short-term cash flow and runway, not the long-term strategy, but it's the fastest way to create opportunities while the longer-term engine comes together.</p>
+  <ul>
+    <li><strong>First the who and the position.</strong> No new channels, no new content calendar, until those exist.</li>
+    <li><strong>Then one engine.</strong> A specific set of activities we define together, run consistently, measured by leads per month and where they came from.</li>
+    <li><strong>Your face on the brand throughout.</strong> The personal perspective moves to where the business lives.</li>
+    <li><strong>The website refreshed to match.</strong> Copy for the who, images large and in color, people visible.</li>
+    <li><strong>Deliberate referral asks in the meantime.</strong> Runway, not strategy.</li>
+  </ul>
+</section>
+
+<!-- ===================== 8. SYSTEMS & OPERATIONS ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 08</div>
+    <h2>Systems &amp; operations</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You're the bottleneck. The way out is narrower work, documented, and handed off. You've already done it once.</p>
+  </div>
+
+  <h3>Why this comes after narrowing</h3>
+  <p>Your work as the owner is to build systems that allow people who are less skilled than you to do high-quality work. The only way to get there is to narrow the service offering and the niche enough that your approach can become specialized. If you're serving too many different groups of people, it's impossible to systematize, because every project is a different kind of project. So step one is narrowing the lane and choosing the who. Step two, once the marketing strategy is in place, is extricating you from the doing. That's the order, and it's why I'm not asking you to overhaul operations in the first month.</p>
+
+  <h3>Replicate what you did with Mayan Pools</h3>
+  <p>You already have the proof that this works. The pool work has an intake form, a shared communication platform, and a team that delivers it with minimal involvement from you. You named the opportunity yourself: take what's working there and apply it to the rest of the firm. Once the offering is narrowed, we come back to this and do exactly that, line by line. The constraint was never your ability to build the system. It was that the rest of the business was too broad to build one for.</p>
+
+  <h3>Put a dollar value on every task</h3>
+  <p>Here's the exercise I want you to do in the first thirty days. Take the list of how you spend your week and put a dollar value on every task on it. Then figure out what an hour of your time is worth at your income goal. Call it $50K a month. Do that math for yourself, but roughly, an hour of the owner of that business is worth somewhere around $250 to $300.</p>
+  <p>Now sort the list. Some of what you're doing is $20 or $30 an hour work. Some of it is $1,000-plus an hour work: sales, calls with leads, proposals. Design work is something that should be outsourced to your team. Basic coordination and admin, the same. The way we grow this business, and the way we grow you as a leader, is when you get ruthless about handing off anything on your plate that's worth less per hour than the number you just calculated. That frees you up for the work that actually generates revenue.</p>
+  <p>Look at your own list through that lens. Fifteen hours of design, eight reviewing redlines, six coordinating, six on email, four on admin. That's roughly thirty-nine hours a week below the line, and it doesn't include the time-tracking spreadsheets you cross-reference by hand. Right now you're far too in the weeds. I want to spend time with you mapping out what this transition looks like in practice, but the sorting starts now.</p>
+
+  <h3>Roles and ownership with Amir</h3>
+  <p>This is the foundational piece. You see him running the design side while you lead the build side down the line, and you don't yet know whether he wants that. The business can't be systematized around two people whose roles are undefined. Have the conversation early, bring where you land to a call, and we'll build the operating structure on top of it. You already know this: you wrote that operations need <em>"clearly defined roles and responsibilities, starting with my partner and me."</em></p>
+
+  <h3>On letting go</h3>
+  <p>You wrote that it's hard to let go of tasks, partly trust and partly <em>"I haven't found the right person to train for those roles."</em> I'd gently reframe that. It's hard to hand off work that lives in your head. It's easy to hand off work that lives in a process. That's the whole point of the E-Myth, and it's why documenting how you work comes before hiring for it.</p>
+
+  <div class="callout">
+    <p>Anything on your plate worth less per hour than the owner of a $50K-a-month firm gets handed off. That's not a luxury you earn later. It's the job now.</p>
+  </div>
+</section>
+
+<!-- ===================== 9. 90-DAY PLAN ===================== -->
+<section class="section break">
+  <div class="sechead">
+    <div class="sec-num">Section 09</div>
+    <h2>Your 90-day action plan</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">This is the payoff. Concrete enough to start Monday. Sequenced on purpose, so don't reorder it.</p>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 1–30</span>
+      <span class="ttl">Foundation — define the who, get the facts on the table</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Bring the revenue breakdown to our first call.</strong> The past twelve months by line of business: pool drafting, residential, commercial, and anything else. Percentage of revenue for each, and hours if you can get them. This is the single most useful document for planning the transition.</li>
+        <li><strong>Price every task on your list.</strong> Take your weekly hours breakdown, put a dollar value on each task, work out what an hour is worth at $50K a month, and sort everything above or below that line. Bring the sorted list. We'll turn it into a handoff plan together.</li>
+        <li><strong>Define the who, with me, on calls one and two.</strong> Project type, role, budget, where they are in the process when they find you. One paragraph, written down, that Amir and the team can repeat. Nothing else in this plan moves until this does.</li>
+        <li><strong>Have the roles conversation with Amir.</strong> Design side and build side, what he wants from the design-build move, who owns what. You don't need to resolve it alone. Bring where you land to a call and we'll work the rest out together.</li>
+        <li><strong>Read The E-Myth.</strong> Owner versus craftsman. It's the frame for everything in days 31 through 90.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 31–60</span>
+      <span class="ttl">Implementation — articulate the difference, fix the conversation, use the network</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Write the positioning.</strong> With the who settled: what's different about the work, how specifically it's different from the other studios in Atlanta, and why someone should hire Modernacy over them. We refine the anti-farmhouse frame from Section 05 into real language. This becomes the spine of the site, the feed, and every proposal.</li>
+        <li><strong>Do the sales session with me.</strong> Bring two or three recent proposals that died on price, and walk me through a lead from first text to site visit to proposal. We rebuild the conversation around questions that help the client name the gap, and we look at how you qualify before a site visit.</li>
+        <li><strong>Make deliberate referral asks.</strong> With the who in hand, go back through past clients, the builders and developers who've sent you work, and the collaborators on your About page. Ask specific people for specific introductions. This is runway while the engine gets built.</li>
+        <li><strong>Decide the transition.</strong> From the breakdown and the who: what you keep, what you phase out, how, and over what period, so the business is never at risk. Mayan Pools stays the stable base while you make the shift.</li>
+        <li><strong>Start the merge.</strong> Modernacy's platform begins showing the people and the perspective, not just renderings. Point the reels you're already making at the who. Put your team on the editing, now that there's a direction for them to run with.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 61–90</span>
+      <span class="ttl">Momentum — the engine, the website, and your way out of the weeds</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Launch the marketing activities we defined.</strong> The specific set from our calls, run on a consistent cadence, with two numbers tracked: leads per month and where each one came from. This replaces marketing by accident.</li>
+        <li><strong>Refresh the website.</strong> Copy rewritten for the who and the position, starting with the Vision section. Images of the spaces large and in color, front and center. The people behind the work visible. The kind of work you want more of shown clearly, and the work you're phasing out gone.</li>
+        <li><strong>Document and hand off.</strong> Write down how the Mayan Pools work runs and apply the same structure to the next line of business. Admin, invoicing, and coordination come off your plate. Design work and redlines start moving to the team. The design hours on your list should be visibly lower by day 90.</li>
+        <li><strong>Watch the numbers that matter.</strong> Close rate on non-referral leads versus referral leads. Leads per month. How often price is the reason a lead goes quiet. Your hours above and below the line. If the close rate slips as leads get colder, we go back into the sales process.</li>
+        <li><strong>Pricing confidence check-in.</strong> By now you've run the new positioning in real conversations. We look at what's shifted, what still stops you, and what the next rate decision is.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== CLOSING ===================== -->
+<section class="closing">
+  <div class="sechead">
+    <div class="note-head">Before you go</div>
+    <h2>One last thing</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>This is a roadmap, not a rulebook. The sequence matters: the who, then what's different, then the engine, then the way out of the weeds. How it feels in practice is yours to shape. If something isn't landing, that's information. Bring it to me.</p>
+  <p>I want to say the core of it one more time. You built a profitable firm by taking the work that came through the door, and that was the right way to start. The next chapter is a narrower, more specialized firm that stands for something specific, with your face and your perspective on it, run by a team that doesn't need you in every drawing, and priced like the specialty work it is. That's how you get to $50K to $80K a month and to the design-build life you actually want. Not by doing more. By doing less, more precisely.</p>
+  <p>Some of this will take longer than 90 days. Narrowing a business is a transition, and I'll help you plan it so the lights stay on. But the first moves, the who, the breakdown, the roles conversation, the dollar-value exercise, the book, are things you can start this week. You told me you'd rather act before everything is figured out. Good. That's exactly what this plan asks of you.</p>
+  <p>I'm looking forward to walking this with you. When you hit something, a proposal that died on price, a conversation with Amir that got stuck, a task you can't make yourself hand off, that's exactly when to reach out. Not after you've figured it out alone.</p>
+  <div class="sign">— Jason
+  <span>Telegram @jasonmossofficial &nbsp;·&nbsp; jason@jasonmoss.com</span>
+  </div>
+</section>
+
+</body>
+</html>
