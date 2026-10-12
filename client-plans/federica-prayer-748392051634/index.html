@@ -26,8 +26,9 @@
      - Under 1000px: one reading column (--measure) on a single left edge.
      - 1000px and up: wide grid (--wide). Each section's .sechead sits in a
        sticky left column, its content in the right column. The 90-day
-       .section.break becomes a forest band with the three .phase cards
-       side by side. The closing uses the same two-column grid.
+       .section.break becomes a forest band with each .phase card as a
+       full-width row (title left, actions right). The closing uses the
+       same two-column grid.
      - Textures come from the site root (/assets/textures/), the same
        approved recipe as the main site, so they are not copied per plan.
      - Sharp corners, no drop shadows, per the brand guide.
@@ -167,6 +168,10 @@
     color:var(--mocha);
     margin:0;
   }
+
+  /* a .lead used inside the body text (an emphasis line), not in a sechead */
+  .section > .lead{margin:.6em 0 1.2em;}
+  .section > .lead + p{margin-top:0;}
 
   h3{
     font-family:'Raleway',sans-serif;font-weight:600;
@@ -311,14 +316,14 @@
     .cover .logo{margin-left:calc((100% - var(--wide)) / 2);}
     .cover .cover-mid{
       display:grid;
-      grid-template-columns:minmax(0,7fr) minmax(0,5fr);
+      grid-template-columns:minmax(0,8fr) minmax(0,5fr);
       column-gap:clamp(48px,6vw,96px);
       align-items:end;
     }
     .cover .eyebrow,.cover h1,.cover .rule{grid-column:1;}
     .cover .cover-mid{grid-template-rows:1fr auto auto;}
     .cover .eyebrow{grid-row:1;align-self:end;}
-    .cover h1{grid-row:2;font-size:clamp(3.4rem,1.6rem + 4.2vw,5.6rem);}
+    .cover h1{grid-row:2;font-size:clamp(3.2rem,1.4rem + 3.4vw,4.8rem);}
     .cover .rule{grid-row:3;margin-bottom:0;}
     .cover .sub{grid-column:2;grid-row:1 / 4;align-self:end;padding-bottom:2px;border-left:1px solid rgba(194,168,108,.45);padding-left:clamp(24px,2.6vw,36px);}
 
@@ -336,17 +341,19 @@
       position:sticky;top:clamp(40px,6vh,72px);
       margin-bottom:0;
     }
-    .section > .sechead .lead{margin-top:4px;font-size:clamp(1.08rem,1rem + .3vw,1.24rem);}
+    .section > .sechead .lead{margin-top:4px;font-size:clamp(1.15rem,1rem + .5vw,1.45rem);}
     .section > .sechead > .h2-rule{margin-bottom:22px;}
     .section > .sechead + *{margin-top:0;}
     .section > h3{margin-top:1.3em;}
     /* grid items don't collapse margins: keep list→h3 equal to p→h3 */
     .section > ul,.section > ol{margin-bottom:1.2em;}
-    .callout{margin-inline:0 -40px;}
+    .callout{margin-inline:0;}
     h2{font-size:clamp(2rem,1.3rem + 1.4vw,2.6rem);}
 
-    /* 90-day plan: forest band, three columns */
+    /* 90-day plan: forest band, one full-width row per phase
+       (phase title left, actions right at a comfortable reading width) */
     main.doc > .section.break{
+      display:block;
       width:100%;
       background-color:var(--forest);
       background-image:
@@ -355,17 +362,13 @@
         url(/assets/textures/paper-forest.jpg);
       background-size:256px 256px,auto,cover;
       background-repeat:repeat,no-repeat,no-repeat;
-      display:grid;
-      grid-template-columns:repeat(3,minmax(0,1fr));
-      column-gap:clamp(18px,1.8vw,28px);
       padding-inline:max(var(--gutter),calc((100% - 1160px) / 2));
-      align-items:stretch;
       border-bottom:1px solid rgba(194,168,108,.35);
     }
-    .section.break > *{max-width:none;margin-inline:0;grid-column:auto;}
+    main.doc > .section.break > *{max-width:none;margin-inline:0;}
     main.doc > .section.break > .sechead{
-      position:static;grid-row:auto;
-      display:grid;grid-column:1 / -1;
+      position:static;
+      display:grid;
       grid-template-columns:minmax(0,4fr) minmax(0,7fr);
       column-gap:clamp(56px,6vw,104px);
       margin-bottom:clamp(44px,5vw,64px);
@@ -377,13 +380,28 @@
     .section.break h2{color:var(--sand);}
     .section.break .lead{color:var(--stone);}
     /* anything else a plan puts in this section (an intro <p>, a callout)
-       spans the full width above the cards */
-    main.doc > .section.break > :not(.sechead):not(.phase){grid-column:1 / -1;max-width:var(--measure);}
+       sits above the phase rows */
+    main.doc > .section.break > :not(.sechead):not(.phase){max-width:var(--measure);}
     main.doc > .section.break > :not(.sechead):not(.phase):last-of-type{margin-bottom:clamp(36px,4vw,52px);}
     .section.break > p{color:var(--stone);}
-    main.doc > .section.break > .phase{grid-column:auto;grid-row:span 2;display:grid;grid-template-rows:subgrid;grid-template-columns:1fr;row-gap:0;max-width:none;margin:0;border-color:rgba(233,226,211,.14);}
-    .section.break .phase-head{background:var(--forest-deep);border-bottom:1px solid var(--gold);}
-    .phase-body ol li{padding-left:34px;}
+    main.doc > .section.break > .phase{
+      display:grid;
+      grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+      column-gap:clamp(56px,6vw,104px);
+      align-items:start;
+      max-width:none;
+      margin:0;
+      padding:clamp(36px,4vw,52px) 0;
+      background:transparent;
+      border:0;
+      border-top:1px solid rgba(194,168,108,.35);
+    }
+    main.doc > .section.break > .phase:last-child{padding-bottom:0;}
+    /* phase title sits on the band and stays in view while its actions scroll */
+    .section.break .phase-head{background:transparent;padding:0;position:sticky;top:clamp(40px,6vh,72px);}
+    .section.break .phase-head .ttl{font-size:clamp(1.3rem,1.05rem + .6vw,1.6rem);}
+    .section.break .phase-body{background:var(--paper);padding:clamp(28px,3vw,40px) clamp(20px,2.6vw,48px) clamp(14px,1.6vw,20px);}
+    .section.break .phase-body ol li{padding-left:34px;}
 
     /* closing: same heading column + text column as the sections */
     .closing{
