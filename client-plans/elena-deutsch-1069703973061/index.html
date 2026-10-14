@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="googlebot" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<title>Women Interested in Leaving Law — Strategy Plan</title>
+
+
+<style>
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Libre Baskerville';src:url('assets/LibreBaskerville-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Light.ttf') format('truetype');font-weight:300;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Regular.ttf') format('truetype');font-weight:400;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-SemiBold.ttf') format('truetype');font-weight:600;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Bold.ttf') format('truetype');font-weight:700;font-style:normal;font-display:swap;}
+  @font-face{font-family:'Raleway';src:url('assets/Raleway-Italic.ttf') format('truetype');font-weight:400;font-style:italic;font-display:swap;}
+
+  /* =====================================================================
+     DESIGN (v3, Oct 2026). Styles only; the markup contract is unchanged.
+     - Under 1000px: one reading column (--measure) on a single left edge.
+     - 1000px and up: wide grid (--wide). Each section's .sechead sits in a
+       sticky left column, its content in the right column. The 90-day
+       .section.break becomes a forest band with each .phase card as a
+       full-width row (title left, actions right). The closing uses the
+       same two-column grid.
+     - Textures come from the site root (/assets/textures/), the same
+       approved recipe as the main site, so they are not copied per plan.
+     - Sharp corners, no drop shadows, per the brand guide.
+     ===================================================================== */
+  :root{
+    --obsidian:#1D1F1E;
+    --forest:#2C3F36;
+    --forest-deep:#1F2D26;
+    --mocha:#5B4B3F;
+    --taupe:#8C837A;
+    --gold:#C2A86C;
+    --brass:#755A26;
+    --stone:#E9E2D3;
+    --sand:#F8F6F2;
+    --paper:#FBFAF7;
+    --ink:#2E2C2A;
+    --ink-soft:#57514B;
+    --line:rgba(91,75,63,.18);
+    --measure:720px;
+    --gutter:clamp(22px,6vw,64px);
+    --col:min(calc(100% - 2 * var(--gutter)),var(--measure));
+  }
+
+  *{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;}
+
+  body{
+    color:var(--ink);
+    font-family:'Raleway',sans-serif;
+    font-weight:400;
+    font-size:clamp(1rem,.95rem + .25vw,1.125rem);
+    line-height:1.8;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    -webkit-print-color-adjust:exact;
+    print-color-adjust:exact;
+    background-color:#F4F1EA;
+    background-image:
+      url(/assets/textures/grain-light-soft.png),
+      linear-gradient(180deg,rgba(248,246,242,.22),rgba(248,246,242,.3)),
+      url(/assets/textures/tile-pale.jpg);
+    background-size:256px 256px,auto,520px 520px;
+    background-repeat:repeat,no-repeat,repeat;
+  }
+
+  ::selection{background:var(--gold);color:var(--obsidian);}
+  p{margin:0 0 1.2em 0;text-wrap:pretty;}
+  body{overflow-wrap:break-word;}
+  strong{font-weight:600;color:var(--obsidian);}
+  em{font-style:italic;}
+
+  /* textured forest, shared by cover + closing */
+  .cover,.closing{
+    background-color:var(--forest);
+    background-image:
+      url(/assets/textures/grain-dark-soft.png),
+      linear-gradient(180deg,rgba(44,63,54,.25),rgba(44,63,54,.35)),
+      url(/assets/textures/paper-forest.jpg);
+    background-size:256px 256px,auto,cover;
+    background-repeat:repeat,no-repeat,no-repeat;
+    background-position:0 0,0 0,center;
+  }
+
+  /* ---------- COVER ---------- */
+  .cover{
+    display:grid;
+    grid-template-rows:auto 1fr auto;
+    grid-template-columns:minmax(0,1fr);
+    min-height:clamp(560px,92svh,940px);
+    padding:clamp(28px,4vw,48px) 0 clamp(40px,5vw,64px);
+    color:var(--sand);
+  }
+  .cover > *{width:var(--col);margin-inline:auto;}
+  .cover .logo{width:clamp(140px,12vw,172px);height:auto;display:block;margin-left:calc((100% - var(--col)) / 2);}
+  .cover .cover-mid{align-self:center;padding:clamp(56px,9vh,112px) 0;}
+  .cover .eyebrow{
+    display:flex;align-items:center;gap:14px;
+    font-weight:600;font-size:.75rem;line-height:1.4;
+    letter-spacing:.26em;text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:clamp(20px,2.6vw,28px);
+  }
+  .cover .eyebrow::before{content:"";width:32px;height:1px;background:var(--gold);flex:none;}
+  .cover h1{
+    font-family:'Libre Baskerville',serif;font-weight:400;
+    font-size:clamp(2.7rem,1.7rem + 3.6vw,4.6rem);
+    line-height:1.08;letter-spacing:-.015em;
+    color:var(--sand);
+    margin-bottom:clamp(24px,3vw,32px);
+    text-wrap:balance;
+  }
+  .cover .rule{width:56px;height:1px;background:var(--gold);margin-bottom:clamp(24px,3vw,32px);}
+  .cover .sub{
+    font-weight:300;
+    font-size:clamp(1.05rem,.98rem + .35vw,1.28rem);
+    line-height:1.75;
+    color:var(--stone);
+  }
+  .cover .foot{
+    display:flex;justify-content:space-between;align-items:baseline;gap:18px;
+    padding-top:20px;
+    border-top:1px solid rgba(233,226,211,.22);
+    font-size:.8rem;letter-spacing:.06em;
+    color:var(--stone);
+  }
+  .cover .foot .who{font-weight:600;color:var(--sand);}
+  .cover .foot .r{color:var(--gold);white-space:nowrap;}
+
+  /* ---------- BODY ---------- */
+  main.doc{padding:clamp(24px,4vw,48px) 0 0;}
+  main.doc > .section{width:var(--col);margin-inline:auto;}
+
+  .section{padding:clamp(64px,8vw,104px) 0;}
+  .section + .section{border-top:1px solid var(--line);}
+
+  .sechead{margin-bottom:clamp(28px,3.4vw,40px);}
+  .sec-num,.note-head{
+    display:flex;align-items:center;gap:14px;
+    font-weight:600;font-size:.75rem;line-height:1.4;
+    letter-spacing:.24em;text-transform:uppercase;
+    color:var(--brass);
+    margin-bottom:18px;
+  }
+  .sec-num::before,.note-head::before{content:"";width:28px;height:1px;background:var(--gold);flex:none;}
+  h2{
+    font-family:'Libre Baskerville',serif;font-weight:400;
+    font-size:clamp(1.85rem,1.35rem + 1.9vw,2.7rem);
+    line-height:1.2;letter-spacing:-.012em;
+    color:var(--obsidian);
+    text-wrap:balance;
+  }
+  .h2-rule{width:56px;height:1px;background:var(--gold);margin:24px 0 26px;}
+  .lead{
+    font-family:'Libre Baskerville',serif;font-style:italic;font-weight:400;
+    font-size:clamp(1.15rem,1.04rem + .5vw,1.42rem);
+    line-height:1.62;
+    color:var(--mocha);
+    margin:0;
+  }
+
+  /* a .lead used inside the body text (an emphasis line), not in a sechead */
+  .section > .lead{margin:.6em 0 1.2em;}
+  .section > .lead + p{margin-top:0;}
+
+  h3{
+    font-family:'Raleway',sans-serif;font-weight:600;
+    font-size:clamp(1.1rem,1.02rem + .3vw,1.25rem);
+    line-height:1.4;
+    color:var(--forest);
+    margin:2.4em 0 .6em;
+  }
+  .sechead + h3{margin-top:0;}
+
+  ul,ol{margin:.4em 0 1.6em;padding-left:0;list-style:none;}
+  li{position:relative;padding-left:28px;margin-bottom:.75em;}
+  ul li::before{
+    content:"";position:absolute;left:4px;top:.72em;
+    width:6px;height:6px;background:var(--gold);transform:rotate(45deg);
+  }
+  ol{counter-reset:ol;}
+  ol li{padding-left:40px;counter-increment:ol;}
+  ol li::before{
+    content:counter(ol,decimal-leading-zero);
+    position:absolute;left:0;top:.1em;
+    font-weight:600;font-size:.78rem;letter-spacing:.06em;line-height:1.9;
+    color:var(--brass);
+  }
+
+  /* callout: stone panel, inset gold hairline, slightly wider than the text */
+  .callout{
+    position:relative;
+    background:var(--stone);
+    padding:clamp(28px,3.6vw,44px) clamp(26px,4vw,52px);
+    margin:2.4em 0;
+  }
+  .callout::after{
+    content:"";position:absolute;inset:10px;
+    border:1px solid rgba(194,168,108,.55);
+    pointer-events:none;
+  }
+  .callout p{
+    font-family:'Libre Baskerville',serif;font-style:italic;
+    font-size:clamp(1.1rem,1.02rem + .38vw,1.3rem);
+    line-height:1.62;
+    color:var(--obsidian);
+    margin:0;
+  }
+  .callout p + p{margin-top:.8em;}
+  .section > .callout:last-child{margin-bottom:0;}
+  @media (min-width:1000px){ .callout{margin-inline:-52px;} }
+
+  /* ---------- 90-DAY PLAN: full-width warm band (phones/tablets) ---------- */
+  main.doc > .section.break{
+    width:100%;
+    max-width:none;
+    border-top:0;
+    padding:clamp(72px,9vw,120px) var(--gutter);
+    background-color:#EFE9DD;
+    background-image:
+      url(/assets/textures/grain-light-soft.png),
+      linear-gradient(180deg,rgba(233,226,211,.35),rgba(233,226,211,.45)),
+      url(/assets/textures/tile-warm.jpg);
+    background-size:256px 256px,auto,520px 520px;
+    background-repeat:repeat,no-repeat,repeat;
+  }
+  .section.break > *{max-width:var(--measure);margin-inline:auto;}
+  .section.break > .phase{max-width:1040px;}
+
+  .phase{
+    display:grid;
+    grid-template-columns:1fr;
+    background:var(--paper);
+    border:1px solid var(--line);
+    margin-bottom:20px;
+  }
+  .phase:last-child{margin-bottom:0;}
+  .phase-head{
+    background:var(--forest);
+    color:var(--sand);
+    padding:clamp(22px,2.8vw,32px) clamp(22px,3vw,34px);
+  }
+  .phase-head .tag{
+    display:block;
+    font-weight:600;font-size:.72rem;line-height:1.3;
+    letter-spacing:.24em;text-transform:uppercase;
+    color:var(--gold);
+    margin-bottom:12px;
+  }
+  .phase-head .ttl{
+    display:block;
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.15rem,1.05rem + .45vw,1.38rem);
+    line-height:1.4;
+    color:var(--sand);
+  }
+  .phase-body{padding:clamp(24px,3vw,36px) clamp(22px,3.2vw,40px) clamp(10px,1.6vw,16px);}
+  .phase-body ol{margin:0;}
+  .phase-body ol li{margin-bottom:1.1em;}
+  .phase-body ol li strong{color:var(--forest);}
+  @media (min-width:900px){
+    .phase{grid-template-columns:300px 1fr;}
+  }
+
+  /* ---------- CLOSING ---------- */
+  .closing{
+    color:var(--sand);
+    padding:clamp(80px,10vw,136px) 0 clamp(80px,10vw,128px);
+  }
+  .closing > *{width:var(--col);margin-inline:auto;}
+  .closing .note-head{color:var(--gold);}
+  .closing .note-head::before{background:var(--gold);}
+  .closing h2{color:var(--sand);}
+  .closing p{
+    color:var(--stone);
+    font-size:clamp(1.02rem,.97rem + .3vw,1.15rem);
+    line-height:1.8;
+  }
+  .closing strong{color:var(--sand);}
+  .closing .sign{
+    font-family:'Libre Baskerville',serif;
+    font-size:clamp(1.15rem,1.05rem + .4vw,1.35rem);
+    line-height:1.5;
+    color:var(--sand);
+    margin-top:clamp(36px,4vw,48px);
+    padding-top:28px;
+    border-top:1px solid rgba(233,226,211,.22);
+  }
+  .closing .sign span{
+    display:block;
+    font-family:'Raleway',sans-serif;font-weight:400;
+    font-size:.86rem;line-height:1.5;letter-spacing:.05em;
+    color:var(--gold);
+    margin-top:12px;
+  }
+
+
+  /* =====================================================================
+     WIDE SCREENS (1000px and up)
+     ===================================================================== */
+  @media (min-width:1000px){
+    :root{--wide:min(calc(100% - 2 * var(--gutter)),1160px);}
+
+    /* cover: title left, intro right, both on the wide grid */
+    .cover > *{width:var(--wide);}
+    .cover .logo{margin-left:calc((100% - var(--wide)) / 2);}
+    .cover .cover-mid{
+      display:grid;
+      grid-template-columns:minmax(0,8fr) minmax(0,5fr);
+      column-gap:clamp(48px,6vw,96px);
+      align-items:end;
+    }
+    .cover .eyebrow,.cover h1,.cover .rule{grid-column:1;}
+    .cover .cover-mid{grid-template-rows:1fr auto auto;}
+    .cover .eyebrow{grid-row:1;align-self:end;}
+    .cover h1{grid-row:2;font-size:clamp(3.2rem,1.4rem + 3.4vw,4.8rem);}
+    .cover .rule{grid-row:3;margin-bottom:0;}
+    .cover .sub{grid-column:2;grid-row:1 / 4;align-self:end;padding-bottom:2px;border-left:1px solid rgba(194,168,108,.45);padding-left:clamp(24px,2.6vw,36px);}
+
+    /* sections: sticky heading column + reading column */
+    main.doc > .section{
+      width:var(--wide);
+      display:grid;
+      grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+      column-gap:clamp(56px,6vw,104px);
+      align-items:start;
+    }
+    main.doc > .section > *{grid-column:2;}
+    main.doc > .section > .sechead{
+      grid-column:1;grid-row:1 / span 300;
+      position:sticky;top:clamp(40px,6vh,72px);
+      margin-bottom:0;
+    }
+    .section > .sechead .lead{margin-top:4px;font-size:clamp(1.15rem,1rem + .5vw,1.45rem);}
+    .section > .sechead > .h2-rule{margin-bottom:22px;}
+    .section > .sechead + *{margin-top:0;}
+    .section > h3{margin-top:1.3em;}
+    /* grid items don't collapse margins: keep list→h3 equal to p→h3 */
+    .section > ul,.section > ol{margin-bottom:1.2em;}
+    .callout{margin-inline:0;}
+    h2{font-size:clamp(2rem,1.3rem + 1.4vw,2.6rem);}
+
+    /* 90-day plan: forest band, one full-width row per phase
+       (phase title left, actions right at a comfortable reading width) */
+    main.doc > .section.break{
+      display:block;
+      width:100%;
+      background-color:var(--forest);
+      background-image:
+        url(/assets/textures/grain-dark-soft.png),
+        linear-gradient(180deg,rgba(44,63,54,.25),rgba(44,63,54,.35)),
+        url(/assets/textures/paper-forest.jpg);
+      background-size:256px 256px,auto,cover;
+      background-repeat:repeat,no-repeat,no-repeat;
+      padding-inline:max(var(--gutter),calc((100% - 1160px) / 2));
+      border-bottom:1px solid rgba(194,168,108,.35);
+    }
+    main.doc > .section.break > *{max-width:none;margin-inline:0;}
+    main.doc > .section.break > .sechead{
+      position:static;
+      display:grid;
+      grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+      column-gap:clamp(56px,6vw,104px);
+      margin-bottom:clamp(44px,5vw,64px);
+    }
+    main.doc > .section.break > .sechead:not(:has(.lead)){margin-bottom:clamp(24px,2.6vw,32px);}
+    .section.break .sechead > *{grid-column:1;}
+    .section.break .sechead > .lead{grid-column:2;grid-row:1 / 5;align-self:end;margin:0;font-size:clamp(1.15rem,1.04rem + .5vw,1.42rem);}
+    .section.break .sec-num{color:var(--gold);}
+    .section.break h2{color:var(--sand);}
+    .section.break .lead{color:var(--stone);}
+    /* anything else a plan puts in this section (an intro <p>, a callout)
+       sits above the phase rows */
+    main.doc > .section.break > :not(.sechead):not(.phase){max-width:var(--measure);}
+    main.doc > .section.break > :not(.sechead):not(.phase):last-of-type{margin-bottom:clamp(36px,4vw,52px);}
+    .section.break > p{color:var(--stone);}
+    main.doc > .section.break > .phase{
+      display:grid;
+      grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+      column-gap:clamp(56px,6vw,104px);
+      align-items:start;
+      max-width:none;
+      margin:0;
+      padding:clamp(36px,4vw,52px) 0;
+      background:transparent;
+      border:0;
+      border-top:1px solid rgba(194,168,108,.35);
+    }
+    main.doc > .section.break > .phase:last-child{padding-bottom:0;}
+    /* phase title sits on the band and stays in view while its actions scroll */
+    .section.break .phase-head{background:transparent;padding:0;position:sticky;top:clamp(40px,6vh,72px);}
+    .section.break .phase-head .ttl{font-size:clamp(1.3rem,1.05rem + .6vw,1.6rem);}
+    .section.break .phase-body{background:var(--paper);padding:clamp(28px,3vw,40px) clamp(20px,2.6vw,48px) clamp(14px,1.6vw,20px);}
+    .section.break .phase-body ol li{padding-left:34px;}
+
+    /* closing: same heading column + text column as the sections */
+    .closing{
+      display:grid;
+      grid-template-columns:minmax(0,4fr) minmax(0,7fr);
+      column-gap:clamp(56px,6vw,104px);
+      padding-inline:max(var(--gutter),calc((100% - 1160px) / 2));
+      align-items:start;
+    }
+    .closing > *{width:auto;margin-inline:0;grid-column:2;}
+    .closing > .sechead{grid-column:1;grid-row:1 / span 20;}
+    .closing > .sechead + p{margin-top:0;}
+  }
+  /* short laptop screens: a tall heading block must never be cut off */
+  @media (min-width:1000px) and (max-height:720px){
+    main.doc > .section > .sechead{position:static;}
+  }
+
+  /* ---------- SMALL SCREENS ---------- */
+  @media (max-width:700px){
+    body{line-height:1.72;background-size:256px 256px,auto,420px 420px;}
+    .cover,.closing{background-image:url(/assets/textures/grain-dark-soft.png),linear-gradient(180deg,rgba(44,63,54,.25),rgba(44,63,54,.35)),url(/assets/textures/tile-forest.jpg);background-size:256px 256px,auto,420px 420px;background-repeat:repeat,no-repeat,repeat;}
+    .cover{min-height:100svh;}
+    .cover .foot{flex-direction:column;gap:4px;}
+    main.doc > .section.break{padding-inline:0;}
+    .section.break > *{width:var(--col);}
+    .section.break > .phase{width:calc(100% - 28px);}
+  }
+
+  @media (prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+  }
+
+  /* ---------- PRINT ---------- */
+  @media print{
+    body{background:#fff;}
+    .cover{min-height:100vh;break-after:page;}
+    main.doc{padding-top:0;}
+    main.doc > .section.break{background:#fff;}
+    .phase,.callout,.sechead,.closing .sign{break-inside:avoid;}
+    .sechead,h3{break-after:avoid;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ===================== COVER ===================== -->
+<section class="cover">
+  <img class="logo" src="assets/logo-light.svg" alt="Jason Moss">
+  <div class="cover-mid">
+    <div class="eyebrow">Business Strategy Plan</div>
+    <h1>Women Interested in Leaving Law</h1>
+    <div class="rule"></div>
+    <div class="sub">A clear-eyed look at where your business is, the biggest opportunities I see, and a 90-day plan to act on them — built from my review of your business, your assessment, and the notes I recorded going through everything.</div>
+  </div>
+  <div class="foot">
+    <span class="l">Prepared for <span class="who">Elena Deutsch</span></span>
+    <span class="r">October 2026</span>
+  </div>
+</section>
+
+
+<main class="doc">
+
+<!-- ===================== 1. PERSONAL NOTE ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="note-head">A note before we begin</div>
+    <h2>Read this as a starting point</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>Hey Elena —</p>
+  <p>A quick note on how this came together.</p>
+  <p>I used AI to help me organize my notes and shape them into something clean you can read in one sitting. It reads tidy because I wanted it to be easy on you. The thinking underneath it is mine.</p>
+  <p>I went through your assessment line by line. Your StrengthsFinder. Your Human Design chart. Your website, your LinkedIn, the podcast, the booking page. And I recorded voice notes as I went. Every recommendation in here traces back to something I said in those notes. Nothing here is a template with your name dropped in.</p>
+  <p>Something you wrote when you sent it all over stayed with me. You said it felt vulnerable to share, that you didn't hold back, and that some shame came up around the finances. I saw that, and I'm glad you didn't hold back. Running a deficit this year isn't a verdict on you or on ten years of work. It's information, and it's exactly the information that lets us fix the right things. You wrote that there's learning here and a real growth opportunity. I agree.</p>
+  <p>One more thing, and it matters. You told me on our sales call that coaching doesn't work for you when it's too prescriptive ("follow this system and fill out this spreadsheet") and it doesn't work when it's too loose ("follow your own wisdom"). The magic for you is in the middle. So read this as a foundation we build on together, not a set of instructions to obey. Read it slowly. Write down your questions, your notes, and especially the things that don't feel right. Sleep on it, the way you do. Then bring all of it to our first call on Tuesday, and we'll spend real time refining this until it's truly yours.</p>
+  <p>Let's get into it.</p>
+</section>
+
+<!-- ===================== 2. WHERE YOU ARE NOW ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 02</div>
+    <h2>Where you are right now</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You've built something real and meaningful. It's also carrying far more than it needs to.</p>
+  </div>
+
+  <p>Let me start with what you want. On our sales call you said it plainly: "it feels heavy and it feels more like, oh, I have to do this instead of, like, I get to." And then: "I want to be back and, like, I get to do this."</p>
+  <p>When I read your intake, the essence of your vision comes down to simplicity and fun. Creating $20K plus a month. Working with clients you love, with less stress, less overwhelm and fewer moving parts. Leveraging your strengths in a way that creates more ease, joy and fulfillment for you. You painted the picture yourself: "most of December off," traveling internationally "at least twice a year" with your kids, and to "not be in frenzied launch cycles." I love that vision. My sense is that's the core of what we're here to create.</p>
+
+  <h3>What's working</h3>
+  <p>You have a beautiful origin story. We'll come back to it in Section 05. (And I love that we share NYU. That's where I did my undergrad.)</p>
+  <p>You know exactly who she is. You described her vividly: "tired of the billable hour bullshit," "waking up with dread and anxiety, and reaching for the phone first thing in the morning," and knowing "she will regret not doing something if she doesn't make a change."</p>
+  <p>The work itself works. Your refund rate is close to zero. A woman you were just talking to told you she's been following you for ten years. And you still believe in WILL Transform, the process at the center of all of it. You called it "really sound."</p>
+  <p>And look at what happened this summer when you got in front of new people. Nina put you in front of a group of 15,000 lawyers. About 30 applied, 6 enrolled, and a $12K VIP client came through it. Four of those six women got great results.</p>
+  <p>You're genuinely good at the things that bring people in. Speaking. Podcast interviews. Picking up the phone. Your top five strengths are Strategic, Ideation, Connectedness, Woo and Positivity. You'll see your strengths all through this plan.</p>
+  <p>And you did over $300K last year. The best year you've had. You wrote it yourself: "I can do that again. I just don't want to work so hard, and I don't think I have to."</p>
+
+  <h3>What's holding you back</h3>
+  <p>About 60 to 70 percent of what's in this business right now doesn't need to be here.</p>
+  <ul>
+    <li><strong>Too many offers.</strong> More than a dozen over the years, plus old pages for WILL Start and WILL Evolve still live at prices that don't match.</li>
+    <li><strong>A team three or four times bigger than the business needs.</strong> Christina, plus Janelle's team of four or five, plus a retreat assistant. Your words: "I am highly dependent upon my team to execute things, and they are a big expense."</li>
+    <li><strong>Almost no top of funnel.</strong> That's the part that brings new people in. Eighty to ninety percent of your marketing is aimed at the people already on your list. The newsletter, the podcast, the reels, the WILLportunities email, the Facebook group. It's nurture, not reach. "Fishing in a barrel, and there are only limited fish." Your words.</li>
+    <li><strong>A sales process converting one or two in ten.</strong> You've averaged about three sales calls a month this year. In past years you closed 20 to 25 percent, sometimes 40 to 50. Something has shifted, and we need to find out what.</li>
+    <li><strong>Too much friction before someone can talk to you.</strong> Your homepage says "No pressure. No judgment. Just a warm conversation." Then the booking form asks four required written questions and three 0-to-10 ratings. It tells her investments "start at 4-figures" and asks if she's ready. It asks her to check a box promising she's read "the overview materials," which aren't linked anywhere on the page. All before a one-hour "Consultation Call." As you put it: "People get hung up on booking a call."</li>
+    <li><strong>The numbers.</strong> Year to date you've brought in $145,438 and spent $163,187. You've drawn $115,000 from personal savings this past year to support your life and the business. You wrote "I can't keep going like this." That's exactly why we start with the numbers.</li>
+  </ul>
+
+  <div class="callout">
+    <p>We simplify this business down to the core few activities we actually know are working.</p>
+  </div>
+</section>
+
+<!-- ===================== 3. BIGGEST OPPORTUNITIES ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 03</div>
+    <h2>The biggest opportunities I see</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Cut the fat and free up cash with a reactivation sprint. Then bring far more of the right people in the door, nurture them with live events, make it easier to talk to you, and simplify the offers.</p>
+  </div>
+
+  <h3>1. Cut the fat first</h3>
+  <p>Before we build anything, we eliminate. There's a lot of complexity and bloat in expenses, team and software right now that absolutely does not need to be there, and in marketing activities that aren't moving the needle. One of the first things we're going to do is cut the fat and get this business down to a lean, simple model, with a select set of tools and a lean team to execute. It starts with your P&amp;L, line by line. That's how we get back to profitability.</p>
+
+  <h3>2. Run a reactivation sprint for cash</h3>
+  <p>You have a pipeline of over 500 people you've already had sales conversations with, and a core group of past clients who've "probably been the bulk of my income over these last years." You also told me why this fits you: "Woo is winning others over, and leaving people a voice message or reaching out and calling them is really powerful." You don't even call it follow-up. You call it "love them up." And you wrote that it takes you a long time "because, in order to reach out to them, I feel like I have to look up my last communication with them and write them something personal."</p>
+  <p>So here's the move. We use AI to do semi-automated outreach to those people, with a compelling offer that opens the door back up for a conversation. Let's focus one of our first calls on building a tangible, practical strategy to do this that's aligned with your strengths. This could be a very high-leverage way to generate short-term cash flow. It's easy, it's a quick win on the front end, and we run it in parallel with the longer-term build, with the cash redirected into top of funnel.</p>
+
+  <h3>3. Build a real top of funnel</h3>
+  <p>This is the biggest gap in the business and the biggest opportunity. Google, your ACC listing and referrals bring you leads, but that's inbound you can't turn up. The activities that have actually put you in front of new people on purpose are speaking, guest podcasting, and this summer's collaboration with Nina's group. Reach is the core problem to solve, and it's one of the first things we solve together. A simple stack: a paid-traffic lead magnet, regular speaking engagements, and guest podcasting. That's the trifecta.</p>
+
+  <h3>4. Nurture with live events</h3>
+  <p>Your nurture channels right now are fairly passive, and your live events are inconsistent. What I've found in my own business is that live events are the single best way to nurture and convert an existing audience. Once someone is on my list, my core strategy is to get them to a live experience. We'll shape what that looks like for you together.</p>
+
+  <h3>5. Lower the barrier to a conversation</h3>
+  <p>You wrote: "Maybe introduce something like you do, like a 20-minute fit call that's not a sales call, so they could have an experience of me before we go deeper." I agree. Right now your booking page is likely creating too much friction to just get someone on a call. We move to a short connection conversation, 15 to 20 minutes, with minimal qualification, framed around value rather than as a sales call. Something like: I'll help you get clarity on your next move in your career. If she's a fit, you invite her to a part-two conversation. Some women aren't quite ready to buy yet. But after spending 15 or 20 minutes with you, they'd be far more likely to take that next step.</p>
+
+  <h3>6. Simplify to one core offer</h3>
+  <p>There are really two lanes in your business, and right now they're tangled together. Section 06 lays them out, along with why I'm going to suggest one-to-one as the core.</p>
+</section>
+
+<!-- ===================== 4. WHAT NEEDS TO SHIFT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 04</div>
+    <h2>What needs to shift first</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">The core of our work is to simplify your model without losing the variety, novelty and spontaneity of the creative process that makes you feel alive.</p>
+  </div>
+
+  <h3>From adding to subtracting</h3>
+  <p>You've got a lot of moving parts in your business. A lot of offers, a lot of live events. Part of this is a result of the way you're wired. You're an ideator. Ideation is your number two strength, Activator is number nine, and Consistency and Discipline sit in your bottom five, with Discipline last, at 34. Which is fine. In Human Design you're an Emotional Manifestor, a 6/2. You start things. And you told me you need to build in "periods of rest and creation." You're not the type of entrepreneur who's meant to run a rinse-and-repeat strategy and show up to do the same thing every day.</p>
+  <p>You wrote that you've "always felt like there are so many things I 'should be doing,'" and that you've "never just picked one lane." And: "I never have a shortage of ideas, and I want them all done right now. I am literally laughing at myself." So the first shift is from adding to subtracting. I want to start our work together with elimination.</p>
+  <p>And you wrote that nimbleness "actually grounds me." So we're not taking the ideas away. Section 06 shows where they go.</p>
+
+  <h3>From nurturing harder to reaching further</h3>
+  <p>You've been having the same conversation with the same thousand people. When things get slow, the instinct has been to do more for them. That's the wrong lever. The lever is reach. We're going to spend a lot less time nurturing and a lot more time getting you in front of women who have never heard of you.</p>
+
+  <h3>From corporation to friend</h3>
+  <p>My sense is you're seeing email a bit too much like a corporation would. A template, set sections, two people touching it before it ships. I want every email to be just you writing to a friend. Section 07 has the specifics.</p>
+</section>
+
+<!-- ===================== 5. POSITIONING & MESSAGING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 05</div>
+    <h2>Positioning &amp; messaging</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Your niche is right. Your message is generally strong. The main thing I'd reflect on is where the conversation starts.</p>
+  </div>
+
+  <h3>Keep the niche where it is</h3>
+  <p>Your niche is incredibly clear, specific and well thought out. Women lawyers in a practice they no longer want to be in. Keep the focus there.</p>
+  <p>There's one slight shift I agree with: going upstream. The more established lawyer. The partner. The woman who's been practicing 15 or 20 years and knows her time with her kids is "precious and fleeting." That's a slight refinement, not a change of niche.</p>
+  <p>I think the women lawyers who've already left their practice, and the entrepreneur market, are distractions. You wrote about the Lawyer Coach Circle: "I enjoyed that, but I don't think I really want to specialize in that." About entrepreneurs: "I don't really want to be a full-on business coach." You can always serve the occasional client on the back end who walks in wanting something a little outside your lane. But I wouldn't focus or broaden your front-end marketing to speak to those groups. It would dilute the potency and impact of the message for the women you're actually here to serve.</p>
+
+  <h3>Your origin story</h3>
+  <p>I loved getting to hear the origin story of your business. The client in big law who got very clear that she wanted "the benefit of unlimited vacation days and to leave her firm and go to a startup." And you, on Cape Cod that summer, so fired up that you were waking at 5:30 in the morning to "write love letters to my future clients, telling them that they could do this." That breakthrough clarified what Women Interested in Leaving Law was meant to be.</p>
+  <p>I'm curious how much of it is in your marketing. Parts of your story are on your About page and in a recent LinkedIn post. But the client breakthrough and the love letters aren't on your site anywhere. Are you sharing that part? It's powerful, and reading it connects me back to the why behind your work. I think it's an important piece of your message.</p>
+
+  <h3>Meet her in the pain first</h3>
+  <p>Here's one question I'd reflect on. Is your ideal client oriented around alleviating a pain or achieving a desire? When you describe her, she's tired. Tired of the billable hour. Tired of the dread. Tired of carrying everyone else's burdens. That's pain.</p>
+  <p>Your homepage already meets her there. Right under the headline she reads "You deserve to wake up excited about your day. Not filled with dread." But a lot of your other messaging leans toward desire. The Fall Sunday Sprint: "Joy Starts Here. Join the 6-week Sprint to begin your days, and end the year with momentum, focus and connection." The podcast tagline reads "For Women Lawyers Searching for Freedom, Flexibility and Fulfilment," and your LinkedIn bio leans the same way. There may be a bit of a mismatch between how you're framing your message and where your ideal client actually is when she first finds you.</p>
+  <p>The goal of marketing is to meet people where they are first, then build a bridge from that place to where they want to go. I'm not saying all of your marketing needs to be negative. I'm saying the first touchpoint should focus more on the pain, if that's where she is. Then the conversation can elevate as she goes deeper with you, into your live events and your calls. You said it yourself on our sales call: she needs you to be "the person who's, like, holding up, like, the door that's open." We likely need to build a better bridge, and it's something for us to talk through together.</p>
+
+  <div class="callout">
+    <p>You told me she "doesn't want to be told, oh, you should try and love the law, because they've tried." If that's where she is, that may be where your first touchpoint needs to start.</p>
+  </div>
+</section>
+
+<!-- ===================== 6. OFFERS & PRICING ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 06</div>
+    <h2>Offers &amp; pricing</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Two lanes. One stable core offer that pays the bills, and a flexible lane of small live experiences where your creativity gets to run.</p>
+  </div>
+
+  <h3>What's here now</h3>
+  <p>WILL Transform at $12K with you, or $5,997 with one of your coaches. WILL Evolve at $297 a month. WILL Start at $1,997. The seasonal woo shops at $297 to $497. The Relief Now Toolkit at $49. The Sunday Sprint at $997. The Mystery Circle Mastermind at $12K. Retreats at $6K to $7K. The summer bootcamp with Law Mamas at $1,997.</p>
+  <p>Every one of these came from a real idea. But the more I read through them, the more I see way too much complexity here. There are too many offers for the business you're trying to run.</p>
+
+  <h3>Lane one: the core offer</h3>
+  <p>I want one core high-ticket offer that stays stable on the back end and provides your cash flow and profitability. Given your low volume of current clients, I'm going to suggest that offer be one-to-one with you, still leveraging your WILL Transform curriculum as the core of the delivery.</p>
+  <p>You already have VIP clients one-to-one, one of them at $24,000 for the year. And you wrote that you "have fun when I am coaching the right-fit clients one-on-one." On our sales call, when we talked about the boutique model, you said: "I just, would like to work with a few people."</p>
+  <p>What I'm seeing across the industry is that group programs are becoming more difficult to sell. In a world where people can get information and answers so easily from AI, the real value is proximity and intimacy. Since I made the transition to one-to-one, my return on ad spend has gone up considerably, and I've found one-to-one offers much easier to sell. And as you wrote: "When only one or two people come on a community call, it's such a downer to me."</p>
+  <p>Community doesn't disappear. It may be that community becomes more of a nurture and conversion play: regular live events that give people the group feel. Then the one-to-one is the core way you actually monetize. We'll go deeper on this together before anything changes.</p>
+
+  <h3>Lane two: the entry experiences</h3>
+  <p>This is where your variety lives. Low-friction, low-risk, sub-$100 live experiences for people already in your audience: workshops, live events, three-day or five-day challenges. You run these more often, as bridges into the core offer. They can vary widely depending on your mood, what's exciting for you, what feels alive, what you want to share. You already work this way: "Even if I do the Sunday Sprint, every year is different." Your seasonal woo shops, at $297 to $497, function more like mini programs right now. You wrote that you've had "very little success enrolling new people into this. It's typically people who are already in my world."</p>
+  <p>It's close to what you asked for: "clarity of my core offer as the central thing, and clarity for these seasonal pillars that I can build marketing around, as well as room for rest and divine inspiration." I think that's how we accomplish both stability and spontaneity.</p>
+
+  <h3>One downsell is fine</h3>
+  <p>I like the idea of a single downsell for the women the core offer doesn't make sense for, around $2,000, like WILL Start. Core offer plus one downsell.</p>
+
+  <h3>What we'll sort together</h3>
+  <p>The place I see the most complexity is the back end, especially the coach-delivered tier and WILL Evolve. Then the masterminds, the retreats and the Sunday Sprint. When we simplify the offer suite, we'll go through each one together. Strategic is your number one strength. You'll see paths I've missed, which is why we do this together. You wrote that you want to "give myself full permission to want what I want and not want what I don't want, and let some things go if they don't feel aligned." That's exactly the spirit of this.</p>
+
+  <h3>The back end, once</h3>
+  <p>It's absolutely worth going through your back end once, making sure the materials are being delivered correctly in Funnel Gorgeous. You wrote that just saying you feel "somewhat self-conscious about enrolling people in it" gave you "a sinking feeling in my stomach." I think that's an energetic block, and it stops you from feeling fully confident when you sell. So do it once. Not as a rabbit hole, just so you can feel coherent and good about what you're delivering.</p>
+</section>
+
+<!-- ===================== 7. MARKETING & CONTENT ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 07</div>
+    <h2>Marketing &amp; content strategy</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You're spending way too much time nurturing and not nearly enough time getting in front of new people.</p>
+  </div>
+
+  <h3>How I see your funnel</h3>
+  <p>Top of funnel is reach: a paid-traffic lead magnet, speaking, guest podcasting. Middle of funnel is nurture: your emails, your podcast, your live events. Bottom of funnel is conversations. Your September numbers show how low traffic and awareness are right now: 718 people visited the website. YouTube added six subscribers. And in the LinkedIn data your team pulled, 176 posts produced three link clicks.</p>
+
+  <h3>What to stop</h3>
+  <p>SEO and GEO (trying to rank in Google and show up in AI answers), including the content Mica is helping generate for it, isn't worth your focus right now. More broadly, you can cut 80 percent of your current marketing activities. They're basically just a waste of time, because you're having the same conversation again and again with the same thousand people who are engaged with you. Your list is about 940 people, and about 130 of them are alumni and your coaches.</p>
+
+  <h3>Top of funnel: the trifecta</h3>
+  <ul>
+    <li><strong>A paid-traffic front end.</strong> A simple lead magnet with a steady ad budget behind it. Very easy to set up. You wrote that you'd like to "run effective ads," and that "All my marketing to date has been organic. I've never really done ads because I think it feels like my income hasn't been stable enough."</li>
+    <li><strong>Speaking.</strong> You have a talk with the National Association of Women Lawyers coming up, and you've spoken for the New York City Bar, the DC Bar, the Beverly Hills Bar and more. You wrote that you don't think speaking is "a great way for me to get a lot of clients, but it does increase my visibility, and I have gotten some clients through it." Visibility is the job here. Along with guest podcasting and the Law Mamas collaboration, it's what has actually put you in front of new people.</li>
+    <li><strong>Guest podcasting.</strong> There are a lot of legal podcasts now and you've been on a bunch. You stopped because there's no system and, in your words, "Follow-up and follow-through are one of my real weaknesses." Podcast discoverability is virtually zero unless you get on other people's shows, so this is where the podcast work turns into reach. Both need a solid pipeline and workflow.</li>
+  </ul>
+  <p>This is why I really like a paid-traffic lead magnet for you. It runs in the background on autopilot for the most part, and it becomes the steady foundation that brings in new leads every single day. That makes your emails, calls and live events far more powerful. With that foundation underneath you, you don't have to be militantly consistent with your emails and live events. You're not using them for reach. You're using them to nurture the people already in the door. Consistency and Discipline sit at the bottom of your list. This is why that's fine. Your middle of funnel gets to be as creative as you want.</p>
+  <p>Speaking and guest podcasting both fit how you're built. Woo is in your top five. And as a 6/2 in Human Design, you do your best work when you're invited in. A stage and a guest seat are both invitations.</p>
+
+  <h3>Middle of funnel: emails like love letters</h3>
+  <p>You wrote: "I'm also really, really proud that I publish weekly and I have published consistently for almost 10 years." You should be. I just want to change what you're writing. Right now the newsletter "takes a good chunk of my time each week," and in your words it "doesn't convert all that well in terms of click-throughs and people purchasing."</p>
+  <p>One email a week is fairly low. I'd move to three to five. But not newsletters. Love letters to your ideal clients. It's how WILL started, with those love letters on Cape Cod. Quick thoughts, perspectives, stories, stream of consciousness, written in ten minutes.</p>
+  <p>My sense is you're seeing email a bit too much like a corporation would. Right now it's a template Christina sets up, with set sections (a personal message, news, the WILL Win of the Week, the podcast), drafted Monday or Tuesday for a Friday send. I'd treat it as frequent touchpoints that build connection, intimacy, desire and trust, and help her feel seen, heard and understood. Then give her a regular invitation to take a next step: book a call, or come to a live event. You wrote that you're "constantly finding mistakes that my team has not caught." I don't think you need your team for this. Go into your CRM, write, and send. Every email is just you writing to a friend.</p>
+
+  <h3>Middle of funnel: live experiences</h3>
+  <p>You wrote that building community and running group calls is "one of my favorite things to do," and "I have fun on the Sunday Sprint calls. I have fun when I'm leading workshops." Connectedness and Woo are two of your top five, so this part plays to what you already love. My guess is that ramping up live experiences, alongside solving top of funnel, is the best path to more sales opportunities.</p>
+
+  <h3>Bottom of funnel: the conversation</h3>
+  <ul>
+    <li><strong>Record your calls.</strong> Your sales call process looks fine. But one or two in ten is significantly lower than I'd like, and I need more information to diagnose it. It could be broader market shifts. It could be energetic or mindset, and you named that yourself: "my mindset and my energy are hugely important variables in this." It could be something missing in the process. I understand the sensitivity with clients. But recording with an AI note-taker is the single best way I've found to see what's going on. Give me transcripts from even a few calls, and we'll spend a session diving into them together.</li>
+    <li><strong>Follow up inside the window.</strong> In my own business's data, about 90 percent or more of buyers close within 14 days of a sales call. When women leave a call needing "time to think about it," you wrote, they "rarely convert after that." There's still opportunity in long-term follow-up with past buyers, even low-ticket ones. But following up long-term with people who haven't bought after the first 30 days has generally been wasted time. That's not to say we abandon the reactivation sprint. We just right-size it to focus on quality opportunities.</li>
+  </ul>
+</section>
+
+<!-- ===================== 8. SYSTEMS & OPERATIONS ===================== -->
+<section class="section">
+  <div class="sechead">
+    <div class="sec-num">Section 08</div>
+    <h2>Systems &amp; operations</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">You and an OBM (online business manager) or a higher-level VA is more than enough. And a short list of tools.</p>
+  </div>
+
+  <h3>The team</h3>
+  <p>Your team is absolutely massive for the business you're running. In your words: "I think there's some confusion around who's doing what," and with Janelle's team, "the execution is patchy." I think a lot of the complexity in your marketing is a symptom of that: too many people doing too many different things that aren't actually producing results.</p>
+  <p>We likely need to cut 80 percent of this team. The amount of bloat on this team is crazy for a business your size. I don't mean to be so direct, and I can appreciate that you might have resistance around this. On our sales call you said it yourself: "I could scale back my team." And: "I don't think I want to be creating a half a million dollar a year business." You also wrote that you're "very hesitant to let Christina go." I hear that. You'll take your 24 to 48 hours on this before anything gets locked in. That's your emotional authority, and we build around it.</p>
+
+  <h3>The tools</h3>
+  <p>You moved to Funnel Gorgeous because your stack was costing about $8,000 a year, and you're still paying for Teachable, ActiveCampaign and Acuity. Streamlining and consolidating the back end is likely something you can hire someone on Upwork for as a one-off project: run through all of it and consolidate down your tools.</p>
+  <p>You wrote: "I'd love to simplify my systems." A lean team and a select set of tools is how we get there.</p>
+</section>
+
+<!-- ===================== 9. 90-DAY PLAN ===================== -->
+<section class="section break">
+  <div class="sechead">
+    <div class="sec-num">Section 09</div>
+    <h2>Your 90-day action plan</h2>
+    <div class="h2-rule"></div>
+    <p class="lead">Elimination first. Then the front end. Then the offers. That order matters. The connection call, the emails and the live events can slide earlier or later, and we'll place them together, with room for the "periods of rest and creation" you told me you need. What you're not doing matters just as much: no broadening the niche, no SEO or GEO, no counting on LinkedIn, Facebook or YouTube for reach, no team-written newsletter, no back-end rabbit holes.</p>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 1–30</span>
+      <span class="ttl">Cut the fat and free up cash</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Bring the P&amp;L to our first call on Tuesday.</strong> Last month's revenue and expenses, itemized line by line, software included. We go through every line together, along with every marketing activity that isn't working, and cut what doesn't need to be there. Tool consolidation can go to a one-off Upwork hire.</li>
+        <li><strong>Decide the team, together.</strong> With the numbers in front of us. I think we likely need to cut 80 percent, down to you plus an OBM or higher-level VA. I know there's resistance here, and you'll sleep on it before anything is locked in.</li>
+        <li><strong>Walk through WILL Transform once.</strong> A small side note, not a project. You wrote that you "really need to dedicate 3 hours and just do that so that I feel more confident in the delivery." That's the whole job.</li>
+        <li><strong>Run the reactivation sprint.</strong> We design it together on one of our first calls, then you run it: AI-assisted outreach to past clients and high-intent leads who didn't buy, with an offer that opens the door back up. The cash goes into top of funnel spend.</li>
+        <li><strong>Start recording your sales calls.</strong> Keep the AI note-taker on, save the full transcript, and send me the first few. Then we look at them together.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 31–60</span>
+      <span class="ttl">Build the front end</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Launch the paid lead magnet.</strong> We choose the magnet together on a call, then turn on paid traffic behind it, funded by the reactivation cash.</li>
+        <li><strong>Build the speaking and guest podcasting pipeline.</strong> Regular speaking engagements and guest podcast appearances, with a solid pipeline and workflow behind them. We shape it together on a call.</li>
+        <li><strong>Open the door to a conversation.</strong> Replace the long questionnaire and the hour-long call with a 15-to-20-minute connection call. Value-focused framing, minimal qualification, and a clear path to the part-two conversation.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="phase">
+    <div class="phase-head">
+      <span class="tag">Days 61–90</span>
+      <span class="ttl">Simplify the offers and ramp up live events</span>
+    </div>
+    <div class="phase-body">
+      <ol>
+        <li><strong>Simplify the offer suite.</strong> My suggestion is one core one-to-one offer on the WILL Transform curriculum, one downsell around $2,000, and sub-$100 entry experiences. We explore it together and go through Evolve, the masterminds, the retreats and the Sunday Sprint. You sleep on it before we lock it in.</li>
+        <li><strong>Ramp up live experiences.</strong> Run them more often than you do now, sub-$100 and built around whatever feels alive for you. We shape the first one together on a call. Invite your list and your new leads.</li>
+        <li><strong>Write to her like a friend.</strong> Three to five short emails a week, written by you, regularly inviting her to book a call or come to a live event. Not a newsletter, and not a schedule to grind through. Love letters, the way WILL started on Cape Cod, each written in ten minutes.</li>
+      </ol>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ===================== CLOSING ===================== -->
+<section class="closing">
+  <div class="sechead">
+    <div class="note-head">Before you go</div>
+    <h2>One last thing</h2>
+    <div class="h2-rule"></div>
+  </div>
+  <p>This is a starting point for us, not a set of rules. In short, what I see is very simple. About 60 to 70 percent of what's here doesn't need to be here. One, we cut the fat: expenses, team, and marketing that isn't moving the needle, and then the offers. Two, a reliable top of funnel that brings far more of the right people in the door. Three, an evolving set of nurture, regular emails and live events, that turns them into sales opportunities. Four, a lower-barrier way into your sales process, so you have more conversations.</p>
+  <p>It's about removing complexity, getting back to what works, and building this business in a way that's aligned with your strengths and what you do best. All of it in service of a business that feels like a joy to run again.</p>
+  <p>You've built something incredible. You've helped so many women. This business is doing meaningful, important work in the world, and it's one of the hardest things ever to build a business that creates that kind of impact. What we're doing now is building off of the good you've already created. You said it on our sales call: "I've got, like, all these raw materials, like, to build it with." You do. Lots of Legos.</p>
+  <p>Write down your questions, your notes, your thoughts, and anything that didn't land. Bring all of it to our first call on Tuesday. We'll refine, we'll tweak, and we'll optimize together.</p>
+  <p>This is the work. I'm excited to do it with you.</p>
+  <div class="sign">— Jason
+  <span>Telegram @jasonmossofficial &nbsp;·&nbsp; jason@jasonmoss.com</span>
+  </div>
+</section>
+
+</body>
+</html>
