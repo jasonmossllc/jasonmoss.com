@@ -151,9 +151,9 @@
 /* tall/portrait large screens (e.g. iPad Pro upright): stack like phones, photo on top */
 @media (min-width:901px) and (max-aspect-ratio:1/1){
   .hero{background:#201C17}
-  .hero-bg{bottom:auto;height:46vh;background-position:66% 80%}
-  .hero-shade{bottom:auto;height:46vh;background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 22%,rgba(32,28,23,0) 60%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
-  .hero-body{align-items:flex-end;padding-top:40vh}
+  .hero-bg{bottom:auto;height:max(60vw,46vh);background-size:auto max(76vw,calc(46vh + 16vw));background-position:64% 100%}
+  .hero-shade{bottom:auto;height:calc(max(60vw,46vh) + 1px);background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 22%,rgba(32,28,23,0) 60%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
+  .hero-body{align-items:flex-end;padding-top:calc(max(60vw,46vh) - 90px)}
   .hero-copy{max-width:min(640px,80vw)}
   .hero-copy .h1{font-size:clamp(36px,6vw,64px)}
 }
@@ -168,9 +168,9 @@
 }
 @media (max-width:900px){
   .hero{min-height:0;background:#201C17}
-  .hero-bg{bottom:auto;height:500px;background-position:64% 35%}
-  .hero-shade{bottom:auto;height:500px;background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 25%,rgba(32,28,23,0) 50%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
-  .hero-body{align-items:flex-end;padding:400px 22px 28px}
+  .hero-bg{bottom:auto;height:430px;background-size:auto 520px;background-position:66% 100%}
+  .hero-shade{bottom:auto;height:430px;background:linear-gradient(180deg,rgba(32,28,23,.45) 0,rgba(32,28,23,0) 25%,rgba(32,28,23,0) 50%,#201C17 100%),radial-gradient(ellipse 80% 55% at 75% 10%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
+  .hero-body{align-items:flex-end;padding:330px 22px 28px}
   .hero-copy .h1{font-size:44px}
   .hero-ctas{gap:18px}
   .hero-press{padding:20px 22px 32px;flex-direction:column;gap:16px}
@@ -189,9 +189,9 @@
   .method-grid,.story{gap:64px}
 }
 @media (min-width:601px) and (max-width:900px){
-  .hero-bg,.hero-shade{height:68vw!important}
-  .hero-bg{background-position:62% 72%!important}
-  .hero-body{padding-top:calc(68vw - 90px)!important}
+  .hero-bg{height:60vw!important;background-size:auto 76vw;background-position:62% 100%!important}
+  .hero-shade{height:calc(60vw + 1px)!important}
+  .hero-body{padding-top:calc(60vw - 90px)!important}
   .proof,.paths{grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
   .proof .pc-body,.path-body{padding:22px 20px 24px}
   .pc-body .quote{font-size:17px}
