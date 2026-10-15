@@ -22,6 +22,10 @@
 .bg-tex-forest-soft{background-color:#2C3F36;background-image:linear-gradient(180deg,rgba(44,63,54,0.45),rgba(44,63,54,0.55)),url(/assets/textures/paper-forest.jpg);background-size:auto,cover;background-repeat:no-repeat,no-repeat;background-position:0 0,center}
 @media (max-width:700px){.bg-tex-forest-soft{background-image:linear-gradient(180deg,rgba(44,63,54,0.45),rgba(44,63,54,0.55)),url(/assets/textures/tile-forest.jpg);background-size:auto,520px 520px;background-repeat:no-repeat,repeat;background-position:0 0,0 0}}
 
+/* tall sections: tile the paper at native size instead of stretching one image (avoids blur) */
+.tex-tile.bg-tex-sand-soft{background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.5),rgba(248,246,242,0.6)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,720px 720px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
+.tex-tile.bg-tex-stone-soft{background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(233,226,211,0.52),rgba(233,226,211,0.62)),url(/assets/textures/tile-warm.jpg);background-size:256px 256px,auto,720px 720px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
+.tex-tile.bg-tex-forest-soft{background-image:linear-gradient(180deg,rgba(44,63,54,0.45),rgba(44,63,54,0.55)),url(/assets/textures/tile-forest.jpg);background-size:auto,720px 720px;background-repeat:no-repeat,repeat;background-position:0 0,0 0}
 /* shared bits */
 .jm .section{padding:112px 0}
 .lp-center{text-align:center}
@@ -361,7 +365,7 @@
 </section>
 
 <!-- PROOF -->
-<section class="bg-tex-stone-soft section paper">
+<section class="tex-tile bg-tex-stone-soft section paper">
   <div class="wrap">
     <div class="lp-head">
       <div class="eyebrow center">Client results</div>
@@ -386,7 +390,7 @@
 </section>
 
 <!-- INSIDE -->
-<section class="bg-tex-sand-soft section paper">
+<section class="tex-tile bg-tex-sand-soft section paper">
   <div class="wrap">
     <div class="lp-inside-grid">
       <div class="frame lp-cover-wrap"><img class="lp-cover" src="assets/images/photo-jason-dock@2x.jpg" width="940" height="498" loading="lazy" decoding="async" alt="Launchpad course cover featuring Jason Moss"></div>
@@ -408,7 +412,7 @@
 </section>
 
 <!-- OFFER + GUARANTEE -->
-<section class="bg-tex-forest-soft section on-dark paper" id="enroll">
+<section class="tex-tile bg-tex-forest-soft section on-dark paper" id="enroll">
   <div class="wrap">
     <div class="lp-head">
       <div class="eyebrow center">Join Launchpad</div>
@@ -440,7 +444,7 @@
 </section>
 
 <!-- WALL -->
-<section class="bg-tex-stone-soft section paper">
+<section class="tex-tile bg-tex-stone-soft section paper">
   <div class="wrap">
     <div class="lp-head" style="margin-bottom:24px">
       <div class="eyebrow center">In their words</div>
@@ -453,7 +457,7 @@
 </section>
 
 <!-- FAQ -->
-<section class="bg-tex-sand-soft section paper">
+<section class="tex-tile bg-tex-sand-soft section paper">
   <div class="wrap-narrow">
     <div class="lp-head" style="margin-bottom:48px">
       <div class="eyebrow center">Questions</div>
