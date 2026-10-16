@@ -34,12 +34,18 @@
 <link rel="stylesheet" href="/css/site.css">
 <style>
 
-.legal-hero{padding:96px 0 56px}
-.legal-hero .wrap-narrow{display:flex;flex-direction:column;gap:20px;max-width:872px}
+.legal-hero{padding:96px 0 64px}
+.legal-hero .wrap-narrow{display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center}
 .legal-hero .h1{font-size:clamp(38px,4.4vw,60px)}
-.legal-body{background:var(--sand);padding:72px 0 128px}
-.legal{max-width:872px;margin:0 auto;padding:0 56px;color:var(--ink-soft);font-size:17px;line-height:1.85}
+.legal-nav{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 32px;margin-top:6px;font-size:12px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--taupe)}
+.legal-nav a{padding:8px 0}
+.legal-nav a:hover{color:var(--brass)}
+.legal-nav a[aria-current]{color:var(--obs);box-shadow:inset 0 -1px 0 var(--gold)}
+.legal-body{padding:0 56px 128px}
+.legal{max-width:920px;margin:0 auto;padding:80px 88px 88px;position:relative;background:#FBFAF7;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(91,75,63,.35);color:var(--ink-soft);font-size:17px;line-height:1.85}
+.legal::before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;height:2px;background:var(--gold)}
 .legal>p:first-child{margin-top:0}
+.legal>:last-child{margin-bottom:0}
 .legal p{margin:0 0 20px}
 .legal h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:26px;line-height:1.3;color:var(--obs);margin:60px 0 18px;padding-top:28px;border-top:1px solid var(--line)}
 .legal h3{font-family:'Raleway',sans-serif;font-weight:600;font-size:18px;color:var(--obs);margin:32px 0 10px}
@@ -50,14 +56,13 @@
 .legal a{color:var(--brass);text-decoration:underline;text-decoration-color:rgba(117,90,38,.35);text-underline-offset:3px}
 .legal a:hover{text-decoration-color:currentColor}
 @media (max-width:900px){
-  .legal-hero{padding:56px 0 36px}
-  .legal-body{padding:48px 0 88px}
-  .legal{padding:0 22px;font-size:16px}
+  .legal-hero{padding:56px 0 40px}
+  .legal-body{padding:0 14px 88px}
+  .legal{padding:48px 24px 56px;font-size:16px}
   .legal h2{font-size:22px;margin:44px 0 14px;padding-top:22px}
 }
 
-.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/paper-pale.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
-@media (max-width:700px){.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
+.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
 </style>
 </head>
 <body>
@@ -69,11 +74,12 @@
   <nav aria-label="Mobile"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply">Work together</a></nav>
 </div>
 
-<main id="main">
-<section class="legal-hero bg-tex-sand paper">
+<main id="main" class="bg-tex-sand">
+<section class="legal-hero">
   <div class="wrap-narrow">
-    <div class="eyebrow">Legal</div>
+    <div class="eyebrow center">Legal</div>
     <h1 class="h1">Terms and Conditions</h1>
+    <nav class="legal-nav" aria-label="Legal"><a href="/privacy/">Privacy policy</a><a href="/terms/" aria-current="page">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav>
   </div>
 </section>
 <section class="legal-body">

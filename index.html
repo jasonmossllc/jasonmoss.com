@@ -135,10 +135,9 @@
 .closer{position:relative;padding:180px 0;text-align:center;color:var(--sand);background-size:cover;background-position:center}
 .closer::before{content:"";position:absolute;inset:0;background:url(/assets/textures/grain-dark-soft.png) 0 0/256px 256px repeat,linear-gradient(180deg,rgba(16,30,22,.48),rgba(16,30,22,.58))}
 /* same plaster + grain as the other green sections, laid softly over the forest photo */
-.closer::after{content:"";position:absolute;inset:0;pointer-events:none;background:url(/assets/textures/detail-forest.jpg) center/cover no-repeat;mix-blend-mode:soft-light;opacity:.6}
+.closer::after{content:"";position:absolute;inset:0;pointer-events:none;background:url(/assets/textures/detail-forest-tile.jpg) 0 0/520px 520px repeat;mix-blend-mode:soft-light;opacity:.6}
 .closer{background-blend-mode:normal}
 .closer .inner::before{content:none}
-@media (max-width:700px){.closer::after{background:url(/assets/textures/detail-forest-tile.jpg) 0 0/520px 520px repeat}}
 .closer .inner{position:relative;z-index:1;display:flex;flex-direction:column;align-items:center;gap:32px}
 @media (min-width:901px){
   .hero .hdr,.hero-body,.hero-press{max-width:none;padding-left:clamp(56px,7vw,220px);padding-right:clamp(56px,7vw,220px)}
@@ -202,10 +201,8 @@
   .hero-copy .h1{font-size:36px}
   .recog .big{font-size:26px}
 }
-.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/paper-pale.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
-@media (max-width:700px){.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
-.bg-tex-forest{background-color:#2C3F36;background-image:url(/assets/textures/grain-dark-soft.png),linear-gradient(180deg,rgba(44,63,54,0.25),rgba(44,63,54,0.35)),url(/assets/textures/paper-forest.jpg);background-size:256px 256px,auto,cover;background-repeat:repeat,no-repeat,no-repeat;background-position:0 0,0 0,center}
-@media (max-width:700px){.bg-tex-forest{background-color:#2C3F36;background-image:url(/assets/textures/grain-dark-soft.png),linear-gradient(180deg,rgba(44,63,54,0.25),rgba(44,63,54,0.35)),url(/assets/textures/tile-forest.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}}
+.bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
+.bg-tex-forest{background-color:#2C3F36;background-image:url(/assets/textures/grain-dark-soft.png),linear-gradient(180deg,rgba(44,63,54,0.25),rgba(44,63,54,0.35)),url(/assets/textures/tile-forest.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
 .bg-forest-bg{background-image:url(/assets/images/graded/forest-bg.jpg)}
 </style>
 </head>
