@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>You're Booked — Jason Moss</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+<style>
+.cb-top{display:flex;padding:0 0 48px}
+.cb-top a{display:inline-block;padding:9px 0;margin:-9px 0}
+.cb-top img{height:30px;width:auto}
+.cb-hero{padding:40px 0 96px}
+.cb-grid{display:grid;grid-template-columns:7fr 5fr;gap:80px;align-items:center}
+.cb-copy{display:flex;flex-direction:column;gap:24px}
+.cb-copy .h1{font-size:52px;line-height:1.12}
+.cb-copy .lede{text-wrap:pretty}
+.cb-photo{aspect-ratio:4/5;object-fit:cover;width:100%;height:auto;object-position:14% 50%;box-shadow:0 24px 48px -28px rgba(91,75,63,.32);outline:1px solid rgba(91,75,63,.10);outline-offset:-1px}
+.nw{white-space:nowrap}
+
+/* The booking itself: a ticket with real weight, gold rule on top */
+.ticket{position:relative;background:#FBFAF7;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(91,75,63,.35);padding:40px 44px 36px;margin-top:6px}
+.ticket::before{content:"";position:absolute;left:0;top:0;width:100%;height:2px;background:var(--gold)}
+.ticket .when{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.ticket .date{font-family:'Libre Baskerville',serif;font-size:32px;line-height:1.25;color:var(--obs);margin-top:10px}
+.ticket .time{font-size:19px;color:var(--ink);margin-top:6px}
+.ticket .actions{margin-top:26px;display:flex;flex-direction:column;gap:16px;align-items:flex-start}
+.ticket .meta{display:flex;align-items:center;gap:12px;margin-top:26px;padding-top:20px;border-top:1px solid var(--line);font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+.ticket .meta>span{text-wrap:balance}
+.ticket .meta img{width:34px;height:34px;border-radius:50%;object-fit:cover;flex-shrink:0;border:1px solid var(--gold)}
+.ticket .fine{font-size:14px;color:var(--taupe);line-height:1.6;text-wrap:pretty}
+.ticket>.fine{margin-top:14px}
+.ticket .fine a{color:var(--mocha);text-decoration:underline;text-decoration-color:rgba(91,75,63,.35);text-underline-offset:3px;padding:14px 0}
+.ticket .fine a:hover{text-decoration-color:var(--mocha)}
+.ticket.generic .date{font-size:26px;text-wrap:balance}
+/* Raleway defaults to old-style figures; the booking data reads cleaner in lining ones */
+.ticket .when,.ticket .time,.ticket .meta,.ticket .fine,.cb-when,.addcal-menu,.addcal-done{font-variant-numeric:lining-nums}
+
+/* Add to calendar */
+.addcal{position:relative;display:inline-block}
+.addcal:empty{display:none}
+.addcal .btn svg:last-child{transition:transform .25s ease}
+.addcal.open .btn svg:last-child{transform:rotate(180deg)}
+.addcal-menu{position:absolute;left:0;top:calc(100% + 8px);min-width:100%;width:290px;background:#fff;border:1px solid var(--line);box-shadow:0 24px 48px -20px rgba(29,31,30,.35);z-index:20;padding:6px 0;text-align:left}
+.addcal-menu[hidden]{display:none}
+.addcal-menu a{display:flex;align-items:center;gap:14px;padding:14px 20px;font-size:15px;font-weight:500;color:var(--ink);letter-spacing:0;text-transform:none}
+.addcal-menu a:hover{background:rgba(233,226,211,.5);color:var(--obs)}
+.addcal-menu a:focus-visible{background:rgba(233,226,211,.5);color:var(--obs);outline:2px solid var(--gold);outline-offset:-2px}
+.addcal-menu a span{font-size:12.5px;color:var(--taupe);margin-left:auto}
+.addcal-menu a b,.addcal-menu a span{white-space:nowrap}
+.addcal-done{display:none;align-items:flex-start;gap:10px;font-size:14.5px;line-height:1.55;color:var(--forest)}
+.addcal-done.on{display:flex}
+.addcal-done::before{content:"";width:14px;height:14px;margin-top:4px;flex-shrink:0;background:var(--gold);-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12.5l5 5L20 6.5'/%3E%3C/svg%3E") center/contain no-repeat}
+
+/* Letter */
+.letter-sec{padding-top:150px}
+.letter{max-width:760px;margin:0 auto;background:#FBFAF7;border:1px solid var(--line);box-shadow:0 30px 60px -30px rgba(91,75,63,.35);padding:80px 88px;position:relative;font-family:'Libre Baskerville',serif;font-size:17px;line-height:1.85;color:#3A3633}
+.letter::before{content:"";position:absolute;left:0;top:0;width:100%;height:2px;background:var(--gold)}
+.letter .hs{width:84px;height:84px;border-radius:50%;object-fit:cover;position:absolute;top:-42px;left:88px;border:3px solid #FBFAF7;box-shadow:0 0 0 1px var(--gold)}
+.letter .h2{font-size:32px;margin-bottom:28px;text-wrap:balance}
+.letter p+p{margin-top:20px}
+.letter p,.letter li{text-wrap:pretty}
+@media (min-width:601px){.letter li{text-wrap:balance}}
+.letter ul{list-style:none;padding:0;margin:20px 0;display:flex;flex-direction:column;gap:10px}
+.letter li{display:grid;grid-template-columns:28px 1fr}
+.letter li::before{content:"✓";color:var(--gold)}
+.said{margin:8px 0 36px;padding:26px 30px;background:rgba(233,226,211,.45);border-left:2px solid var(--gold)}
+.said .lbl{font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass)}
+.said blockquote{margin:12px 0 0;font-style:italic;font-size:19px;line-height:1.6;color:var(--obs);overflow-wrap:anywhere;text-indent:-.42em}
+.said .after{margin-top:14px;font-size:16px;color:var(--ink-soft)}
+.prep{margin-top:44px;padding-top:36px;border-top:1px solid var(--line)}
+.prep h3{font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin:0 0 18px}
+.prep ul{counter-reset:prep}
+.prep li{counter-increment:prep;align-items:baseline}
+.prep li::before{content:counter(prep,decimal-leading-zero);font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;font-variant-numeric:lining-nums;color:var(--brass)}
+.sig{font-family:'Caveat',cursive;font-size:36px;color:var(--mocha);margin-top:32px;line-height:1}
+
+/* Testimonial wall */
+.wall{padding:130px 0 120px}
+.wall-intro{display:flex;flex-direction:column;align-items:center;gap:18px;text-align:center;margin-bottom:56px}
+.wall-intro .h2{max-width:860px;text-wrap:balance}
+.wall-intro .lede{max-width:560px}
+.jm-testimonials{font-variant-numeric:lining-nums}
+
+/* Close */
+.cb-close{padding:120px 0}
+.cb-close .wrap{display:flex;flex-direction:column;align-items:center;gap:26px;text-align:center}
+.cb-when{font-size:15px;font-weight:500;letter-spacing:.04em;color:var(--sand);margin-top:-8px}
+.cb-when span{white-space:nowrap}
+.cb-note{max-width:560px;color:rgba(248,246,242,.78);text-wrap:balance}
+.cb-close .js-addcal{margin-top:8px}
+.cb-close .addcal-menu{left:50%;transform:translateX(-50%);top:auto;bottom:calc(100% + 8px)}
+.cb-close .addcal .btn svg:last-child{transform:rotate(180deg)}
+.cb-close .addcal.open .btn svg:last-child{transform:none}
+.cb-close .addcal-done{color:var(--gold);max-width:460px;text-wrap:balance}
+.cb-close .addcal-done.on{display:block}
+.cb-close .addcal-done::before{display:inline-block;vertical-align:-1px;margin:0 10px 0 0}
+
+/* States */
+[data-show]{display:none}
+body.s-active [data-show~="active"],body.s-generic [data-show~="generic"],body.s-canceled [data-show~="canceled"],body.s-past [data-show~="past"]{display:revert}
+
+/* Textured section backgrounds (same recipe as /apply/) */
+.bg-tex-sand-soft{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.5),rgba(248,246,242,0.6)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
+.bg-tex-stone-soft{background-color:#E9E2D3;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(233,226,211,0.52),rgba(233,226,211,0.62)),url(/assets/textures/tile-warm.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
+.bg-tex-forest-soft{background-color:#2C3F36;background-image:linear-gradient(180deg,rgba(44,63,54,0.45),rgba(44,63,54,0.55)),url(/assets/textures/tile-forest.jpg);background-size:auto,520px 520px;background-repeat:no-repeat,repeat;background-position:0 0,0 0}
+body{background:var(--obs)}
+.testbar{background:#1D1F1E;color:#F8F6F2;font:500 13px/1.5 'Raleway',sans-serif;padding:10px 22px;text-align:center}
+.testbar a{color:var(--gold);margin:0 6px;border-bottom:1px solid rgba(194,168,108,.5)}
+
+/* Laptops: keep the calendar button above the fold */
+@media (min-width:901px) and (max-width:1180px){
+  .cb-grid{gap:56px}
+  .cb-copy .h1{font-size:50px}
+  .ticket{padding:34px 36px 30px}
+}
+@media (min-width:901px) and (max-height:760px){
+  .cb-hero{padding-top:28px}
+  .cb-top{padding-bottom:32px}
+  .cb-copy .h1{font-size:50px}
+}
+@media (max-width:900px){
+  .cb-hero{padding:24px 0 72px}
+  .cb-top{padding:0 0 32px}
+  .cb-grid{grid-template-columns:1fr;gap:0}
+  .cb-grid .frame{display:none}
+  .cb-copy{gap:20px}
+  .cb-copy .h1{font-size:clamp(32px,9vw,40px)}
+  .ticket{padding:32px 24px 28px}
+  .ticket .date{font-size:26px}
+  .ticket .time{font-size:17px}
+  .ticket .actions{align-items:stretch}
+  .addcal{display:block}
+  .addcal-menu{width:100%}
+  .letter-sec{padding-top:96px}
+  .letter{padding:72px 24px 40px;font-size:16px}
+  .letter .hs{left:24px}
+  .said{padding:22px 20px}
+  .said blockquote{font-size:17px}
+  .wall{padding:88px 0 80px}
+  .cb-close{padding:80px 0}
+  .ftr-base nav a{display:inline-block;padding:10px 4px}
+  /* Cancelled / past: keep the framed portrait so the page isn't bare */
+  body.s-canceled .cb-grid .frame,body.s-past .cb-grid .frame{display:block;margin-top:44px}
+  body.s-canceled .cb-photo,body.s-past .cb-photo{aspect-ratio:4/3;object-position:14% 45%}
+}
+/* Tablet portrait: a composed card, not the phone layout stretched wide */
+@media (min-width:601px) and (max-width:900px){
+  .cb-top,.cb-grid{max-width:680px;margin-left:auto;margin-right:auto}
+  .cb-copy .h1{font-size:48px}
+  .ticket{max-width:none;padding:40px 44px 34px}
+  .ticket .date{font-size:30px}
+  .ticket .fine{max-width:520px}
+  .ticket .actions{align-items:flex-start}
+  .addcal{display:inline-block}
+  .addcal .btn,.cb-copy .btn{width:auto}
+  .addcal-menu{width:300px}
+  .letter{max-width:680px;padding:76px 60px 52px}
+  .letter .hs{left:60px}
+  .said{padding:24px 28px}
+}
+@media (max-width:600px){
+  .cb-hero{padding:18px 0 56px}
+  .cb-top{padding:0 0 24px}
+  .cb-top img{height:26px}
+  .cb-copy{gap:16px}
+  .cb-copy .h1{font-size:clamp(32px,10vw,40px)}
+  .ticket{padding:28px 22px 24px}
+  .ticket .actions{margin-top:22px}
+  .ticket .meta{margin-top:20px;padding-top:18px;font-size:14px}
+  .ticket .meta .sep{display:none}
+  .ticket .meta .nw{display:block}
+  .ticket.generic .date{font-size:22px;line-height:1.35}
+  .addcal .btn{white-space:nowrap;padding-left:20px;padding-right:20px;letter-spacing:.1em}
+  .letter{line-height:1.75;padding-bottom:52px}
+  .letter .h2{font-size:26px;margin-bottom:22px}
+  .letter p+p{margin-top:18px}
+  .said{margin-left:-24px;margin-right:-24px;padding:22px 24px 22px 22px}
+  .said blockquote{text-wrap:pretty}
+  .wall{padding:80px 0 72px}
+  .wall-intro{margin-bottom:36px;gap:14px}
+}
+@media (max-width:340px){
+  .addcal .btn{gap:8px;letter-spacing:.04em;padding-left:12px;padding-right:12px}
+  .addcal-menu a{padding:14px 16px;gap:10px}
+}
+</style>
+</head>
+<body class="s-generic">
+<div id="testbar" hidden></div>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<div class="jm">
+<main id="main">
+
+<section class="bg-tex-sand-soft cb-hero paper">
+  <div class="wrap">
+    <div class="cb-top"><a href="/" aria-label="Jason Moss home"><img src="/assets/images/logo.svg" alt="Jason Moss" width="140" height="31"></a></div>
+    <div class="cb-grid">
+      <div class="cb-copy">
+
+        <div data-show="active generic">
+          <div class="eyebrow">Business assessment call</div>
+        </div>
+        <h1 class="h1" data-show="active generic"><span class="nw">You’re booked</span><span class="js-name"></span>.</h1>
+        <p class="lede" data-show="active">Last step… <strong>add it to your calendar now.</strong></p>
+        <p class="lede" data-show="generic">Your confirmation email is on its way.</p>
+
+        <div class="ticket" data-show="active">
+          <div class="when js-when"></div>
+          <div class="date js-date"></div>
+          <div class="time js-time"></div>
+          <div class="actions">
+            <div class="addcal js-addcal"></div>
+            <div class="addcal-done js-done" role="status" aria-live="polite"></div>
+          </div>
+          <div class="meta"><img src="/qualify/jason.jpg" alt="" width="34" height="34"><span>20&nbsp;minutes&nbsp;· on&nbsp;Zoom<span class="sep">&nbsp;· </span><span class="nw">one-to-one with Jason</span></span></div>
+          <p class="fine">Your Zoom link is in your confirmation email<span class="js-zoomcal"> and goes into the calendar entry when you add it</span>.<span class="js-resched"> If something comes up, <a href="#" target="_blank" rel="noopener">reschedule</a> rather than skip.</span></p>
+        </div>
+
+        <div class="ticket generic" data-show="generic">
+          <div class="when">One last step</div>
+          <div class="date">Add the call to your calendar from that email.</div>
+          <p class="fine">It has your call time and Zoom link. Not there in a few minutes? Check your spam or promotions folder.</p>
+        </div>
+
+        <div data-show="canceled"><div class="eyebrow">Booking cancelled</div></div>
+        <h1 class="h1" data-show="canceled">This call was cancelled.</h1>
+        <p class="lede" data-show="canceled">If you’d still like to talk, you can book a new time. It starts with two quick questions.</p>
+        <div data-show="canceled"><a class="btn btn-gold" href="/apply/">Book a new time</a></div>
+
+        <div data-show="past"><div class="eyebrow">Business assessment call</div></div>
+        <h1 class="h1" data-show="past">The time for this call has passed.</h1>
+        <p class="lede" data-show="past">If you’d like another conversation, you can book a new time. It starts with two quick questions.</p>
+        <div data-show="past"><a class="btn btn-gold" href="/apply/">Book a new time</a></div>
+
+      </div>
+      <div class="frame"><img class="cb-photo" src="/assets/images/graded/lifestyle-3.jpg" alt="Jason Moss in the mountains" width="720" height="900"></div>
+    </div>
+  </div>
+</section>
+
+<section class="bg-tex-stone-soft section paper letter-sec" data-show="active generic">
+  <div class="wrap">
+    <div class="letter">
+      <img class="hs" src="/assets/images/graded/headshot.webp" alt="Jason Moss">
+      <h2 class="h2">Here’s what we’ll do with our 20 minutes.</h2>
+
+      <div class="said js-said" hidden>
+        <div class="lbl">You told me</div>
+        <blockquote class="js-challenge"></blockquote>
+        <p class="after">That’s where we’ll start.</p>
+      </div>
+
+      <p>I keep these calls simple.</p>
+      <p>We’ll look at where your business is right now… how clients find you, what’s working, and where it’s getting stuck.</p>
+      <p>Most of the people I talk to aren’t short on effort. They just can’t see what’s holding things back… they’re standing too <span class="nw">close to it.</span></p>
+      <p>That’s what this call is for. You’ll walk away with:</p>
+      <ul>
+        <li>A clear read on what’s really going on, and why</li>
+        <li><strong>The one shift that would bring more clients in the door</strong></li>
+        <li>A next step you can act on right away, whether or not we ever work together</li>
+      </ul>
+      <p>If it looks like I can help you beyond this call, I’ll tell you what that would involve… and you can decide from there.</p>
+
+      <div class="prep">
+        <h3>To get the most out of it</h3>
+        <ul>
+          <li>Join from somewhere quiet, with your camera on.</li>
+          <li>Be there a minute or two early. Twenty minutes goes quickly.</li>
+          <li>Know your rough monthly revenue, and where your clients come from.</li>
+          <li>Come honest. The more real you are with me, the more useful this will be.</li>
+        </ul>
+      </div>
+
+      <p class="sig">— Jason</p>
+    </div>
+  </div>
+</section>
+
+<section class="wall bg-tex-sand-soft paper" data-show="active generic">
+  <div class="wrap">
+    <div class="wall-intro">
+      <div class="eyebrow center">What clients have created</div>
+      <h2 class="h2">Almost every one of these started with <span class="brass-it">a&nbsp;simple conversation.</span></h2>
+      <p class="lede">Like the one you’re about to have.</p>
+      <p class="disclaimer">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
+    </div>
+    <!-- A fixed set (data-limit), so the wall neither loads forever past the closing section nor needs a Load more button.
+         11 ends the masonry nearly flat with the current wall order (12 drops a tall portrait video alone into the middle column). Re-check if the wall is reordered. -->
+    <div class="jm-testimonials" data-layout="grid" data-initial="11" data-limit="11"></div>
+  </div>
+</section>
+
+<section class="bg-tex-forest-soft cb-close on-dark paper" data-show="active generic">
+  <div class="wrap">
+    <div class="eyebrow center">Before you go</div>
+    <h2 class="h2">I’ll see you <span class="gold-it js-day">on the call</span>.</h2>
+    <p class="cb-when" data-show="active"><span class="js-time"></span></p>
+    <p class="cb-note" data-show="active">If it isn’t on your calendar yet, <span class="nw">add it now…</span> and protect the time.</p>
+    <p class="cb-note" data-show="generic">Add it to your calendar from your confirmation email… and protect the time.</p>
+    <div class="addcal js-addcal"></div>
+    <div class="addcal-done js-done" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+</main>
+<footer class="ftr ftr-min"><div class="wrap"><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"><div class="ftr-base"><span>&copy; Jason Moss LLC. All rights reserved. <span class="credit">Select photography by Kate Milford</span></span><nav aria-label="Legal"><a href="/privacy/">Privacy</a><a href="/terms/">Terms</a><a href="/earnings-disclaimer/">Earnings disclaimer</a></nav></div></div></footer>
+</div>
+
+<script>
+(function () {
+  var TITLE = 'Business Assessment Call with Jason Moss';
+  var FN = '/.netlify/functions/booking-details';
+  var qs = new URLSearchParams(location.search);
+  var E = qs.get('e') || '', I = qs.get('i') || '';
+  var PREVIEW = qs.get('preview');
+  var data = null;
+
+  var BASE_TITLE = document.title;
+
+  function $(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
+  function setState(s){
+    document.body.className = 's-' + s;
+    document.title = s === 'canceled' ? 'Booking Cancelled — Jason Moss' : s === 'past' ? 'Book a New Time — Jason Moss' : BASE_TITLE;
+  }
+
+  // ── Dates, in the invitee's own timezone ─────────────────────────────
+  function tzOf(d){ return d.timezone || undefined; }
+  function fmt(iso, tz, opts){
+    opts.timeZone = tz;
+    try { return new Intl.DateTimeFormat('en-US', opts).format(new Date(iso)); }
+    catch (e) { delete opts.timeZone; return new Intl.DateTimeFormat('en-US', opts).format(new Date(iso)); }
+  }
+  function dayKey(date, tz){ return fmt(date.toISOString(), tz, { year:'numeric', month:'2-digit', day:'2-digit' }); }
+  function relative(iso, tz){
+    var a = new Date(dayKey(new Date(), tz)), b = new Date(dayKey(new Date(iso), tz));
+    var days = Math.round((b - a) / 86400000);
+    if (days <= 0) return 'Today';
+    if (days === 1) return 'Tomorrow';
+    return 'In ' + days + ' days';
+  }
+  function timeRange(d){
+    var tz = tzOf(d);
+    var lower = function(t){ return t.replace(/\s?AM/i, ' am').replace(/\s?PM/i, ' pm'); };
+    var s = lower(fmt(d.start, tz, { hour:'numeric', minute:'2-digit' }));
+    var e = lower(fmt(d.end, tz, { hour:'numeric', minute:'2-digit', timeZoneName:'short' }));
+    // "10:00 – 10:20 am MDT", but keep both markers when the call straddles noon.
+    if (s.slice(-2) === e.split(' ')[1]) s = s.slice(0, -3);
+    return s + ' – ' + e;
+  }
+
+  // ── Calendar links ───────────────────────────────────────────────────
+  function utc(iso){ return new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+  function details(d){
+    return [
+      '20 minutes, one-to-one with Jason.',
+      'Join from somewhere quiet, with your camera on.',
+      d.join_url ? 'Join on Zoom: ' + d.join_url : 'Your Zoom link is in your confirmation email.',
+      d.reschedule_url ? 'Need a different time? ' + d.reschedule_url : ''
+    ].filter(Boolean).join('\n\n');
+  }
+  function links(d){
+    var loc = d.join_url || 'Zoom';
+    var google = 'https://calendar.google.com/calendar/render?action=TEMPLATE' +
+      '&text=' + encodeURIComponent(TITLE) +
+      '&dates=' + utc(d.start) + '/' + utc(d.end) +
+      '&details=' + encodeURIComponent(details(d)) +
+      '&location=' + encodeURIComponent(loc);
+    var outlook = 'https://outlook.live.com/calendar/0/deeplink/compose?path=%2Fcalendar%2Faction%2Fcompose&rru=addevent' +
+      '&subject=' + encodeURIComponent(TITLE) +
+      '&startdt=' + encodeURIComponent(new Date(d.start).toISOString()) +
+      '&enddt=' + encodeURIComponent(new Date(d.end).toISOString()) +
+      '&body=' + encodeURIComponent(details(d)) +
+      '&location=' + encodeURIComponent(loc);
+    var office = outlook.replace('https://outlook.live.com', 'https://outlook.office.com');
+    var ics = PREVIEW ? icsBlob(d) : FN + '?e=' + encodeURIComponent(E) + '&i=' + encodeURIComponent(I) + '&format=ics';
+    return [
+      { label:'Google Calendar', href:google, name:'Google Calendar', newTab:true },
+      { label:'Apple Calendar', href:ics, name:'Apple Calendar', hint:'iPhone, Mac', ics:true },
+      { label:'Outlook', href:ics, name:'Outlook', hint:'desktop app', ics:true },
+      { label:'Outlook.com', href:outlook, name:'Outlook.com', hint:'Hotmail, Live', newTab:true },
+      { label:'Office 365', href:office, name:'Office 365', hint:'work or school', newTab:true }
+    ];
+  }
+  // Preview only: the real .ics comes from the function so iOS opens it natively.
+  function icsBlob(d){
+    var esc = function(s){ return String(s).replace(/\\/g,'\\\\').replace(/;/g,'\\;').replace(/,/g,'\\,').replace(/\n/g,'\\n'); };
+    var body = ['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Jason Moss//Booking//EN','BEGIN:VEVENT',
+      'UID:preview@jasonmoss.com','DTSTAMP:' + utc(new Date().toISOString()),
+      'DTSTART:' + utc(d.start),'DTEND:' + utc(d.end),'SUMMARY:' + esc(TITLE),
+      'DESCRIPTION:' + esc(details(d)),'LOCATION:' + esc(d.join_url || 'Zoom'),
+      'END:VEVENT','END:VCALENDAR'].join('\r\n');
+    return URL.createObjectURL(new Blob([body], { type:'text/calendar' }));
+  }
+
+  var CAL_ICON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg>';
+  var CHEVRON = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
+  // iPhone and iPad (iPadOS reports as Macintosh with touch): Apple Calendar goes first.
+  var APPLE_TOUCH = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+  var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function mountAddCal(host, done, n){
+    var id = 'addcal-menu-' + n;
+    host.innerHTML =
+      '<button type="button" class="btn btn-gold" aria-haspopup="true" aria-expanded="false" aria-controls="' + id + '">' +
+        CAL_ICON + '<span>Add to my calendar</span>' + CHEVRON + '</button>' +
+      '<div class="addcal-menu" id="' + id + '" role="menu" hidden></div>';
+    var btn = host.querySelector('button'), menu = host.querySelector('.addcal-menu');
+    function close(){ menu.hidden = true; host.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+    function render(){
+      menu.innerHTML = '';
+      var list = links(data);
+      if (APPLE_TOUCH) list.sort(function(a, b){ return (b.label === 'Apple Calendar') - (a.label === 'Apple Calendar'); });
+      list.forEach(function(l){
+        var a = document.createElement('a');
+        a.href = l.href; a.setAttribute('role', 'menuitem');
+        if (l.newTab){ a.target = '_blank'; a.rel = 'noopener'; }
+        if (l.ics && PREVIEW) a.download = 'call-with-jason-moss.ics';
+        a.innerHTML = '<b style="font-weight:500"></b>' + (l.hint ? '<span></span>' : '');
+        a.querySelector('b').textContent = l.label;
+        if (l.hint) a.querySelector('span').textContent = l.hint;
+        a.addEventListener('click', function(){
+          close();
+          $('.js-done').forEach(function(el){
+            el.textContent = l.ics
+              ? 'Calendar file ready. Open it in ' + l.name + ' and save the event.'
+              : 'Opened in ' + l.name + '. Save it there and you’re set.';
+            el.classList.add('on');
+          });
+          try { (window.dataLayer = window.dataLayer || []).push({ event:'call_added_to_calendar', calendar:l.name }); } catch (e) {}
+        });
+        menu.appendChild(a);
+      });
+    }
+    btn.addEventListener('click', function(ev){
+      ev.stopPropagation();
+      if (!menu.hidden) return close();
+      render();
+      menu.hidden = false; host.classList.add('open'); btn.setAttribute('aria-expanded', 'true');
+      var first = menu.querySelector('a'); if (first) first.focus({ preventScroll:true });
+      // The menu can open past the fold (phones, short laptops): bring all of it into view, keeping the button on screen.
+      requestAnimationFrame(function(){
+        var r = menu.getBoundingClientRect(), b = btn.getBoundingClientRect(), vh = window.innerHeight, by = 0;
+        if (r.bottom > vh - 12) by = Math.min(r.bottom - vh + 16, b.top - 16);
+        else if (r.top < 12) by = Math.max(r.top - 16, b.bottom - vh + 16);
+        if (by) window.scrollBy({ top: by, behavior: REDUCED ? 'auto' : 'smooth' });
+      });
+    });
+    document.addEventListener('click', function(ev){ if (!host.contains(ev.target)) close(); });
+    // iOS Safari doesn't reliably fire click on non-interactive taps; pointerdown does.
+    document.addEventListener('pointerdown', function(ev){ if (!menu.hidden && !host.contains(ev.target)) close(); });
+    document.addEventListener('keydown', function(ev){
+      if (menu.hidden) return;
+      if (ev.key === 'Escape'){ close(); btn.focus(); return; }
+      var items = Array.prototype.slice.call(menu.querySelectorAll('a')), n = items.length, i = items.indexOf(document.activeElement), down = ev.key === 'ArrowDown';
+      if (down || ev.key === 'ArrowUp'){ ev.preventDefault(); items[i < 0 ? (down ? 0 : n - 1) : (i + (down ? 1 : n - 1)) % n].focus(); }
+      else if (ev.key === 'Home' || ev.key === 'End'){ ev.preventDefault(); items[ev.key === 'Home' ? 0 : n - 1].focus(); }
+    });
+    host.addEventListener('focusout', function(ev){ if (!menu.hidden && ev.relatedTarget && !host.contains(ev.relatedTarget)) close(); });
+  }
+
+  // ── Paint ────────────────────────────────────────────────────────────
+  function paint(d){
+    data = d;
+    if (d.status !== 'active'){ setState(d.status === 'canceled' || d.status === 'past' ? d.status : 'generic'); return; }
+    var tz = tzOf(d);
+    // "Dr. Jane Smith" arrives as first_name "Dr." — drop honorifics rather than greet someone by one.
+    var first = /^(dr|mr|mrs|ms|miss|mx|prof|rev)\.?$/i.test(d.first_name || '') ? '' : (d.first_name || '');
+    // "SARAH" shouldn't shout from a 52px headline.
+    if (/^[A-Z][A-Z'’-]+$/.test(first)) first = first.charAt(0) + first.slice(1).toLowerCase();
+    $('.js-name').forEach(function(el){ el.textContent = first ? ', ' + first : ''; });
+    $('.js-when').forEach(function(el){ el.textContent = relative(d.start, tz); });
+    $('.js-date').forEach(function(el){
+      // "Tuesday, October 20" with the month and day kept together.
+      el.textContent = fmt(d.start, tz, { weekday:'long' }) + ', ';
+      var s = document.createElement('span'); s.className = 'nw';
+      s.textContent = fmt(d.start, tz, { month:'long', day:'numeric' });
+      el.appendChild(s);
+    });
+    $('.js-time').forEach(function(el){ el.textContent = timeRange(d); });
+    $('.js-day').forEach(function(el){
+      var rel = relative(d.start, tz), n = rel === 'Today' ? 0 : rel === 'Tomorrow' ? 1 : parseInt(rel.slice(3), 10);
+      el.textContent = n === 0 ? 'today' : n === 1 ? 'tomorrow'
+        : n < 7 ? fmt(d.start, tz, { weekday:'long' }) : 'on ' + fmt(d.start, tz, { month:'long', day:'numeric' }).replace(' ', ' ');
+    });
+    $('.js-zoomcal').forEach(function(el){ el.hidden = !d.join_url; });
+    var resched = document.querySelector('.js-resched');
+    if (resched){ if (d.reschedule_url){ resched.querySelector('a').href = d.reschedule_url; } else { resched.remove(); } }
+    if (d.challenge){
+      // Tidy the echo: one-per-line answers read as a list, no wrapping quotes, a capital "I",
+      // no mid-word cut-off, and skip non-answers like "n/a" or "not sure yet".
+      var c = String(d.challenge).trim()
+        .replace(/([^\s.,;:!?…])[ \t]*(?:\r?\n)+\s*/g, '$1, ')
+        .replace(/\s+/g, ' ').replace(/^[\s"'“”‘’]+|[\s"'“”‘’]+$/g, '')
+        .replace(/(^|\s)i(?=\s|$|[,;:!?]|\.(?!\w)|[’'](?:m|ve|ll|d)\b)/g, '$1I');
+      if (c.length > 280){
+        c = c.slice(0, 280);
+        var sp = c.lastIndexOf(' ');
+        if (sp > 200) c = c.slice(0, sp);
+        c = c.replace(/[,;:.\-]+$/, '') + '…';
+      }
+      if (c.length >= 3 && !/^(n\/?a|none|nothing|no|yes|ok(ay)?|idk|tbd|test|unsure|dunno|no idea|not sure( yet)?|i\s*(do not|don[’']?t)\s*know( yet)?|[-.?!]+)(\s*lol)?[.!?]*$/i.test(c)){
+        c = c.charAt(0).toUpperCase() + c.slice(1);
+        document.querySelector('.js-challenge').textContent = '“' + c + '”';
+        document.querySelector('.js-said').hidden = false;
+      }
+    }
+    if (!document.querySelector('.js-addcal button')){
+      $('.js-addcal').forEach(function(el, n){ mountAddCal(el, null, n); });
+    }
+    setState('active');
+  }
+
+  // ── Load ─────────────────────────────────────────────────────────────
+  if (PREVIEW){
+    var tb = document.getElementById('testbar');
+    tb.hidden = false; tb.className = 'testbar';
+    tb.innerHTML = '<b>Preview</b> · sample booking, nothing is real. States: ' +
+      '<a href="?preview=1">booked</a><a href="?preview=noname">no name or challenge</a>' +
+      '<a href="?preview=generic">no booking data</a><a href="?preview=canceled">cancelled</a>';
+    if (PREVIEW === 'generic') return setState('generic');
+    if (PREVIEW === 'canceled') return setState('canceled');
+    var start = new Date(); start.setDate(start.getDate() + 4); start.setUTCHours(16, 0, 0, 0);
+    paint({
+      status:'active',
+      first_name: PREVIEW === 'noname' ? '' : 'Sarah',
+      start: start.toISOString(), end: new Date(start.getTime() + 20 * 60000).toISOString(),
+      timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+      join_url: 'https://us02web.zoom.us/j/0000000000', reschedule_url: 'https://calendly.com/',
+      challenge: PREVIEW === 'noname' ? '' : 'I get plenty of interest and good conversations, but people say they need to think about it... and then they go quiet.'
+    });
+    return;
+  }
+
+  if (!/^[A-Za-z0-9-]{8,64}$/.test(E) || !/^[A-Za-z0-9-]{8,64}$/.test(I)) return setState('generic');
+
+  function load(isRetry){
+    return fetch(FN + '?e=' + encodeURIComponent(E) + '&i=' + encodeURIComponent(I), { credentials:'omit' })
+      .then(function(r){ return r.json().catch(function(){ return { status:'generic' }; }); })
+      .then(function(d){
+        if (!d || !d.status) d = { status:'generic' };
+        paint(d);
+        // Calendly creates the Zoom meeting a beat after the booking, so a
+        // very fresh booking can arrive without a link. One quiet retry fills
+        // it in for the calendar entries.
+        if (d.status === 'active' && !d.join_url && !isRetry) setTimeout(function(){ load(true); }, 3000);
+      })
+      .catch(function(){ if (!isRetry) setState('generic'); });
+  }
+  load(false);
+})();
+</script>
+<script>
+// Phones get a shorter set of testimonials so the closing section stays within reach.
+(function(){ var w = document.querySelector('.jm-testimonials'); if (w && window.matchMedia && matchMedia('(max-width:579px)').matches){ w.setAttribute('data-initial', '6'); w.setAttribute('data-limit', '6'); } })();
+</script>
+<script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
+</body>
+</html>

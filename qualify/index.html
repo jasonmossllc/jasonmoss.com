@@ -798,7 +798,9 @@
     var uri = '';
     try { uri = (e.data.payload && e.data.payload.invitee && e.data.payload.invitee.uri) || ''; } catch(err){}
     try {
-      fetch(FN, { method:'POST', headers:{'Content-Type':'application/json'},
+      // keepalive: the page is about to navigate to /assessment-booked/, and this
+      // ping must still reach the server after it does.
+      fetch(FN, { method:'POST', headers:{'Content-Type':'application/json'}, keepalive:true,
         body: JSON.stringify({
           // No email here on purpose: whoever booked is resolved server-side
           // from the Calendly invitee URI, which cannot be forged.
@@ -811,7 +813,22 @@
     // them book a second time.
     state.decided = 'book'; state.reason = null; save();
     try { parent.postMessage({ type:'qualify:booked', source:SOURCE }, '*'); } catch(err){}
+    goToConfirmation(uri);
   });
+
+  // Send the whole page (not just this frame) to the confirmation page. Only
+  // the two opaque Calendly ids travel in the URL; /assessment-booked/ swaps them for
+  // the name, time and Zoom link server-side, so nothing personal lands in the
+  // address bar or analytics. The short pause lets Calendly's own confirmation
+  // flash and the host page's dataLayer push go out first.
+  function goToConfirmation(inviteeUri){
+    var m = /\/scheduled_events\/([\w-]+)\/invitees\/([\w-]+)$/.exec(inviteeUri || '');
+    var dest = '/assessment-booked/' + (m ? '?e=' + m[1] + '&i=' + m[2] : '');
+    setTimeout(function(){
+      try { window.top.location.href = dest; }
+      catch(err){ try { window.location.href = dest; } catch(e2){} }
+    }, 900);
+  }
 
   if (TEST){
     var tb = document.getElementById('testbar');
