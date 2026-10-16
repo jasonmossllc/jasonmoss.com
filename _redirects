@@ -23,6 +23,8 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /growth-bottleneck/* /growth-bottleneck-quiz/:splat 301
 # Runs You assessment retired (archived) -> new bottleneck assessment
 /runs-you-assessment/* /growth-bottleneck-quiz/ 301
+# Runs You free-conversation page retired (archived, was a dead-end Typeform) -> booking page
+/runs-you/* /apply/ 301
 # Vanity link for YouTube CTAs (stamps organic attribution), then catch-all
 /bottleneck   /growth-bottleneck-quiz/?source=YouTube_Organic&ad=Growth_Bottleneck_Quiz 301
 /bottleneck/  /growth-bottleneck-quiz/?source=YouTube_Organic&ad=Growth_Bottleneck_Quiz 301
