@@ -26,7 +26,9 @@
 //
 // Optional payload fields: `phone` (written to the Kit "phone" custom field,
 // normalized, latest value wins; unusable values are dropped silently so the
-// email opt-in always proceeds). Pages that also want the Roezan SMS sync
+// email opt-in always proceeds). `optin_revenue` (one of the OPTIN_REVENUE
+// codes below, written to the Kit "optin_revenue" field as its label, latest
+// answer wins; an unknown code is dropped, never blocks the opt-in). Pages that also want the Roezan SMS sync
 // read `roezan_pass` from the response — see ROEZAN PASS below.
 //
 const crypto = require('crypto');
@@ -49,6 +51,15 @@ const MAX_TAG_IDS = 10;
 // collects one. Optional: pages without a phone field are unaffected, and an
 // unusable value is dropped rather than blocking the email opt-in.
 const KIT_PHONE_FIELD = 'phone';
+// "Where's your business at right now?" on the cold-traffic opt-in pages.
+// Pages send the code; Kit stores the readable label. $1K+ is the qualified
+// line (same as the call qualifier), so keep these boundaries in sync with it.
+const KIT_OPTIN_REVENUE_FIELD = 'optin_revenue';
+const OPTIN_REVENUE = {
+  'under-1k': 'Under $1K/mo',
+  '1k-10k': '$1K-$10K/mo',
+  '10k-plus': '$10K+/mo',
+};
 
 class KitApiError extends Error {
   constructor(message, status, body) {
@@ -797,6 +808,11 @@ exports.handler = async (event) => {
     } else if (phone === null) {
       console.log('Ignoring unusable phone on opt-in', { ip });
     }
+    if (data.optin_revenue != null && data.optin_revenue !== '') {
+      const revenue = OPTIN_REVENUE[String(data.optin_revenue)];
+      if (revenue) overwriteFields[KIT_OPTIN_REVENUE_FIELD] = revenue;
+      else console.log('Ignoring unknown optin_revenue', { ip, value: String(data.optin_revenue).slice(0, 40) });
+    }
 
     const submission = {
       email,
@@ -859,7 +875,7 @@ exports.handler = async (event) => {
 };
 
 // Exposed for unit tests only; Netlify invokes .handler exclusively.
-module.exports.__test = { looksLikeBotName, maxConsonantRun, originAllowed, EMAIL_RE, admitTokenless, checkTurnstile, TOKENLESS_DAILY_CAP, TOKENLESS_PER_IP_PER_HOUR };
+module.exports.__test = { OPTIN_REVENUE, KIT_OPTIN_REVENUE_FIELD, looksLikeBotName, maxConsonantRun, originAllowed, EMAIL_RE, admitTokenless, checkTurnstile, TOKENLESS_DAILY_CAP, TOKENLESS_PER_IP_PER_HOUR };
 module.exports.__internal = {
   // Needed by submit-qualify.js to undo a decline when someone is rescued.
   kitRequest,
