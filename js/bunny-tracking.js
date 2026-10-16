@@ -1,11 +1,10 @@
 // Bunny Video Engagement Tracking
 // Include on pages with Bunny Stream embeds where you want watch-time tracking.
-// Fires the Automation Hub webhook when a viewer watches 75%+ of the video.
+// Fires the Automation Hub webhook when a viewer watches 50%+ of the video.
 //
 // This is the Bunny replacement for the legacy js/wistia-tracking.js. It keeps
-// the renamed Bunny webhook endpoint and the SAME payload shape (including the original
-// Wistia video id, carried on each embed as data-video-id) so the backend
-// automation continues to behave identically — only the video host changed.
+// the SAME payload shape (including the original Wistia video id, carried on
+// each embed as data-video-id) so the backend automation behaves identically.
 //
 // Requirements:
 //   - Kit subscriber ID must be in the URL as ?ck_subscriber_id=123, or email
@@ -40,18 +39,13 @@
   'use strict';
 
   // ==============================
-  // CONFIG (matches the Wistia script)
+  // CONFIG
   // ==============================
-  // Watch-time threshold (defaults to 0.75). Overridable per page via
-  // window.JM_TRACK_THRESHOLD set before this script loads — used in production
-  // by the resonance masterclass replay (0.5) and by automated tests.
-  var WATCH_THRESHOLD =
-    (typeof window !== 'undefined' &&
-      typeof window.JM_TRACK_THRESHOLD === 'number' &&
-      window.JM_TRACK_THRESHOLD > 0 && window.JM_TRACK_THRESHOLD <= 1)
-      ? window.JM_TRACK_THRESHOLD
-      : 0.75;
-  var WEBHOOK_URL = 'https://automation.jasonmoss.com/webhooks/bunny/75';
+  // Site-wide watch-time threshold: 50%, the same on every tracked page. The
+  // Automation Hub endpoint (/webhooks/bunny/50) and the Kit tag
+  // "Watched 50%+ Of Video (Last 7 Days)" are named for it — change all three together.
+  var WATCH_THRESHOLD = 0.5;
+  var WEBHOOK_URL = 'https://automation.jasonmoss.com/webhooks/bunny/50';
   var MAX_STEP = 2.0;         // max seconds credited per timeupdate (guards seeks/gaps)
   var PLAYER_POLL_INTERVAL = 500;
   var PLAYER_POLL_TIMEOUT = 30000;
