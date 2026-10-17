@@ -359,12 +359,18 @@ body{background:var(--obs)}
 
   // ── Calendar links ───────────────────────────────────────────────────
   function utc(iso){ return new Date(iso).toISOString().replace(/[-:]/g, '').replace(/\.\d{3}/, ''); }
+  // What they read when they open the event on the day: the Zoom link first,
+  // then why the call is worth showing up for. Keep in step with buildIcs() in
+  // netlify/functions/booking-details.js (the Apple / Outlook file).
   function details(d){
     return [
-      '20 minutes, one-to-one with Jason.',
-      'Join from somewhere quiet, with your camera on.',
       d.join_url ? 'Join on Zoom: ' + d.join_url : 'Your Zoom link is in your confirmation email.',
-      d.reschedule_url ? 'Need a different time? ' + d.reschedule_url : ''
+      '20 minutes, just you and me.',
+      "We'll look at where your business really is right now... how clients find you, what's working, and where it's getting stuck.",
+      "You'll walk away with:\n- A clear read on what's really going on, and why\n- The one shift that would bring more clients in the door\n- A next step you can act on right away, whether or not we ever work together",
+      'To get the most out of it:\n- Join from somewhere quiet, with your camera on\n- Be there a minute or two early. Twenty minutes goes quickly.\n- Know your rough monthly revenue, and where your clients come from',
+      d.reschedule_url ? 'If something comes up, reschedule rather than skip: ' + d.reschedule_url : '',
+      'Talk soon,\nJason'
     ].filter(Boolean).join('\n\n');
   }
   function links(d){
