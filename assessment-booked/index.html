@@ -106,6 +106,16 @@
 /* States */
 [data-show]{display:none}
 body.s-active [data-show~="active"],body.s-generic [data-show~="generic"],body.s-canceled [data-show~="canceled"],body.s-past [data-show~="past"]{display:revert}
+/* A booking link starts in s-loading: the booked layout is laid out but invisible until the booking arrives,
+   so the "check your inbox" fallback never flashes first. The logo, portrait and backgrounds show at once. */
+body.s-loading [data-show~="active"]{display:revert}
+body.s-loading .cb-copy,body.s-loading main>section:not(.cb-hero){opacity:0}
+/* Hold the ticket at its finished height while loading (the date lines carry an &nbsp;), so the portrait
+   beside it does not jump when the booking fills in. */
+body.s-loading .ticket .js-addcal:empty{display:block;min-height:56px}
+/* Same for the headline: hold room for a typical first name (invisible, CSS-only) so adding it does not re-wrap the H1. */
+body.s-loading .js-name:empty::after{content:", Sarah"}
+.cb-copy,main>section{transition:opacity .35s ease}
 
 /* Textured section backgrounds (same recipe as /apply/) */
 .bg-tex-sand-soft{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.5),rgba(248,246,242,0.6)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
@@ -191,6 +201,7 @@ body{background:var(--obs)}
 </style>
 </head>
 <body class="s-generic">
+<script>(function(){var q=new URLSearchParams(location.search),r=/^[A-Za-z0-9-]{8,64}$/;if(!q.get('preview')&&r.test(q.get('e')||'')&&r.test(q.get('i')||''))document.body.className='s-loading';})();</script>
 <div id="testbar" hidden></div>
 <a class="skip-link" href="#main">Skip to content</a>
 
@@ -211,9 +222,9 @@ body{background:var(--obs)}
         <p class="lede" data-show="generic">Your confirmation email is on its way.</p>
 
         <div class="ticket" data-show="active">
-          <div class="when js-when"></div>
-          <div class="date js-date"></div>
-          <div class="time js-time"></div>
+          <div class="when js-when">&nbsp;</div>
+          <div class="date js-date">&nbsp;</div>
+          <div class="time js-time">&nbsp;</div>
           <div class="actions">
             <div class="addcal js-addcal"></div>
             <div class="addcal-done js-done" role="status" aria-live="polite"></div>
@@ -546,9 +557,13 @@ body{background:var(--obs)}
   if (!/^[A-Za-z0-9-]{8,64}$/.test(E) || !/^[A-Za-z0-9-]{8,64}$/.test(I)) return setState('generic');
 
   function load(isRetry){
-    return fetch(FN + '?e=' + encodeURIComponent(E) + '&i=' + encodeURIComponent(I), { credentials:'omit' })
+    // A slow lookup must not leave the page blank: after 8 seconds show the fallback.
+    var ctl = window.AbortController ? new AbortController() : null;
+    var timer = ctl ? setTimeout(function(){ ctl.abort(); }, 8000) : null;
+    return fetch(FN + '?e=' + encodeURIComponent(E) + '&i=' + encodeURIComponent(I), { credentials:'omit', signal: ctl ? ctl.signal : undefined })
       .then(function(r){ return r.json().catch(function(){ return { status:'generic' }; }); })
       .then(function(d){
+        clearTimeout(timer);
         if (!d || !d.status) d = { status:'generic' };
         paint(d);
         // Calendly creates the Zoom meeting a beat after the booking, so a
@@ -556,7 +571,7 @@ body{background:var(--obs)}
         // it in for the calendar entries.
         if (d.status === 'active' && !d.join_url && !isRetry) setTimeout(function(){ load(true); }, 3000);
       })
-      .catch(function(){ if (!isRetry) setState('generic'); });
+      .catch(function(){ clearTimeout(timer); if (!isRetry) setState('generic'); });
   }
   load(false);
 })();
