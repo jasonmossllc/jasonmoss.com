@@ -71,9 +71,9 @@
 .letter ul{list-style:none;padding:0;margin:20px 0;display:flex;flex-direction:column;gap:10px}
 .letter li{display:grid;grid-template-columns:28px 1fr}
 .letter li::before{content:"✓";color:var(--gold)}
-.said{margin:8px 0 36px;padding:26px 30px;background:rgba(233,226,211,.45);border-left:2px solid var(--gold)}
+.said{margin:8px 0 36px;padding:26px 30px;background:var(--sand);border-left:2px solid var(--gold)}
 .said .lbl{font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass)}
-.said blockquote{margin:12px 0 0;font-style:italic;font-size:19px;line-height:1.6;color:var(--obs);overflow-wrap:anywhere;text-indent:-.42em}
+.said blockquote{margin:12px 0 0;font-style:italic;font-size:19px;line-height:1.6;color:var(--obs);overflow-wrap:anywhere}
 .said .after{margin-top:14px;font-size:16px;color:var(--ink-soft)}
 .prep{margin-top:44px;padding-top:36px;border-top:1px solid var(--line)}
 .prep h3{font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);margin:0 0 18px}
@@ -164,7 +164,6 @@ body{background:var(--obs)}
   .addcal-menu{width:300px}
   .letter{max-width:680px;padding:76px 60px 52px}
   .letter .hs{left:60px}
-  .said{padding:24px 28px}
 }
 @media (max-width:600px){
   .cb-hero{padding:18px 0 56px}
@@ -182,8 +181,6 @@ body{background:var(--obs)}
   .letter{line-height:1.75;padding-bottom:52px}
   .letter .h2{font-size:26px;margin-bottom:22px}
   .letter p+p{margin-top:18px}
-  .said{margin-left:-24px;margin-right:-24px;padding:22px 24px 22px 22px}
-  .said blockquote{text-wrap:pretty}
   .wall{padding:80px 0 72px}
   .wall-intro{margin-bottom:36px;gap:14px}
 }
@@ -254,7 +251,7 @@ body{background:var(--obs)}
       <h2 class="h2">Here’s what we’ll do with our 20 minutes.</h2>
 
       <div class="said js-said" hidden>
-        <div class="lbl">You told me</div>
+        <div class="lbl">You told me your biggest business challenge is</div>
         <blockquote class="js-challenge"></blockquote>
         <p class="after">That’s where we’ll start.</p>
       </div>
