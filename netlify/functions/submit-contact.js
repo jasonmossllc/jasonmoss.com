@@ -696,6 +696,42 @@ function verifyRoezanPass(pass, email, phone) {
   }
 }
 
+// ── ANSWER PASS ────────────────────────────────────────────────────────────
+// Two-step opt-in pages ask a follow-up question AFTER the opt-in has been
+// saved. The answer goes to submit-optin-answer.js, which must not re-run the
+// bot gates (the Turnstile token is single-use), so a successful submission
+// here returns answer_pass = "<ms-timestamp>.<hmac-sha256('answer' \n email \n
+// timestamp)>". It is bound to the email and expires after ANSWER_PASS_TTL_MS;
+// the 'answer' prefix keeps it from ever validating as a roezan_pass.
+const ANSWER_PASS_TTL_MS = 60 * 60 * 1000;
+
+function answerPassSignature(email, timestamp) {
+  const secret = process.env.ROEZAN_PASS_SECRET;
+  if (!secret) return null;
+  return crypto.createHmac('sha256', secret).update(`answer\n${email}\n${timestamp}`).digest('hex');
+}
+
+function issueAnswerPass(email) {
+  const timestamp = Date.now();
+  const signature = answerPassSignature(email, timestamp);
+  return signature ? `${timestamp}.${signature}` : null;
+}
+
+function verifyAnswerPass(pass, email) {
+  if (typeof pass !== 'string' || typeof email !== 'string' || !email) return false;
+  const match = pass.match(/^(\d{10,16})\.([a-f0-9]{64})$/);
+  if (!match) return false;
+  const timestamp = Number.parseInt(match[1], 10);
+  if (!Number.isSafeInteger(timestamp) || Math.abs(Date.now() - timestamp) > ANSWER_PASS_TTL_MS) return false;
+  const expected = answerPassSignature(email, timestamp);
+  if (!expected) return false;
+  try {
+    return crypto.timingSafeEqual(Buffer.from(match[2], 'hex'), Buffer.from(expected, 'hex'));
+  } catch (e) {
+    return false;
+  }
+}
+
 // ── CORS ───────────────────────────────────────────────────────────────────
 // The origin allowlist accepts subdomains and this site's deploy previews,
 // but a fixed apex-only ACAO header made responses unreadable from those
@@ -831,6 +867,7 @@ exports.handler = async (event) => {
     // Issued only after every bot gate above has passed; lets the page call
     // submit-roezan-contact.js without a second Turnstile run (see ROEZAN PASS).
     const roezanPass = issueRoezanPass(email, phone);
+    const answerPass = issueAnswerPass(email);
 
     let result;
     try {
@@ -850,6 +887,7 @@ exports.handler = async (event) => {
           success: true,
           queued: true,
           ...(roezanPass ? { roezan_pass: roezanPass } : {}),
+          ...(answerPass ? { answer_pass: answerPass } : {}),
         }),
       };
     }
@@ -862,6 +900,7 @@ exports.handler = async (event) => {
         subscriberId: result.subscriberId,
         tagged: result.tagged,
         ...(roezanPass ? { roezan_pass: roezanPass } : {}),
+        ...(answerPass ? { answer_pass: answerPass } : {}),
       }),
     };
   } catch (error) {
@@ -901,6 +940,10 @@ module.exports.__internal = {
   updateSubscriber,
   issueRoezanPass,
   verifyRoezanPass,
+  issueAnswerPass,
+  verifyAnswerPass,
+  OPTIN_REVENUE,
+  KIT_OPTIN_REVENUE_FIELD,
   corsHeaders,
   allowedCorsOrigin,
 };

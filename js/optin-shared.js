@@ -16,6 +16,10 @@
  *     extraPayload: function (form) { return {...}; },  // extra Kit payload fields (latest_ad etc.)
  *     fastRedirectMs: 1500,                              // optional: redirect this soon even if the Kit
  *                                                       // submit hasn't answered yet (see below)
+ *     onSuccess: function (ctx) { ... },                 // optional: called INSTEAD of the redirect once the
+ *                                                       // opt-in is captured; ctx adds {response} (the Kit
+ *                                                       // submit's JSON, or null if it didn't answer) and
+ *                                                       // {redirectUrl}. The page then owns navigation.
  *   });
  *
  * The Cloudflare api.js tag must come AFTER this file:
@@ -179,6 +183,16 @@
 
   /* ── Submit pipeline ──────────────────────────────────────────────────── */
   function init(config) {
+    // Hands off to the page's onSuccess (two-step forms) or redirects.
+    function finish(ctx, response) {
+      var url = config.redirect(ctx);
+      if (config.onSuccess) {
+        config.onSuccess({ firstName: ctx.firstName, email: ctx.email, form: ctx.form, response: response || null, redirectUrl: url });
+      } else {
+        window.location.href = url;
+      }
+    }
+
     function start() {
       var form = document.querySelector(config.form || '.email-form');
       if (!form) return;
@@ -301,7 +315,7 @@
             console.error('Kit submit error:', err);
           }
           if (fastRedirect) {
-            window.location.href = config.redirect({ firstName: firstName, email: email, form: form });
+            finish({ firstName: firstName, email: email, form: form }, null);
             return;
           }
 
@@ -352,7 +366,7 @@
             }
           }
 
-          window.location.href = config.redirect({ firstName: firstName, email: email, form: form });
+          finish({ firstName: firstName, email: email, form: form }, scData);
         } catch (err) {
           console.error('Form submission error:', err);
           alert('Something went wrong. Please try again.');
