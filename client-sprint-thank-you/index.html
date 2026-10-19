@@ -35,7 +35,7 @@
 .sessions .k{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 .sessions .d{font-family:'Libre Baskerville',serif;font-size:24px;color:var(--sand)}
 .sessions .t{font-size:13.5px;color:rgba(248,246,242,.6)}
-.zoomline{margin-top:18px;font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(248,246,242,.6)}
+.panel .zoomline{margin-top:22px;font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(248,246,242,.6)}
 .step{margin-top:44px;display:flex;flex-direction:column;align-items:center;gap:14px}
 .step-label{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(248,246,242,.55)}
 .panel .btn{padding:21px 40px;box-shadow:0 0 0 1px rgba(194,168,108,.4),0 18px 50px -12px rgba(194,168,108,.45)}
@@ -69,14 +69,16 @@
   .panel h1{font-size:42px}
   .sessions{grid-template-columns:1fr;margin-top:28px}
   .sessions li+li{border-left:0;border-top:1px solid rgba(194,168,108,.25)}
-  .sessions li{padding:13px 4px;flex-direction:row;align-items:baseline;justify-content:space-between;gap:10px;text-align:left}
-  .sessions .k{flex:0 0 118px;font-size:10px;white-space:nowrap}
-  .sessions .d{flex:1;font-size:18px}
-  .sessions .t{font-size:12.5px;white-space:nowrap}
-  .zoomline{font-size:11px;letter-spacing:.12em}
+  .sessions li{display:grid;grid-template-columns:1fr auto;align-items:baseline;column-gap:12px;row-gap:4px;padding:14px 4px;text-align:left}
+  .sessions .k{grid-column:1/-1;font-size:10.5px}
+  .sessions .d{font-size:20px;white-space:nowrap}
+  .sessions .t{font-size:13px;white-space:nowrap}
+  .panel .zoomline{margin-top:18px;font-size:11px;letter-spacing:.12em}
   .panel h1{margin:16px 0 10px}
   .step{margin-top:32px}
-  .panel .btn{font-size:13px;letter-spacing:.1em}
+  .panel .btn{font-size:12.5px;letter-spacing:.06em;padding:19px 12px}
+  .panel .eyebrow{font-size:11px;letter-spacing:.18em}
+  .panel .eyebrow::before,.panel .eyebrow::after{display:none}
   .panel .btn{width:100%;padding:19px 18px}
   .ty-invite{padding:72px 0 88px}
   .invite-grid{grid-template-columns:1fr;gap:44px}
@@ -94,9 +96,9 @@
   <div class="wrap ty-top"><img src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"></div>
   <div class="wrap" style="margin-top:48px">
     <div class="panel">
-      <div class="eyebrow center">Seat saved &middot; Two quick things</div>
+      <div class="eyebrow center">Seat saved &middot; Two&nbsp;quick&nbsp;things</div>
       <h1 id="headline">You&rsquo;re in.</h1>
-      <p class="sub">The 7-Day Client Sprint starts Thursday.</p>
+      <p class="sub">The 7-Day Client Sprint starts&nbsp;Thursday.</p>
 
       <ul class="sessions">
         <li><span class="k">Day 1</span><span class="d">Thu, Oct 29</span><span class="t">9&ndash;11am MT</span></li>
