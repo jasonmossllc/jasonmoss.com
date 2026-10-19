@@ -160,6 +160,11 @@
 .incl li span{color:rgba(248,246,242,.5);font-size:14px;text-align:right}
 .invite .btn{width:100%;position:relative;z-index:1}
 .invite .fine-it{margin-top:18px;font-size:14px}
+.guarantee{position:relative;z-index:1;display:flex;align-items:center;gap:20px;margin-top:36px;padding-top:30px;border-top:1px solid rgba(194,168,108,.22);text-align:left}
+.seal{flex-shrink:0;width:68px;height:68px;border-radius:50%;border:1px solid var(--gold);box-shadow:inset 0 0 0 5px rgba(194,168,108,.12);display:flex;align-items:center;justify-content:center}
+.seal .pct{font-family:'Libre Baskerville',serif;font-size:17px;color:var(--gold)}
+.guarantee .g-h{font-family:'Libre Baskerville',serif;font-size:19px;line-height:1.35;color:var(--sand)}
+.guarantee .g-p{margin-top:6px;font-size:15px;line-height:1.6;color:rgba(248,246,242,.66)}
 
 /* faq */
 .faq{max-width:840px;margin:0 auto;border-top:1px solid rgba(248,246,242,.12)}
@@ -253,6 +258,11 @@
   .invite .amt{font-size:92px}
   .incl li{flex-direction:column;gap:4px}
   .incl li span{text-align:left}
+  .guarantee{gap:16px;margin-top:30px;padding-top:26px}
+  .seal{width:56px;height:56px}
+  .seal .pct{font-size:14px}
+  .guarantee .g-h{font-size:17px}
+  .guarantee .g-p{font-size:14.5px}
   /* faq + footer */
   .faq summary{font-size:18px}
   .cta-center .fd{display:none}
@@ -426,6 +436,10 @@
       </ul>
       <a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint</a>
       <p class="fine-it">Live on Zoom &middot; Recordings included</p>
+      <div class="guarantee">
+        <div class="seal" aria-hidden="true"><span class="pct">100%</span></div>
+        <div><p class="g-h">100% money-back guarantee</p><p class="g-p">If you&rsquo;re not satisfied, just reach out and I&rsquo;ll give you a full&nbsp;refund.</p></div>
+      </div>
     </div>
   </div>
 </section>
