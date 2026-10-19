@@ -66,14 +66,20 @@
 .band-quote cite{display:block;margin-top:10px;font-style:normal;font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 
 /* story */
-.cs-story .col{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:56px;align-items:center;text-align:center}
-.stanza{font-family:'Libre Baskerville',serif;font-size:28px;line-height:1.6;color:var(--sand)}
-.stanza .soft{color:rgba(248,246,242,.55)}
-.story-p{font-size:19px;line-height:1.85;color:rgba(248,246,242,.74);max-width:640px;display:flex;flex-direction:column;gap:22px}
-.story-p b{color:var(--gold);font-weight:600}
-.story-p strong{color:var(--sand);font-weight:600}
-.closer{font-family:'Libre Baskerville',serif;font-style:italic;font-size:34px;line-height:1.45;color:var(--gold);max-width:780px}
-.closer span{display:block;font-style:normal;font-size:20px;line-height:1.6;color:rgba(248,246,242,.6);margin-bottom:16px}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px;margin:0 auto}
+.person{position:relative;padding:40px 42px 38px;background:linear-gradient(180deg,rgba(248,246,242,.04),rgba(248,246,242,.015));border:1px solid rgba(248,246,242,.09);box-shadow:0 40px 80px -50px rgba(0,0,0,.8)}
+.person::before{content:"";position:absolute;left:0;top:0;width:56px;height:2px;background:var(--gold)}
+.person .when{font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.person .line{margin-top:18px;font-family:'Libre Baskerville',serif;font-size:26px;line-height:1.4;color:var(--sand)}
+.person .soft{margin-top:10px;font-family:'Libre Baskerville',serif;font-size:19px;line-height:1.6;color:rgba(248,246,242,.55)}
+.story-body{max-width:720px;margin:96px auto 0;display:flex;flex-direction:column;gap:26px}
+.story-body p{font-size:19px;line-height:1.8;color:rgba(248,246,242,.72)}
+.story-body b{color:var(--gold);font-weight:600}
+.story-body .thesis{font-family:'Libre Baskerville',serif;font-size:30px;line-height:1.5;color:var(--sand);margin-bottom:10px}
+.story-body .thesis em{color:var(--gold)}
+.sting{margin-top:38px;padding:6px 0 6px 34px;border-left:1px solid var(--gold)}
+.sting .setup{font-size:19px;color:rgba(248,246,242,.6)}
+.sting .hit{margin-top:14px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:30px;line-height:1.45;color:var(--gold)}
 
 /* why */
 .why-grid{display:grid;grid-template-columns:5fr 6fr;gap:96px;align-items:center}
@@ -179,8 +185,15 @@
   .cta-row small{text-align:center}
   .pre-cta{display:flex;justify-content:center;order:-1}
   .hero-cta .desk-only{display:none}
-  .stanza{font-size:22px}
-  .closer{font-size:26px}
+  .people{grid-template-columns:1fr;gap:18px}
+  .person{padding:30px 24px 28px}
+  .person .line{font-size:22px}
+  .person .soft{font-size:17px}
+  .story-body{margin-top:64px;gap:22px}
+  .story-body p{font-size:17.5px}
+  .story-body .thesis{font-size:24px}
+  .sting{margin-top:24px;padding-left:22px}
+  .sting .hit{font-size:24px}
   .why-grid,.tl-grid{grid-template-columns:1fr;gap:48px}
   .why-grid .h2{font-size:34px}
   .why-lines{padding-left:24px}
@@ -245,17 +258,18 @@
 <!-- Story -->
 <section class="sec cs-story bg-obsidian">
   <div class="wrap">
-    <div class="col">
-      <p class="stanza">She talked to you six months ago.<br><span class="soft">She wanted your help. She just wasn&rsquo;t ready.</span></p>
-      <hr class="hair">
-      <p class="stanza">He&rsquo;s followed you for a year.<br><span class="soft">Never commented. Watched everything you&rsquo;ve posted.</span></p>
-      <hr class="hair">
-      <div class="story-p">
-        <p>I&rsquo;ve signed over 2,000 clients, and here&rsquo;s what I&rsquo;ve learned: <strong>the fastest path to your next client usually isn&rsquo;t someone new.</strong> It&rsquo;s someone who already knows you.</p>
-        <p>They&rsquo;ve been thinking about working with you&hellip; and waiting for a reason to take the next step.</p>
-        <p>And with the right message and the right conversation, these people could become clients who pay you <b>$3,000, $5,000, $10,000 or more.</b></p>
+    <div class="people">
+      <div class="person"><div class="when">Six months ago</div><p class="line">She talked to you six months ago.</p><p class="soft">She wanted your help. She just wasn&rsquo;t ready.</p></div>
+      <div class="person"><div class="when">For a year</div><p class="line">He&rsquo;s followed you for a year.</p><p class="soft">Never commented. Watched everything you&rsquo;ve posted.</p></div>
+    </div>
+    <div class="story-body">
+      <p class="thesis">I&rsquo;ve signed over 2,000 clients, and here&rsquo;s what I&rsquo;ve learned: the fastest path to your next client usually isn&rsquo;t someone new. <em>It&rsquo;s someone who already knows you.</em></p>
+      <p>They&rsquo;ve been thinking about working with you&hellip; and waiting for a reason to take the next step.</p>
+      <p>And with the right message and the right conversation, these people could become clients who pay you <b>$3,000, $5,000, $10,000 or more.</b></p>
+      <div class="sting">
+        <p class="setup">But while you&rsquo;re busy trying to reach more people, they sit untouched.</p>
+        <p class="hit">And some of them will hire someone else&hellip; not because that person was better, but because they started the conversation you didn&rsquo;t.</p>
       </div>
-      <p class="closer"><span>But while you&rsquo;re busy trying to reach more people, they sit untouched.</span>And some of them will hire someone else&hellip; not because that person was better, but because they started the conversation you didn&rsquo;t.</p>
     </div>
   </div>
 </section>
