@@ -74,7 +74,7 @@
 /* sprint + timeline */
 .tl-grid{display:grid;grid-template-columns:5fr 7fr;gap:88px}
 .tl-intro{display:flex;flex-direction:column;gap:24px;position:sticky;top:48px;align-self:start}
-.tl-intro .h2{font-size:42px}
+.tl-intro .h2{font-size:clamp(29px,2.65vw,38px);line-height:1.25}
 .tl-intro p{font-size:17.5px;line-height:1.8;color:rgba(248,246,242,.7)}
 .goal{padding:22px 26px;border:1px solid rgba(194,168,108,.4);background:rgba(194,168,108,.06);font-family:'Libre Baskerville',serif;font-size:19px;line-height:1.55;color:var(--sand)}
 .goal b{display:block;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
@@ -268,7 +268,7 @@
     <div class="tl-grid">
       <div class="tl-intro">
         <div class="eyebrow">The 7-Day Client Sprint</div>
-        <h2 class="h2">Two days to learn it. Five days to use it.</h2>
+        <h2 class="h2">Two days to learn it.<br>Five days to use it.</h2>
         <div class="goal"><b>The goal</b>Sign your next high-ticket client in seven days.</div>
         <p>This doesn&rsquo;t require a complicated marketing machine or thousands of dollars in ads. It starts with the relationships you already have.</p>
       </div>
