@@ -176,7 +176,12 @@
 .faq .a{max-width:720px;padding:0 56px 30px 0;display:flex;flex-direction:column;gap:14px;font-size:17px;line-height:1.75;color:rgba(248,246,242,.7)}
 .faq .a p{text-wrap:pretty}
 
+/* wall */
+.cs-wall{border-top:1px solid rgba(194,168,108,.14)}
+.wall-note{font-size:14px;line-height:1.6;color:rgba(248,246,242,.5);max-width:520px}
+
 /* footer */
+.cs-ftr .credit{margin-top:4px;font-size:11.5px;letter-spacing:.03em;color:rgba(248,246,242,.38)}
 .cs-ftr{background:#141514;border-top:1px solid rgba(194,168,108,.18);color:rgba(248,246,242,.55);padding:64px 0 48px;font-size:13px;line-height:1.7;text-align:center}
 .cs-ftr img{height:30px;width:auto;margin:0 auto 20px}
 .cs-ftr nav{display:flex;gap:4px 20px;justify-content:center;flex-wrap:wrap;margin:8px auto 26px;padding-bottom:22px;border-bottom:1px solid rgba(248,246,242,.1);max-width:820px}
@@ -328,7 +333,7 @@
       </div>
       <div class="why-lines">
         <p class="dim">You know these opportunities&nbsp;exist.</p>
-        <p class="dim">But you still don&rsquo;t reach out.</p>
+        <p class="dim">But you don&rsquo;t reach out.</p>
         <p>Because you don&rsquo;t know what to&nbsp;say.</p>
         <p>Or because reaching out feels like chasing. Like needing something. Like making it&nbsp;weird.</p>
         <p class="turn">That&rsquo;s about to change&hellip; starting&nbsp;now.</p>
@@ -477,14 +482,30 @@
   </div>
 </section>
 
+<!-- Wall of love -->
+<section class="sec cs-wall bg-deep">
+  <div class="wrap">
+    <div class="cs-head">
+      <div class="eyebrow center">More stories</div>
+      <h2 class="h2">More from clients across my programs.</h2>
+      <p class="wall-note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
+    </div>
+    <div class="jm-testimonials" data-layout="scroll" data-height="800" data-shadow="171817" style="display:block;width:100%;max-width:69rem;margin:0 auto"></div>
+    <script>try{if(window.matchMedia('(max-width:700px)').matches){document.querySelector('.jm-testimonials').setAttribute('data-height','560')}}catch(e){}</script>
+    <div class="cta-center"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span></div>
+  </div>
+</section>
+
 <footer class="cs-ftr">
   <div class="wrap">
     <img src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31" loading="lazy">
     <div>&copy; Jason Moss LLC</div>
+    <div class="credit">Select photography by Kate Milford</div>
     <nav><a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a><a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a><a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings disclaimer</a></nav>
-    <p>Results shared on this page come from past participants and aren&rsquo;t typical or guaranteed. Your results depend on your offer, your relationships, and your <span class="nw">follow-through.</span></p>
+    <p>Results shared on this page come from past clients and participants and aren&rsquo;t typical or guaranteed. Your results depend on your offer, your relationships, and your <span class="nw">follow-through.</span></p>
     <p>This website is not a part of Facebook or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
   </div>
 </footer>
+<script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>
