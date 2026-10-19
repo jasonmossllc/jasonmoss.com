@@ -50,8 +50,18 @@
 .cs-hero-copy{flex:1;display:flex;align-items:center}
 .cs-hero-copy .inner{max-width:640px;display:flex;flex-direction:column;gap:30px;padding:72px 0 110px}
 .cs-hero .h1{font-size:74px;line-height:1.05}
-.cs-hero .lede{max-width:540px}
+.cs-hero .lede{max-width:600px}
 .cs-hero .btn{padding:21px 44px}
+
+/* proof band */
+.band{background:#141514;border-top:1px solid rgba(194,168,108,.28);border-bottom:1px solid rgba(194,168,108,.28)}
+.band-grid{display:grid;grid-template-columns:auto 1fr;gap:64px;align-items:center;padding:44px 0}
+.band-stat{display:flex;align-items:center;gap:26px;padding-right:64px;border-right:1px solid rgba(194,168,108,.28)}
+.band-stat .n{font-family:'Libre Baskerville',serif;font-size:54px;line-height:1;color:var(--gold);white-space:nowrap}
+.band-stat .t{font-size:14.5px;line-height:1.6;color:rgba(248,246,242,.66);max-width:250px}
+.band-quote{margin:0}
+.band-quote p{font-family:'Libre Baskerville',serif;font-style:italic;font-size:24px;line-height:1.45;color:var(--sand)}
+.band-quote cite{display:block;margin-top:10px;font-style:normal;font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 
 /* story */
 .cs-story .col{max-width:780px;margin:0 auto;display:flex;flex-direction:column;gap:56px;align-items:center;text-align:center}
@@ -92,8 +102,8 @@
 .learn{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
 .learn-card{position:relative;padding:40px 40px 38px;background:linear-gradient(180deg,rgba(248,246,242,.035),rgba(248,246,242,.015));border:1px solid rgba(248,246,242,.09);box-shadow:0 40px 80px -50px rgba(0,0,0,.8)}
 .learn-card::before{content:"";position:absolute;left:0;top:0;width:56px;height:2px;background:var(--gold)}
-.learn-card .n{font-family:'Libre Baskerville',serif;font-style:italic;font-size:15px;color:var(--gold)}
-.learn-card h3{font-size:25px;margin:14px 0 12px}
+.learn-card .n{font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.learn-card h3{font-size:24px;line-height:1.35;margin:16px 0 14px}
 .learn-card p{font-size:16.5px;line-height:1.75;color:rgba(248,246,242,.68)}
 .learn-card.wide{grid-column:1/-1;display:grid;grid-template-columns:5fr 7fr;gap:40px;align-items:center}
 .learn-card.wide h3{margin-bottom:0}
@@ -190,6 +200,11 @@
   .learn-card.wide{display:block}
   .learn-card.wide h3{margin-bottom:12px}
   .big-num{font-size:68px}
+  .band-grid{grid-template-columns:1fr;gap:22px;padding:36px 0}
+  .band-stat{flex-direction:column;align-items:flex-start;gap:10px;padding:0 0 22px;border-right:0;border-bottom:1px solid rgba(194,168,108,.28)}
+  .band-stat .n{font-size:46px}
+  .band-stat .t{max-width:none}
+  .band-quote p{font-size:20px}
   .proof{grid-template-columns:1fr}
   .pf.narrow img{width:88%}
   .invite{padding:52px 24px}
@@ -218,9 +233,19 @@
     <div class="inner">
       <div class="eyebrow">A live 7-day sprint &middot; Oct 29 &ndash; Nov 5</div>
       <h1 class="h1">Your next client already <span class="gold-it">knows your name.</span></h1>
-      <p class="lede">A live 7-day sprint to turn the people who already know you into paying clients. No ads. No funnel. No posting more.</p>
+      <p class="lede">A live 7-day sprint where you&rsquo;ll turn the people who already know you into paying clients. No ads. No funnel. No posting more.</p>
       <div class="meta"><span>3 live sessions</span><span>Oct 29, 30 &amp; Nov 5</span><span>9&ndash;11am MT</span></div>
       <div class="cta-row"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><small>Live on Zoom &middot; Recordings included</small></div>
+    </div>
+  </div>
+</section>
+
+<!-- Proof band -->
+<section class="band">
+  <div class="wrap">
+    <div class="band-grid">
+      <div class="band-stat"><div class="n">$100,000+</div><div class="t">in sales in under three weeks, when I taught this approach to a live group earlier this year</div></div>
+      <blockquote class="band-quote"><p>&ldquo;The sales conversation was barely even a sales conversation.&rdquo;</p><cite>Meleah &middot; $60K package</cite></blockquote>
     </div>
   </div>
 </section>
@@ -286,15 +311,15 @@
 <section class="sec bg-obsidian">
   <div class="wrap">
     <div class="cs-head">
-      <div class="eyebrow center">What you&rsquo;ll learn</div>
+      <div class="eyebrow center">What you&rsquo;ll walk away with</div>
       <h2 class="h2">Five pieces. One week.<br>Your next client.</h2>
     </div>
     <div class="learn">
-      <div class="learn-card"><div class="n">01</div><h3>The Hidden Client Scan</h3><p>Where your next high-ticket client could be hiding&hellip; and why you may have already crossed them off your list.</p></div>
-      <div class="learn-card"><div class="n">02</div><h3>The Reconnection Message</h3><p>How to open the door after six months of silence. No apology, no awkward check-in, no pitch.</p></div>
-      <div class="learn-card"><div class="n">03</div><h3>The 20-Minute Bridge Call</h3><p>What happens inside the short conversation I&rsquo;ve used to generate tens of thousands of dollars in additional sales, without turning it into a sales pitch or an hour of free coaching.</p></div>
-      <div class="learn-card"><div class="n">04</div><h3>The Permission-Based Pivot</h3><p>They say, &ldquo;That was really helpful.&rdquo; What you say next decides whether the conversation ends or opens the door to working together.</p></div>
-      <div class="learn-card wide"><div><div class="n">05</div><h3>The Follow-Up Loop</h3></div><p>How to lead opportunities to a close without chasing, discounting, or sending another &ldquo;just checking in.&rdquo;</p></div>
+      <div class="learn-card"><div class="n">01 &middot; The Hidden Client Scan</div><h3>A list of people who could hire you now.</h3><p>Where your next high-ticket client could be hiding&hellip; and why you may have already crossed them off your list.</p></div>
+      <div class="learn-card"><div class="n">02 &middot; The Reconnection Message</div><h3>Messages that reopen old conversations.</h3><p>How to open the door after six months of silence. No apology, no awkward check-in, no pitch.</p></div>
+      <div class="learn-card"><div class="n">03 &middot; The 20-Minute Bridge Call</div><h3>A short call that turns interest into a real conversation about working together.</h3><p>What happens inside the short conversation I&rsquo;ve used to generate tens of thousands of dollars in additional sales, without turning it into a sales pitch or an hour of free coaching.</p></div>
+      <div class="learn-card"><div class="n">04 &middot; The Permission-Based Pivot</div><h3>The words that move a helpful call toward working together.</h3><p>They say, &ldquo;That was really helpful.&rdquo; What you say next decides whether the conversation ends or opens the door to working together.</p></div>
+      <div class="learn-card wide"><div><div class="n">05 &middot; The Follow-Up Loop</div><h3>A follow-up rhythm that gets you to a clear yes or no.</h3></div><p>How to lead opportunities to a close without chasing, discounting, or sending another &ldquo;just checking in.&rdquo;</p></div>
     </div>
     <div class="cta-center"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span></div>
   </div>
@@ -305,8 +330,8 @@
   <div class="wrap">
     <div class="cs-head">
       <div class="eyebrow center">From inside the group chat</div>
-      <div class="big-num">$100,000+</div>
-      <p class="lede">Earlier this year, I taught this approach to a live group. In less than three weeks, attendees made over $100,000 in sales.</p>
+      <h2 class="h2">Here&rsquo;s what that looked like.</h2>
+      <p class="lede">Earlier this year, I taught this approach to a live group. In less than three weeks, attendees made over $100,000 in sales. These came straight from the group chat.</p>
     </div>
     <div class="proof">
       <div class="pcol">
