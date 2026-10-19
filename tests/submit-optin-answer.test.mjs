@@ -10,6 +10,14 @@ process.env.ROEZAN_PASS_SECRET = 'test-pass-secret';
 const contact = require('../netlify/functions/submit-contact.js');
 const answer = require('../netlify/functions/submit-optin-answer.js');
 const { issueAnswerPass, issueRoezanPass } = contact.__internal;
+// In-memory stand-in for Netlify Blobs so queued opt-ins really run here.
+const queued = new Map();
+contact.__test.setBlobStoreOverride(() => ({
+  async setJSON(key, value) { queued.set(key, value); return { modified: true }; },
+  async get(key) { return queued.has(key) ? queued.get(key) : null; },
+  async list() { return { blobs: [...queued.keys()].map((key) => ({ key })) }; },
+  async delete(key) { queued.delete(key); },
+}));
 
 let failures = 0;
 function check(name, cond, extra) {
@@ -95,7 +103,7 @@ check('no Kit writes from any rejected request', writes.length === 0, JSON.strin
   const res = await quiet(() => contact.handler({ httpMethod: 'POST', headers: ORIGIN,
     body: JSON.stringify({ email: 'queued.test@example.org', first_name: 'Queue', tag_id: 20410092, website: '' }) }));
   const body = JSON.parse(res.body || '{}');
-  check('Kit outage: no answer_pass on a queued or failed opt-in', !body.answer_pass, res.body);
+  check('Kit outage, brand-new email: queued, and no answer_pass (Kit has no id yet)', body.success === true && body.queued === true && !body.answer_pass, res.body);
   global.fetch = prev;
 }
 {
@@ -108,6 +116,33 @@ check('no Kit writes from any rejected request', writes.length === 0, JSON.strin
   writes = [];
   const r8 = await post({ email: 'sarah.test@example.org', optin_revenue: '10k-plus', answer_pass: goodPass });
   check('valid answer is one direct PUT (no lookup)', r8.statusCode === 200 && writes.length === 1 && /\/v4\/subscribers\/42$/.test(writes[0].url), JSON.stringify(writes));
+}
+
+// 5) Returning contacts still get a pass, so their answer saves (bug 2026-10-19:
+//    no pass made the page skip the question and jump to the replay).
+async function optinWithState(state, email) {
+  const prev = global.fetch;
+  global.fetch = async (url, opts = {}) => {
+    const u = String(url);
+    const method = (opts.method || 'GET').toUpperCase();
+    const json = (status, body) => ({ ok: status < 400, status, headers: { get: () => null }, json: async () => body, text: async () => JSON.stringify(body) });
+    if (u.includes('/v4/subscribers') && method === 'GET') return json(200, { subscribers: [{ id: 77, email_address: email, state, fields: {} }] });
+    if (/\/v4\/subscribers(\/\d+)?$/.test(u)) return json(200, { subscriber: { id: 77, email_address: email, state } });
+    return json(200, {});
+  };
+  try {
+    const res = await quiet(() => contact.handler({ httpMethod: 'POST', headers: ORIGIN,
+      body: JSON.stringify({ email, first_name: 'Re', tag_id: 20410092, website: '', latest_ad: 'qa' }) }));
+    return JSON.parse(res.body || '{}');
+  } finally { global.fetch = prev; }
+}
+{
+  const body = await optinWithState('bounced', 'bounced.test@example.org');
+  check('un-retaggable contact (bounced): pass issued for its Kit id', body.success === true && /^\d+\.77\.[a-f0-9]{64}$/.test(body.answer_pass || ''), JSON.stringify(body));
+}
+{
+  const body = await optinWithState('cancelled', 'cancelled.test@example.org');
+  check('unsubscribed contact still awaiting resubscribe: queued AND pass issued', body.success === true && body.queued === true && /^\d+\.77\.[a-f0-9]{64}$/.test(body.answer_pass || ''), JSON.stringify(body));
 }
 
 if (failures) { console.error(`\n${failures} failure(s)`); process.exit(1); }

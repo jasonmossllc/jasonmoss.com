@@ -347,7 +347,9 @@ let blobsEvent = null;
 function connectBlobs(event) {
   blobsEvent = event;
 }
+let blobStoreOverride = null; // tests only (see __test.setBlobStoreOverride)
 async function blobStore(name) {
+  if (blobStoreOverride) return blobStoreOverride(name);
   const blobs = await import('@netlify/blobs');
   if (blobsEvent) blobs.connectLambda(blobsEvent);
   return blobs.getStore({ name });
@@ -522,6 +524,18 @@ async function syncContactToKit(submission, deadline = Date.now() + 8000) {
     subscriberExisted = saved.status === 200;
   }
 
+  // From here Kit has the subscriber, so a deferred/queued finish still knows
+  // its id (the two-step page uses it to save the opt-in answer).
+  try {
+    return await finishKitSync(submission, subscriber, subscriberExisted, ensureTime);
+  } catch (error) {
+    if (error && error.subscriberId == null) error.subscriberId = safeSubscriberId(subscriber);
+    throw error;
+  }
+}
+
+async function finishKitSync(submission, subscriber, subscriberExisted, ensureTime) {
+  const { email, tagIds, referrer = '' } = submission;
   if (subscriberExisted && !isSubscribed(subscriber)) {
     if (!canUseResubscribeForm(subscriber)) {
       console.error('Kit subscriber is not eligible for automatic form resubscribe', {
@@ -887,6 +901,9 @@ exports.handler = async (event) => {
     } catch (error) {
       if (!isQueueableKitError(error)) throw error;
       const queueKey = await enqueueOptin(submission, error);
+      // Kit may already have the subscriber (e.g. waiting on resubscribe); if so
+      // the answer can still be saved now. A brand-new email has no id yet.
+      const queuedAnswerPass = error.subscriberId ? issueAnswerPass(email, error.subscriberId) : null;
       console.error('Queued Kit opt-in after transient Kit failure', {
         queueKey,
         email,
@@ -899,12 +916,14 @@ exports.handler = async (event) => {
           success: true,
           queued: true,
           ...(roezanPass ? { roezan_pass: roezanPass } : {}),
+          ...(queuedAnswerPass ? { answer_pass: queuedAnswerPass } : {}),
         }),
       };
     }
 
-    // Only when Kit really has (and tagged) the subscriber.
-    const answerPass = result.tagged ? issueAnswerPass(email, result.subscriberId) : null;
+    // Whenever Kit has the subscriber (tagged, or an unsubscribed contact that
+    // couldn't be re-tagged), so the two-step page can save the answer.
+    const answerPass = result.subscriberId ? issueAnswerPass(email, result.subscriberId) : null;
 
     return {
       statusCode: 200,
@@ -928,7 +947,7 @@ exports.handler = async (event) => {
 };
 
 // Exposed for unit tests only; Netlify invokes .handler exclusively.
-module.exports.__test = { OPTIN_REVENUE, KIT_OPTIN_REVENUE_FIELD, looksLikeBotName, maxConsonantRun, originAllowed, EMAIL_RE, admitTokenless, checkTurnstile, TOKENLESS_DAILY_CAP, TOKENLESS_PER_IP_PER_HOUR };
+module.exports.__test = { setBlobStoreOverride: (fn) => { blobStoreOverride = fn; }, OPTIN_REVENUE, KIT_OPTIN_REVENUE_FIELD, looksLikeBotName, maxConsonantRun, originAllowed, EMAIL_RE, admitTokenless, checkTurnstile, TOKENLESS_DAILY_CAP, TOKENLESS_PER_IP_PER_HOUR };
 module.exports.__internal = {
   // Needed by submit-qualify.js to undo a decline when someone is rescued.
   kitRequest,

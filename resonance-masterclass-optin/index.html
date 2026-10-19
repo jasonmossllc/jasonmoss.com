@@ -694,7 +694,7 @@
 
       async function leave() {
         if (!state || state.leaving || !state.done) return;
-        if (!state.answer && state.pass) return; // still waiting for their tap
+        if (!state.answer) return; // the question is on screen: always wait for their tap
         state.leaving = true;
         var url = state.redirectUrl;
         var waits = [];
