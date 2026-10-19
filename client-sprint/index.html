@@ -59,7 +59,6 @@
 .cs-top img{height:30px;width:auto}
 .cs-hero-copy{flex:1;display:flex;align-items:center}
 .cs-hero-copy .inner{max-width:640px;display:flex;flex-direction:column;gap:30px;padding:72px 0 110px}
-.cs-hero .eb-b{white-space:nowrap}
 .cs-hero .h1{font-size:74px;line-height:1.05}
 .cs-hero .lede{max-width:600px}
 .cs-hero .btn{padding:21px 44px}
@@ -70,8 +69,7 @@
 .people{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1088px;margin:0 auto}
 .person{position:relative;padding:40px 36px 38px;background:linear-gradient(180deg,rgba(248,246,242,.04),rgba(248,246,242,.015));border:1px solid rgba(248,246,242,.09);box-shadow:0 40px 80px -50px rgba(0,0,0,.8)}
 .person::before{content:"";position:absolute;left:0;top:0;width:56px;height:2px;background:var(--gold)}
-.person .when{font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-.person .line{margin-top:18px;font-family:'Libre Baskerville',serif;font-size:26px;line-height:1.4;color:var(--sand)}
+.person .line{margin-top:0;font-family:'Libre Baskerville',serif;font-size:26px;line-height:1.4;color:var(--sand)}
 .person .soft{margin-top:10px;font-family:'Libre Baskerville',serif;font-size:19px;line-height:1.6;color:rgba(248,246,242,.55)}
 .story-body{max-width:720px;margin:72px auto 0;display:flex;flex-direction:column;gap:26px}
 .story-body p{font-size:19px;line-height:1.8;color:rgba(248,246,242,.72);text-wrap:pretty}
@@ -90,35 +88,32 @@
 .cs-hinge .hit{display:block;margin-top:24px;font-style:italic;font-size:64px;line-height:1.12;color:var(--gold);text-shadow:0 0 60px rgba(194,168,108,.25);text-wrap:balance}
 
 /* why */
-.cs-why{padding:140px 0 72px}
 .why-grid{display:grid;grid-template-columns:5fr 6fr;gap:96px;align-items:center}
-.why-grid .h2{margin-top:24px;font-size:44px}
+.why-grid .h2{font-size:44px}
 .why-lines{display:flex;flex-direction:column;gap:14px;padding-left:40px;border-left:1px solid rgba(194,168,108,.4)}
 .why-lines p{font-family:'Libre Baskerville',serif;font-size:24px;line-height:1.5;color:var(--sand)}
 .why-lines p.dim{color:rgba(248,246,242,.55)}
 .why-lines p.turn{margin-top:26px;font-style:italic;font-size:28px;line-height:1.35;color:var(--gold)}
 
 /* the sprint: intro + the week, with the five pieces under the day they're taught */
-.cs-sprint{padding-top:72px}
-.tl-grid{display:grid;grid-template-columns:5fr 7fr;gap:88px}
-/* sticky intro: on short viewports it rides up so the CTA + fine print stay on screen (zoom-aware where site.css zooms sections) */
-.tl-intro{display:flex;flex-direction:column;gap:24px;position:sticky;top:min(48px,calc(100vh - 720px));align-self:start}
-@media (min-width:901px) and (max-width:960px){.tl-intro{top:min(48px,calc(100vh - 760px))}}
-@media (min-width:901px) and (max-height:760px){.tl-intro{gap:18px;top:min(48px,calc(100vh - 690px))}}
-@media (min-width:901px) and (max-width:960px) and (max-height:760px){.tl-intro{top:min(48px,calc(100vh - 730px))}}
-@media (min-width:1600px){.tl-intro{top:min(48px,calc(100vh/1.1 - 720px))}}
-@media (min-width:1900px){.tl-intro{top:min(48px,calc(100vh/1.22 - 720px))}}
-.tl-intro .h2{font-size:clamp(29px,2.65vw,38px);line-height:1.25}
-.tl-intro p{font-size:17.5px;line-height:1.8;color:rgba(248,246,242,.7);text-wrap:pretty}
-.tl-intro p.explain{font-size:19px;line-height:1.7;color:rgba(248,246,242,.86)}
-.goal{padding:22px 26px;border:1px solid rgba(194,168,108,.4);background:rgba(194,168,108,.06);font-family:'Libre Baskerville',serif;font-size:19px;line-height:1.55;color:var(--sand)}
+/* introducing */
+.cs-intro{position:relative;overflow:hidden;background-color:#1D1F1E;background-image:url(/assets/textures/grain-dark-soft.png),radial-gradient(60% 46% at 50% 34%,rgba(194,168,108,.16),rgba(194,168,108,0) 70%);background-size:256px 256px,auto;background-repeat:repeat,no-repeat;border-top:1px solid rgba(194,168,108,.22)}
+.cs-intro .eyebrow{justify-content:center}
+.intro-card{position:relative;max-width:860px;margin:30px auto 0}
+.intro-card::after{content:"";position:absolute;inset:18px -18px -18px 18px;border:1px solid rgba(194,168,108,.55);pointer-events:none}
+.intro-card img{position:relative;z-index:1;width:100%;height:auto;display:block;box-shadow:0 60px 120px -40px rgba(0,0,0,.9),0 0 90px -30px rgba(194,168,108,.3)}
+.intro-copy{max-width:680px;margin:88px auto 0;display:flex;flex-direction:column;align-items:center;gap:24px;text-align:center}
+.intro-copy .h2{font-size:44px;line-height:1.2}
+.intro-copy p{font-size:17.5px;line-height:1.8;color:rgba(248,246,242,.7);text-wrap:pretty}
+.intro-copy p.explain{font-size:20px;line-height:1.7;color:rgba(248,246,242,.86)}
+.goal{padding:22px 30px;border:1px solid rgba(194,168,108,.4);background:rgba(194,168,108,.06);font-family:'Libre Baskerville',serif;font-size:20px;line-height:1.55;color:var(--sand)}
 .goal b{display:block;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
-.tl-cta{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:8px}
-.tl-cta.mob-only{display:none}
-/* desktop: the week starts level with the explain line, so the sprint H2 leads alone */
-.wk{padding-top:calc(69px + 2.5*clamp(29px,2.65vw,38px))}
-.wk-head{margin-bottom:52px}
-.wk-head .wk-title{margin-top:16px;font-family:'Libre Baskerville',serif;font-size:26px;line-height:1.3;color:var(--sand)}
+.tl-cta{display:flex;flex-direction:column;align-items:center;gap:14px;margin-top:8px}
+/* how it works */
+.cs-week{border-top:1px solid rgba(194,168,108,.12)}
+.wk{max-width:620px;margin:0 auto}
+.wk>.eyebrow{margin-bottom:48px}
+.wk-cta{margin-top:72px}
 .rail{position:relative;display:flex;flex-direction:column}
 .rail::before{content:"";position:absolute;left:9px;top:12px;bottom:12px;width:1px;background:linear-gradient(180deg,rgba(194,168,108,.7),rgba(194,168,108,.15))}
 .rail-item{position:relative;padding:0 0 56px 58px}
@@ -128,12 +123,6 @@
 .rail-item .when{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 .rail-item h3{font-size:30px;margin:12px 0}
 .rail-item p{font-size:17px;line-height:1.75;color:rgba(248,246,242,.68);max-width:560px;text-wrap:pretty}
-.pieces{margin-top:24px;display:flex;flex-direction:column;gap:12px}
-.piece{position:relative;padding:24px 26px;background:linear-gradient(180deg,rgba(248,246,242,.04),rgba(248,246,242,.015));border:1px solid rgba(248,246,242,.09)}
-.piece::before{content:"";position:absolute;left:0;top:0;width:40px;height:2px;background:var(--gold)}
-.piece .n{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.piece h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:21px;line-height:1.4;color:var(--sand);margin:10px 0 8px;text-wrap:balance}
-.rail-item .piece p{font-size:15.5px;line-height:1.7;color:rgba(248,246,242,.62)}
 
 /* results */
 .big-num{display:block;margin-bottom:16px;font-family:'Libre Baskerville',serif;font-size:60px;line-height:1;color:var(--gold)}
@@ -198,11 +187,10 @@
   .cs-hero .bg{inset:0 0 auto 0;height:64vh;background-position:46% 28%}
   .cs-hero .bg::after{background:linear-gradient(0deg,#171817 6%,rgba(23,24,23,.2) 60%,rgba(23,24,23,.35) 100%)}
   .cs-hero-copy .inner{padding:30vh 0 72px;gap:22px}
-  .cs-hero .eb-dot{display:none}
-  .cs-hero .eb-b{display:block}
   .cs-hero .h1{font-size:clamp(36px,10.7vw,46px)}
-  .meta{flex-wrap:nowrap;gap:0 16px}
-  .meta span+span::before{margin-right:16px}
+  .meta{flex-wrap:nowrap;gap:0 10px;font-size:clamp(10.5px,3vw,12px);letter-spacing:.08em}
+  .meta span{white-space:nowrap}
+  .meta span+span::before{margin-right:10px}
   .cta-row{flex-direction:column;align-items:stretch;gap:14px}
   .cta-row small{text-align:center}
   .pre-cta{display:flex;justify-content:center;order:-1}
@@ -225,26 +213,25 @@
   .cs-hinge .setup{margin-top:22px;font-size:24px;line-height:1.4}
   .cs-hinge .hit{margin-top:18px;font-size:clamp(32px,9.6vw,38px);line-height:1.15}
   /* why */
-  .cs-why{padding:96px 0 48px}
-  .why-grid,.tl-grid{grid-template-columns:1fr;gap:48px}
+  .cs-why{padding:96px 0}
+  .why-grid{grid-template-columns:1fr;gap:40px}
   .why-grid .h2{font-size:32px}
   .why-lines{padding-left:24px}
   .why-lines p{font-size:20px}
   .why-lines p.turn{margin-top:22px;font-size:23px}
   /* sprint */
-  .cs-sprint{padding-top:56px}
-  .wk{padding-top:0}
-  .tl-intro{position:static}
-  .tl-intro .h2{font-size:32px}
-  .tl-cta{align-items:stretch;margin-top:4px}
+  .intro-card{margin-top:24px;margin-right:12px}
+  .intro-card::after{inset:10px -10px -10px 10px}
+  .intro-copy{margin-top:56px;gap:20px}
+  .intro-copy .h2{font-size:32px}
+  .intro-copy p.explain{font-size:18px}
+  .goal{font-size:18px;padding:20px 22px}
+  .tl-cta{align-self:stretch;align-items:stretch;margin-top:4px}
   .tl-cta .fine-it{text-align:center}
-  .tl-cta.mob-only{display:flex;margin-top:56px}
-  .wk-head{margin-bottom:40px}
-  .wk-head .wk-title{font-size:24px}
+  .wk>.eyebrow{margin-bottom:36px}
+  .wk-cta{margin-top:56px}
   .rail-item{padding:0 0 48px 40px}
   .rail-item h3{font-size:25px}
-  .piece{padding:22px 18px}
-  .piece h4{font-size:19px}
   /* results */
   .cs-head .h2{font-size:32px}
   .cs-head .h2.res-h{font-size:clamp(28px,7.9vw,32px)}
@@ -254,7 +241,7 @@
   .pf.o1{order:1}.pf.o2{order:2}.pf.o3{order:3}.pf.o4{order:4}.pf.o5{order:5}
   .pf.narrow img{width:88%}
   .pf figcaption{font-size:12px;letter-spacing:.16em}
-  @media (max-width:400px){.piece .n,.rail-item .when{letter-spacing:.14em}.pf figcaption{letter-spacing:.12em}}
+  @media (max-width:400px){.rail-item .when{letter-spacing:.14em}.pf figcaption{letter-spacing:.12em}}
   /* close + offer */
   .cs-close{padding:96px 0 40px}
   .cs-close .col{gap:24px}
@@ -275,7 +262,7 @@
   .cs-ftr p{text-align:left;font-size:12.5px}
 }
 @media (min-width:601px) and (max-width:900px){
-  .tl-intro,.wk,.why-grid,.story-body,.faq{max-width:620px;margin-left:auto;margin-right:auto}
+  .intro-copy,.wk,.why-grid,.story-body,.faq{max-width:620px;margin-left:auto;margin-right:auto}
 }
 </style>
 </head>
@@ -288,10 +275,10 @@
   <div class="wrap cs-top"><img src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"></div>
   <div class="wrap cs-hero-copy" id="main">
     <div class="inner">
-      <div class="eyebrow"><span><span class="eb-a">A live 7-day sprint</span><span class="eb-dot"> &middot; </span><span class="eb-b">Oct 29 &ndash; Nov 5</span></span></div>
+      <div class="eyebrow">A live 7-day sprint</div>
       <h1 class="h1">Your next client already <span class="gold-it">knows your name.</span></h1>
       <p class="lede">Learn the fastest way to turn the people who already know you into high-ticket clients &mdash; without ads, a funnel, or posting&nbsp;more.</p>
-      <div class="meta"><span>3 live sessions</span><span>9&ndash;11am MT</span></div>
+      <div class="meta"><span>3 live sessions</span><span>Oct 29 &ndash; Nov 5</span><span>9&ndash;11am MT</span></div>
       <div class="cta-row hero-cta"><p class="pre-cta">Recordings included</p><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><small class="desk-only">Live on Zoom &middot; Recordings included</small></div>
     </div>
   </div>
@@ -301,8 +288,8 @@
 <section class="sec cs-story bg-obsidian">
   <div class="wrap">
     <div class="people">
-      <div class="person"><div class="when">Six months ago</div><p class="line">She talked to you six months&nbsp;ago.</p><p class="soft">She wanted your help. She just wasn&rsquo;t&nbsp;ready.</p></div>
-      <div class="person"><div class="when">For a year</div><p class="line">He&rsquo;s followed you for a&nbsp;year.</p><p class="soft">Never commented. Watched everything you&rsquo;ve&nbsp;posted.</p></div>
+      <div class="person"><p class="line">She talked to you six months&nbsp;ago.</p><p class="soft">She wanted your help. She just wasn&rsquo;t&nbsp;ready.</p></div>
+      <div class="person"><p class="line">He&rsquo;s followed you for a&nbsp;year.</p><p class="soft">Never commented. Watched everything you&rsquo;ve&nbsp;posted.</p></div>
     </div>
     <div class="story-body">
       <p>They&rsquo;ve been thinking about working with you&hellip; and waiting for a reason to take the next&nbsp;step.</p>
@@ -318,7 +305,7 @@
 <!-- The hinge: the key idea -->
 <section class="cs-hinge">
   <div class="wrap">
-    <p class="key"><span class="lead">I&rsquo;ve signed over 2,000 clients, and here&rsquo;s what I&rsquo;ve&nbsp;learned:</span> <span class="setup">the fastest path to your next client usually isn&rsquo;t someone&nbsp;new.</span> <em class="hit">It&rsquo;s someone who already knows&nbsp;you.</em></p>
+    <p class="key"><span class="lead">I&rsquo;ve signed over 2,000 clients, and here&rsquo;s what I&rsquo;ve&nbsp;learned:</span> <span class="setup">The fastest path to your next client usually isn&rsquo;t someone&nbsp;new.</span> <em class="hit">It&rsquo;s someone who already knows&nbsp;you.</em></p>
   </div>
 </section>
 
@@ -327,13 +314,12 @@
   <div class="wrap">
     <div class="why-grid">
       <div>
-        <div class="eyebrow">Why it never happens</div>
         <h2 class="h2">Why the conversation never starts.</h2>
       </div>
       <div class="why-lines">
-        <p class="dim">Most people know these opportunities&nbsp;exist.</p>
-        <p class="dim">They still don&rsquo;t reach out.</p>
-        <p>Because they don&rsquo;t know what to&nbsp;say.</p>
+        <p class="dim">You know these opportunities&nbsp;exist.</p>
+        <p class="dim">But you still don&rsquo;t reach out.</p>
+        <p>Because you don&rsquo;t know what to&nbsp;say.</p>
         <p>Or because reaching out feels like chasing. Like needing something. Like making it&nbsp;weird.</p>
         <p class="turn">That&rsquo;s about to change&hellip; starting&nbsp;now.</p>
       </div>
@@ -341,58 +327,49 @@
   </div>
 </section>
 
-<!-- The sprint + the week -->
-<section class="sec cs-sprint bg-deep">
+<!-- Introducing the sprint -->
+<section class="sec cs-intro">
   <div class="wrap">
-    <div class="tl-grid">
-      <div class="tl-intro">
-        <div class="eyebrow">The 7-Day Client Sprint</div>
-        <h2 class="h2">The fastest path to your next client.</h2>
-        <p class="explain">Over seven days, you&rsquo;ll learn exactly how to turn the people who already know you into high-ticket clients.</p>
-        <p>This doesn&rsquo;t require a complicated marketing machine or thousands of dollars in ads. It starts with the relationships you already&nbsp;have.</p>
-        <div class="goal"><b>The goal</b>Sign your next high-ticket client in seven days or&nbsp;less.</div>
-        <div class="tl-cta"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span></div>
-      </div>
-      <div class="wk">
-        <div class="wk-head">
-          <div class="eyebrow">What you&rsquo;ll walk&nbsp;away&nbsp;with</div>
-          <p class="wk-title">Five pieces. One week.<br>Your next client.</p>
+    <div class="eyebrow center">Introducing</div>
+    <figure class="intro-card"><img src="assets/sprint-card.jpg" width="1530" height="1020" loading="lazy" alt="The 7-Day Client Sprint, live with Jason Moss: Oct 29, Oct 30 and Nov 5, 9&ndash;11am MT on Zoom"></figure>
+    <div class="intro-copy">
+      <h2 class="h2">The fastest path to your next client.</h2>
+      <p class="explain">Over seven days, you&rsquo;ll learn exactly how to turn the people who already know you into high-ticket&nbsp;clients.</p>
+      <p>This doesn&rsquo;t require a complicated marketing machine or thousands of dollars in ads. It starts with the relationships you already&nbsp;have.</p>
+      <div class="goal"><b>The goal</b>Sign your next high-ticket client in seven days or&nbsp;less.</div>
+      <div class="tl-cta"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- How it works -->
+<section class="sec cs-week bg-deep">
+  <div class="wrap">
+    <div class="wk">
+      <div class="eyebrow">How it works</div>
+      <div class="rail">
+        <div class="rail-item">
+          <div class="when">Day 1 &middot; <span class="nw">Thu Oct 29</span> &middot; <span class="nw">Live 9&ndash;11am MT</span></div>
+          <h3>Find them.</h3>
+          <p>Run the Hidden Client Scan and write your first reconnection messages. You&rsquo;ll have opportunities in your pipeline before the day&nbsp;ends.</p>
         </div>
-        <div class="rail">
-          <div class="rail-item">
-            <div class="when">Day 1 &middot; <span class="nw">Thu Oct 29</span> &middot; <span class="nw">Live 9&ndash;11am MT</span></div>
-            <h3>Find them.</h3>
-            <p>Run the Hidden Client Scan and write your first reconnection messages. You&rsquo;ll have opportunities in your pipeline before the day&nbsp;ends.</p>
-            <div class="pieces">
-              <div class="piece"><div class="n">01 &middot; The Hidden Client Scan</div><h4>A list of people who could hire you now.</h4><p>Where your next high-ticket client could be hiding&hellip; and why you may have already crossed them off your&nbsp;list.</p></div>
-              <div class="piece"><div class="n">02 &middot; The Reconnection Message</div><h4>Messages that reopen old conversations.</h4><p>How to open the door after six months of silence. No apology, no awkward <span class="nw">check-in,</span> no&nbsp;pitch.</p></div>
-            </div>
-          </div>
-          <div class="rail-item">
-            <div class="when">Day 2 &middot; <span class="nw">Fri Oct 30</span> &middot; <span class="nw">Live 9&ndash;11am MT</span></div>
-            <h3>Talk to them.</h3>
-            <p>Learn the Bridge Call and the <span class="nw">Permission-Based Pivot</span>, then practice both so you&rsquo;re ready when the calls&nbsp;come.</p>
-            <div class="pieces">
-              <div class="piece"><div class="n">03 &middot; The 20-Minute Bridge Call</div><h4>A short call that turns interest into a real conversation about working together.</h4><p>What happens inside the short conversation I&rsquo;ve used to generate tens of thousands of dollars in additional sales, without turning it into a sales pitch or an hour of free&nbsp;coaching.</p></div>
-              <div class="piece"><div class="n">04 &middot; The Permission-Based Pivot</div><h4>The words that move a helpful call toward working together.</h4><p>They say, &ldquo;That was really helpful.&rdquo; What you say next decides whether the conversation ends or opens the door to working&nbsp;together.</p></div>
-            </div>
-          </div>
-          <div class="rail-item own">
-            <div class="when">Days 3&ndash;7 &middot; <span class="nw">Your conversations</span></div>
-            <h3>Have the conversations.</h3>
-            <p>Send your messages, take your calls, and use the Follow-Up Loop to move each opportunity toward a&nbsp;yes.</p>
-            <div class="pieces">
-              <div class="piece"><div class="n">05 &middot; The Follow-Up Loop</div><h4>A follow-up rhythm that gets you to a clear yes&nbsp;or&nbsp;no.</h4><p>How to lead opportunities to a close without chasing, discounting, or sending another &ldquo;just checking&nbsp;in.&rdquo;</p></div>
-            </div>
-          </div>
-          <div class="rail-item">
-            <div class="when"><span class="nw">Thu Nov 5</span> &middot; <span class="nw">Live 9&ndash;11am MT</span></div>
-            <h3>Group coaching call.</h3>
-            <p>Bring your open conversations. We&rsquo;ll work through them live, so you leave knowing exactly how to move each one toward a&nbsp;yes.</p>
-          </div>
+        <div class="rail-item">
+          <div class="when">Day 2 &middot; <span class="nw">Fri Oct 30</span> &middot; <span class="nw">Live 9&ndash;11am MT</span></div>
+          <h3>Talk to them.</h3>
+          <p>Learn the Bridge Call and the <span class="nw">Permission-Based Pivot</span> &mdash; the exact approach I&rsquo;ve used to generate tens of thousands of dollars in additional sales, without unwanted sales pitches or unnecessary free&nbsp;coaching.</p>
         </div>
-        <div class="tl-cta mob-only"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span></div>
+        <div class="rail-item own">
+          <div class="when">Days 3&ndash;7 &middot; <span class="nw">Your conversations</span></div>
+          <h3>Have the conversations.</h3>
+          <p>Send your messages, take your calls, and use the Follow-Up Loop to move each opportunity toward a&nbsp;yes.</p>
+        </div>
+        <div class="rail-item">
+          <div class="when"><span class="nw">Thu Nov 5</span> &middot; <span class="nw">Live 9&ndash;11am MT</span></div>
+          <h3>Group coaching call.</h3>
+          <p>Bring your open conversations. We&rsquo;ll work through them live, so you leave knowing exactly how to move each one toward a&nbsp;yes.</p>
+        </div>
       </div>
+      <div class="tl-cta wk-cta"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span></div>
     </div>
   </div>
 </section>
