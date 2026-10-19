@@ -476,7 +476,7 @@
     .optin-revenue-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
     .optin-revenue-opt { display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
     .optin-revenue-opt span { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.125rem; text-align: center; min-height: 3.5rem; padding: 0.6rem 0.25rem; border: 1px solid #C9BB94; border-radius: 0.25rem; background: #FFFFFF; box-shadow: 0 1px 2px rgba(29, 31, 30, 0.06); font-family: 'Raleway', sans-serif; color: #2E3A2E; transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease; }
-    .optin-revenue-opt b { font-weight: 600; font-size: 0.9375rem; line-height: 1.2; white-space: nowrap; }
+    .optin-revenue-opt b { font-weight: 600; font-size: 0.9375rem; line-height: 1.2; }
     .optin-revenue-opt small { font-weight: 400; font-size: 0.75rem; line-height: 1.2; color: #6B706D; transition: color 0.15s ease; }
     .optin-revenue-opt:hover span { border-color: #B8962E; }
     .optin-revenue-opt:active span { background: #F3EEE2; }
@@ -667,7 +667,7 @@
       var buttons = el ? Array.prototype.slice.call(el.querySelectorAll('.optin-revenue-opt')) : [];
       var NOTE_IDLE = 'Tap one to start your masterclass.';
       var NOTE_GOING = 'Starting your masterclass\u2026';
-      var state = null;      // { email, fname, answer, done, confirmed, pass, redirectUrl, leaving }
+      var state = null;      // { email, fname, answer, done, confirmed, pass, redirectUrl, leaving, armAt, late }
       var keptAnswer = null; // survives a failed attempt so a retry goes straight through
 
       function setButtons(disabled) { buttons.forEach(function (b) { b.disabled = disabled; }); }
@@ -696,6 +696,9 @@
         if (!state || state.leaving || !state.done) return;
         if (!state.answer) return; // the question is on screen: always wait for their tap
         state.leaving = true;
+        // The save answered after the form's 8s cap: give its reply a little
+        // longer so this visitor still gets their Lead and answer saved.
+        if (state.late) await Promise.race([state.late, new Promise(function (r) { setTimeout(r, 3000); })]);
         var url = state.redirectUrl;
         var waits = [];
         if (state.answer && state.pass) {
@@ -712,9 +715,13 @@
 
       buttons.forEach(function (btn) {
         btn.addEventListener('click', function () {
+          if (!state || state.answer) return;
+          // The middle tile sits where the submit button was: ignore stray
+          // repeat taps on the button that land on it as the card swaps. Each
+          // early tap pushes the window out, so only a deliberate tap counts.
+          if (Date.now() < state.armAt) { state.armAt = Date.now() + 700; return; }
           var value = btn.getAttribute('data-value');
           keptAnswer = value;
-          if (!state || state.answer) return;
           state.answer = value;
           markSelected(value);
           setButtons(true);
@@ -727,7 +734,7 @@
         show: function (email, firstName) {
           if (!el || !wrap) return;
           var fname = String(firstName || '').trim().split(/\s+/)[0] || '';
-          state = { email: email, fname: fname.slice(0, 20), answer: keptAnswer, done: false, confirmed: false, pass: null, redirectUrl: null, leaving: false };
+          state = { email: email, fname: fname.slice(0, 20), answer: keptAnswer, done: false, confirmed: false, pass: null, redirectUrl: null, leaving: false, armAt: Date.now() + 700, late: null };
           wrap.style.minHeight = wrap.offsetHeight + 'px'; // same-size card
           wrap.classList.add('is-step2');
           form.hidden = true;
@@ -765,9 +772,19 @@
           }
           state.done = true;
           state.confirmed = confirmed;
-          state.pass = (confirmed && ctx.response && ctx.response.answer_pass) || null;
+          // The pass only lets us save the answer; the Lead stays gated on a
+          // confirmed save (an un-retaggable returning contact gets a pass).
+          state.pass = (ctx.response && ctx.response.success === true && ctx.response.answer_pass) || null;
           state.redirectUrl = ctx.redirectUrl;
           if (confirmed) fireLead();
+          if (!ctx.response && ctx.late) {
+            var s = state;
+            s.late = ctx.late.then(function (r) {
+              s.late = null;
+              if (r && r.success === true && r.answer_pass && !s.pass) s.pass = r.answer_pass;
+              if (optinConfirmed(r) && !s.confirmed) { s.confirmed = true; fireLead(); }
+            });
+          }
           leave();
         }
       };

@@ -32,6 +32,7 @@
 // read `roezan_pass` from the response — see ROEZAN PASS below.
 //
 const crypto = require('crypto');
+const { AsyncLocalStorage } = require('async_hooks');
 
 const KIT_API_BASE = (process.env.KIT_API_URL || 'https://api.kit.com').replace(/\/+$/, '');
 const KIT_RESUBSCRIBE_FORM_ID = process.env.KIT_RESUBSCRIBE_FORM_ID || '9576424';
@@ -70,6 +71,9 @@ class KitApiError extends Error {
   }
 }
 
+// Carries submit-contact's strict deadline down to every kitRequest.
+const kitDeadline = new AsyncLocalStorage();
+
 class DeferredKitSyncError extends Error {
   constructor(message, submissionPatch = {}) {
     super(message);
@@ -86,9 +90,19 @@ async function kitRequest(path, options = {}) {
   }
 
   const { returnResponseMeta, ...fetchOptions } = options;
+  // Strict deadline (submit-contact only, see syncContactToKit): never start an
+  // attempt or a retry sleep that can't finish in time, so the handler answers
+  // {queued} before the page stops listening, instead of being killed.
+  const strictDeadline = kitDeadline.getStore()?.deadline || 0;
+  const timeLeft = () => (strictDeadline ? strictDeadline - Date.now() : Infinity);
+  const sleepOrDefer = async (ms) => {
+    if (timeLeft() < ms + 500) throw new DeferredKitSyncError('Kit retry would pass the deadline; queued for retry');
+    await sleep(ms);
+  };
 
   for (let attempt = 0; attempt <= KIT_RETRY_DELAYS_MS.length; attempt += 1) {
     let res;
+    if (timeLeft() < 500) throw new DeferredKitSyncError('Function deadline reached before a Kit call; queued for retry');
     try {
       res = await fetch(`${KIT_API_BASE}${path}`, {
         ...fetchOptions,
@@ -101,11 +115,11 @@ async function kitRequest(path, options = {}) {
         // A hanging connection would otherwise ride out Netlify's 10s kill —
         // which throws away the request without ever reaching the durable
         // queue. An abort throws, which the queue path can catch and enqueue.
-        signal: AbortSignal.timeout(4000),
+        signal: AbortSignal.timeout(Math.max(250, Math.min(4000, timeLeft() - 250))),
       });
     } catch (error) {
       if (attempt >= KIT_RETRY_DELAYS_MS.length) throw error;
-      await sleep(KIT_RETRY_DELAYS_MS[attempt]);
+      await sleepOrDefer(KIT_RETRY_DELAYS_MS[attempt]);
       continue;
     }
 
@@ -125,7 +139,7 @@ async function kitRequest(path, options = {}) {
         const delay = Number.isFinite(retryAfterSeconds)
           ? Math.min(Math.max(retryAfterSeconds * 1000, 250), 5000)
           : KIT_RETRY_DELAYS_MS[attempt];
-        await sleep(delay);
+        await sleepOrDefer(delay);
         continue;
       }
 
@@ -321,6 +335,9 @@ async function waitForActiveSubscriber(email) {
 
 function isQueueableKitError(error) {
   if (error?.retryable) return true;
+  // AbortSignal.timeout() rejects with a DOMException (TimeoutError), which is
+  // neither a TypeError nor a KitApiError; a hung Kit is as transient as a 5xx.
+  if (error?.name === 'TimeoutError' || error?.name === 'AbortError') return true;
   if (error instanceof KitApiError) {
     return error.status === 429 || error.status >= 500;
   }
@@ -470,7 +487,8 @@ async function enqueueOptin(submission, error) {
 // platform kill loses the lead without ever reaching the durable queue. When
 // time runs short we throw a DeferredKitSyncError instead, so the remaining
 // work is enqueued and finished by the scheduled retry (tagging is idempotent).
-async function syncContactToKit(submission, deadline = Date.now() + 8000) {
+async function syncContactToKit(submission, deadline = Date.now() + 8000, { strict = false } = {}) {
+  if (strict) return kitDeadline.run({ deadline }, () => syncContactToKit(submission, deadline));
   const ensureTime = () => {
     if (Date.now() > deadline) {
       throw new DeferredKitSyncError('Function deadline reached mid-sync; queued for retry');
@@ -718,9 +736,10 @@ function verifyRoezanPass(pass, email, phone) {
 // 'answer' \n email \n subscriberId \n timestamp)>". Binding the subscriber id
 // lets the answer go straight to that Kit record (no lookup); binding the email
 // keeps a pass from being moved to another person; the 'answer' prefix keeps
-// it from ever validating as a roezan_pass. Only issued when Kit has the
-// subscriber (not for queued opt-ins). Short TTL: the page uses it in seconds.
-const ANSWER_PASS_TTL_MS = 15 * 60 * 1000;
+// it from ever validating as a roezan_pass. Issued whenever Kit has the
+// subscriber id. 24h TTL: the page waits for the tap with no time limit, and a
+// pass can only write optin_revenue on that one record.
+const ANSWER_PASS_TTL_MS = 24 * 60 * 60 * 1000;
 
 function answerPassSignature(email, subscriberId, timestamp) {
   const secret = process.env.ROEZAN_PASS_SECRET;
@@ -792,6 +811,9 @@ function corsHeaders(event) {
 }
 
 exports.handler = async (event) => {
+  // The opt-in pages stop listening 8s after they send; answer (saved, or
+  // queued for retry) well inside that, counting the Turnstile check too.
+  const handlerStart = Date.now();
   connectBlobs(event);
   const headers = corsHeaders(event);
   if (event.httpMethod === 'OPTIONS') {
@@ -897,7 +919,7 @@ exports.handler = async (event) => {
 
     let result;
     try {
-      result = await syncContactToKit(submission);
+      result = await syncContactToKit(submission, handlerStart + 6500, { strict: true });
     } catch (error) {
       if (!isQueueableKitError(error)) throw error;
       const queueKey = await enqueueOptin(submission, error);

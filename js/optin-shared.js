@@ -189,10 +189,12 @@
   /* ── Submit pipeline ──────────────────────────────────────────────────── */
   function init(config) {
     // Hands off to the page's onSuccess (two-step forms) or redirects.
-    function finish(ctx, response) {
+    function finish(ctx, response, late) {
       var url = config.redirect(ctx);
       if (config.onSuccess) {
-        config.onSuccess({ firstName: ctx.firstName, email: ctx.email, form: ctx.form, response: response || null, redirectUrl: url });
+        // late: when the 8s cap won, the still-running save's eventual JSON
+        // (or null), so a two-step page that's still on screen can use it.
+        config.onSuccess({ firstName: ctx.firstName, email: ctx.email, form: ctx.form, response: response || null, redirectUrl: url, late: late || null });
       } else {
         window.location.href = url;
       }
@@ -322,8 +324,9 @@
           // well under a second because they short-circuit before any Kit call.
           var fastMs = (typeof config.fastRedirectMs === 'number' && config.fastRedirectMs > 0) ? config.fastRedirectMs : 0;
           var fastRedirect = false;
+          var submitFetch = null;
           try {
-            var submitFetch = fetch('/.netlify/functions/submit-contact', {
+            submitFetch = fetch('/.netlify/functions/submit-contact', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload),
@@ -394,7 +397,10 @@
             }
           }
 
-          finish({ firstName: firstName, email: email, form: form }, scData);
+          var late = (!scRes && submitFetch && config.onSuccess)
+            ? submitFetch.then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
+            : null;
+          finish({ firstName: firstName, email: email, form: form }, scData, late);
         } catch (err) {
           console.error('Form submission error:', err);
           fail('Something went wrong. Please try again.');

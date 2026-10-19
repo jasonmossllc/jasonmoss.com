@@ -72,9 +72,19 @@ check('pass for a different email -> 403', r1.statusCode === 403, r1.body);
 const r2 = await post({ email: 'sarah.test@example.org', optin_revenue: '1k-10k', answer_pass: '123.' + 'a'.repeat(64) });
 check('forged pass -> 403', r2.statusCode === 403, r2.body);
 const parts = goodPass.split('.');
-const old = `${Date.now() - 20 * 60 * 1000}.${parts[1]}.${parts[2]}`;
+const old = `${Date.now() - 25 * 60 * 60 * 1000}.${parts[1]}.${parts[2]}`;
 const r3 = await post({ email: 'sarah.test@example.org', optin_revenue: '1k-10k', answer_pass: old });
-check('expired (20 min) / tampered timestamp -> 403', r3.statusCode === 403, r3.body);
+check('expired (25 h) / tampered timestamp -> 403', r3.statusCode === 403, r3.body);
+{
+  const saved = writes; writes = [];
+  const realNow = Date.now;
+  Date.now = () => realNow() - 2 * 60 * 60 * 1000; // issue the pass 2h ago
+  const twoHoursOld = issueAnswerPass('sarah.test@example.org', 42);
+  Date.now = realNow;
+  const r3c = await post({ email: 'sarah.test@example.org', optin_revenue: '1k-10k', answer_pass: twoHoursOld });
+  check('a 2-hour-old pass still saves (24h TTL; visitor may sit on the question)', r3c.statusCode === 200, r3c.body);
+  writes = saved; // this one was a valid write; keep the rejected-requests check clean
+}
 const swapped = `${parts[0]}.99.${parts[2]}`;
 const r3b = await post({ email: 'sarah.test@example.org', optin_revenue: '1k-10k', answer_pass: swapped });
 check('pass with a different subscriber id -> 403', r3b.statusCode === 403, r3b.body);
@@ -143,6 +153,42 @@ async function optinWithState(state, email) {
 {
   const body = await optinWithState('cancelled', 'cancelled.test@example.org');
   check('unsubscribed contact still awaiting resubscribe: queued AND pass issued', body.success === true && body.queued === true && /^\d+\.77\.[a-f0-9]{64}$/.test(body.answer_pass || ''), JSON.stringify(body));
+}
+
+// 6) A hung Kit (AbortSignal.timeout -> TimeoutError) queues the opt-in
+//    instead of a 500 that loses it; and the reply comes inside the page's 8s.
+{
+  const prev = global.fetch;
+  global.fetch = async (url, opts = {}) => {
+    const u = String(url);
+    if (u.includes('challenges.cloudflare.com')) return { ok: true, status: 200, json: async () => ({ success: true }) };
+    throw new DOMException('The operation was aborted due to timeout', 'TimeoutError');
+  };
+  const t0 = Date.now();
+  const res = await quiet(() => contact.handler({ httpMethod: 'POST', headers: ORIGIN,
+    body: JSON.stringify({ email: 'hung.test@example.org', first_name: 'Hung', tag_id: 20410092, website: '', latest_ad: 'qa' }) }));
+  const ms = Date.now() - t0;
+  const body = JSON.parse(res.body || '{}');
+  check('Kit timeout -> queued (not 500)', res.statusCode === 200 && body.queued === true, res.statusCode + ' ' + res.body);
+  check(`Kit timeout answers inside the page's 8s window (${ms}ms)`, ms < 7500, ms);
+  global.fetch = prev;
+}
+{
+  // Every Kit call is slow (1.8s) but succeeds: the handler must still answer
+  // before ~7s (saved or queued), never run toward Netlify's 10s kill.
+  const prev = global.fetch;
+  global.fetch = async (url, opts = {}) => {
+    await new Promise((r) => setTimeout(r, 1800));
+    return prev(url, opts);
+  };
+  const t0 = Date.now();
+  const res = await quiet(() => contact.handler({ httpMethod: 'POST', headers: ORIGIN,
+    body: JSON.stringify({ email: 'sarah.test@example.org', first_name: 'Slow', tag_id: 20410092, website: '', latest_ad: 'qa' }) }));
+  const ms = Date.now() - t0;
+  const body = JSON.parse(res.body || '{}');
+  check(`slow Kit: answers by ~7s (${ms}ms) as saved or queued`, ms < 7500 && body.success === true && (body.tagged === true || body.queued === true), ms + ' ' + res.body);
+  check('slow Kit queued after the save: still carries an answer_pass', body.tagged === true || !!body.answer_pass, res.body);
+  global.fetch = prev;
 }
 
 if (failures) { console.error(`\n${failures} failure(s)`); process.exit(1); }

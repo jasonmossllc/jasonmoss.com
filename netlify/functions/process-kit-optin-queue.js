@@ -5,7 +5,21 @@ const QUEUE_BATCH_SIZE = Number.parseInt(process.env.KIT_QUEUE_BATCH_SIZE || '10
 // Items that keep failing must eventually leave the pending/ prefix: the
 // queue is processed oldest-first, so without a cap a handful of permanently
 // failing items would monopolize every run and starve newer opt-ins forever.
-const QUEUE_MAX_ATTEMPTS = Number.parseInt(process.env.KIT_QUEUE_MAX_ATTEMPTS || '12', 10);
+// Give-up is by AGE, not attempt count: a Kit outage longer than a few
+// minutes used to park every queued (already Lead-fired) opt-in in failed/
+// for good. Retries back off (1, 2, 4 ... 60 min) so a long outage doesn't
+// burn every run on the same items, and stop after QUEUE_MAX_AGE_HOURS.
+const QUEUE_MAX_AGE_MS = Number.parseFloat(process.env.KIT_QUEUE_MAX_AGE_HOURS || '48') * 60 * 60 * 1000;
+const QUEUE_MAX_READS = 50; // blobs inspected per run, including ones still backing off
+
+function retryGapMs(attempts) {
+  if (!attempts) return 0;
+  return Math.min(60 * 1000 * 2 ** (attempts - 1), 60 * 60 * 1000);
+}
+function msSince(iso, now) {
+  const t = Date.parse(iso || '');
+  return Number.isFinite(t) ? now - t : Infinity;
+}
 
 async function moveToFailed(store, key, item, error) {
   const failedKey = key.replace(/^pending\//, 'failed/');
@@ -26,6 +40,8 @@ async function processQueuedOptins() {
   let succeeded = 0;
   let retained = 0;
   let failed = 0;
+  let reads = 0;
+  const now = Date.now();
 
   for await (const page of store.list({ paginate: true, prefix: 'pending/' })) {
     for (const blob of page.blobs || []) {
@@ -33,6 +49,10 @@ async function processQueuedOptins() {
         return { processed, succeeded, retained, failed };
       }
 
+      if (reads >= QUEUE_MAX_READS) {
+        return { processed, succeeded, retained, failed };
+      }
+      reads += 1;
       const key = blob.key;
       let item;
       try {
@@ -52,6 +72,9 @@ async function processQueuedOptins() {
         continue;
       }
 
+      // Still inside its back-off gap: leave it for a later run.
+      if (item.attempts && msSince(item.lastAttemptAt, now) < retryGapMs(item.attempts)) continue;
+
       try {
         await __internal.syncContactToKit(item.submission);
         await store.delete(key);
@@ -68,7 +91,9 @@ async function processQueuedOptins() {
           lastError: __internal.kitErrorSummary(error),
         };
 
-        if (__internal.isQueueableKitError(error) && updated.attempts < QUEUE_MAX_ATTEMPTS) {
+        const age = msSince(item.queuedAt, now);
+        const tooOld = Number.isFinite(age) && age > QUEUE_MAX_AGE_MS;
+        if (__internal.isQueueableKitError(error) && !tooOld) {
           await store.setJSON(key, updated);
           retained += 1;
         } else {
@@ -94,4 +119,4 @@ exports.handler = schedule('* * * * *', async (event) => {
   };
 });
 
-module.exports.__test = { processQueuedOptins };
+module.exports.__test = { processQueuedOptins, retryGapMs };
