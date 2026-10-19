@@ -452,26 +452,35 @@
       }
     }
 
-    /* Two-step opt-in: after name + email are saved, the card swaps to one
-       tap-to-answer question, then goes to the replay. Codes match
-       OPTIN_REVENUE in netlify/functions/submit-contact.js. */
-    .optin-step2 { text-align: left; }
+    /* Two-step opt-in: the moment name + email pass the local checks, the card
+       swaps (same size) to one tap-to-answer question while the email check and
+       Kit save finish in the background. Codes match OPTIN_REVENUE in
+       netlify/functions/submit-contact.js. */
     .optin-step2[hidden], .optin-form[hidden], .optin-subtext[hidden] { display: none !important; }
-    .optin-step2-kicker { margin: 0 0 0.375rem; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 0.6875rem; letter-spacing: 0.16em; text-transform: uppercase; color: #907740; text-align: center; }
-    .optin-step2-q { margin: 0 0 1.125rem; font-family: 'Libre Baskerville', serif; font-weight: 400; font-size: 1.375rem; line-height: 1.3; color: #1D1F1E; text-align: center; }
+    .optin-form-wrap.is-step2 { display: flex; flex-direction: column; justify-content: center; }
+    .optin-step2 { width: 100%; max-width: 28rem; margin: 0 auto; text-align: center; }
+    .optin-step2-kicker { margin: 0 0 0.75rem; min-height: 1.2em; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 0.75rem; line-height: 1.2; letter-spacing: 0.14em; text-transform: uppercase; color: #8A6D2E; }
+    .optin-step2-kicker.is-in::before { content: '\2713\00a0'; color: #2C3E2D; }
+    .optin-step2-headline { margin: 0 auto 1.25rem; max-width: 22rem; font-family: 'Libre Baskerville', serif; font-weight: 400; font-size: 1.375rem; line-height: 1.3; color: #1D1F1E; text-wrap: balance; }
+    .optin-step2-headline:focus, .optin-step2-headline:focus-visible { outline: none; }
+    .optin-step2-q { display: block; margin: 0 0 0.75rem; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 0.9375rem; color: #2E3A2E; text-align: center; }
     .optin-revenue-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0.5rem; }
-    .optin-revenue-opt { display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; }
-    .optin-revenue-opt span { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.125rem; text-align: center; min-height: 3.5rem; padding: 0.6rem 0.25rem; border: 1px solid #D6CDB5; border-radius: 0.25rem; background: #FBF9F4; font-family: 'Raleway', sans-serif; color: #2E3A2E; transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease; }
+    .optin-revenue-opt { display: block; width: 100%; padding: 0; margin: 0; border: 0; background: none; font: inherit; cursor: pointer; -webkit-tap-highlight-color: transparent; touch-action: manipulation; }
+    .optin-revenue-opt span { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.125rem; text-align: center; min-height: 3.5rem; padding: 0.6rem 0.25rem; border: 1px solid #C9BB94; border-radius: 0.25rem; background: #FFFDF8; box-shadow: 0 1px 2px rgba(29, 31, 30, 0.06); font-family: 'Raleway', sans-serif; color: #2E3A2E; transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, opacity 0.15s ease; }
     .optin-revenue-opt b { font-weight: 600; font-size: 0.9375rem; line-height: 1.2; white-space: nowrap; }
-    .optin-revenue-opt small { font-weight: 400; font-size: 0.75rem; line-height: 1.2; color: #7E8381; transition: color 0.15s ease; }
+    .optin-revenue-opt small { font-weight: 400; font-size: 0.75rem; line-height: 1.2; color: #6B706D; transition: color 0.15s ease; }
     .optin-revenue-opt:hover span { border-color: #B8962E; }
+    .optin-revenue-opt:active span { background: #F3EEE2; }
     .optin-revenue-opt.is-selected span { background: #2C3E2D; border-color: #2C3E2D; color: #F7F4ED; }
-    .optin-revenue-opt.is-selected small { color: rgba(247, 244, 237, 0.75); }
+    .optin-revenue-opt.is-selected small { color: rgba(247, 244, 237, 0.8); }
+    .optin-revenue-opt[disabled]:not(.is-selected) span { opacity: 0.55; }
     .optin-revenue-opt:focus-visible { outline: none; }
-    .optin-revenue-opt:focus-visible span { outline: 2px solid #B8962E; outline-offset: 2px; }
+    .optin-revenue-opt:focus-visible span { outline: 2px solid #2C3E2D; outline-offset: 2px; }
     .optin-revenue-opt[disabled] { cursor: default; }
-    .optin-step2-note { margin: 0.875rem 0 0; font-family: 'Raleway', sans-serif; font-size: 0.875rem; color: #7E8381; text-align: center; }
-    @media (max-width: 380px) { .optin-revenue-grid { gap: 0.4rem; } .optin-revenue-opt b { font-size: 0.875rem; } }
+    .optin-step2-note { margin: 0.875rem 0 0; min-height: 1.3em; font-family: 'Raleway', sans-serif; font-size: 0.875rem; color: #5A5F5C; }
+    @media (prefers-reduced-motion: reduce) { .optin-revenue-opt span, .optin-revenue-opt small { transition: none; } }
+    @media (max-width: 380px) { .optin-revenue-grid { gap: 0.4rem; } .optin-revenue-opt b { font-size: 0.875rem; } .optin-step2-headline { font-size: 1.25rem; } }
+    @media (max-width: 345px) { .optin-revenue-opt b { font-size: 0.8125rem; } .optin-revenue-opt span { padding-left: 0.125rem; padding-right: 0.125rem; } }
   </style>
 </head>
 <body>
@@ -549,15 +558,16 @@
 
         <p class="optin-subtext"><strong>11,000+</strong> entrepreneurs signed up.<br class="mobile-only"> Instant access.</p>
 
-        <div class="optin-step2" hidden aria-live="polite">
-          <p class="optin-step2-kicker">You&rsquo;re in. Last thing:</p>
-          <h3 class="optin-step2-q" tabindex="-1">Where&rsquo;s your business at right now?</h3>
-          <div class="optin-revenue-grid" role="group" aria-label="Monthly revenue">
-            <button type="button" class="optin-revenue-opt" data-value="under-1k"><span><b>Under $1K</b><small>per month</small></span></button>
-            <button type="button" class="optin-revenue-opt" data-value="1k-10k"><span><b>$1K&ndash;$10K</b><small>per month</small></span></button>
-            <button type="button" class="optin-revenue-opt" data-value="10k-plus"><span><b>$10K+</b><small>per month</small></span></button>
+        <div class="optin-step2" hidden>
+          <p class="optin-step2-kicker" aria-live="polite"></p>
+          <h3 class="optin-step2-headline" tabindex="-1">One last question before your masterclass starts</h3>
+          <span class="optin-step2-q" id="optin-step2-q">Where&rsquo;s your business at right now?</span>
+          <div class="optin-revenue-grid" role="group" aria-labelledby="optin-step2-q">
+            <button type="button" class="optin-revenue-opt" data-value="under-1k" aria-pressed="false"><span><b>Under $1K</b><small>per month</small></span></button>
+            <button type="button" class="optin-revenue-opt" data-value="1k-10k" aria-pressed="false"><span><b>$1K&ndash;$10K</b><small>per month</small></span></button>
+            <button type="button" class="optin-revenue-opt" data-value="10k-plus" aria-pressed="false"><span><b>$10K+</b><small>per month</small></span></button>
           </div>
-          <p class="optin-step2-note">One tap and your masterclass starts.</p>
+          <p class="optin-step2-note" aria-live="polite"></p>
         </div>
       </div>
 
@@ -589,6 +599,168 @@
     var latestAd = (urlParams.get('ad') || '').trim();
     var latestSource = (urlParams.get('source') || '').trim();
 
+    // Coming Back from the replay can restore this page mid-step-2 from the
+    // back/forward cache (buttons disabled, form locked). Start clean instead.
+    window.addEventListener('pageshow', function (e) { if (e.persisted) window.location.reload(); });
+
+    // Warm the functions on first engagement so cold starts don't land on
+    // the visitor's wait (OPTIONS returns before doing any work).
+    var warmed = false;
+    function warmFunctions() {
+      if (warmed) return;
+      warmed = true;
+      ['verify-email', 'submit-contact', 'submit-optin-answer'].forEach(function (fn) {
+        try { fetch('/.netlify/functions/' + fn, { method: 'OPTIONS', keepalive: true }).catch(function () {}); } catch (e) {}
+      });
+    }
+    form.addEventListener('focusin', warmFunctions);
+
+    // ── Meta Lead ──────────────────────────────────────────────────────────
+    // This page skips /optin-thank-you, where GTM normally fires the Lead, so
+    // it fires the same plain fbq('track','Lead') itself, once, and only for a
+    // save the server confirmed. The pixel is loaded by GTM; the Stape gateway
+    // (capig.jasonmoss.com) mirrors it server-side. Before navigating we give
+    // the pixel a moment to send. If the pixel never loaded, the visitor goes
+    // through /optin-thank-you instead, where GTM fires the Lead as before.
+    var leadFired = false;
+    var leadAt = 0;
+    function fireLead() {
+      if (leadFired) return true;
+      if (typeof window.fbq !== 'function') return false;
+      try { window.fbq('track', 'Lead'); leadFired = true; leadAt = Date.now(); } catch (e) {}
+      return leadFired;
+    }
+    function pixelSettled() {
+      return new Promise(function (resolve) {
+        var t0 = Date.now();
+        (function poll() {
+          var live = window.fbq && typeof window.fbq.callMethod === 'function';
+          if ((live && Date.now() - leadAt >= 300) || Date.now() - t0 >= 1500) { resolve(); return; }
+          setTimeout(poll, 100);
+        })();
+      });
+    }
+    function optinConfirmed(r) {
+      return !!(r && r.success === true && (r.tagged === true || r.queued === true));
+    }
+
+    // ── Step 2 ─────────────────────────────────────────────────────────────
+    var step2 = (function () {
+      var el = document.querySelector('.optin-step2');
+      var wrap = document.getElementById('optin-form');
+      var subtext = document.querySelector('.optin-subtext');
+      var kicker = el ? el.querySelector('.optin-step2-kicker') : null;
+      var note = el ? el.querySelector('.optin-step2-note') : null;
+      var buttons = el ? Array.prototype.slice.call(el.querySelectorAll('.optin-revenue-opt')) : [];
+      var NOTE_IDLE = 'Tap one to start your masterclass.';
+      var NOTE_GOING = 'Starting your masterclass\u2026';
+      var state = null;      // { email, fname, answer, done, confirmed, pass, redirectUrl, leaving }
+      var keptAnswer = null; // survives a failed attempt so a retry goes straight through
+
+      function setButtons(disabled) { buttons.forEach(function (b) { b.disabled = disabled; }); }
+      function markSelected(value) {
+        buttons.forEach(function (b) {
+          var on = b.getAttribute('data-value') === value;
+          b.classList.toggle('is-selected', on);
+          b.setAttribute('aria-pressed', on ? 'true' : 'false');
+        });
+      }
+      function setKicker(confirmed) {
+        if (!kicker || !state) return;
+        var name = state.fname ? ', ' + state.fname : '';
+        kicker.textContent = confirmed ? 'You\u2019re in' + name : 'Almost there' + name;
+        kicker.classList.toggle('is-in', !!confirmed);
+      }
+      function saveAnswer() {
+        return fetch('/.netlify/functions/submit-optin-answer', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ email: state.email, optin_revenue: state.answer, answer_pass: state.pass }),
+          keepalive: true
+        });
+      }
+
+      async function leave() {
+        if (!state || state.leaving || !state.done) return;
+        if (!state.answer && state.pass) return; // still waiting for their tap
+        state.leaving = true;
+        var url = state.redirectUrl;
+        var waits = [];
+        if (state.answer && state.pass) {
+          // keepalive lets the save finish after we navigate; cap the wait.
+          waits.push(Promise.race([saveAnswer(), new Promise(function (r) { setTimeout(r, 1500); })]).catch(function (e) { console.error('Answer save error:', e); }));
+        }
+        if (state.confirmed) {
+          if (fireLead()) waits.push(pixelSettled());
+          else url = '/optin-thank-you?redirect=resonance-masterclass-replay&email=' + encodeURIComponent(state.email);
+        }
+        await Promise.all(waits);
+        window.location.href = url;
+      }
+
+      buttons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var value = btn.getAttribute('data-value');
+          keptAnswer = value;
+          if (!state || state.answer) return;
+          state.answer = value;
+          markSelected(value);
+          setButtons(true);
+          if (note) note.textContent = NOTE_GOING;
+          leave();
+        });
+      });
+
+      return {
+        show: function (email, firstName) {
+          if (!el || !wrap) return;
+          var fname = String(firstName || '').trim().split(/\s+/)[0] || '';
+          state = { email: email, fname: fname.slice(0, 20), answer: keptAnswer, done: false, confirmed: false, pass: null, redirectUrl: null, leaving: false };
+          wrap.style.minHeight = wrap.offsetHeight + 'px'; // same-size card
+          wrap.classList.add('is-step2');
+          form.hidden = true;
+          if (subtext) subtext.hidden = true;
+          setKicker(false);
+          markSelected(keptAnswer);
+          setButtons(!!keptAnswer);
+          if (note) note.textContent = keptAnswer ? NOTE_GOING : NOTE_IDLE;
+          el.hidden = false;
+          var h = el.querySelector('.optin-step2-headline');
+          if (h) { try { h.focus({ preventScroll: true }); } catch (e) {} }
+          setTimeout(function () {
+            var r = wrap.getBoundingClientRect();
+            if (r.top < 0 || r.bottom > window.innerHeight) {
+              try { wrap.scrollIntoView({ block: 'center', behavior: 'instant' }); } // 'instant' throws on older Safari
+              catch (e) { wrap.scrollIntoView(); }
+            }
+          }, 30);
+        },
+        reset: function () {
+          state = null;
+          if (!el || !wrap) return;
+          el.hidden = true;
+          wrap.classList.remove('is-step2');
+          wrap.style.minHeight = '';
+          form.hidden = false;
+          if (subtext) subtext.hidden = false;
+          if (emailInput) { try { emailInput.focus(); } catch (e) {} }
+        },
+        optedIn: function (ctx, confirmed) {
+          if (!state) { // no step 2 on screen (shouldn't happen): just go
+            if (confirmed && fireLead()) { pixelSettled().then(function () { window.location.href = ctx.redirectUrl; }); }
+            else window.location.href = confirmed ? '/optin-thank-you?redirect=resonance-masterclass-replay&email=' + encodeURIComponent(ctx.email) : ctx.redirectUrl;
+            return;
+          }
+          state.done = true;
+          state.confirmed = confirmed;
+          state.pass = (confirmed && ctx.response && ctx.response.answer_pass) || null;
+          state.redirectUrl = ctx.redirectUrl;
+          if (confirmed) { setKicker(true); fireLead(); }
+          leave();
+        }
+      };
+    })();
+
     JMOptin.init({
       kitTagId: 20410092, // Kit: Resonance Masterclass (Cold Traffic)
       extraPayload: function () {
@@ -597,58 +769,15 @@
         if (latestSource) extra.latest_source = latestSource;
         return extra;
       },
-      // Two-step: this page skips /optin-thank-you, so it fires the Meta Lead
-      // itself (same plain call as the GTM tag there; the pixel comes from GTM
-      // and the Stape gateway mirrors it server-side), then asks one question.
       redirect: function (ctx) {
         return '/resonance-masterclass-replay/?email=' + encodeURIComponent(ctx.email);
       },
-      onSuccess: function (ctx) {
-        try { if (typeof window.fbq === 'function') window.fbq('track', 'Lead'); } catch (e) {}
-        var pass = ctx.response && ctx.response.answer_pass;
-        var step2 = document.querySelector('.optin-step2');
-        if (!pass || !step2) { window.location.href = ctx.redirectUrl; return; }
-
-        form.hidden = true;
-        var subtext = document.querySelector('.optin-subtext');
-        if (subtext) subtext.hidden = true;
-        step2.hidden = false;
-        var q = step2.querySelector('.optin-step2-q');
-        if (q) { try { q.focus({ preventScroll: true }); } catch (e) {} }
-        // After the layout settles, bring the question on screen if it isn't.
-        var wrap = document.getElementById('optin-form');
-        setTimeout(function () {
-          if (!wrap) return;
-          var r = wrap.getBoundingClientRect();
-          if (r.top < 0 || r.bottom > window.innerHeight) wrap.scrollIntoView({ block: 'center', behavior: 'instant' });
-        }, 30);
-
-        var answered = false;
-        step2.querySelectorAll('.optin-revenue-opt').forEach(function (btn) {
-          btn.addEventListener('click', async function () {
-            if (answered) return;
-            answered = true;
-            btn.classList.add('is-selected');
-            step2.querySelectorAll('.optin-revenue-opt').forEach(function (b) { b.disabled = true; });
-            // Bounded wait so a slow save never strands the visitor; keepalive
-            // lets the save finish even after the page navigates away.
-            try {
-              await Promise.race([
-                fetch('/.netlify/functions/submit-optin-answer', {
-                  method: 'POST',
-                  headers: { 'Content-Type': 'application/json' },
-                  body: JSON.stringify({ email: ctx.email, optin_revenue: btn.getAttribute('data-value'), answer_pass: pass }),
-                  keepalive: true
-                }),
-                new Promise(function (resolve) { setTimeout(resolve, 2500); })
-              ]);
-            } catch (e) {
-              console.error('Answer save error:', e);
-            }
-            window.location.href = ctx.redirectUrl;
-          });
-        });
-      }
+      // The question shows as soon as the fields pass local checks; the email
+      // check and Kit save keep running. Nothing is saved and no Lead fires
+      // until the server confirms; a failure brings the form back.
+      onSubmitStart: function (ctx) { warmFunctions(); step2.show(ctx.email, ctx.firstName); },
+      onSubmitFail: function () { step2.reset(); },
+      onSuccess: function (ctx) { step2.optedIn(ctx, optinConfirmed(ctx.response)); }
     });
   })();
   </script>

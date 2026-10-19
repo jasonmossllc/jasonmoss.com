@@ -9,21 +9,19 @@
 // subscribers, tag them, or touch any other field.
 //
 // Request:  { email, optin_revenue: 'under-1k' | '1k-10k' | '10k-plus', answer_pass }
-// Response: 200 { saved: true } | 200 { saved: false } when the subscriber
-//           isn't in Kit yet (queued opt-in) | 400 bad input | 403 bad origin/pass
+// Response: 200 { saved: true } | 400 bad input | 403 bad origin/pass | 500
+// The pass carries the Kit subscriber id (signed together with the email), so
+// the answer is written straight to that record with one Kit call.
 const { __internal } = require('./submit-contact.js');
 const {
   corsHeaders,
   originAllowed,
   verifyAnswerPass,
-  findSubscriberByEmail,
   updateSubscriber,
   EMAIL_RE,
-  OPTIN_REVENUE,
+  optinRevenueLabel,
   KIT_OPTIN_REVENUE_FIELD,
 } = __internal;
-
-const FIND_RETRY_DELAYS_MS = [0, 1500];
 
 exports.handler = async (event) => {
   const headers = corsHeaders(event);
@@ -42,26 +40,17 @@ exports.handler = async (event) => {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request body' }) };
   }
   const email = String((data && data.email) || '').trim().toLowerCase();
-  const label = OPTIN_REVENUE[String((data && data.optin_revenue) || '')];
+  const label = optinRevenueLabel(data && data.optin_revenue);
   if (!EMAIL_RE.test(email) || !label) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid answer' }) };
   }
-  if (!verifyAnswerPass(data.answer_pass, email)) {
+  const subscriberId = verifyAnswerPass(data.answer_pass, email);
+  if (!subscriberId) {
     return { statusCode: 403, headers, body: JSON.stringify({ error: 'Forbidden' }) };
   }
 
   try {
-    let subscriber = null;
-    for (const delay of FIND_RETRY_DELAYS_MS) {
-      if (delay) await new Promise((r) => setTimeout(r, delay));
-      subscriber = await findSubscriberByEmail(email);
-      if (subscriber && subscriber.id) break;
-    }
-    if (!subscriber || !subscriber.id) {
-      console.log('Opt-in answer: subscriber not in Kit yet (queued opt-in?)', { value: data.optin_revenue });
-      return { statusCode: 200, headers, body: JSON.stringify({ saved: false }) };
-    }
-    await updateSubscriber(subscriber.id, { email, fields: { [KIT_OPTIN_REVENUE_FIELD]: label } });
+    await updateSubscriber(subscriberId, { email, fields: { [KIT_OPTIN_REVENUE_FIELD]: label } });
     return { statusCode: 200, headers, body: JSON.stringify({ saved: true }) };
   } catch (error) {
     console.error('Opt-in answer error:', error && error.message);

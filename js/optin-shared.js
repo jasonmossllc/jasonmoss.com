@@ -20,6 +20,11 @@
  *                                                       // opt-in is captured; ctx adds {response} (the Kit
  *                                                       // submit's JSON, or null if it didn't answer) and
  *                                                       // {redirectUrl}. The page then owns navigation.
+ *     onSubmitStart: function (ctx) { ... },             // optional: fields passed local checks and the
+ *                                                       // email check + Kit submit are starting ({firstName,
+ *                                                       // email, form}); lets a page move on visually
+ *     onSubmitFail: function () { ... },                 // optional: that attempt failed and the form is
+ *                                                       // usable again (the visitor saw the usual alert)
  *   });
  *
  * The Cloudflare api.js tag must come AFTER this file:
@@ -201,7 +206,27 @@
       var submitting = false;
 
       function setBtn(text) { if (submitBtn) submitBtn.textContent = text; }
-      function restore() { submitting = false; setBtn(originalText); }
+      var started = false;
+      // A failure after onSubmitStart: put the form back first, then explain,
+      // so the message never sits over a swapped-out card. Pages without the
+      // hook keep the original alert-then-restore order.
+      function fail(msg) {
+        if (started && config.onSubmitFail) {
+          restore();
+          setTimeout(function () { alert(msg); }, 60);
+        } else {
+          alert(msg);
+          restore();
+        }
+      }
+      function restore() {
+        submitting = false;
+        setBtn(originalText);
+        if (started) {
+          started = false;
+          if (config.onSubmitFail) { try { config.onSubmitFail(); } catch (e) {} }
+        }
+      }
 
       form.addEventListener('submit', async function (e) {
         e.preventDefault();
@@ -233,10 +258,15 @@
 
         submitting = true;
         setBtn('Validating…');
+        if (config.onSubmitStart) {
+          started = true;
+          try { config.onSubmitStart({ firstName: firstName, email: email, form: form }); } catch (e) {}
+        }
 
         // ZeroBounce email validation — fails open on timeout/outage so a
         // hiccup there can never block a real lead.
         var emailValid = true;
+        var zbMsg = '';
         var controller = new AbortController();
         var zbTimeout = setTimeout(function () { controller.abort(); }, 4000);
         try {
@@ -248,7 +278,7 @@
           });
           var zb = await zbRes.json();
           if (!zb.valid) {
-            alert(zb.reason || 'Please enter a real, non-temporary email address.');
+            zbMsg = zb.reason || 'Please enter a real, non-temporary email address.';
             emailValid = false;
           }
         } catch (err) {
@@ -256,7 +286,7 @@
         } finally {
           clearTimeout(zbTimeout);
         }
-        if (!emailValid) { restore(); return; }
+        if (!emailValid) { fail(zbMsg); return; }
 
         setBtn('Submitting…');
         try {
@@ -323,8 +353,7 @@
             // No token and the server's tokenless lane is closed (its daily
             // cap is full, e.g. during a bot flood). Ask for the challenge.
             try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (e) {}
-            alert("We couldn't verify your browser. Please complete the verification check if one appears, or try again in a few minutes.");
-            restore();
+            fail("We couldn't verify your browser. Please complete the verification check if one appears, or try again in a few minutes.");
             return;
           }
           if (scRes && scRes.status >= 400 && scRes.status < 500) {
@@ -332,8 +361,7 @@
             // idling on the form). Re-run the invisible widget so the next
             // click carries a fresh token, and let the visitor retry.
             try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (e) {}
-            alert("That didn't go through — please click the button again.");
-            restore();
+            fail("That didn't go through — please click the button again.");
             return;
           }
 
@@ -369,8 +397,7 @@
           finish({ firstName: firstName, email: email, form: form }, scData);
         } catch (err) {
           console.error('Form submission error:', err);
-          alert('Something went wrong. Please try again.');
-          restore();
+          fail('Something went wrong. Please try again.');
         }
       });
     }

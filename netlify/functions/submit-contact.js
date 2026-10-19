@@ -699,37 +699,50 @@ function verifyRoezanPass(pass, email, phone) {
 // ── ANSWER PASS ────────────────────────────────────────────────────────────
 // Two-step opt-in pages ask a follow-up question AFTER the opt-in has been
 // saved. The answer goes to submit-optin-answer.js, which must not re-run the
-// bot gates (the Turnstile token is single-use), so a successful submission
-// here returns answer_pass = "<ms-timestamp>.<hmac-sha256('answer' \n email \n
-// timestamp)>". It is bound to the email and expires after ANSWER_PASS_TTL_MS;
-// the 'answer' prefix keeps it from ever validating as a roezan_pass.
-const ANSWER_PASS_TTL_MS = 60 * 60 * 1000;
+// bot gates (the Turnstile token is single-use), so a confirmed save here
+// returns answer_pass = "<ms-timestamp>.<kit-subscriber-id>.<hmac-sha256(
+// 'answer' \n email \n subscriberId \n timestamp)>". Binding the subscriber id
+// lets the answer go straight to that Kit record (no lookup); binding the email
+// keeps a pass from being moved to another person; the 'answer' prefix keeps
+// it from ever validating as a roezan_pass. Only issued when Kit has the
+// subscriber (not for queued opt-ins). Short TTL: the page uses it in seconds.
+const ANSWER_PASS_TTL_MS = 15 * 60 * 1000;
 
-function answerPassSignature(email, timestamp) {
+function answerPassSignature(email, subscriberId, timestamp) {
   const secret = process.env.ROEZAN_PASS_SECRET;
   if (!secret) return null;
-  return crypto.createHmac('sha256', secret).update(`answer\n${email}\n${timestamp}`).digest('hex');
+  return crypto.createHmac('sha256', secret).update(`answer\n${email}\n${subscriberId}\n${timestamp}`).digest('hex');
 }
 
-function issueAnswerPass(email) {
+function issueAnswerPass(email, subscriberId) {
+  const id = String(subscriberId || '');
+  if (!/^\d{1,20}$/.test(id)) return null;
   const timestamp = Date.now();
-  const signature = answerPassSignature(email, timestamp);
-  return signature ? `${timestamp}.${signature}` : null;
+  const signature = answerPassSignature(email, id, timestamp);
+  return signature ? `${timestamp}.${id}.${signature}` : null;
 }
 
+// Returns the bound Kit subscriber id when the pass is valid for this email,
+// otherwise false.
 function verifyAnswerPass(pass, email) {
   if (typeof pass !== 'string' || typeof email !== 'string' || !email) return false;
-  const match = pass.match(/^(\d{10,16})\.([a-f0-9]{64})$/);
+  const match = pass.match(/^(\d{10,16})\.(\d{1,20})\.([a-f0-9]{64})$/);
   if (!match) return false;
   const timestamp = Number.parseInt(match[1], 10);
   if (!Number.isSafeInteger(timestamp) || Math.abs(Date.now() - timestamp) > ANSWER_PASS_TTL_MS) return false;
-  const expected = answerPassSignature(email, timestamp);
+  const expected = answerPassSignature(email, match[2], timestamp);
   if (!expected) return false;
   try {
-    return crypto.timingSafeEqual(Buffer.from(match[2], 'hex'), Buffer.from(expected, 'hex'));
+    return crypto.timingSafeEqual(Buffer.from(match[3], 'hex'), Buffer.from(expected, 'hex')) ? match[2] : false;
   } catch (e) {
     return false;
   }
+}
+
+// Own-property lookup: a plain object would also "find" __proto__ etc.
+function optinRevenueLabel(code) {
+  const key = String(code == null ? '' : code);
+  return Object.prototype.hasOwnProperty.call(OPTIN_REVENUE, key) ? OPTIN_REVENUE[key] : null;
 }
 
 // ── CORS ───────────────────────────────────────────────────────────────────
@@ -845,7 +858,7 @@ exports.handler = async (event) => {
       console.log('Ignoring unusable phone on opt-in', { ip });
     }
     if (data.optin_revenue != null && data.optin_revenue !== '') {
-      const revenue = OPTIN_REVENUE[String(data.optin_revenue)];
+      const revenue = optinRevenueLabel(data.optin_revenue);
       if (revenue) overwriteFields[KIT_OPTIN_REVENUE_FIELD] = revenue;
       else console.log('Ignoring unknown optin_revenue', { ip, value: String(data.optin_revenue).slice(0, 40) });
     }
@@ -867,7 +880,6 @@ exports.handler = async (event) => {
     // Issued only after every bot gate above has passed; lets the page call
     // submit-roezan-contact.js without a second Turnstile run (see ROEZAN PASS).
     const roezanPass = issueRoezanPass(email, phone);
-    const answerPass = issueAnswerPass(email);
 
     let result;
     try {
@@ -887,10 +899,12 @@ exports.handler = async (event) => {
           success: true,
           queued: true,
           ...(roezanPass ? { roezan_pass: roezanPass } : {}),
-          ...(answerPass ? { answer_pass: answerPass } : {}),
         }),
       };
     }
+
+    // Only when Kit really has (and tagged) the subscriber.
+    const answerPass = result.tagged ? issueAnswerPass(email, result.subscriberId) : null;
 
     return {
       statusCode: 200,
@@ -942,6 +956,7 @@ module.exports.__internal = {
   verifyRoezanPass,
   issueAnswerPass,
   verifyAnswerPass,
+  optinRevenueLabel,
   OPTIN_REVENUE,
   KIT_OPTIN_REVENUE_FIELD,
   corsHeaders,
