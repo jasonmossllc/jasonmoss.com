@@ -37,6 +37,8 @@
 .meta span+span::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--gold);margin-right:20px}
 .btn-glow{box-shadow:0 0 0 1px rgba(194,168,108,.4),0 18px 50px -12px rgba(194,168,108,.45)}
 .cta-row{display:flex;align-items:center;gap:28px;flex-wrap:wrap}
+.pre-cta{display:none;align-items:center;gap:10px;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:rgba(248,246,242,.82)}
+.pre-cta::before{content:"";width:16px;height:16px;border-radius:50%;border:1px solid var(--gold);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%23C2A86C' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;flex-shrink:0}
 .cta-row small,.fine-it{font-family:'Libre Baskerville',serif;font-style:italic;font-size:15px;color:rgba(248,246,242,.58)}
 .cta-center{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:64px}
 
@@ -86,6 +88,7 @@
 .tl-intro{display:flex;flex-direction:column;gap:24px;position:sticky;top:48px;align-self:start}
 .tl-intro .h2{font-size:clamp(29px,2.65vw,38px);line-height:1.25}
 .tl-intro p{font-size:17.5px;line-height:1.8;color:rgba(248,246,242,.7)}
+.tl-intro p.explain{font-size:19px;line-height:1.7;color:rgba(248,246,242,.86)}
 .goal{padding:22px 26px;border:1px solid rgba(194,168,108,.4);background:rgba(194,168,108,.06);font-family:'Libre Baskerville',serif;font-size:19px;line-height:1.55;color:var(--sand)}
 .goal b{display:block;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
 .rail{position:relative;display:flex;flex-direction:column}
@@ -134,17 +137,6 @@
 .invite .btn{width:100%;position:relative;z-index:1}
 .invite .fine-it{margin-top:18px;font-size:14px}
 
-/* fit */
-.fit{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1040px;margin:0 auto}
-.fit-card{padding:48px 46px;border:1px solid rgba(248,246,242,.1);background:rgba(248,246,242,.025)}
-.fit-card.yes{border-color:rgba(194,168,108,.45);background:rgba(194,168,108,.05)}
-.fit-card h3{font-size:26px;margin:0 0 8px}
-.fit-card .sub{font-size:15.5px;color:rgba(248,246,242,.6);margin-bottom:22px}
-.fit-card ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:14px}
-.fit-card li{position:relative;padding-left:34px;font-size:17px;line-height:1.6;color:rgba(248,246,242,.86)}
-.fit-card.yes li::before{content:"";position:absolute;left:0;top:5px;width:20px;height:20px;border-radius:50%;border:1px solid var(--gold);background:radial-gradient(circle,var(--gold) 0 3px,transparent 4px)}
-.fit-card.no li::before{content:"";position:absolute;left:4px;top:13px;width:12px;height:1px;background:rgba(248,246,242,.45)}
-.fit-note{margin-top:32px;text-align:center;font-family:'Libre Baskerville',serif;font-style:italic;font-size:17px;color:rgba(248,246,242,.6)}
 
 /* closing */
 .cs-close{position:relative;overflow:hidden;background:#141514}
@@ -185,6 +177,8 @@
   .meta span+span::before{display:none}
   .cta-row{flex-direction:column;align-items:stretch;gap:14px}
   .cta-row small{text-align:center}
+  .pre-cta{display:flex;justify-content:center;order:-1}
+  .hero-cta .desk-only{display:none}
   .stanza{font-size:22px}
   .closer{font-size:26px}
   .why-grid,.tl-grid{grid-template-columns:1fr;gap:48px}
@@ -211,8 +205,6 @@
   .invite .amt{font-size:92px}
   .incl li{flex-direction:column;gap:4px}
   .incl li span{text-align:left}
-  .fit{grid-template-columns:1fr}
-  .fit-card{padding:36px 26px}
   .cs-close .h2{font-size:36px}
   .cs-close .last{font-size:24px}
   .faq summary{font-size:18px}
@@ -233,9 +225,9 @@
     <div class="inner">
       <div class="eyebrow">A live 7-day sprint &middot; Oct 29 &ndash; Nov 5</div>
       <h1 class="h1">Your next client already <span class="gold-it">knows your name.</span></h1>
-      <p class="lede">A live 7-day sprint where you&rsquo;ll turn the people who already know you into paying clients. No ads. No funnel. No posting more.</p>
-      <div class="meta"><span>3 live sessions</span><span>Oct 29, 30 &amp; Nov 5</span><span>9&ndash;11am MT</span></div>
-      <div class="cta-row"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><small>Live on Zoom &middot; Recordings included</small></div>
+      <p class="lede">Learn how to turn the people who already know you into high-ticket clients &mdash; without ads, a funnel, or posting more.</p>
+      <div class="meta"><span>3 live sessions</span><span>Oct 29 &mdash; Nov 5</span><span>9&ndash;11am MT</span></div>
+      <div class="cta-row hero-cta"><p class="pre-cta">Recordings included</p><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><small class="desk-only">Live on Zoom &middot; Recordings included</small></div>
     </div>
   </div>
 </section>
@@ -245,7 +237,7 @@
   <div class="wrap">
     <div class="band-grid">
       <div class="band-stat"><div class="n">$100,000+</div><div class="t">in sales in under three weeks, when I taught this approach to a live group earlier this year</div></div>
-      <blockquote class="band-quote"><p>&ldquo;The sales conversation was barely even a sales conversation.&rdquo;</p><cite>Meleah &middot; $60K package</cite></blockquote>
+      <blockquote class="band-quote"><p>&ldquo;It worked! I followed our steps&hellip; Then she said: Yes, yes, yes.&rdquo;</p><cite>From the group chat &middot; New client signed</cite></blockquote>
     </div>
   </div>
 </section>
@@ -259,9 +251,9 @@
       <p class="stanza">He&rsquo;s followed you for a year.<br><span class="soft">Never commented. Watched everything you&rsquo;ve posted.</span></p>
       <hr class="hair">
       <div class="story-p">
-        <p>They&rsquo;ve been thinking about working with you&hellip; and waiting for a reason to take the next step.</p>
         <p>I&rsquo;ve signed over 2,000 clients, and here&rsquo;s what I&rsquo;ve learned: <strong>the fastest path to your next client usually isn&rsquo;t someone new.</strong> It&rsquo;s someone who already knows you.</p>
-        <p>With the right message and the right conversation, these people could become clients who pay you <b>$3,000, $5,000, $10,000 or more.</b></p>
+        <p>They&rsquo;ve been thinking about working with you&hellip; and waiting for a reason to take the next step.</p>
+        <p>And with the right message and the right conversation, these people could become clients who pay you <b>$3,000, $5,000, $10,000 or more.</b></p>
       </div>
       <p class="closer"><span>But while you&rsquo;re busy trying to reach more people, they sit untouched.</span>And some of them will hire someone else&hellip; not because that person was better, but because they started the conversation you didn&rsquo;t.</p>
     </div>
@@ -294,14 +286,15 @@
       <div class="tl-intro">
         <div class="eyebrow">The 7-Day Client Sprint</div>
         <h2 class="h2">Two days to learn it.<br>Five days to use it.</h2>
-        <div class="goal"><b>The goal</b>Sign your next high-ticket client in seven days.</div>
+        <p class="explain">Over seven days, you&rsquo;ll learn exactly how to turn the people who already know you into high-ticket clients.</p>
+        <div class="goal"><b>The goal</b>Sign your next high-ticket client in seven days or less.</div>
         <p>This doesn&rsquo;t require a complicated marketing machine or thousands of dollars in ads. It starts with the relationships you already have.</p>
       </div>
       <div class="rail">
         <div class="rail-item"><div class="when">Day 1 &middot; Thu Oct 29 &middot; Live 9&ndash;11am MT</div><h3>Find them.</h3><p>Run the Hidden Client Scan and write your first reconnection messages. You&rsquo;ll have opportunities in your pipeline before the day ends.</p></div>
         <div class="rail-item"><div class="when">Day 2 &middot; Fri Oct 30 &middot; Live 9&ndash;11am MT</div><h3>Talk to them.</h3><p>Learn the Bridge Call and the Permission-Based Pivot, then practice both so you&rsquo;re ready when the calls come.</p></div>
         <div class="rail-item own"><div class="when">Days 3&ndash;7 &middot; Your conversations</div><h3>Have the conversations.</h3><p>Send your messages, take your calls, and use the Follow-Up Loop to move each opportunity toward a yes.</p></div>
-        <div class="rail-item"><div class="when">Thu Nov 5 &middot; Live 9&ndash;11am MT</div><h3>Group coaching call.</h3><p>Bring what happened. We&rsquo;ll work through your questions and your next steps.</p></div>
+        <div class="rail-item"><div class="when">Thu Nov 5 &middot; Live 9&ndash;11am MT</div><h3>Group coaching call.</h3><p>Bring your open conversations. We&rsquo;ll work through them live, so you leave knowing exactly how to move each one toward a yes.</p></div>
       </div>
     </div>
   </div>
@@ -367,37 +360,6 @@
   </div>
 </section>
 
-<!-- Fit -->
-<section class="sec bg-obsidian">
-  <div class="wrap">
-    <div class="cs-head">
-      <div class="eyebrow center">Is this for you</div>
-      <h2 class="h2">Built for people who already have something to sell.</h2>
-    </div>
-    <div class="fit">
-      <div class="fit-card yes">
-        <h3>This is for you if&hellip;</h3>
-        <p class="sub">You&rsquo;re a coach, consultant, or service-based business owner who:</p>
-        <ul>
-          <li>has worked with paying clients</li>
-          <li>has an offer you believe in</li>
-          <li>wants more chances to sell it, without adding more to your plate</li>
-        </ul>
-      </div>
-      <div class="fit-card no">
-        <h3>This isn&rsquo;t for you if&hellip;</h3>
-        <p class="sub">Any of these sound like you right now:</p>
-        <ul>
-          <li>You&rsquo;re still deciding what to sell</li>
-          <li>You haven&rsquo;t built relationships in your field yet</li>
-          <li>You want a script to blast your contact list</li>
-        </ul>
-      </div>
-    </div>
-    <p class="fit-note">If that&rsquo;s you, those foundations come first.</p>
-  </div>
-</section>
-
 <!-- Closing -->
 <section class="sec cs-close">
   <div class="bg" aria-hidden="true"></div>
@@ -422,6 +384,10 @@
     </div>
     <div class="faq">
       <details open>
+        <summary>Is this right for me?</summary>
+        <div class="a"><p>It&rsquo;s built for coaches, consultants, and service-based business owners who have worked with paying clients, have an offer they believe in, and want more chances to sell it, without adding more to their plate.</p><p>It&rsquo;s not the right fit if you&rsquo;re still deciding what to sell, haven&rsquo;t built relationships in your field yet, or want a script to blast your contact list. If that&rsquo;s you, those foundations come first.</p></div>
+      </details>
+      <details>
         <summary>What if I don&rsquo;t have a big audience?</summary>
         <div class="a"><p>You don&rsquo;t need thousands of followers. You need people who already know you or your work.</p><p>That could be past clients, old inquiries, professional connections, email subscribers, or people who regularly engage with your content.</p><p>Inside the sprint, we&rsquo;ll help you find those people and decide who to reach out to first.</p></div>
       </details>
