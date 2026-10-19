@@ -141,9 +141,10 @@
 .cs-close .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#141514 0%,rgba(20,21,20,0) 40%),radial-gradient(70% 80% at 50% 50%,rgba(20,21,20,.55),#141514 85%)}
 .cs-close .wrap{position:relative}
 .cs-close .col{max-width:760px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:30px;align-items:center}
-.cs-close .h2{font-size:44px}
+.cs-close .h2{font-size:44px;line-height:1.25;text-wrap:balance}
+.cs-close .answer{margin-top:-8px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:30px;line-height:1.4;color:var(--gold);text-wrap:balance}
 .cs-close p{font-size:19px;line-height:1.8;color:rgba(248,246,242,.75)}
-.cs-close .last{font-family:'Libre Baskerville',serif;font-style:italic;font-size:26px;line-height:1.45;color:var(--gold);text-wrap:balance}
+.cs-close .last{font-family:'Libre Baskerville',serif;font-style:italic;font-size:22px;line-height:1.5;color:var(--sand);text-wrap:balance}
 
 /* offer */
 .cs-offer{position:relative;overflow:visible;overflow-x:clip;background:#141514;padding:40px 0 140px}
@@ -255,9 +256,9 @@
   /* close + offer */
   .cs-close{padding:96px 0 40px}
   .cs-close .col{gap:24px}
-  .cs-close .eyebrow::before,.cs-close .eyebrow::after{display:none}
-  .cs-close .h2{font-size:32px}
-  .cs-close .last{font-size:22px}
+  .cs-close .h2{font-size:30px}
+  .cs-close .answer{font-size:23px;margin-top:-4px}
+  .cs-close .last{font-size:19px}
   .cs-offer{padding:24px 0 96px}
   .invite{padding:52px 24px}
   .invite .amt{font-size:92px}
@@ -416,9 +417,8 @@
   <div class="bg" aria-hidden="true"></div>
   <div class="wrap">
     <div class="col">
-      <div class="eyebrow center">You&rsquo;ve already done the hard part</div>
-      <h2 class="h2">They already know you.</h2>
-      <p>You could spend another month trying to get more people to notice&nbsp;you.<br>Or you could start with the people who already have.</p>
+      <h2 class="h2">You could spend another month trying to get more people to notice&nbsp;you.</h2>
+      <p class="answer">Or you could start with the people who already&nbsp;have.</p>
       <p>You&rsquo;ve already done the work of getting on their radar.</p>
       <p class="last">Don&rsquo;t stop one conversation short of finding out where it could&nbsp;lead.</p>
     </div>
@@ -434,8 +434,7 @@
       <div class="amt"><sup>$</sup>11</div>
       <div class="one">One payment</div>
       <ul class="incl">
-        <li>Two live workshop days <span>Oct 29 &amp; 30 &middot; 9&ndash;11am MT</span></li>
-        <li>A live group coaching call <span>Nov 5 &middot; 9&ndash;11am MT</span></li>
+        <li>3 live calls <span>Oct 29, 30 &amp; Nov 5 &middot; 9&ndash;11am MT</span></li>
         <li>Lifetime access to every replay <span>Including the coaching call</span></li>
         <li>The Bridge Call template <span>To keep open during your own calls</span></li>
       </ul>
@@ -506,6 +505,15 @@
     <p>This website is not a part of Facebook or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
   </div>
 </footer>
+<script>
+  // FAQ: opening one question closes the others
+  document.querySelectorAll('.faq details').forEach(function(d){
+    d.addEventListener('toggle',function(){
+      if(!d.open) return;
+      document.querySelectorAll('.faq details').forEach(function(o){ if(o!==d && o.open) o.open=false; });
+    });
+  });
+</script>
 <script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>
