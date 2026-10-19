@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
+<title>You're In · The 7-Day Client Sprint</title>
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/site.css">
+<style>
+/* ── The 7-Day Client Sprint · confirmation ("Obsidian Evening") ── */
+.jm.dark{background:#171817;color:rgba(248,246,242,.8)}
+.dark h1,.dark h2,.dark h3{color:var(--sand)}
+.dark .eyebrow{color:var(--gold)}
+.bg-obsidian{background-color:#1D1F1E;background-image:url(/assets/textures/grain-dark-soft.png),radial-gradient(110% 70% at 50% 0%,rgba(194,168,108,.12),rgba(194,168,108,0) 60%),radial-gradient(90% 70% at 0% 100%,rgba(91,75,63,.22),rgba(91,75,63,0) 65%);background-size:256px 256px,auto,auto;background-repeat:repeat,no-repeat,no-repeat}
+.ty-top{padding:34px 0 0;text-align:center}
+.ty-top img{height:30px;width:auto;margin:0 auto}
+
+/* step 1: confirm + calendar */
+.ty-confirm{padding:56px 0 110px}
+.panel{position:relative;max-width:760px;margin:0 auto;padding:64px 64px 56px;text-align:center;background:linear-gradient(180deg,rgba(194,168,108,.08),rgba(194,168,108,.02));border:1px solid rgba(194,168,108,.55);box-shadow:0 60px 120px -50px rgba(0,0,0,.9),0 0 80px -30px rgba(194,168,108,.22)}
+.panel::after{content:"";position:absolute;inset:10px;border:1px solid rgba(194,168,108,.2);pointer-events:none}
+.panel>*{position:relative;z-index:1}
+.panel h1{font-size:64px;line-height:1.08;margin:22px 0 14px}
+.panel .sub{font-family:'Libre Baskerville',serif;font-style:italic;font-size:18px;color:rgba(248,246,242,.66)}
+.sessions{list-style:none;margin:40px 0 0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid rgba(194,168,108,.25);border-bottom:1px solid rgba(194,168,108,.25)}
+.sessions li{padding:26px 12px;display:flex;flex-direction:column;gap:6px}
+.sessions li+li{border-left:1px solid rgba(194,168,108,.25)}
+.sessions .k{font-size:11px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
+.sessions .d{font-family:'Libre Baskerville',serif;font-size:24px;color:var(--sand)}
+.sessions .t{font-size:13.5px;color:rgba(248,246,242,.6)}
+.zoomline{margin-top:18px;font-size:12.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:rgba(248,246,242,.6)}
+.step{margin-top:44px;display:flex;flex-direction:column;align-items:center;gap:14px}
+.step-label{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(248,246,242,.55)}
+.panel .btn{padding:21px 40px;box-shadow:0 0 0 1px rgba(194,168,108,.4),0 18px 50px -12px rgba(194,168,108,.45)}
+.each{display:flex;gap:6px 22px;flex-wrap:wrap;justify-content:center;font-size:14px;color:rgba(248,246,242,.55)}
+.each a{color:rgba(248,246,242,.82);border-bottom:1px solid rgba(194,168,108,.5);padding:6px 0}
+.each a:hover{color:var(--gold)}
+.zoom-save{margin-top:36px;padding-top:30px;border-top:1px solid rgba(248,246,242,.1);font-size:16px;line-height:1.7;color:rgba(248,246,242,.72)}
+.zoom-save a{color:var(--gold);border-bottom:1px solid rgba(194,168,108,.5)}
+.next-cue{margin-top:26px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:17px;color:var(--gold)}
+.next-cue .arrow{display:block;margin-top:6px;font-style:normal;font-size:20px}
+
+/* step 2: call invite */
+.ty-invite{padding:120px 0 130px;background:#1A1B1A;border-top:1px solid rgba(194,168,108,.14)}
+.invite-grid{display:grid;grid-template-columns:5fr 6fr;gap:72px;align-items:start;max-width:1100px;margin:0 auto}
+.invite-copy{display:flex;flex-direction:column;gap:24px;position:sticky;top:40px}
+.invite-copy .h2{font-size:44px}
+.invite-copy .h2 em{color:var(--gold)}
+.invite-copy p{font-size:18px;line-height:1.8;color:rgba(248,246,242,.74)}
+.invite-copy strong{color:var(--sand);font-weight:600}
+.portrait{position:relative;margin-top:10px;max-width:380px}
+.portrait img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:50% 30%;filter:brightness(.92)}
+.portrait::after{content:"";position:absolute;inset:14px -14px -14px 14px;border:1px solid rgba(194,168,108,.55);pointer-events:none}
+.qualify-card{background:#F8F6F2;padding:30px 26px;box-shadow:0 60px 120px -50px rgba(0,0,0,.9);position:relative;min-height:420px}
+.qualify-card::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:var(--gold)}
+.qualify-card h3{color:var(--obs);font-size:22px;margin:4px 6px 14px}
+
+/* footer */
+.ty-ftr{background:#141514;border-top:1px solid rgba(194,168,108,.18);color:rgba(248,246,242,.55);padding:56px 0 44px;font-size:13px;text-align:center}
+.ty-ftr img{height:28px;width:auto;margin:0 auto 18px}
+.ty-ftr nav{display:flex;gap:4px 20px;justify-content:center;flex-wrap:wrap;margin:6px auto 0}
+.ty-ftr nav a{display:inline-block;padding:11px 4px;color:rgba(248,246,242,.8)}
+
+@media (max-width:900px){
+  .ty-confirm{padding:40px 0 88px}
+  .panel{padding:48px 22px 44px}
+  .panel h1{font-size:42px}
+  .sessions{grid-template-columns:1fr}
+  .sessions li+li{border-left:0;border-top:1px solid rgba(194,168,108,.25)}
+  .sessions li{padding:18px 8px}
+  .panel .btn{width:100%;padding:19px 18px}
+  .ty-invite{padding:88px 0 96px}
+  .invite-grid{grid-template-columns:1fr;gap:44px}
+  .invite-copy{position:static}
+  .invite-copy .h2{font-size:34px}
+  .portrait{display:none}
+  .qualify-card{padding:24px 14px;margin:0 -6px}
+  .ty-ftr nav{flex-direction:column;align-items:center;gap:0}
+}
+</style>
+</head>
+<body class="jm dark">
+
+<section class="ty-confirm bg-obsidian">
+  <div class="wrap ty-top"><img src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"></div>
+  <div class="wrap" style="margin-top:48px">
+    <div class="panel">
+      <div class="eyebrow center">Seat saved &middot; Two quick things</div>
+      <h1 id="headline">You&rsquo;re in.</h1>
+      <p class="sub">The 7-Day Client Sprint starts Thursday.</p>
+
+      <ul class="sessions">
+        <li><span class="k">Day 1</span><span class="d">Thu, Oct 29</span><span class="t">9&ndash;11am MT</span></li>
+        <li><span class="k">Day 2</span><span class="d">Fri, Oct 30</span><span class="t">9&ndash;11am MT</span></li>
+        <li><span class="k">Coaching call</span><span class="d">Thu, Nov 5</span><span class="t">9&ndash;11am MT</span></li>
+      </ul>
+      <p class="zoomline">Live on Zoom &middot; Recordings included</p>
+
+      <div class="step">
+        <span class="step-label">1 &middot; Protect the time</span>
+        <a class="btn btn-gold" href="https://addcal.co/c/kehw49d8mclr" target="_blank" rel="noopener">Add all three to your calendar</a>
+        <div class="each">Or one at a time:
+          <a href="https://addcal.co/e/bcfysv7shzec" target="_blank" rel="noopener">Day 1</a>
+          <a href="https://addcal.co/e/15yez5o5hx3o" target="_blank" rel="noopener">Day 2</a>
+          <a href="https://addcal.co/e/dkq6zz419u6w" target="_blank" rel="noopener">Coaching call</a>
+        </div>
+      </div>
+
+      <p class="zoom-save">Save your Zoom link&hellip; this is where we&rsquo;ll meet: <a href="https://jasonmoss.com/zoom" target="_blank" rel="noopener">jasonmoss.com/zoom</a><br>It&rsquo;s also on its way to your inbox.</p>
+      <p class="next-cue">Number two is the good part&hellip;<span class="arrow">&darr;</span></p>
+    </div>
+  </div>
+</section>
+
+<section class="ty-invite">
+  <div class="wrap">
+    <div class="invite-grid">
+      <div class="invite-copy">
+        <div class="eyebrow">2 &middot; Skip the line</div>
+        <h2 class="h2">Want me to look at your business <em>before</em> the sprint?</h2>
+        <p>A <strong>free 20-minute call</strong>, you and me. We&rsquo;ll uncover your #1 next step to bring more clients in the door, so you walk into Day 1 knowing exactly where to focus.</p>
+        <div class="portrait"><img src="/assets/images/graded/lifestyle-3.jpg" alt="Jason Moss" loading="lazy"></div>
+      </div>
+      <div class="qualify-card">
+        <h3>Two quick questions to start.</h3>
+        <div data-qualify-source="client-sprint"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="ty-ftr">
+  <div class="wrap">
+    <img src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31" loading="lazy">
+    <div>&copy; Jason Moss LLC</div>
+    <nav><a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a><a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a><a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings disclaimer</a></nav>
+  </div>
+</footer>
+
+<script>
+  // Personalize with the buyer's first name from Spiffy's thank-you redirect
+  (function(){
+    var p = new URLSearchParams(window.location.search);
+    var name = (p.get('first_name') || p.get('name_first') || p.get('firstName') || '').trim();
+    if (!name) { var full = (p.get('name') || p.get('full_name') || '').trim(); name = full.split(/\s+/)[0] || ''; }
+    if (name && /^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ' -]{0,30}$/.test(name)) {
+      var safe = name.charAt(0).toUpperCase() + name.slice(1);
+      document.getElementById('headline').textContent = safe + ", you’re in.";
+    }
+  })();
+</script>
+<script src="https://jasonmoss.com/qualify/embed.js" async></script>
+</body>
+</html>
