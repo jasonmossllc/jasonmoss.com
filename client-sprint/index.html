@@ -20,7 +20,8 @@
 <link rel="preload" as="image" href="/assets/images/graded/lifestyle-4.jpg">
 <link rel="stylesheet" href="/css/site.css">
 <style>
-/* ── The 7-Day Client Sprint · "Obsidian Evening" ── */
+/* ── The 7-Day Client Sprint · "Obsidian Evening" ──
+   Gold-italic display budget: hero H1 · hinge hit · why turn line · close last line. Nothing else. */
 .jm.dark{background:#1D1F1E;color:rgba(248,246,242,.8)}
 .dark h1,.dark h2,.dark h3{color:var(--sand)}
 .dark .eyebrow{color:var(--gold)}
@@ -28,10 +29,11 @@
 .bg-obsidian{background-color:#1D1F1E;background-image:url(/assets/textures/grain-dark-soft.png),radial-gradient(120% 80% at 85% 0%,rgba(194,168,108,.10),rgba(194,168,108,0) 60%),radial-gradient(90% 70% at 0% 100%,rgba(91,75,63,.22),rgba(91,75,63,0) 65%);background-size:256px 256px,auto,auto;background-repeat:repeat,no-repeat,no-repeat}
 .bg-deep{background:#171817}
 .bg-ink{background:#1A1B1A}
-.hair{height:1px;width:120px;margin:0 auto;border:0;background:linear-gradient(90deg,rgba(194,168,108,0),rgba(194,168,108,.55),rgba(194,168,108,0))}
 .sec{padding:140px 0}
 .center{text-align:center}
+.nw{white-space:nowrap}
 .cs-head{display:flex;flex-direction:column;align-items:center;gap:22px;max-width:780px;margin:0 auto 72px;text-align:center}
+.cs-head .lede{max-width:26em;text-wrap:pretty}
 .meta{display:flex;flex-wrap:wrap;gap:8px 20px;font-size:13px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgba(248,246,242,.9)}
 .meta span{display:inline-flex;align-items:center}
 .meta span+span::before{content:"";width:4px;height:4px;border-radius:50%;background:var(--gold);margin-right:20px}
@@ -41,9 +43,15 @@
 .pre-cta::before{content:"";width:16px;height:16px;border-radius:50%;border:1px solid var(--gold);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.5 8.2l2.2 2.2 4.8-4.8' fill='none' stroke='%23C2A86C' stroke-width='1.4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat;flex-shrink:0}
 .cta-row small,.fine-it{font-family:'Libre Baskerville',serif;font-style:italic;font-size:15px;color:rgba(248,246,242,.58)}
 .cta-center{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:64px}
+.cta-center .fine-it{text-align:center}
 
 /* hero */
 .cs-hero{position:relative;min-height:min(100svh,960px);display:flex;flex-direction:column;overflow:hidden;background:#171817}
+/* site.css zooms sections on big monitors, which also scales 100svh: divide it back so the hero still fits the first screen */
+@media (min-width:1600px){.cs-hero{min-height:min(calc(100svh/1.1),960px)}}
+@media (min-width:1900px){.cs-hero{min-height:min(calc(100svh/1.22),960px)}}
+@media (min-width:2300px){.cs-hero{min-height:min(calc(100svh/1.4),960px)}}
+@media (min-width:3000px){.cs-hero{min-height:min(calc(100svh/1.75),960px)}}
 .cs-hero .bg{position:absolute;inset:0 0 0 34%;background:url(/assets/images/graded/lifestyle-4.jpg) 40% 30%/cover no-repeat}
 .cs-hero .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#171817 0%,rgba(23,24,23,.86) 18%,rgba(23,24,23,.25) 52%,rgba(23,24,23,.1) 100%),linear-gradient(0deg,#1D1F1E 0%,rgba(29,31,30,0) 30%)}
 .cs-hero>.wrap{width:100%;position:relative;z-index:2}
@@ -51,52 +59,66 @@
 .cs-top img{height:30px;width:auto}
 .cs-hero-copy{flex:1;display:flex;align-items:center}
 .cs-hero-copy .inner{max-width:640px;display:flex;flex-direction:column;gap:30px;padding:72px 0 110px}
+.cs-hero .eb-b{white-space:nowrap}
 .cs-hero .h1{font-size:74px;line-height:1.05}
 .cs-hero .lede{max-width:600px}
 .cs-hero .btn{padding:21px 44px}
+@media (min-width:901px) and (max-height:820px),(min-width:1600px) and (max-height:900px),(min-width:1900px) and (max-height:1000px){.cs-hero-copy .inner{padding:36px 0 64px;gap:24px}}
 
-/* proof band */
-.band{background:#141514;border-top:1px solid rgba(194,168,108,.28);border-bottom:1px solid rgba(194,168,108,.28)}
-.band-grid{display:grid;grid-template-columns:auto 1fr;gap:64px;align-items:center;padding:44px 0}
-.band-stat{display:flex;align-items:center;gap:26px;padding-right:64px;border-right:1px solid rgba(194,168,108,.28)}
-.band-stat .n{font-family:'Libre Baskerville',serif;font-size:54px;line-height:1;color:var(--gold);white-space:nowrap}
-.band-stat .t{font-size:14.5px;line-height:1.6;color:rgba(248,246,242,.66);max-width:250px}
-.band-quote{margin:0}
-.band-quote p{font-family:'Libre Baskerville',serif;font-style:italic;font-size:24px;line-height:1.45;color:var(--sand)}
-.band-quote cite{display:block;margin-top:10px;font-style:normal;font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
-
-/* story */
-.people{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1000px;margin:0 auto}
-.person{position:relative;padding:40px 42px 38px;background:linear-gradient(180deg,rgba(248,246,242,.04),rgba(248,246,242,.015));border:1px solid rgba(248,246,242,.09);box-shadow:0 40px 80px -50px rgba(0,0,0,.8)}
+/* recognition + stakes */
+.cs-story{padding:120px 0;border-top:1px solid rgba(194,168,108,.22)}
+.people{display:grid;grid-template-columns:1fr 1fr;gap:28px;max-width:1088px;margin:0 auto}
+.person{position:relative;padding:40px 36px 38px;background:linear-gradient(180deg,rgba(248,246,242,.04),rgba(248,246,242,.015));border:1px solid rgba(248,246,242,.09);box-shadow:0 40px 80px -50px rgba(0,0,0,.8)}
 .person::before{content:"";position:absolute;left:0;top:0;width:56px;height:2px;background:var(--gold)}
 .person .when{font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 .person .line{margin-top:18px;font-family:'Libre Baskerville',serif;font-size:26px;line-height:1.4;color:var(--sand)}
 .person .soft{margin-top:10px;font-family:'Libre Baskerville',serif;font-size:19px;line-height:1.6;color:rgba(248,246,242,.55)}
-.story-body{max-width:720px;margin:96px auto 0;display:flex;flex-direction:column;gap:26px}
-.story-body p{font-size:19px;line-height:1.8;color:rgba(248,246,242,.72)}
-.story-body b{color:var(--gold);font-weight:600}
-.story-body .thesis{font-family:'Libre Baskerville',serif;font-size:30px;line-height:1.5;color:var(--sand);margin-bottom:10px}
-.story-body .thesis em{color:var(--gold)}
+.story-body{max-width:720px;margin:72px auto 0;display:flex;flex-direction:column;gap:26px}
+.story-body p{font-size:19px;line-height:1.8;color:rgba(248,246,242,.72);text-wrap:pretty}
+.story-body b{display:block;margin-top:10px;font-family:'Libre Baskerville',serif;font-weight:400;font-size:26px;line-height:1.4;color:var(--gold)}
 .sting{margin-top:38px;padding:6px 0 6px 34px;border-left:1px solid var(--gold)}
 .sting .setup{font-size:19px;color:rgba(248,246,242,.6)}
-.sting .hit{margin-top:14px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:30px;line-height:1.45;color:var(--gold)}
+.sting .hit{margin-top:14px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:26px;line-height:1.45;color:var(--sand)}
+
+/* the hinge: the key idea, alone */
+.cs-hinge{position:relative;overflow:hidden;padding:150px 0;background:#141514;border-top:1px solid rgba(194,168,108,.28);border-bottom:1px solid rgba(194,168,108,.28)}
+.cs-hinge::before{content:"";position:absolute;left:50%;top:60%;width:1100px;height:720px;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(194,168,108,.12),rgba(194,168,108,0));pointer-events:none}
+.cs-hinge .key{position:relative;max-width:980px;margin:0 auto;text-align:center;font-family:'Libre Baskerville',serif}
+.cs-hinge .lead{display:block;font-style:italic;font-size:19px;line-height:1.6;color:rgba(248,246,242,.62);text-wrap:balance}
+.cs-hinge .lead::before{content:"";display:block;width:56px;height:1px;background:var(--gold);margin:0 auto 30px}
+.cs-hinge .setup{display:block;max-width:820px;margin:30px auto 0;font-size:38px;line-height:1.32;color:rgba(248,246,242,.88);text-wrap:balance}
+.cs-hinge .hit{display:block;margin-top:24px;font-style:italic;font-size:64px;line-height:1.12;color:var(--gold);text-shadow:0 0 60px rgba(194,168,108,.25);text-wrap:balance}
 
 /* why */
+.cs-why{padding:140px 0 72px}
 .why-grid{display:grid;grid-template-columns:5fr 6fr;gap:96px;align-items:center}
-.why-grid .h2{margin-top:24px;font-size:46px}
+.why-grid .h2{margin-top:24px;font-size:44px}
 .why-lines{display:flex;flex-direction:column;gap:14px;padding-left:40px;border-left:1px solid rgba(194,168,108,.4)}
 .why-lines p{font-family:'Libre Baskerville',serif;font-size:24px;line-height:1.5;color:var(--sand)}
 .why-lines p.dim{color:rgba(248,246,242,.55)}
-.why-lines p.turn{margin-top:30px;font-style:italic;font-size:34px;line-height:1.35;color:var(--gold)}
+.why-lines p.turn{margin-top:26px;font-style:italic;font-size:28px;line-height:1.35;color:var(--gold)}
 
-/* sprint + timeline */
+/* the sprint: intro + the week, with the five pieces under the day they're taught */
+.cs-sprint{padding-top:72px}
 .tl-grid{display:grid;grid-template-columns:5fr 7fr;gap:88px}
-.tl-intro{display:flex;flex-direction:column;gap:24px;position:sticky;top:48px;align-self:start}
+/* sticky intro: on short viewports it rides up so the CTA + fine print stay on screen (zoom-aware where site.css zooms sections) */
+.tl-intro{display:flex;flex-direction:column;gap:24px;position:sticky;top:min(48px,calc(100vh - 720px));align-self:start}
+@media (min-width:901px) and (max-width:960px){.tl-intro{top:min(48px,calc(100vh - 760px))}}
+@media (min-width:901px) and (max-height:760px){.tl-intro{gap:18px;top:min(48px,calc(100vh - 690px))}}
+@media (min-width:901px) and (max-width:960px) and (max-height:760px){.tl-intro{top:min(48px,calc(100vh - 730px))}}
+@media (min-width:1600px){.tl-intro{top:min(48px,calc(100vh/1.1 - 720px))}}
+@media (min-width:1900px){.tl-intro{top:min(48px,calc(100vh/1.22 - 720px))}}
 .tl-intro .h2{font-size:clamp(29px,2.65vw,38px);line-height:1.25}
-.tl-intro p{font-size:17.5px;line-height:1.8;color:rgba(248,246,242,.7)}
+.tl-intro p{font-size:17.5px;line-height:1.8;color:rgba(248,246,242,.7);text-wrap:pretty}
 .tl-intro p.explain{font-size:19px;line-height:1.7;color:rgba(248,246,242,.86)}
 .goal{padding:22px 26px;border:1px solid rgba(194,168,108,.4);background:rgba(194,168,108,.06);font-family:'Libre Baskerville',serif;font-size:19px;line-height:1.55;color:var(--sand)}
 .goal b{display:block;font-family:'Raleway',sans-serif;font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:8px}
+.tl-cta{display:flex;flex-direction:column;align-items:flex-start;gap:14px;margin-top:8px}
+.tl-cta.mob-only{display:none}
+/* desktop: the week starts level with the explain line, so the sprint H2 leads alone */
+.wk{padding-top:calc(69px + 2.5*clamp(29px,2.65vw,38px))}
+.wk-head{margin-bottom:52px}
+.wk-head .wk-title{margin-top:16px;font-family:'Libre Baskerville',serif;font-size:26px;line-height:1.3;color:var(--sand)}
 .rail{position:relative;display:flex;flex-direction:column}
 .rail::before{content:"";position:absolute;left:9px;top:12px;bottom:12px;width:1px;background:linear-gradient(180deg,rgba(194,168,108,.7),rgba(194,168,108,.15))}
 .rail-item{position:relative;padding:0 0 56px 58px}
@@ -105,30 +127,37 @@
 .rail-item.own::before{box-shadow:none;border-style:dashed;border-color:rgba(194,168,108,.6)}
 .rail-item .when{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold)}
 .rail-item h3{font-size:30px;margin:12px 0}
-.rail-item p{font-size:17px;line-height:1.75;color:rgba(248,246,242,.68);max-width:560px}
+.rail-item p{font-size:17px;line-height:1.75;color:rgba(248,246,242,.68);max-width:560px;text-wrap:pretty}
+.pieces{margin-top:24px;display:flex;flex-direction:column;gap:12px}
+.piece{position:relative;padding:24px 26px;background:linear-gradient(180deg,rgba(248,246,242,.04),rgba(248,246,242,.015));border:1px solid rgba(248,246,242,.09)}
+.piece::before{content:"";position:absolute;left:0;top:0;width:40px;height:2px;background:var(--gold)}
+.piece .n{font-size:11px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.piece h4{font-family:'Libre Baskerville',serif;font-weight:400;font-size:21px;line-height:1.4;color:var(--sand);margin:10px 0 8px;text-wrap:balance}
+.rail-item .piece p{font-size:15.5px;line-height:1.7;color:rgba(248,246,242,.62)}
 
-/* learn */
-.learn{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px}
-.learn-card{position:relative;padding:40px 40px 38px;background:linear-gradient(180deg,rgba(248,246,242,.035),rgba(248,246,242,.015));border:1px solid rgba(248,246,242,.09);box-shadow:0 40px 80px -50px rgba(0,0,0,.8)}
-.learn-card::before{content:"";position:absolute;left:0;top:0;width:56px;height:2px;background:var(--gold)}
-.learn-card .n{font-size:11.5px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.learn-card h3{font-size:24px;line-height:1.35;margin:16px 0 14px}
-.learn-card p{font-size:16.5px;line-height:1.75;color:rgba(248,246,242,.68)}
-.learn-card.wide{grid-column:1/-1;display:grid;grid-template-columns:5fr 7fr;gap:40px;align-items:center}
-.learn-card.wide h3{margin-bottom:0}
-
-/* proof */
-.big-num{font-family:'Libre Baskerville',serif;font-size:104px;line-height:1;color:var(--gold);text-shadow:0 0 60px rgba(194,168,108,.22)}
+/* results */
+.big-num{display:block;margin-bottom:16px;font-family:'Libre Baskerville',serif;font-size:60px;line-height:1;color:var(--gold)}
 .proof{display:grid;grid-template-columns:1fr 1fr;gap:28px;align-items:start;max-width:1080px;margin:0 auto}
 .pcol{display:flex;flex-direction:column;gap:30px}
 .pf{margin:0;display:flex;flex-direction:column;gap:14px}
-.pf img{width:100%;height:auto;filter:brightness(.95) drop-shadow(0 30px 50px rgba(0,0,0,.55)) drop-shadow(0 0 1px rgba(194,168,108,.6))}
+.pf img{width:100%;height:auto;filter:brightness(.95) drop-shadow(0 0 1px rgba(194,168,108,.6)) drop-shadow(0 30px 50px rgba(0,0,0,.55))}
 .pf.narrow img{width:78%}
-.pf figcaption{display:flex;align-items:center;gap:12px;font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);padding-left:4px}
+.pf.crop img{aspect-ratio:638/246;object-fit:cover;object-position:50% 100%;border-radius:2.82%/7.32%}
+.pf figcaption{position:relative;z-index:1;order:-1;display:flex;align-items:center;gap:12px;font-size:12.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);padding-left:4px}
 .pf figcaption::before{content:"";width:22px;height:1px;background:var(--gold)}
 
+/* closing: runs straight into the offer card */
+.cs-close{position:relative;overflow:hidden;background:#141514;padding:140px 0 56px}
+.cs-close .bg{position:absolute;inset:0;background:url(/assets/images/graded/lifestyle-2.jpg) 60% 40%/cover no-repeat;opacity:.22;filter:saturate(.8)}
+.cs-close .bg::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,#141514 0%,rgba(20,21,20,0) 40%),radial-gradient(70% 80% at 50% 50%,rgba(20,21,20,.55),#141514 85%)}
+.cs-close .wrap{position:relative}
+.cs-close .col{max-width:760px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:30px;align-items:center}
+.cs-close .h2{font-size:44px}
+.cs-close p{font-size:19px;line-height:1.8;color:rgba(248,246,242,.75)}
+.cs-close .last{font-family:'Libre Baskerville',serif;font-style:italic;font-size:26px;line-height:1.45;color:var(--gold);text-wrap:balance}
+
 /* offer */
-.cs-offer{position:relative;overflow:hidden}
+.cs-offer{position:relative;overflow:visible;overflow-x:clip;background:#141514;padding:40px 0 140px}
 .cs-offer::before{content:"";position:absolute;left:50%;top:50%;width:900px;height:900px;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(194,168,108,.12),rgba(194,168,108,0) 62%);pointer-events:none}
 .invite{position:relative;max-width:640px;margin:0 auto;padding:72px 64px;text-align:center;background:linear-gradient(180deg,rgba(194,168,108,.08),rgba(194,168,108,.02));border:1px solid rgba(194,168,108,.55);box-shadow:0 60px 120px -50px rgba(0,0,0,.9),0 0 80px -30px rgba(194,168,108,.25)}
 .invite::after{content:"";position:absolute;inset:10px;border:1px solid rgba(194,168,108,.22);pointer-events:none}
@@ -143,25 +172,15 @@
 .invite .btn{width:100%;position:relative;z-index:1}
 .invite .fine-it{margin-top:18px;font-size:14px}
 
-
-/* closing */
-.cs-close{position:relative;overflow:hidden;background:#141514}
-.cs-close .bg{position:absolute;inset:0;background:url(/assets/images/graded/lifestyle-2.jpg) 60% 40%/cover no-repeat;opacity:.22;filter:saturate(.8)}
-.cs-close .bg::after{content:"";position:absolute;inset:0;background:radial-gradient(70% 80% at 50% 50%,rgba(20,21,20,.55),#141514 85%)}
-.cs-close .wrap{position:relative}
-.cs-close .col{max-width:760px;margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:30px;align-items:center}
-.cs-close .h2{font-size:52px}
-.cs-close p{font-size:19px;line-height:1.8;color:rgba(248,246,242,.75)}
-.cs-close .last{font-family:'Libre Baskerville',serif;font-style:italic;font-size:30px;line-height:1.45;color:var(--gold)}
-
 /* faq */
 .faq{max-width:840px;margin:0 auto;border-top:1px solid rgba(248,246,242,.12)}
 .faq details{border-bottom:1px solid rgba(248,246,242,.12)}
-.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 0;font-family:'Libre Baskerville',serif;font-size:21px;line-height:1.45;color:var(--sand)}
+.faq summary{list-style:none;cursor:pointer;display:flex;justify-content:space-between;align-items:center;gap:24px;padding:28px 0;font-family:'Libre Baskerville',serif;font-size:21px;line-height:1.45;color:var(--sand);text-wrap:balance}
 .faq summary::-webkit-details-marker{display:none}
 .faq summary::after{content:"+";font-family:'Raleway',sans-serif;font-size:28px;line-height:1;color:var(--gold);flex-shrink:0;transition:transform .2s}
 .faq details[open] summary::after{transform:rotate(45deg)}
-.faq .a{padding:0 56px 30px 0;display:flex;flex-direction:column;gap:14px;font-size:17px;line-height:1.75;color:rgba(248,246,242,.7)}
+.faq .a{max-width:720px;padding:0 56px 30px 0;display:flex;flex-direction:column;gap:14px;font-size:17px;line-height:1.75;color:rgba(248,246,242,.7)}
+.faq .a p{text-wrap:pretty}
 
 /* footer */
 .cs-ftr{background:#141514;border-top:1px solid rgba(194,168,108,.18);color:rgba(248,246,242,.55);padding:64px 0 48px;font-size:13px;line-height:1.7;text-align:center}
@@ -174,56 +193,89 @@
 @media (max-width:900px){
   .sec{padding:96px 0}
   .cs-head{margin-bottom:52px}
+  /* hero */
   .cs-hero{min-height:auto}
   .cs-hero .bg{inset:0 0 auto 0;height:64vh;background-position:46% 28%}
   .cs-hero .bg::after{background:linear-gradient(0deg,#171817 6%,rgba(23,24,23,.2) 60%,rgba(23,24,23,.35) 100%)}
-  .cs-hero-copy .inner{padding:38vh 0 80px;gap:26px}
-  .cs-hero .h1{font-size:46px}
-  .meta{display:grid;grid-template-columns:auto auto;justify-content:start;gap:10px 22px}
-  .meta span+span::before{display:none}
+  .cs-hero-copy .inner{padding:30vh 0 72px;gap:22px}
+  .cs-hero .eb-dot{display:none}
+  .cs-hero .eb-b{display:block}
+  .cs-hero .h1{font-size:clamp(36px,10.7vw,46px)}
+  .meta{flex-wrap:nowrap;gap:0 16px}
+  .meta span+span::before{margin-right:16px}
   .cta-row{flex-direction:column;align-items:stretch;gap:14px}
   .cta-row small{text-align:center}
   .pre-cta{display:flex;justify-content:center;order:-1}
   .hero-cta .desk-only{display:none}
-  .people{grid-template-columns:1fr;gap:18px}
-  .person{padding:30px 24px 28px}
+  /* recognition + stakes */
+  .cs-story{padding:72px 0 80px}
+  .people{grid-template-columns:1fr;gap:14px}
+  .person{padding:26px 22px 24px}
   .person .line{font-size:22px}
   .person .soft{font-size:17px}
-  .story-body{margin-top:64px;gap:22px}
+  .story-body{margin-top:52px;gap:22px}
   .story-body p{font-size:17.5px}
-  .story-body .thesis{font-size:24px}
+  .story-body b{font-size:clamp(17px,5vw,19px)}
   .sting{margin-top:24px;padding-left:22px}
-  .sting .hit{font-size:24px}
+  .sting .hit{font-size:22px}
+  /* hinge */
+  .cs-hinge{padding:100px 0}
+  .cs-hinge .lead{font-size:16.5px}
+  .cs-hinge .lead::before{margin-bottom:22px}
+  .cs-hinge .setup{margin-top:22px;font-size:24px;line-height:1.4}
+  .cs-hinge .hit{margin-top:18px;font-size:clamp(32px,9.6vw,38px);line-height:1.15}
+  /* why */
+  .cs-why{padding:96px 0 48px}
   .why-grid,.tl-grid{grid-template-columns:1fr;gap:48px}
-  .why-grid .h2{font-size:34px}
+  .why-grid .h2{font-size:32px}
   .why-lines{padding-left:24px}
   .why-lines p{font-size:20px}
-  .why-lines p.turn{font-size:27px}
+  .why-lines p.turn{margin-top:22px;font-size:23px}
+  /* sprint */
+  .cs-sprint{padding-top:56px}
+  .wk{padding-top:0}
   .tl-intro{position:static}
-  .tl-intro .h2{font-size:34px}
+  .tl-intro .h2{font-size:32px}
+  .tl-cta{align-items:stretch;margin-top:4px}
+  .tl-cta .fine-it{text-align:center}
+  .tl-cta.mob-only{display:flex;margin-top:56px}
+  .wk-head{margin-bottom:40px}
+  .wk-head .wk-title{font-size:24px}
+  .rail-item{padding:0 0 48px 40px}
   .rail-item h3{font-size:25px}
-  .learn{grid-template-columns:1fr}
-  .learn-card{padding:32px 26px}
-  .learn-card.wide{display:block}
-  .learn-card.wide h3{margin-bottom:12px}
-  .big-num{font-size:68px}
-  .band-grid{grid-template-columns:1fr;gap:22px;padding:36px 0}
-  .band-stat{flex-direction:column;align-items:flex-start;gap:10px;padding:0 0 22px;border-right:0;border-bottom:1px solid rgba(194,168,108,.28)}
-  .band-stat .n{font-size:46px}
-  .band-stat .t{max-width:none}
-  .band-quote p{font-size:20px}
-  .proof{grid-template-columns:1fr}
+  .piece{padding:22px 18px}
+  .piece h4{font-size:19px}
+  /* results */
+  .cs-head .h2{font-size:32px}
+  .cs-head .h2.res-h{font-size:clamp(28px,7.9vw,32px)}
+  .big-num{font-size:clamp(32px,9.2vw,36px);margin-bottom:10px}
+  .proof{display:flex;flex-direction:column;gap:34px;align-items:stretch;max-width:600px;margin:0 auto}
+  .pcol{display:contents}
+  .pf.o1{order:1}.pf.o2{order:2}.pf.o3{order:3}.pf.o4{order:4}.pf.o5{order:5}
   .pf.narrow img{width:88%}
+  .pf figcaption{font-size:12px;letter-spacing:.16em}
+  @media (max-width:400px){.piece .n,.rail-item .when{letter-spacing:.14em}.pf figcaption{letter-spacing:.12em}}
+  /* close + offer */
+  .cs-close{padding:96px 0 40px}
+  .cs-close .col{gap:24px}
+  .cs-close .eyebrow::before,.cs-close .eyebrow::after{display:none}
+  .cs-close .h2{font-size:32px}
+  .cs-close .last{font-size:22px}
+  .cs-offer{padding:24px 0 96px}
   .invite{padding:52px 24px}
   .invite .amt{font-size:92px}
   .incl li{flex-direction:column;gap:4px}
   .incl li span{text-align:left}
-  .cs-close .h2{font-size:36px}
-  .cs-close .last{font-size:24px}
+  /* faq + footer */
   .faq summary{font-size:18px}
+  .cta-center .fd{display:none}
+  .cta-center .fb{display:block}
   .faq .a{padding-right:0}
   .cs-ftr nav{flex-direction:column;align-items:center;gap:0}
   .cs-ftr p{text-align:left;font-size:12.5px}
+}
+@media (min-width:601px) and (max-width:900px){
+  .tl-intro,.wk,.why-grid,.story-body,.faq{max-width:620px;margin-left:auto;margin-right:auto}
 }
 </style>
 </head>
@@ -236,46 +288,42 @@
   <div class="wrap cs-top"><img src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"></div>
   <div class="wrap cs-hero-copy" id="main">
     <div class="inner">
-      <div class="eyebrow">A live 7-day sprint &middot; Oct 29 &ndash; Nov 5</div>
+      <div class="eyebrow"><span><span class="eb-a">A live 7-day sprint</span><span class="eb-dot"> &middot; </span><span class="eb-b">Oct 29 &ndash; Nov 5</span></span></div>
       <h1 class="h1">Your next client already <span class="gold-it">knows your name.</span></h1>
       <p class="lede">Learn the fastest way to turn the people who already know you into high-ticket clients &mdash; without ads, a funnel, or posting&nbsp;more.</p>
-      <div class="meta"><span>3 live sessions</span><span>Oct 29 &mdash; Nov 5</span><span>9&ndash;11am MT</span></div>
+      <div class="meta"><span>3 live sessions</span><span>9&ndash;11am MT</span></div>
       <div class="cta-row hero-cta"><p class="pre-cta">Recordings included</p><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><small class="desk-only">Live on Zoom &middot; Recordings included</small></div>
     </div>
   </div>
 </section>
 
-<!-- Proof band -->
-<section class="band">
-  <div class="wrap">
-    <div class="band-grid">
-      <div class="band-stat"><div class="n">$100,000+</div><div class="t">in sales in under three weeks, when I taught this approach to a live group earlier this year</div></div>
-      <blockquote class="band-quote"><p>&ldquo;It worked! I followed our steps&hellip; Then she said: Yes, yes, yes.&rdquo;</p><cite>From the group chat &middot; New client signed</cite></blockquote>
-    </div>
-  </div>
-</section>
-
-<!-- Story -->
+<!-- Recognition + stakes -->
 <section class="sec cs-story bg-obsidian">
   <div class="wrap">
     <div class="people">
-      <div class="person"><div class="when">Six months ago</div><p class="line">She talked to you six months ago.</p><p class="soft">She wanted your help. She just wasn&rsquo;t ready.</p></div>
-      <div class="person"><div class="when">For a year</div><p class="line">He&rsquo;s followed you for a year.</p><p class="soft">Never commented. Watched everything you&rsquo;ve posted.</p></div>
+      <div class="person"><div class="when">Six months ago</div><p class="line">She talked to you six months&nbsp;ago.</p><p class="soft">She wanted your help. She just wasn&rsquo;t&nbsp;ready.</p></div>
+      <div class="person"><div class="when">For a year</div><p class="line">He&rsquo;s followed you for a&nbsp;year.</p><p class="soft">Never commented. Watched everything you&rsquo;ve&nbsp;posted.</p></div>
     </div>
     <div class="story-body">
-      <p class="thesis">I&rsquo;ve signed over 2,000 clients, and here&rsquo;s what I&rsquo;ve learned: the fastest path to your next client usually isn&rsquo;t someone new. <em>It&rsquo;s someone who already knows you.</em></p>
-      <p>They&rsquo;ve been thinking about working with you&hellip; and waiting for a reason to take the next step.</p>
-      <p>And with the right message and the right conversation, these people could become clients who pay you <b>$3,000, $5,000, $10,000 or more.</b></p>
+      <p>They&rsquo;ve been thinking about working with you&hellip; and waiting for a reason to take the next&nbsp;step.</p>
+      <p>And with the right message and the right conversation, these people could become clients who pay you <b>$3,000, $5,000, $10,000 or&nbsp;more.</b></p>
       <div class="sting">
-        <p class="setup">But while you&rsquo;re busy trying to reach more people, they sit untouched.</p>
-        <p class="hit">And some of them will hire someone else&hellip; not because that person was better, but because they started the conversation you didn&rsquo;t.</p>
+        <p class="setup">But while you&rsquo;re busy trying to reach more people, they sit&nbsp;untouched.</p>
+        <p class="hit">And some of them will hire someone else&hellip; not because that person was better, but because they started the conversation you&nbsp;didn&rsquo;t.</p>
       </div>
     </div>
   </div>
 </section>
 
+<!-- The hinge: the key idea -->
+<section class="cs-hinge">
+  <div class="wrap">
+    <p class="key"><span class="lead">I&rsquo;ve signed over 2,000 clients, and here&rsquo;s what I&rsquo;ve&nbsp;learned:</span> <span class="setup">the fastest path to your next client usually isn&rsquo;t someone&nbsp;new.</span> <em class="hit">It&rsquo;s someone who already knows&nbsp;you.</em></p>
+  </div>
+</section>
+
 <!-- Why -->
-<section class="sec bg-ink">
+<section class="sec cs-why bg-deep">
   <div class="wrap">
     <div class="why-grid">
       <div>
@@ -283,79 +331,110 @@
         <h2 class="h2">Why the conversation never starts.</h2>
       </div>
       <div class="why-lines">
-        <p>Most people know these opportunities exist.</p>
+        <p class="dim">Most people know these opportunities&nbsp;exist.</p>
         <p class="dim">They still don&rsquo;t reach out.</p>
-        <p>Because they don&rsquo;t know what to say.</p>
-        <p class="dim">Or because reaching out feels like chasing. Like needing something. Like making it weird.</p>
-        <p class="turn">That&rsquo;s about to change&hellip; starting now.</p>
+        <p>Because they don&rsquo;t know what to&nbsp;say.</p>
+        <p>Or because reaching out feels like chasing. Like needing something. Like making it&nbsp;weird.</p>
+        <p class="turn">That&rsquo;s about to change&hellip; starting&nbsp;now.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- The sprint + how it works -->
-<section class="sec bg-deep">
+<!-- The sprint + the week -->
+<section class="sec cs-sprint bg-deep">
   <div class="wrap">
     <div class="tl-grid">
       <div class="tl-intro">
         <div class="eyebrow">The 7-Day Client Sprint</div>
         <h2 class="h2">The fastest path to your next client.</h2>
         <p class="explain">Over seven days, you&rsquo;ll learn exactly how to turn the people who already know you into high-ticket clients.</p>
-        <div class="goal"><b>The goal</b>Sign your next high-ticket client in seven days or less.</div>
-        <p>This doesn&rsquo;t require a complicated marketing machine or thousands of dollars in ads. It starts with the relationships you already have.</p>
+        <p>This doesn&rsquo;t require a complicated marketing machine or thousands of dollars in ads. It starts with the relationships you already&nbsp;have.</p>
+        <div class="goal"><b>The goal</b>Sign your next high-ticket client in seven days or&nbsp;less.</div>
+        <div class="tl-cta"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span></div>
       </div>
-      <div class="rail">
-        <div class="rail-item"><div class="when">Day 1 &middot; Thu Oct 29 &middot; Live 9&ndash;11am MT</div><h3>Find them.</h3><p>Run the Hidden Client Scan and write your first reconnection messages. You&rsquo;ll have opportunities in your pipeline before the day ends.</p></div>
-        <div class="rail-item"><div class="when">Day 2 &middot; Fri Oct 30 &middot; Live 9&ndash;11am MT</div><h3>Talk to them.</h3><p>Learn the Bridge Call and the Permission-Based Pivot, then practice both so you&rsquo;re ready when the calls come.</p></div>
-        <div class="rail-item own"><div class="when">Days 3&ndash;7 &middot; Your conversations</div><h3>Have the conversations.</h3><p>Send your messages, take your calls, and use the Follow-Up Loop to move each opportunity toward a yes.</p></div>
-        <div class="rail-item"><div class="when">Thu Nov 5 &middot; Live 9&ndash;11am MT</div><h3>Group coaching call.</h3><p>Bring your open conversations. We&rsquo;ll work through them live, so you leave knowing exactly how to move each one toward a yes.</p></div>
+      <div class="wk">
+        <div class="wk-head">
+          <div class="eyebrow">What you&rsquo;ll walk&nbsp;away&nbsp;with</div>
+          <p class="wk-title">Five pieces. One week.<br>Your next client.</p>
+        </div>
+        <div class="rail">
+          <div class="rail-item">
+            <div class="when">Day 1 &middot; <span class="nw">Thu Oct 29</span> &middot; <span class="nw">Live 9&ndash;11am MT</span></div>
+            <h3>Find them.</h3>
+            <p>Run the Hidden Client Scan and write your first reconnection messages. You&rsquo;ll have opportunities in your pipeline before the day&nbsp;ends.</p>
+            <div class="pieces">
+              <div class="piece"><div class="n">01 &middot; The Hidden Client Scan</div><h4>A list of people who could hire you now.</h4><p>Where your next high-ticket client could be hiding&hellip; and why you may have already crossed them off your&nbsp;list.</p></div>
+              <div class="piece"><div class="n">02 &middot; The Reconnection Message</div><h4>Messages that reopen old conversations.</h4><p>How to open the door after six months of silence. No apology, no awkward <span class="nw">check-in,</span> no&nbsp;pitch.</p></div>
+            </div>
+          </div>
+          <div class="rail-item">
+            <div class="when">Day 2 &middot; <span class="nw">Fri Oct 30</span> &middot; <span class="nw">Live 9&ndash;11am MT</span></div>
+            <h3>Talk to them.</h3>
+            <p>Learn the Bridge Call and the <span class="nw">Permission-Based Pivot</span>, then practice both so you&rsquo;re ready when the calls&nbsp;come.</p>
+            <div class="pieces">
+              <div class="piece"><div class="n">03 &middot; The 20-Minute Bridge Call</div><h4>A short call that turns interest into a real conversation about working together.</h4><p>What happens inside the short conversation I&rsquo;ve used to generate tens of thousands of dollars in additional sales, without turning it into a sales pitch or an hour of free&nbsp;coaching.</p></div>
+              <div class="piece"><div class="n">04 &middot; The Permission-Based Pivot</div><h4>The words that move a helpful call toward working together.</h4><p>They say, &ldquo;That was really helpful.&rdquo; What you say next decides whether the conversation ends or opens the door to working&nbsp;together.</p></div>
+            </div>
+          </div>
+          <div class="rail-item own">
+            <div class="when">Days 3&ndash;7 &middot; <span class="nw">Your conversations</span></div>
+            <h3>Have the conversations.</h3>
+            <p>Send your messages, take your calls, and use the Follow-Up Loop to move each opportunity toward a&nbsp;yes.</p>
+            <div class="pieces">
+              <div class="piece"><div class="n">05 &middot; The Follow-Up Loop</div><h4>A follow-up rhythm that gets you to a clear yes&nbsp;or&nbsp;no.</h4><p>How to lead opportunities to a close without chasing, discounting, or sending another &ldquo;just checking&nbsp;in.&rdquo;</p></div>
+            </div>
+          </div>
+          <div class="rail-item">
+            <div class="when"><span class="nw">Thu Nov 5</span> &middot; <span class="nw">Live 9&ndash;11am MT</span></div>
+            <h3>Group coaching call.</h3>
+            <p>Bring your open conversations. We&rsquo;ll work through them live, so you leave knowing exactly how to move each one toward a&nbsp;yes.</p>
+          </div>
+        </div>
+        <div class="tl-cta mob-only"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span></div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- What you'll learn -->
-<section class="sec bg-obsidian">
-  <div class="wrap">
-    <div class="cs-head">
-      <div class="eyebrow center">What you&rsquo;ll walk away with</div>
-      <h2 class="h2">Five pieces. One week.<br>Your next client.</h2>
-    </div>
-    <div class="learn">
-      <div class="learn-card"><div class="n">01 &middot; The Hidden Client Scan</div><h3>A list of people who could hire you now.</h3><p>Where your next high-ticket client could be hiding&hellip; and why you may have already crossed them off your list.</p></div>
-      <div class="learn-card"><div class="n">02 &middot; The Reconnection Message</div><h3>Messages that reopen old conversations.</h3><p>How to open the door after six months of silence. No apology, no awkward check-in, no pitch.</p></div>
-      <div class="learn-card"><div class="n">03 &middot; The 20-Minute Bridge Call</div><h3>A short call that turns interest into a real conversation about working together.</h3><p>What happens inside the short conversation I&rsquo;ve used to generate tens of thousands of dollars in additional sales, without turning it into a sales pitch or an hour of free coaching.</p></div>
-      <div class="learn-card"><div class="n">04 &middot; The Permission-Based Pivot</div><h3>The words that move a helpful call toward working together.</h3><p>They say, &ldquo;That was really helpful.&rdquo; What you say next decides whether the conversation ends or opens the door to working together.</p></div>
-      <div class="learn-card wide"><div><div class="n">05 &middot; The Follow-Up Loop</div><h3>A follow-up rhythm that gets you to a clear yes or no.</h3></div><p>How to lead opportunities to a close without chasing, discounting, or sending another &ldquo;just checking in.&rdquo;</p></div>
-    </div>
-    <div class="cta-center"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span></div>
-  </div>
-</section>
-
-<!-- Proof -->
+<!-- Results -->
 <section class="sec bg-ink">
   <div class="wrap">
     <div class="cs-head">
       <div class="eyebrow center">The results</div>
-      <h2 class="h2">$100,000+ in sales in under three weeks.</h2>
-      <p class="lede">Earlier this year, I taught this approach to a live group. Here&rsquo;s what they shared in the group chat.</p>
+      <h2 class="h2 res-h"><span class="big-num">$100,000+</span> in sales <span class="nw">in under three&nbsp;weeks.</span></h2>
+      <p class="lede">Earlier this year, I taught this approach to a live group. Here&rsquo;s what they shared in the group&nbsp;chat.</p>
     </div>
     <div class="proof">
       <div class="pcol">
-        <figure class="pf"><img src="assets/proof-meleah.png" width="752" height="648" loading="lazy" alt="Meleah: It's official! I will get $60k for it. The sales conversation was barely even a sales conversation. He said yes nearly immediately. My biggest coaching package I've ever sold."><figcaption>$60K package</figcaption></figure>
-        <figure class="pf narrow"><img src="assets/proof-natal.png" width="466" height="220" loading="lazy" alt="Natal: I just booked another discovery call, making that six booked in since the challenge started."><figcaption>Six discovery calls booked</figcaption></figure>
-        <figure class="pf"><img src="assets/proof-s.png" width="848" height="411" loading="lazy" alt="I must admit, I've never done that much invitation in a short time period. I've got 3 scheduled discovery calls next week."><figcaption>Three discovery calls scheduled</figcaption></figure>
+        <figure class="pf o1"><img src="assets/proof-meleah.png" width="752" height="648" loading="lazy" alt="Meleah: It's official! I will get $60k for it. The sales conversation was barely even a sales conversation. He said yes nearly immediately. My biggest coaching package I've ever sold."><figcaption>$60K package</figcaption></figure>
+        <figure class="pf narrow o3"><img src="assets/proof-natal.png" width="466" height="220" loading="lazy" alt="Natal: I just booked another discovery call, making that six booked in since the challenge started."><figcaption>Six discovery calls booked</figcaption></figure>
       </div>
       <div class="pcol">
-        <figure class="pf"><img src="assets/proof-reset.png" width="638" height="891" loading="lazy" alt="Yay! It worked! I followed our steps. Then saying the price and being silent. Then she said: Yes, yes, yes."><figcaption>Client said yes</figcaption></figure>
-        <figure class="pf"><img src="assets/proof-ana.png" width="848" height="169" loading="lazy" alt="Ana: I just booked my first discovery call since starting this challenge. Welcome messages did great work."><figcaption>First discovery call booked</figcaption></figure>
+        <figure class="pf crop o2"><img src="assets/proof-reset.png" width="638" height="891" loading="lazy" alt="Yay! It worked! I followed our steps. Then saying the price and being silent. Then she said: Yes, yes, yes."><figcaption>Client said yes</figcaption></figure>
+        <figure class="pf o4"><img src="assets/proof-s.png" width="848" height="411" loading="lazy" alt="I must admit, I've never done that much invitation in a short time period. I've got 3 scheduled discovery calls next week."><figcaption>Three discovery calls scheduled</figcaption></figure>
+        <figure class="pf o5"><img src="assets/proof-ana.png" width="848" height="169" loading="lazy" alt="Ana: I just booked my first discovery call since starting this challenge. Welcome messages did great work."><figcaption>First discovery call booked</figcaption></figure>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- Closing -->
+<section class="sec cs-close">
+  <div class="bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div class="col">
+      <div class="eyebrow center">You&rsquo;ve already done the hard part</div>
+      <h2 class="h2">They already know you.</h2>
+      <p>You could spend another month trying to get more people to notice&nbsp;you.<br>Or you could start with the people who already have.</p>
+      <p>You&rsquo;ve already done the work of getting on their radar.</p>
+      <p class="last">Don&rsquo;t stop one conversation short of finding out where it could&nbsp;lead.</p>
     </div>
   </div>
 </section>
 
 <!-- Offer -->
-<section class="sec cs-offer bg-deep" id="join">
+<section class="sec cs-offer" id="join">
   <div class="wrap">
     <div class="invite">
       <div class="eyebrow center" style="position:relative;z-index:1">Your seat</div>
@@ -374,21 +453,6 @@
   </div>
 </section>
 
-<!-- Closing -->
-<section class="sec cs-close">
-  <div class="bg" aria-hidden="true"></div>
-  <div class="wrap">
-    <div class="col">
-      <div class="eyebrow center">You&rsquo;ve already done the hard part</div>
-      <h2 class="h2">They already know you.</h2>
-      <p>You could spend another month trying to get more people to notice you.<br>Or you could start with the people who already have.</p>
-      <p>You&rsquo;ve already done the work of getting on their radar.</p>
-      <p class="last">Don&rsquo;t stop one conversation short of finding out where it could lead.</p>
-      <a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a>
-    </div>
-  </div>
-</section>
-
 <!-- FAQ -->
 <section class="sec bg-ink">
   <div class="wrap">
@@ -399,7 +463,11 @@
     <div class="faq">
       <details open>
         <summary>Is this right for me?</summary>
-        <div class="a"><p>It&rsquo;s built for coaches, consultants, and service-based business owners who have worked with paying clients, have an offer they believe in, and want more chances to sell it, without adding more to their plate.</p><p>It&rsquo;s not the right fit if you&rsquo;re still deciding what to sell, haven&rsquo;t built relationships in your field yet, or want a script to blast your contact list. If that&rsquo;s you, those foundations come first.</p></div>
+        <div class="a"><p>It&rsquo;s built for coaches, consultants, and <span class="nw">service-based</span> business owners who have worked with paying clients, have an offer they believe in, and want more chances to sell it, without adding more to their plate.</p><p>It&rsquo;s not the right fit if you&rsquo;re still deciding what to sell, haven&rsquo;t built relationships in your field yet, or want a script to blast your contact list. If that&rsquo;s you, those foundations come first.</p></div>
+      </details>
+      <details>
+        <summary>Will I actually sign a client in seven days?</summary>
+        <div class="a"><p>That&rsquo;s the goal we&rsquo;ll work toward. It isn&rsquo;t guaranteed.</p><p>Your offer, your relationships, your follow-through, and other people&rsquo;s timing all play a role.</p><p>What we&rsquo;ll do together is concrete: find your opportunities, write your outreach, and practice the conversations that lead to paying clients. You&rsquo;ll leave with a process you can keep using long after the sprint.</p></div>
       </details>
       <details>
         <summary>What if I don&rsquo;t have a big audience?</summary>
@@ -410,15 +478,11 @@
         <div class="a"><p>No. You won&rsquo;t be blasting your contact list or trying to sell coaching to everyone you know.</p><p>You&rsquo;ll learn how to spot the people your work could genuinely help, make a relevant invitation, and explore working together when there&rsquo;s a real fit&hellip; without forcing the conversation.</p></div>
       </details>
       <details>
-        <summary>Will I actually sign a client in seven days?</summary>
-        <div class="a"><p>That&rsquo;s the goal we&rsquo;ll work toward. It isn&rsquo;t guaranteed.</p><p>Your offer, your relationships, your follow-through, and other people&rsquo;s timing all play a role.</p><p>What we&rsquo;ll do together is concrete: find your opportunities, write your outreach, and practice the conversations that lead to paying clients. You&rsquo;ll leave with a process you can keep using long after the sprint.</p></div>
-      </details>
-      <details>
         <summary>What if I can&rsquo;t attend live?</summary>
         <div class="a"><p>You&rsquo;ll get lifetime access to every recording, including the coaching call.</p><p>Attending live lets you ask questions and practice with us. If you miss a session, catch the replay&hellip; and come back to it whenever you need a refresher.</p></div>
       </details>
     </div>
-    <div class="cta-center"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it">Oct 29 &ndash; Nov 5 &middot; Live on Zoom &middot; Recordings included</span></div>
+    <div class="cta-center"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it"><span class="nw">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span><span class="fd"> &middot; </span><span class="nw fb">Recordings included</span></span></div>
   </div>
 </section>
 
@@ -427,7 +491,7 @@
     <img src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31" loading="lazy">
     <div>&copy; Jason Moss LLC</div>
     <nav><a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a><a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a><a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings disclaimer</a></nav>
-    <p>Results shared on this page come from past participants and aren&rsquo;t typical or guaranteed. Your results depend on your offer, your relationships, and your follow-through.</p>
+    <p>Results shared on this page come from past participants and aren&rsquo;t typical or guaranteed. Your results depend on your offer, your relationships, and your <span class="nw">follow-through.</span></p>
     <p>This website is not a part of Facebook or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
   </div>
 </footer>
