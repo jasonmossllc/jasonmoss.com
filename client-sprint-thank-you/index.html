@@ -23,7 +23,7 @@
 .ty-top img{height:30px;width:auto;margin:0 auto}
 
 /* step 1: confirm + calendar */
-.ty-confirm{padding:56px 0 110px}
+.ty-confirm{padding:48px 0 72px}
 .panel{position:relative;max-width:760px;margin:0 auto;padding:64px 64px 56px;text-align:center;background:linear-gradient(180deg,rgba(194,168,108,.08),rgba(194,168,108,.02));border:1px solid rgba(194,168,108,.55);box-shadow:0 60px 120px -50px rgba(0,0,0,.9),0 0 80px -30px rgba(194,168,108,.22)}
 .panel::after{content:"";position:absolute;inset:10px;border:1px solid rgba(194,168,108,.2);pointer-events:none}
 .panel>*{position:relative;z-index:1}
@@ -39,16 +39,11 @@
 .step{margin-top:44px;display:flex;flex-direction:column;align-items:center;gap:14px}
 .step-label{font-size:11px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(248,246,242,.55)}
 .panel .btn{padding:21px 40px;box-shadow:0 0 0 1px rgba(194,168,108,.4),0 18px 50px -12px rgba(194,168,108,.45)}
-.each{display:flex;gap:6px 22px;flex-wrap:wrap;justify-content:center;font-size:14px;color:rgba(248,246,242,.55)}
-.each a{color:rgba(248,246,242,.82);border-bottom:1px solid rgba(194,168,108,.5);padding:6px 0}
-.each a:hover{color:var(--gold)}
-.zoom-save{margin-top:36px;padding-top:30px;border-top:1px solid rgba(248,246,242,.1);font-size:16px;line-height:1.7;color:rgba(248,246,242,.72)}
-.zoom-save a{color:var(--gold);border-bottom:1px solid rgba(194,168,108,.5)}
-.next-cue{margin-top:26px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:17px;color:var(--gold)}
+.panel .next-cue{margin-top:30px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:17px;color:var(--gold)}
 .next-cue .arrow{display:block;margin-top:6px;font-style:normal;font-size:20px}
 
 /* step 2: call invite */
-.ty-invite{padding:120px 0 130px;background:#1A1B1A;border-top:1px solid rgba(194,168,108,.14)}
+.ty-invite{padding:96px 0 120px;background:#1A1B1A;border-top:1px solid rgba(194,168,108,.14)}
 .invite-grid{display:grid;grid-template-columns:5fr 6fr;gap:72px;align-items:start;max-width:1100px;margin:0 auto}
 .invite-copy{display:flex;flex-direction:column;gap:24px;position:sticky;top:40px}
 .invite-copy .h2{font-size:44px}
@@ -69,14 +64,21 @@
 .ty-ftr nav a{display:inline-block;padding:11px 4px;color:rgba(248,246,242,.8)}
 
 @media (max-width:900px){
-  .ty-confirm{padding:40px 0 88px}
+  .ty-confirm{padding:32px 0 56px}
   .panel{padding:48px 22px 44px}
   .panel h1{font-size:42px}
-  .sessions{grid-template-columns:1fr}
+  .sessions{grid-template-columns:1fr;margin-top:28px}
   .sessions li+li{border-left:0;border-top:1px solid rgba(194,168,108,.25)}
-  .sessions li{padding:18px 8px}
+  .sessions li{padding:13px 4px;flex-direction:row;align-items:baseline;justify-content:space-between;gap:10px;text-align:left}
+  .sessions .k{flex:0 0 118px;font-size:10px;white-space:nowrap}
+  .sessions .d{flex:1;font-size:18px}
+  .sessions .t{font-size:12.5px;white-space:nowrap}
+  .zoomline{font-size:11px;letter-spacing:.12em}
+  .panel h1{margin:16px 0 10px}
+  .step{margin-top:32px}
+  .panel .btn{font-size:13px;letter-spacing:.1em}
   .panel .btn{width:100%;padding:19px 18px}
-  .ty-invite{padding:88px 0 96px}
+  .ty-invite{padding:72px 0 88px}
   .invite-grid{grid-template-columns:1fr;gap:44px}
   .invite-copy{position:static}
   .invite-copy .h2{font-size:34px}
@@ -106,14 +108,8 @@
       <div class="step">
         <span class="step-label">1 &middot; Protect the time</span>
         <a class="btn btn-gold" href="https://addcal.co/c/kehw49d8mclr" target="_blank" rel="noopener">Add all three to your calendar</a>
-        <div class="each">Or one at a time:
-          <a href="https://addcal.co/e/bcfysv7shzec" target="_blank" rel="noopener">Day 1</a>
-          <a href="https://addcal.co/e/15yez5o5hx3o" target="_blank" rel="noopener">Day 2</a>
-          <a href="https://addcal.co/e/dkq6zz419u6w" target="_blank" rel="noopener">Coaching call</a>
-        </div>
       </div>
 
-      <p class="zoom-save">Save your Zoom link&hellip; this is where we&rsquo;ll meet: <a href="https://jasonmoss.com/zoom" target="_blank" rel="noopener">jasonmoss.com/zoom</a><br>It&rsquo;s also on its way to your inbox.</p>
       <p class="next-cue">Number two is the good part&hellip;<span class="arrow">&darr;</span></p>
     </div>
   </div>
