@@ -460,7 +460,6 @@
     .optin-form-wrap.is-step2 { display: flex; flex-direction: column; justify-content: center; }
     .optin-step2 { width: 100%; max-width: 28rem; margin: 0 auto; text-align: center; }
     .optin-step2-kicker { margin: 0 0 0.75rem; min-height: 1.2em; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 0.75rem; line-height: 1.2; letter-spacing: 0.14em; text-transform: uppercase; color: #8A6D2E; }
-    .optin-step2-kicker.is-in::before { content: '\2713\00a0'; color: #2C3E2D; }
     .optin-step2-headline { margin: 0 auto 1.25rem; max-width: 22rem; font-family: 'Libre Baskerville', serif; font-weight: 400; font-size: 1.375rem; line-height: 1.3; color: #1D1F1E; text-wrap: balance; }
     .optin-step2-headline:focus, .optin-step2-headline:focus-visible { outline: none; }
     .optin-step2-q { display: block; margin: 0 0 0.75rem; font-family: 'Raleway', sans-serif; font-weight: 600; font-size: 0.9375rem; color: #2E3A2E; text-align: center; }
@@ -559,7 +558,7 @@
         <p class="optin-subtext"><strong>11,000+</strong> entrepreneurs signed up.<br class="mobile-only"> Instant access.</p>
 
         <div class="optin-step2" hidden>
-          <p class="optin-step2-kicker" aria-live="polite"></p>
+          <p class="optin-step2-kicker"></p>
           <h3 class="optin-step2-headline" tabindex="-1">One last question before your masterclass starts</h3>
           <span class="optin-step2-q" id="optin-step2-q">Where&rsquo;s your business at right now?</span>
           <div class="optin-revenue-grid" role="group" aria-labelledby="optin-step2-q">
@@ -665,11 +664,10 @@
           b.setAttribute('aria-pressed', on ? 'true' : 'false');
         });
       }
-      function setKicker(confirmed) {
+      // One steady line: it never changes while the visitor is reading.
+      function setKicker() {
         if (!kicker || !state) return;
-        var name = state.fname ? ', ' + state.fname : '';
-        kicker.textContent = confirmed ? 'You\u2019re in' + name : 'Almost there' + name;
-        kicker.classList.toggle('is-in', !!confirmed);
+        kicker.textContent = 'Almost there' + (state.fname ? ', ' + state.fname : '');
       }
       function saveAnswer() {
         return fetch('/.netlify/functions/submit-optin-answer', {
@@ -720,7 +718,7 @@
           wrap.classList.add('is-step2');
           form.hidden = true;
           if (subtext) subtext.hidden = true;
-          setKicker(false);
+          setKicker();
           markSelected(keptAnswer);
           setButtons(!!keptAnswer);
           if (note) note.textContent = keptAnswer ? NOTE_GOING : NOTE_IDLE;
@@ -755,7 +753,7 @@
           state.confirmed = confirmed;
           state.pass = (confirmed && ctx.response && ctx.response.answer_pass) || null;
           state.redirectUrl = ctx.redirectUrl;
-          if (confirmed) { setKicker(true); fireLead(); }
+          if (confirmed) fireLead();
           leave();
         }
       };
