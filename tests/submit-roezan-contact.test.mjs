@@ -48,10 +48,13 @@ await withStubbedFetch(async (calls) => {
   // The bug: this assertion fails if `lists` is ever emptied again.
   check('upsert puts the contact on Main List',
     JSON.stringify(upsert?.body?.lists) === JSON.stringify([MAIN_LIST]), upsert?.body);
-  check('upsert carries the tag',
-    JSON.stringify(upsert?.body?.tags) === JSON.stringify([1690]), upsert?.body);
+  // Every tag add fires tag-triggered Roezan automations, so the tag must be
+  // applied exactly once (registration texts went out twice on 2026-10-20).
+  check('upsert does not carry the tag', !('tags' in (upsert?.body || {})), upsert?.body);
+  check('tag is applied exactly once',
+    calls.filter(c => c.path === '/integrations/contacts/tags').length === 1, calls);
   check('explicit list subscribe is sent', sub?.body?.list === MAIN_LIST, sub?.body);
-  check('explicit tag apply is still sent',
+  check('explicit tag apply is sent',
     JSON.stringify(tag?.body?.tagIds) === JSON.stringify([1690]), tag?.body);
   check('subscribe and tag both target the same phone',
     sub?.body?.phone === '+15551234567' && tag?.body?.phone === '+15551234567');

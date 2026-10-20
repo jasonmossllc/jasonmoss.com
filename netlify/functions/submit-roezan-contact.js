@@ -142,14 +142,16 @@ async function syncContactToRoezan({ email, firstName, lastName, phone, tagId },
       ...(firstName ? { firstName } : {}),
       ...(lastName ? { lastName } : {}),
       ...(email ? { email } : {}),
-      tags: [tagId],
     },
   });
 
-  // Belt and suspenders for BOTH the tag and the list. The upsert above returns
-  // 202 and applies tags/lists asynchronously, which has proven unreliable for
-  // contacts that already exist. These run in parallel so the pair costs one
-  // round trip against the request deadline rather than two.
+  // The tag is applied exactly once, here and never in the upsert: every tag add
+  // is a separate "tag added" event in Roezan, so a registration-text automation
+  // on the tag fires once per add (buyers got the text twice on 2026-10-20).
+  // The list is belt and suspenders: the upsert above returns 202 and applies
+  // lists asynchronously, which has proven unreliable for contacts that already
+  // exist. These run in parallel so the pair costs one round trip against the
+  // request deadline rather than two.
   await Promise.all([
     roezanRequest('/integrations/contacts/tags', {
       method: 'POST',
