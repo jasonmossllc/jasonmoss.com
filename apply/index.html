@@ -169,7 +169,24 @@
       <div class="eyebrow center">Free · 20 minutes · 1-on-1 with Jason</div>
       <h2 class="h2">Start with two quick questions.</h2>
     </div>
-    <div class="qualify-wrap"><div data-qualify-source="apply"></div></div>
+    <div class="qualify-wrap" id="qualifyWrap"></div>
+    <!--
+      Attribution: ?source= on this page's URL overrides the default "apply" (e.g. /book ->
+      /apply/?source=YouTube_Organic). Only `source`, never utm_source: Kit adds
+      utm_source=convertkit to email links, and those must keep reading as "apply".
+      The host div is created here WITH the attribute so the embed never sees it without one.
+    -->
+    <script>
+      (function () {
+        var wrap = document.getElementById('qualifyWrap');
+        if (!wrap) return;
+        var raw = new URLSearchParams(window.location.search).get('source') || 'apply';
+        var source = String(raw).slice(0, 80).replace(/[^A-Za-z0-9_\-.]/g, '_') || 'apply';
+        var host = document.createElement('div');
+        host.setAttribute('data-qualify-source', source);
+        wrap.appendChild(host);
+      })();
+    </script>
 </section>
 
 <section style="background:var(--sand);padding:120px 0 120px">

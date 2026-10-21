@@ -10,6 +10,8 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /go           /links                                                                           301
 /go/          /links                                                                           301
 /resonance    /resonance-masterclass-optin?source=YouTube_Organic                             301
+# YouTube CTA (descriptions + pinned comments): the booking page, tagged so bookings count as YouTube
+/book         /apply/?source=YouTube_Organic                                                  302
 # optin2 retired (archived) -> restored original optin page; old ad/email links still resolve
 /resonance-masterclass-optin2    /resonance-masterclass-optin                                  301
 /clients      https://jasonmoss.com/aligned-client-engine/                                     301
