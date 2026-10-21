@@ -736,6 +736,34 @@ footer .fine.links a:hover{color:var(--mocha);}
 .wall .wall-note:has(+ .results-note){margin-bottom:0}
 .wall .results-note{margin:14px auto clamp(44px,5vw,60px)}
 </style>
+<style id="jm-s2-theme">
+/* Two-step revenue question (js/optin-shared.js revenueQuestion), themed to this page: gold eyebrow, modal heading, input-style tiles, gold selection */
+.jm-s2{--s2-sans:var(--sans);--s2-serif:var(--serif);--s2-ink:var(--obsidian);--s2-text:var(--obsidian);--s2-muted:#6E6259;--s2-note:#6E6259;--s2-hover:var(--gold);--s2-tile-bg:rgba(255,255,255,.74);--s2-tile-border:1px solid rgba(91,75,63,.26);--s2-tile-radius:2px;--s2-tile-shadow:none;--s2-tile-active:#FFFFFF;--s2-sel-bg:var(--gold);--s2-sel-ink:var(--obsidian);--s2-sel-muted:rgba(29,31,30,.8);--s2-modal-headline-size:clamp(22px,5.8vw,27px)}
+.jm-s2-progress{height:3px;background:var(--stone)}
+.jm-s2-progress i{background:var(--gold)}
+.optin-modal .jm-s2-progress{top:-1px;left:-1px;right:-1px;border-radius:2px 2px 0 0}
+.jm-s2 .jm-s2-kicker{gap:16px;padding:0;border-radius:0;background:none;font-weight:600;font-size:12px;line-height:1.3;letter-spacing:.3em;text-transform:uppercase;text-wrap:balance;color:#7E6A3E}
+.jm-s2 .jm-s2-kicker::before,.jm-s2 .jm-s2-kicker::after{content:"";flex:none;width:36px;height:1px;border-radius:0;background:var(--gold)}
+.jm-s2 .jm-s2-kicker.is-wrapped::before,.jm-s2 .jm-s2-kicker.is-wrapped::after{display:none}
+.jm-s2 .jm-s2-headline{font-size:clamp(22px,5.8vw,27px);line-height:1.22;max-width:340px;color:var(--obsidian)}
+.jm-s2 .jm-s2-panel{margin:0;padding:0;background:none;border:0;border-radius:0}
+.jm-s2 .jm-s2-panel::before{content:"";display:block;width:34px;height:1px;margin:0 auto 18px;background:var(--gold)}
+.jm-s2 .jm-s2-q{font-weight:500;font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+.jm-s2 .jm-s2-grid{gap:10px}
+.jm-s2 .jm-s2-opt span{min-height:64px;gap:3px;transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease,color .2s ease,opacity .2s ease}
+.jm-s2 .jm-s2-opt b{font-weight:600;font-size:15px;letter-spacing:.01em}
+.jm-s2 .jm-s2-opt small{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.jm-s2 .jm-s2-opt.is-selected span{border-color:var(--gold-deep);box-shadow:0 6px 18px rgba(91,75,63,.18)}
+.jm-s2 .jm-s2-opt:focus-visible span{outline:2px solid var(--gold-deep);outline-offset:3px}
+.jm-s2 .jm-s2-opt:active span{border-color:var(--gold)}
+.jm-s2 .jm-s2-note{font-size:13.5px;line-height:1.45}
+@media (hover:hover){.jm-s2 .jm-s2-opt:not([disabled]):hover span{border-color:var(--gold);background:#FFFFFF;box-shadow:0 0 0 3px rgba(194,168,108,.16)}}
+@media (min-width:361px){.optin-modal .jm-s2 .jm-s2-kicker{margin-bottom:18px}.optin-modal .jm-s2 .jm-s2-headline{max-width:360px;margin-bottom:22px}.optin-modal .jm-s2 .jm-s2-panel{padding:0}.optin-modal .jm-s2 .jm-s2-panel::before{margin-bottom:20px}.optin-modal .jm-s2 .jm-s2-q{font-size:15px;margin-bottom:14px}.optin-modal .jm-s2 .jm-s2-opt span{min-height:72px}.optin-modal .jm-s2 .jm-s2-opt b{font-size:16px}.optin-modal .jm-s2 .jm-s2-note{margin-top:16px;font-size:13.5px}}
+@media (max-width:640px){.jm-s2 .jm-s2-kicker{letter-spacing:.24em}.jm-s2 .jm-s2-kicker::before,.jm-s2 .jm-s2-kicker::after{display:none}}
+@media (max-width:380px){.jm-s2 .jm-s2-grid{gap:8px}.jm-s2 .jm-s2-opt small{letter-spacing:.1em}}
+@media (max-width:360px){.jm-s2 .jm-s2-panel{margin:0 -12px}.jm-s2 .jm-s2-grid{gap:6px}.jm-s2 .jm-s2-opt b{font-size:14px}}
+@media (max-width:345px){.jm-s2 .jm-s2-headline{font-size:20px}.jm-s2 .jm-s2-panel::before{margin-bottom:16px}.jm-s2 .jm-s2-q{font-size:13.5px}.jm-s2 .jm-s2-opt b{font-size:13px}.jm-s2 .jm-s2-opt small{font-size:10px;letter-spacing:.04em}}
+</style>
 </head>
 <body>
 

@@ -342,6 +342,82 @@
     .call-list li { font-size: 14.5px; }
   }
 </style>
+<style id="jm-s2-theme">
+/* Step 2 revenue question (js/optin-shared.js revenueQuestion), matched to the guide panel: gold eyebrow, square tiles, gold selected fill */
+  .jm-s2 {
+    --s2-sans: var(--font-body); --s2-serif: var(--font-headline);
+    max-width: none; text-align: left;
+  }
+  .jm-s2 .jm-s2-kicker {
+    display: block; width: auto; margin: 0 0 10px; padding: 0; border-radius: 0; background: none;
+    font-weight: 600; font-size: 11.5px; line-height: 1.3; letter-spacing: 0.16em; text-transform: uppercase;
+    color: #806A3A; text-wrap: balance;
+  }
+  .jm-s2 .jm-s2-kicker::before { display: none; }
+  .jm-s2 .jm-s2-headline {
+    margin: 0 0 18px; max-width: none; font-size: 24px; line-height: 1.3; color: var(--charcoal-obsidian);
+    text-wrap: balance;
+  }
+  .jm-s2 .jm-s2-panel {
+    margin: 0; padding: 16px 0 0; background: none; border: 0; border-top: 1px solid rgba(194, 168, 108, 0.45); border-radius: 0;
+  }
+  .jm-s2 .jm-s2-q {
+    margin: 0 0 12px; text-align: left; font-weight: 600; font-size: 15px; line-height: 1.45; color: var(--charcoal-obsidian); text-wrap: pretty;
+  }
+  .jm-s2 .jm-s2-grid { gap: 10px; }
+  .jm-s2 .jm-s2-opt span {
+    min-height: 64px; padding: 10px 4px; gap: 4px;
+    background: #FFFFFF; border: 1px solid rgba(29, 31, 30, 0.16); border-radius: 0; box-shadow: none;
+    color: var(--charcoal-obsidian);
+    transition: background-color 0.25s var(--ease-out), border-color 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out), opacity 0.2s var(--ease-out);
+  }
+  .jm-s2 .jm-s2-opt b { font-weight: 600; font-size: 15px; line-height: 1.2; }
+  .jm-s2 .jm-s2-opt small {
+    font-weight: 600; font-size: 9.5px; line-height: 1.2; letter-spacing: 0.14em; text-transform: uppercase; color: #6F665D;
+  }
+  @media (hover: hover) {
+    .jm-s2 .jm-s2-opt:not([disabled]):hover span { border-color: var(--muted-gold); box-shadow: 0 0 0 3px rgba(194, 168, 108, 0.2); }
+  }
+  .jm-s2 .jm-s2-opt:active span { background: rgba(194, 168, 108, 0.12); }
+  .jm-s2 .jm-s2-opt.is-selected span {
+    background: var(--muted-gold); border-color: var(--muted-gold); color: var(--charcoal-obsidian);
+    box-shadow: 0 4px 20px rgba(194, 168, 108, 0.25);
+  }
+  .jm-s2 .jm-s2-opt.is-selected small { color: #3A3530; }
+  .jm-s2 .jm-s2-opt[disabled]:not(.is-selected) span { opacity: 0.5; }
+  .jm-s2 .jm-s2-opt:focus-visible span { outline: 2px solid #806A3A; outline-offset: 2px; border-color: var(--muted-gold); }
+  .jm-s2 .jm-s2-note {
+    margin: 14px 0 0; text-align: center; font-size: 12px; line-height: 1.4; color: #6F665D;
+  }
+  .optin-panel > .jm-s2-progress { height: 3px; background: rgba(194, 168, 108, 0.2); }
+  .optin-panel > .jm-s2-progress i { background: var(--muted-gold); }
+  @media (max-width: 760px) {
+    .jm-s2 .jm-s2-headline { font-size: 22px; margin-bottom: 16px; }
+    .jm-s2 .jm-s2-panel { padding-top: 14px; }
+    .jm-s2 .jm-s2-q { font-size: 14px; margin-bottom: 10px; }
+    .jm-s2 .jm-s2-grid { gap: 8px; }
+    .jm-s2 .jm-s2-opt span { min-height: 58px; }
+    .jm-s2 .jm-s2-note { font-size: 11px; margin-top: 10px; }
+  }
+  @media (max-width: 380px) {
+    .jm-s2 .jm-s2-headline { font-size: 19px; }
+    .jm-s2 .jm-s2-grid { gap: 6px; }
+    .jm-s2 .jm-s2-opt b { font-size: 13.5px; }
+    .jm-s2 .jm-s2-opt small { font-size: 9px; letter-spacing: 0.1em; }
+    .jm-s2 .jm-s2-opt span { padding-left: 2px; padding-right: 2px; }
+  }
+  @media (max-width: 345px) {
+    .jm-s2 .jm-s2-kicker { margin-bottom: 8px; }
+    .jm-s2 .jm-s2-headline { font-size: 18px; margin-bottom: 14px; }
+    .jm-s2 .jm-s2-panel { padding-top: 12px; }
+    .jm-s2 .jm-s2-q { font-size: 13.5px; margin-bottom: 8px; }
+    .jm-s2 .jm-s2-grid { grid-template-columns: 1fr; gap: 8px; }
+    .jm-s2 .jm-s2-opt span { flex-direction: row; justify-content: space-between; min-height: 48px; padding: 0 16px; }
+    .jm-s2 .jm-s2-opt b { font-size: 15px; }
+    .jm-s2 .jm-s2-opt small { font-size: 9.5px; letter-spacing: 0.14em; }
+    .jm-s2 .jm-s2-note { margin-top: 8px; }
+  }
+</style>
 </head>
 <body>
 

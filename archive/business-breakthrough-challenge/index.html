@@ -1881,6 +1881,7 @@
     JMOptin.init({
       kitTagId: 20410114, // Kit: Business Breakthrough Challenge
       phone: true,
+      revenueQuestion: false, // archived page: keep its original one-step flow
       validate: function (form) {
         var sel = form.querySelector('select[name="Signed Paying Clients"]');
         return sel && !sel.value ? 'Please tell us whether you have signed paying clients before.' : '';

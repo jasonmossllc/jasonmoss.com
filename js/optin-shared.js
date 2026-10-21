@@ -15,16 +15,27 @@
  *     validate: function (form) { return '' or 'msg' }, // extra page-specific validation
  *     extraPayload: function (form) { return {...}; },  // extra Kit payload fields (latest_ad etc.)
  *     fastRedirectMs: 1500,                              // optional: redirect this soon even if the Kit
- *                                                       // submit hasn't answered yet (see below)
+ *                                                       // submit hasn't answered yet (see below); ignored
+ *                                                       // while the revenue question is on (it needs the
+ *                                                       // Kit reply's answer_pass)
  *     onSuccess: function (ctx) { ... },                 // optional: called INSTEAD of the redirect once the
  *                                                       // opt-in is captured; ctx adds {response} (the Kit
  *                                                       // submit's JSON, or null if it didn't answer) and
  *                                                       // {redirectUrl}. The page then owns navigation.
+ *                                                       // Passing onSuccess without revenueQuestion turns
+ *                                                       // the revenue question off; with both, the question
+ *                                                       // owns navigation and onSuccess is not called.
  *     onSubmitStart: function (ctx) { ... },             // optional: fields passed local checks and the
  *                                                       // email check + Kit submit are starting ({firstName,
  *                                                       // email, form}); lets a page move on visually
  *     onSubmitFail: function () { ... },                 // optional: that attempt failed and the form is
  *                                                       // usable again (the visitor saw the usual alert)
+ *     revenueQuestion: { headline, idle, going, ... },   // the two-step revenue question: ON BY DEFAULT for
+ *                                                       // every form (pass false, or onSuccess without it,
+ *                                                       // to turn it off). Set the
+ *                                                       // copy here and style it in the page's own <style>
+ *                                                       // via the --s2-* variables / .jm-s2 rules. See the
+ *                                                       // "Revenue question" section below.
  *   });
  *
  * The Cloudflare api.js tag must come AFTER this file:
@@ -192,61 +203,81 @@
    * one tap-to-answer question while the email check and Kit save finish in
    * the background. Codes match OPTIN_REVENUE in netlify/functions/
    * submit-contact.js; the answer goes to submit-optin-answer.js with the
-   * answer_pass from the Kit save. Mirrors the hand-built version on
-   * /resonance-masterclass-optin/ (which keeps its own copy).
+   * answer_pass from the Kit save. Its default look is the original
+   * /resonance-masterclass-optin/ design, which uses this component too.
    *
    * Meta Lead: fired HERE as soon as the server confirms the save (tagged or
    * queued), so someone who opts in and never answers still counts. The page
    * then goes to its usual destination with qualified=false added, which the
    * GTM thank-you Lead rule already excludes, so nobody counts twice. If the
-   * pixel never loaded, the URL is left alone and GTM fires as before.
+   * pixel never loaded, the URL is left alone (or replaced by noPixelRedirect
+   * when the destination isn't a thank-you URL) so GTM's thank-you Lead fires.
+   * A page whose own redirect already carries qualified=false never gets a
+   * page Lead.
    *
-   *   revenueQuestion: {
+   *   revenueQuestion: {                // on by default; false turns it off
    *     headline: 'One last question before your training starts',
    *     idle:     'Tap one to start your training.',
    *     going:    'Starting your training…',
    *     container: '.selector',   // card whose content swaps (default: the form's parent)
    *     progressHost: '.selector',// element whose top edge carries the bar (default: container)
-   *     standalone: true          // no card around the form: the question brings its own
+   *     standalone: true,         // no card around the form: the question brings its own
+   *     noPixelRedirect: function (email) { return '/optin-thank-you?...'; }
+   *                               // where to go when the Meta pixel never loaded and the
+   *                               // destination isn't a thank-you URL (so GTM still fires)
    *   }
+   *
+   * Adding it to a new form: include this file, call JMOptin.init as usual, set
+   * revenueQuestion.headline/idle/going to fit the page, and give the page a
+   * <style id="jm-s2-theme"> block that matches its own palette and type
+   * (copy a sibling page's block as a starting point).
    */
+  // Every color, font and shape is a --s2-* custom property with the Resonance
+  // look as its default. A page restyles the card in its own <style>, e.g.
+  //   .jm-s2 { --s2-tile-radius: 2px; --s2-sel-bg: #C2A86C; }
+  // or with ordinary .jm-s2 rules; this sheet is inserted FIRST in <head>, so
+  // a page's rules win any tie. The progress bar sits in the host card, OUTSIDE
+  // .jm-s2 (except standalone), so style it on .jm-s2-progress itself, e.g.
+  //   .jm-s2-progress { --s2-accent: #C2A86C; --s2-track: #EFE9DB; --s2-bar-h: 3px; }
   var S2_CSS = [
     '.jm-s2[hidden],.jm-s2-off{display:none!important}',
     '.jm-s2-host{position:relative}',
     '.jm-s2-swap{display:flex!important;flex-direction:column;justify-content:center}',
-    '.jm-s2{width:100%;max-width:28rem;margin:0 auto;text-align:center;font-family:"Raleway",sans-serif;box-sizing:border-box}',
+    '.jm-s2{width:100%;max-width:28rem;margin:0 auto;text-align:center;font-family:var(--s2-sans,"Raleway",sans-serif);box-sizing:border-box}',
     '.jm-s2 *{box-sizing:border-box}',
-    '.jm-s2.is-standalone{position:relative;max-width:none;overflow:hidden;background:#fff;border:1px solid rgba(221,219,211,.7);border-radius:.375rem;box-shadow:0 1.25rem 2.75rem rgba(29,31,30,.11),0 .25rem .75rem rgba(93,93,93,.08);padding:1.75rem 1.25rem 1.125rem}',
+    '.jm-s2.is-standalone{position:relative;max-width:none;overflow:hidden;background:var(--s2-card-bg,#fff);border:var(--s2-card-border,1px solid rgba(221,219,211,.7));border-radius:var(--s2-card-radius,.375rem);box-shadow:var(--s2-card-shadow,0 1.25rem 2.75rem rgba(29,31,30,.11),0 .25rem .75rem rgba(93,93,93,.08));padding:1.75rem 1.25rem 1.125rem}',
     '.jm-s2.is-standalone .jm-s2-headline{max-width:none;margin-bottom:1rem}',
     '.jm-s2.is-standalone .jm-s2-kicker{margin-bottom:.75rem}',
-    '.jm-s2-progress{display:block;position:absolute;top:0;left:0;right:0;height:5px;overflow:hidden;background:#ECE6D6;pointer-events:none}',
-    '.jm-s2-progress i{display:block;height:100%;background:var(--gold,#B8962E);transform-origin:left center;transform:scaleX(.85);animation:jm-s2-grow .7s cubic-bezier(.22,.61,.36,1) .1s both}',
+    '.jm-s2-progress{display:block;position:absolute;top:0;left:0;right:0;height:var(--s2-bar-h,5px);overflow:hidden;background:var(--s2-track,#ECE6D6);border-radius:var(--s2-bar-radius,var(--s2-host-radius,0));pointer-events:none}',
+    '.jm-s2-progress i{display:block;height:100%;background:var(--s2-accent,var(--gold,#B8962E));transform-origin:left center;transform:scaleX(.85);animation:jm-s2-grow .7s cubic-bezier(.22,.61,.36,1) .1s both}',
     '@keyframes jm-s2-grow{from{transform:scaleX(.5)}to{transform:scaleX(.85)}}',
-    '.jm-s2 .jm-s2-kicker{display:flex;align-items:center;gap:.375rem;width:fit-content;max-width:100%;margin:0 auto .875rem;padding:.3125rem .75rem;border-radius:999px;background:#EEF2EC;font-family:"Raleway",sans-serif;font-weight:600;font-size:.75rem;line-height:1.2;letter-spacing:0;text-transform:none;color:#2C3E2D}',
-    '.jm-s2 .jm-s2-kicker::before{content:"";flex:none;width:.4375rem;height:.4375rem;border-radius:50%;background:#3E6B4A}',
+    '.jm-s2 .jm-s2-kicker{display:flex;align-items:center;gap:.375rem;width:fit-content;max-width:100%;margin:0 auto .875rem;padding:.3125rem .75rem;border-radius:999px;background:var(--s2-pill-bg,#EEF2EC);font-family:var(--s2-sans,"Raleway",sans-serif);font-weight:600;font-size:.75rem;line-height:1.2;letter-spacing:0;text-transform:none;color:var(--s2-pill-ink,#2C3E2D)}',
+    '.jm-s2 .jm-s2-kicker::before{content:"";flex:none;width:.4375rem;height:.4375rem;border-radius:50%;background:var(--s2-dot,#3E6B4A)}',
     '.jm-s2 .jm-s2-kicker:empty{display:none}',
-    '.jm-s2 .jm-s2-headline{margin:0 auto 1.25rem;max-width:22rem;font-family:"Libre Baskerville",Georgia,serif;font-weight:400;font-style:normal;font-size:1.375rem;line-height:1.3;letter-spacing:0;text-transform:none;color:#1D1F1E;text-wrap:balance}',
+    '.jm-s2 .jm-s2-headline{margin:0 auto 1.25rem;max-width:22rem;font-family:var(--s2-serif,"Libre Baskerville",Georgia,serif);font-weight:400;font-style:normal;font-size:var(--s2-headline-size,1.375rem);line-height:1.3;letter-spacing:0;text-transform:none;color:var(--s2-ink,#1D1F1E);text-wrap:balance}',
     '.jm-s2 .jm-s2-headline:focus,.jm-s2 .jm-s2-headline:focus-visible{outline:none}',
-    '.jm-s2 .jm-s2-panel{margin:0 -.5rem;padding:1rem .5rem .875rem;background:#F8F5EE;border:1px solid #ECE4D2;border-radius:.375rem}',
-    '.jm-s2 .jm-s2-q{display:block;margin:0 0 .75rem;font-family:"Raleway",sans-serif;font-weight:600;font-size:.875rem;line-height:1.3;letter-spacing:0;text-transform:none;color:#2E3A2E;text-align:center;text-wrap:balance}',
+    '.jm-s2 .jm-s2-panel{margin:0 -.5rem;padding:1rem .5rem .875rem;background:var(--s2-panel-bg,#F8F5EE);border:var(--s2-panel-border,1px solid #ECE4D2);border-radius:var(--s2-panel-radius,.375rem)}',
+    '.jm-s2 .jm-s2-q{display:block;margin:0 0 .75rem;font-family:var(--s2-sans,"Raleway",sans-serif);font-weight:600;font-size:.875rem;line-height:1.3;letter-spacing:0;text-transform:none;color:var(--s2-text,#2E3A2E);text-align:center;text-wrap:balance}',
     '.jm-s2 .jm-s2-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.5rem}',
     '.jm-s2 .jm-s2-opt{display:block;width:100%;height:auto;min-height:0;padding:0;margin:0;border:0;border-radius:0;background:none;box-shadow:none;font:inherit;letter-spacing:0;text-transform:none;cursor:pointer;-webkit-appearance:none;appearance:none;-webkit-tap-highlight-color:transparent;touch-action:manipulation}',
-    '.jm-s2 .jm-s2-opt span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.125rem;text-align:center;min-height:3.5rem;padding:.6rem .25rem;border:1px solid #C9BB94;border-radius:.25rem;background:#fff;box-shadow:0 1px 2px rgba(29,31,30,.06);font-family:"Raleway",sans-serif;color:#2E3A2E;transition:background-color .15s ease,border-color .15s ease,color .15s ease,opacity .15s ease}',
+    '.jm-s2 .jm-s2-opt span{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.125rem;text-align:center;min-height:3.5rem;padding:.6rem .25rem;border:var(--s2-tile-border,1px solid #C9BB94);border-radius:var(--s2-tile-radius,.25rem);background:var(--s2-tile-bg,#fff);box-shadow:var(--s2-tile-shadow,0 1px 2px rgba(29,31,30,.06));font-family:var(--s2-sans,"Raleway",sans-serif);color:var(--s2-text,#2E3A2E);transition:background-color .15s ease,border-color .15s ease,color .15s ease,opacity .15s ease}',
     '.jm-s2 .jm-s2-opt b{font-weight:600;font-size:.9375rem;line-height:1.2}',
-    '.jm-s2 .jm-s2-opt small{font-weight:400;font-size:.75rem;line-height:1.2;color:#6B706D;transition:color .15s ease}',
+    '.jm-s2 .jm-s2-opt small{font-weight:400;font-size:.75rem;line-height:1.2;color:var(--s2-muted,#6B706D);transition:color .15s ease}',
     // Mouse only: on touch screens a hover can stick to the tile that appears
     // under the finger that just pressed the submit button.
-    '@media (hover:hover){.jm-s2 .jm-s2-opt:hover span{border-color:var(--gold,#B8962E)}}',
-    '.jm-s2 .jm-s2-opt:active span{background:#F3EEE2}',
-    '.jm-s2 .jm-s2-opt.is-selected span{background:#2C3E2D;border-color:#2C3E2D;color:#F7F4ED}',
-    '.jm-s2 .jm-s2-opt.is-selected small{color:rgba(247,244,237,.8)}',
+    '@media (hover:hover){.jm-s2 .jm-s2-opt:not([disabled]):hover span{border-color:var(--s2-hover,var(--s2-accent,var(--gold,#B8962E)))}}',
+    '.jm-s2 .jm-s2-opt:active span{background:var(--s2-tile-active,#F3EEE2)}',
+    '.jm-s2 .jm-s2-opt.is-selected span{background:var(--s2-sel-bg,#2C3E2D);border-color:var(--s2-sel-bg,#2C3E2D);color:var(--s2-sel-ink,#F7F4ED)}',
+    '.jm-s2 .jm-s2-opt.is-selected small{color:var(--s2-sel-muted,rgba(247,244,237,.8))}',
     '.jm-s2 .jm-s2-opt[disabled]{cursor:default}',
     '.jm-s2 .jm-s2-opt[disabled]:not(.is-selected) span{opacity:.55}',
     '.jm-s2 .jm-s2-opt:focus,.jm-s2 .jm-s2-opt:focus-visible{outline:none}',
-    '.jm-s2 .jm-s2-opt:focus-visible span{outline:2px solid #2C3E2D;outline-offset:2px}',
-    '.jm-s2 .jm-s2-note{margin:.75rem 0 0;min-height:1.3em;font-family:"Raleway",sans-serif;font-size:.8125rem;line-height:1.3;letter-spacing:0;text-transform:none;color:#5F6461}',
-    '@media (min-width:361px){.optin-modal .jm-s2{max-width:30rem}.optin-modal .jm-s2 .jm-s2-kicker{margin-bottom:1rem}.optin-modal .jm-s2 .jm-s2-headline{font-size:clamp(1.375rem,5.6vw,1.6875rem);max-width:24rem;margin-bottom:1.5rem}.optin-modal .jm-s2 .jm-s2-panel{padding:1.125rem .625rem 1rem}.optin-modal .jm-s2 .jm-s2-q{font-size:.9375rem;margin-bottom:.875rem}.optin-modal .jm-s2 .jm-s2-opt span{min-height:4rem}.optin-modal .jm-s2 .jm-s2-opt b{font-size:1rem}.optin-modal .jm-s2 .jm-s2-note{margin-top:.875rem;font-size:.875rem}}',
-    '@media (prefers-reduced-motion:reduce){.jm-s2 .jm-s2-opt span,.jm-s2 .jm-s2-opt small{transition:none}.jm-s2-progress i{animation:none}}',
+    '.jm-s2 .jm-s2-opt:focus-visible span{outline:2px solid var(--s2-focus,#2C3E2D);outline-offset:2px}',
+    '.jm-s2 .jm-s2-note{margin:.75rem 0 0;min-height:1.3em;font-family:var(--s2-sans,"Raleway",sans-serif);font-size:.8125rem;line-height:1.3;letter-spacing:0;text-transform:none;color:var(--s2-note,#5F6461)}',
+    '@media (min-width:361px){.optin-modal .jm-s2{max-width:30rem}.optin-modal .jm-s2 .jm-s2-kicker{margin-bottom:1rem}.optin-modal .jm-s2 .jm-s2-headline{font-size:var(--s2-modal-headline-size,clamp(1.375rem,5.6vw,1.6875rem));max-width:24rem;margin-bottom:1.5rem}.optin-modal .jm-s2 .jm-s2-panel{padding:1.125rem .625rem 1rem}.optin-modal .jm-s2 .jm-s2-q{font-size:.9375rem;margin-bottom:.875rem}.optin-modal .jm-s2 .jm-s2-opt span{min-height:4rem}.optin-modal .jm-s2 .jm-s2-opt b{font-size:1rem}.optin-modal .jm-s2 .jm-s2-note{margin-top:.875rem;font-size:.875rem}}',
+    // A visitor's reduced-motion setting must beat every page theme (this
+    // sheet loads first), hence the one !important.
+    '@media (prefers-reduced-motion:reduce){.jm-s2 .jm-s2-opt span,.jm-s2 .jm-s2-opt small{transition:none!important}.jm-s2-progress i{animation:none!important;transition:none!important}}',
     '@media (max-width:380px){.jm-s2 .jm-s2-grid{gap:.4rem}.jm-s2 .jm-s2-opt b{font-size:.875rem}.jm-s2 .jm-s2-headline{font-size:1.25rem}}',
     '@media (max-width:345px){.jm-s2 .jm-s2-kicker{margin-bottom:.625rem}.jm-s2 .jm-s2-headline{font-size:1.1875rem;margin-bottom:1rem}.jm-s2 .jm-s2-note{margin-top:.625rem}.jm-s2 .jm-s2-q{font-size:.8125rem}.jm-s2 .jm-s2-opt b{font-size:.8125rem}.jm-s2 .jm-s2-opt span{padding-left:.125rem;padding-right:.125rem}.jm-s2.is-standalone{padding-left:1.125rem;padding-right:1.125rem}}'
   ].join('\n');
@@ -279,7 +310,9 @@
       var st = document.createElement('style');
       st.id = 'jm-s2-css';
       st.textContent = S2_CSS;
-      document.head.appendChild(st);
+      // First in <head>: the page's own stylesheet wins any tie, so each page
+      // can restyle the card to match itself.
+      document.head.insertBefore(st, document.head.firstChild);
     }
 
     // Build the card. Everything is text/escaped; no page HTML is reused.
@@ -345,6 +378,14 @@
       });
     }
     function showStep1() { hidden.forEach(function (c) { c.classList.remove('jm-s2-off'); }); hidden = []; }
+
+    // Flag a kicker that wrapped (long name) so a page can drop decoration
+    // that only works on one line, e.g. flanking rules. Re-checked on resize.
+    function flagWrap() {
+      kicker.classList.remove('is-wrapped');
+      try { var rg = document.createRange(); rg.selectNodeContents(kicker); kicker.classList.toggle('is-wrapped', rg.getClientRects().length > 1); } catch (e) {}
+    }
+    window.addEventListener('resize', function () { if (state && !el.hidden) flagWrap(); });
 
     var inModal = !!(container.closest && container.closest('.optin-modal'));
     var state = null;      // { email, fname, answer, done, confirmed, pass, redirectUrl, leaving, armAt, late, skipped }
@@ -412,7 +453,9 @@
       }
       if (state.confirmed) {
         if (fireLead()) { waits.push(pixelSettled()); url = withQualifiedFalse(url); }
-        // no pixel on this page: leave the URL alone so GTM's thank-you Lead fires
+        // No pixel on this page: let GTM's thank-you Lead fire instead. Pages
+        // whose destination isn't a thank-you URL name one (noPixelRedirect).
+        else if (opts.noPixelRedirect) url = opts.noPixelRedirect(state.email);
       } else {
         url = withQualifiedFalse(url); // the save wasn't confirmed: never count a Lead
       }
@@ -472,23 +515,27 @@
     return {
       engaged: function () { return !!state; },
       show: function (email, firstName) {
+        // First name for "Almost there, X": a long hyphenated name keeps its
+        // first part; anything still over 20 characters falls back to no name.
         var fname = String(firstName || '').trim().split(/\s+/)[0] || '';
-        state = { email: email, fname: fname.slice(0, 20), answer: keptAnswer, done: false, confirmed: false, pass: null, redirectUrl: null, leaving: false, armAt: Date.now() + 700, late: null, skipped: false };
+        if (fname.length > 20) fname = fname.split('-')[0];
+        if (fname.length > 20) fname = '';
+        state = { email: email, fname: fname, answer: keptAnswer, done: false, confirmed: false, pass: null, redirectUrl: null, leaving: false, armAt: Date.now() + 700, late: null, skipped: false };
         if (!standalone) {
           lockedHeight = container.style.minHeight;
-          container.style.minHeight = container.offsetHeight + 'px'; // same-size card
+          container.style.minHeight = container.getBoundingClientRect().height + 'px'; // same-size card (unrounded)
           container.classList.add('jm-s2-swap');
         }
         hostWasStatic = progressHost !== el && getComputedStyle(progressHost).position === 'static';
         if (hostWasStatic) progressHost.classList.add('jm-s2-host');
         if (progressHost !== el) {
           var r = getComputedStyle(progressHost).borderTopLeftRadius || '0px';
-          bar.style.borderRadius = r + ' ' + r + ' 0 0';
+          bar.style.setProperty('--s2-host-radius', r + ' ' + r + ' 0 0'); // a page can override with --s2-bar-radius
           // First child: anything positioned later in the card (a close
           // button that hangs over the edge) paints on top of the bar.
           progressHost.insertBefore(bar, progressHost.firstChild);
         }
-        var h1 = form.offsetHeight;
+        var h1 = form.getBoundingClientRect().height;
         // Standalone: same width as the form it replaces (measured before hiding it).
         if (standalone) el.style.maxWidth = Math.round(form.getBoundingClientRect().width) + 'px';
         hideStep1();
@@ -498,6 +545,7 @@
         note.textContent = keptAnswer ? NOTE_GOING : NOTE_IDLE;
         el.hidden = false;
         if (standalone) el.style.minHeight = h1 + 'px';
+        flagWrap();
         // The pop-up was closed while Turnstile / the email check ran: nobody
         // will see the question, so carry on to the destination once saved.
         if (inModal && !container.closest('.optin-modal').classList.contains('is-open')) {
@@ -507,10 +555,14 @@
         }
         try { headline.focus({ preventScroll: true }); } catch (e) {}
         setTimeout(function () {
-          var box = (standalone ? el : container).getBoundingClientRect();
+          var target = standalone ? el : container;
+          var box = target.getBoundingClientRect();
           if (box.top < 0 || box.bottom > window.innerHeight) {
-            try { (standalone ? el : container).scrollIntoView({ block: 'center', behavior: 'instant' }); } // 'instant' throws on older Safari
-            catch (e) { (standalone ? el : container).scrollIntoView(); }
+            // A card taller than the screen lines up its top (bar + close
+            // button visible) instead of being centred off both edges.
+            var tall = box.height > window.innerHeight;
+            try { target.scrollIntoView({ block: tall ? 'start' : 'center', behavior: 'instant' }); } // 'instant' throws on older Safari
+            catch (e) { target.scrollIntoView(tall); }
           }
         }, 30);
       },
@@ -530,11 +582,15 @@
         if (emailInput) { try { emailInput.focus(); } catch (e) {} }
       },
       optedIn: function (ctx) {
-        var confirmed = optinConfirmed(ctx.response);
+        // A page whose own redirect already excludes this lead (qualified=false,
+        // e.g. an unqualified answer it asked itself) never gets a page Lead.
+        var pageExcluded = /[?&]qualified=false(?:[&#]|$)/.test(ctx.redirectUrl || '');
+        var confirmed = optinConfirmed(ctx.response) && !pageExcluded;
         if (!state) { // no question on screen (shouldn't happen): just go
           var url = ctx.redirectUrl;
           if (confirmed && fireLead()) { pixelSettled().then(function () { window.location.href = withQualifiedFalse(url); }); }
-          else window.location.href = confirmed ? url : withQualifiedFalse(url);
+          else if (confirmed) window.location.href = opts.noPixelRedirect ? opts.noPixelRedirect(ctx.email || '') : url;
+          else window.location.href = withQualifiedFalse(url);
           return;
         }
         state.done = true;
@@ -549,7 +605,7 @@
           s.late = ctx.late.then(function (r) {
             s.late = null;
             if (r && r.success === true && r.answer_pass && !s.pass) s.pass = r.answer_pass;
-            if (optinConfirmed(r) && !s.confirmed) { s.confirmed = true; fireLead(); }
+            if (optinConfirmed(r) && !s.confirmed && !pageExcluded) { s.confirmed = true; fireLead(); }
           });
         }
         leave();
@@ -559,13 +615,13 @@
 
   /* ── Submit pipeline ──────────────────────────────────────────────────── */
   function init(config) {
-    var rqStep = null; // the shared revenue question, when config.revenueQuestion is set
+    var rqStep = null; // the shared revenue question (on by default; see rqOn below)
     // Hands off to the revenue question or the page's onSuccess (two-step
     // forms), or redirects.
     function finish(ctx, response, late) {
       var url = config.redirect(ctx);
       if (rqStep) {
-        rqStep.optedIn({ response: response || null, redirectUrl: url, late: late || null });
+        rqStep.optedIn({ response: response || null, redirectUrl: url, late: late || null, email: ctx.email });
       } else if (config.onSuccess) {
         // late: when the 8s cap won, the still-running save's eventual JSON
         // (or null), so a two-step page that's still on screen can use it.
@@ -582,7 +638,10 @@
       var originalText = submitBtn ? submitBtn.textContent.trim() : '';
       var submitting = false;
 
-      if (config.revenueQuestion) {
+      // On by default for every opt-in; a page opts out with revenueQuestion:false
+      // (or by handling the flow itself with onSuccess).
+      var rqOn = config.revenueQuestion !== false && !(config.onSuccess && !config.revenueQuestion);
+      if (rqOn) {
         try { rqStep = createRevenueStep(config.revenueQuestion, form); } catch (e) { console.error('Revenue question setup error:', e); rqStep = null; }
         if (rqStep) {
           // Warm the functions on first engagement so cold starts don't land
