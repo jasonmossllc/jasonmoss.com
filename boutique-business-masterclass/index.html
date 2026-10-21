@@ -1097,6 +1097,12 @@ if(params.has('static')){
     kitTagId: 23169630,  // Kit: The Boutique Business (masterclass registration)
     roezanTagId: 1771,   // Roezan: The Boutique Business
     phone: true,
+    // Two-step: revenue question after name/email/phone (js/optin-shared.js).
+    revenueQuestion: {
+      headline: 'One last question to finish your registration',
+      idle: 'Tap one to finish registering.',
+      going: 'Finishing your registration\u2026'
+    },
     // The "you're in" confirmation is sent by a Kit automation:
     // tag "The Boutique Business" -> sequence "The Boutique Business Masterclass" (2886206).
     extraPayload: function () {

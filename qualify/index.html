@@ -335,6 +335,20 @@
       ]},
   ];
 
+  // Arrived from a two-step opt-in that already asked "Where's your business
+  // at right now?" (rev = its answer; see revenueQuestion in js/optin-shared.js).
+  // Don't ask the same question again: narrow it to the bands inside that
+  // answer, or skip it when the answer is already exact.
+  var REV = p('rev');
+  if (REV === 'under-1k' || REV === '1k-10k') {
+    var keep = REV === 'under-1k' ? ['none', 'under-1k'] : ['1k-5k', '5k-10k'];
+    QUESTIONS[0] = { id:'revenue', title:'Which is closer to where you are?', sub:QUESTIONS[0].sub,
+      options:QUESTIONS[0].options.filter(function(o){ return keep.indexOf(o.v) >= 0; }) };
+  } else if (REV === '10k-plus') {
+    state.revenue = '10k-plus';
+    QUESTIONS.shift();
+  }
+
   // Where you are, what you need, what to do about it. Said the way you would
   // say it to someone across a table — no cleverness, no reframing.
   // These render at the most exposed moment in the flow - right after someone

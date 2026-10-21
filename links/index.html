@@ -279,6 +279,14 @@
 
   JMOptin.init({
     kitTagId: 20410092, // Kit: Resonance Masterclass (Cold Traffic)
+    // Two-step: no card around this form, so the question brings its own
+    // (js/optin-shared.js).
+    revenueQuestion: {
+      headline: 'One last question before your masterclass starts',
+      idle: 'Tap one to start your masterclass.',
+      going: 'Starting your masterclass\u2026',
+      standalone: true
+    },
     extraPayload: function () {
       return { latest_source: sourceInput ? sourceInput.value : 'Organic' };
     },

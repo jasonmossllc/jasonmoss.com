@@ -1437,6 +1437,12 @@
     JMOptin.init({
       kitTagId: 20410107, // Kit: Why Great Entrepreneurs Still Experience Inconsistent Clients
       phone: true,
+      // Two-step: revenue question after name/email/phone (js/optin-shared.js).
+      revenueQuestion: {
+        headline: 'One last question to finish your registration',
+        idle: 'Tap one to finish registering.',
+        going: 'Finishing your registration\u2026'
+      },
       extraPayload: function () {
         return { latest_ad: adField ? adField.value : '' };
       },

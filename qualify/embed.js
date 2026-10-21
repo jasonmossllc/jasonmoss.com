@@ -44,6 +44,13 @@
       });
     } catch (e) {}
 
+    // The answer from a two-step opt-in's revenue question (rev), so the
+    // widget doesn't ask the same question again.
+    try {
+      var rev = new URLSearchParams(window.location.search).get('rev');
+      if (rev === 'under-1k' || rev === '1k-10k' || rev === '10k-plus') qs.push('rev=' + rev);
+    } catch (e) {}
+
     var frame = document.createElement('iframe');
     frame.src = BASE + '?' + qs.join('&');
     frame.title = 'Book a business assessment call';

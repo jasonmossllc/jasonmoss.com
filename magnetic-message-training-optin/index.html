@@ -707,7 +707,13 @@
 
     JMOptin.init({
       kitTagId: 23281601, // Kit: Magnetic Message Training (Cold Traffic)
-      fastRedirectMs: 1500, // don't hold the visitor for the full Kit sync; see js/optin-shared.js
+      // Two-step: the revenue question shows as soon as name + email pass the
+      // local checks (see revenueQuestion in js/optin-shared.js).
+      revenueQuestion: {
+        headline: 'One last question before your training starts',
+        idle: 'Tap one to start your training.',
+        going: 'Starting your training\u2026'
+      },
       extraPayload: function () {
         var extra = {};
         if (latestAd) extra.latest_ad = latestAd;

@@ -440,6 +440,14 @@
 
   JMOptin.init({
     kitTagId: 20410073, // Kit: Get More Clients Guide
+    // Two-step: revenue question in the form column; the progress bar runs
+    // along the whole panel's top edge (js/optin-shared.js).
+    revenueQuestion: {
+      headline: 'One last question before you get your guide',
+      idle: 'Tap one to get your guide.',
+      going: 'Getting your guide\u2026',
+      progressHost: '.optin-panel'
+    },
     // Guide delivery is sent by a Kit automation:
     // tag "Get More Clients Guide" -> guide delivery sequence.
     extraPayload: function () {

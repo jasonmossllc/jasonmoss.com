@@ -1088,6 +1088,12 @@ if(params.has('static')){
     kitTagId: 21050514, // Kit: The Client Engine (masterclass registration)
     roezanTagId: 1626,  // Roezan: The Client Engine
     phone: true,
+    // Two-step: revenue question after name/email/phone (js/optin-shared.js).
+    revenueQuestion: {
+      headline: 'One last question to finish your registration',
+      idle: 'Tap one to finish registering.',
+      going: 'Finishing your registration\u2026'
+    },
     extraPayload: function () {
       return {
         latest_ad: adField ? adField.value : '',

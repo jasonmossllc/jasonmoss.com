@@ -1156,6 +1156,12 @@ if(params.has('static')){
     kitTagId: 22247461,  // Kit: The Magnetic Message (masterclass registration)
     roezanTagId: 1690,   // Roezan: The Magnetic Message
     phone: true,
+    // Two-step: revenue question after name/email/phone (js/optin-shared.js).
+    revenueQuestion: {
+      headline: 'One last question to finish your registration',
+      idle: 'Tap one to finish registering.',
+      going: 'Finishing your registration\u2026'
+    },
     // The "you're in" confirmation is sent by a Kit automation:
     // tag "The Magnetic Message" -> sequence "The Magnetic Message Masterclass".
     extraPayload: function () {
