@@ -14,11 +14,37 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /book         /apply/?source=YouTube_Organic                                                  302
 # optin2 retired (archived) -> restored original optin page; old ad/email links still resolve
 /resonance-masterclass-optin2    /resonance-masterclass-optin                                  301
-/clients      https://jasonmoss.com/aligned-client-engine/                                     301
+/clients      /apply/                                                                          301
 
-# June 2026 challenge ended — page archived (noindex); old ad/email links still resolve
-/business-breakthrough-challenge/*    /archive/business-breakthrough-challenge/:splat          301
-/business-breakthrough-challenge      /archive/business-breakthrough-challenge/                 301
+# June 2026 challenge ended — page archived (noindex). Old ad/email/text links go to the
+# live opt-in (Oct 2026), including its day-by-day replay links.
+/business-breakthrough-challenge/*    /resonance-masterclass-optin/                            301
+/business-breakthrough-challenge      /resonance-masterclass-optin/                            301
+/business-breakthrough-challenge-day-1-replay   /resonance-masterclass-optin/                  301
+/business-breakthrough-challenge-day-2-replay   /resonance-masterclass-optin/                  301
+/business-breakthrough-challenge-day-3-replay   /resonance-masterclass-optin/                  301
+/business-breakthrough-challenge-day-4-replay   /resonance-masterclass-optin/                  301
+/business-breakthrough-challenge-day-5-replay   /resonance-masterclass-optin/                  301
+/business-breakthrough-thank-you      /resonance-masterclass-optin/                            301
+/business-breakthrough-challenge-complete   /resonance-masterclass-optin/                      301
+
+# Oct 2026 archive: past masterclasses and retired pages moved to /archive/ (noindex).
+# Old email, text and paused-ad links land on the closest live page.
+/client-engine-masterclass                  /resonance-masterclass-optin/                      301
+/client-engine-masterclass/*                /resonance-masterclass-optin/                      301
+/client-engine-masterclass-thank-you        /resonance-masterclass-optin/                      301
+/client-engine-masterclass-replay           /resonance-masterclass-optin/                      301
+/watch-client-engine-masterclass            /resonance-masterclass-optin/                      301
+/magnetic-message-masterclass               /magnetic-message-training-optin/                  301
+/magnetic-message-masterclass/*             /magnetic-message-training-optin/                  301
+/magnetic-message-masterclass-thank-you     /magnetic-message-training-optin/                  301
+/magnetic-message-masterclass-replay        /magnetic-message-training-optin/                  301
+/boutique-business-masterclass              /boutique-business-masterclass-replay/             301
+/boutique-business-masterclass/*            /boutique-business-masterclass-replay/             301
+/boutique-business-masterclass-thank-you    /boutique-business-masterclass-replay/             301
+/why-great-entrepreneurs-still-experience-inconsistent-clients          /resonance-masterclass-optin/   301
+/why-great-entrepreneurs-still-experience-inconsistent-clients-replay   /resonance-masterclass-optin/   301
+/application-received                       /apply/                                            301
 /vip          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /VIP          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /Vip          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301

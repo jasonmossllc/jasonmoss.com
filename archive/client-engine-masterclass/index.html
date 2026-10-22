@@ -1,20 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+  <meta name="robots" content="noindex, nofollow">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Magnetic Message — Free Live Masterclass with Jason Moss</title>
-<meta name="description" content="A free 60-minute live masterclass: how to talk about your work so the right clients can't help but buy.">
-<meta property="og:title" content="The Magnetic Message — Free Live Masterclass">
-<meta property="og:description" content="How to talk about your work so the right clients can't help but buy.">
-<meta property="og:image" content="https://jasonmoss.com/magnetic-message-masterclass/assets/jason-headon.jpg">
+<title>The Client Engine — Free Live Masterclass with Jason Moss</title>
+<meta name="description" content="A free 60-minute live masterclass: how to create consistent clients through real conversations — without an audience, a funnel, or posting every day.">
+<meta property="og:title" content="The Client Engine — Free Live Masterclass">
+<meta property="og:description" content="How to create consistent clients through real conversations — without an audience, a funnel, or posting every day.">
+<meta property="og:image" content="https://jasonmoss.com/archive/client-engine-masterclass/assets/jason-headon.jpg">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://jasonmoss.com/magnetic-message-masterclass/">
-<link rel="canonical" href="https://jasonmoss.com/magnetic-message-masterclass/">
+<meta property="og:url" content="https://jasonmoss.com/archive/client-engine-masterclass/">
+<link rel="canonical" href="https://jasonmoss.com/archive/client-engine-masterclass/">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="The Magnetic Message — Free Live Masterclass">
-<meta name="twitter:description" content="How to talk about your work so the right clients can't help but buy.">
-<meta name="twitter:image" content="https://jasonmoss.com/magnetic-message-masterclass/assets/jason-headon.jpg">
+<meta name="twitter:title" content="The Client Engine — Free Live Masterclass">
+<meta name="twitter:description" content="How to create consistent clients through real conversations — without an audience, a funnel, or posting every day.">
+<meta name="twitter:image" content="https://jasonmoss.com/archive/client-engine-masterclass/assets/jason-headon.jpg">
 <link rel="icon" href="https://jasonmoss.com/assets/images/favicon-32x32.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -152,9 +153,8 @@ header.top img{height:28px;width:auto;}
 .hero{
   position:relative;
   background:
-    radial-gradient(1000px 560px at 50% -10%, rgba(194,168,108,0.34), rgba(194,168,108,0) 62%),
-    radial-gradient(900px 480px at 50% 108%, rgba(194,168,108,0.16), rgba(194,168,108,0) 60%),
-    linear-gradient(180deg, rgba(248,246,242,0.84), rgba(248,246,242,0.9)),
+    radial-gradient(1000px 560px at 50% -10%, rgba(194,168,108,0.24), rgba(194,168,108,0) 62%),
+    linear-gradient(180deg, rgba(248,246,242,0.88), rgba(248,246,242,0.93)),
     url('assets/section-bg-pale.jpg') top left / 1716px 916px repeat,
     var(--sand);
   padding:clamp(64px,7vw,96px) 0 clamp(60px,6.5vw,84px);
@@ -268,6 +268,7 @@ header.top img{height:28px;width:auto;}
 }
 .letter p{color:var(--ink-soft);}
 .letter .lead-line{font-family:var(--serif);font-size:clamp(22px,2.4vw,28px);color:var(--obsidian);line-height:1.45;margin-bottom:26px;}
+.letter .short-stack p{margin-bottom:0.55em;}
 .letter .closer{
   font-family:var(--serif);
   font-style:italic;
@@ -335,6 +336,7 @@ header.top img{height:28px;width:auto;}
   line-height:1.7;
   color:var(--ink-soft);
 }
+.discover-item:last-child{grid-column:1 / -1;max-width:560px;justify-self:center;}
 .discover-item .num{
   display:block;
   font-family:var(--serif);
@@ -344,27 +346,52 @@ header.top img{height:28px;width:auto;}
   margin-bottom:10px;
 }
 .discover-item strong{color:var(--obsidian);}
-.working-note{
-  max-width:640px;
-  margin:clamp(36px,4vw,44px) auto 0;
-  text-align:center;
-  font-family:var(--serif);
-  font-style:italic;
-  font-size:clamp(18px,2vw,21px);
-  line-height:1.6;
-  color:var(--forest);
+
+/* other side */
+.other{
+  background:
+    linear-gradient(180deg, rgba(233,226,211,0.86), rgba(233,226,211,0.92)),
+    url('assets/section-bg-warm.jpg') top left / 1716px 916px repeat,
+    var(--stone);
+  padding:clamp(96px,8.5vw,108px) 0;
+  position:relative;
+  overflow:hidden;
+  border-top:1px solid rgba(91,75,63,0.08);
+  box-shadow:inset 0 24px 34px rgba(91,75,63,0.035);
 }
+.other::before{
+  content:"";
+  position:absolute;inset:0;
+  background:radial-gradient(820px 520px at 0% 100%, rgba(248,246,242,0.6), rgba(248,246,242,0) 58%);
+  pointer-events:none;
+}
+.other .narrow{position:relative;}
+.other .eyebrow{margin-bottom:24px;}
+.other p{color:var(--ink-soft);}
+.other .imagine{font-family:var(--serif);font-size:clamp(20px,2.2vw,25px);line-height:1.55;color:var(--obsidian);margin-bottom:26px;}
+.other .no-more p{margin-bottom:0.55em;}
+.other .promise{
+  background:
+    linear-gradient(180deg, rgba(44,63,54,0.88), rgba(36,53,48,0.94)),
+    url('assets/section-bg-forest.jpg') top left / 1716px 916px repeat,
+    var(--forest);
+  color:var(--stone);
+  padding:clamp(30px,3.5vw,40px) clamp(28px,4vw,44px);
+  margin-top:32px;
+  box-shadow:0 30px 60px -38px rgba(29,31,30,0.7);
+}
+.other .promise .gold-rule{width:34px;height:1px;background:var(--gold);margin-bottom:18px;}
+.other .promise p{color:var(--stone);margin-bottom:0.6em;}
+.other .promise p:last-child{margin-bottom:0;}
+.other .promise .big{font-family:var(--serif);font-style:italic;font-size:clamp(18px,2vw,21px);line-height:1.6;}
 
 /* details */
 .details{
   padding:clamp(100px,9vw,112px) 0;
   background:
-    linear-gradient(180deg, rgba(233,226,211,0.86), rgba(233,226,211,0.92)),
-    url('assets/section-bg-warm.jpg') top left / 1716px 916px repeat,
-    var(--stone);
-  position:relative;
-  border-top:1px solid rgba(91,75,63,0.08);
-  box-shadow:inset 0 24px 34px rgba(91,75,63,0.035);
+    linear-gradient(180deg, rgba(248,246,242,0.88), rgba(248,246,242,0.93)),
+    url('assets/section-bg-pale.jpg') top left / 1716px 916px repeat,
+    var(--sand);
 }
 .d-card{
   position:relative;
@@ -666,109 +693,12 @@ footer .fine.links a:hover{color:var(--mocha);}
   .optin-modal-heading{margin-bottom:14px;}
 }
 
-/* ── magnetic treatment ─────────────────────────────────────────────
-   The page should feel like a pull, not a pitch: a slow-breathing gold
-   field behind the hero, a shimmer riding the word "Magnetic", CTAs that
-   glow like something charged, and the two competing voices literally
-   converging into one gold line. All CSS/SVG — no libraries. */
-@keyframes auraPulse{0%,100%{opacity:.5;}50%{opacity:.95;}}
-@keyframes auraSpin{from{transform:rotate(0deg);}to{transform:rotate(360deg);}}
-@keyframes shimmer{0%{background-position:200% center;}100%{background-position:-200% center;}}
-@keyframes ctaGlow{
-  0%,100%{box-shadow:0 12px 34px -12px rgba(160,135,82,.6), 0 0 0 0 rgba(194,168,108,.38);}
-  50%{box-shadow:0 12px 34px -10px rgba(160,135,82,.8), 0 0 0 16px rgba(194,168,108,0);}
-}
-.hero{overflow:hidden;}
-.hero .wrap{position:relative;z-index:2;}
-.hero-aura{
-  position:absolute;
-  left:50%;top:45%;
-  width:min(1150px,160vw);
-  transform:translate(-50%,-50%);
-  pointer-events:none;
-  z-index:1;
-  animation:auraPulse 7s ease-in-out infinite;
-}
-.hero-aura .aura-dots{transform-origin:400px 400px;animation:auraSpin 70s linear infinite;}
-.hero h1 .title-lead{font-size:clamp(44px,6vw,76px);letter-spacing:-0.015em;}
-.title-lead .mag{
-  font-style:italic;
-  background:linear-gradient(100deg, #A08752 20%, #E7CF92 42%, #C2A86C 58%, #A08752 80%);
-  background-size:220% auto;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
-  animation:shimmer 6.5s linear infinite;
-  padding-right:0.05em;
-}
-.hero h1 .title-rest em{font-style:italic;color:var(--gold-deep);white-space:nowrap;}
-@media (max-width:480px){.hero h1 .title-rest em{white-space:normal;}}
-.hero .host img{
-  box-shadow:
-    0 0 0 6px rgba(194,168,108,0.16),
-    0 0 46px rgba(194,168,108,0.5),
-    0 14px 28px -14px rgba(91,75,63,0.55);
-}
-h2 em{font-style:italic;color:var(--gold-deep);}
-.btn{box-shadow:0 12px 34px -12px rgba(160,135,82,.55);}
-.btn:hover{transform:translateY(-2px) scale(1.015);}
-.btn.pulse{animation:ctaGlow 3.4s ease-in-out infinite;}
-.btn .arr{display:inline-block;margin-left:10px;transition:transform .25s ease;}
-.btn:hover .arr{transform:translateX(5px);}
-.letter .lead-line::after{content:"";display:block;width:52px;height:2px;background:var(--gold);margin-top:18px;}
-.proof-shot{transition:transform .5s cubic-bezier(.22,.61,.36,1), box-shadow .5s ease;}
-.proof-shot:hover{transform:rotate(0deg) scale(1.03);box-shadow:0 34px 62px -30px rgba(91,75,63,0.62);position:relative;z-index:2;}
-.d-card{box-shadow:0 34px 70px -40px rgba(91,75,63,0.55), 0 0 60px -20px rgba(194,168,108,0.35);}
-
-/* two voices as overlapping fields — the message lives in the overlap */
-.venn{margin:42px auto 12px;max-width:560px;}
-.venn-circles{position:relative;display:flex;justify-content:center;}
-.vc{
-  width:56%;aspect-ratio:1/1;border-radius:50%;
-  display:flex;align-items:center;
-  position:relative;flex:none;
-}
-.vc-l{border:1.5px solid rgba(140,131,122,0.55);background:rgba(140,131,122,0.05);margin-right:-14%;}
-.vc-r{border:1.5px solid rgba(194,168,108,0.8);background:rgba(194,168,108,0.07);margin-left:-14%;}
-.vc span{
-  display:block;width:36%;text-align:center;
-  font-weight:600;font-size:12px;line-height:1.5;
-  letter-spacing:0.12em;text-transform:uppercase;
-}
-.vc-l span{margin-left:9%;color:var(--taupe);}
-.vc-r span{margin-left:auto;margin-right:9%;color:var(--gold-deep);}
-.v-lens{
-  position:absolute;left:50%;top:50%;
-  transform:translate(-50%,-50%);
-  width:30%;height:68%;
-  border-radius:50%;
-  background:radial-gradient(closest-side, rgba(194,168,108,0.6), rgba(194,168,108,0) 84%);
-  animation:auraPulse 5.5s ease-in-out infinite;
-  pointer-events:none;
-}
-.v-core{
-  position:absolute;left:50%;top:50%;
-  transform:translate(-50%,-50%);
-  width:24%;
-  text-align:center;
-  font-family:var(--serif);font-style:italic;
-  font-size:clamp(15px,2vw,19px);
-  line-height:1.35;
-  color:var(--forest);
-}
-@media (max-width:640px){
-  .vc span{font-size:9px;letter-spacing:0.08em;}
-  .v-core{font-size:12px;}
-  /* on phones the drifting dots overlap copy and read as stray bullets */
-  .hero-aura .aura-dots{display:none;}
-  .hero-aura{opacity:.7;}
-}
-
 /* responsive */
 @media (max-width:900px){
   .who .wrap{grid-template-columns:1fr;gap:56px;}
   .who-media{max-width:420px;margin:0 auto;}
   .discover-grid{grid-template-columns:1fr;}
+  .discover-item:last-child{grid-column:auto;max-width:none;}
 }
 @media (max-width:640px){
   body{font-size:16px;}
@@ -780,7 +710,7 @@ h2 em{font-style:italic;color:var(--gold-deep);}
   .eyebrow::before,.eyebrow.lined::after{display:none;}
   .eyebrow{letter-spacing:0.24em;}
   /* When .when flows inline with the sentence (mobile), separate
-     "…with Jason Moss" and "Wednesday…" with a middot; at 641px+ the
+     "…with Jason Moss" and "Tuesday…" with a middot; at 641px+ the
      .when is display:block on its own line, so no dot is rendered. */
   .hero .sub .when::before{content:"\00B7  ";}
   /* Compact hero so the CTA lands above the fold on phones —
@@ -808,78 +738,32 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 .wall .results-note{margin:14px auto clamp(44px,5vw,60px)}
 </style>
 <style id="jm-s2-theme">
-/* Step-2 revenue question (js/optin-shared.js revenueQuestion), themed to this page's modal: the sand card is the surface, the kicker is the lined gold eyebrow, tiles match the form's inputs, and the progress bar covers the modal's 1px border. */
-.jm-s2{
-  --s2-sans:var(--sans);
-  --s2-serif:var(--serif);
-  --s2-ink:var(--obsidian);
-  --s2-text:var(--obsidian);
-  --s2-muted:var(--mocha);
-  --s2-note:rgba(91,75,63,0.85);
-  --s2-hover:var(--gold);
-  --s2-tile-bg:rgba(255,255,255,0.74);
-  --s2-tile-border:1px solid rgba(91,75,63,0.26);
-  --s2-tile-radius:2px;
-  --s2-tile-shadow:none;
-  --s2-tile-active:#FFFFFF;
-  --s2-sel-bg:var(--forest);
-  --s2-sel-ink:var(--sand);
-  --s2-sel-muted:var(--gold);
-  --s2-modal-headline-size:clamp(22px,5.8vw,27px);
-}
-.jm-s2-progress{height:3px;background:var(--stone);}
-.jm-s2-progress i{background:var(--gold);}
-.optin-modal .jm-s2-progress{top:-1px;left:-1px;right:-1px;border-radius:2px 2px 0 0;}
-.jm-s2 .jm-s2-kicker{
-  gap:16px;padding:0;border-radius:0;background:none;
-  font-family:var(--sans);font-weight:600;font-size:12px;line-height:1.4;
-  letter-spacing:0.3em;text-transform:uppercase;color:#7E6A3E;text-wrap:balance;
-}
-.jm-s2 .jm-s2-kicker::before,
-.jm-s2 .jm-s2-kicker::after{content:"";flex:none;width:36px;height:1px;border-radius:0;background:var(--gold);}
-.jm-s2 .jm-s2-kicker.is-wrapped::before,.jm-s2 .jm-s2-kicker.is-wrapped::after{display:none;}
-.jm-s2 .jm-s2-headline{font-size:clamp(22px,5.8vw,27px);line-height:1.22;}
-.jm-s2 .jm-s2-panel{margin:0;padding:0;background:none;border:0;border-radius:0;}
-.jm-s2 .jm-s2-q{font-weight:500;font-size:15px;line-height:1.45;color:var(--ink-soft);margin-bottom:14px;}
-.jm-s2 .jm-s2-grid{gap:10px;}
-.jm-s2 .jm-s2-opt{display:flex;}
-.jm-s2 .jm-s2-opt span{flex:1 1 auto;min-width:0;padding:12px 4px;gap:3px;transition:background-color .2s ease,border-color .2s ease,color .2s ease,box-shadow .2s ease,opacity .2s ease;}
-.jm-s2 .jm-s2-opt b{font-weight:600;font-size:16px;line-height:1.2;letter-spacing:0;white-space:nowrap;}
-.jm-s2 .jm-s2-opt small{font-weight:500;font-size:10.5px;line-height:1.2;letter-spacing:0.14em;text-transform:uppercase;white-space:nowrap;}
-@media (hover:hover){.jm-s2 .jm-s2-opt:not([disabled]):hover span{background:#FFFFFF;box-shadow:0 0 0 3px rgba(194,168,108,0.16);}}
-.jm-s2 .jm-s2-opt:focus-visible span{outline:2px solid var(--gold-deep);outline-offset:3px;}
-.jm-s2 .jm-s2-note{font-size:13.5px;line-height:1.45;margin-top:16px;}
-@media (max-width:640px){
-  .jm-s2 .jm-s2-kicker{letter-spacing:0.24em;}
-  .jm-s2 .jm-s2-kicker::before,
-  .jm-s2 .jm-s2-kicker::after{display:none;}
-}
-@media (min-width:480px){
-  .optin-modal .jm-s2 .jm-s2-opt b{font-size:17px;}
-}
-@media (min-width:361px){
-  .optin-modal .jm-s2 .jm-s2-kicker{margin-bottom:18px;}
-  .optin-modal .jm-s2 .jm-s2-headline{max-width:340px;margin-bottom:30px;}
-  .optin-modal .jm-s2 .jm-s2-panel{padding:0;}
-  .optin-modal .jm-s2 .jm-s2-q{margin-bottom:16px;}
-  .optin-modal .jm-s2 .jm-s2-opt span{min-height:78px;}
-  .optin-modal .jm-s2 .jm-s2-note{margin-top:18px;font-size:13.5px;}
-}
-@media (max-width:380px){
-  .jm-s2 .jm-s2-grid{gap:8px;}
-  .optin-modal .jm-s2 .jm-s2-opt b{font-size:15px;}
-}
-@media (max-width:360px){
-  .jm-s2 .jm-s2-kicker{letter-spacing:0.2em;margin-bottom:14px;}
-  .jm-s2 .jm-s2-headline{margin-bottom:22px;}
-  .jm-s2 .jm-s2-q{font-size:14.5px;}
-  .jm-s2 .jm-s2-panel{margin:0 -12px;}
-  .jm-s2 .jm-s2-grid{gap:6px;}
-  .jm-s2 .jm-s2-opt span{min-height:66px;padding:10px 2px;}
-  .optin-modal .jm-s2 .jm-s2-opt b{font-size:13.5px;}
-  .jm-s2 .jm-s2-opt small{font-size:9.5px;letter-spacing:0.08em;}
-}
-@media (max-width:345px){.jm-s2 .jm-s2-headline{font-size:20px;}}
+/* Two-step revenue question (js/optin-shared.js revenueQuestion), themed to this page: gold eyebrow, modal heading, input-style tiles, gold selection */
+.jm-s2{--s2-sans:var(--sans);--s2-serif:var(--serif);--s2-ink:var(--obsidian);--s2-text:var(--obsidian);--s2-muted:#6E6259;--s2-note:#6E6259;--s2-hover:var(--gold);--s2-tile-bg:rgba(255,255,255,.74);--s2-tile-border:1px solid rgba(91,75,63,.26);--s2-tile-radius:2px;--s2-tile-shadow:none;--s2-tile-active:#FFFFFF;--s2-sel-bg:var(--gold);--s2-sel-ink:var(--obsidian);--s2-sel-muted:rgba(29,31,30,.8);--s2-modal-headline-size:clamp(22px,5.8vw,27px)}
+.jm-s2-progress{height:3px;background:var(--stone)}
+.jm-s2-progress i{background:var(--gold)}
+.optin-modal .jm-s2-progress{top:-1px;left:-1px;right:-1px;border-radius:2px 2px 0 0}
+.jm-s2 .jm-s2-kicker{gap:16px;padding:0;border-radius:0;background:none;font-weight:600;font-size:12px;line-height:1.3;letter-spacing:.3em;text-transform:uppercase;text-wrap:balance;color:#7E6A3E}
+.jm-s2 .jm-s2-kicker::before,.jm-s2 .jm-s2-kicker::after{content:"";flex:none;width:36px;height:1px;border-radius:0;background:var(--gold)}
+.jm-s2 .jm-s2-kicker.is-wrapped::before,.jm-s2 .jm-s2-kicker.is-wrapped::after{display:none}
+.jm-s2 .jm-s2-headline{font-size:clamp(22px,5.8vw,27px);line-height:1.22;max-width:340px;color:var(--obsidian)}
+.jm-s2 .jm-s2-panel{margin:0;padding:0;background:none;border:0;border-radius:0}
+.jm-s2 .jm-s2-panel::before{content:"";display:block;width:34px;height:1px;margin:0 auto 18px;background:var(--gold)}
+.jm-s2 .jm-s2-q{font-weight:500;font-size:14.5px;line-height:1.5;color:var(--ink-soft)}
+.jm-s2 .jm-s2-grid{gap:10px}
+.jm-s2 .jm-s2-opt span{min-height:64px;gap:3px;transition:background-color .2s ease,border-color .2s ease,box-shadow .2s ease,color .2s ease,opacity .2s ease}
+.jm-s2 .jm-s2-opt b{font-weight:600;font-size:15px;letter-spacing:.01em}
+.jm-s2 .jm-s2-opt small{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;white-space:nowrap}
+.jm-s2 .jm-s2-opt.is-selected span{border-color:var(--gold-deep);box-shadow:0 6px 18px rgba(91,75,63,.18)}
+.jm-s2 .jm-s2-opt:focus-visible span{outline:2px solid var(--gold-deep);outline-offset:3px}
+.jm-s2 .jm-s2-opt:active span{border-color:var(--gold)}
+.jm-s2 .jm-s2-note{font-size:13.5px;line-height:1.45}
+@media (hover:hover){.jm-s2 .jm-s2-opt:not([disabled]):hover span{border-color:var(--gold);background:#FFFFFF;box-shadow:0 0 0 3px rgba(194,168,108,.16)}}
+@media (min-width:361px){.optin-modal .jm-s2 .jm-s2-kicker{margin-bottom:18px}.optin-modal .jm-s2 .jm-s2-headline{max-width:360px;margin-bottom:22px}.optin-modal .jm-s2 .jm-s2-panel{padding:0}.optin-modal .jm-s2 .jm-s2-panel::before{margin-bottom:20px}.optin-modal .jm-s2 .jm-s2-q{font-size:15px;margin-bottom:14px}.optin-modal .jm-s2 .jm-s2-opt span{min-height:72px}.optin-modal .jm-s2 .jm-s2-opt b{font-size:16px}.optin-modal .jm-s2 .jm-s2-note{margin-top:16px;font-size:13.5px}}
+@media (max-width:640px){.jm-s2 .jm-s2-kicker{letter-spacing:.24em}.jm-s2 .jm-s2-kicker::before,.jm-s2 .jm-s2-kicker::after{display:none}}
+@media (max-width:380px){.jm-s2 .jm-s2-grid{gap:8px}.jm-s2 .jm-s2-opt small{letter-spacing:.1em}}
+@media (max-width:360px){.jm-s2 .jm-s2-panel{margin:0 -12px}.jm-s2 .jm-s2-grid{gap:6px}.jm-s2 .jm-s2-opt b{font-size:14px}}
+@media (max-width:345px){.jm-s2 .jm-s2-headline{font-size:20px}.jm-s2 .jm-s2-panel::before{margin-bottom:16px}.jm-s2 .jm-s2-q{font-size:13.5px}.jm-s2 .jm-s2-opt b{font-size:13px}.jm-s2 .jm-s2-opt small{font-size:10px;letter-spacing:.04em}}
 </style>
 </head>
 <body>
@@ -888,7 +772,7 @@ h2 em{font-style:italic;color:var(--gold-deep);}
   <div class="wrap inner">
     <img class="brand" src="assets/logo-obsidian.svg" alt="Jason Moss">
     <div class="right">
-      <span class="mini-date"><span class="mc-date">Wednesday, August 19</span> &middot; <span class="mc-time">9:00 a.m. Mountain Time</span></span>
+      <span class="mini-date"><span class="mc-date">Tuesday, July 21</span> &middot; <span class="mc-time">10:00 a.m. Mountain Time</span></span>
       <a class="btn" href="#optin">Save My Seat &mdash; Free</a>
     </div>
   </div>
@@ -902,33 +786,18 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 
 <!-- ================= HERO ================= -->
 <section class="hero">
-  <svg class="hero-aura" viewBox="0 0 800 800" aria-hidden="true" fill="none">
-    <g stroke="#C2A86C">
-      <circle cx="400" cy="400" r="150" stroke-opacity="0.30"/>
-      <circle cx="400" cy="400" r="238" stroke-opacity="0.21"/>
-      <circle cx="400" cy="400" r="322" stroke-opacity="0.13"/>
-      <circle cx="400" cy="400" r="396" stroke-opacity="0.07"/>
-    </g>
-    <g class="aura-dots" fill="#A08752">
-      <circle cx="400" cy="162" r="3.5" fill-opacity="0.75"/>
-      <circle cx="618" cy="493" r="2.8" fill-opacity="0.55"/>
-      <circle cx="196" cy="524" r="2.4" fill-opacity="0.5"/>
-      <circle cx="704" cy="298" r="2" fill-opacity="0.4"/>
-      <circle cx="118" cy="286" r="2" fill-opacity="0.4"/>
-    </g>
-  </svg>
   <div class="wrap">
     <div class="host reveal">
       <img src="assets/jm-headshot.png" alt="Jason Moss" width="402" height="402">
     </div>
     <span class="eyebrow lined center reveal">Free Live Masterclass</span>
     <h1 class="reveal">
-      <span class="title-lead">The <span class="mag">Magnetic</span> Message</span>
-      <span class="title-rest">How to Talk About Your Work So the Right Clients <em>Can&rsquo;t Help But Buy</em></span>
+      <span class="title-lead">The Client Engine</span>
+      <span class="title-rest">How to Create Consistent Clients Through Real Conversations &mdash; Without an Audience, a Funnel, or Posting Every Day</span>
     </h1>
-    <p class="sub reveal">A free 60-minute live masterclass with Jason Moss <span class="when"><span class="mc-date">Wednesday, August 19</span> at <span class="mc-time">9:00 a.m. Mountain Time</span></span></p>
+    <p class="sub reveal">A free 60-minute live masterclass with Jason Moss <span class="when"><span class="mc-date">Tuesday, July 21</span> at <span class="mc-time">10:00 a.m. Mountain Time</span></span></p>
     <div class="cta-stack reveal">
-      <a class="btn pulse" href="#optin">Save My Seat &mdash; Free<span class="arr">&rarr;</span></a>
+      <a class="btn" href="#optin">Save My Seat &mdash; Free</a>
     </div>
     <div class="trust-logos reveal">
       <img src="https://jasonmoss.com/assets/logo-forbes-scotland.png" alt="Forbes Scotland" class="lg-forbes" loading="lazy">
@@ -944,18 +813,23 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 <section class="letter">
   <div class="narrow reveal">
     <p class="lead-line">You're good at what you do.</p>
+    <p>You've seen what happens when someone works with you &mdash; the shift, the change, the person on the other side of it.</p>
     <p><strong>What you don't have is enough clients.</strong></p>
-    <p>And if you're honest, a big part of the problem?</p>
-    <p><strong>Your message.</strong></p>
-    <p>You sit down to write a post about your work.</p>
-    <p>You know what you're "supposed" to say &mdash; the hooks, the pain points, the stuff that converts.</p>
-    <p>But it feels hollow. Like a costume. And it sounds like everyone else.</p>
-    <p>So you delete it and write what you actually believe.</p>
-    <p>Share from your heart.</p>
-    <p>Post what feels real.</p>
-    <p>And then... crickets.</p>
-    <p>Or worse, people who comment and tell you how inspiring you are &mdash; but never buy anything.</p>
-    <p class="closer">After helping over 1,000 entrepreneurs, here&rsquo;s what I&rsquo;ve discovered&hellip;</p>
+    <p>Maybe you've signed a few &mdash; a referral here, a friend-of-a-friend there. Enough to know this works when someone says yes. Not enough to trust where the next one is coming from.</p>
+    <p>Here&rsquo;s why.</p>
+    <p>Because you've done what everyone says to do.</p>
+    <div class="short-stack">
+      <p>Post consistently.</p>
+      <p>Grow an audience.</p>
+      <p>Dial in your niche.</p>
+      <p>Build a funnel.</p>
+    </div>
+    <p style="margin-top:1.15em;">So you show up every day, feed the algorithm, and wait for clients to appear.</p>
+    <p>But if you're honest?</p>
+    <p><strong>It's not working.</strong></p>
+    <p>Not because you're doing it wrong&hellip;</p>
+    <p>But because that model was built for a stage of business you're not in yet &mdash; a stage with a big audience, an ad budget, and endless hours to create.</p>
+    <p class="closer">At your stage, there's a faster way. And almost no one is teaching it.</p>
     <div class="cta-inline">
       <a class="btn" href="#optin">Save My Seat &mdash; Free</a>
     </div>
@@ -965,27 +839,20 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 <!-- ================= THE SHIFT ================= -->
 <section class="shift">
   <div class="narrow reveal">
-    <h2>An <em>unclear message</em> is one of the biggest things stopping clients from buying from you.</h2>
-    <p>And here&rsquo;s the real reason it&rsquo;s happening&hellip;</p>
-    <p><strong>There are two parts of you fighting in your marketing.</strong></p>
-    <p>One knows what your market wants to hear.</p>
-    <p>The other has something real to say.</p>
-    <p>When either takes over, your business struggles &mdash; you either sound like everyone else, or finally sound like you and the clients you want scroll right past.</p>
-    <div class="venn reveal">
-      <div class="venn-circles">
-        <div class="vc vc-l"><span>What your market wants to hear</span></div>
-        <div class="vc vc-r"><span>What&rsquo;s real for you</span></div>
-        <div class="v-lens" aria-hidden="true"></div>
-        <span class="v-core">Your magnetic message</span>
-      </div>
-    </div>
-    <div class="hint">A magnetic message is what happens when you find the balance in between. And inside this masterclass, I&rsquo;ll show you how.</div>
+    <h2>The fastest path to clients isn't more content. It's something you already know how to do.</h2>
+    <p>Over the last 18 years &mdash; 1,000+ clients, nearly $2M in sales &mdash; I've tested just about every way there is to create clients online.</p>
+    <p>And when I looked honestly at what got me to around $10K / month, and where my most successful students' clients came from &mdash; it wasn't the content. It wasn't the daily posting.</p>
+    <p><strong>It was something much simpler. And much faster.</strong></p>
+    <p>One of my clients used it to build an ~$8K/month business with no real funnel, dialed-in content strategy, or audience to speak of.</p>
+    <p>I use it today to create tens of thousands of dollars of client opportunities every single year.</p>
+    <p>And in this free masterclass, I'm going to show you the entire system: what it is, why it works so much faster than the audience-building path, and exactly what it takes to install it in your business.</p>
+    <div class="hint">(Hint: it can collapse a six-month trust-building journey into a single conversation. Once you see how, you'll never look at visibility the same way again.)</div>
   </div>
   <div class="wrap proof-block reveal">
     <div class="proof-strip">
-      <div class="proof-shot pw-33"><img width="706" height="877" src="assets/proof/emily-50k-launch.jpg" alt="Client messages from Emily: On target for a $50k launch, $40k collected so far — 'I have been hiding big time.'" loading="lazy"></div>
-      <div class="proof-shot pw-48"><img width="700" height="190" src="assets/proof/kristina-3x.png" alt="Client post from Kristina: I have earned 14,000€ in the past 3 months — in the 3 months before it was only 4,000€." loading="lazy"></div>
+      <div class="proof-shot pw-44"><img width="993" height="626" src="assets/proof/andrew-so-easy.jpg" alt="Client messages from Andrew: I just used your sales script and sold a $4800 coaching package! I'm laughing to myself — it was so easy." loading="lazy"></div>
       <div class="proof-shot pw-35"><img width="363" height="136" src="assets/proof/ariel-consistent.jpg" alt="Client quote: Working with Jason has single-handedly driven the most consistent results I've seen in my business since I started 3 years ago. — Ariel Naftali" loading="lazy"></div>
+      <div class="proof-shot pw-48"><img width="700" height="190" src="assets/proof/kristina-3x.png" alt="Client post from Kristina: I have earned 14,000€ in the past 3 months — in the 3 months before it was only 4,000€." loading="lazy"></div>
     </div>
     <div class="proof-cap">From clients across my programs over the years</div>
     <div class="cta-inline">
@@ -999,16 +866,35 @@ h2 em{font-style:italic;color:var(--gold-deep);}
   <div class="wrap">
     <div class="sec-head reveal">
       <span class="eyebrow lined center">What We'll Cover</span>
-      <h2>In this free 60-minute masterclass:</h2>
+      <h2>On this free 60-minute masterclass, you'll discover:</h2>
     </div>
     <div class="discover-grid reveal">
-      <div class="discover-item"><span class="num">01</span><strong>The real reason your marketing isn't converting</strong> &mdash; and why the fix isn&rsquo;t posting more</div>
-      <div class="discover-item"><span class="num">02</span><strong>The two voices competing in your message</strong> &mdash; and which one is running yours right now</div>
-      <div class="discover-item"><span class="num">03</span><strong>How to uncover your magnetic message</strong> &mdash; we'll work on it together, live</div>
-      <div class="discover-item"><span class="num">04</span><strong>How to use your message to create clients the fastest</strong> at your specific stage of business</div>
+      <div class="discover-item"><span class="num">01</span>Why the <strong>"post more content" advice is keeping you stuck</strong> &mdash; and the exact stage of business where content starts working (you'll know instantly which side of the line you're on)</div>
+      <div class="discover-item"><span class="num">02</span><strong>The trust math nobody shows you:</strong> why one real conversation outperforms a hundred posts when you're under $10K/month &mdash; and how to use that to your advantage starting this week</div>
+      <div class="discover-item"><span class="num">03</span><strong>The Client Engine:</strong> the five-part system my clients use to create consistent clients through real conversations &mdash; without an audience or posting every day</div>
+      <div class="discover-item"><span class="num">04</span><strong>The single biggest mistake people make when they try "just having conversations"</strong> &mdash; why most conversations float, stall, and go nowhere... and what the ones that turn into clients have in common</div>
+      <div class="discover-item"><span class="num">05</span><strong>Why you're closer than you think:</strong> the hidden pool of client opportunities almost everyone is sitting on without realizing it (most people are surprised when they see theirs on paper)</div>
     </div>
-    <p class="working-note reveal">This is a working session. You'll leave with real progress on your message &mdash; not just notes.</p>
-    <div class="cta-inline reveal">
+  </div>
+</section>
+
+<!-- ================= THE OTHER SIDE ================= -->
+<section class="other">
+  <div class="narrow reveal">
+    <span class="eyebrow">On the other side of this:</span>
+    <p class="imagine">Imagine knowing &mdash; every single week &mdash; exactly where your next client conversation is coming from.</p>
+    <div class="no-more">
+      <p>No more posting into the void and hoping.</p>
+      <p>No more wondering whether this is ever going to work.</p>
+      <p>No more feeling like you need to become an influencer just to do the work you're actually great at.</p>
+    </div>
+    <p style="margin-top:1.15em;">Just a simple, repeatable rhythm &mdash; a few focused hours a week &mdash; that keeps real potential clients moving toward you. Built around connection, not performance. Built for your stage, your hours, and the way you actually like to work.</p>
+    <div class="promise">
+      <div class="gold-rule"></div>
+      <p class="big">That's what The Client Engine makes possible.</p>
+      <p>And on <span class="mc-date">Tuesday, July 21</span>, I'm going live to show you the entire thing.</p>
+    </div>
+    <div class="cta-inline">
       <a class="btn" href="#optin">Save My Seat &mdash; Free</a>
     </div>
   </div>
@@ -1020,22 +906,23 @@ h2 em{font-style:italic;color:var(--gold-deep);}
     <div class="d-card reveal">
       <span class="eyebrow center">Details</span>
       <div class="d-rows">
-        <div class="d-row"><span class="label">What</span><span>The Magnetic Message &mdash; a free, live 60-minute masterclass</span></div>
-        <div class="d-row"><span class="label">When</span><span><span class="mc-date">Wednesday, August 19</span> at <span class="mc-time">9:00 a.m. Mountain Time</span></span></div>
+        <div class="d-row"><span class="label">What</span><span>The Client Engine &mdash; a free, live 60-minute masterclass</span></div>
+        <div class="d-row"><span class="label">When</span><span><span class="mc-date">Tuesday, July 21</span> at <span class="mc-time">10:00 a.m. Mountain Time</span></span></div>
         <div class="d-row"><span class="label">Where</span><span>Live on Zoom (link sent when you register)</span></div>
         <div class="d-row"><span class="label">Cost</span><span>Free</span></div>
       </div>
       <div class="d-notes">
-        <p>This is a working session. You'll leave with real progress on your message &mdash; not just notes.</p>
+        <p>This is a live teaching event &mdash; not a thinly-veiled pitch fest. You'll leave with the complete map, whether we ever work together or not.</p>
+        <p>Can't make it live? Register anyway &mdash; a replay will be available for a limited time. (But come live. I'll be answering questions and coaching real scenarios at the end.)</p>
       </div>
       <div class="cta-stack">
-        <a class="btn green pulse" href="#optin">Save My Seat &mdash; Free<span class="arr">&rarr;</span></a>
+        <a class="btn green" href="#optin">Save My Seat &mdash; Free</a>
       </div>
     </div>
     <div class="proof-block reveal">
       <div class="proof-strip">
-        <div class="proof-shot pw-33"><img width="562" height="575" src="assets/proof/zach-4x-year.png" alt="Client message from Zach: Best month ever at $25k in December — ended the year at $160k, 4X what I did the year prior." loading="lazy"></div>
-        <div class="proof-shot pw-44"><img width="1000" height="641" src="assets/proof/karuna-15k-month.jpg" alt="Client messages from Karuna: 15k! My biggest month yet. I'm blown away." loading="lazy"></div>
+        <div class="proof-shot pw-48"><img width="700" height="155" src="assets/proof/steve-six-month-client.png" alt="Client message from Steve: I've secured my first 6 month client — more than double the price I've charged previously." loading="lazy"></div>
+        <div class="proof-shot pw-35"><img width="460" height="294" src="assets/proof/emma-referral.jpg" alt="Client post: Just sold my first coaching package — a client I worked with 3 years ago recommended me to one of her clients." loading="lazy"></div>
         <div class="proof-shot pw-48"><img width="700" height="336" src="assets/proof/dana-10k-thursday.jpg" alt="Client message from Dana: a $10,000 payment received — 'just another Thursday.'" loading="lazy"></div>
       </div>
       <div class="proof-cap">From clients across my programs over the years</div>
@@ -1054,11 +941,11 @@ h2 em{font-style:italic;color:var(--gold-deep);}
     <div class="who-copy reveal">
       <span class="eyebrow">Who's teaching this?</span>
       <h2>I'm Jason Moss.</h2>
-      <p>I've helped 1,000+ coaches and service providers grow their businesses &mdash; and signed over 2,000 clients online along the way.</p>
-      <p>The split this masterclass resolves is the most common thing I&rsquo;ve found holding your message back.</p>
+      <p>Over the last 18 years I've helped 1,000+ coaches, consultants, and service providers grow their businesses &mdash; and generated nearly $2M in sales along the way.</p>
+      <p>I've built my business with content <em>AND</em> conversations. On this masterclass, I'll show you which one will work best for you &mdash; and why, if you're under $10K/month, the answer changes everything about what you should do next.</p>
       <div class="cta-stack">
         <a class="btn" href="#optin">Save My Seat &mdash; Free</a>
-        <span class="btn-note"><span class="mc-date">Wednesday, August 19</span> at <span class="mc-time">9:00 a.m. Mountain Time</span> &mdash; Free 60-Minute Live Masterclass</span>
+        <span class="btn-note"><span class="mc-date">Tuesday, July 21</span> at <span class="mc-time">10:00 a.m. Mountain Time</span> &mdash; Free 60-Minute Live Masterclass</span>
       </div>
     </div>
   </div>
@@ -1075,7 +962,7 @@ h2 em{font-style:italic;color:var(--gold-deep);}
     <div class="jm-testimonials" data-layout="grid" data-initial="20"></div>
     <div class="cta-stack reveal">
       <a class="btn" href="#optin">Save My Seat &mdash; Free</a>
-      <span class="btn-note"><span class="mc-date">Wednesday, August 19</span> at <span class="mc-time">9:00 a.m. Mountain Time</span> &mdash; Free 60-Minute Live Masterclass</span>
+      <span class="btn-note"><span class="mc-date">Tuesday, July 21</span> at <span class="mc-time">10:00 a.m. Mountain Time</span> &mdash; Free 60-Minute Live Masterclass</span>
     </div>
   </div>
 </section>
@@ -1100,7 +987,7 @@ h2 em{font-style:italic;color:var(--gold-deep);}
   <div class="optin-modal-content">
     <button type="button" class="optin-modal-close" aria-label="Close" id="optinModalClose">&times;</button>
     <h3 class="optin-modal-heading" id="optinModalHeading">Save Your Seat for the Free Masterclass</h3>
-    <p class="optin-modal-lead">The Magnetic Message &mdash; live on Zoom, <span class="mc-date">Wednesday, August 19</span> at <span class="mc-time">9:00 a.m. Mountain Time</span>.</p>
+    <p class="optin-modal-lead">The Client Engine &mdash; live on Zoom, <span class="mc-date">Tuesday, July 21</span> at <span class="mc-time">10:00 a.m. Mountain Time</span>.</p>
     <form class="optin-form email-form" novalidate>
       <input type="text" name="First Name" class="form-input" placeholder="First Name" required aria-required="true">
       <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
@@ -1141,8 +1028,8 @@ h2 em{font-style:italic;color:var(--gold-deep);}
 <!-- Event config: set the date/time once here -->
 <script>
   window.MC_EVENT = {
-    date: 'Wednesday, August 19',
-    time: '9:00 a.m. Mountain Time'
+    date: 'Tuesday, July 21',
+    time: '10:00 a.m. Mountain Time'
   };
   document.querySelectorAll('.mc-date').forEach(function(el){ el.textContent = window.MC_EVENT.date; });
   document.querySelectorAll('.mc-time').forEach(function(el){ el.textContent = window.MC_EVENT.time; });
@@ -1227,8 +1114,8 @@ if(params.has('static')){
   });
 
   JMOptin.init({
-    kitTagId: 22247461,  // Kit: The Magnetic Message (masterclass registration)
-    roezanTagId: 1690,   // Roezan: The Magnetic Message
+    kitTagId: 21050514, // Kit: The Client Engine (masterclass registration)
+    roezanTagId: 1626,  // Roezan: The Client Engine
     phone: true,
     // Two-step: revenue question after name/email/phone (js/optin-shared.js).
     revenueQuestion: {
@@ -1236,8 +1123,6 @@ if(params.has('static')){
       idle: 'Tap one to finish registering.',
       going: 'Finishing your registration\u2026'
     },
-    // The "you're in" confirmation is sent by a Kit automation:
-    // tag "The Magnetic Message" -> sequence "The Magnetic Message Masterclass".
     extraPayload: function () {
       return {
         latest_ad: adField ? adField.value : '',
@@ -1246,10 +1131,10 @@ if(params.has('static')){
     },
     redirect: function (ctx) {
       var p = new URLSearchParams();
-      p.set('registered', 'magneticmessagemasterclass');
+      p.set('registered', 'clientenginemasterclass');
       p.set('first_name', ctx.firstName);
       p.set('email', ctx.email);
-      return '/magnetic-message-masterclass-thank-you/?' + p.toString();
+      return '/archive/client-engine-masterclass-thank-you/?' + p.toString();
     }
   });
 })();
