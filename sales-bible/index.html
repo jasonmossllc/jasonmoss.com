@@ -512,6 +512,15 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
   new IntersectionObserver(function(e){past=!e[0].isIntersecting&&e[0].boundingClientRect.top<0;set()}).observe(hero);
   new IntersectionObserver(function(e){atOffer=e[0].isIntersecting;set()},{threshold:.2}).observe(offer);
 })();
+// Carry the ad's click ID and UTMs (fbclid, utm_*, ad, source) through to checkout, so the purchase matches back to the ad click
+(function(){
+  var q=new URLSearchParams(location.search),keep=[];
+  q.forEach(function(v,k){if(/^(fbclid|utm_[a-z]+|ad|source)$/.test(k))keep.push([k,v])});
+  if(!keep.length) return;
+  document.querySelectorAll('a[href^="https://checkout.jasonmoss.com/"]').forEach(function(a){
+    var u=new URL(a.href);keep.forEach(function(p){if(!u.searchParams.has(p[0]))u.searchParams.set(p[0],p[1])});a.href=u.toString();
+  });
+})();
 document.querySelectorAll('.faq details').forEach(function(d){d.addEventListener('toggle',function(){if(!d.open)return;document.querySelectorAll('.faq details').forEach(function(o){if(o!==d&&o.open)o.open=false})})});
 </script>
 <script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
