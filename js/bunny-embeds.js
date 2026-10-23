@@ -180,7 +180,7 @@
       // Plyr's own replay button + playbar would sit on top of the card.
       '.jm-plyr.jm-ended .plyr__control--overlaid,.jm-plyr.jm-ended .plyr__controls,' +
       '.jm-plyr.jm-ended .jm-cfs' +
-      '{opacity:0!important;pointer-events:none!important;}' +
+      '{opacity:0!important;pointer-events:none!important;visibility:hidden!important;}' +
       // Phone-size players: drop the note (the button carries it), tighten the
       // spacing, and give both buttons thumb-sized hit areas (44px / 32px).
       '@container (max-width:420px){.jm-end__note{display:none;}' +
