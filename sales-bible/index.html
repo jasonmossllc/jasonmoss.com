@@ -522,6 +522,12 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
 // Carry the ad's click ID and UTMs (fbclid, utm_*, ad, source) through to checkout, so the purchase matches back to the ad click
 (function(){
   var q=new URLSearchParams(location.search),keep=[];
+  // Spiffy drops source/ad/utm params, so save them for the thank-you page to
+  // send to Kit after purchase (same keys as the opt-in pages; first touch wins).
+  try{
+    var src=(q.get('source')||q.get('utm_source')||'').trim(),ad=(q.get('ad')||q.get('utm_content')||'').trim();
+    if((src||ad)&&!localStorage.getItem('jm_purchase_source'))localStorage.setItem('jm_purchase_source',JSON.stringify({latest_source:src,latest_ad:ad}));
+  }catch(e){}
   q.forEach(function(v,k){if(/^(fbclid|utm_[a-z]+|ad|source)$/.test(k))keep.push([k,v])});
   if(!keep.length) return;
   document.querySelectorAll('a[href^="https://checkout.jasonmoss.com/"]').forEach(function(a){

@@ -988,6 +988,7 @@ module.exports.__internal = {
   looksLikeBotName,
   cleanString,
   cleanMappedFieldValues,
+  buildFieldsToSet,
   normalizePhone,
   headerValue,
   EMAIL_RE,
