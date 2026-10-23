@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Your copy is ready · The Sales Bible</title>
+<meta name="theme-color" content="#0a0e0c">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── The Sales Bible · confirmation (same "Object" system as /sales-bible/) ── */
+:root{--night:#0a0e0c;--green:#14201a;--gold:#C2A86C;--cream:#F7F4EE;--paper:#fff;--ink:#22201D;--ink2:#5A534C;--brass:#86682E;--rule:rgba(34,32,29,.14)}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--cream);color:var(--ink);font-family:'Raleway',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:1100px;margin:0 auto;padding:0 40px}
+.label{display:block;font-weight:700;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.label.c{display:flex;align-items:center;justify-content:center;gap:14px}
+.label.c::before,.label.c::after{content:"";width:32px;height:1px;background:currentColor;opacity:.7}
+.buy{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(180deg,#CDB57D,#B99A5B);color:#14130f;font-weight:700;font-size:14.5px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:20px 42px;min-height:62px;box-shadow:0 0 0 1px rgba(194,168,108,.55),0 20px 46px -14px rgba(194,168,108,.6)}
+.buy svg{width:16px;height:16px}
+
+/* dark confirmation band */
+.band{position:relative;overflow:hidden;color:#fff;text-align:center;background:var(--night);background-image:radial-gradient(60% 46% at 50% 0%,rgba(44,63,54,.95),rgba(10,14,12,0) 74%),linear-gradient(180deg,var(--green) 0%,var(--night) 72%)}
+.band::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%);pointer-events:none}
+.grain{position:absolute;inset:0;background:url(/assets/textures/grain-dark-soft.png);background-size:256px;opacity:.5;mix-blend-mode:overlay;pointer-events:none}
+.cone{position:absolute;left:50%;top:0;width:1100px;height:72%;transform:translateX(-50%);background:conic-gradient(from 180deg at 50% 0%,rgba(255,236,200,0) 166deg,rgba(255,236,200,.10) 180deg,rgba(255,236,200,0) 194deg);-webkit-mask-image:linear-gradient(180deg,#000 20%,transparent 100%);mask-image:linear-gradient(180deg,#000 20%,transparent 100%);pointer-events:none}
+.frame{position:absolute;inset:16px;border:1px solid rgba(194,168,108,.22);pointer-events:none;z-index:4}
+.in{position:relative;z-index:2;padding:26px 40px 72px;display:flex;flex-direction:column;align-items:center}
+.logo{height:26px;width:auto}
+.band .label{margin-top:30px;color:var(--gold)}
+h1{margin-top:16px;font-family:'Libre Baskerville',serif;font-weight:400;font-size:52px;line-height:1.12;color:#fff;text-wrap:balance}
+.sub{margin-top:14px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,.72)}
+.stage{position:relative;isolation:isolate;width:170px;margin:34px auto 0}
+.stage::before{content:"";z-index:-1;position:absolute;left:50%;top:46%;width:240%;height:120%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(232,204,146,.34),rgba(232,204,146,.1) 45%,rgba(232,204,146,0) 75%)}
+.stage img{position:relative;filter:drop-shadow(0 30px 30px rgba(0,0,0,.75))}
+.floor{position:absolute;left:50%;bottom:4px;width:380px;max-width:86vw;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,rgba(194,168,108,0),rgba(194,168,108,.6),rgba(194,168,108,0))}
+.step{position:relative;z-index:3;margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:12px}
+.step-l{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55)}
+.tip{position:relative;z-index:3;max-width:520px;margin-top:30px;padding:20px 24px;text-align:left;border:1px solid rgba(194,168,108,.35);background:rgba(194,168,108,.06);font-family:'Libre Baskerville',serif;font-size:16px;line-height:1.65;color:rgba(255,255,255,.86)}
+.tip b{display:block;margin-bottom:6px;font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
+.bump{position:relative;z-index:3;margin-top:16px;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.6)}
+.cue{position:relative;z-index:3;margin-top:30px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:17px;color:var(--gold)}
+.cue span{display:block;margin-top:6px;font-style:normal;font-size:20px}
+
+/* next step */
+.next{padding:96px 0 110px;background:var(--cream) url(/assets/textures/grain-light-soft.png);background-size:256px}
+.grid{display:grid;grid-template-columns:5fr 6fr;gap:64px;align-items:start;max-width:1060px;margin:0 auto}
+.copy{position:sticky;top:40px;display:flex;flex-direction:column;gap:22px}
+.copy h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:42px;line-height:1.2;text-wrap:balance}
+.copy h2 em{color:var(--brass)}
+.copy p{font-family:'Libre Baskerville',serif;font-size:18.5px;line-height:1.75}
+.copy strong{font-weight:700}
+.who{display:flex;align-items:center;gap:16px;margin-top:6px}
+.who .ph{flex-shrink:0;width:72px;height:72px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#E2C98E,#9C7E44)}
+.who .ph img{width:100%;height:100%;border-radius:50%;object-fit:cover}
+.who b{display:block;font-family:'Libre Baskerville',serif;font-weight:400;font-size:18px}
+.who span{display:block;margin-top:2px;font-size:13px;font-weight:600;color:var(--ink2)}
+.qualify{position:relative;background:var(--paper);padding:30px 26px;min-height:420px;border:1px solid var(--rule);box-shadow:0 40px 80px -50px rgba(34,32,29,.7)}
+.qualify::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:var(--gold)}
+.qualify h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:22px;margin:4px 6px 14px}
+
+.ftr{background:var(--night);color:rgba(248,246,242,.55);padding:52px 0 44px;font-size:13px;text-align:center}
+.ftr img{height:26px;width:auto;margin:0 auto 16px}
+.ftr nav{display:flex;gap:4px 20px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.ftr nav a{display:inline-block;padding:11px 4px;color:rgba(248,246,242,.8);text-decoration:none}
+
+@media (max-width:860px){
+  .wrap{padding:0 22px}
+  .frame{inset:8px}
+  .in{padding:20px 22px 52px}
+  .logo{height:22px}
+  .band .label{margin-top:22px;font-size:10px;letter-spacing:.12em}
+  .band .label::before,.band .label::after{width:14px}
+  h1{font-size:34px}
+  .sub{font-size:16px}
+  .stage{width:38vw;margin-top:26px}
+  .buy{width:100%;padding:18px 14px;min-height:58px;font-size:13.5px;letter-spacing:.1em}
+  .step{align-self:stretch;margin-top:28px}
+  .tip{margin-top:24px;padding:18px 18px;font-size:15px}
+  .next{padding:64px 0 76px}
+  .grid{grid-template-columns:1fr;gap:36px}
+  .copy{position:static}
+  .copy h2{font-size:31px}
+  .copy p{font-size:17px}
+  .qualify{padding:24px 14px;margin:0 -6px}
+  .ftr nav{flex-direction:column;align-items:center;gap:0}
+}
+</style>
+</head>
+<body>
+
+<header class="band">
+  <div class="cone"></div><div class="grain"></div><div class="frame"></div>
+  <div class="in">
+    <img class="logo" src="/assets/images/logo-light.svg" width="140" height="31" alt="Jason Moss">
+    <span class="label c">Order confirmed &middot; Two quick things</span>
+    <h1 id="headline">Your copy is ready.</h1>
+    <p class="sub">The Sales Bible is yours. A copy is on its way to your inbox too.</p>
+    <div class="stage"><picture><source srcset="/sales-bible/assets/book-3d-sm.webp" type="image/webp"><img src="/sales-bible/assets/book-3d-sm.png" width="560" height="770" alt="The Sales Bible by Jason Moss"></picture><div class="floor"></div></div>
+    <div class="step">
+      <span class="step-l">1 &middot; Get your copy</span>
+      <a class="buy" href="/assets/docs/the-sales-bible-jason-moss.pdf" target="_blank" rel="noopener" download="The Sales Bible - Jason Moss.pdf"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 6.8L8 10.3l3.5-3.5M3 13.5h10"/></svg>Download the book (PDF)</a>
+    </div>
+    <div class="tip"><b>Have a call coming up?</b>Start with Appendix A: the whole call, word for word. Then read the scenes in Chapters 10 to 17.</div>
+    <p class="bump">Added <em>What To Say</em>? It&rsquo;s on its way to your inbox separately.</p>
+    <p class="cue">Number two is the good part&hellip;<span>&darr;</span></p>
+  </div>
+</header>
+
+<section class="next">
+  <div class="wrap">
+    <div class="grid">
+      <div class="copy">
+        <span class="label">2 &middot; Your next step</span>
+        <h2>Want my eyes on <em>your</em> business?</h2>
+        <p>The book will help you close more of the calls you take. But for a lot of business owners, the bigger gap is getting enough of the right calls in the first place.</p>
+        <p>Book a <strong>free 20-minute call</strong>, you and me. We&rsquo;ll uncover your #1 next step to bring more clients in the door.</p>
+        <div class="who"><div class="ph"><img src="/assets/images/graded/headshot.webp" width="402" height="402" alt="Jason Moss"></div><div><b>Jason Moss</b><span>Business coach &middot; Former Director of Sales</span></div></div>
+      </div>
+      <div class="qualify">
+        <h3>Two quick questions to start.</h3>
+        <div data-qualify-source="sales-bible"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="ftr">
+  <div class="wrap">
+    <img src="/assets/images/logo-light.svg" width="140" height="31" loading="lazy" alt="Jason Moss">
+    <div>&copy; Jason Moss LLC</div>
+    <nav><a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a><a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a><a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings disclaimer</a></nav>
+  </div>
+</footer>
+
+<script>
+  // Personalize with the buyer's first name from Spiffy's thank-you redirect
+  (function(){
+    var p = new URLSearchParams(window.location.search);
+    var name = (p.get('first_name') || p.get('name_first') || p.get('firstName') || '').trim();
+    if (!name) { var full = (p.get('name') || p.get('full_name') || '').trim(); name = full.split(/\s+/)[0] || ''; }
+    if (name && /^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ' -]{0,30}$/.test(name)) {
+      var safe = name.charAt(0).toUpperCase() + name.slice(1);
+      document.getElementById('headline').textContent = safe + ", your copy is ready.";
+    }
+  })();
+</script>
+<script src="https://jasonmoss.com/qualify/embed.js" async></script>
+</body>
+</html>
