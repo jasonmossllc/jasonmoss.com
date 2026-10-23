@@ -148,7 +148,39 @@
       'font:600 clamp(11px,3cqw,14px)/1.3 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;' +
       'white-space:normal;width:max-content;max-width:min(70cqw,240px);text-align:center;' +
       'pointer-events:none;opacity:0;transition:opacity .14s;box-shadow:0 2px 12px rgba(0,0,0,.4);}' +
-      '.jm-chap-tip.is-visible{opacity:1;}';
+      '.jm-chap-tip.is-visible{opacity:1;}' +
+      // --- End screen (opt-in via data-end-cta on the <video>) ------------------
+      // Covers the frame when the video ends: forest wash over the last frame,
+      // serif headline, gold button. Sized in cqw so it fits a ~340px phone
+      // player as well as a desktop one.
+      '.jm-end{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;' +
+      'align-items:center;justify-content:center;gap:3.2cqw;padding:5cqw;text-align:center;' +
+      'background:linear-gradient(180deg,rgba(18,26,22,.80),rgba(18,26,22,.92));' +
+      'opacity:0;visibility:hidden;transition:opacity .45s,visibility 0s .45s;}' +
+      '.jm-end.is-visible{opacity:1;visibility:visible;transition:opacity .45s;}' +
+      '.jm-end__title{margin:0;color:#fff;max-width:22em;' +
+      'font:400 clamp(15px,4.6cqw,34px)/1.25 "Libre Baskerville",Georgia,serif;}' +
+      '.jm-plyr .jm-end__cta{display:inline-block;width:auto;margin:0;padding:.95em 1.7em;' +
+      'border:0;border-radius:4px;background:#c2a86c;color:#1d1f1e;cursor:pointer;' +
+      'font:600 clamp(12px,2.7cqw,17px)/1.2 Raleway,-apple-system,BlinkMacSystemFont,' +
+      '"Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;' +
+      'box-shadow:0 4px 18px rgba(0,0,0,.35);transition:background .2s,transform .2s;}' +
+      '.jm-plyr .jm-end__cta:hover{background:#A7915D;transform:translateY(-1px);}' +
+      '.jm-end__note{margin:0;color:rgba(255,255,255,.72);' +
+      'font:500 clamp(10px,2.1cqw,14px)/1.3 Raleway,-apple-system,BlinkMacSystemFont,' +
+      '"Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.06em;}' +
+      '.jm-plyr .jm-end__replay{display:inline-flex;align-items:center;gap:.4em;width:auto;' +
+      'margin:0;padding:.3em .5em;border:0;background:transparent;cursor:pointer;' +
+      'color:rgba(255,255,255,.62);text-decoration:underline;text-underline-offset:3px;' +
+      'font:500 clamp(10px,2cqw,13px)/1.2 Raleway,-apple-system,BlinkMacSystemFont,' +
+      '"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}' +
+      '.jm-plyr .jm-end__replay:hover{color:#fff;}' +
+      // Plyr's own replay button + playbar would sit on top of the card.
+      '.jm-plyr.jm-ended .plyr__control--overlaid,.jm-plyr.jm-ended .plyr__controls,' +
+      '.jm-plyr.jm-ended .jm-cfs' +
+      '{opacity:0!important;pointer-events:none!important;}' +
+      // Very short players (phones): drop the note, the button carries it.
+      '@container (max-width:420px){.jm-end__note{display:none;}}';
     var style = document.createElement('style');
     style.id = 'jm-bunny-styles';
     style.textContent = css;
@@ -302,6 +334,95 @@
     }
   }
 
+  // End screen: when the video ends, cover the frame with a booking card.
+  // Opt-in per video via attributes, so pages carry the copy:
+  //   data-end-cta     button label (required to enable)
+  //   data-end-title   headline above the button
+  //   data-end-note    small line under the button (hidden on phones)
+  //   data-end-target  selector of the page link the button should "press"
+  // The button clicks that existing page link instead of navigating itself, so
+  // it inherits whatever the link already does: same-page scroll to the
+  // qualifier, or a new tab to the next-step page with the passthrough params.
+  // ?endscreen=preview jumps to the last few seconds once playback starts, so
+  // a reviewer sees the real ending → card transition without the full watch.
+  function installEndScreen(plyr, entry) {
+    var video = entry.video;
+    var container = plyr.elements && plyr.elements.container;
+    var label = video.getAttribute('data-end-cta');
+    if (!container || !label) return;
+    var title = video.getAttribute('data-end-title');
+    var note = video.getAttribute('data-end-note');
+    var targetSel = video.getAttribute('data-end-target');
+
+    var card = document.createElement('div');
+    card.className = 'jm-end';
+    card.setAttribute('role', 'dialog');
+    card.setAttribute('aria-label', title || label);
+    if (title) {
+      var h = document.createElement('p');
+      h.className = 'jm-end__title';
+      h.textContent = title;
+      card.appendChild(h);
+    }
+    var cta = document.createElement('button');
+    cta.type = 'button';
+    cta.className = 'jm-end__cta';
+    cta.textContent = label;
+    card.appendChild(cta);
+    if (note) {
+      var n = document.createElement('p');
+      n.className = 'jm-end__note';
+      n.textContent = note;
+      card.appendChild(n);
+    }
+    var replay = document.createElement('button');
+    replay.type = 'button';
+    replay.className = 'jm-end__replay';
+    replay.textContent = 'Watch again';
+    card.appendChild(replay);
+    container.appendChild(card);
+
+    function show() {
+      // A viewer in fullscreen would never see the card (or the page below).
+      try { if (plyr.fullscreen && plyr.fullscreen.active) plyr.fullscreen.exit(); } catch (e) {}
+      try { if (video.webkitDisplayingFullscreen) video.webkitExitFullscreen(); } catch (e) {}
+      container.classList.add('jm-ended');
+      card.classList.add('is-visible');
+    }
+    function hide() {
+      container.classList.remove('jm-ended');
+      card.classList.remove('is-visible');
+    }
+
+    // Swallow clicks on the card itself so Plyr's clickToPlay doesn't restart.
+    card.addEventListener('click', function (e) { e.stopPropagation(); });
+    cta.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var target = targetSel && document.querySelector(targetSel);
+      if (target) { target.click(); }
+    });
+    replay.addEventListener('click', function (e) {
+      e.stopPropagation();
+      hide();
+      try { plyr.restart(); } catch (x) {}
+      try { var r = plyr.play(); if (r && r.catch) r.catch(function () {}); } catch (x) {}
+    });
+
+    plyr.on('ended', show);
+    // Seeking back or replaying from the controls (keyboard) clears the card.
+    plyr.on('play', hide);
+
+    if (/(^|[?&])endscreen=preview(&|$)/.test(window.location.search)) {
+      var jumped = false;
+      plyr.on('playing', function () {
+        var d = durationOf(plyr);
+        if (jumped || !d) return;
+        jumped = true;
+        try { plyr.currentTime = Math.max(0, d - 4); } catch (e) {}
+      });
+    }
+  }
+
   // ---- per-video init --------------------------------------------------------
   function initOne(video) {
     if (video.__jmInit) return;
@@ -449,6 +570,7 @@
       // Interactive chapter markers (wider hit area + click-to-seek). Minimal
       // (testimonial) players have no scrubber, so skip them.
       if (!minimal && markers.length) { enhanceChapters(plyr, markers); }
+      installEndScreen(plyr, entry);
       registerPlayer(entry);
     }
 
