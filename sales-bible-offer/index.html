@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>One more thing · The Sales Bible</title>
+<meta name="theme-color" content="#0a0e0c">
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+<link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ── The Sales Bible · one-click upsell: Sales Call Review (same "Object" system) ── */
+:root{--night:#0a0e0c;--green:#14201a;--gold:#C2A86C;--cream:#F7F4EE;--paper:#fff;--ink:#22201D;--ink2:#5A534C;--brass:#86682E;--rule:rgba(34,32,29,.14);--ok:#7fbf8e}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--cream);color:var(--ink);font-family:'Raleway',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{display:block;max-width:100%;height:auto}
+.wrap{max-width:1100px;margin:0 auto;padding:0 40px}
+.col{max-width:660px;margin:0 auto}
+.label{display:block;font-weight:700;font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--brass)}
+.yes{display:flex;align-items:center;justify-content:center;width:100%;max-width:520px;margin:0 auto;background:linear-gradient(180deg,#CDB57D,#B99A5B);color:#14130f;font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;text-decoration:none;padding:21px 24px;min-height:64px;text-align:center;box-shadow:0 0 0 1px rgba(194,168,108,.55),0 20px 46px -14px rgba(194,168,108,.6);cursor:pointer;border:0}
+.yes:hover{filter:brightness(1.05)}
+.card-note{margin-top:10px;text-align:center;font-size:13px;font-weight:500}
+.no{display:inline-block;margin-top:18px;font-size:14px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* confirmation strip */
+.strip{background:#0f1512;color:rgba(255,255,255,.86);text-align:center;padding:12px 16px;font-size:13px;font-weight:600;letter-spacing:.04em;border-bottom:1px solid rgba(194,168,108,.25)}
+.strip b{color:var(--ok);margin-right:6px}
+
+/* dark band */
+.band{position:relative;overflow:hidden;color:#fff;text-align:center;background:var(--night);background-image:radial-gradient(60% 46% at 50% 0%,rgba(44,63,54,.95),rgba(10,14,12,0) 74%),linear-gradient(180deg,var(--green) 0%,var(--night) 72%)}
+.band::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%);pointer-events:none}
+.grain{position:absolute;inset:0;background:url(/assets/textures/grain-dark-soft.png);background-size:256px;opacity:.5;mix-blend-mode:overlay;pointer-events:none}
+.frame{position:absolute;inset:16px;border:1px solid rgba(194,168,108,.22);pointer-events:none;z-index:4}
+.in{position:relative;z-index:2;padding:40px 40px 64px;max-width:900px;margin:0 auto}
+.band .label{color:var(--gold)}
+h1{margin-top:16px;font-family:'Libre Baskerville',serif;font-weight:400;font-size:46px;line-height:1.15;text-wrap:balance}
+.gap{max-width:620px;margin:18px auto 0;font-family:'Libre Baskerville',serif;font-size:18.5px;line-height:1.65;color:rgba(255,255,255,.82)}
+.video{position:relative;margin:30px auto 0;max-width:620px;aspect-ratio:16/9;background:#050706;box-shadow:0 0 0 1px rgba(194,168,108,.4),0 40px 80px -30px rgba(0,0,0,.9)}
+.video .ph{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;color:rgba(255,255,255,.55);font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.video .ph i{width:62px;height:62px;border-radius:50%;border:1px solid rgba(194,168,108,.7);display:flex;align-items:center;justify-content:center}
+.video .ph i::after{content:"";margin-left:4px;border-left:16px solid var(--gold);border-top:10px solid transparent;border-bottom:10px solid transparent}
+.band .yes{position:relative;z-index:3;margin-top:30px}
+.band .card-note{color:rgba(255,255,255,.62)}
+.band .no{color:rgba(255,255,255,.6)}
+
+/* details */
+.details{padding:84px 0 96px;background:var(--cream) url(/assets/textures/grain-light-soft.png);background-size:256px}
+.details h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:32px;line-height:1.25;margin-top:10px}
+.checks{list-style:none;margin-top:22px}
+.checks li{position:relative;padding:18px 0 18px 46px;border-bottom:1px solid var(--rule);font-family:'Libre Baskerville',serif;font-size:18px;line-height:1.6}
+.checks li:first-child{border-top:1px solid var(--rule)}
+.checks li::before{content:"";position:absolute;left:0;top:21px;width:26px;height:26px;border-radius:50%;background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.4 8.3l2.3 2.3 4.9-5' fill='none' stroke='%23C2A86C' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/16px no-repeat}
+.steps{list-style:none;counter-reset:s;margin-top:22px;display:grid;gap:14px}
+.steps li{counter-increment:s;position:relative;padding:22px 24px 22px 74px;background:var(--paper);border:1px solid var(--rule);font-size:16.5px;font-weight:500;line-height:1.6;color:var(--ink2)}
+.steps li::before{content:counter(s);position:absolute;left:22px;top:20px;width:34px;height:34px;border-radius:50%;background:var(--night);color:var(--gold);font-family:'Libre Baskerville',serif;font-size:17px;display:flex;align-items:center;justify-content:center}
+.steps b{display:block;color:var(--ink);font-family:'Libre Baskerville',serif;font-weight:400;font-size:19px;margin-bottom:2px}
+.sec2{margin-top:56px}
+.cert{position:relative;display:flex;align-items:center;gap:24px;margin-top:56px;padding:30px 32px;background:var(--paper);border:1px solid rgba(194,168,108,.55)}
+.cert::after{content:"";position:absolute;inset:7px;border:1px solid rgba(194,168,108,.25);pointer-events:none}
+.cert .s{flex-shrink:0;width:84px;height:84px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#1f2b25,#0a0e0c);box-shadow:0 0 0 3px #fff,0 0 0 4px var(--gold);display:flex;align-items:center;justify-content:center;color:var(--gold);font-family:'Libre Baskerville',serif;font-size:13px;text-align:center;line-height:1.2}
+.cert h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:22px}
+.cert p{margin-top:6px;font-size:16px;font-weight:500;line-height:1.6;color:var(--ink2)}
+.final{margin-top:52px;text-align:center}
+.final .card-note{color:var(--ink2)}
+.final .no{color:var(--ink2)}
+.small{margin-top:30px;text-align:center;font-size:13px;font-weight:500;color:var(--ink2)}
+
+.ftr{background:var(--night);color:rgba(248,246,242,.55);padding:44px 0;font-size:13px;text-align:center}
+.ftr nav{display:flex;gap:4px 20px;justify-content:center;flex-wrap:wrap}
+.ftr nav a{display:inline-block;padding:11px 4px;color:rgba(248,246,242,.8);text-decoration:none}
+
+@media (max-width:760px){
+  .wrap{padding:0 22px}
+  .strip{font-size:11.5px;padding:10px 12px}
+  .frame{inset:8px}
+  .in{padding:28px 22px 48px}
+  .band .label{font-size:10.5px;letter-spacing:.12em}
+  h1{font-size:30px;line-height:1.18}
+  .gap{font-size:16.5px}
+  .video{margin-top:24px;margin-left:-8px;margin-right:-8px}
+  .yes{padding:19px 14px;font-size:14px;letter-spacing:.08em;min-height:60px}
+  .details{padding:60px 0 72px}
+  .details h2{font-size:26px}
+  .checks li{font-size:16.5px;padding-left:40px}
+  .checks li::before{top:19px;width:24px;height:24px;background-size:14px}
+  .steps li{padding:20px 18px 20px 64px;font-size:15.5px}
+  .steps li::before{left:16px}
+  .cert{flex-direction:column;align-items:flex-start;padding:26px 22px}
+  .ftr nav{flex-direction:column;align-items:center;gap:0}
+}
+</style>
+</head>
+<body>
+
+<div class="strip"><b>&#10003;</b>Order confirmed &middot; Your copy of The Sales Bible is on its way</div>
+
+<header class="band">
+  <div class="grain"></div><div class="frame"></div>
+  <div class="in">
+    <span class="label">Congratulations. Before you go, a one-time offer:</span>
+    <h1>See exactly where your sales calls are losing clients.</h1>
+    <p class="gap">When a call doesn&rsquo;t close, you almost never know why. So you guess, and you repeat it on the next call. If your offer is $3,000, that&rsquo;s $3,000 walking out the door every time.</p>
+    <div class="video" id="video" data-bunny-guid=""><div class="ph"><i></i><span>Video coming</span></div></div>
+    <a class="yes" data-upsell="accept" href="#">Yes, add the call review &middot; $47</a>
+    <p class="card-note">Charged to the card you just used. No need to re-enter anything.</p>
+    <a class="no" data-upsell="decline" href="/sales-bible-thank-you/">No thanks, take me to my book</a>
+  </div>
+</header>
+
+<section class="details">
+  <div class="wrap">
+    <div class="col">
+      <span class="label">The Sales Call Review</span>
+      <h2>A personalized report on your own calls.</h2>
+      <ul class="checks">
+        <li><b>A review of up to 5 of your real sales calls.</b> Your calls, your prospects, your words.</li>
+        <li><b>What&rsquo;s already working,</b> so you keep doing it on purpose.</li>
+        <li><b>Exactly where each call slipped,</b> the moments the prospect started pulling away.</li>
+        <li><b>What to fix and what to say instead,</b> the specific words to use next time, and where in the call.</li>
+        <li><b>The same review system I use with my private clients,</b> who invest $10,000 or more to work with me.</li>
+      </ul>
+
+      <div class="sec2">
+        <span class="label">How it works</span>
+        <ol class="steps">
+          <li><b>Add it with one click.</b>It&rsquo;s charged to the card you just used.</li>
+          <li><b>Send your transcripts.</b>You&rsquo;ll get an email with simple steps. Zoom, Google Meet, Fathom and most call tools create transcripts automatically.</li>
+          <li><b>Get your report within 5 business days.</b>Where each call slipped, what to fix, and what to say instead.</li>
+        </ol>
+      </div>
+
+      <div class="cert">
+        <div class="s" aria-hidden="true">Money<br>back</div>
+        <div><h3>If it isn&rsquo;t worth it, it&rsquo;s free.</h3><p>If your report isn&rsquo;t worth it to you, email me and I&rsquo;ll refund you in full.</p></div>
+      </div>
+
+      <div class="final">
+        <a class="yes" data-upsell="accept" href="#">Yes, add the call review &middot; $47</a>
+        <p class="card-note">One click. Charged to the card you just used.</p>
+        <a class="no" data-upsell="decline" href="/sales-bible-thank-you/">No thanks, take me to my book</a>
+      </div>
+      <p class="small">Your transcripts are kept confidential and used only to create your report.</p>
+    </div>
+  </div>
+</section>
+
+<footer class="ftr">
+  <div class="wrap">
+    <div>&copy; Jason Moss LLC</div>
+    <nav><a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a><a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a></nav>
+  </div>
+</footer>
+<!-- Spiffy one-click accept/decline links and SpiffyJS are wired in once the upsell exists in Spiffy -->
+</body>
+</html>
