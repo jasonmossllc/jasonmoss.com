@@ -155,12 +155,14 @@
       // player as well as a desktop one.
       '.jm-end{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;' +
       'align-items:center;justify-content:center;gap:3.2cqw;padding:5cqw;text-align:center;' +
-      'background:linear-gradient(180deg,rgba(18,26,22,.80),rgba(18,26,22,.92));' +
+      // Blur the last frame so any on-screen text in it can't ghost through.
+      'background:linear-gradient(180deg,rgba(18,26,22,.84),rgba(18,26,22,.93));' +
+      '-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);' +
       'opacity:0;visibility:hidden;transition:opacity .45s,visibility 0s .45s;}' +
       '.jm-end.is-visible{opacity:1;visibility:visible;transition:opacity .45s;}' +
       '.jm-end__title{margin:0;color:#fff;max-width:22em;' +
       'font:400 clamp(15px,4.6cqw,34px)/1.25 "Libre Baskerville",Georgia,serif;}' +
-      '.jm-plyr .jm-end__cta{display:inline-block;width:auto;margin:0;padding:.95em 1.7em;' +
+      '.jm-plyr .jm-end__cta{display:inline-flex;align-items:center;justify-content:center;width:auto;margin:0;padding:.95em 1.7em;' +
       'border:0;border-radius:4px;background:#c2a86c;color:#1d1f1e;cursor:pointer;' +
       'font:600 clamp(12px,2.7cqw,17px)/1.2 Raleway,-apple-system,BlinkMacSystemFont,' +
       '"Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;' +
@@ -179,8 +181,16 @@
       '.jm-plyr.jm-ended .plyr__control--overlaid,.jm-plyr.jm-ended .plyr__controls,' +
       '.jm-plyr.jm-ended .jm-cfs' +
       '{opacity:0!important;pointer-events:none!important;}' +
-      // Very short players (phones): drop the note, the button carries it.
-      '@container (max-width:420px){.jm-end__note{display:none;}}';
+      // Phone-size players: drop the note (the button carries it), tighten the
+      // spacing, and give both buttons thumb-sized hit areas (44px / 32px).
+      '@container (max-width:420px){.jm-end__note{display:none;}' +
+      '.jm-end{gap:2.2cqw;padding:3cqw;}' +
+      '.jm-plyr .jm-end__cta{min-height:44px;padding:0 1.4em;font-size:13px;}' +
+      '.jm-plyr .jm-end__replay{min-height:32px;padding:0 1em;font-size:11px;}}' +
+      // Any touch screen (incl. a landscape phone with a wide player) keeps
+      // the thumb-sized hit areas.
+      '@media (pointer:coarse){.jm-plyr .jm-end__cta{min-height:44px;}' +
+      '.jm-plyr .jm-end__replay{min-height:32px;padding-top:0;padding-bottom:0;}}';
     var style = document.createElement('style');
     style.id = 'jm-bunny-styles';
     style.textContent = css;
@@ -356,7 +366,7 @@
 
     var card = document.createElement('div');
     card.className = 'jm-end';
-    card.setAttribute('role', 'dialog');
+    card.setAttribute('role', 'group');
     card.setAttribute('aria-label', title || label);
     if (title) {
       var h = document.createElement('p');
@@ -409,8 +419,13 @@
     });
 
     plyr.on('ended', show);
-    // Seeking back or replaying from the controls (keyboard) clears the card.
+    // Replaying, or seeking back (keyboard arrows while paused at the end),
+    // clears the card.
     plyr.on('play', hide);
+    plyr.on('seeked', function () {
+      var d = durationOf(plyr);
+      if (d && plyr.currentTime < d - 1) hide();
+    });
 
     if (/(^|[?&])endscreen=preview(&|$)/.test(window.location.search)) {
       var jumped = false;
