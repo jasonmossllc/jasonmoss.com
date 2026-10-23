@@ -110,8 +110,7 @@ h1{margin-top:16px;font-family:'Libre Baskerville',serif;font-weight:400;font-si
       <a class="buy" href="/assets/docs/the-sales-bible-jason-moss.pdf" target="_blank" rel="noopener" download="The Sales Bible - Jason Moss.pdf"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 6.8L8 10.3l3.5-3.5M3 13.5h10"/></svg>Download the book (PDF)</a>
     </div>
     <div class="tip"><b>Call coming up?</b>Start with Appendix A: the whole call, word for word.</div>
-    <p class="bump" id="bump-add" hidden><em>What To Say</em> is on its way to your inbox separately.</p>
-    <p class="bump" id="bump-ups" hidden>For your <em>Sales Call Review</em>, check your inbox for how to send me your calls.</p>
+    <p class="bump">Added anything else to your order? It&rsquo;s on its way to your inbox.</p>
     <p class="cue">Number two is the good part&hellip;<span>&darr;</span></p>
   </div>
 </header>
@@ -152,14 +151,6 @@ h1{margin-top:16px;font-family:'Libre Baskerville',serif;font-weight:400;font-si
       var safe = name.charAt(0).toUpperCase() + name.slice(1);
       document.getElementById('headline').textContent = safe + ", your copy is ready.";
     }
-  })();
-
-  // Spiffy passes add / ups (true/false) for the order bump and upsell:
-  // only show the note for what this buyer actually added.
-  (function(){
-    var p = new URLSearchParams(window.location.search);
-    if (p.get('add') === 'true') document.getElementById('bump-add').hidden = false;
-    if (p.get('ups') === 'true') document.getElementById('bump-ups').hidden = false;
   })();
 
   // Send the ad source saved on the sales page to Kit (Spiffy drops it).
