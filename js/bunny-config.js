@@ -247,6 +247,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "29c6624a-2a1a-4f77-95b9-fa095e6ad768": {
+      "videoId": "29c6624a-2a1a-4f77-95b9-fa095e6ad768",
+      "title": "Sales Call Review — One-Click Upsell VSL",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "d7b7080c-ccd1-49a5-8b69-8b9e0c4904b1": {
       "videoId": "ncvrwu0082",
       "title": "Sold Out - Day 1 Live Cut",
