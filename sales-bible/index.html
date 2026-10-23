@@ -87,6 +87,9 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
 .hero .buy{position:relative;z-index:3;margin-top:22px;min-width:340px}
 .hero .ticks{position:relative;z-index:3;margin-top:14px;color:rgba(255,255,255,.74)}
 .hero .proof{position:relative;z-index:3;margin-top:22px;max-width:640px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:14.5px;line-height:1.6;color:rgba(255,255,255,.68)}
+.hero .proof .by{display:inline-flex;align-items:center;gap:10px;margin-left:8px;vertical-align:middle;white-space:nowrap}
+.hero .proof .by .av{width:36px;height:36px;border-radius:50%;object-fit:cover;border:1px solid rgba(194,168,108,.8)}
+.hero .proof .by b{margin-left:0}
 .hero .proof b{font-family:'Raleway',sans-serif;font-style:normal;font-weight:700;font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-left:8px;white-space:nowrap}
 .m-only{display:none}
 
@@ -146,6 +149,8 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
 .qc p{font-family:'Libre Baskerville',serif;font-size:17.5px;line-height:1.65}
 .qc cite{margin-top:auto;padding-top:14px;border-top:1px solid var(--rule);font-style:normal;font-size:14px;font-weight:600;color:var(--ink2)}
 .qc cite b{color:var(--ink);font-weight:700}
+.qc cite{display:flex;align-items:center;gap:14px}
+.qc cite .av{flex:none;width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 0 0 1px rgba(194,168,108,.7),0 6px 14px -8px rgba(34,32,29,.5)}
 .qc.wide{grid-column:1/-1}
 
 /* ── guarantee ── */
@@ -287,7 +292,7 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
     <p class="promise"><b>The Sales Bible</b> shows you exactly what to say so more of your calls end in a yes, without ever feeling salesy.</p>
     <a class="buy" id="hero-buy" href="https://checkout.jasonmoss.com/checkout/sales-bible">Get the book &middot; $7</a>
     <div class="ticks"><span>200+ pages</span><span>Instant download</span><span>60-day guarantee</span></div>
-    <p class="proof">&ldquo;I&rsquo;ve been following your script verbatim and it&rsquo;s seriously working. I&rsquo;ve signed 3 1:1 clients in the past week.&rdquo;<b>Karuna May, Health Coach</b></p>
+    <p class="proof">&ldquo;I&rsquo;ve been following your script verbatim and it&rsquo;s seriously working. I&rsquo;ve signed 3 1:1 clients in the past week.&rdquo;<span class="by"><img class="av" src="assets/people/karuna.webp" width="36" height="36" alt="Karuna May"><b>Karuna May, Health Coach</b></span></p>
   </div>
 </header>
 
@@ -401,11 +406,11 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
       <p style="margin-top:16px">I&rsquo;ve shared this approach with hundreds of clients over the last few years, in just about every niche you can think of.</p>
     </div>
     <div class="quotes">
-      <figure class="qc"><span class="win">$4,800 package</span><p>&ldquo;I just used your sales script and sold a $4800 coaching package&hellip; it was so easy.&rdquo;</p><cite><b>Andrew Tanner</b>, Men&rsquo;s health coach</cite></figure>
-      <figure class="qc"><span class="win">After 15 years in corporate sales</span><p>&ldquo;I followed the sales script and felt great about myself in a sales call for maybe the first time ever&hellip; after doing corporate sales for 15 years!&rdquo;</p><cite><b>Renee Pollins</b></cite></figure>
-      <figure class="qc"><span class="win">Highest rate yet</span><p>&ldquo;&hellip;signed him up for 6 weeks of coaching at the highest rate I ever charged for this: $1,500. He had absolutely no objections around paying.&rdquo;</p><cite><b>Leszek Erazmus</b>, Coach</cite></figure>
-      <figure class="qc"><span class="win">No more feeling sleazy</span><p>&ldquo;It&rsquo;s just, for me, so easy now and free-flowing. And I don&rsquo;t feel bad anymore getting on a call with someone.&rdquo;</p><cite><b>Marc Wagner</b>, Coach since 2011</cite></figure>
-      <figure class="qc wide"><span class="win">Closed at $3,000</span><p>&ldquo;I definitely feel a sense of&hellip; groundedness&hellip; in my ability to show up on a sales call and have an idea of what I&rsquo;m doing and not just feel like I&rsquo;m kind of floating around. Like I actually have a plan.&rdquo;</p><cite><b>Casey Hall</b>, Coach</cite></figure>
+      <figure class="qc"><span class="win">$4,800 package</span><p>&ldquo;I just used your sales script and sold a $4800 coaching package&hellip; it was so easy.&rdquo;</p><cite><img class="av" src="assets/people/andrew.webp" width="48" height="48" loading="lazy" alt="Andrew Tanner"><span><b>Andrew Tanner</b>, Men&rsquo;s health coach</span></cite></figure>
+      <figure class="qc"><span class="win">After 15 years in corporate sales</span><p>&ldquo;I followed the sales script and felt great about myself in a sales call for maybe the first time ever&hellip; after doing corporate sales for 15 years!&rdquo;</p><cite><span><b>Renee Pollins</b></span></cite></figure>
+      <figure class="qc"><span class="win">Highest rate yet</span><p>&ldquo;&hellip;signed him up for 6 weeks of coaching at the highest rate I ever charged for this: $1,500. He had absolutely no objections around paying.&rdquo;</p><cite><span><b>Leszek Erazmus</b>, Coach</span></cite></figure>
+      <figure class="qc"><span class="win">No more feeling sleazy</span><p>&ldquo;It&rsquo;s just, for me, so easy now and free-flowing. And I don&rsquo;t feel bad anymore getting on a call with someone.&rdquo;</p><cite><img class="av" src="assets/people/marc.webp" width="48" height="48" loading="lazy" alt="Marc Wagner"><span><b>Marc Wagner</b>, Coach since 2011</span></cite></figure>
+      <figure class="qc wide"><span class="win">Closed at $3,000</span><p>&ldquo;I definitely feel a sense of&hellip; groundedness&hellip; in my ability to show up on a sales call and have an idea of what I&rsquo;m doing and not just feel like I&rsquo;m kind of floating around. Like I actually have a plan.&rdquo;</p><cite><img class="av" src="assets/people/casey.webp" width="48" height="48" loading="lazy" alt="Casey Hall"><span><b>Casey Hall</b>, Coach</span></cite></figure>
     </div>
   </div>
 </section>
