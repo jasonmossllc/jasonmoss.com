@@ -78,8 +78,10 @@ const event = (id) => ({ id: 'evt_1', object: 'event', type: 'order:success', da
   check('existing source kept', JSON.parse(r.body).saved === false && kitWrites.length === 0, r.body);
   orders['901'] = { id: 901, preserved_params: {}, customer: { email: 'x@example.org' } };
   check('no fbclid: skipped', JSON.parse((await webhook(event('901'))).body).skipped === 'no fbclid');
-  orders['902'] = { id: 902, preserved_params: { fbclid: 'IwZXh0bgNhZW0B_unlogged_click' }, customer: { email: 'x@example.org' } };
-  check('unlogged click: skipped', JSON.parse((await webhook(event('902'))).body).skipped === 'no logged click');
+  orders['902'] = { id: 902, created_at: '2026-01-01T00:00:00Z', preserved_params: { fbclid: 'IwZXh0bgNhZW0B_unlogged_click' }, customer: { email: 'x@example.org' } };
+  check('old order, unlogged click: skipped (no retry storm)', JSON.parse((await webhook(event('902'))).body).skipped === 'no logged click');
+  orders['903'] = { id: 903, created_at: new Date().toISOString(), preserved_params: { fbclid: 'IwZXh0bgNhZW0B_not_visible_yet' }, customer: { email: 'x@example.org' } };
+  check('fresh order, click not visible yet: 503 retry', (await webhook(event('903'))).statusCode === 503);
   check('other event types ignored', JSON.parse((await webhook({ type: 'order:complete', data: { object: { id: 900 } } })).body).skipped === 'event type');
   check('unknown order: skipped', JSON.parse((await webhook(event('999'))).body).skipped === 'order not found');
 }

@@ -51,7 +51,7 @@ exports.handler = async (event) => {
 
   try {
     connectBlobs(event);
-    const store = await blobStore(AD_CLICK_STORE, { consistency: 'strong' });
+    const store = await blobStore(AD_CLICK_STORE);
     const key = clickKey(fbclid);
     if (await store.get(key, { type: 'json' })) {
       return { statusCode: 200, headers, body: JSON.stringify({ saved: false }) };

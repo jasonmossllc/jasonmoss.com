@@ -365,8 +365,8 @@ function connectBlobs(event) {
   blobsEvent = event;
 }
 let blobStoreOverride = null; // tests only (see __test.setBlobStoreOverride)
-// options pass through to getStore, e.g. { consistency: 'strong' } when a
-// read must see a write made seconds earlier by another function.
+// options pass through to getStore (note: { consistency: 'strong' } is not
+// available to these Lambda-style functions and throws).
 async function blobStore(name, options = {}) {
   if (blobStoreOverride) return blobStoreOverride(name, options);
   const blobs = await import('@netlify/blobs');

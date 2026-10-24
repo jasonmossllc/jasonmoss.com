@@ -24,6 +24,8 @@ const SPIFFY_API_BASE = (process.env.SPIFFY_BASE_URL || 'https://api.spiffy.co')
 // Spiffy's Kit sync usually lands within seconds of the order; wait briefly
 // before handing the retry back to Spiffy.
 const KIT_WAIT_MS = [0, 2500, 3500];
+// Within this window after an order, a missing click means "not visible yet".
+const FRESH_ORDER_MS = 5 * 60 * 1000;
 
 function json(statusCode, body) {
   return { statusCode, headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) };
@@ -69,9 +71,17 @@ exports.handler = async (event) => {
     if (!fbclid) return json(200, { skipped: 'no fbclid' });
 
     connectBlobs(event);
-    const store = await blobStore(clicks.AD_CLICK_STORE, { consistency: 'strong' });
+    const store = await blobStore(clicks.AD_CLICK_STORE);
     const click = await store.get(clicks.clickKey(fbclid), { type: 'json' });
-    if (!click || !click.fields || !Object.keys(click.fields).length) return json(200, { skipped: 'no logged click' });
+    if (!click || !click.fields || !Object.keys(click.fields).length) {
+      // Blobs reads are eventually consistent, so a click logged moments ago
+      // may not be visible yet: ask Spiffy to retry a fresh order. Older orders
+      // (other funnels, clicks we never logged) are acknowledged so they can
+      // never pile up failures and get the webhook disabled.
+      const ageMs = Date.now() - Date.parse(order.created_at || 0);
+      if (ageMs >= 0 && ageMs < FRESH_ORDER_MS) return json(503, { retry: 'click not visible yet' });
+      return json(200, { skipped: 'no logged click' });
+    }
 
     const email = String((order.customer && order.customer.email) || '').trim().toLowerCase();
     if (!EMAIL_RE.test(email)) return json(200, { skipped: 'no customer email' });
