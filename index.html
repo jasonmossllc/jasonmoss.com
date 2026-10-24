@@ -37,6 +37,21 @@
 <link rel="preload" as="image" type="image/avif" fetchpriority="high" href="/assets/images/hero/hero-2400.avif" media="(min-width:701px) and (max-width:1099px), (min-width:1100px) and (max-width:1599px) and (max-resolution:1.49dppx)">
 <link rel="preload" as="image" type="image/avif" fetchpriority="high" href="/assets/images/hero/hero-3200.avif" media="(min-width:1600px), (min-width:1100px) and (min-resolution:1.5dppx)">
 <link rel="stylesheet" href="/css/site.css">
+<script>
+// Hero photo loading. Paints a blurred placeholder first, then fades the full photo in once it is decoded
+// (already cached = shown at once, no fade). When the window is resized or moved to a sharper screen, the
+// photo on screen stays put until the bigger file is decoded, and it never swaps down to a smaller one, so
+// the hero never blanks out. The preloads are listed smallest to largest. No JS = the CSS media rules alone.
+(function(){var d=document.documentElement,t=performance.now(),first=1,cur=-1,L=[].slice.call(document.querySelectorAll('link[rel=preload][as=image]'));
+if(!L.length||!window.matchMedia)return;d.classList.add('hero-wait');
+function reveal(){if(!first)return;first=0;if(performance.now()-t<150)d.classList.add('hero-now');d.classList.remove('hero-wait')}
+function want(){for(var k=0;k<L.length;k++)if(matchMedia(L[k].media).matches)return k;return -1}
+function load(){var k=want();if(k<=cur)return;var i=new Image();
+function go(){if(k<=cur)return;cur=k;d.style.setProperty('--hero-photo','url("'+L[k].href+'")');d.classList.add('hero-locked');reveal()}
+i.onload=function(){if(!i.decode)return go();i.decode().then(go,go);setTimeout(go,250)};i.onerror=reveal;i.src=L[k].href}
+load();setTimeout(reveal,8000);
+L.forEach(function(l){var m=matchMedia(l.media);m.addEventListener?m.addEventListener('change',load):m.addListener(load)})})();
+</script>
 <!-- JSON-LD Structured Data -->
 <script type="application/ld+json">
 {
@@ -78,11 +93,19 @@
 </script>
 <style>
 .hero{position:relative;min-height:100vh;min-height:100svh;color:var(--sand);display:flex;flex-direction:column;background:#201C17}
-.hero-bg{position:absolute;inset:0;background-size:cover;background-position:62% 100%}
+.hero-bg{position:absolute;inset:0;overflow:hidden;background-size:cover;background-position:62% 100%}
+/* Load-in: a ~500-byte blurred copy of the photo paints instantly, then the full photo fades in over it once decoded (see the head script) */
+.hero-bg::before,.hero-bg::after{content:"";position:absolute;inset:0;background-size:inherit;background-position:inherit;background-repeat:no-repeat}
+.hero-bg::before{background-image:url(data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAA0JCgsKCA0LCgsODg0PEyAVExISEyccHhcgLikxMC4pLSwzOko+MzZGNywtQFdBRkxOUlNSMj5aYVpQYEpRUk//2wBDAQ4ODhMREyYVFSZPNS01T09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT09PT0//wAARCAAgADADASIAAhEBAxEB/8QAGgAAAgMBAQAAAAAAAAAAAAAABAUAAwYHAf/EACUQAAEEAQMDBQEAAAAAAAAAAAEAAgMEEQUSIRMxQRQiUWFxBv/EABgBAAMBAQAAAAAAAAAAAAAAAAACAwEE/8QAGREBAQEBAQEAAAAAAAAAAAAAAAECESFB/9oADAMBAAIRAxEAPwDcVbUFhoMUjXIsLmlW2+LBZIcj4Whp67MGgSHd9qc1Po41i9Sqtqsco5OCjBYZgHcMfqYClFR1FDMGjLiAPtaOuRwuc0nAPCOhsOBzjgKipXnkYZQ0BuOxR1PTJbABHtb8nwubtU4JZawR4/EHrOp3wYo6chGOSM8lPa9CGKPDWiR2OCUtj0O+5pL4GgSH3OPcBUz4Wyn387esWdPZ6g75BwXDyqNYu2/VGFrH9MdtozlX6FRbDujjcMRu7JvJPFv2AAFPr1kzX//Z);filter:blur(18px);transform:scale(1.06)}
+.hero-bg::after{transition:opacity .8s ease}
+.hero-wait .hero-bg::after{opacity:0}
+.hero-now .hero-bg::after{transition:none}
+.hero-locked .hero-bg::after{background-image:var(--hero-photo)}
+@media (prefers-reduced-motion:reduce){.hero-bg::after{transition:none}}
 /* Hero photo: each screen gets only the size it needs, in the smallest format it supports (AVIF > WebP > JPEG) */
-.hero-bg{background-image:url(/assets/images/hero/hero-1600.jpg);background-image:image-set(url(/assets/images/hero/hero-1600.avif) type("image/avif"),url(/assets/images/hero/hero-1600.webp) type("image/webp"),url(/assets/images/hero/hero-1600.jpg) type("image/jpeg"))}
-@media (min-width:701px){.hero-bg{background-image:url(/assets/images/hero/hero-2400.jpg);background-image:image-set(url(/assets/images/hero/hero-2400.avif) type("image/avif"),url(/assets/images/hero/hero-2400.webp) type("image/webp"),url(/assets/images/hero/hero-2400.jpg) type("image/jpeg"))}}
-@media (min-width:1600px),(min-width:1100px) and (min-resolution:1.5dppx){.hero-bg{background-image:url(/assets/images/hero/hero-3200.jpg);background-image:image-set(url(/assets/images/hero/hero-3200.avif) type("image/avif"),url(/assets/images/hero/hero-3200.webp) type("image/webp"),url(/assets/images/hero/hero-3200.jpg) type("image/jpeg"))}}
+.hero-bg::after{background-image:url(/assets/images/hero/hero-1600.jpg);background-image:image-set(url(/assets/images/hero/hero-1600.avif) type("image/avif"),url(/assets/images/hero/hero-1600.webp) type("image/webp"),url(/assets/images/hero/hero-1600.jpg) type("image/jpeg"))}
+@media (min-width:701px){.hero-bg::after{background-image:url(/assets/images/hero/hero-2400.jpg);background-image:image-set(url(/assets/images/hero/hero-2400.avif) type("image/avif"),url(/assets/images/hero/hero-2400.webp) type("image/webp"),url(/assets/images/hero/hero-2400.jpg) type("image/jpeg"))}}
+@media (min-width:1600px),(min-width:1100px) and (min-resolution:1.5dppx){.hero-bg::after{background-image:url(/assets/images/hero/hero-3200.jpg);background-image:image-set(url(/assets/images/hero/hero-3200.avif) type("image/avif"),url(/assets/images/hero/hero-3200.webp) type("image/webp"),url(/assets/images/hero/hero-3200.jpg) type("image/jpeg"))}}
 .hero-shade{position:absolute;inset:0;background:linear-gradient(180deg,rgba(32,28,23,.55) 0,rgba(32,28,23,0) 200px),linear-gradient(90deg,rgba(32,28,23,.78) 0%,rgba(32,28,23,.5) 38%,rgba(32,28,23,0) 66%),linear-gradient(0deg,rgba(32,28,23,.7) 0%,rgba(32,28,23,0) 30%),radial-gradient(ellipse 70% 60% at 82% 8%,rgba(233,218,186,.12),rgba(233,218,186,0) 70%)}
 .hero .hdr{color:var(--sand)}
 .hero .eyebrow{color:#D8C08A;max-width:470px}
@@ -259,7 +282,7 @@
 
 <section class="bg-tex-forest method on-dark paper">
   <div class="wrap method-grid">
-  <div class="frame"><img class="method-img" src="/assets/images/graded/lifestyle-4.jpg" alt="Jason Moss in the mountains at golden hour"></div>
+  <div class="frame"><img class="method-img" loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-4.jpg" alt="Jason Moss in the mountains at golden hour"></div>
   <div class="method-copy">
     <div class="eyebrow">The approach</div>
     <h2 class="h2">Growth begins where <span class="gold-it">effort ends.</span></h2>
@@ -293,7 +316,7 @@
 
 <section class="section">
   <div class="wrap story">
-    <div class="frame"><img class="story-img" src="/assets/images/graded/lifestyle-1.jpg" alt="Jason Moss in the mountains"></div>
+    <div class="frame"><img class="story-img" loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-1.jpg" alt="Jason Moss in the mountains"></div>
     <div class="story-copy">
       <div class="eyebrow">My story</div>
       <h2 class="h2" style="margin-bottom:8px">Business is one of the most <span class="brass-it">honest mirrors</span> we have.</h2>
@@ -314,15 +337,15 @@
     </div>
     <div class="paths">
       <a class="path" href="/resonance-masterclass-optin/?source=Website">
-        <div class="path-img"><img src="/assets/images/graded/lifestyle-2.jpg" alt=""></div>
+        <div class="path-img"><img loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-2.jpg" alt=""></div>
         <div class="path-body"><h3 class="h3">The Resonance Masterclass</h3><p class="muted">A free training on growing a business that feels like you.</p><span class="tlink">Watch now</span></div>
       </a>
       <a class="path" href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer">
-        <div class="path-img"><img src="/assets/images/graded/lifestyle-3.jpg" alt="" style="object-position:18% 50%"></div>
+        <div class="path-img"><img loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-3.jpg" alt="" style="object-position:18% 50%"></div>
         <div class="path-body"><h3 class="h3">YouTube channel</h3><p class="muted">Free videos on attracting clients and growing a sustainable business.</p><span class="tlink">Watch on YouTube</span></div>
       </a>
       <a class="path" href="/apply/">
-        <div class="path-img"><img src="/assets/images/graded/featured.jpg" alt="" style="object-position:47% 30%"></div>
+        <div class="path-img"><img loading="lazy" decoding="async" src="/assets/images/graded/featured.jpg" alt="" style="object-position:47% 30%"></div>
         <div class="path-body"><h3 class="h3">Work together</h3><p class="muted">Start with a free 20-minute business assessment, one-on-one with me.</p><span class="tlink">Book your call</span></div>
       </a>
     </div>

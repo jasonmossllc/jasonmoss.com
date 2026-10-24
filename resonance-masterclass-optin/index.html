@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
+  <link rel="preload" as="image" fetchpriority="high" href="assets/images/hero-bg.webp">
   <title>The Resonance Masterclass</title>
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -30,7 +31,7 @@
        ===================================== */
     .hero {
       position: relative;
-      background: url('assets/images/hero-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      background: url('assets/images/hero-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
       overflow: hidden;
     }
     .hero::before {
@@ -131,7 +132,7 @@
 
     @media (min-width: 768px) {
       .hero {
-        background: url('assets/images/hero-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        background: url('assets/images/hero-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
       }
       .hero-inner {
         max-width: 60rem;

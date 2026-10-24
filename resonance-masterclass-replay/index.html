@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
+  <link rel="preload" as="image" fetchpriority="high" href="assets/images/section-bg.webp">
   <title>Resonance Masterclass Replay</title>
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -29,7 +30,7 @@
        ===================================== */
     .page {
       position: relative;
-      background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover;
+      background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
       padding: 1.75rem 1.25rem 3rem;
       color: #F8F6F2;
       overflow: visible;
@@ -191,7 +192,7 @@
 
     @media (min-width: 768px) {
       .page {
-        background: url('assets/images/section-bg.png') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+        background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
         padding: 2.375rem 1.8125rem 4rem;
       }
       .page-heading {
