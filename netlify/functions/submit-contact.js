@@ -365,11 +365,13 @@ function connectBlobs(event) {
   blobsEvent = event;
 }
 let blobStoreOverride = null; // tests only (see __test.setBlobStoreOverride)
-async function blobStore(name) {
-  if (blobStoreOverride) return blobStoreOverride(name);
+// options pass through to getStore, e.g. { consistency: 'strong' } when a
+// read must see a write made seconds earlier by another function.
+async function blobStore(name, options = {}) {
+  if (blobStoreOverride) return blobStoreOverride(name, options);
   const blobs = await import('@netlify/blobs');
   if (blobsEvent) blobs.connectLambda(blobsEvent);
-  return blobs.getStore({ name });
+  return blobs.getStore({ name, ...options });
 }
 
 // ── TOKENLESS LANE ─────────────────────────────────────────────────────────

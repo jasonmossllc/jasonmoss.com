@@ -69,7 +69,7 @@ exports.handler = async (event) => {
     if (!fbclid) return json(200, { skipped: 'no fbclid' });
 
     connectBlobs(event);
-    const store = await blobStore(clicks.AD_CLICK_STORE);
+    const store = await blobStore(clicks.AD_CLICK_STORE, { consistency: 'strong' });
     const click = await store.get(clicks.clickKey(fbclid), { type: 'json' });
     if (!click || !click.fields || !Object.keys(click.fields).length) return json(200, { skipped: 'no logged click' });
 
