@@ -38,14 +38,24 @@ function tokenValid(event) {
   return crypto.timingSafeEqual(Buffer.from(given), Buffer.from(expected));
 }
 
-async function fetchOrder(orderId) {
-  const res = await fetch(`${SPIFFY_API_BASE}/v2/orders/${encodeURIComponent(orderId)}`, {
+async function spiffyGet(path) {
+  const res = await fetch(`${SPIFFY_API_BASE}${path}`, {
     headers: { Authorization: `Bearer ${process.env.SPIFFY_API_KEY}`, Accept: 'application/json' },
   });
   if (res.status === 404) return null;
-  if (!res.ok) throw new Error(`Spiffy order lookup failed: ${res.status}`);
+  if (!res.ok) throw new Error(`Spiffy lookup failed: ${res.status}`);
   const body = await res.json();
   return body && body.data ? body.data : body;
+}
+
+// The order only embeds its customer when asked (?include=customer); fall
+// back to the customer record so a missing embed can never drop the email.
+async function fetchOrder(orderId) {
+  const order = await spiffyGet(`/v2/orders/${encodeURIComponent(orderId)}?include=customer`);
+  if (order && !(order.customer && order.customer.email) && order.customer_id) {
+    order.customer = await spiffyGet(`/v2/customers/${encodeURIComponent(order.customer_id)}`);
+  }
+  return order;
 }
 
 const sleep = (ms) => new Promise((resolve) => setTimeout(resolve, ms));

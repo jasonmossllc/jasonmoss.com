@@ -34,8 +34,15 @@ global.fetch = async (url, opts = {}) => {
   const u = String(url);
   const method = (opts.method || 'GET').toUpperCase();
   const json = (status, body) => ({ ok: status < 400, status, headers: { get: () => null }, json: async () => body, text: async () => JSON.stringify(body) });
-  const m = u.match(/\/v2\/orders\/(\w+)$/);
-  if (m) { spiffyAuth = (opts.headers || {}).Authorization; return orders[m[1]] ? json(200, { data: orders[m[1]] }) : json(404, {}); }
+  const m = u.match(/\/v2\/orders\/(\w+)\?include=customer$/);
+  if (m) {
+    spiffyAuth = (opts.headers || {}).Authorization;
+    if (!orders[m[1]]) return json(404, {});
+    const { customer, ...bare } = orders[m[1]];
+    return json(200, { data: orders[m[1]].embed === false ? bare : orders[m[1]] });
+  }
+  const c = u.match(/\/v2\/customers\/(\w+)$/);
+  if (c) return json(200, { data: { id: c[1], email: 'fallback.buyer@example.org' } });
   if (u.includes('/v4/subscribers?') && method === 'GET') return json(200, { subscribers: subscriber ? [subscriber] : [] });
   if (/\/v4\/subscribers\/\d+$/.test(u) && method === 'PUT') { kitWrites.push(JSON.parse(opts.body)); return json(200, { subscriber: { id: 42 } }); }
   return json(200, {});
@@ -68,6 +75,15 @@ const event = (id) => ({ id: 'evt_1', object: 'event', type: 'order:success', da
   check('order attributed', r.statusCode === 200 && JSON.parse(r.body).saved === true, r.body);
   check('Spiffy fetched with API key', spiffyAuth === 'Bearer spiffy-test-key');
   check('writes only the two fields', JSON.stringify(kitWrites[0]?.fields) === JSON.stringify({ original_ad: 'SalesBibleUS', original_source: 'Facebook_Ads' }), JSON.stringify(kitWrites));
+}
+
+// 2b) Order without an embedded customer: falls back to the customer record.
+{
+  orders['905'] = { id: 905, embed: false, customer_id: 77, preserved_params: { fbclid: FBCLID } };
+  subscriber = { id: 42, email_address: 'fallback.buyer@example.org', fields: {} };
+  kitWrites = [];
+  const r = await webhook(event('905'));
+  check('customer fallback finds the email', r.statusCode === 200 && JSON.parse(r.body).saved === true, r.body);
 }
 
 // 3) First touch wins in Kit; unknown/absent data is skipped, never defaulted.
