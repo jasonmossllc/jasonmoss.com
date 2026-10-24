@@ -164,9 +164,11 @@ h1{margin-top:16px;font-family:'Libre Baskerville',serif;font-weight:400;font-si
     var saved;
     try { saved = JSON.parse(localStorage.getItem('jm_purchase_source') || 'null'); } catch (e) {}
     var p = new URLSearchParams(window.location.search);
-    var email = (p.get('email') || '').trim();
-    if (!saved || !email) return;
-    var body = JSON.stringify({ email: email, order: p.get('order') || '', latest_source: saved.latest_source || '', latest_ad: saved.latest_ad || '' });
+    // a '+' in an unencoded email param arrives as a space
+    var email = (p.get('email') || '').trim().replace(/ /g, '+');
+    var order = (p.get('order') || '').trim();
+    if (!saved || !email || !order) return;
+    var body = JSON.stringify({ email: email, order: order, latest_source: saved.latest_source || '', latest_ad: saved.latest_ad || '' });
     var delays = [0, 8000, 20000, 45000];
     (function attempt(i){
       setTimeout(function(){

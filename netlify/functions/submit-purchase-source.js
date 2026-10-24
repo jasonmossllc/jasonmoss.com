@@ -1,32 +1,28 @@
-// Purchase attribution (ad source for Spiffy buyers)
+// Purchase attribution backup (ad source for Spiffy buyers)
 // Netlify Serverless Function
 //
-// Spiffy only keeps ad click ids (fbclid, gclid...) on an order and drops
-// source / ad / utm_* params, so a buyer's ad source never reaches Kit on its
-// own. The sales page saves the landing params in localStorage (same keys the
-// opt-in pages send: source || utm_source, ad || utm_content), and the Spiffy
-// thank-you page posts them here with the buyer's email from Spiffy's
-// thank-you params.
+// The primary path is spiffy-order-source.js (Spiffy order webhook + the
+// fbclid click log). This is the backup for buyers without an fbclid: the
+// sales page saves the landing params in localStorage (same keys the opt-in
+// pages send: source || utm_source, ad || utm_content), and the Spiffy
+// thank-you page posts them with Spiffy's thank-you params (order + email).
 //
-// Same rules as the opt-in pages: only original_source / original_ad, only
-// when that field is still blank (first touch wins), never a default value.
-// This endpoint cannot create, tag or unsubscribe anyone: the subscriber must
-// already exist (Spiffy's own Kit integration creates them on purchase).
+// Nothing is written unless the order is verified with the Spiffy API: it
+// must exist, belong to that email, and be recent. That stops anyone from
+// writing values to arbitrary subscribers or probing who is on the list.
+// Same rules as the webhook (shared helpers): source + ad as one pair, only
+// when original_source is blank, read from the authoritative Kit record,
+// never a default, never create or tag a subscriber.
 //
-// Request:  { email, latest_source?, latest_ad?, order? }
-// Response: 200 { saved: true|false } | 404 { retry: true } (not in Kit yet)
-//           | 400 bad input | 403 bad origin | 500
+// Request:  { order, email, latest_source?, latest_ad? }
+// Response: 200 { saved: true|false } | 404 { retry: true } (verified, not in
+//           Kit yet) | 400 bad input | 403 bad origin or unverified order | 500
 const { __internal } = require('./submit-contact.js');
-const {
-  corsHeaders,
-  originAllowed,
-  cleanMappedFieldValues,
-  buildFieldsToSet,
-  findSubscriberByEmail,
-  updateSubscriber,
-  cleanString,
-  EMAIL_RE,
-} = __internal;
+const { corsHeaders, originAllowed, cleanMappedFieldValues, cleanString, EMAIL_RE } = __internal;
+const { __internal: orders } = require('./spiffy-order-source.js');
+
+// The thank-you page posts within about a minute of checkout; allow a margin.
+const ORDER_MAX_AGE_MS = 2 * 60 * 60 * 1000;
 
 exports.handler = async (event) => {
   const headers = corsHeaders(event);
@@ -44,28 +40,31 @@ exports.handler = async (event) => {
   } catch (e) {
     return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request body' }) };
   }
-  const email = String((data && data.email) || '').trim().toLowerCase();
-  if (!EMAIL_RE.test(email)) {
-    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid email' }) };
+  // A '+' in an unencoded thank-you URL arrives as a space: put it back.
+  const email = String((data && data.email) || '').trim().replace(/ /g, '+').toLowerCase();
+  const orderId = cleanString(data && data.order, 40);
+  if (!EMAIL_RE.test(email) || !/^\d{1,20}$/.test(orderId || '')) {
+    return { statusCode: 400, headers, body: JSON.stringify({ error: 'Invalid request' }) };
   }
   const mapped = cleanMappedFieldValues(data || {});
-  if (!Object.keys(mapped).length) {
+  if (!mapped.original_source) {
     return { statusCode: 200, headers, body: JSON.stringify({ saved: false }) };
   }
 
   try {
-    const subscriber = await findSubscriberByEmail(email);
-    if (!subscriber || !subscriber.id) {
+    const order = await orders.fetchOrder(orderId);
+    const verified = order && orders.orderEmail(order) === email && orders.ageMs(order.created_at) < ORDER_MAX_AGE_MS;
+    if (!verified) {
+      return { statusCode: 403, headers, body: JSON.stringify({ error: 'Forbidden' }) };
+    }
+    const subscriber = await orders.authoritativeSubscriber(email);
+    if (!subscriber) {
       // Spiffy's Kit sync can land a few seconds after the thank-you page.
       return { statusCode: 404, headers, body: JSON.stringify({ retry: true }) };
     }
-    const fields = buildFieldsToSet(mapped, subscriber.fields);
-    if (!Object.keys(fields).length) {
-      return { statusCode: 200, headers, body: JSON.stringify({ saved: false }) };
-    }
-    await updateSubscriber(subscriber.id, { email, fields });
-    console.log('Purchase source saved', { order: cleanString(data.order, 40), fields: Object.keys(fields) });
-    return { statusCode: 200, headers, body: JSON.stringify({ saved: true }) };
+    const saved = await orders.writeSourcePair(subscriber, email, mapped);
+    if (saved) console.log('Purchase source saved', { order: orderId });
+    return { statusCode: 200, headers, body: JSON.stringify({ saved }) };
   } catch (error) {
     console.error('Purchase source error:', error && error.message);
     return { statusCode: 500, headers, body: JSON.stringify({ error: 'Internal server error' }) };
