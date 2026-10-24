@@ -544,6 +544,11 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
   try{
     var src=(q.get('source')||q.get('utm_source')||'').trim(),ad=(q.get('ad')||q.get('utm_content')||'').trim();
     if((src||ad)&&!localStorage.getItem('jm_purchase_source'))localStorage.setItem('jm_purchase_source',JSON.stringify({latest_source:src,latest_ad:ad}));
+    // Also log the ad click server-side, keyed by Facebook's click id, so the
+    // Spiffy order webhook can attribute the sale even if the buyer never
+    // reaches the thank-you page.
+    var fbclid=(q.get('fbclid')||'').trim();
+    if(fbclid&&(src||ad))fetch('/.netlify/functions/track-ad-click',{method:'POST',headers:{'Content-Type':'text/plain'},body:JSON.stringify({fbclid:fbclid,latest_source:src,latest_ad:ad}),keepalive:true}).catch(function(){});
   }catch(e){}
   q.forEach(function(v,k){if(/^(fbclid|utm_[a-z]+|ad|source)$/.test(k))keep.push([k,v])});
   if(!keep.length) return;
