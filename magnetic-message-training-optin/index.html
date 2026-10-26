@@ -60,6 +60,33 @@
       align-items: center;
       text-align: center;
     }
+    /* Who it's for, said before the question: gold small caps between two hairlines */
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.6875rem;
+      line-height: 1.4;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: #C2A86C;
+      margin: 0 0 1.125rem;
+    }
+    .hero-eyebrow::before,
+    .hero-eyebrow::after {
+      content: '';
+      flex: none;
+      width: 1.25rem;
+      height: 1px;
+      background: rgba(194, 168, 108, 0.55);
+    }
+    /* Phones: no hairlines and tighter tracking so it holds one line; if it must wrap, balance it */
+    @media (max-width: 767px) {
+      .hero-eyebrow { display: block; letter-spacing: 0.12em; text-wrap: balance; max-width: 20rem; }
+      .hero-eyebrow::before, .hero-eyebrow::after { content: none; }
+    }
     .hero-subheading .nowrap { white-space: nowrap; }
     .hero-heading {
       font-family: 'Libre Baskerville', serif;
@@ -237,6 +264,8 @@
         max-width: 60rem;
         padding: 3rem 1.8125rem 4rem;
       }
+      .hero-eyebrow { font-size: 0.8125rem; gap: 1rem; margin-bottom: 1.25rem; }
+      .hero-eyebrow::before, .hero-eyebrow::after { width: 2rem; }
       .hero-heading {
         font-size: 2.5rem;
         line-height: 1.22;
@@ -606,9 +635,10 @@
       ============================================ -->
   <section class="hero">
     <div class="hero-inner">
+      <p class="hero-eyebrow">For coaches who already have clients</p>
       <h1 class="hero-heading">Coaches, is your message <span class="gold"><em>costing you clients?</em></span></h1>
 
-      <h2 class="hero-subheading">Find out and fix yours <span class="nowrap">in under 10&nbsp;minutes.</span></h2>
+      <h2 class="hero-subheading">Find out and fix yours in this free <span class="nowrap">9-minute training.</span></h2>
 
       <button type="button" class="loop-card js-open-optin" aria-label="Watch the free training">
         <video autoplay muted loop playsinline preload="metadata" poster="assets/images/loop-poster.jpg" aria-hidden="true" tabindex="-1">
@@ -644,7 +674,7 @@
       <div class="benefits">
         <div class="benefit">
           <span class="benefit-number">01</span>
-          <p class="benefit-headline">Why people aren&rsquo;t buying&mdash;even when they need your help</p>
+          <p class="benefit-headline">Why more of the right people aren&rsquo;t booking calls</p>
         </div>
         <div class="benefit">
           <span class="benefit-number">02</span>
@@ -652,7 +682,7 @@
         </div>
         <div class="benefit">
           <span class="benefit-number">03</span>
-          <p class="benefit-headline">A simple messaging framework to help you get more clients</p>
+          <p class="benefit-headline">A simple messaging framework to bring in more of the right clients</p>
         </div>
       </div>
 
