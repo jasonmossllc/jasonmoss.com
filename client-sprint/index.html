@@ -45,6 +45,27 @@
 .cta-center{display:flex;flex-direction:column;align-items:center;gap:16px;margin-top:64px}
 .cta-center .fine-it{text-align:center}
 
+/* Registration reminder: stays visible without covering page content. */
+.cs-deadline{position:sticky;top:0;z-index:100;background:#171817;border-bottom:1px solid rgba(194,168,108,.28)}
+.cs-deadline .wrap{display:flex;align-items:center;justify-content:center;gap:28px;padding-top:6px;padding-bottom:6px}
+.cs-deadline-copy{font-size:13px;line-height:1.5;color:rgba(248,246,242,.68)}
+.cs-deadline-copy strong{font-family:'Libre Baskerville',serif;font-style:italic;font-weight:400;font-size:14px;color:var(--gold)}
+.cs-deadline-copy span{margin-left:14px}
+.jm .cs-deadline-link{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;min-height:44px;padding:8px 20px;background:var(--gold);color:#1D1F1E;font-size:12px;font-weight:600;line-height:1.4;text-decoration:none}
+.jm .cs-deadline-link:hover{background:#b89a5e}
+.cs-deadline-link:focus-visible{outline:2px solid var(--sand);outline-offset:4px}
+.jm .closing-note{font-size:14px;font-weight:500;line-height:1.6;color:var(--gold);text-wrap:balance}
+.hero-closing{margin-top:-14px}
+.invite .closing-note{margin-top:22px}
+#main,#join{scroll-margin-top:110px}
+@media (max-width:600px){
+  .cs-deadline .wrap{gap:12px;justify-content:space-between;padding-top:8px;padding-bottom:8px}
+  .cs-deadline-copy{font-size:12px;line-height:1.5}
+  .cs-deadline-copy strong,.cs-deadline-copy span{display:block;margin:0}
+  .jm .cs-deadline-link{font-size:11px;padding:8px 12px}
+  .hero-closing{text-align:center;margin-top:-8px}
+}
+
 /* hero */
 .cs-hero{position:relative;min-height:min(100svh,960px);display:flex;flex-direction:column;overflow:hidden;background:#171817}
 /* site.css zooms sections on big monitors, which also scales 100svh: divide it back so the hero still fits the first screen */
@@ -286,6 +307,13 @@
 <body class="jm dark">
 <a class="skip-link" href="#main">Skip to content</a>
 
+<aside class="cs-deadline" aria-label="Registration reminder">
+  <div class="wrap">
+    <p class="cs-deadline-copy"><strong>Doors closing soon</strong><span>We begin Thursday, Oct 29.</span></p>
+    <a class="cs-deadline-link" href="https://checkout.jasonmoss.com/checkout/client-sprint">Save your spot</a>
+  </div>
+</aside>
+
 <!-- Hero -->
 <section class="cs-hero">
   <div class="bg" role="img" aria-label="Jason Moss"></div>
@@ -297,6 +325,7 @@
       <p class="lede">Learn the fastest way to turn the people who know you into high-ticket clients &mdash; without ads, a funnel, or posting&nbsp;more.</p>
       <div class="meta"><span>3 live sessions</span><span>Oct 29 &ndash; Nov 5</span><span>9&ndash;11am MT</span></div>
       <div class="cta-row hero-cta"><p class="pre-cta">Recordings included</p><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><small class="desk-only">Live on Zoom &middot; Recordings included</small></div>
+      <p class="closing-note hero-closing">Doors closing soon. Join us this Thursday.</p>
     </div>
   </div>
 </section>
@@ -354,7 +383,7 @@
       <p class="explain">Over seven days, you&rsquo;ll learn the simplest way to turn the people who already know you into high-ticket&nbsp;clients.</p>
       <p>This doesn&rsquo;t require a complicated marketing machine or thousands of dollars in ads. It starts with the relationships you already&nbsp;have.</p>
       <div class="goal"><b>The goal</b>Sign your next high-ticket client in seven days or&nbsp;less.</div>
-      <div class="tl-cta"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it"><span class="nw">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span><span class="fd"> &middot; </span><span class="nw fb">Recordings included</span></span></div>
+      <div class="tl-cta"><p class="closing-note">We start Thursday. Save your spot before doors close.</p><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it"><span class="nw">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span><span class="fd"> &middot; </span><span class="nw fb">Recordings included</span></span></div>
     </div>
   </div>
 </section>
@@ -430,8 +459,9 @@
 <section class="sec cs-offer" id="join">
   <div class="wrap">
     <div class="invite">
-      <div class="eyebrow center" style="position:relative;z-index:1">Your seat</div>
+      <div class="eyebrow center" style="position:relative;z-index:1">Doors closing soon</div>
       <h2 class="h2">The 7-Day Client Sprint</h2>
+      <p class="closing-note">Join us before doors close.<br>Day 1 begins Thursday, Oct 29.</p>
       <div class="amt"><sup>$</sup>11</div>
       <div class="one">One payment</div>
       <ul class="incl">
@@ -492,7 +522,7 @@
     </div>
     <div class="jm-testimonials" data-layout="scroll" data-height="800" data-shadow="171817" style="display:block;width:100%;max-width:69rem;margin:0 auto"></div>
     <script>try{if(window.matchMedia('(max-width:700px)').matches){document.querySelector('.jm-testimonials').setAttribute('data-height','560')}}catch(e){}</script>
-    <div class="cta-center"><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it"><span class="nw">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span><span class="fd"> &middot; </span><span class="nw fb">Recordings included</span></span></div>
+    <div class="cta-center"><p class="closing-note center">Doors closing soon. I&rsquo;d love to have you with us.</p><a class="btn btn-gold btn-glow" href="https://checkout.jasonmoss.com/checkout/client-sprint">Join the sprint &middot; $11</a><span class="fine-it"><span class="nw">Oct 29 &ndash; Nov 5 &middot; Live on Zoom</span><span class="fd"> &middot; </span><span class="nw fb">Recordings included</span></span></div>
   </div>
 </section>
 
