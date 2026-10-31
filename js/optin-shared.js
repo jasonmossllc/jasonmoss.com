@@ -417,7 +417,7 @@
       if (qualifiedFired || QUALIFIED_ANSWERS.indexOf(answer) < 0) return false;
       if (typeof window.fbq !== 'function') return false;
       var page = window.location.pathname.replace(/^\/|\/$/g, '') || 'home';
-      try { window.fbq('trackCustom', 'Qualified Lead', { content_name: page, optin_revenue: answer }); qualifiedFired = true; leadAt = Date.now(); } catch (e) {}
+      try { window.fbq('trackCustom', 'Qualified Lead', { content_name: page }); qualifiedFired = true; leadAt = Date.now(); } catch (e) {}
       return qualifiedFired;
     }
     function fireLead() {
