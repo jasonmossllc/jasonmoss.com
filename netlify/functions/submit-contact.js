@@ -980,7 +980,7 @@ module.exports.__internal = {
   isQueueableKitError,
   kitErrorSummary,
   syncContactToKit,
-  // Shared with sibling form functions (submit-assessment.js) so every public
+  // Shared with sibling form functions (submit-qualify.js and others) so every public
   // endpoint runs the exact same bot guards and Kit plumbing.
   verifyTurnstile,
   checkTurnstile,
