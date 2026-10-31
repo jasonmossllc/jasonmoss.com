@@ -289,6 +289,7 @@
     { value: '1k-10k', label: '$1K–$10K' },
     { value: '10k-plus', label: '$10K+' }
   ];
+  var META_PIXEL_ID = '441869284373614';
   var QUALIFIED_ANSWERS = ['1k-10k', '10k-plus']; // answers that also fire the Meta "Qualified Lead"
 
   function optinConfirmed(r) {
@@ -398,6 +399,19 @@
     var lockedHeight = '';
     var hostWasStatic = false;
 
+    // Manual advanced matching: hand the pixel the opt-in's email (also as
+    // external_id) and first name before the Lead, so Lead and Qualified Lead
+    // match even when automatic matching misses the swapped-out form. The
+    // pixel hashes them; the Stape gateway forwards the hashes.
+    var userDataSet = false;
+    function setUserData() {
+      if (userDataSet || !state || typeof window.fbq !== 'function') return;
+      var em = String(state.email || '').trim().toLowerCase();
+      if (!em) return;
+      var ud = { em: em, external_id: em };
+      if (state.fname) ud.fn = state.fname.toLowerCase();
+      try { window.fbq('init', META_PIXEL_ID, ud); userDataSet = true; } catch (e) {}
+    }
     var qualifiedFired = false;
     function fireQualifiedLead(answer) {
       if (qualifiedFired || QUALIFIED_ANSWERS.indexOf(answer) < 0) return false;
@@ -409,6 +423,7 @@
     function fireLead() {
       if (leadFired) return true;
       if (typeof window.fbq !== 'function') return false;
+      setUserData();
       try { window.fbq('track', 'Lead'); leadFired = true; leadAt = Date.now(); } catch (e) {}
       return leadFired;
     }
