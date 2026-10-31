@@ -210,8 +210,8 @@
    * queued), so someone who opts in and never answers still counts. The page
    * then goes to its usual destination with qualified=false added, which the
    * GTM thank-you Lead rule already excludes, so nobody counts twice. If the
-   * pixel never loaded, the URL is left alone (or replaced by noPixelRedirect
-   * when the destination isn't a thank-you URL) so GTM's thank-you Lead fires.
+   * pixel never loaded, the URL is left alone, so a thank-you destination
+   * still gets GTM's Lead.
    * A page whose own redirect already carries qualified=false never gets a
    * page Lead.
    *
@@ -226,10 +226,7 @@
    *     going:    'Starting your training…',
    *     container: '.selector',   // card whose content swaps (default: the form's parent)
    *     progressHost: '.selector',// element whose top edge carries the bar (default: container)
-   *     standalone: true,         // no card around the form: the question brings its own
-   *     noPixelRedirect: function (email) { return '/optin-thank-you?...'; }
-   *                               // where to go when the Meta pixel never loaded and the
-   *                               // destination isn't a thank-you URL (so GTM still fires)
+   *     standalone: true          // no card around the form: the question brings its own
    *   }
    *
    * Adding it to a new form: include this file, call JMOptin.init as usual, set
@@ -467,9 +464,6 @@
       }
       if (state.confirmed) {
         if (fireLead()) { fireQualifiedLead(state.answer); waits.push(pixelSettled()); url = withQualifiedFalse(url); }
-        // No pixel on this page: let GTM's thank-you Lead fire instead. Pages
-        // whose destination isn't a thank-you URL name one (noPixelRedirect).
-        else if (opts.noPixelRedirect) url = opts.noPixelRedirect(state.email);
       } else {
         url = withQualifiedFalse(url); // the save wasn't confirmed: never count a Lead
       }
@@ -603,7 +597,7 @@
         if (!state) { // no question on screen (shouldn't happen): just go
           var url = ctx.redirectUrl;
           if (confirmed && fireLead()) { pixelSettled().then(function () { window.location.href = withQualifiedFalse(url); }); }
-          else if (confirmed) window.location.href = opts.noPixelRedirect ? opts.noPixelRedirect(ctx.email || '') : url;
+          else if (confirmed) window.location.href = url;
           else window.location.href = withQualifiedFalse(url);
           return;
         }

@@ -590,11 +590,7 @@
       revenueQuestion: {
         headline: 'One last question before your masterclass starts',
         idle: 'Tap one to start your masterclass.',
-        going: 'Starting your masterclass\u2026',
-        // No pixel loaded: go through the thank-you page so GTM counts the Lead.
-        noPixelRedirect: function (email) {
-          return '/optin-thank-you?redirect=resonance-masterclass-replay&email=' + encodeURIComponent(email);
-        }
+        going: 'Starting your masterclass\u2026'
       }
     });
   })();

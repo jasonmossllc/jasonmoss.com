@@ -315,7 +315,7 @@
       return { latest_source: sourceInput ? sourceInput.value : 'Organic' };
     },
     redirect: function (ctx) {
-      return '/optin-thank-you?redirect=resonance-masterclass-replay&email=' + encodeURIComponent(ctx.email);
+      return '/resonance-masterclass-replay/?email=' + encodeURIComponent(ctx.email);
     }
   });
 })();
