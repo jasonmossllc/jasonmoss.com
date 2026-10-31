@@ -48,15 +48,8 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /vip          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /VIP          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
 /Vip          https://checkout.jasonmoss.com/checkout/business-breakthrough-challenge-vip      301
-/growth-bottleneck/* /growth-bottleneck-quiz/:splat 301
-# Runs You assessment retired (archived) -> new bottleneck assessment
-/runs-you-assessment/* /growth-bottleneck-quiz/ 301
 # Runs You free-conversation page retired (archived, was a dead-end Typeform) -> booking page
 /runs-you/* /apply/ 301
-# Vanity link for YouTube CTAs (stamps organic attribution), then catch-all
-/bottleneck   /growth-bottleneck-quiz/?source=YouTube_Organic&ad=Growth_Bottleneck_Quiz 301
-/bottleneck/  /growth-bottleneck-quiz/?source=YouTube_Organic&ad=Growth_Bottleneck_Quiz 301
-/bottleneck/* /growth-bottleneck-quiz/:splat 301
 
 /ai-conversation-coach   https://chatgpt.com/g/g-6a7a41a9e048819188e7db5ae757a880-ai-conversation-coach-by-jason-moss   301
 /ai-conversation-coach/  https://chatgpt.com/g/g-6a7a41a9e048819188e7db5ae757a880-ai-conversation-coach-by-jason-moss   301
