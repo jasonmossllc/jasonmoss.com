@@ -215,6 +215,11 @@
    * A page whose own redirect already carries qualified=false never gets a
    * page Lead.
    *
+   * Meta "Qualified Lead": a custom event fired once, on top of the Lead, when a
+   * confirmed opt-in taps $1K–$10K or $10K+ (QUALIFIED_ANSWERS). Ad sets can
+   * optimize on it (via a custom conversion) to find earners, not just any
+   * opt-in. The Stape CAPI gateway mirrors it server-side like every pixel event.
+   *
    *   revenueQuestion: {                // on by default; false turns it off
    *     headline: 'One last question before your training starts',
    *     idle:     'Tap one to start your training.',
@@ -287,6 +292,7 @@
     { value: '1k-10k', label: '$1K–$10K' },
     { value: '10k-plus', label: '$10K+' }
   ];
+  var QUALIFIED_ANSWERS = ['1k-10k', '10k-plus']; // answers that also fire the Meta "Qualified Lead"
 
   function optinConfirmed(r) {
     return !!(r && r.success === true && (r.tagged === true || r.queued === true));
@@ -395,6 +401,14 @@
     var lockedHeight = '';
     var hostWasStatic = false;
 
+    var qualifiedFired = false;
+    function fireQualifiedLead(answer) {
+      if (qualifiedFired || QUALIFIED_ANSWERS.indexOf(answer) < 0) return false;
+      if (typeof window.fbq !== 'function') return false;
+      var page = window.location.pathname.replace(/^\/|\/$/g, '') || 'home';
+      try { window.fbq('trackCustom', 'Qualified Lead', { content_name: page, optin_revenue: answer }); qualifiedFired = true; leadAt = Date.now(); } catch (e) {}
+      return qualifiedFired;
+    }
     function fireLead() {
       if (leadFired) return true;
       if (typeof window.fbq !== 'function') return false;
@@ -452,7 +466,7 @@
         waits.push(Promise.race([saveAnswer(), new Promise(function (r) { setTimeout(r, 1500); })]).catch(function (e) { console.error('Answer save error:', e); }));
       }
       if (state.confirmed) {
-        if (fireLead()) { waits.push(pixelSettled()); url = withQualifiedFalse(url); }
+        if (fireLead()) { fireQualifiedLead(state.answer); waits.push(pixelSettled()); url = withQualifiedFalse(url); }
         // No pixel on this page: let GTM's thank-you Lead fire instead. Pages
         // whose destination isn't a thank-you URL name one (noPixelRedirect).
         else if (opts.noPixelRedirect) url = opts.noPixelRedirect(state.email);
