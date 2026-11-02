@@ -28,8 +28,8 @@
 //     data-autoplay="true|false"> on the page. No other code changes.
 //
 // data-captions="off": the video has captions burned into the picture, so the
-// player never turns its own caption track on (not even for muted autoplay).
-// The CC button still works for anyone who wants the track.
+// player never turns its own caption track on (not even for muted autoplay)
+// and hides the CC button and the captions settings entry.
 
 (function () {
   'use strict';
@@ -455,7 +455,8 @@
     var videoId = video.getAttribute('data-video-id') || cfg.videoId || guid;
     var autoplay = video.getAttribute('data-autoplay') === 'true';
     var lang = cfg.captions || null;
-    var autoCaptions = autoplay && video.getAttribute('data-captions') !== 'off';
+    var burnedInCaptions = video.getAttribute('data-captions') === 'off';
+    var autoCaptions = autoplay && !burnedInCaptions;
 
     var hlsUrl = 'https://' + cdn + '/' + guid + '/playlist.m3u8';
     var capUrl = lang ? 'https://' + cdn + '/' + guid + '/captions/' + lang + '.vtt' : null;
@@ -504,6 +505,7 @@
       }
       var useQuality = !minimal && !!qualityOpts;
       var settingsMenu = minimal ? [] : (useQuality ? ['captions', 'quality', 'speed'] : ['captions', 'speed']);
+      var noCaptions = function (list) { return burnedInCaptions ? list.filter(function (c) { return c !== 'captions'; }) : list; };
 
       var plyrOpts = {
         // Don't persist/restore volume·muted·captions·speed across players or
@@ -529,10 +531,10 @@
         // preview/poster state and appears once playing (see the
         // .jm-minimal.plyr--stopped CSS rule). Compact = no volume slider /
         // settings / quality, which would cram a small player.
-        controls: minimal
+        controls: noCaptions(minimal
           ? ['play-large', 'play', 'progress', 'current-time', 'mute', 'captions', 'fullscreen']
-          : ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen'],
-        settings: settingsMenu,
+          : ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume', 'captions', 'settings', 'fullscreen']),
+        settings: noCaptions(settingsMenu),
         i18n: { qualityLabel: { 0: 'Auto' } },
         // Plyr's own markers are tiny + non-interactive; we render our own
         // chapter layer (enhanceChapters) with a wider hit area + click-to-seek.
