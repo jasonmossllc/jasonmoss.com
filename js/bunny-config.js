@@ -290,6 +290,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "f2fd7fdb-c07a-4332-bbd8-989b1f91e7ab": {
+      "videoId": "f2fd7fdb-c07a-4332-bbd8-989b1f91e7ab",
+      "title": "Sales Bible Post Opt-In VSL v2",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "29c6624a-2a1a-4f77-95b9-fa095e6ad768": {
       "videoId": "29c6624a-2a1a-4f77-95b9-fa095e6ad768",
       "title": "Sales Call Review — One-Click Upsell VSL",
