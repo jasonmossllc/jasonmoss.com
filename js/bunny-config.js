@@ -283,20 +283,6 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
-    "cdd35cd2-a127-4345-8807-89c0dbcf0e0c": {
-      "videoId": "cdd35cd2-a127-4345-8807-89c0dbcf0e0c",
-      "title": "Sales Bible Post Opt-In VSL",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
-    "f2fd7fdb-c07a-4332-bbd8-989b1f91e7ab": {
-      "videoId": "f2fd7fdb-c07a-4332-bbd8-989b1f91e7ab",
-      "title": "Sales Bible Post Opt-In VSL v2",
-      "poster": "thumbnail.jpg",
-      "captions": "en",
-      "chapters": []
-    },
     "fe2a25f3-53af-4b63-8158-41ad56d10bff": {
       "videoId": "fe2a25f3-53af-4b63-8158-41ad56d10bff",
       "title": "Sales Bible Post Opt-In VSL V3",
