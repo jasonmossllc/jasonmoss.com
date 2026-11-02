@@ -71,9 +71,9 @@ h1 em{color:var(--gold)}
 .qualify h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:22px;line-height:1.35;margin:4px 6px 14px}
 
 /* ── proof ── */
-.quotes{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:1060px;margin:80px auto 0}
+.quotes{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;max-width:1060px;margin:80px auto 0}
 .qc{margin:0;padding:30px 30px 24px;background:var(--paper);border:1px solid var(--rule);box-shadow:0 24px 50px -38px rgba(34,32,29,.6);display:flex;flex-direction:column;gap:16px}
-.qc p{font-family:'Libre Baskerville',serif;font-style:italic;font-size:19px;line-height:1.55}
+.qc p{font-family:'Libre Baskerville',serif;font-style:italic;font-size:17.5px;line-height:1.55}
 .qc cite{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:14px;border-top:1px solid var(--rule);font-style:normal;font-size:14px;font-weight:600;color:var(--ink2)}
 .qc cite img{flex:none;width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 0 0 1px rgba(194,168,108,.7)}
 .qc cite b{display:block;color:var(--ink);font-weight:700}
@@ -113,6 +113,9 @@ h1 em{color:var(--gold)}
   .qc p{font-size:17.5px}
   .ftr nav{flex-direction:column;align-items:center;gap:0}
   .ftr p{text-align:left;font-size:12.5px}
+}
+@media (min-width:600px) and (max-width:860px){
+  .quotes{grid-template-columns:1fr 1fr}
 }
 @media (min-width:481px) and (max-width:860px){
   .watch-cta{width:auto;min-width:360px;padding:18px 36px}
@@ -167,8 +170,12 @@ h1 em{color:var(--gold)}
     </div>
 
     <div class="quotes">
+      <figure class="qc"><p>Working with Jason has single-handedly driven the most consistent results I&rsquo;ve seen in my business since I started 3 years ago.</p><cite><img src="/sales-bible-thank-you/assets/people/ariel.jpg" width="48" height="48" loading="lazy" alt="Ariel Naftali"><span><b>Ariel Naftali</b></span></cite></figure>
+      <figure class="qc"><p>Investing in coaching with you was the best business decision I made this past year, hands down. ROI is beyond what I paid.</p><cite><img src="/sales-bible-thank-you/assets/people/andrea.jpg" width="48" height="48" loading="lazy" alt="Andrea Horvath"><span><b>Andrea Horvath</b></span></cite></figure>
+      <figure class="qc"><p>Ended the year at $160K, 4X what he did the year before.</p><cite><img src="/magnetic-message-training-replay/assets/images/zach.jpg" width="48" height="48" loading="lazy" alt="Zach Bloom"><span><b>Zach Bloom</b></span></cite></figure>
       <figure class="qc"><p>From $2k to $260k in sales, while cutting her hours in half.</p><cite><img src="/magnetic-message-training-replay/assets/images/meaghan.jpg" width="48" height="48" loading="lazy" alt="Meaghan Long"><span><b>Meaghan Long</b></span></cite></figure>
-      <figure class="qc"><p>Never experienced financial success like this in his life.</p><cite><img src="/magnetic-message-training-replay/assets/images/zach.jpg" width="48" height="48" loading="lazy" alt="Zach Bloom"><span><b>Zach Bloom</b></span></cite></figure>
+      <figure class="qc"><p>I&rsquo;ve secured my first 6-month client&hellip; more than double the price I&rsquo;ve charged previously.</p><cite><img src="/sales-bible-thank-you/assets/people/steve.jpg" width="48" height="48" loading="lazy" alt="Steve Bradshaw"><span><b>Steve Bradshaw</b></span></cite></figure>
+      <figure class="qc"><p>Two or three months in a row, like 10K, 12K, 17K. I was closing all the sales calls.</p><cite><img src="/sales-bible-thank-you/assets/people/federica.jpg" width="48" height="48" loading="lazy" alt="Federica Prayer"><span><b>Federica Prayer</b></span></cite></figure>
     </div>
     <p class="note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
 
