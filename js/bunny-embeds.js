@@ -26,6 +26,10 @@
 //     node scripts/build-bunny-config.mjs
 // and drop a <video class="jm-player" data-bunny-id="<guid>" data-video-id="…"
 //     data-autoplay="true|false"> on the page. No other code changes.
+//
+// data-captions="off": the video has captions burned into the picture, so the
+// player never turns its own caption track on (not even for muted autoplay).
+// The CC button still works for anyone who wants the track.
 
 (function () {
   'use strict';
@@ -451,6 +455,7 @@
     var videoId = video.getAttribute('data-video-id') || cfg.videoId || guid;
     var autoplay = video.getAttribute('data-autoplay') === 'true';
     var lang = cfg.captions || null;
+    var autoCaptions = autoplay && video.getAttribute('data-captions') !== 'off';
 
     var hlsUrl = 'https://' + cdn + '/' + guid + '/playlist.m3u8';
     var capUrl = lang ? 'https://' + cdn + '/' + guid + '/captions/' + lang + '.vtt' : null;
@@ -519,7 +524,7 @@
         // state via CSS. Other videos auto-hide the controls as usual.
         hideControls: !minimal,
         resetOnEnd: !autoplay,
-        captions: { active: autoplay, language: lang || 'en', update: true },
+        captions: { active: autoCaptions, language: lang || 'en', update: true },
         // Testimonials (minimal) get a compact playbar that is hidden in the
         // preview/poster state and appears once playing (see the
         // .jm-minimal.plyr--stopped CSS rule). Compact = no volume slider /
@@ -577,7 +582,7 @@
       if (autoplay) {
         plyr.on('ready', function () {
           try { plyr.muted = true; } catch (e) {}
-          try { plyr.toggleCaptions(true); } catch (e) {} // captions ON while muted-autoplaying
+          if (autoCaptions) { try { plyr.toggleCaptions(true); } catch (e) {} } // captions ON while muted-autoplaying
           try { var r = plyr.play(); if (r && r.catch) r.catch(function () {}); } catch (e) {}
         });
         addClickForSound(plyr, entry);

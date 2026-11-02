@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="robots" content="noindex, nofollow">
-<title>Your copy is ready · The Sales Bible</title>
+<title>Your book is on its way · The Sales Bible</title>
 <meta name="theme-color" content="#0a0e0c">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
 <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -14,127 +14,165 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:wght@500;600;700&display=swap" rel="stylesheet">
 <style>
-/* ── The Sales Bible · confirmation (same "Object" system as /sales-bible/) ── */
+/* ── The Sales Bible · after the free opt-in (same "Object" system as /sales-bible/) ──
+   Dark spotlight band = the VSL. Cream section = the call invite + the qualifier. */
 :root{--night:#0a0e0c;--green:#14201a;--gold:#C2A86C;--cream:#F7F4EE;--paper:#fff;--ink:#22201D;--ink2:#5A534C;--brass:#86682E;--rule:rgba(34,32,29,.14)}
 *{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
 body{background:var(--cream);color:var(--ink);font-family:'Raleway',sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
 img{display:block;max-width:100%;height:auto}
+a{color:inherit}
 .wrap{max-width:1100px;margin:0 auto;padding:0 40px}
 .label{display:block;font-weight:700;font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
 .label.c{display:flex;align-items:center;justify-content:center;gap:14px}
 .label.c::before,.label.c::after{content:"";width:32px;height:1px;background:currentColor;opacity:.7}
-.buy{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(180deg,#CDB57D,#B99A5B);color:#14130f;font-weight:700;font-size:14.5px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:20px 42px;min-height:62px;box-shadow:0 0 0 1px rgba(194,168,108,.55),0 20px 46px -14px rgba(194,168,108,.6)}
-.buy svg{width:16px;height:16px}
+.buy{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:linear-gradient(180deg,#CDB57D,#B99A5B);color:#14130f;font-weight:700;font-size:14.5px;letter-spacing:.14em;text-transform:uppercase;text-decoration:none;padding:20px 42px;min-height:62px;box-shadow:0 0 0 1px rgba(194,168,108,.55),0 20px 46px -14px rgba(194,168,108,.6);transition:transform .15s,filter .15s}
+.buy:hover{transform:translateY(-1px);filter:brightness(1.05)}
 
-/* dark confirmation band */
+/* ── watch (dark) ── */
 .band{position:relative;overflow:hidden;color:#fff;text-align:center;background:var(--night);background-image:radial-gradient(60% 46% at 50% 0%,rgba(44,63,54,.95),rgba(10,14,12,0) 74%),linear-gradient(180deg,var(--green) 0%,var(--night) 72%)}
 .band::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%);pointer-events:none}
 .grain{position:absolute;inset:0;background:url(/assets/textures/grain-dark-soft.png);background-size:256px;opacity:.5;mix-blend-mode:overlay;pointer-events:none}
 .cone{position:absolute;left:50%;top:0;width:1100px;height:72%;transform:translateX(-50%);background:conic-gradient(from 180deg at 50% 0%,rgba(255,236,200,0) 166deg,rgba(255,236,200,.10) 180deg,rgba(255,236,200,0) 194deg);-webkit-mask-image:linear-gradient(180deg,#000 20%,transparent 100%);mask-image:linear-gradient(180deg,#000 20%,transparent 100%);pointer-events:none}
 .frame{position:absolute;inset:16px;border:1px solid rgba(194,168,108,.22);pointer-events:none;z-index:4}
-.in{position:relative;z-index:2;padding:52px 40px 72px;display:flex;flex-direction:column;align-items:center}
+.in{position:relative;z-index:2;padding:48px 40px 68px;display:flex;flex-direction:column;align-items:center}
 .logo{height:26px;width:auto}
-.band .label{margin-top:34px;color:var(--gold)}
-h1{margin-top:16px;font-family:'Libre Baskerville',serif;font-weight:400;font-size:52px;line-height:1.12;color:#fff;text-wrap:balance}
-.sub{margin-top:14px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:18px;color:rgba(255,255,255,.72)}
-.stage{position:relative;isolation:isolate;width:170px;margin:34px auto 0}
-.stage::before{content:"";z-index:-1;position:absolute;left:50%;top:46%;width:240%;height:120%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(232,204,146,.34),rgba(232,204,146,.1) 45%,rgba(232,204,146,0) 75%)}
-.stage img{position:relative;filter:drop-shadow(0 30px 30px rgba(0,0,0,.75))}
-.floor{position:absolute;left:50%;bottom:4px;width:380px;max-width:86vw;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,rgba(194,168,108,0),rgba(194,168,108,.6),rgba(194,168,108,0))}
-.step{position:relative;z-index:3;margin-top:34px;display:flex;flex-direction:column;align-items:center;gap:12px}
-.step-l{font-size:11px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.55)}
-.tip{position:relative;z-index:3;max-width:520px;margin-top:30px;padding:20px 24px;text-align:left;border:1px solid rgba(194,168,108,.35);background:rgba(194,168,108,.06);font-family:'Libre Baskerville',serif;font-size:16px;line-height:1.65;color:rgba(255,255,255,.86)}
-.tip b{display:block;margin-bottom:6px;font-family:'Raleway',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold)}
-.bump{position:relative;z-index:3;margin-top:16px;font-size:13.5px;font-weight:500;line-height:1.7;color:rgba(255,255,255,.6)}
-.cue{position:relative;z-index:3;margin-top:30px;font-family:'Libre Baskerville',serif;font-style:italic;font-size:17px;color:var(--gold)}
-.cue span{display:block;margin-top:6px;font-style:normal;font-size:20px}
+.status{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:8px 16px 8px 12px;border:1px solid rgba(194,168,108,.4);border-radius:999px;background:rgba(194,168,108,.08);font-size:12.5px;font-weight:600;color:rgba(255,255,255,.86)}
+.status i{flex:none;width:18px;height:18px;border-radius:50%;background:var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.4 8.3l2.3 2.3 4.9-5' fill='none' stroke='%2314130f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/12px no-repeat}
+.band .label{margin-top:26px;color:var(--gold)}
+h1{margin-top:14px;max-width:820px;font-family:'Libre Baskerville',serif;font-weight:400;font-size:44px;line-height:1.16;color:#fff;text-wrap:balance}
+h1 em{color:var(--gold)}
+.sub{margin-top:14px;max-width:600px;font-family:'Libre Baskerville',serif;font-size:18px;line-height:1.6;color:rgba(255,255,255,.76);text-wrap:balance}
+.sub b{font-weight:400;color:#fff}
+.video{position:relative;z-index:3;width:100%;max-width:820px;aspect-ratio:16/9;margin-top:32px;overflow:hidden;background:#000;box-shadow:0 0 0 1px rgba(194,168,108,.55),0 0 0 7px rgba(10,14,12,.7),0 0 0 8px rgba(194,168,108,.22),0 40px 90px -30px rgba(0,0,0,.9),0 0 70px -10px rgba(194,168,108,.28)}
+.video .jm-player{width:100%;height:100%}
+.watch-cta{position:relative;z-index:3;margin-top:36px;min-width:380px}
+.fine{position:relative;z-index:3;margin-top:14px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:rgba(255,255,255,.6)}
 
-/* next step */
-.next{padding:96px 0 110px;background:var(--cream) url(/assets/textures/grain-light-soft.png);background-size:256px}
-.grid{display:grid;grid-template-columns:5fr 6fr;gap:64px;align-items:start;max-width:1060px;margin:0 auto}
-.copy{position:sticky;top:40px;display:flex;flex-direction:column;gap:22px}
-.copy h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:42px;line-height:1.2;text-wrap:balance}
-.copy h2 em{color:var(--brass)}
-.copy p{font-family:'Libre Baskerville',serif;font-size:18.5px;line-height:1.75}
+/* ── the call + qualifier (cream) ── */
+.next{padding:96px 0 72px;background:var(--cream) url(/assets/textures/grain-light-soft.png);background-size:256px;scroll-margin-top:0}
+.grid{display:grid;grid-template-columns:5fr 6fr;grid-template-areas:"head q" "copy q";column-gap:64px;align-items:start;max-width:1060px;margin:0 auto}
+.head{grid-area:head}
+.head h2{margin-top:14px;font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-height:1.2;text-wrap:balance}
+.head h2 em{color:var(--brass)}
+.copy{grid-area:copy;margin-top:22px;display:flex;flex-direction:column;gap:20px}
+.copy p{font-family:'Libre Baskerville',serif;font-size:18px;line-height:1.75}
 .copy strong{font-weight:700}
-.who{display:flex;align-items:center;gap:16px;margin-top:6px}
+.checks{list-style:none;border-top:1px solid var(--rule)}
+.checks li{position:relative;padding:14px 0 14px 40px;border-bottom:1px solid var(--rule);font-family:'Libre Baskerville',serif;font-size:17px;line-height:1.6}
+.checks li::before{content:"";position:absolute;left:0;top:16px;width:24px;height:24px;border-radius:50%;background:var(--night) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M4.4 8.3l2.3 2.3 4.9-5' fill='none' stroke='%23C2A86C' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/14px no-repeat}
+.who{display:flex;align-items:center;gap:16px;margin-top:4px}
 .who .ph{flex-shrink:0;width:72px;height:72px;border-radius:50%;padding:3px;background:linear-gradient(135deg,#E2C98E,#9C7E44)}
 .who .ph img{width:100%;height:100%;border-radius:50%;object-fit:cover}
 .who b{display:block;font-family:'Libre Baskerville',serif;font-weight:400;font-size:18px}
 .who span{display:block;margin-top:2px;font-size:13px;font-weight:600;color:var(--ink2)}
-.qualify{position:relative;background:var(--paper);padding:30px 26px;min-height:420px;border:1px solid var(--rule);box-shadow:0 40px 80px -50px rgba(34,32,29,.7)}
+.qualify{grid-area:q;position:sticky;top:28px;background:var(--paper);padding:30px 26px;min-height:420px;border:1px solid var(--rule);box-shadow:0 40px 80px -50px rgba(34,32,29,.7)}
 .qualify::before{content:"";position:absolute;left:0;top:0;width:100%;height:3px;background:var(--gold)}
-.qualify h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:22px;margin:4px 6px 14px}
+.qualify h3{font-family:'Libre Baskerville',serif;font-weight:400;font-size:22px;line-height:1.35;margin:4px 6px 14px}
 
-.ftr{background:var(--night);color:rgba(248,246,242,.55);padding:52px 0 44px;font-size:13px;text-align:center}
+/* ── proof ── */
+.quotes{display:grid;grid-template-columns:1fr 1fr;gap:22px;max-width:1060px;margin:80px auto 0}
+.qc{margin:0;padding:30px 30px 24px;background:var(--paper);border:1px solid var(--rule);box-shadow:0 24px 50px -38px rgba(34,32,29,.6);display:flex;flex-direction:column;gap:16px}
+.qc p{font-family:'Libre Baskerville',serif;font-style:italic;font-size:19px;line-height:1.55}
+.qc cite{display:flex;align-items:center;gap:14px;margin-top:auto;padding-top:14px;border-top:1px solid var(--rule);font-style:normal;font-size:14px;font-weight:600;color:var(--ink2)}
+.qc cite img{flex:none;width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid #fff;box-shadow:0 0 0 1px rgba(194,168,108,.7)}
+.qc cite b{display:block;color:var(--ink);font-weight:700}
+.note{max-width:1060px;margin:18px auto 0;text-align:center;font-size:13px;font-weight:500;color:var(--ink2)}
+.lost{max-width:620px;margin:56px auto 0;padding-top:28px;border-top:1px solid var(--rule);text-align:center;font-size:14.5px;font-weight:500;line-height:1.7;color:var(--ink2)}
+.lost a{color:var(--brass);font-weight:700}
+
+.ftr{background:var(--night);color:rgba(248,246,242,.55);padding:52px 0 44px;font-size:13px;line-height:1.7;text-align:center}
 .ftr img{height:26px;width:auto;margin:0 auto 16px}
-.ftr nav{display:flex;gap:4px 20px;justify-content:center;flex-wrap:wrap;margin-top:6px}
+.ftr nav{display:flex;gap:4px 20px;justify-content:center;flex-wrap:wrap;margin:6px auto 18px}
 .ftr nav a{display:inline-block;padding:11px 4px;color:rgba(248,246,242,.8);text-decoration:none}
+.ftr p{max-width:820px;margin:0 auto 10px;font-style:italic}
 
 @media (max-width:860px){
   .wrap{padding:0 22px}
   .frame{inset:8px}
-  .in{padding:34px 22px 52px}
+  .in{padding:32px 18px 50px}
   .logo{height:22px}
-  .band .label{margin-top:26px;font-size:10px;letter-spacing:.12em}
+  .status{margin-top:22px;font-size:12px}
+  .band .label{margin-top:20px;font-size:10px;letter-spacing:.12em;gap:8px}
   .band .label::before,.band .label::after{width:14px}
-  h1{font-size:34px}
+  h1{font-size:30px;line-height:1.2}
   .sub{font-size:16px}
-  .stage{width:38vw;margin-top:26px}
-  .buy{width:100%;padding:18px 14px;min-height:58px;font-size:13.5px;letter-spacing:.1em}
-  .step{align-self:stretch;margin-top:28px}
-  .tip{margin-top:24px;padding:18px 18px;font-size:15px}
-  .next{padding:64px 0 76px}
-  .grid{grid-template-columns:1fr;gap:36px}
-  .copy{position:static}
-  .copy h2{font-size:31px}
+  .video{margin-top:24px;box-shadow:0 0 0 1px rgba(194,168,108,.55),0 30px 60px -24px rgba(0,0,0,.9),0 0 46px -10px rgba(194,168,108,.3)}
+  .watch-cta{width:100%;min-width:0;margin-top:28px;padding:18px 14px;min-height:58px;font-size:13.5px;letter-spacing:.1em}
+  .fine{font-size:10.5px;letter-spacing:.12em}
+  .next{padding:60px 0 56px}
+  .grid{grid-template-columns:1fr;grid-template-areas:"head" "q" "copy"}
+  .head{text-align:center}
+  .head h2{font-size:29px}
+  .qualify{position:static;margin:26px -6px 0;padding:24px 14px}
+  .copy{margin-top:40px}
   .copy p{font-size:17px}
-  .qualify{padding:24px 14px;margin:0 -6px}
+  .checks li{font-size:16px}
+  .quotes{grid-template-columns:1fr;gap:18px;margin-top:52px}
+  .qc{padding:26px 22px 20px}
+  .qc p{font-size:17.5px}
   .ftr nav{flex-direction:column;align-items:center;gap:0}
+  .ftr p{text-align:left;font-size:12.5px}
 }
-
-/* tablets: keep the download button its desktop size instead of full-width */
 @media (min-width:481px) and (max-width:860px){
-  .buy{width:auto;min-width:340px;padding:18px 36px}
+  .watch-cta{width:auto;min-width:360px;padding:18px 36px}
+}
+@media (max-width:480px){
+  .band .label::before,.band .label::after{display:none}
 }
 </style>
 </head>
 <body>
 
+<!-- 1 · Watch -->
 <header class="band">
   <div class="cone"></div><div class="grain"></div><div class="frame"></div>
   <div class="in">
     <img class="logo" src="/assets/images/logo-light.svg" width="140" height="31" alt="Jason Moss">
-    <span class="label c">Order confirmed &middot; Two quick things</span>
-    <h1 id="headline">Your copy is ready.</h1>
-    <p class="sub">The Sales Bible is yours. It&rsquo;s on its way to your inbox.</p>
-    <div class="stage"><picture><source srcset="/sales-bible/assets/book-3d-sm.webp" type="image/webp"><img src="/sales-bible/assets/book-3d-sm.png" width="560" height="770" alt="The Sales Bible by Jason Moss"></picture><div class="floor"></div></div>
-    <div class="step">
-      <span class="step-l">1 &middot; Get your copy</span>
-      <a class="buy" href="/assets/docs/the-sales-bible-jason-moss.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v8M4.5 6.8L8 10.3l3.5-3.5M3 13.5h10"/></svg>Download the book (PDF)</a>
+    <span class="status"><i aria-hidden="true"></i>The Sales Bible is on its way to your inbox</span>
+    <span class="label c">Wait &middot; Before you close this page</span>
+    <h1>There&rsquo;s something you&rsquo;ll <em>want to hear.</em></h1>
+    <p class="sub">Your book will arrive in the next few minutes. In the meantime, watch this short video. <b>Tap it for sound.</b></p>
+    <div class="video">
+      <video class="jm-player" data-bunny-id="cdd35cd2-a127-4345-8807-89c0dbcf0e0c" data-video-id="cdd35cd2-a127-4345-8807-89c0dbcf0e0c" data-autoplay="true" data-captions="off" data-end-title="Let&rsquo;s find what&rsquo;s costing you clients." data-end-cta="Book Your Free Assessment" data-end-note="FREE · 20 MINUTES · 1-ON-1 WITH JASON" data-end-target=".watch-cta" muted playsinline crossorigin="anonymous"></video>
     </div>
-    <div class="tip"><b>Call coming up?</b>Start with Appendix A: the whole call, word for word.</div>
-    <p class="bump">Added anything else to your order? It&rsquo;s on its way to your inbox too.</p>
-    <p class="cue">Number two is the good part&hellip;<span>&darr;</span></p>
+    <a class="buy watch-cta" href="#book">Book my free assessment call</a>
+    <span class="fine">Free &middot; 20 minutes &middot; 1-on-1 with Jason</span>
   </div>
 </header>
 
-<section class="next">
+<!-- 2 · The call + qualifier -->
+<section class="next" id="book">
   <div class="wrap">
     <div class="grid">
-      <div class="copy">
-        <span class="label">2 &middot; Your next step</span>
-        <h2>Want my eyes on <em>your</em> business?</h2>
-        <p>The book will help you close more of the calls you take. But for a lot of business owners, the bigger gap is getting enough of the right calls in the first place.</p>
-        <p>Book a <strong>free 20-minute call</strong>, you and me. We&rsquo;ll uncover your #1 next step to bring more clients in the door.</p>
-        <div class="who"><div class="ph"><img src="/assets/images/graded/headshot.webp" width="402" height="402" alt="Jason Moss"></div><div><b>Jason Moss</b><span>Business coach &middot; Former Director of Sales</span></div></div>
+      <div class="head">
+        <span class="label">Your free business assessment</span>
+        <h2>Find what&rsquo;s <em>actually</em> costing you clients.</h2>
       </div>
-      <div class="qualify">
-        <h3>Two quick questions to start.</h3>
+      <div class="qualify" id="qualify">
+        <h3>Start here. It takes about a minute.</h3>
         <div data-qualify-source="sales-bible"></div>
       </div>
+      <div class="copy">
+        <p>After more than 800 sales calls of my own, here&rsquo;s what I&rsquo;ve learned: the biggest thing that decides your close rate isn&rsquo;t what you say on the call. It&rsquo;s everything that happens <strong>before</strong> someone gets on the phone with you.</p>
+        <p>That&rsquo;s hard to see from the inside. So on a free 20-minute call, one-on-one over Zoom, we&rsquo;ll:</p>
+        <ul class="checks">
+          <li>Look at your marketing, your sales, your offers and your niche</li>
+          <li>Find the gap you&rsquo;re not seeing that&rsquo;s costing you clients</li>
+          <li>Get clear on what to focus on to bring more clients in the door</li>
+        </ul>
+        <p>If I think I can help you on a deeper level, I&rsquo;ll let you know. Either way, you&rsquo;ll leave knowing exactly what to focus on next.</p>
+        <div class="who"><div class="ph"><img src="/assets/images/graded/headshot.webp" width="402" height="402" loading="lazy" alt="Jason Moss"></div><div><b>Jason Moss</b><span>Business coach &middot; Former Director of Sales</span></div></div>
+      </div>
     </div>
+
+    <div class="quotes">
+      <figure class="qc"><p>&ldquo;From $2k to $260k in sales, while cutting my hours in half.&rdquo;</p><cite><img src="/magnetic-message-training-replay/assets/images/meaghan.jpg" width="48" height="48" loading="lazy" alt="Meaghan Long"><span><b>Meaghan Long</b></span></cite></figure>
+      <figure class="qc"><p>&ldquo;Never experienced financial success like this in my life.&rdquo;</p><cite><img src="/magnetic-message-training-replay/assets/images/zach.jpg" width="48" height="48" loading="lazy" alt="Zach Bloom"><span><b>Zach Bloom</b></span></cite></figure>
+    </div>
+    <p class="note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
+
+    <p class="lost">Can&rsquo;t find the email with your book? Check your spam or promotions folder, or <a href="/assets/docs/the-sales-bible-jason-moss.pdf" target="_blank" rel="noopener">open the book here</a>.</p>
   </div>
 </section>
 
@@ -143,45 +181,14 @@ h1{margin-top:16px;font-family:'Libre Baskerville',serif;font-weight:400;font-si
     <img src="/assets/images/logo-light.svg" width="140" height="31" loading="lazy" alt="Jason Moss">
     <div>&copy; Jason Moss LLC</div>
     <nav><a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a><a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a><a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings disclaimer</a></nav>
+    <p>This website is not a part of Facebook or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
   </div>
 </footer>
 
-<script>
-  // Personalize with the buyer's first name from Spiffy's thank-you redirect
-  (function(){
-    var p = new URLSearchParams(window.location.search);
-    var name = (p.get('first_name') || p.get('name_first') || p.get('firstName') || '').trim();
-    if (!name) { var full = (p.get('name') || p.get('full_name') || '').trim(); name = full.split(/\s+/)[0] || ''; }
-    if (name && /^[A-Za-zÀ-ɏ][A-Za-zÀ-ɏ' -]{0,30}$/.test(name)) {
-      var safe = name.charAt(0).toUpperCase() + name.slice(1);
-      document.getElementById('headline').textContent = safe + ", your copy is ready.";
-    }
-  })();
-
-  // Send the ad source saved on the sales page to Kit (Spiffy drops it).
-  // Kit can take a few seconds to receive the buyer, so retry on 404.
-  (function(){
-    var saved;
-    try { saved = JSON.parse(localStorage.getItem('jm_purchase_source') || 'null'); } catch (e) {}
-    var p = new URLSearchParams(window.location.search);
-    // a '+' in an unencoded email param arrives as a space
-    var email = (p.get('email') || '').trim().replace(/ /g, '+');
-    var order = (p.get('order') || '').trim();
-    if (!saved || !email || !order) return;
-    var body = JSON.stringify({ email: email, order: order, latest_source: saved.latest_source || '', latest_ad: saved.latest_ad || '' });
-    var delays = [0, 8000, 20000, 45000];
-    (function attempt(i){
-      setTimeout(function(){
-        fetch('/.netlify/functions/submit-purchase-source', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: body })
-          .then(function(r){
-            if (r.status === 404 && i + 1 < delays.length) return attempt(i + 1);
-            if (r.ok) { try { localStorage.removeItem('jm_purchase_source'); } catch (e) {} }
-          })
-          .catch(function(){ if (i + 1 < delays.length) attempt(i + 1); });
-      }, delays[i]);
-    })(0);
-  })();
-</script>
+<!-- Bunny video tracking (50% watch webhook) + player -->
+<script src="/js/bunny-tracking.js" defer></script>
+<script src="/js/bunny-embeds.js" defer></script>
+<!-- Call qualifier: then Calendly (self-resizing iframe). Source lands on Kit (qualify_source) + Calendly utm_source. -->
 <script src="https://jasonmoss.com/qualify/embed.js" async></script>
 </body>
 </html>
