@@ -69,7 +69,7 @@ body{margin:0}
 .disclaimer{font-family:'Libre Baskerville',serif;font-style:italic;font-size:13px;color:var(--taupe)}
 /* footer */
 .ftr{background:var(--obs);color:rgba(248,246,242,.7);padding:96px 0 40px;font-size:15px}
-.ftr-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:48px}
+.ftr-grid{display:grid;grid-template-columns:1.6fr 1fr 1fr;gap:48px}
 .ftr .ftr-h{font-family:'Raleway',sans-serif;font-weight:600;font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin:0 0 20px}
 .ftr ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:12px}
 .ftr .logo{height:30px;width:auto;margin-bottom:24px}
