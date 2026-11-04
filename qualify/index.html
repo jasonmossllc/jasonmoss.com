@@ -225,6 +225,7 @@
     font-size:clamp(28px,6.6vw,38px);line-height:1.16;margin:0 0 22px;
     letter-spacing:-.01em;text-align:center;
   }
+  .book-note{margin:-12px 0 18px;text-align:center;color:var(--mocha);font-size:14px;line-height:1.5}
   /* After the calendar, where an alternative to the listed times belongs. */
   .rebook{
     margin:0 0 20px;padding:12px 16px;border-radius:10px;
@@ -749,12 +750,13 @@
         '<span><i class="nb">20 minutes</i> \u00b7 <i class="nb">on Zoom</i> \u00b7 <i class="nb">one-to-one with <b>Jason</b></i></span></p>'+
       '</div>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
+      '<p class="book-note">Open days are highlighted.</p>'+
       '<div id="cal"></div>'+
       '<p class="cal-alt">Can\u2019t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20-%20alternate%20time">Tap here to send me an email</a> and we\u2019ll arrange an alternate.</p>',
       5, false
     );
     var url = CALENDLY +
-      '?hide_gdpr_banner=1&hide_event_type_details=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=2C3F36' +
+      '?hide_gdpr_banner=1&hide_event_type_details=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=0E6B5A' +
       Object.keys(UTM).map(function(k){ return UTM[k] ? '&'+k+'='+encodeURIComponent(UTM[k]) : ''; }).join('');
     calH = 0;
     function init(){
