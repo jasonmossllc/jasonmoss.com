@@ -534,6 +534,13 @@ window.JM_BUNNY_CONFIG = {
       "captions": "en",
       "chapters": []
     },
+    "94836f92-afd6-4cb7-be7f-b8c798d47155": {
+      "videoId": "94836f92-afd6-4cb7-be7f-b8c798d47155",
+      "title": "The 7-Day Client Sprint — Day 3",
+      "poster": "thumbnail.jpg",
+      "captions": "en",
+      "chapters": []
+    },
     "3fcd4fe3-9a1b-4197-b032-2084453a4039": {
       "videoId": "3fcd4fe3-9a1b-4197-b032-2084453a4039",
       "title": "The Boutique Business Masterclass",
