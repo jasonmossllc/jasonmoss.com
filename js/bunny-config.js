@@ -233,42 +233,6 @@ window.JM_BUNNY_CONFIG = {
         }
       ]
     },
-    "f3a23a2c-e856-4dea-aaff-4c4b13eadf68": {
-      "videoId": "f3a23a2c-e856-4dea-aaff-4c4b13eadf68",
-      "title": "Resonance Masterclass (2.1)",
-      "poster": "thumbnail_c983d553.jpg",
-      "captions": "en",
-      "chapters": [
-        {
-          "time": 0,
-          "label": "Intro"
-        },
-        {
-          "time": 61,
-          "label": "What is resonance?"
-        },
-        {
-          "time": 304,
-          "label": "Marketing as conversion"
-        },
-        {
-          "time": 622,
-          "label": "Marketing as resonance"
-        },
-        {
-          "time": 1175,
-          "label": "Before vs. after example"
-        },
-        {
-          "time": 1354,
-          "label": "Open coaching"
-        },
-        {
-          "time": 1722,
-          "label": "Invitation"
-        }
-      ]
-    },
     "f5f7f71d-cf20-49d0-91bb-31050a978973": {
       "videoId": "f5f7f71d-cf20-49d0-91bb-31050a978973",
       "title": "Resonance Masterclass (2.2)",
