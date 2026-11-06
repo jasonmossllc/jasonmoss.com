@@ -119,3 +119,19 @@ test("set-aside batches can be moved back into the queue", async () => {
   assert.equal(await requeueDead(store), 2);
   assert.deepEqual([...store.m.keys()].sort(), ["q/000000000000001-a", "q/000000000000002-b"]);
 });
+
+test("tracker refusing EVERY envelope (e.g. a deploy answering 404) sets nothing aside", async () => {
+  const store = memStore({ [key(2000, 1)]: env(1), [key(1000, 2)]: env(2) });
+  const r = await drain({ store, url: "https://t.example", secret: "s", now: NOW, fetchImpl: async (u) => (u.endsWith("/healthz") ? ok() : new Response("nope", { status: 404 })) });
+  assert.equal(r.dead, 0);
+  assert.equal(r.failed, true);
+  assert.equal([...store.m.keys()].filter((k) => k.startsWith("q/")).length, 2);
+});
+
+test("set-aside envelopes are keyed by when they were set aside", async () => {
+  const store = memStore({ [key(20 * 864e5, 1)]: env(1) }); // buffered 20 days ago, parked now
+  await drain({ store, url: "https://t.example", secret: "s", now: NOW, fetchImpl: async () => ok() });
+  const dead = [...store.m.keys()].filter((k) => k.startsWith("dead/"));
+  assert.equal(dead.length, 1);
+  assert.ok(Number(dead[0].slice(5, 20)) === NOW, dead[0]);
+});

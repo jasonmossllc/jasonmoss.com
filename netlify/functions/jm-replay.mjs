@@ -84,8 +84,9 @@ export async function drain({ store, url, secret, now = Date.now(), fetchImpl = 
   if (!keys.length) return result;
   if (!url || !secret) { result.failed = true; result.misconfigured = true; return result; }
 
+  // dead/<time set aside>-<original key>: kept 7 days from when it was set aside (not from when it was buffered).
   const park = async (key, raw) => {
-    if (raw != null) await store.set(key.replace(/^q\//, "dead/"), raw);
+    if (raw != null) await store.set(`dead/${String(now).padStart(15, "0")}-${key.slice(2)}`, raw);
     await store.delete(key);
     result.dead++;
   };
@@ -135,13 +136,13 @@ export async function drain({ store, url, secret, now = Date.now(), fetchImpl = 
     for (let j = 0; j < batch.length && !outOfTime(); j++) {
       const single = await send(url, secret, [batch[j]], fetchImpl);
       if (single === "ok") { await store.delete(batchKeys[j]); result.sent++; anyOk = true; }
-      else if (single === "refused") await park(batchKeys[j], raws[j]); // the tracker says this content is bad
       else if (single === "auth") { result.failed = true; result.auth = true; break; }
-      else failedAlone.push(j);
+      else failedAlone.push(j); // refused or failing: decided below
+
     }
     if (result.auth) break;
-    // Failing ones are set aside only if others got through (so it's those envelopes, not the tracker). If nothing
-    // got through, the tracker is broken across the board: keep everything and stop.
+    // Failing or refused ones are set aside only if others got through (so it's those envelopes, not the tracker,
+    // e.g. a deploy that answers 404 to everything). If nothing got through, keep everything and stop.
     if (failedAlone.length && anyOk) { for (const j of failedAlone) await park(batchKeys[j], raws[j]); }
     else if (failedAlone.length) { result.failed = true; result.systemic = true; break; }
   }
@@ -186,9 +187,11 @@ export default async () => {
   else if (r.failed && r.oldestMs > ALERT_AFTER_MS) problem = `The Site Tracker app on Railway hasn't accepted events for ${Math.round(r.oldestMs / 3600e3)} hours${r.systemic ? " (it answers its health check but fails every event batch: check its logs and disk space)" : ""}.`;
   else if (r.dead > 5) problem = `${r.dead} event batches were refused by the tracker and set aside in Netlify Blobs (jm-buffer, dead/). They're kept 7 days; to retry them, set JM_REQUEUE_DEAD=1 on Netlify for one run.`;
   if (problem) {
-    const meta = await store.get("meta/last-alert").catch(() => null);
+    // Each kind of problem has its own once-a-day limit (a rejected secret is never hidden behind another alert).
+    const metaKey = `meta/last-alert-${r.misconfigured ? "config" : r.auth ? "auth" : r.failed ? "down" : "dead"}`;
+    const meta = await store.get(metaKey).catch(() => null);
     if (!meta || Date.now() - Number(meta) > 864e5) {
-      await store.set("meta/last-alert", String(Date.now()));
+      await store.set(metaKey, String(Date.now()));
       await sendAlert("Site Tracker can't deliver site events",
         `${problem}\n\n` +
         (r.dead > 5 && !r.failed ? "" : `Nothing is lost yet: ${r.pending} batches are waiting in Netlify and will be replayed automatically once it's fixed (they're kept 14 days).\n\n`) +

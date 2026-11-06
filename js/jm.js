@@ -29,7 +29,7 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 4;
+  var VERSION = 5;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -156,6 +156,10 @@
     while (list.length > 30) list.shift();
     writeQ(list);
   }
+  function markBeaconCopy(key) {
+    var list = readQ();
+    for (var i = 0; i < list.length; i++) if (list[i] && list[i].k === key) { list[i].b = PAGE_INST; writeQ(list); return; }
+  }
   function dropBacklog(key) {
     if (!store || !key) return;
     var list = readQ(), out = [];
@@ -165,6 +169,7 @@
   // 4xx = the server will never take this body: don't keep it. Network errors / 5xx = keep for later.
   function keepFor(status) { return !(status >= 400 && status < 500 && status !== 408 && status !== 429); }
   var inflight = {};
+  var PAGE_INST = rid(8); // this page load: copies of its own page-close beacons are resent from a later page only
   function post(p, opts) {
     opts = opts || {};
     var key = opts.key || rid(10);
@@ -181,7 +186,14 @@
     // Page closing: a beacon (the most dependable send while a page unloads). It can't report back, so the saved copy
     // stays and the next page sends it again (harmless: the tracker ignores events it already has).
     if (opts.beacon && navigator.sendBeacon) {
-      try { if (navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'text/plain' }))) { delete inflight[key]; return; } } catch (e) {}
+      try {
+        if (navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'text/plain' }))) {
+          delete inflight[key];
+          // On checkout pages nothing personal is kept in storage once it's handed to the browser to send.
+          if (isCheckoutHost) dropBacklog(key); else markBeaconCopy(key);
+          return;
+        }
+      } catch (e) {}
     }
     if (window.fetch) {
       try {
@@ -228,7 +240,7 @@
         keep.push(it);
       }
       if (keep.length !== list.length || JSON.stringify(keep) !== JSON.stringify(list)) writeQ(keep);
-      for (i = 0; i < keep.length; i++) if (!tried[keep[i].k] && !inflight[keep[i].k]) { item = keep[i]; break; }
+      for (i = 0; i < keep.length; i++) if (!tried[keep[i].k] && !inflight[keep[i].k] && keep[i].b !== PAGE_INST) { item = keep[i]; break; }
       if (!item) { draining = false; return; }
       tried[item.k] = 1;
       item.p.now = now(); // the server dates each event by its age on this clock
@@ -241,7 +253,7 @@
     drainTimer = setTimeout(safe(function () {
       drainTimer = null;
       var list = readQ();
-      for (var i = 0; i < list.length; i++) if (list[i] && !inflight[list[i].k]) { sendBacklog(); return; }
+      for (var i = 0; i < list.length; i++) if (list[i] && !inflight[list[i].k] && list[i].b !== PAGE_INST) { sendBacklog(); return; }
     }), 1000);
   }
   try { if (store) store.removeItem('jm_q'); } catch (e) {} // first version's backlog key (bodies without times)
