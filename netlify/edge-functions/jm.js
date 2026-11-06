@@ -10,7 +10,8 @@
 //     and a keyed hash of the network (for rate limits; the IP itself is never sent or stored). If Railway is slow
 //     or down, the batch goes into Netlify Blobs and netlify/functions/jm-replay.mjs replays it later.
 //  3. /_jm/c: consent for EU/UK visitors (they get a notice; nothing is tracked until they accept), and the
-//     visitor id for checkout.jasonmoss.com pages (where the script loads through GTM, not through this function).
+//     visitor id for checkout.jasonmoss.com and learn.jasonmoss.com pages (where the script loads through GTM, not
+//     through this function).
 //
 // Never breaks the site: `onError: "bypass"` serves the page untouched if this function throws, and every step
 // below fails open.
@@ -31,7 +32,7 @@ const COOKIE = "jm_vid";
 const CONSENT = "jm_consent";
 const MAX_AGE = 400 * 86400; // Chrome's ceiling for cookie lifetime
 const VID_RE = /^[A-Za-z0-9_-]{16,48}$/;
-const SCRIPT_VERSION = "6";
+const SCRIPT_VERSION = "7";
 const FORWARD_TIMEOUT_MS = 2500;
 const MAX_BODY = 256 * 1024;
 // EU + EEA + UK + Switzerland: these visitors get the consent notice.
@@ -39,7 +40,7 @@ const CONSENT_COUNTRIES = new Set(("AT BE BG HR CY CZ DK EE FI FR DE GR HU IE IT
   "IS LI NO GB CH").split(" "));
 // "bot" as a word, but not phone models like "CUBOT X30".
 const BOT_RE = /(?<!cu)bot\b|crawl|spider|slurp|facebookexternalhit|headlesschrome|lighthouse|pagespeed|python-|curl\/|wget\/|go-http-client|okhttp|scrapy|proofpoint|mimecast|barracuda|safelinks|urldefense|outlook-ios-linkscanner|ms-office/i;
-const SITE_ORIGINS = /^https:\/\/(jasonmoss\.com|www\.jasonmoss\.com|checkout\.jasonmoss\.com)$/;
+const SITE_ORIGINS = /^https:\/\/(jasonmoss\.com|www\.jasonmoss\.com|checkout\.jasonmoss\.com|learn\.jasonmoss\.com)$/;
 // This site's own Netlify hosts (deploy previews / branch deploys): <name>.netlify.app and <prefix>--<name>.netlify.app
 const PREVIEW_ORIGIN = /^https:\/\/([a-z0-9-]+--)?jasonmoss\.netlify\.app$/;
 

@@ -2,7 +2,7 @@
  * jasonmoss.com first-party visit + video tracking (Site Tracker).
  *
  * Added to every page automatically by the Netlify edge function (netlify/edge-functions/jm.js), and loaded on
- * checkout.jasonmoss.com through Google Tag Manager. Nothing is configured per page or per video:
+ * checkout.jasonmoss.com and learn.jasonmoss.com through Google Tag Manager. Nothing is configured per page or per video:
  *   - page views, active time, scroll depth           (every page)
  *   - clicks on anything clickable (links, buttons)   (every page; checkout links flagged)
  *   - every Bunny video player bunny-embeds.js makes  (real audible watch time, furthest point, 5-second watch map)
@@ -29,7 +29,7 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 6;
+  var VERSION = 7;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -315,6 +315,17 @@
     }
     return { fn: fn, ln: ln };
   }
+  // Signed in to our Learn platform: its server puts an encrypted identity token in <meta name="jm-id">. It is passed
+  // on unread (only the tracker can open it). Checked on every page view, so signing in mid-visit counts too.
+  var sentTk = '';
+  function appIdentity() {
+    var m = document.querySelector ? document.querySelector('meta[name="jm-id"]') : null;
+    var tk = m && m.getAttribute('content');
+    if (!tk || tk === sentTk || tk.length > 600) return;
+    sentTk = tk;
+    push({ t: 'id', k: 'app', tk: tk, pv: pvId });
+    flush(false);
+  }
   function identifyEmail(email, scope) {
     email = cleanEmail(email);
     if (!EMAIL_RE.test(email) || email.length > 254 || sentEmails[email]) return;
@@ -429,7 +440,7 @@
     function reset() {
       st = {
         id: rid(16), guid: guid.toLowerCase(), lid: entry.videoId && entry.videoId !== guid ? String(entry.videoId).slice(0, 64) : null,
-        tt: cfg.title || null, watched: 0, maxPos: 0, buckets: [], plays: 0, seeks: 0, ended: 0, last: null, lastChunk: -1,
+        tt: cfg.title || (entry.title ? String(entry.title).slice(0, 200) : null), watched: 0, maxPos: 0, buckets: [], plays: 0, seeks: 0, ended: 0, last: null, lastChunk: -1,
         countingPlay: false, dirty: false, sentSig: '', lastAudibleAt: -1,
       };
     }
@@ -506,6 +517,61 @@
     function restart() { report(true); var keepPlaying = st.countingPlay; reset(); st.countingPlay = keepPlaying; }
     videos.push({ report: report, restart: restart });
   }
+  // Bunny's embedded player (iframe, controlled through Bunny's player.js), as on the Learn platform. The page
+  // hands each Player over: (window.JM_EMBEDS = window.JM_EMBEDS || []).push({ player, guid, title, iframe }).
+  // It is wrapped to look like a <video> element, so the same counting rules apply (audible playback only).
+  function embedAdapter(x) {
+    var player = x.player, ls = {};
+    var v = {
+      duration: 0, currentTime: 0, paused: true, ended: false, seeking: false, muted: false, volume: 1, playbackRate: 1,
+      addEventListener: function (ev, fn) { (ls[ev] = ls[ev] || []).push(fn); },
+    };
+    function emit(ev) { var l = ls[ev] || []; for (var i = 0; i < l.length; i++) l[i](); }
+    function checkSound() {
+      try {
+        player.getMuted(safe(function (m) { var was = v.muted; v.muted = m === true || m === 'true'; if (was !== v.muted) emit('volumechange'); }));
+        player.getVolume(safe(function (vol) { var n = Number(vol); if (isFinite(n)) { var was = v.volume > 0; v.volume = n; if (was !== n > 0) emit('volumechange'); } }));
+      } catch (e) {}
+    }
+    var lastSound = 0;
+    player.on('play', safe(function () { v.paused = false; v.ended = false; checkSound(); emit('play'); }));
+    player.on('pause', safe(function () { if (v.paused) return; v.paused = true; emit('pause'); }));
+    player.on('ended', safe(function () { v.paused = true; v.ended = true; emit('ended'); }));
+    player.on('seeked', safe(function () { emit('seeking'); emit('seeked'); }));
+    player.on('timeupdate', safe(function (d) {
+      if (!d) return;
+      var sec = Number(d.seconds), du = Number(d.duration);
+      if (isFinite(du) && du > 0) v.duration = du;
+      if (!isFinite(sec)) return;
+      if (v.paused) { v.paused = false; v.ended = false; emit('play'); } // a play event Bunny didn't send
+      v.currentTime = sec;
+      if (now() - lastSound > 5000) { lastSound = now(); checkSound(); } // muted / volume changes while playing
+      emit('timeupdate');
+    }));
+    // The app removed the player (moved to another lesson): it stopped playing.
+    var gone = setInterval(safe(function () {
+      if (x.iframe && !(document.documentElement && document.documentElement.contains(x.iframe))) {
+        clearInterval(gone);
+        if (!v.paused) { v.paused = true; emit('pause'); }
+      }
+    }), 2000);
+    return v;
+  }
+  function hookEmbeds() {
+    var list = (window.JM_EMBEDS = window.JM_EMBEDS || []);
+    var take = safe(function (x) {
+      if (!x || x.__jm || !x.player || typeof x.player.on !== 'function') return;
+      x.__jm = 1;
+      trackVideo({ video: embedAdapter(x), bunnyId: x.guid, title: x.title });
+    });
+    for (var i = 0; i < list.length; i++) take(list[i]);
+    list.push = function () {
+      var r = Array.prototype.push.apply(list, arguments);
+      for (var j = 0; j < arguments.length; j++) take(arguments[j]);
+      return r;
+    };
+  }
+
   function hookVideos() {
     var JM = (window.JM_BUNNY = window.JM_BUNNY || {});
     JM.players = JM.players || [];
@@ -551,7 +617,9 @@
     lastTick = perf();
     newPageView();
     identityFromUrl();
+    appIdentity();
     hookVideos();
+    hookEmbeds();
     watchEmbeds();
     var act = safe(markHuman);
     on(document, 'pointerdown', act, true);
@@ -583,6 +651,7 @@
       pvId = rid(16);
       activeMs = 0; maxScroll = 0; sentActive = -1; sentScroll = -1;
       push({ t: 'pv', id: pvId, u: location.href, ti: document.title ? document.title.slice(0, 300) : null, r: from, f: framed ? 1 : 0 });
+      appIdentity();
       flush(false);
     });
     try {
