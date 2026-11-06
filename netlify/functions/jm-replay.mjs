@@ -168,11 +168,11 @@ export async function requeueDead(store) {
   let n = 0;
   await inChunks(blobs, async (b) => {
     const orig = origOf(b.key);
-    if (/-r[^-]*$/.test(orig) || /-r_/.test(orig)) return; // already had its second chance
+    if (/^\d{15}-r_/.test(orig)) return; // already had its second chance
     const raw = await store.get(b.key).catch(() => null);
     if (raw == null) return;
-    const [ms, rand] = [orig.slice(0, 15), orig.slice(16)];
-    await store.set(`q/${ms}-r_${rand}`, raw);
+    // A fresh queue time (the 14-day limit counts from the requeue; the envelope keeps its own event times).
+    await store.set(`q/${String(Date.now()).padStart(15, "0")}-r_${orig.slice(16)}`, raw);
     await store.delete(b.key);
     n++;
   });
@@ -180,6 +180,10 @@ export async function requeueDead(store) {
 }
 
 async function cleanDead(store, now = Date.now()) {
+  try { // per-envelope failure marks older than the 14-day queue limit
+    const { blobs } = await store.list({ prefix: "meta/fail/" });
+    await inChunks(blobs.filter((b) => now - keyTime(`q/${b.key.slice(10)}`) > DEAD_AFTER_MS + 864e5), (b) => store.delete(b.key));
+  } catch (e) { console.error("jm-replay: fail-mark cleanup", e?.message); }
   try {
     const { blobs } = await store.list({ prefix: "dead/" });
     await inChunks(blobs.filter((b) => now - keyTime(b.key) > DEAD_KEEP_MS), (b) => store.delete(b.key));

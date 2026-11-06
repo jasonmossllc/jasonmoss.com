@@ -29,7 +29,7 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 5;
+  var VERSION = 6;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -156,10 +156,13 @@
     while (list.length > 30) list.shift();
     writeQ(list);
   }
-  function markBeaconCopy(key) {
+  function markBeaconCopy(key, at) {
     var list = readQ();
-    for (var i = 0; i < list.length; i++) if (list[i] && list[i].k === key) { list[i].b = PAGE_INST; writeQ(list); return; }
+    for (var i = 0; i < list.length; i++) if (list[i] && list[i].k === key) { list[i].b = PAGE_INST; list[i].ba = at; writeQ(list); return; }
   }
+  // A page's own page-close copy waits for a later page, unless this page lives on: after a minute (or once the
+  // network is back) it resends it itself.
+  function ownFresh(it) { return it && it.b === PAGE_INST && now() - (it.ba || 0) < 60000; }
   function dropBacklog(key) {
     if (!store || !key) return;
     var list = readQ(), out = [];
@@ -190,7 +193,7 @@
         if (navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'text/plain' }))) {
           delete inflight[key];
           // On checkout pages nothing personal is kept in storage once it's handed to the browser to send.
-          if (isCheckoutHost) dropBacklog(key); else markBeaconCopy(key);
+          if (isCheckoutHost) dropBacklog(key); else markBeaconCopy(key, now());
           return;
         }
       } catch (e) {}
@@ -240,7 +243,7 @@
         keep.push(it);
       }
       if (keep.length !== list.length || JSON.stringify(keep) !== JSON.stringify(list)) writeQ(keep);
-      for (i = 0; i < keep.length; i++) if (!tried[keep[i].k] && !inflight[keep[i].k] && keep[i].b !== PAGE_INST) { item = keep[i]; break; }
+      for (i = 0; i < keep.length; i++) if (!tried[keep[i].k] && !inflight[keep[i].k] && !ownFresh(keep[i])) { item = keep[i]; break; }
       if (!item) { draining = false; return; }
       tried[item.k] = 1;
       item.p.now = now(); // the server dates each event by its age on this clock
@@ -253,7 +256,7 @@
     drainTimer = setTimeout(safe(function () {
       drainTimer = null;
       var list = readQ();
-      for (var i = 0; i < list.length; i++) if (list[i] && !inflight[list[i].k] && list[i].b !== PAGE_INST) { sendBacklog(); return; }
+      for (var i = 0; i < list.length; i++) if (list[i] && !inflight[list[i].k] && !ownFresh(list[i])) { sendBacklog(); return; }
     }), 1000);
   }
   try { if (store) store.removeItem('jm_q'); } catch (e) {} // first version's backlog key (bodies without times)
@@ -613,7 +616,13 @@
     }), FLUSH_MS);
     flush(false);
     setTimeout(safe(sendBacklog), 3000);
-    on(window, 'online', safe(function () { setTimeout(safe(sendBacklog), 1000); }));
+    on(window, 'online', safe(function () {
+      // Back online: this page's own copies may never have left (a beacon queued while offline), so they go now.
+      var list = readQ(), changed = false;
+      for (var i = 0; i < list.length; i++) if (list[i] && list[i].b === PAGE_INST) { list[i].ba = 0; changed = true; }
+      if (changed) writeQ(list);
+      setTimeout(safe(sendBacklog), 1000);
+    }));
   }
   // Pages Chrome prerenders or Safari preloads, and background tabs, only count once someone actually sees them.
   function start(serverVid) {

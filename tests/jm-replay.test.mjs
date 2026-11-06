@@ -118,7 +118,9 @@ test("set-aside batches go back under their original key, once (no key growth, n
   const { requeueDead } = await import("../netlify/functions/jm-replay.mjs");
   const store = memStore({ "dead/000000000000009-000000000000001-a": env(1), "dead/000000000000009-000000000000002-b": env(2) });
   assert.equal(await requeueDead(store), 2);
-  assert.deepEqual([...store.m.keys()].sort(), ["q/000000000000001-r_a", "q/000000000000002-r_b"]);
+  const q = [...store.m.keys()].filter((k) => k.startsWith("q/")).sort();
+  assert.equal(q.length, 2);
+  assert.ok(q.every((k) => /^q\/\d{15}-r_[ab]$/.test(k) && Date.now() - Number(k.slice(2, 17)) < 60000), q.join(",") + " (fresh queue time)");
   // Refused again: set aside under a fixed-length key, and never requeued a second time.
   await drain({ store, url: "https://t.example", secret: "s", now: NOW, fetchImpl: async (u, o) => (JSON.parse(o.body).batch.length > 1 ? new Response("x", { status: 413 }) : new Response("bad", { status: 400 })) });
   const dead = [...store.m.keys()].filter((k) => k.startsWith("dead/"));
