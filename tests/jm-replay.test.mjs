@@ -87,3 +87,35 @@ test("missing settings count as a failure (so the alert fires)", async () => {
   assert.equal(r.misconfigured, true);
   assert.equal(store.m.size, 1);
 });
+
+test("tracker healthy but failing every batch (full disk, bad deploy): nothing set aside, run fails", async () => {
+  const entries = {};
+  for (let n = 1; n <= 50; n++) entries[key(5000 - n, n)] = env(n);
+  const store = memStore(entries);
+  const r = await drain({
+    store, url: "https://t.example", secret: "s", now: NOW,
+    fetchImpl: async (u) => (u.endsWith("/healthz") ? ok() : new Response("SQLITE_FULL", { status: 500 })),
+  });
+  assert.equal(r.failed, true);
+  assert.equal(r.systemic, true);
+  assert.equal(r.dead, 0);
+  assert.equal([...store.m.keys()].filter((k) => k.startsWith("q/")).length, 50);
+});
+
+test("rejected secret: run stops at once, flagged for an immediate alert, nothing set aside", async () => {
+  const store = memStore({ [key(2000, 1)]: env(1), [key(1000, 2)]: env(2) });
+  const r = await drain({
+    store, url: "https://t.example", secret: "s", now: NOW,
+    fetchImpl: async (u) => (u.endsWith("/healthz") ? ok() : new Response("unauthorized", { status: 401 })),
+  });
+  assert.equal(r.auth, true);
+  assert.equal(r.dead, 0);
+  assert.equal(store.m.size, 2);
+});
+
+test("set-aside batches can be moved back into the queue", async () => {
+  const { requeueDead } = await import("../netlify/functions/jm-replay.mjs");
+  const store = memStore({ "dead/000000000000001-a": env(1), "dead/000000000000002-b": env(2) });
+  assert.equal(await requeueDead(store), 2);
+  assert.deepEqual([...store.m.keys()].sort(), ["q/000000000000001-a", "q/000000000000002-b"]);
+});

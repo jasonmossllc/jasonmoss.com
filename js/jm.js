@@ -20,15 +20,16 @@
  *     count once they're actually shown. Back/forward-cache restores count as a new view.
  *   - Video updates carry the full state of that viewing, so a lost or repeated update can't lose or double-count.
  *     Only audible playback counts: muted autoplay, seeks and replays don't add watch time or "furthest point".
- *   - Sends use sendBeacon on page hide (survives closing the tab), fetch keepalive otherwise; anything that fails
- *     waits in localStorage and goes out on the next page (with its original time).
+ *   - Every batch is saved in localStorage first and removed once the site confirms it. Sends use fetch, and
+ *     sendBeacon while the page closes; anything unconfirmed goes out again from a later page (with its original
+ *     time), and the tracker ignores events it already has.
  */
 (function () {
   'use strict';
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 2;
+  var VERSION = 3;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -103,7 +104,7 @@
   var vid = null, vidOrigin = 'cookie', prevVid = null;
   function resolveVid(serverVid) {
     var c = getCookie('jm_vid') || serverVid || null;
-    var backup = store ? store.getItem(STORE_VID) : null;
+    var backup = store && !isCheckoutHost ? store.getItem(STORE_VID) : null;
     if (c && ID_RE.test(c)) {
       vid = c;
       if (backup && backup !== c && ID_RE.test(backup)) prevVid = backup; // same browser, older id: server re-joins them
@@ -112,7 +113,8 @@
     } else {
       vid = 's' + rid(21); vidOrigin = 'storage';
     }
-    try { if (store) store.setItem(STORE_VID, vid); } catch (e) {}
+    // Not on checkout pages: the id comes from the site each time there, and other scripts on those pages could read it.
+    try { if (store && !isCheckoutHost) store.setItem(STORE_VID, vid); } catch (e) {}
   }
 
   // ------------------------------------------------------------------ queue + transport
@@ -130,37 +132,63 @@
     if (prevVid) p.pv = prevVid; // sent with every batch from this page, so a lost beacon can't lose the re-join
     return p;
   }
-  // Failed sends wait in localStorage (events keep their own times; the batch's age keeps its first-saved time).
-  function saveBacklog(p, savedAt) {
+  // Every batch is written to localStorage BEFORE it is sent and removed only once the site confirms it (2xx), so
+  // nothing is lost when a page closes mid-send, the network drops, or the site is unreachable. A batch that never
+  // got its answer is sent again from a later page; the tracker ignores events it already has (each has an id).
+  function readQ() {
+    if (!store) return [];
+    try { var l = JSON.parse(store.getItem(STORE_Q) || '[]'); return l && l.push ? l : []; } catch (e) { return []; }
+  }
+  function writeQ(list) {
     if (!store) return;
     try {
-      var list = JSON.parse(store.getItem(STORE_Q) || '[]');
-      list.push({ t: savedAt || now(), p: p });
-      while (list.length > 30) list.shift();
-      store.setItem(STORE_Q, JSON.stringify(list));
+      if (list.length) store.setItem(STORE_Q, JSON.stringify(list)); else store.removeItem(STORE_Q);
     } catch (e) {
-      try { store.removeItem(STORE_Q); } catch (x) {}
+      // Storage full: keep the newest half rather than nothing.
+      try { store.setItem(STORE_Q, JSON.stringify(list.slice(Math.floor(list.length / 2)))); } catch (x) { try { store.removeItem(STORE_Q); } catch (y) {} }
     }
+  }
+  function saveBacklog(p, savedAt, key) {
+    if (!store) return;
+    var list = readQ();
+    for (var i = 0; i < list.length; i++) if (list[i] && list[i].k === key) return;
+    list.push({ k: key, t: savedAt || now(), p: p });
+    while (list.length > 30) list.shift();
+    writeQ(list);
+  }
+  function dropBacklog(key) {
+    if (!store || !key) return;
+    var list = readQ(), out = [];
+    for (var i = 0; i < list.length; i++) if (!(list[i] && list[i].k === key)) out.push(list[i]);
+    if (out.length !== list.length) writeQ(out);
   }
   // 4xx = the server will never take this body: don't keep it. Network errors / 5xx = keep for later.
   function keepFor(status) { return !(status >= 400 && status < 500 && status !== 408 && status !== 429); }
+  var inflight = {};
   function post(p, opts) {
     opts = opts || {};
+    var key = opts.key || rid(10);
     var body = JSON.stringify(p);
+    if (!opts.key) saveBacklog(p, now(), key); // new batch: saved first (a backlog item is already saved)
+    inflight[key] = 1;
+    function settle(ok, status) {
+      delete inflight[key];
+      var finished = ok || !keepFor(status); // delivered, or refused for good: either way it's done
+      if (finished) dropBacklog(key);
+      if (opts.done) opts.done(finished);
+      else if (ok) drainSoon();
+    }
+    // Page closing: a beacon (the most dependable send while a page unloads). It can't report back, so the saved copy
+    // stays and the next page sends it again (harmless: the tracker ignores events it already has).
     if (opts.beacon && navigator.sendBeacon) {
-      try {
-        if (navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'text/plain' }))) return;
-      } catch (e) {}
+      try { if (navigator.sendBeacon(ENDPOINT, new Blob([body], { type: 'text/plain' }))) { delete inflight[key]; return; } } catch (e) {}
     }
     if (window.fetch) {
       try {
         window.fetch(ENDPOINT, {
           method: 'POST', body: body, keepalive: !opts.noKeepalive && body.length < 30000, credentials: sameOrigin ? 'same-origin' : 'include',
           headers: { 'Content-Type': 'text/plain' },
-        }).then(function (r) {
-          if (!r.ok && keepFor(r.status)) saveBacklog(p, opts.savedAt);
-          if (opts.done) opts.done();
-        }, function () { saveBacklog(p, opts.savedAt); if (opts.done) opts.done(); });
+        }).then(function (r) { settle(r.ok, r.status); }, function () { settle(false, 0); });
         return;
       } catch (e) {}
     }
@@ -171,11 +199,10 @@
       x.setRequestHeader('Content-Type', 'text/plain');
       x.onreadystatechange = function () {
         if (x.readyState !== 4) return;
-        if (!(x.status >= 200 && x.status < 300) && keepFor(x.status)) saveBacklog(p, opts.savedAt);
-        if (opts.done) opts.done();
+        settle(x.status >= 200 && x.status < 300, x.status);
       };
       x.send(body);
-    } catch (e) { saveBacklog(p, opts.savedAt); }
+    } catch (e) { settle(false, 0); }
   }
   var started = false;
   function flush(beacon) {
@@ -183,20 +210,39 @@
     snapshot();
     while (q.length) post(payloadObj(q.splice(0, 100)), { beacon: beacon });
   }
-  // Old batches go out one at a time, without keepalive (its small per-page budget is kept for page-hide sends).
+  // Saved batches go out one at a time, without keepalive (its small per-page budget is kept for page-hide sends).
+  // Each is removed from storage only after the site confirms it; if this page closes mid-way, the rest wait.
+  var draining = false, drainTimer = null;
   function sendBacklog() {
-    if (!store) return;
-    var list;
-    try { list = JSON.parse(store.getItem(STORE_Q) || '[]'); store.removeItem(STORE_Q); } catch (e) { return; }
+    if (!store || draining || !started) return;
+    draining = true;
+    var tried = {};
     var cutoff = now() - 7 * 864e5;
-    var i = 0;
-    (function next() {
-      while (i < list.length && !(list[i] && list[i].t > cutoff && list[i].p && list[i].p.e)) i++;
-      if (i >= list.length) return;
-      var item = list[i++];
+    (function next(ok) {
+      if (ok === false) { draining = false; return; } // still can't get through: try again later
+      var list = readQ(), keep = [], item = null, i;
+      for (i = 0; i < list.length; i++) {
+        var it = list[i];
+        if (!(it && it.t > cutoff && it.p && it.p.e)) continue; // too old or unreadable: dropped
+        if (!it.k) it.k = rid(10);
+        keep.push(it);
+      }
+      if (keep.length !== list.length || JSON.stringify(keep) !== JSON.stringify(list)) writeQ(keep);
+      for (i = 0; i < keep.length; i++) if (!tried[keep[i].k] && !inflight[keep[i].k]) { item = keep[i]; break; }
+      if (!item) { draining = false; return; }
+      tried[item.k] = 1;
       item.p.now = now(); // the server dates each event by its age on this clock
-      post(item.p, { noKeepalive: true, savedAt: item.t, done: next });
+      post(item.p, { noKeepalive: true, key: item.k, done: next });
     })();
+  }
+  // After a send succeeds, anything still waiting goes out too (e.g. a batch saved while the network was down).
+  function drainSoon() {
+    if (drainTimer || draining || !store) return;
+    drainTimer = setTimeout(safe(function () {
+      drainTimer = null;
+      var list = readQ();
+      for (var i = 0; i < list.length; i++) if (list[i] && !inflight[list[i].k]) { sendBacklog(); return; }
+    }), 1000);
   }
   try { if (store) store.removeItem('jm_q'); } catch (e) {} // first version's backlog key (bodies without times)
 
@@ -509,6 +555,35 @@
       if (document.hidden) { commitPendingEmail(); flush(true); }
     }));
     on(window, 'pagehide', safe(function () { commitPendingEmail(); flush(true); }));
+    // In-page navigation (single-page apps such as Spiffy's checkout -> upsell -> thank-you steps): a new URL path
+    // is a new page view. Hash-only changes (#section links) are not.
+    var lastPath = location.pathname + location.search;
+    var routeChanged = safe(function () {
+      var p = location.pathname + location.search;
+      if (p === lastPath) return;
+      var from = location.protocol + '//' + location.host + lastPath;
+      lastPath = p;
+      commitPendingEmail();
+      flush(false); // close out the previous view's time and scroll
+      pvId = rid(16);
+      activeMs = 0; maxScroll = 0; sentActive = -1; sentScroll = -1;
+      push({ t: 'pv', id: pvId, u: location.href, ti: document.title ? document.title.slice(0, 300) : null, r: from, f: framed ? 1 : 0 });
+      flush(false);
+    });
+    try {
+      var wrap = function (name) {
+        var orig = history[name];
+        if (typeof orig !== 'function') return;
+        history[name] = function () {
+          var r = orig.apply(this, arguments);
+          setTimeout(routeChanged, 0); // after the app has updated the title
+          return r;
+        };
+      };
+      wrap('pushState');
+      wrap('replaceState');
+    } catch (e) {}
+    on(window, 'popstate', function () { setTimeout(routeChanged, 0); });
     // Back/forward cache: the page comes back exactly as it was left. That's a new view of it.
     on(window, 'pageshow', safe(function (ev) {
       if (!ev || !ev.persisted) return;
@@ -526,6 +601,7 @@
     }), FLUSH_MS);
     flush(false);
     setTimeout(safe(sendBacklog), 3000);
+    on(window, 'online', safe(function () { setTimeout(safe(sendBacklog), 1000); }));
   }
   // Pages Chrome prerenders or Safari preloads, and background tabs, only count once someone actually sees them.
   function start(serverVid) {
@@ -558,7 +634,7 @@
     box.id = 'jm-consent';
     box.setAttribute('role', 'dialog');
     box.setAttribute('aria-label', 'Cookie choice');
-    box.innerHTML = '<p>I use a first-party cookie to understand which pages and videos are useful, so I can make better ones. No ads, no selling data. <a href="https://jasonmoss.com/privacy/">Privacy</a></p>'
+    box.innerHTML = '<p>I&rsquo;d like to use a first-party cookie to see which pages and videos are useful, so I can make better ones. <a href="https://jasonmoss.com/privacy/">Privacy</a></p>'
       + '<div class="jm-b"><button type="button" class="jm-y">Accept</button><button type="button" class="jm-n">No thanks</button></div>';
     function decide(yes) {
       try { box.parentNode.removeChild(box); } catch (e) {}

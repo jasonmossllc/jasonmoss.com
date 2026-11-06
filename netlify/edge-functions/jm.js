@@ -31,7 +31,7 @@ const COOKIE = "jm_vid";
 const CONSENT = "jm_consent";
 const MAX_AGE = 400 * 86400; // Chrome's ceiling for cookie lifetime
 const VID_RE = /^[A-Za-z0-9_-]{16,48}$/;
-const SCRIPT_VERSION = "2";
+const SCRIPT_VERSION = "3";
 const FORWARD_TIMEOUT_MS = 2500;
 const MAX_BODY = 256 * 1024;
 // EU + EEA + UK + Switzerland: these visitors get the consent notice.
@@ -98,12 +98,29 @@ function cors(req, headers) {
   return headers;
 }
 
+// The network an address belongs to: the IPv4 address itself, or the IPv6 /64 (with "::" expanded first, so every
+// spelling of one /64 is the same key).
+export function netOf(raw) {
+  let ip = String(raw || "").trim().toLowerCase().split("%")[0];
+  const mapped = /^::ffff:(\d+\.\d+\.\d+\.\d+)$/.exec(ip);
+  if (mapped) return mapped[1];
+  if (!ip.includes(":")) return ip;
+  const parts = (x) => (x ? x.split(":") : []);
+  let groups;
+  if (ip.includes("::")) {
+    const [head, tail] = ip.split("::");
+    const h = parts(head), t = parts(tail);
+    groups = [...h, ...Array(Math.max(0, 8 - h.length - t.length)).fill("0"), ...t];
+  } else groups = parts(ip);
+  return groups.slice(0, 4).map((g) => g.replace(/^0+(?=.)/, "") || "0").join(":") + "::/64";
+}
+
 // Keyed hash of the client network (for per-network rate limits at the tracker). Never reversible to the IP.
 async function networkKey(context, secret) {
   try {
     const ip = String(context?.ip || "");
     if (!ip || !secret) return null;
-    const net = ip.includes(":") ? ip.split(":").slice(0, 4).join(":") : ip; // IPv6: the /64
+    const net = netOf(ip);
     const key = await crypto.subtle.importKey("raw", new TextEncoder().encode(secret), { name: "HMAC", hash: "SHA-256" }, false, ["sign"]);
     const sig = new Uint8Array(await crypto.subtle.sign("HMAC", key, new TextEncoder().encode(`net:${net}`)));
     return Array.from(sig.slice(0, 12), (b) => b.toString(16).padStart(2, "0")).join("");
@@ -116,8 +133,31 @@ async function networkKey(context, secret) {
 function bufferStore() {
   try { return getStore({ name: "jm-buffer", consistency: "strong" }); } catch { return getStore("jm-buffer"); }
 }
+// Personal details that can ride along in a page URL (?email=, Kit ids, names...). The tracker strips them too; this
+// keeps them out of the outage buffer as well.
+const DROP_PARAMS = /^(email|e-mail|mail|ck_subscriber_id|subscriber_id|token|code|key|password|pass|phone|tel|first_name|last_name|name|fname|lname)$/i;
+export function scrubUrl(raw) {
+  if (typeof raw !== "string" || !raw.includes("?")) return raw;
+  try {
+    const u = new URL(raw);
+    let changed = false;
+    for (const k of [...u.searchParams.keys()]) if (DROP_PARAMS.test(k)) { u.searchParams.delete(k); changed = true; }
+    return changed ? u.toString() : raw;
+  } catch { return raw; }
+}
+function scrubEnvelope(envelope) {
+  const ev = envelope?.p?.e;
+  if (!Array.isArray(ev)) return envelope;
+  for (const e of ev) {
+    if (!e || typeof e !== "object") continue;
+    if (typeof e.u === "string") e.u = scrubUrl(e.u);
+    if (typeof e.r === "string") e.r = scrubUrl(e.r);
+  }
+  return envelope;
+}
 async function bufferEnvelope(envelope) {
   const store = bufferStore();
+  scrubEnvelope(envelope);
   const key = `q/${String(Date.now()).padStart(15, "0")}-${newId().slice(0, 10)}`;
   await store.set(key, JSON.stringify(envelope));
 }
@@ -218,6 +258,9 @@ export default async function handler(req, context) {
   if (url.pathname === "/_jm/c") return handleConsent(req, context);
   if (req.method !== "GET") return; // forms, HEAD etc.: untouched
 
+  // Revalidation is answered here (below): the browser's tag is this function's own (W/"<page tag>-jm<version><mode>"),
+  // which the original never matches, so the page always comes back whole and the tag can be added.
+  const inm = req.headers.get("if-none-match");
   const res = await context.next();
   const type = res.headers.get("content-type") || "";
   if (!type.includes("text/html") || res.status !== 200) return res;
@@ -226,15 +269,22 @@ export default async function handler(req, context) {
   try { html = await res.text(); } catch { return; }
   const headers = new Headers(res.headers);
   headers.delete("content-length");
+  headers.delete("accept-ranges"); // the page is rewritten here, so byte ranges of the original don't apply
   try {
     const mode = consentState(req, context);
     if (!html.includes("/js/jm.js")) {
-      const tag = `<script src="/js/jm.js?v=${SCRIPT_VERSION}" data-c="${mode}" defer></script>`;
+      // async: the page never waits for this script (videos, forms and other scripts start as before).
+      const tag = `<script src="/js/jm.js?v=${SCRIPT_VERSION}" data-c="${mode}" async></script>`;
       const head = html.search(/<\/head\s*>/i);
       const body = head >= 0 ? -1 : html.search(/<\/body\s*>/i);
       if (head >= 0) html = `${html.slice(0, head)}${tag}${html.slice(head)}`;
       else if (body >= 0) html = `${html.slice(0, body)}${tag}${html.slice(body)}`;
     }
+    // A version tag for this exact output (the page's own tag + the script mode), so returning visitors and crawlers
+    // can get a quick "not changed" answer.
+    const originTag = (res.headers.get("etag") || "").replace(/^W\//, "").replace(/"/g, "");
+    const etag = originTag ? `W/"${originTag}-jm${SCRIPT_VERSION}${mode}"` : null;
+    if (etag) headers.set("ETag", etag); else headers.delete("etag");
     if (!BOT_RE.test(req.headers.get("user-agent") || "")) {
       let personal = false;
       if (mode === "g") {
@@ -245,11 +295,12 @@ export default async function handler(req, context) {
       }
       const choice = readCookie(req, CONSENT);
       if (choice === "1" || choice === "0") { setCookie(headers, url, CONSENT, choice); personal = true; }
-      if (personal) {
-        // This response now carries a per-visitor cookie: no shared cache may store it.
-        headers.delete("etag");
-        headers.set("Cache-Control", "private, no-cache");
-      }
+      // This response now carries a per-visitor cookie: no shared cache may store it (browsers revalidate each time).
+      if (personal) headers.set("Cache-Control", "private, no-cache");
+    }
+    if (etag && inm && inm.split(",").some((t) => t.trim() === etag)) {
+      for (const h of ["content-type", "content-encoding", "content-length"]) headers.delete(h);
+      return new Response(null, { status: 304, headers });
     }
   } catch (e) {
     console.error("jm inject failed", e?.message);
