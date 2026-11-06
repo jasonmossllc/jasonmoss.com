@@ -29,7 +29,7 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 7;
+  var VERSION = 8;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -74,9 +74,25 @@
     }
     return null;
   }
+  // The words as written (innerText would return CSS-uppercased "ENROLL NOW"), with a space between
+  // separately laid-out parts (badge "A" + "Yes", "$1K" + block "per month") that textContent glues together.
+  function words(node, out) {
+    if (node.nodeType === 3) { out.push(node.data); return; }
+    if (node.nodeType !== 1 || /^(SCRIPT|STYLE|TEMPLATE|NOSCRIPT)$/.test(node.tagName)) return;
+    if (node.tagName === 'BR') { out.push(' '); return; }
+    var d = 'inline';
+    try { d = window.getComputedStyle(node).display; } catch (e) {}
+    if (d === 'none') return;
+    var gap = d !== 'inline' && d !== 'contents';
+    if (gap) out.push(' ');
+    for (var c = node.firstChild; c; c = c.nextSibling) words(c, out);
+    if (gap) out.push(' ');
+  }
   function text(el) {
-    // textContent = the words as written (innerText would return CSS-uppercased "ENROLL NOW").
-    var t = (el.getAttribute && (el.getAttribute('aria-label') || el.getAttribute('title'))) || el.textContent || el.innerText || el.value || '';
+    var shown = '';
+    try { var parts = []; for (var c = el.firstChild; c; c = c.nextSibling) words(c, parts); shown = parts.join(''); } catch (e) {}
+    if (!/\S/.test(shown)) shown = el.textContent || el.innerText || '';
+    var t = (el.getAttribute && (el.getAttribute('aria-label') || el.getAttribute('title'))) || shown || el.value || '';
     if (!t && el.querySelector) { var img = el.querySelector('img[alt]'); if (img) t = img.getAttribute('alt'); }
     return String(t).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '').slice(0, 120);
   }
