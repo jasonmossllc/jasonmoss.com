@@ -29,7 +29,7 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 3;
+  var VERSION = 4;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -703,11 +703,19 @@
   // field are picked up automatically).
   window.JM_TRACK = { identify: safe(function (email) { if (started) identifyEmail(email, null); }) };
 
+  // Nothing runs while the page is still being parsed: the tracker starts right after (DOMContentLoaded), so it
+  // never delays the page's own scripts, videos or forms.
+  function init() {
+    try {
+      if (navigator.webdriver) return; // automated browsers (crawlers, test robots)
+      if (consentMode === 'g') start();
+      else if (consentMode === 'r') askConsent();
+      else if (consentMode === 'n') return;
+      else checkThenStart();
+    } catch (e) { /* never break the page */ }
+  }
   try {
-    if (navigator.webdriver) return; // automated browsers (crawlers, test robots)
-    if (consentMode === 'g') start();
-    else if (consentMode === 'r') askConsent();
-    else if (consentMode === 'n') return;
-    else checkThenStart();
+    if (document.readyState === 'loading') on(document, 'DOMContentLoaded', safe(init));
+    else init();
   } catch (e) { /* never break the page */ }
 })();
