@@ -28,6 +28,20 @@ test("delivers everything oldest-first and empties the buffer", async () => {
   assert.ok(sent.flat().every((e) => e.rp === 1), "marked as replayed");
 });
 
+test("one envelope that keeps failing while the tracker is healthy is set aside; the rest go through", async () => {
+  const store = memStore({ [key(3000, 1)]: env(1), [key(2000, 2)]: env(2), [key(1000, 3)]: env(3) });
+  const r = await drain({
+    store, url: "https://t.example", secret: "s", now: NOW,
+    fetchImpl: async (u, o) => {
+      if (u.endsWith("/healthz")) return ok();
+      const batch = JSON.parse(o.body).batch;
+      return batch.some((e) => e.vc.startsWith("vid2")) ? new Response("err", { status: 500 }) : ok();
+    },
+  });
+  assert.equal(r.sent, 2);
+  assert.equal(r.dead, 1);
+});
+
 test("tracker down: nothing deleted, run reports failure", async () => {
   const store = memStore({ [key(1000, 1)]: env(1) });
   const r = await drain({ store, url: "https://t.example", secret: "s", now: NOW, fetchImpl: async () => { throw new Error("ECONNREFUSED"); } });

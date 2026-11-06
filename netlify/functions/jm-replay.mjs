@@ -54,6 +54,15 @@ async function send(url, secret, batch, fetchImpl) {
   }
 }
 
+async function healthy(url, fetchImpl) {
+  try {
+    const res = await fetchImpl(`${url.replace(/\/$/, "")}/healthz`, { signal: AbortSignal.timeout(5000) });
+    return res.ok;
+  } catch {
+    return false;
+  }
+}
+
 export async function drain({ store, url, secret, now = Date.now(), fetchImpl = fetch, budgetMs = RUN_BUDGET_MS }) {
   const started = Date.now();
   const outOfTime = () => Date.now() - started > budgetMs;
@@ -100,12 +109,13 @@ export async function drain({ store, url, secret, now = Date.now(), fetchImpl = 
       result.sent += batchKeys.length;
       continue;
     }
-    if (r === "down") { result.failed = true; break; } // tracker unreachable: oldest-first next run
-    // Refused as a batch: try each envelope alone; set aside only the ones refused on their own.
+    if (r === "down" && !(await healthy(url, fetchImpl))) { result.failed = true; break; } // tracker unreachable: oldest-first next run
+    // Refused (or failing while the tracker is otherwise healthy): try each envelope alone; set aside only the ones
+    // that fail on their own, so one bad envelope can never block the queue (they're kept 30 days in dead/).
     for (let j = 0; j < batch.length && !outOfTime(); j++) {
       const single = await send(url, secret, [batch[j]], fetchImpl);
       if (single === "ok") { await store.delete(batchKeys[j]); result.sent++; }
-      else if (single === "refused") await park(batchKeys[j], raws[j]);
+      else if (single === "refused" || (await healthy(url, fetchImpl))) await park(batchKeys[j], raws[j]);
       else { result.failed = true; break; }
     }
     if (result.failed) break;
