@@ -28,18 +28,19 @@ test("delivers everything oldest-first and empties the buffer", async () => {
   assert.ok(sent.flat().every((e) => e.rp === 1), "marked as replayed");
 });
 
-test("one envelope that keeps failing while the tracker is healthy is set aside; the rest go through", async () => {
+test("one envelope that keeps failing while the tracker is healthy is set aside on its second failing run; the rest go through", async () => {
   const store = memStore({ [key(3000, 1)]: env(1), [key(2000, 2)]: env(2), [key(1000, 3)]: env(3) });
-  const r = await drain({
-    store, url: "https://t.example", secret: "s", now: NOW,
-    fetchImpl: async (u, o) => {
-      if (u.endsWith("/healthz")) return ok();
-      const batch = JSON.parse(o.body).batch;
-      return batch.some((e) => e.vc.startsWith("vid2")) ? new Response("err", { status: 500 }) : ok();
-    },
-  });
+  const fetchImpl = async (u, o) => {
+    if (u.endsWith("/healthz")) return ok();
+    const batch = JSON.parse(o.body).batch;
+    return batch.some((e) => e.vc.startsWith("vid2")) ? new Response("err", { status: 500 }) : ok();
+  };
+  let r = await drain({ store, url: "https://t.example", secret: "s", now: NOW, fetchImpl });
   assert.equal(r.sent, 2);
-  assert.equal(r.dead, 1);
+  assert.equal(r.dead, 0, "one failing run could be a blip: kept");
+  store.m.set(key(500, 4), env(4)); // newer traffic gets buffered next to it
+  r = await drain({ store, url: "https://t.example", secret: "s", now: NOW + 300000, fetchImpl });
+  assert.equal(r.dead, 1, "failed again on the next run: set aside");
 });
 
 test("tracker down: nothing deleted, run reports failure", async () => {
@@ -113,11 +114,16 @@ test("rejected secret: run stops at once, flagged for an immediate alert, nothin
   assert.equal(store.m.size, 2);
 });
 
-test("set-aside batches can be moved back into the queue", async () => {
+test("set-aside batches go back under their original key, once (no key growth, no endless loop)", async () => {
   const { requeueDead } = await import("../netlify/functions/jm-replay.mjs");
-  const store = memStore({ "dead/000000000000001-a": env(1), "dead/000000000000002-b": env(2) });
+  const store = memStore({ "dead/000000000000009-000000000000001-a": env(1), "dead/000000000000009-000000000000002-b": env(2) });
   assert.equal(await requeueDead(store), 2);
-  assert.deepEqual([...store.m.keys()].sort(), ["q/000000000000001-a", "q/000000000000002-b"]);
+  assert.deepEqual([...store.m.keys()].sort(), ["q/000000000000001-r_a", "q/000000000000002-r_b"]);
+  // Refused again: set aside under a fixed-length key, and never requeued a second time.
+  await drain({ store, url: "https://t.example", secret: "s", now: NOW, fetchImpl: async (u, o) => (JSON.parse(o.body).batch.length > 1 ? new Response("x", { status: 413 }) : new Response("bad", { status: 400 })) });
+  const dead = [...store.m.keys()].filter((k) => k.startsWith("dead/"));
+  assert.ok(dead.every((k) => k.length === "dead/".length + 15 + 1 + 15 + 1 + 3), dead.join(","));
+  assert.equal(await requeueDead(store), 0);
 });
 
 test("tracker refusing EVERY envelope (e.g. a deploy answering 404) sets nothing aside", async () => {

@@ -31,6 +31,8 @@ const DEAD_KEEP_MS = 7 * 864e5;
 const ALERT_AFTER_MS = 6 * 3600e3;
 
 const keyTime = (key) => Number((/^(?:q|dead)\/(\d+)-/.exec(key) || [])[1]) || 0;
+// The original buffered key ("<ms>-<rand>") inside a q/ or dead/ key, so keys never grow however often they move.
+const origOf = (key) => { const m = /(\d{15}-[^/]+)$/.exec(key.replace(/^dead\/\d{15}-/, "")); return m ? m[1] : key.replace(/^(q|dead)\//, ""); };
 
 async function sendAlert(subject, text) {
   const token = process.env.POSTMARK_TOKEN;
@@ -86,10 +88,16 @@ export async function drain({ store, url, secret, now = Date.now(), fetchImpl = 
 
   // dead/<time set aside>-<original key>: kept 7 days from when it was set aside (not from when it was buffered).
   const park = async (key, raw) => {
-    if (raw != null) await store.set(`dead/${String(now).padStart(15, "0")}-${key.slice(2)}`, raw);
-    await store.delete(key);
-    result.dead++;
+    try {
+      if (raw != null) await store.set(`dead/${String(now).padStart(15, "0")}-${origOf(key)}`, raw);
+      await store.delete(key);
+      result.dead++;
+    } catch (e) { console.error("jm-replay: could not set aside", key, e?.message); } // never stops the run or its alert
   };
+  // An envelope that fails on its own (others in its batch got through) is only set aside after failing on two
+  // separate runs: a short tracker blip during the retry never sets good events aside.
+  const failMark = (key) => `meta/fail/${origOf(key)}`;
+  const failedBefore = async (key) => !!(await store.get(failMark(key)).catch(() => null));
 
   let i = 0;
   const cache = new Map(); // key -> raw (read ahead, PARALLEL at a time)
@@ -137,25 +145,34 @@ export async function drain({ store, url, secret, now = Date.now(), fetchImpl = 
       const single = await send(url, secret, [batch[j]], fetchImpl);
       if (single === "ok") { await store.delete(batchKeys[j]); result.sent++; anyOk = true; }
       else if (single === "auth") { result.failed = true; result.auth = true; break; }
-      else failedAlone.push(j); // refused or failing: decided below
+      else failedAlone.push({ j, why: single }); // refused or failing: decided below
 
     }
     if (result.auth) break;
     // Failing or refused ones are set aside only if others got through (so it's those envelopes, not the tracker,
     // e.g. a deploy that answers 404 to everything). If nothing got through, keep everything and stop.
-    if (failedAlone.length && anyOk) { for (const j of failedAlone) await park(batchKeys[j], raws[j]); }
-    else if (failedAlone.length) { result.failed = true; result.systemic = true; break; }
+    if (failedAlone.length && anyOk) {
+      for (const { j, why } of failedAlone) {
+        if (why === "refused" || await failedBefore(batchKeys[j])) { await park(batchKeys[j], raws[j]); await store.delete(failMark(batchKeys[j])).catch(() => {}); }
+        else { await store.set(failMark(batchKeys[j]), String(now)).catch(() => {}); result.retryLater = (result.retryLater || 0) + 1; }
+      }
+    } else if (failedAlone.length) { result.failed = true; result.systemic = true; break; }
   }
   return result;
 }
 
+// Moves set-aside envelopes back into the queue under their ORIGINAL key. Each envelope gets one second chance
+// (marked "r"): one that is set aside again stays in dead/ and expires instead of looping forever.
 export async function requeueDead(store) {
   const { blobs } = await store.list({ prefix: "dead/" });
   let n = 0;
   await inChunks(blobs, async (b) => {
+    const orig = origOf(b.key);
+    if (/-r[^-]*$/.test(orig) || /-r_/.test(orig)) return; // already had its second chance
     const raw = await store.get(b.key).catch(() => null);
     if (raw == null) return;
-    await store.set(b.key.replace(/^dead\//, "q/"), raw);
+    const [ms, rand] = [orig.slice(0, 15), orig.slice(16)];
+    await store.set(`q/${ms}-r_${rand}`, raw);
     await store.delete(b.key);
     n++;
   });
@@ -181,14 +198,18 @@ export default async () => {
   if (r.pending) console.log("jm-replay", JSON.stringify(r));
   await cleanDead(store);
 
-  let problem = null;
-  if (r.misconfigured) problem = "The Netlify settings TRACKER_URL / TRACKER_INGEST_SECRET are missing, so site events can't be delivered.";
-  else if (r.auth) problem = "The tracker app on Railway is rejecting the shared secret (TRACKER_INGEST_SECRET on Netlify must match INGEST_SECRET on Railway).";
-  else if (r.failed && r.oldestMs > ALERT_AFTER_MS) problem = `The Site Tracker app on Railway hasn't accepted events for ${Math.round(r.oldestMs / 3600e3)} hours${r.systemic ? " (it answers its health check but fails every event batch: check its logs and disk space)" : ""}.`;
-  else if (r.dead > 5) problem = `${r.dead} event batches were refused by the tracker and set aside in Netlify Blobs (jm-buffer, dead/). They're kept 7 days; to retry them, set JM_REQUEUE_DEAD=1 on Netlify for one run.`;
+  let problem = null, kind = null;
+  if (r.misconfigured) { kind = "config"; problem = "The Netlify settings TRACKER_URL / TRACKER_INGEST_SECRET are missing, so site events can't be delivered."; }
+  else if (r.auth) { kind = "auth"; problem = "The tracker app on Railway is rejecting the shared secret (TRACKER_INGEST_SECRET on Netlify must match INGEST_SECRET on Railway)."; }
+  else if (r.failed && r.oldestMs > ALERT_AFTER_MS) {
+    kind = "down";
+    problem = r.pending === 1
+      ? "One buffered event batch has been failing at the Site Tracker for 6+ hours (the tracker itself may be fine). It's retried automatically and set aside after 14 days."
+      : `The Site Tracker app on Railway hasn't accepted events for ${Math.round(r.oldestMs / 3600e3)} hours${r.systemic ? " (it answers its health check but fails every event batch: check its logs and disk space)" : ""}.`;
+  } else if (r.dead > 5) { kind = "dead"; problem = `${r.dead} event batches were refused by the tracker and set aside in Netlify Blobs (jm-buffer, dead/). They're kept 7 days; to retry them, set JM_REQUEUE_DEAD=1 on Netlify for one run.`; }
   if (problem) {
     // Each kind of problem has its own once-a-day limit (a rejected secret is never hidden behind another alert).
-    const metaKey = `meta/last-alert-${r.misconfigured ? "config" : r.auth ? "auth" : r.failed ? "down" : "dead"}`;
+    const metaKey = `meta/last-alert-${kind}`;
     const meta = await store.get(metaKey).catch(() => null);
     if (!meta || Date.now() - Number(meta) > 864e5) {
       await store.set(metaKey, String(Date.now()));
