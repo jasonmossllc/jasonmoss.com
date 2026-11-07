@@ -37,3 +37,17 @@ test("buffered envelopes keep no identity parameters in URLs; Kit's hashed email
   assert.ok(!pv.r.includes("sh_kit") && !ck.u.includes("sh_kit") && !ck.u.includes("email"));
   assert.equal(ck.shk, undefined, "only the page view carries it (that's where the tracker reads it)");
 });
+
+test("Pinterest's in-app browser is a person (forwarded); its crawler and AI agents fetching a page aren't", async () => {
+  const send = (ua) => handler(new Request("https://jasonmoss.com/_jm/e", { method: "POST", headers: { "user-agent": ua, "content-type": "text/plain" },
+    body: JSON.stringify({ v: "s" + "B".repeat(21), e: [{ t: "h", eid: "abcdefabcdef" }] }) }), { geo: { country: { code: "US" } }, ip: "203.0.113.9" });
+  sent.length = 0;
+  await send("Mozilla/5.0 (Linux; Android 14; Pixel 7 Build/AP2A.240805.005; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/127.0.6533.103 Mobile Safari/537.36 [Pinterest/Android]");
+  assert.equal(sent.length, 1);
+  for (const ua of ["Pinterest/0.2 (+https://www.pinterest.com/bot.html)", "Mozilla/5.0 AppleWebKit/537.36 (KHTML, like Gecko; compatible; Claude-User/1.0; +Claude-User@anthropic.com)",
+    "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko; Google-PageRenderer Google (+https://developers.google.com/+/web/snippet/)) Chrome/130.0.0.0 Safari/537.36",
+    "WhatsApp/2.23.20.0"]) {
+    assert.equal((await send(ua)).status, 204, ua);
+  }
+  assert.equal(sent.length, 1, "none of those reached the tracker");
+});

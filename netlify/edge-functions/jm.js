@@ -32,14 +32,16 @@ const COOKIE = "jm_vid";
 const CONSENT = "jm_consent";
 const MAX_AGE = 400 * 86400; // Chrome's ceiling for cookie lifetime
 const VID_RE = /^[A-Za-z0-9_-]{16,48}$/;
-const SCRIPT_VERSION = "11";
+const SCRIPT_VERSION = "12";
 const FORWARD_TIMEOUT_MS = 2500;
 const MAX_BODY = 256 * 1024;
 // EU + EEA + UK + Switzerland: these visitors get the consent notice.
 const CONSENT_COUNTRIES = new Set(("AT BE BG HR CY CZ DK EE FI FR DE GR HU IE IT LV LT LU MT NL PL PT RO SK SI ES SE " +
   "IS LI NO GB CH").split(" "));
-// "bot" as a word, but not phone models like "CUBOT X30".
-const BOT_RE = /(?<!cu)bot\b|crawl|spider|slurp|facebookexternalhit|headlesschrome|lighthouse|pagespeed|python-|curl\/|wget\/|go-http-client|okhttp|scrapy|proofpoint|mimecast|barracuda|safelinks|urldefense|outlook-ios-linkscanner|ms-office/i;
+// "bot" as a word, but not phone models like "CUBOT X30". Fetchers that never are a person: link previews, Pinterest's
+// crawler (Pinterest/0.x; its in-app browser, "[Pinterest/Android]", is a person), Google's renderers and AI agents
+// fetching a page for someone (Claude-User/, ChatGPT-User/, Perplexity-User/). The tracker (src/ua.js) has a longer list.
+const BOT_RE = /(?<!cu)bot\b|crawl|spider|slurp|facebookexternalhit|whatsapp|pinterest\/0\.|google-pagerenderer|google-read-aloud|-user\/\d|headlesschrome|lighthouse|pagespeed|python-|curl\/|wget\/|go-http-client|okhttp|scrapy|proofpoint|mimecast|barracuda|safelinks|urldefense|outlook-ios-linkscanner|ms-office/i;
 const SITE_ORIGINS = /^https:\/\/(jasonmoss\.com|www\.jasonmoss\.com|checkout\.jasonmoss\.com|learn\.jasonmoss\.com)$/;
 // This site's own Netlify hosts (deploy previews / branch deploys): <name>.netlify.app and <prefix>--<name>.netlify.app
 const PREVIEW_ORIGIN = /^https:\/\/([a-z0-9-]+--)?jasonmoss\.netlify\.app$/;

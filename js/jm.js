@@ -29,7 +29,7 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 11;
+  var VERSION = 12;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -92,7 +92,10 @@
     var shown = '';
     try { var parts = []; for (var c = el.firstChild; c; c = c.nextSibling) words(c, parts); shown = parts.join(''); } catch (e) {}
     // A card (heading + description) is named by its heading.
-    try { var hd = el.querySelector && el.querySelector('h1,h2,h3,h4,h5,h6'); if (hd && /\S/.test(hd.textContent || '')) shown = hd.textContent; } catch (e) {}
+    try {
+      var hd = el.querySelector && el.querySelector('h1,h2,h3,h4,h5,h6');
+      if (hd) { var hp = []; words(hd, hp); var ht = hp.join(''); if (/\S/.test(ht)) shown = ht; }
+    } catch (e) {}
     if (!/\S/.test(shown)) shown = el.textContent || el.innerText || '';
     var t = (el.getAttribute && (el.getAttribute('aria-label') || el.getAttribute('title'))) || shown || el.value || '';
     if (!t && el.querySelector) { var img = el.querySelector('img[alt]'); if (img) t = img.getAttribute('alt'); }
@@ -394,8 +397,10 @@
     }
     return { found: null, scope: null };
   }
+  // A submit is never itself the sign of a person: a page script can start one (requestSubmit(), a scripted click on the
+  // submit button) and the browser still marks it trusted. A person's submit always comes after their pointer, key or
+  // touch, which already counted. The email counts either way.
   var submitHandler = safe(function (ev) {
-    if (ev.isTrusted !== false) markHuman(); // a script-dispatched submit isn't a person (the email still counts)
     var form = ev.target;
     var f = emailIn(form);
     if (f) identifyEmail(f.email, form);
@@ -408,6 +413,7 @@
     if (pendingEmail) { var p = pendingEmail; pendingEmail = null; identifyEmail(p.email, p.scope); }
   }
   var changeHandler = safe(function (ev) {
+    if (ev.isTrusted === false) return; // a value a script set isn't someone typing (typing and autofill are trusted)
     var el = ev.target;
     if (!isEmailInput(el) || !EMAIL_RE.test(cleanEmail(el.value))) return;
     pendingEmail = { email: el.value, scope: closest(el, 'form') || el.parentNode };
@@ -575,32 +581,34 @@
         player.getVolume(safe(function (vol) { var n = Number(vol); if (isFinite(n)) { var was = v.volume > 0; v.volume = n; if (was !== n > 0) emit('volumechange'); } }));
       } catch (e) {}
     }
-    var lastSound = 0, lastSec = null;
-    player.on('play', safe(function () { v.paused = false; v.ended = false; checkSound(); emit('play'); }));
+    var lastSound = 0, lastSec = null, lastWall = 0, steady = 0, seekedAt = -1e9;
+    player.on('play', safe(function () { v.paused = false; v.ended = false; lastWall = perf(); checkSound(); emit('play'); }));
     player.on('pause', safe(function () { if (v.paused) return; v.paused = true; emit('pause'); }));
     player.on('ended', safe(function () { v.paused = true; v.ended = true; emit('ended'); }));
-    player.on('seeked', safe(function () { emit('seeking'); emit('seeked'); }));
+    player.on('seeked', safe(function () { seekedAt = perf(); v.seeking = true; emit('seeking'); emit('seeked'); }));
     player.on('timeupdate', safe(function (d) {
       if (!d) return;
       var sec = Number(d.seconds), du = Number(d.duration);
       if (isFinite(du) && du > 0) v.duration = du;
       if (!isFinite(sec)) return;
-      // A play event Bunny didn't send: only when time is really moving forward (a seek while paused also sends a
-      // timeupdate, and that isn't playback).
-      var moving = lastSec !== null && sec > lastSec && sec - lastSec < 2.5;
-      lastSec = sec;
-      if (v.paused && moving) { v.paused = false; v.ended = false; emit('play'); }
+      // A play event Bunny didn't send is inferred only when the video's time keeps pace with the clock for two updates
+      // in a row, away from a seek: dragging the scrubber while paused also sends updates, and that isn't playback.
+      var t = perf(), dSec = lastSec === null ? 0 : sec - lastSec, dWall = (t - lastWall) / 1000;
+      steady = dSec > 0 && dWall >= 0.15 && Math.abs(dSec - dWall * v.playbackRate) < 0.4 && t - seekedAt > 1000 ? steady + 1 : 0;
+      lastSec = sec; lastWall = t;
+      if (v.paused && steady >= 2) { v.paused = false; v.ended = false; emit('play'); }
       v.currentTime = sec;
       if (now() - lastSound > 5000) { lastSound = now(); checkSound(); } // muted / volume changes while playing
       emit('timeupdate');
+      v.seeking = false; // the first update after a seek only sets the new position (onTime doesn't count it)
     }));
-    // The app removed the player (moved to another lesson): it stopped playing.
-    var gone = setInterval(safe(function () {
-      if (x.iframe && !(document.documentElement && document.documentElement.contains(x.iframe))) {
-        clearInterval(gone);
-        if (!v.paused) { v.paused = true; emit('pause'); }
-      }
-    }), 2000);
+    // Not playing any more: the app removed the player (moved to another lesson), or a playing video stopped sending
+    // its time while the page is shown (a pause Bunny didn't send).
+    var watch = setInterval(safe(function () {
+      var gone = x.iframe && !(document.documentElement && document.documentElement.contains(x.iframe));
+      if (gone) clearInterval(watch);
+      if (!v.paused && (gone || (!document.hidden && perf() - lastWall > 3000))) { v.paused = true; emit('pause'); }
+    }), 1000);
     return v;
   }
   function hookEmbeds() {
