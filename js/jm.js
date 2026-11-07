@@ -29,7 +29,7 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 10;
+  var VERSION = 11;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -91,6 +91,8 @@
   function text(el) {
     var shown = '';
     try { var parts = []; for (var c = el.firstChild; c; c = c.nextSibling) words(c, parts); shown = parts.join(''); } catch (e) {}
+    // A card (heading + description) is named by its heading.
+    try { var hd = el.querySelector && el.querySelector('h1,h2,h3,h4,h5,h6'); if (hd && /\S/.test(hd.textContent || '')) shown = hd.textContent; } catch (e) {}
     if (!/\S/.test(shown)) shown = el.textContent || el.innerText || '';
     var t = (el.getAttribute && (el.getAttribute('aria-label') || el.getAttribute('title'))) || shown || el.value || '';
     if (!t && el.querySelector) { var img = el.querySelector('img[alt]'); if (img) t = img.getAttribute('alt'); }
@@ -393,7 +395,7 @@
     return { found: null, scope: null };
   }
   var submitHandler = safe(function (ev) {
-    markHuman();
+    if (ev.isTrusted !== false) markHuman(); // a script-dispatched submit isn't a person (the email still counts)
     var form = ev.target;
     var f = emailIn(form);
     if (f) identifyEmail(f.email, form);
@@ -573,7 +575,7 @@
         player.getVolume(safe(function (vol) { var n = Number(vol); if (isFinite(n)) { var was = v.volume > 0; v.volume = n; if (was !== n > 0) emit('volumechange'); } }));
       } catch (e) {}
     }
-    var lastSound = 0;
+    var lastSound = 0, lastSec = null;
     player.on('play', safe(function () { v.paused = false; v.ended = false; checkSound(); emit('play'); }));
     player.on('pause', safe(function () { if (v.paused) return; v.paused = true; emit('pause'); }));
     player.on('ended', safe(function () { v.paused = true; v.ended = true; emit('ended'); }));
@@ -583,7 +585,11 @@
       var sec = Number(d.seconds), du = Number(d.duration);
       if (isFinite(du) && du > 0) v.duration = du;
       if (!isFinite(sec)) return;
-      if (v.paused) { v.paused = false; v.ended = false; emit('play'); } // a play event Bunny didn't send
+      // A play event Bunny didn't send: only when time is really moving forward (a seek while paused also sends a
+      // timeupdate, and that isn't playback).
+      var moving = lastSec !== null && sec > lastSec && sec - lastSec < 2.5;
+      lastSec = sec;
+      if (v.paused && moving) { v.paused = false; v.ended = false; emit('play'); }
       v.currentTime = sec;
       if (now() - lastSound > 5000) { lastSound = now(); checkSound(); } // muted / volume changes while playing
       emit('timeupdate');
@@ -662,7 +668,7 @@
     hookVideos();
     hookEmbeds();
     watchEmbeds();
-    var act = safe(markHuman);
+    var act = safe(function (ev) { if (ev && ev.isTrusted === false) return; markHuman(); }); // synthetic events (scripts, scanners) aren't a person
     on(document, 'pointerdown', act, true);
     on(document, 'keydown', act, true);
     on(document, 'touchstart', act, { capture: true, passive: true });
