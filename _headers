@@ -17,7 +17,7 @@
 /qualify/*
   Content-Security-Policy: frame-ancestors 'self' https://jasonmoss.com https://*.jasonmoss.com https://*.netlify.app
 
-# Site Tracker script: versioned by ?v= (the edge function bumps it with every change), so browsers can keep it a
+# Engagement Tracker script: versioned by ?v= (the edge function bumps it with every change), so browsers can keep it a
 # day instead of re-checking it on every page.
 /js/jm.js
   Cache-Control: public, max-age=86400, stale-while-revalidate=604800

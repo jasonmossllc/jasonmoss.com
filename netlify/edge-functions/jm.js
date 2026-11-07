@@ -1,4 +1,4 @@
-// Site Tracker edge function (runs in front of every request to jasonmoss.com).
+// Engagement Tracker edge function (runs in front of every request to jasonmoss.com).
 //
 // Three jobs, all first-party on jasonmoss.com:
 //  1. Every HTML page: add the tracking script (<script src="/js/jm.js">) and set the visitor cookie (jm_vid).
@@ -32,7 +32,7 @@ const COOKIE = "jm_vid";
 const CONSENT = "jm_consent";
 const MAX_AGE = 400 * 86400; // Chrome's ceiling for cookie lifetime
 const VID_RE = /^[A-Za-z0-9_-]{16,48}$/;
-const SCRIPT_VERSION = "8";
+const SCRIPT_VERSION = "9";
 const FORWARD_TIMEOUT_MS = 2500;
 const MAX_BODY = 256 * 1024;
 // EU + EEA + UK + Switzerland: these visitors get the consent notice.

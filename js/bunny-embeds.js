@@ -14,8 +14,8 @@
 //     from Bunny by scripts/build-bunny-config.mjs).
 //   • Gold player theme (#c2a86c) matching the brand.
 //
-// Every player is registered on window.JM_BUNNY so js/bunny-tracking.js (loaded
-// only on tracking pages) can hook in unchanged: each entry exposes a small
+// Every player is registered on window.JM_BUNNY so the Engagement Tracker
+// (js/jm.js, on every page) can hook in: each entry exposes a small
 // Player.js-compatible adapter over the Plyr instance.
 //
 // This file self-bootstraps its dependencies (Plyr + hls.js + the config),
@@ -35,7 +35,7 @@
   'use strict';
 
   // ---- shared registry (defined synchronously, before any async load) -------
-  // bunny-tracking.js is loaded `async` and may run BEFORE this file finishes
+  // js/jm.js is loaded `async` and may run BEFORE this file finishes
   // bootstrapping, so the registry contract must exist immediately and be
   // order-independent. Both files create a compatible JM_BUNNY defensively.
   var JM = (window.JM_BUNNY = window.JM_BUNNY || {});
@@ -275,7 +275,7 @@
     }
   }
 
-  // ---- Plyr -> Player.js-compatible adapter (so bunny-tracking.js is unchanged)
+  // ---- Plyr -> Player.js-compatible adapter (what the tracker hooks into)
   function durationOf(p) {
     return (p.media && p.media.duration) || p.duration || 0;
   }

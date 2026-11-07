@@ -1,5 +1,5 @@
 /*
- * jasonmoss.com first-party visit + video tracking (Site Tracker).
+ * jasonmoss.com first-party visit + video tracking (Engagement Tracker).
  *
  * Added to every page automatically by the Netlify edge function (netlify/edge-functions/jm.js), and loaded on
  * checkout.jasonmoss.com and learn.jasonmoss.com through Google Tag Manager. Nothing is configured per page or per video:
@@ -29,7 +29,7 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 8;
+  var VERSION = 9;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -279,9 +279,13 @@
 
   // ------------------------------------------------------------------ page view + engagement
   var pvId = null;
+  var pendingRestore = null;
+  var shownAt = perf(), touched = false, heldMs = 0;
+  var RESTORE_SETTLE_MS = 1500;
   var activeMs = 0, maxScroll = 0, lastAct = -1e9, lastTick = perf(), sentActive = -1, sentScroll = -1, playing = 0;
   function markHuman() {
     lastAct = perf();
+    if (!touched) { touched = true; activeMs += heldMs; heldMs = 0; }
     if (human) return;
     human = true;
     if (started) push({ t: 'h' });
@@ -298,8 +302,12 @@
     var t = perf();
     var step = t - lastTick;
     lastTick = t;
-    // Active = page visible and (a real interaction in the last 30s, or audible video playing).
-    if (!document.hidden && step > 0 && (t - lastAct < 30000 || playing > 0)) activeMs += Math.min(step, 5000);
+    // Active = page visible and (a real interaction in the last 30s, or audible video playing). Reading time before
+    // the first interaction (people read before they touch anything) is held, up to 30s, and only counted once that
+    // page view gets a real interaction: a page an app loaded that nobody touched stays at 0.
+    if (document.hidden || step <= 0) return;
+    if (t - lastAct < 30000 || playing > 0) activeMs += Math.min(step, 5000);
+    else if (!touched && t - shownAt < 30000) heldMs += Math.min(step, 5000);
   }
   function snapshot() {
     tick();
@@ -314,6 +322,7 @@
   function newPageView() {
     pvId = rid(16);
     activeMs = 0; maxScroll = 0; sentActive = -1; sentScroll = -1;
+    shownAt = perf(); touched = false; heldMs = 0; // reading time before the first touch is held (see tick)
     push({ t: 'pv', id: pvId, u: location.href, ti: document.title ? document.title.slice(0, 300) : null, r: document.referrer || null, f: framed ? 1 : 0 });
   }
 
@@ -467,7 +476,7 @@
     // `playing` (keeps the page "active") follows audible playback only.
     function syncPlaying() {
       var should = !v.paused && !v.ended && audible();
-      if (should && !st.countingPlay) { st.countingPlay = true; playing++; }
+      if (should && !st.countingPlay) { st.countingPlay = true; playing++; if (!touched) { touched = true; activeMs += heldMs; heldMs = 0; } }
       else if (!should && st.countingPlay) { st.countingPlay = false; playing = Math.max(0, playing - 1); }
     }
     function onTime() {
@@ -653,7 +662,11 @@
       tick();
       if (document.hidden) { commitPendingEmail(); flush(true); }
     }));
-    on(window, 'pagehide', safe(function () { commitPendingEmail(); flush(true); }));
+    on(window, 'pagehide', safe(function () {
+      // A page restored by Back that leaves again at once (e.g. it reloads itself to reset a form) wasn't a view.
+      if (pendingRestore) { clearTimeout(pendingRestore); pendingRestore = null; }
+      commitPendingEmail(); flush(true);
+    }));
     // In-page navigation (single-page apps such as Spiffy's checkout -> upsell -> thank-you steps): a new URL path
     // is a new page view. Hash-only changes (#section links) are not.
     var lastPath = location.pathname + location.search;
@@ -666,6 +679,7 @@
       flush(false); // close out the previous view's time and scroll
       pvId = rid(16);
       activeMs = 0; maxScroll = 0; sentActive = -1; sentScroll = -1;
+      shownAt = perf(); touched = true; heldMs = 0; // an in-app navigation is itself an interaction
       push({ t: 'pv', id: pvId, u: location.href, ti: document.title ? document.title.slice(0, 300) : null, r: from, f: framed ? 1 : 0 });
       appIdentity();
       flush(false);
@@ -684,13 +698,18 @@
       wrap('replaceState');
     } catch (e) {}
     on(window, 'popstate', function () { setTimeout(routeChanged, 0); });
-    // Back/forward cache: the page comes back exactly as it was left. That's a new view of it.
+    // Back/forward cache: the page comes back exactly as it was left. That's a new view of it, once it has stayed a
+    // moment: some pages reload themselves when restored, and the reload is the view then (never both).
     on(window, 'pageshow', safe(function (ev) {
       if (!ev || !ev.persisted) return;
       for (var i = 0; i < videos.length; i++) videos[i].restart();
       lastTick = perf();
-      newPageView();
-      flush(false);
+      if (pendingRestore) clearTimeout(pendingRestore);
+      pendingRestore = setTimeout(safe(function () {
+        pendingRestore = null;
+        newPageView();
+        flush(false);
+      }), RESTORE_SETTLE_MS);
     }));
     setInterval(safe(tick), 1000);
     var lastHiddenFlush = 0;

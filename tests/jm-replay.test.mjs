@@ -1,4 +1,4 @@
-// Site Tracker outage replay: drain logic against an in-memory store and a fake tracker.
+// Engagement Tracker outage replay: drain logic against an in-memory store and a fake tracker.
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { drain } from "../netlify/functions/jm-replay.mjs";

@@ -1,4 +1,4 @@
-// Site Tracker outage replay (scheduled, every 5 minutes).
+// Engagement Tracker outage replay (scheduled, every 5 minutes).
 //
 // When the tracker app (Railway) is slow or down, the edge function (netlify/edge-functions/jm.js) stores event
 // batches in Netlify Blobs ("jm-buffer", keys q/<ms>-<rand>). This drains them oldest-first into the tracker as
@@ -208,8 +208,8 @@ export default async () => {
   else if (r.failed && r.oldestMs > ALERT_AFTER_MS) {
     kind = "down";
     problem = r.pending === 1
-      ? "One buffered event batch has been failing at the Site Tracker for 6+ hours (the tracker itself may be fine). It's retried automatically and set aside after 14 days."
-      : `The Site Tracker app on Railway hasn't accepted events for ${Math.round(r.oldestMs / 3600e3)} hours${r.systemic ? " (it answers its health check but fails every event batch: check its logs and disk space)" : ""}.`;
+      ? "One buffered event batch has been failing at the Engagement Tracker for 6+ hours (the tracker itself may be fine). It's retried automatically and set aside after 14 days."
+      : `The Engagement Tracker app on Railway hasn't accepted events for ${Math.round(r.oldestMs / 3600e3)} hours${r.systemic ? " (it answers its health check but fails every event batch: check its logs and disk space)" : ""}.`;
   } else if (r.dead > 5) { kind = "dead"; problem = `${r.dead} event batches were refused by the tracker and set aside in Netlify Blobs (jm-buffer, dead/). They're kept 7 days; to retry them, set JM_REQUEUE_DEAD=1 on Netlify for one run.`; }
   if (problem) {
     // Each kind of problem has its own once-a-day limit (a rejected secret is never hidden behind another alert).
@@ -217,10 +217,10 @@ export default async () => {
     const meta = await store.get(metaKey).catch(() => null);
     if (!meta || Date.now() - Number(meta) > 864e5) {
       await store.set(metaKey, String(Date.now()));
-      await sendAlert("Site Tracker can't deliver site events",
+      await sendAlert("Engagement Tracker can't deliver site events",
         `${problem}\n\n` +
         (r.dead > 5 && !r.failed ? "" : `Nothing is lost yet: ${r.pending} batches are waiting in Netlify and will be replayed automatically once it's fixed (they're kept 14 days).\n\n`) +
-        `Check the "site-tracker" service on Railway (deploy logs, volume, health check at ${url || "TRACKER_URL"}/healthz).\n` +
+        `Check the "engagement-tracker" project on Railway (deploy logs, volume, health check at ${url || "TRACKER_URL"}/healthz).\n` +
         `This email repeats at most once a day while the problem lasts.`).catch((e) => console.error("alert failed", e.message));
     }
   }
