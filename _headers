@@ -17,7 +17,8 @@
 /qualify/*
   Content-Security-Policy: frame-ancestors 'self' https://jasonmoss.com https://*.jasonmoss.com https://*.netlify.app
 
-# Engagement Tracker script: versioned by ?v= (the edge function bumps it with every change), so browsers can keep it a
-# day instead of re-checking it on every page.
+# Engagement Tracker script: versioned by ?v= on our own pages (the edge function bumps it with every change), but
+# checkout and Learn load it through Google Tag Manager without a version, so a copy is only kept an hour (then
+# re-checked; a stale copy at most a day while it re-checks).
 /js/jm.js
-  Cache-Control: public, max-age=86400, stale-while-revalidate=604800
+  Cache-Control: public, max-age=3600, stale-while-revalidate=86400
