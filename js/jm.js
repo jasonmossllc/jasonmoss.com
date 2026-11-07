@@ -541,7 +541,7 @@
     }
     reset();
     function dur() { var d = Number(v.duration); return isFinite(d) && d > 0 ? d : 0; }
-    // Only audible playback counts (muted autoplay previews don't): same rule as the old 50% tracker.
+    // Only audible playback counts (muted autoplay previews don't).
     function audible() { return !v.muted && v.volume > 0; }
     // `playing` (keeps the page "active") follows audible playback only.
     function syncPlaying() {
