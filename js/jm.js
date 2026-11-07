@@ -29,7 +29,7 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 9;
+  var VERSION = 10;
   var BUCKET_S = 5;
   var MAX_BUCKETS = 4320;
   var FLUSH_MS = 15000;
@@ -282,6 +282,7 @@
   var pendingRestore = null;
   var shownAt = perf(), touched = false, heldMs = 0;
   var RESTORE_SETTLE_MS = 1500;
+  var HELD_MAX_MS = 120000;
   var activeMs = 0, maxScroll = 0, lastAct = -1e9, lastTick = perf(), sentActive = -1, sentScroll = -1, playing = 0;
   function markHuman() {
     lastAct = perf();
@@ -303,11 +304,14 @@
     var step = t - lastTick;
     lastTick = t;
     // Active = page visible and (a real interaction in the last 30s, or audible video playing). Reading time before
-    // the first interaction (people read before they touch anything) is held, up to 30s, and only counted once that
-    // page view gets a real interaction: a page an app loaded that nobody touched stays at 0.
+    // the first interaction (people read before they touch anything: the first 30s, and while the mouse moves) is
+    // held, up to 2 minutes, and only counted once that page view gets a real interaction (pointer down, key, touch,
+    // wheel, audible play). Mouse movement alone never counts: link scanners move the mouse too, so a page an app or
+    // a scanner loaded that nobody touched stays at 0.
     if (document.hidden || step <= 0) return;
-    if (t - lastAct < 30000 || playing > 0) activeMs += Math.min(step, 5000);
-    else if (!touched && t - shownAt < 30000) heldMs += Math.min(step, 5000);
+    step = Math.min(step, 5000);
+    if ((touched && t - lastAct < 30000) || playing > 0) activeMs += step;
+    else if (!touched && (t - shownAt < 30000 || t - lastAct < 30000) && heldMs < HELD_MAX_MS) heldMs += step;
   }
   function snapshot() {
     tick();
@@ -416,6 +420,17 @@
     var ce = d.payload.event && d.payload.event.uri, ci = d.payload.invitee && d.payload.invitee.uri;
     if (ce && ci) { markHuman(); push({ t: 'id', k: 'calendly', ce: ce, ci: ci, pv: pvId }); flush(true); }
   });
+  // Kit's identity parameters (subscriber id, hashed email), once read, leave the address bar: a copied or shared
+  // link must not carry the reader's identity into someone else's browser. The page view already has the full
+  // address. Only on jasonmoss.com itself (checkout and Learn pages belong to other apps).
+  var ID_PARAM = /^(ck_subscriber_id|subscriber_id|sh_kit)=/i;
+  function stripIdentityParams() {
+    if (isCheckoutHost || /^learn\./i.test(location.hostname) || !window.history || !history.replaceState) return;
+    var parts = location.search ? location.search.slice(1).split('&') : [], kept = [];
+    for (var i = 0; i < parts.length; i++) if (!ID_PARAM.test(parts[i])) kept.push(parts[i]);
+    if (kept.length === parts.length) return;
+    history.replaceState(history.state, '', location.pathname + (kept.length ? '?' + kept.join('&') : '') + location.hash);
+  }
   function identityFromUrl() {
     var kid = param('ck_subscriber_id') || param('subscriber_id');
     if (kid && /^[1-9]\d{0,15}$/.test(kid)) push({ t: 'id', k: 'kit', kid: kid, pv: pvId });
@@ -642,6 +657,7 @@
     lastTick = perf();
     newPageView();
     identityFromUrl();
+    stripIdentityParams(); // before in-page navigation is watched (this isn't a new view)
     appIdentity();
     hookVideos();
     hookEmbeds();

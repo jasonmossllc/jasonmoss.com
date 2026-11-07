@@ -32,7 +32,7 @@ const COOKIE = "jm_vid";
 const CONSENT = "jm_consent";
 const MAX_AGE = 400 * 86400; // Chrome's ceiling for cookie lifetime
 const VID_RE = /^[A-Za-z0-9_-]{16,48}$/;
-const SCRIPT_VERSION = "9";
+const SCRIPT_VERSION = "10";
 const FORWARD_TIMEOUT_MS = 2500;
 const MAX_BODY = 256 * 1024;
 // EU + EEA + UK + Switzerland: these visitors get the consent notice.
@@ -134,9 +134,10 @@ async function networkKey(context, secret) {
 function bufferStore() {
   try { return getStore({ name: "jm-buffer", consistency: "strong" }); } catch { return getStore("jm-buffer"); }
 }
-// Personal details that can ride along in a page URL (?email=, Kit ids, names...). The tracker strips them too; this
-// keeps them out of the outage buffer as well.
-const DROP_PARAMS = /^(email|e-mail|mail|ck_subscriber_id|subscriber_id|token|code|key|password|pass|phone|tel|first_name|last_name|name|fname|lname)$/i;
+// Personal details that can ride along in a page URL (?email=, Kit ids, Kit's hashed email, names...). The tracker
+// strips them too; this keeps them out of the URLs in the outage buffer as well. Identity the tracker needs on replay
+// travels in the events' own fields (a typed email, a Kit id; Kit's hashed email moves to e.shk on the page view).
+const DROP_PARAMS = /^(email|e-mail|mail|ck_subscriber_id|subscriber_id|sh_kit|token|code|key|password|pass|phone|tel|first_name|last_name|name|fname|lname)$/i;
 export function scrubUrl(raw) {
   if (typeof raw !== "string" || !raw.includes("?")) return raw;
   try {
@@ -146,11 +147,14 @@ export function scrubUrl(raw) {
     return changed ? u.toString() : raw;
   } catch { return raw; }
 }
-function scrubEnvelope(envelope) {
+export function scrubEnvelope(envelope) {
   const ev = envelope?.p?.e;
   if (!Array.isArray(ev)) return envelope;
   for (const e of ev) {
     if (!e || typeof e !== "object") continue;
+    if (e.t === "pv" && typeof e.u === "string" && !e.shk) {
+      try { const sh = new URL(e.u).searchParams.get("sh_kit"); if (sh && /^[0-9a-fA-F]{64}$/.test(sh)) e.shk = sh.toLowerCase(); } catch { /* not a URL */ }
+    }
     if (typeof e.u === "string") e.u = scrubUrl(e.u);
     if (typeof e.r === "string") e.r = scrubUrl(e.r);
   }
@@ -202,6 +206,8 @@ async function handleEvents(req, context) {
   let p;
   try { p = JSON.parse(text); } catch { return new Response(null, { status: 400, headers }); }
   if (!p || typeof p !== "object" || !Array.isArray(p.e)) return new Response(null, { status: 400, headers });
+  // The script always sends a well-formed id: anything else is junk (and must not reach the tracker's rate limits).
+  if (p.v != null && !(typeof p.v === "string" && VID_RE.test(p.v))) return new Response(null, { status: 204, headers });
 
   const cookieVid = readCookie(req, COOKIE);
   const geo = context?.geo || {};
