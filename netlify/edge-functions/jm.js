@@ -32,7 +32,7 @@ const COOKIE = "jm_vid";
 const CONSENT = "jm_consent";
 const MAX_AGE = 400 * 86400; // Chrome's ceiling for cookie lifetime
 const VID_RE = /^[A-Za-z0-9_-]{16,48}$/;
-const SCRIPT_VERSION = "12";
+const SCRIPT_VERSION = "13"; // keep equal to VERSION in js/jm.js (tests/jm-edge.test.mjs checks)
 const FORWARD_TIMEOUT_MS = 2500;
 const MAX_BODY = 256 * 1024;
 // EU + EEA + UK + Switzerland: these visitors get the consent notice.
@@ -139,6 +139,7 @@ function bufferStore() {
 // Personal details that can ride along in a page URL (?email=, Kit ids, Kit's hashed email, names...). The tracker
 // strips them too; this keeps them out of the URLs in the outage buffer as well. Identity the tracker needs on replay
 // travels in the events' own fields (a typed email, a Kit id; Kit's hashed email moves to e.shk on the page view).
+// (Keep in step with DROP_PARAMS in the engagement-tracker's src/ingest.js.)
 const DROP_PARAMS = /^(email|e-mail|mail|ck_subscriber_id|subscriber_id|sh_kit|token|code|key|password|pass|phone|tel|first_name|last_name|name|fname|lname)$/i;
 export function scrubUrl(raw) {
   if (typeof raw !== "string" || !raw.includes("?")) return raw;
@@ -169,6 +170,10 @@ async function bufferEnvelope(envelope) {
   await store.set(key, JSON.stringify(envelope));
 }
 
+// Final answers from the tracker's /ingest: 2xx = stored, 400 / 413 = the batch itself is bad (retrying can't help).
+// Anything else (a 404 or 405 from Railway's own routing, auth, rate limits, 5xx, a redirect a wrong TRACKER_URL
+// path gets) is kept and replayed by jm-replay, which tells a bad envelope from a broken tracker.
+export const deliveredStatus = (status) => (status >= 200 && status < 300) || status === 400 || status === 413;
 async function deliver(envelope) {
   const url = env("TRACKER_URL");
   const secret = env("TRACKER_INGEST_SECRET");
@@ -179,10 +184,10 @@ async function deliver(envelope) {
         method: "POST",
         headers: { "Content-Type": "application/json", "x-jm-secret": secret },
         body: JSON.stringify(envelope),
+        redirect: "manual", // a redirect (to a login page) is never a delivery
         signal: AbortSignal.timeout(FORWARD_TIMEOUT_MS),
       });
-      // 2xx = stored. Other 4xx (not auth / rate) = the batch itself is bad; retrying can't help, so drop it.
-      delivered = res.ok || (res.status >= 400 && res.status < 500 && ![401, 403, 408, 429].includes(res.status));
+      delivered = deliveredStatus(res.status);
     } catch { delivered = false; }
   } else {
     console.error("jm: TRACKER_URL / TRACKER_INGEST_SECRET not set; buffering");
@@ -191,6 +196,29 @@ async function deliver(envelope) {
     envelope.buffered = 1;
     try { await bufferEnvelope(envelope); } catch (e) { console.error("jm buffer write failed", e?.message || e); }
   }
+}
+
+// The body, read no further than MAX_BODY (an oversized one is refused before it's all in memory): "" when too big
+// or empty, null when it can't be read.
+async function readCapped(req) {
+  if (Number(req.headers.get("content-length")) > MAX_BODY) return "";
+  if (!req.body) return "";
+  const reader = req.body.getReader();
+  const parts = [];
+  let size = 0;
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      size += value.length;
+      if (size > MAX_BODY) { reader.cancel().catch(() => {}); return ""; }
+      parts.push(value);
+    }
+  } catch { return null; }
+  const all = new Uint8Array(size);
+  let at = 0;
+  for (const p of parts) { all.set(p, at); at += p.length; }
+  return new TextDecoder().decode(all);
 }
 
 async function handleEvents(req, context) {
@@ -202,8 +230,8 @@ async function handleEvents(req, context) {
   if (BOT_RE.test(ua)) return new Response(null, { status: 204, headers });
   if (consentState(req, context) !== "g") return new Response(null, { status: 204, headers }); // no consent = nothing stored
 
-  let text;
-  try { text = await req.text(); } catch { return new Response(null, { status: 400, headers }); }
+  const text = await readCapped(req);
+  if (text === null) return new Response(null, { status: 400, headers });
   if (!text || text.length > MAX_BODY) return new Response(null, { status: 413, headers });
   let p;
   try { p = JSON.parse(text); } catch { return new Response(null, { status: 400, headers }); }

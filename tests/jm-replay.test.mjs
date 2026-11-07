@@ -16,7 +16,7 @@ function memStore(entries = {}, { failGet = new Set() } = {}) {
 const NOW = Date.now();
 const key = (ageMs, n) => `q/${String(NOW - ageMs).padStart(15, "0")}-k${n}`;
 const env = (n) => JSON.stringify({ rt: NOW, vc: `vid${n}xxxxxxxxxxxxxxxx`, p: { v: `vid${n}xxxxxxxxxxxxxxxx`, e: [{ t: "h", eid: `eid${n}aaaaaa` }] } });
-const ok = async () => new Response("{}", { status: 200 });
+const ok = async () => Response.json({ ok: true }); // the tracker's answer to a batch it stored
 
 test("delivers everything oldest-first and empties the buffer", async () => {
   const store = memStore({ [key(3000, 1)]: env(1), [key(2000, 2)]: env(2), [key(1000, 3)]: env(3) });
@@ -99,8 +99,13 @@ test("tracker healthy but failing every batch (full disk, bad deploy): nothing s
   });
   assert.equal(r.failed, true);
   assert.equal(r.systemic, true);
+  assert.equal(r.trackerErrors, true, "the tracker's own 500s: it alerts about those itself");
   assert.equal(r.dead, 0);
   assert.equal([...store.m.keys()].filter((k) => k.startsWith("q/")).length, 50);
+  // A 503 from in front of a tracker that answers its health check isn't the tracker's own error: this side alerts.
+  const r2 = await drain({ store, url: "https://t.example", secret: "s", now: NOW,
+    fetchImpl: async (u) => (u.endsWith("/healthz") ? ok() : new Response("bad gateway", { status: 503 })) });
+  assert.deepEqual([r2.systemic, r2.trackerErrors], [true, false]);
 });
 
 test("rejected secret: run stops at once, flagged for an immediate alert, nothing set aside", async () => {
@@ -142,4 +147,34 @@ test("set-aside envelopes are keyed by when they were set aside", async () => {
   const dead = [...store.m.keys()].filter((k) => k.startsWith("dead/"));
   assert.equal(dead.length, 1);
   assert.ok(Number(dead[0].slice(5, 20)) === NOW, dead[0]);
+});
+
+test("a wrong TRACKER_URL path (redirected to the login page) or a 200 that isn't the tracker's answer never counts as delivered", async () => {
+  const store = memStore({ [key(2000, 1)]: env(1), [key(1000, 2)]: env(2) });
+  const seen = [];
+  const redirecting = async (u, o) => { seen.push(o?.redirect); return new Response(null, { status: 302, headers: { location: "/login" } }); };
+  let r = await drain({ store, url: "https://t.example/tracker", secret: "s", now: NOW, fetchImpl: redirecting });
+  assert.equal(r.failed, true);
+  assert.equal(r.sent, 0);
+  assert.ok(seen.length && seen.every((x) => x === "manual"), "redirects aren't followed");
+  // Something else answering 200 with a page: refused everywhere, so nothing is set aside or deleted.
+  r = await drain({ store, url: "https://t.example", secret: "s", now: NOW,
+    fetchImpl: async (u) => (u.endsWith("/healthz") ? ok() : new Response("<html>login</html>", { status: 200, headers: { "content-type": "text/html" } })) });
+  assert.deepEqual([r.sent, r.dead, r.failed], [0, 0, true]);
+  assert.equal([...store.m.keys()].filter((k) => k.startsWith("q/")).length, 2);
+});
+
+test("an alert Postmark refuses isn't marked as sent: it's tried again an hour later, then once a day", async () => {
+  const { alertOnce } = await import("../netlify/functions/jm-replay.mjs");
+  const store = memStore();
+  const sends = [];
+  let refuse = true;
+  const send = async (subject) => { sends.push(subject); if (refuse) throw new Error("Postmark 422: inactive recipient"); };
+  assert.equal(await alertOnce(store, "down", "S", "T", { send, now: NOW }), "failed");
+  assert.equal(await alertOnce(store, "down", "S", "T", { send, now: NOW + 30 * 60_000 }), "waiting");
+  refuse = false;
+  assert.equal(await alertOnce(store, "down", "S", "T", { send, now: NOW + 61 * 60_000 }), "sent");
+  assert.equal(await alertOnce(store, "down", "S", "T", { send, now: NOW + 5 * 3600e3 }), "waiting", "once a day");
+  assert.equal(await alertOnce(store, "auth", "S", "T", { send, now: NOW + 5 * 3600e3 }), "sent", "each kind has its own limit");
+  assert.equal(sends.length, 3);
 });

@@ -12,8 +12,10 @@
 //  - A wrong secret (401/403) stops the run and alerts at once (no 6-hour wait): it never fixes itself.
 //  - Each run stops after ~18 seconds so it always finishes (and can alert) inside the function time limit.
 //
-// Alerts: one email (at most once a day) when the oldest buffered batch is older than 6 hours, the secret is
-// rejected, the settings are missing, or more than a few batches were set aside in one run.
+// Alerts: one email (at most once a day per kind; a send Postmark refuses is retried hourly) when the oldest buffered
+// batch is older than 6 hours, the secret is rejected, the settings are missing, or more than a few batches were set
+// aside in one run. Not when the tracker answers its health check and fails every batch with its own error (500): it
+// counts those and emails about them itself.
 //
 // Recovery: set the Netlify environment variable JM_REQUEUE_DEAD=1 and the next run moves everything in dead/ back
 // into the queue (remove the variable afterwards).
@@ -21,7 +23,7 @@ import { getStore } from "@netlify/blobs";
 
 export const config = { schedule: "*/5 * * * *" };
 
-const MAX_BATCH_BYTES = 900 * 1024; // the tracker accepts 8 MB; stay far below
+const MAX_BATCH_BYTES = 900 * 1024; // the tracker accepts 2 MB and 500 envelopes per request (server.js /ingest); stay far below
 const MAX_BATCH_COUNT = 200;
 const RUN_BUDGET_MS = 18000;
 const PARALLEL = 20;
@@ -34,29 +36,53 @@ const keyTime = (key) => Number((/^(?:q|dead)\/(\d+)-/.exec(key) || [])[1]) || 0
 // The original buffered key ("<ms>-<rand>") inside a q/ or dead/ key, so keys never grow however often they move.
 const origOf = (key) => { const m = /(\d{15}-[^/]+)$/.exec(key.replace(/^dead\/\d{15}-/, "")); return m ? m[1] : key.replace(/^(q|dead)\//, ""); };
 
-async function sendAlert(subject, text) {
+// Throws when Postmark doesn't take it (so the caller retries instead of marking the alert as sent).
+async function sendAlert(subject, text, fetchImpl = fetch) {
   const token = process.env.POSTMARK_TOKEN;
   if (!token) { console.error("jm-replay: POSTMARK_TOKEN not set; alert not sent:", subject); return; }
-  await fetch("https://api.postmarkapp.com/email", {
+  const res = await fetchImpl("https://api.postmarkapp.com/email", {
     method: "POST",
     headers: { Accept: "application/json", "Content-Type": "application/json", "X-Postmark-Server-Token": token },
     body: JSON.stringify({ From: "jason@jasonmoss.com", To: process.env.TRACKER_ALERT_EMAIL || "jason@jasonmoss.com", Subject: subject, TextBody: text, MessageStream: "outbound" }),
     signal: AbortSignal.timeout(10000),
   });
+  if (!res.ok) throw new Error(`Postmark ${res.status}: ${(await res.text().catch(() => "")).slice(0, 160)}`);
 }
 
-// POST envelopes; returns "ok" | "down" (network/5xx/timeouts) | "auth" (secret rejected) | "refused" (4xx: the content).
+// One alert of each kind a day: marked as sent only once Postmark took it; a failed send is tried again an hour later.
+export async function alertOnce(store, kind, subject, text, { send = sendAlert, now = Date.now() } = {}) {
+  const sentKey = `meta/last-alert-${kind}`, failedKey = `meta/alert-failed-${kind}`;
+  const sent = Number(await store.get(sentKey).catch(() => null)) || 0;
+  const failed = Number(await store.get(failedKey).catch(() => null)) || 0;
+  if (now - sent <= 864e5 || now - failed < 3600e3) return "waiting";
+  try {
+    await send(subject, text);
+  } catch (e) {
+    console.error("jm-replay: alert failed", e?.message || e);
+    await store.set(failedKey, String(now)).catch(() => {});
+    return "failed";
+  }
+  await store.set(sentKey, String(now)).catch(() => {});
+  await store.delete(failedKey).catch(() => {});
+  return "sent";
+}
+
+// POST envelopes; returns "ok" | "down" (network, 5xx from in front of it, timeouts, a redirect) | "error" (the
+// tracker's own 500: it failed on the batch, and counts and alerts on that itself) | "auth" (secret rejected) |
+// "refused" (other 4xx, or a 2xx that isn't the tracker's answer: the content, or a wrong path).
 async function send(url, secret, batch, fetchImpl) {
   try {
     const res = await fetchImpl(`${url.replace(/\/$/, "")}/ingest`, {
       method: "POST",
       headers: { "Content-Type": "application/json", "x-jm-secret": secret },
       body: JSON.stringify({ batch }),
+      redirect: "manual",
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
-    if (res.ok) return "ok";
+    if (res.ok) return (await res.json().catch(() => null))?.ok === true ? "ok" : "refused";
     if (res.status === 401 || res.status === 403) return "auth";
-    if ([408, 429].includes(res.status) || res.status >= 500) return "down";
+    if (res.status === 500) return "error";
+    if ([408, 429].includes(res.status) || res.status >= 500 || (res.status >= 300 && res.status < 400) || res.status === 0) return "down";
     return "refused";
   } catch {
     return "down";
@@ -65,7 +91,7 @@ async function send(url, secret, batch, fetchImpl) {
 
 async function healthy(url, fetchImpl) {
   try {
-    const res = await fetchImpl(`${url.replace(/\/$/, "")}/healthz`, { signal: AbortSignal.timeout(5000) });
+    const res = await fetchImpl(`${url.replace(/\/$/, "")}/healthz`, { redirect: "manual", signal: AbortSignal.timeout(5000) });
     return res.ok;
   } catch {
     return false;
@@ -137,7 +163,7 @@ export async function drain({ store, url, secret, now = Date.now(), fetchImpl = 
       continue;
     }
     if (r === "auth") { result.failed = true; result.auth = true; break; }
-    if (r === "down" && !(await healthy(url, fetchImpl))) { result.failed = true; break; } // tracker unreachable: oldest-first next run
+    if ((r === "down" || r === "error") && !(await healthy(url, fetchImpl))) { result.failed = true; break; } // tracker unreachable: oldest-first next run
     // Refused, or failing while the tracker answers its health check: try each envelope alone.
     const failedAlone = [];
     let anyOk = false;
@@ -156,7 +182,11 @@ export async function drain({ store, url, secret, now = Date.now(), fetchImpl = 
         if (why === "refused" || await failedBefore(batchKeys[j])) { await park(batchKeys[j], raws[j]); await store.delete(failMark(batchKeys[j])).catch(() => {}); }
         else { await store.set(failMark(batchKeys[j]), String(now)).catch(() => {}); result.retryLater = (result.retryLater || 0) + 1; }
       }
-    } else if (failedAlone.length) { result.failed = true; result.systemic = true; break; }
+    } else if (failedAlone.length) {
+      result.failed = true; result.systemic = true;
+      result.trackerErrors = failedAlone.every((f) => f.why === "error"); // the tracker's own 500s: it reports them itself
+      break;
+    }
   }
   return result;
 }
@@ -205,7 +235,7 @@ export default async () => {
   let problem = null, kind = null;
   if (r.misconfigured) { kind = "config"; problem = "The Netlify settings TRACKER_URL / TRACKER_INGEST_SECRET are missing, so site events can't be delivered."; }
   else if (r.auth) { kind = "auth"; problem = "The tracker app on Railway is rejecting the shared secret (TRACKER_INGEST_SECRET on Netlify must match INGEST_SECRET on Railway)."; }
-  else if (r.failed && r.oldestMs > ALERT_AFTER_MS) {
+  else if (r.failed && r.oldestMs > ALERT_AFTER_MS && !r.trackerErrors) {
     kind = "down";
     problem = r.pending === 1
       ? "One buffered event batch has been failing at the Engagement Tracker for 6+ hours (the tracker itself may be fine). It's retried automatically and set aside after 14 days."
@@ -213,16 +243,11 @@ export default async () => {
   } else if (r.dead > 5) { kind = "dead"; problem = `${r.dead} event batches were refused by the tracker and set aside in Netlify Blobs (jm-buffer, dead/). They're kept 7 days; to retry them, set JM_REQUEUE_DEAD=1 on Netlify for one run.`; }
   if (problem) {
     // Each kind of problem has its own once-a-day limit (a rejected secret is never hidden behind another alert).
-    const metaKey = `meta/last-alert-${kind}`;
-    const meta = await store.get(metaKey).catch(() => null);
-    if (!meta || Date.now() - Number(meta) > 864e5) {
-      await store.set(metaKey, String(Date.now()));
-      await sendAlert("Engagement Tracker can't deliver site events",
-        `${problem}\n\n` +
-        (r.dead > 5 && !r.failed ? "" : `Nothing is lost yet: ${r.pending} batches are waiting in Netlify and will be replayed automatically once it's fixed (they're kept 14 days).\n\n`) +
-        `Check the "engagement-tracker" project on Railway (deploy logs, volume, health check at ${url || "TRACKER_URL"}/healthz).\n` +
-        `This email repeats at most once a day while the problem lasts.`).catch((e) => console.error("alert failed", e.message));
-    }
+    await alertOnce(store, kind, "Engagement Tracker can't deliver site events",
+      `${problem}\n\n` +
+      (r.dead > 5 && !r.failed ? "" : `Nothing is lost yet: ${r.pending} batches are waiting in Netlify and will be replayed automatically once it's fixed (they're kept 14 days).\n\n`) +
+      `Check the "engagement-tracker" project on Railway (deploy logs, volume, health check at ${url || "TRACKER_URL"}/healthz).\n` +
+      `This email repeats at most once a day while the problem lasts.`);
   }
   return new Response(null, { status: 204 });
 };

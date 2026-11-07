@@ -6,8 +6,9 @@
  *   - page views, active time, scroll depth           (every page)
  *   - clicks on anything clickable (links, buttons)   (every page; checkout links flagged)
  *   - every Bunny video player bunny-embeds.js makes  (real audible watch time, furthest point, 5-second watch map)
- *   - identity: an email entered in any form (submitted, or sent with a button), Kit email links
- *     (?ck_subscriber_id=), Calendly bookings
+ *   - identity: an email entered in any form (submitted, or sent with a button) or settled in the checkout email
+ *     field, Kit email links (?ck_subscriber_id=, ?sh_kit=), Calendly bookings, the Learn sign-in token
+ *     (<meta name="jm-id">)
  *
  * Plain ES5 on purpose: runs in every browser still in use, including old in-app browsers. Everything is wrapped
  * so a failure here can never break the page.
@@ -17,7 +18,8 @@
  *     400 days (cookies written by JavaScript are capped at 7 days, or 1 day after an ad click). A copy in
  *     localStorage lets the server re-join history if the cookie is ever lost.
  *   - Pages Chrome/Safari load in the background before anyone looks (prerender, preload, background tabs) only
- *     count once they're actually shown. Back/forward-cache restores count as a new view.
+ *     count once they're actually shown. Coming back with Back/Forward (restored from the browser's cache or loaded
+ *     again) is a new view once it has stayed on screen a moment. A reload says so (the tracker folds a quick one).
  *   - Video updates carry the full state of that viewing, so a lost or repeated update can't lose or double-count.
  *     Only audible playback counts: muted autoplay, seeks and replays don't add watch time or "furthest point".
  *   - Every batch is saved in localStorage first and removed once the site confirms it. Sends use fetch, and
@@ -29,9 +31,9 @@
   if (window.__jmTracker) return;
   window.__jmTracker = 1;
 
-  var VERSION = 12;
+  var VERSION = 13; // keep equal to SCRIPT_VERSION in netlify/edge-functions/jm.js (tests/jm-edge.test.mjs checks)
   var BUCKET_S = 5;
-  var MAX_BUCKETS = 4320;
+  var MAX_BUCKETS = 4320; // keep in step with the tracker's MAX_BUCKETS (engagement-tracker src/ingest.js)
   var FLUSH_MS = 15000;
   var HIDDEN_FLUSH_MS = 60000;
   var STORE_Q = 'jm_q2';
@@ -101,8 +103,8 @@
     if (!t && el.querySelector) { var img = el.querySelector('img[alt]'); if (img) t = img.getAttribute('alt'); }
     return String(t).replace(/\s+/g, ' ').replace(/^\s+|\s+$/g, '').slice(0, 120);
   }
-  function param(name) {
-    var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(location.search);
+  function param(name, href) {
+    var m = new RegExp('[?&]' + name + '=([^&#]*)').exec(String(href).split('#')[0]);
     if (!m) return null;
     try { return decodeURIComponent(m[1].replace(/\+/g, ' ')); } catch (e) { return m[1]; }
   }
@@ -144,7 +146,7 @@
   function push(e) {
     e.eid = rid(12);
     e.ts = now();
-    if (human) e.h = 1;
+    if (human && e.h === undefined) e.h = 1; // page views say it per view (newPageView)
     q.push(e);
     if (q.length >= 40) flush(false);
   }
@@ -190,8 +192,9 @@
     for (var i = 0; i < list.length; i++) if (!(list[i] && list[i].k === key)) out.push(list[i]);
     if (out.length !== list.length) writeQ(out);
   }
-  // 4xx = the server will never take this body: don't keep it. Network errors / 5xx = keep for later.
-  function keepFor(status) { return !(status >= 400 && status < 500 && status !== 408 && status !== 429); }
+  // 4xx = the server will never take this body: don't keep it. Network errors / 5xx = keep for later, and so are 404 /
+  // 405, which the endpoint never answers to a batch (they mean it's missing right now: the edge function was bypassed).
+  function keepFor(status) { return !(status >= 400 && status < 500 && [404, 405, 408, 429].indexOf(status) < 0); }
   var inflight = {};
   var PAGE_INST = rid(8); // this page load: copies of its own page-close beacons are resent from a later page only
   function post(p, opts) {
@@ -280,18 +283,18 @@
       for (var i = 0; i < list.length; i++) if (list[i] && !inflight[list[i].k] && !ownFresh(list[i])) { sendBacklog(); return; }
     }), 1000);
   }
-  try { if (store) store.removeItem('jm_q'); } catch (e) {} // first version's backlog key (bodies without times)
 
   // ------------------------------------------------------------------ page view + engagement
   var pvId = null;
-  var pendingRestore = null;
   var shownAt = perf(), touched = false, heldMs = 0;
-  var RESTORE_SETTLE_MS = 1500;
   var HELD_MAX_MS = 120000;
   var activeMs = 0, maxScroll = 0, lastAct = -1e9, lastTick = perf(), sentActive = -1, sentScroll = -1, playing = 0;
+  // This page view's first real interaction: the reading time held so far counts (see tick).
+  function firstTouch() { if (!touched) { touched = true; activeMs += heldMs; heldMs = 0; } }
   function markHuman() {
     lastAct = perf();
-    if (!touched) { touched = true; activeMs += heldMs; heldMs = 0; }
+    startViewNow(); // a view waiting to settle (Back / Forward) starts at the first interaction
+    firstTouch();
     if (human) return;
     human = true;
     if (started) push({ t: 'h' });
@@ -324,15 +327,47 @@
     if (s > maxScroll) maxScroll = s;
     if (pvId && (activeMs !== sentActive || maxScroll !== sentScroll)) {
       sentActive = activeMs; sentScroll = maxScroll;
-      q.push({ t: 'pu', eid: rid(12), ts: now(), id: pvId, a: Math.round(activeMs), s: maxScroll, h: human ? 1 : 0 });
+      q.push({ t: 'pu', eid: rid(12), ts: now(), id: pvId, a: Math.round(activeMs), s: maxScroll, h: human && touched ? 1 : 0 });
     }
     for (var i = 0; i < videos.length; i++) videos[i].report(false);
   }
-  function newPageView() {
+  // A new page view. o: { u (address; default the current one), r (referrer), touched (an in-page navigation is
+  // itself an interaction), n ('r' = the browser reloaded the page) }. Its h says whether THIS view was interacted
+  // with (a view restored by Back that nobody touched isn't), unlike other events' visitor-wide h.
+  function newPageView(o) {
     pvId = rid(16);
     activeMs = 0; maxScroll = 0; sentActive = -1; sentScroll = -1;
-    shownAt = perf(); touched = false; heldMs = 0; // reading time before the first touch is held (see tick)
-    push({ t: 'pv', id: pvId, u: location.href, ti: document.title ? document.title.slice(0, 300) : null, r: document.referrer || null, f: framed ? 1 : 0 });
+    shownAt = perf(); touched = !!o.touched; heldMs = 0; // reading time before the first touch is held (see tick)
+    var e = { t: 'pv', id: pvId, u: o.u || location.href, ti: document.title ? document.title.slice(0, 300) : null, r: o.r || null, f: framed ? 1 : 0, h: human && touched ? 1 : 0 };
+    if (o.n) e.n = o.n;
+    push(e);
+  }
+  // Back / Forward (a page restored from the browser's cache, or loaded again): the view counts once the page has
+  // stayed on screen a moment, or at the first interaction. Some pages reload themselves when they come back, and some
+  // in-app browsers flash a page on the way out: those never count (the page left first).
+  var RESTORE_SETTLE_MS = 1500;
+  var pendingView = null, viewWaiting = null;
+  function startViewLater(o) {
+    cancelPendingView();
+    viewWaiting = o;
+    pendingView = setTimeout(safe(function () { pendingView = null; if (!document.hidden) startViewNow(); }), RESTORE_SETTLE_MS);
+  }
+  function startViewNow() {
+    if (!viewWaiting) return;
+    var o = viewWaiting;
+    cancelPendingView();
+    newPageView(o);
+    appIdentity();
+    flush(false);
+  }
+  function cancelPendingView() { if (pendingView) clearTimeout(pendingView); pendingView = null; viewWaiting = null; }
+  function navType() {
+    try {
+      var nav = performance.getEntriesByType && performance.getEntriesByType('navigation')[0];
+      if (nav && nav.type) return nav.type;
+      var t = performance.navigation && performance.navigation.type;
+      return t === 1 ? 'reload' : t === 2 ? 'back_forward' : 'navigate';
+    } catch (e) { return ''; }
   }
 
   // ------------------------------------------------------------------ identity
@@ -428,9 +463,11 @@
     var ce = d.payload.event && d.payload.event.uri, ci = d.payload.invitee && d.payload.invitee.uri;
     if (ce && ci) { markHuman(); push({ t: 'id', k: 'calendly', ce: ce, ci: ci, pv: pvId }); flush(true); }
   });
-  // Kit's identity parameters (subscriber id, hashed email), once read, leave the address bar: a copied or shared
-  // link must not carry the reader's identity into someone else's browser. The page view already has the full
-  // address. Only on jasonmoss.com itself (checkout and Learn pages belong to other apps).
+  // Kit's identity parameters (subscriber id, hashed email) leave the address bar as soon as the script loads, before
+  // any consent decision (removing them isn't tracking): a copied or shared link must not carry the reader's identity
+  // into someone else's browser. The first page view keeps the address it landed on. Only on jasonmoss.com itself
+  // (checkout and Learn pages belong to other apps).
+  var landingHref = location.href;
   var ID_PARAM = /^(ck_subscriber_id|subscriber_id|sh_kit)=/i;
   function stripIdentityParams() {
     if (isCheckoutHost || /^learn\./i.test(location.hostname) || !window.history || !history.replaceState) return;
@@ -440,11 +477,11 @@
     history.replaceState(history.state, '', location.pathname + (kept.length ? '?' + kept.join('&') : '') + location.hash);
   }
   function identityFromUrl() {
-    var kid = param('ck_subscriber_id') || param('subscriber_id');
+    var kid = param('ck_subscriber_id', landingHref) || param('subscriber_id', landingHref);
     if (kid && /^[1-9]\d{0,15}$/.test(kid)) push({ t: 'id', k: 'kit', kid: kid, pv: pvId });
     // Booking-confirmation pages carry the booking's opaque Calendly ids (?e=&i=). A URL can be shared, so this
     // counts as a weak signal (it never relabels a browser that already belongs to someone).
-    var e = param('e'), i = param('i');
+    var e = param('e', landingHref), i = param('i', landingHref);
     if (e && i && /^[A-Za-z0-9-]{8,64}$/.test(e) && /^[A-Za-z0-9-]{8,64}$/.test(i)) push({ t: 'id', k: 'calendly', src: 'u', ce: e, ci: i, pv: pvId });
   }
 
@@ -499,7 +536,7 @@
     // `playing` (keeps the page "active") follows audible playback only.
     function syncPlaying() {
       var should = !v.paused && !v.ended && audible();
-      if (should && !st.countingPlay) { st.countingPlay = true; playing++; if (!touched) { touched = true; activeMs += heldMs; heldMs = 0; } }
+      if (should && !st.countingPlay) { st.countingPlay = true; playing++; startViewNow(); firstTouch(); }
       else if (!should && st.countingPlay) { st.countingPlay = false; playing = Math.max(0, playing - 1); }
     }
     function onTime() {
@@ -569,12 +606,12 @@
   // hands each Player over: (window.JM_EMBEDS = window.JM_EMBEDS || []).push({ player, guid, title, iframe }).
   // It is wrapped to look like a <video> element, so the same counting rules apply (audible playback only).
   function embedAdapter(x) {
-    var player = x.player, ls = {};
+    var player = x.player, handlers = {};
     var v = {
       duration: 0, currentTime: 0, paused: true, ended: false, seeking: false, muted: false, volume: 1, playbackRate: 1,
-      addEventListener: function (ev, fn) { (ls[ev] = ls[ev] || []).push(fn); },
+      addEventListener: function (ev, fn) { (handlers[ev] = handlers[ev] || []).push(fn); },
     };
-    function emit(ev) { var l = ls[ev] || []; for (var i = 0; i < l.length; i++) l[i](); }
+    function emit(ev) { var l = handlers[ev] || []; for (var i = 0; i < l.length; i++) l[i](); }
     function checkSound() {
       try {
         player.getMuted(safe(function (m) { var was = v.muted; v.muted = m === true || m === 'true'; if (was !== v.muted) emit('volumechange'); }));
@@ -669,9 +706,10 @@
     started = true;
     resolveVid(serverVid);
     lastTick = perf();
-    newPageView();
+    var nav = navType();
+    if (nav === 'back_forward') startViewLater({ r: document.referrer });
+    else newPageView({ u: landingHref, r: document.referrer, n: nav === 'reload' ? 'r' : null });
     identityFromUrl();
-    stripIdentityParams(); // before in-page navigation is watched (this isn't a new view)
     appIdentity();
     hookVideos();
     hookEmbeds();
@@ -691,10 +729,11 @@
     on(document, 'visibilitychange', safe(function () {
       tick();
       if (document.hidden) { commitPendingEmail(); flush(true); }
+      else if (viewWaiting && !pendingView) startViewNow(); // came back after leaving for a moment: now it's seen
     }));
     on(window, 'pagehide', safe(function () {
-      // A page restored by Back that leaves again at once (e.g. it reloads itself to reset a form) wasn't a view.
-      if (pendingRestore) { clearTimeout(pendingRestore); pendingRestore = null; }
+      // A page that came back with Back and leaves again at once (e.g. it reloads itself to reset a form) wasn't a view.
+      cancelPendingView();
       commitPendingEmail(); flush(true);
     }));
     // In-page navigation (single-page apps such as Spiffy's checkout -> upsell -> thank-you steps): a new URL path
@@ -706,11 +745,9 @@
       var from = location.protocol + '//' + location.host + lastPath;
       lastPath = p;
       commitPendingEmail();
+      cancelPendingView();
       flush(false); // close out the previous view's time and scroll
-      pvId = rid(16);
-      activeMs = 0; maxScroll = 0; sentActive = -1; sentScroll = -1;
-      shownAt = perf(); touched = true; heldMs = 0; // an in-app navigation is itself an interaction
-      push({ t: 'pv', id: pvId, u: location.href, ti: document.title ? document.title.slice(0, 300) : null, r: from, f: framed ? 1 : 0 });
+      newPageView({ r: from, touched: true }); // an in-app navigation is itself an interaction
       appIdentity();
       flush(false);
     });
@@ -729,17 +766,12 @@
     } catch (e) {}
     on(window, 'popstate', function () { setTimeout(routeChanged, 0); });
     // Back/forward cache: the page comes back exactly as it was left. That's a new view of it, once it has stayed a
-    // moment: some pages reload themselves when restored, and the reload is the view then (never both).
+    // moment (startViewLater): some pages reload themselves when restored, and the reload is the view then (never both).
     on(window, 'pageshow', safe(function (ev) {
       if (!ev || !ev.persisted) return;
       for (var i = 0; i < videos.length; i++) videos[i].restart();
       lastTick = perf();
-      if (pendingRestore) clearTimeout(pendingRestore);
-      pendingRestore = setTimeout(safe(function () {
-        pendingRestore = null;
-        newPageView();
-        flush(false);
-      }), RESTORE_SETTLE_MS);
+      startViewLater({ r: document.referrer });
     }));
     setInterval(safe(tick), 1000);
     var lastHiddenFlush = 0;
@@ -854,14 +886,11 @@
     } catch (e) { /* stay quiet */ }
   }
 
-  // A small public hook for pages that collect an email without a form (rarely needed: buttons near an email
-  // field are picked up automatically).
-  window.JM_TRACK = { identify: safe(function (email) { if (started) identifyEmail(email, null); }) };
-
   // Nothing runs while the page is still being parsed: the tracker starts right after (DOMContentLoaded), so it
   // never delays the page's own scripts, videos or forms.
   function init() {
     try {
+      stripIdentityParams();
       if (navigator.webdriver) return; // automated browsers (crawlers, test robots)
       if (consentMode === 'g') start();
       else if (consentMode === 'r') askConsent();

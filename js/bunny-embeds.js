@@ -14,9 +14,9 @@
 //     from Bunny by scripts/build-bunny-config.mjs).
 //   • Gold player theme (#c2a86c) matching the brand.
 //
-// Every player is registered on window.JM_BUNNY so the Engagement Tracker
-// (js/jm.js, on every page) can hook in: each entry exposes a small
-// Player.js-compatible adapter over the Plyr instance.
+// Every player is registered on window.JM_BUNNY ({ video, bunnyId, videoId,
+// ... }) so the Engagement Tracker (js/jm.js, on every page) hooks its <video>
+// element.
 //
 // This file self-bootstraps its dependencies (Plyr + hls.js + the config),
 // so a page only needs the <video> markup plus:
@@ -275,32 +275,8 @@
     }
   }
 
-  // ---- Plyr -> Player.js-compatible adapter (what the tracker hooks into)
   function durationOf(p) {
     return (p.media && p.media.duration) || p.duration || 0;
-  }
-  function adapter(p) {
-    return {
-      on: function (ev, cb) {
-        try {
-          if (ev === 'timeupdate') {
-            p.on('timeupdate', function () { cb({ seconds: p.currentTime, duration: durationOf(p) }); });
-          } else if (ev === 'ready') {
-            if (p.ready) { cb(); } else { p.on('ready', function () { cb(); }); }
-          } else {
-            p.on(ev, function () { cb(); });
-          }
-        } catch (e) {}
-      },
-      getMuted: function (cb) { try { cb(!!p.muted); } catch (e) { cb(false); } },
-      getDuration: function (cb) { try { cb(durationOf(p)); } catch (e) { cb(0); } },
-      getCurrentTime: function (cb) { try { cb(p.currentTime); } catch (e) { cb(0); } },
-      play: function () { try { var r = p.play(); if (r && r.catch) r.catch(function () {}); } catch (e) {} },
-      pause: function () { try { p.pause(); } catch (e) {} },
-      mute: function () { try { p.muted = true; } catch (e) {} },
-      unmute: function () { try { p.muted = false; } catch (e) {} },
-      setVolume: function (v) { try { p.volume = (v || 0) / 100; } catch (e) {} },
-    };
   }
 
   function isIosDevice() {
@@ -475,8 +451,8 @@
     if (autoplay) { video.muted = true; video.setAttribute('muted', ''); }
 
     var entry = {
-      iframe: null, video: video, bunnyId: guid, videoId: videoId,
-      autoplay: autoplay, unmuted: !autoplay, player: null, plyr: null, overlay: null,
+      video: video, bunnyId: guid, videoId: videoId,
+      autoplay: autoplay, unmuted: !autoplay, plyr: null, overlay: null,
     };
     var built = false;
 
@@ -555,13 +531,11 @@
       try {
         plyr = new window.Plyr(video, plyrOpts);
       } catch (e) {
-        // Plyr failed: register a stub so tracking no-ops, native <video> still plays.
-        entry.player = null;
+        // Plyr failed: register it anyway (the tracker hooks the native <video>, which still plays).
         registerPlayer(entry);
         return;
       }
       entry.plyr = plyr;
-      entry.player = adapter(plyr);
       try { plyr.elements.container.classList.add('jm-plyr'); } catch (e) {}
       installMobileFullscreenFallback(plyr, entry);
       // Mobile tap-to-pause: on touch, Plyr can treat a frame tap as "show the
@@ -797,7 +771,7 @@
         if (CFG.cdn && guid) { v.src = 'https://' + CFG.cdn + '/' + guid + '/playlist.m3u8'; v.controls = true; }
         registerPlayer({
           video: v, bunnyId: guid, videoId: v.getAttribute('data-video-id') || guid,
-          autoplay: v.getAttribute('data-autoplay') === 'true', unmuted: false, player: null,
+          autoplay: v.getAttribute('data-autoplay') === 'true', unmuted: false,
         });
       });
     });

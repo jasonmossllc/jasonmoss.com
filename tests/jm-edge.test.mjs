@@ -2,14 +2,17 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 
+import { readFileSync } from "node:fs";
+
 const sent = [];
+const sentOpts = [];
 globalThis.Netlify = { env: { get: (k) => ({ TRACKER_URL: "https://tracker.example", TRACKER_INGEST_SECRET: "s".repeat(40) })[k] || "" } };
 const realFetch = globalThis.fetch;
 globalThis.fetch = async (url, opts = {}) => {
-  if (String(url).startsWith("https://tracker.example")) { sent.push(JSON.parse(opts.body)); return new Response("{}", { status: 200 }); }
+  if (String(url).startsWith("https://tracker.example")) { sent.push(JSON.parse(opts.body)); sentOpts.push(opts); return Response.json({ ok: true }); }
   return realFetch(url, opts);
 };
-const { default: handler, scrubEnvelope } = await import("../netlify/edge-functions/jm.js");
+const { default: handler, scrubEnvelope, deliveredStatus } = await import("../netlify/edge-functions/jm.js");
 
 const UA = "Mozilla/5.0 (iPhone; CPU iPhone OS 17_5 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Mobile/15E148 Safari/604.1";
 const post = (p) => handler(new Request("https://jasonmoss.com/_jm/e", { method: "POST", headers: { "user-agent": UA, "content-type": "text/plain" }, body: JSON.stringify(p) }),
@@ -50,4 +53,29 @@ test("Pinterest's in-app browser is a person (forwarded); its crawler and AI age
     assert.equal((await send(ua)).status, 204, ua);
   }
   assert.equal(sent.length, 1, "none of those reached the tracker");
+});
+
+test("only the tracker's own final answers count as delivered (a 404 / 405 from Railway's routing, auth, 5xx or a redirect is kept)", async () => {
+  assert.deepEqual([200, 204, 400, 413].map(deliveredStatus), [true, true, true, true]);
+  assert.deepEqual([302, 401, 403, 404, 405, 408, 409, 410, 421, 429, 500, 502, 503].map(deliveredStatus), Array(13).fill(false));
+  sent.length = 0; sentOpts.length = 0;
+  await post({ v: "s" + "C".repeat(21), e: [{ t: "h", eid: "abcdefabcdef" }] });
+  assert.equal(sentOpts[0]?.redirect, "manual", "a redirect (to a login page) is never followed into a 200");
+});
+
+test("an oversized batch is refused from its declared length, before it's read, and never forwarded", async () => {
+  sent.length = 0;
+  const big = JSON.stringify({ v: "s" + "D".repeat(21), e: [{ t: "h", eid: "abcdefabcdef", pad: "x".repeat(300 * 1024) }] });
+  const r = await handler(new Request("https://jasonmoss.com/_jm/e", { method: "POST", headers: { "user-agent": UA, "content-type": "text/plain", "content-length": String(big.length) }, body: big }),
+    { geo: { country: { code: "US" } }, ip: "203.0.113.9" });
+  assert.equal(r.status, 413);
+  assert.equal(sent.length, 0);
+});
+
+test("the script and the edge function carry the same version number (the edge cache-busts with it, the tracker stores the script's)", () => {
+  const script = readFileSync(new URL("../js/jm.js", import.meta.url), "utf8");
+  const edge = readFileSync(new URL("../netlify/edge-functions/jm.js", import.meta.url), "utf8");
+  const v = /var VERSION = (\d+);/.exec(script)?.[1];
+  assert.ok(v);
+  assert.equal(/const SCRIPT_VERSION = "(\d+)";/.exec(edge)?.[1], v);
 });
