@@ -178,3 +178,11 @@ test("an alert Postmark refuses isn't marked as sent: it's tried again an hour l
   assert.equal(await alertOnce(store, "auth", "S", "T", { send, now: NOW + 5 * 3600e3 }), "sent", "each kind has its own limit");
   assert.equal(sends.length, 3);
 });
+
+test("an envelope the tracker answers 200 {ok: false} (no browser id) is its final verdict: delivered, not stuck at the head of the queue", async () => {
+  const store = memStore({ [key(3000, 1)]: JSON.stringify({ rt: NOW, p: { e: [{ t: "h", eid: "eidxaaaaaa" }] } }) });
+  const r = await drain({ store, url: "https://t.example", secret: "s", now: NOW,
+    fetchImpl: async (u) => (u.endsWith("/healthz") ? ok() : Response.json({ ok: false, reason: "no visitor id" })) });
+  assert.deepEqual([r.sent, r.dead, r.failed], [1, 0, false]);
+  assert.equal([...store.m.keys()].filter((k) => k.startsWith("q/")).length, 0);
+});

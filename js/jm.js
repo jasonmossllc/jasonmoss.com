@@ -476,6 +476,16 @@
     if (kept.length === parts.length) return;
     history.replaceState(history.state, '', location.pathname + (kept.length ? '?' + kept.join('&') : '') + location.hash);
   }
+  // An address without Kit's identity parameters (what stripIdentityParams leaves in the address bar).
+  function withoutIdentity(href) {
+    var h = String(href), hash = '', i = h.indexOf('#');
+    if (i >= 0) { hash = h.slice(i); h = h.slice(0, i); }
+    var q = h.indexOf('?');
+    if (q < 0) return h + hash;
+    var parts = h.slice(q + 1).split('&'), kept = [];
+    for (var k = 0; k < parts.length; k++) if (!ID_PARAM.test(parts[k])) kept.push(parts[k]);
+    return h.slice(0, q) + (kept.length ? '?' + kept.join('&') : '') + hash;
+  }
   function identityFromUrl() {
     var kid = param('ck_subscriber_id', landingHref) || param('subscriber_id', landingHref);
     if (kid && /^[1-9]\d{0,15}$/.test(kid)) push({ t: 'id', k: 'kit', kid: kid, pv: pvId });
@@ -708,7 +718,9 @@
     lastTick = perf();
     var nav = navType();
     if (nav === 'back_forward') startViewLater({ r: document.referrer });
-    else newPageView({ u: landingHref, r: document.referrer, n: nav === 'reload' ? 'r' : null });
+    // The address it landed on (with the identity parameters), unless the page moved on in-app before tracking
+    // started (a consent notice answered later on a single-page app): then where it is now.
+    else newPageView({ u: withoutIdentity(landingHref) === location.href ? landingHref : location.href, r: document.referrer, n: nav === 'reload' ? 'r' : null });
     identityFromUrl();
     appIdentity();
     hookVideos();

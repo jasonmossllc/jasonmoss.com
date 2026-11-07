@@ -137,3 +137,18 @@ test("Kit's identity parameters leave the address bar before any consent decisio
   assert.ok(pv.u.includes("ck_subscriber_id=12345") && pv.u.includes(`sh_kit=${sh}`));
   assert.ok(events().some((e) => e.t === "id" && e.k === "kit" && e.kid === "12345"));
 });
+
+test("tracking that starts after the page moved on in-app (consent answered later) records where the page is now", { skip }, async () => {
+  batches = [];
+  const p = await newPage();
+  await p.goto(`${base}/eu/?utm_source=kit&ck_subscriber_id=12345`);
+  await settle(p, 500);
+  await p.evaluate(() => history.pushState({}, "", "/eu/step-2/?x=1"));
+  await p.click("#jm-consent .jm-y");
+  await settle(p, 800);
+  await p.close({ runBeforeUnload: true });
+  await new Promise((r) => setTimeout(r, 400));
+  const pv = pageViews()[0];
+  assert.ok(pv, "tracking started");
+  assert.equal(new URL(pv.u).pathname + new URL(pv.u).search, "/eu/step-2/?x=1");
+});

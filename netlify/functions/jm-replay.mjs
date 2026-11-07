@@ -79,7 +79,9 @@ async function send(url, secret, batch, fetchImpl) {
       redirect: "manual",
       signal: AbortSignal.timeout(FETCH_TIMEOUT_MS),
     });
-    if (res.ok) return (await res.json().catch(() => null))?.ok === true ? "ok" : "refused";
+    // The tracker always answers {ok: true|false, ...}: ok false on a 200 is its verdict on a bad envelope (no browser
+    // id), final like a 400. A 2xx without that answer (a page from a wrong path) never counts as delivered.
+    if (res.ok) return typeof (await res.json().catch(() => null))?.ok === "boolean" ? "ok" : "refused";
     if (res.status === 401 || res.status === 403) return "auth";
     if (res.status === 500) return "error";
     if ([408, 429].includes(res.status) || res.status >= 500 || (res.status >= 300 && res.status < 400) || res.status === 0) return "down";
