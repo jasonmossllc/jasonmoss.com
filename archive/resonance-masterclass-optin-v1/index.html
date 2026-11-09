@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="preload" as="image" fetchpriority="high" href="assets/images/hero-bg.webp">
+  <title>The Resonance Masterclass</title>
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
+  <link rel="icon" href="/assets/images/favicon-192x192.png" sizes="192x192" type="image/png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:300,300italic,400,500,600,700&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+    body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      color: #F8F6F2;
+      background: rgb(31, 45, 38);
+    }
+    img { max-width: 100%; display: block; }
+
+    /* =====================================
+       SECTION 1: HERO
+       ===================================== */
+    .hero {
+      position: relative;
+      background: url('assets/images/hero-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        rgba(18, 26, 22, 0.50) 0%,
+        rgba(18, 26, 22, 0.68) 38%,
+        rgba(18, 26, 22, 0.62) 78%,
+        rgba(18, 26, 22, 0.45) 100%
+      );
+      z-index: 1;
+    }
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      max-width: 25rem;
+      margin: 0 auto;
+      padding: 6.5rem 1.25rem 5rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+    .hero-kicker {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.875rem;
+      line-height: 1.225rem;
+      color: #9A9791;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin: 0 0 3.75rem;
+    }
+    .hero-kicker .nowrap { white-space: nowrap; }
+    .hero-heading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.875rem;
+      line-height: 2.4375rem;
+      color: #F8F6F2;
+      margin: 0 0 1.5rem;
+      max-width: 23.75rem;
+    }
+    .hero-heading em { font-style: italic; }
+    .hero-heading .gold { color: #C2A86C; }
+    .hero-subheading {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.375rem;
+      line-height: 2.0625rem;
+      color: #F8F6F2;
+      margin: 0 0 2.25rem;
+      max-width: 21.125rem;
+    }
+    .hero-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1.125rem;
+      line-height: 1.5188rem;
+      color: #D5D4D3;
+      margin: 0 0 3.25rem;
+      max-width: 21.9375rem;
+      position: relative;
+    }
+    .hero-body::before {
+      content: '';
+      display: block;
+      width: 3rem;
+      height: 1px;
+      background: rgba(194, 168, 108, 0.7);
+      margin: 0 auto 1.75rem;
+    }
+    .hero-scroll-cue {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      padding: 0.625rem 1rem;
+      animation: chevron-breathe 2.9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
+      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .hero-scroll-cue:hover {
+      opacity: 0.86;
+    }
+    .hero-chevron {
+      width: 3rem;
+      height: auto;
+      display: inline-block;
+      filter: brightness(1.16) saturate(1.08);
+    }
+    @keyframes chevron-breathe {
+      0%, 100% { transform: translateY(0); opacity: 1; }
+      50% { transform: translateY(0.625rem); opacity: 0.74; }
+    }
+
+    @media (min-width: 768px) {
+      .hero {
+        background: url('assets/images/hero-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
+      }
+      .hero-inner {
+        max-width: 60rem;
+        padding: 8.5rem 1.8125rem 6.25rem;
+      }
+      .hero-kicker {
+        font-size: 1.0625rem;
+        line-height: 1.7rem;
+        margin-bottom: 4.25rem;
+      }
+      .hero-heading {
+        font-size: 2.8125rem;
+        line-height: 3.375rem;
+        max-width: 42.875rem;
+        margin-bottom: 1.25rem;
+      }
+      .hero-subheading {
+        font-size: 1.875rem;
+        line-height: 2.4375rem;
+        max-width: 42.875rem;
+        margin-bottom: 4rem;
+      }
+      .hero-body {
+        font-size: 1.25rem;
+        line-height: 1.75rem;
+        max-width: 36.8125rem;
+        margin-bottom: 3.75rem;
+      }
+      .hero-body::before {
+        width: 4rem;
+        margin-bottom: 2.25rem;
+      }
+      .hero-chevron { width: 3.875rem; }
+    }
+
+    /* =====================================
+       SECTION 2: OPT-IN (BENEFITS + TESTIMONIAL + FORM + FOOTER)
+       ===================================== */
+    .optin {
+      background: rgb(248, 246, 242);
+      color: #1D1F1E;
+      display: flex;
+    }
+    .optin-inner {
+      max-width: 25rem;
+      width: 100%;
+      margin: 0 auto;
+      padding: 3rem 1.25rem 2rem;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      flex: 1;
+    }
+    .optin-kicker {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 1rem;
+      line-height: 1.6rem;
+      color: #907740;
+      margin: 0 0 2.25rem;
+    }
+
+    /* Benefits list — editorial numbered treatment */
+    .benefits {
+      width: 100%;
+      max-width: 22.5rem;
+      display: flex;
+      flex-direction: column;
+    }
+    .benefit {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1.5rem 0;
+      text-align: left;
+      border-top: 1px solid #E0D8C4;
+    }
+    .benefit:first-child { border-top: 0; padding-top: 0.5rem; }
+    .benefit:last-child { padding-bottom: 0.5rem; }
+    .benefit-number {
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 1.875rem;
+      line-height: 1;
+      color: #C2A86C;
+      flex-shrink: 0;
+      min-width: 2.25rem;
+      letter-spacing: -0.01em;
+      padding-top: 0.125rem;
+    }
+    .benefit-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+      flex: 1;
+    }
+    .benefit-headline {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 1.125rem;
+      line-height: 1.55rem;
+      color: #1D1F1E;
+      margin: 0;
+    }
+    .benefit-body {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 1.55rem;
+      color: #5A5F5C;
+      margin: 0;
+    }
+    .benefit-divider {
+      width: 10.1875rem;
+      max-width: 100%;
+      border: 0;
+      border-top: 1px solid #E9E2D3;
+      margin: 0 auto;
+    }
+    .benefit-divider--outer {
+      width: 22.5rem;
+      margin-top: 2.25rem;
+    }
+
+    /* Testimonial card */
+    .testimonial {
+      width: 100%;
+      max-width: 22.5rem;
+      margin-top: 2.25rem;
+      padding: 1.1875rem 1.25rem 1.0625rem;
+      border: 1px solid #DDDBD3;
+      border-radius: 0.75rem;
+      background: #F0EDE4;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      text-align: left;
+    }
+    .testimonial-avatar {
+      width: 3.5rem;
+      height: 3.5rem;
+      flex-shrink: 0;
+      border-radius: 50%;
+    }
+    .testimonial-content {
+      display: flex;
+      flex-direction: column;
+      gap: 0.375rem;
+    }
+    .testimonial-quote {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 1.4rem;
+      color: #4F5050;
+      margin: 0;
+    }
+    .testimonial-quote em { font-style: italic; }
+    .testimonial-author {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: 0.75rem;
+      line-height: 1.05rem;
+      color: #7E8381;
+      margin: 0;
+    }
+    /* Form card */
+    .optin-form-wrap {
+      width: 100%;
+      max-width: 22.5rem;
+      margin-top: 2rem;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(221, 219, 211, 0.7);
+      border-radius: 0.375rem;
+      box-shadow:
+        0 1.25rem 2.75rem rgba(29, 31, 30, 0.11),
+        0 0.25rem 0.75rem rgba(93, 93, 93, 0.08);
+      padding: 1.75rem 1.5rem 2rem;
+      scroll-margin-top: 1.25rem;
+    }
+    .optin-form { display: flex; flex-direction: column; gap: 0.5rem; }
+    .optin-form .form-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #C4B99A;
+      border-radius: 0;
+      background: transparent;
+      padding: 1rem 0 0.875rem;
+      font-family: 'Libre Baskerville', serif;
+      font-size: 1rem;
+      font-style: italic;
+      color: #2E3A2E;
+      outline: none;
+      box-shadow: none;
+      transition: border-color 0.3s ease;
+    }
+    .optin-form .form-input::placeholder {
+      color: #8A917E;
+      font-family: 'Libre Baskerville', serif;
+      font-style: italic;
+      font-size: 1rem;
+      opacity: 1;
+    }
+    .optin-form .form-input:focus { border-bottom-color: #B8962E; }
+    .optin-form .form-btn {
+      margin-top: 1.25rem;
+      width: 100%;
+      background: #2C3E2D;
+      border: none;
+      border-radius: 0.25rem;
+      color: #F7F4ED;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.8125rem, 4vw, 1.0625rem);
+      letter-spacing: 0.02em;
+      text-transform: none;
+      white-space: nowrap;
+      padding: 1.375rem 0.5rem;
+      cursor: pointer;
+      transition: background-color 0.25s ease-out, transform 0.25s ease-out;
+    }
+    .optin-form .form-btn:hover { background: #1E2B24; transform: translateY(-1px); }
+    .optin-subtext {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.9375rem;
+      line-height: 1.3125rem;
+      color: #5A5F5C;
+      margin: 1.25rem 0 0;
+      max-width: 20rem;
+      letter-spacing: 0.005em;
+    }
+    .optin-subtext strong {
+      font-weight: 600;
+      color: #1D1F1E;
+    }
+
+    /* Footer */
+    .optin-footer {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 400;
+      font-size: 0.625rem;
+      line-height: 1rem;
+      color: rgba(126, 131, 129, 0.48);
+      margin: 3rem 0 0;
+      max-width: 23.75rem;
+      margin-top: auto;
+      padding-top: 3rem;
+    }
+    .optin-footer p { margin: 0; white-space: nowrap; }
+    .optin-footer a { color: rgba(126, 131, 129, 0.54); text-decoration: none; }
+    .optin-footer a:hover { text-decoration: underline; }
+
+    @media (min-width: 768px) {
+      .optin-inner {
+        max-width: 50rem;
+        padding: 4rem 1.8125rem 2.75rem;
+      }
+      .optin-kicker {
+        font-size: 1.125rem;
+        line-height: 1.8rem;
+        margin-bottom: 2.5rem;
+      }
+      .benefits { max-width: 38rem; }
+      .benefit-divider { width: 18.6875rem; }
+      .benefit-divider--outer { width: 40.9375rem; margin-top: 2.75rem; }
+      .benefit {
+        gap: 1.75rem;
+        padding: 1.875rem 0;
+      }
+      .benefit:first-child { padding-top: 0.75rem; }
+      .benefit:last-child { padding-bottom: 0.75rem; }
+      .benefit-number {
+        font-size: 2.625rem;
+        min-width: 3rem;
+        padding-top: 0.25rem;
+      }
+      .benefit-headline {
+        font-size: 1.3125rem;
+        line-height: 1.75rem;
+      }
+      .benefit-body {
+        font-size: 1.125rem;
+        line-height: 1.7rem;
+      }
+      .testimonial {
+        max-width: 41rem;
+        margin-top: 2.75rem;
+        padding: 1.5rem 2rem;
+        gap: 1.75rem;
+      }
+      .testimonial-avatar { width: 4.8125rem; height: 4.8125rem; }
+      .testimonial-quote { font-size: 1.1875rem; line-height: 2.0188rem; }
+      .testimonial-author { font-size: 1rem; line-height: 1.6rem; }
+      .optin-form-wrap {
+        max-width: 41rem;
+        margin-top: 2.75rem;
+        padding: 1.5rem 2rem 1.5rem;
+      }
+      .optin-form .form-btn {
+        font-size: 1.125rem;
+        padding: 1.25rem 3rem;
+      }
+      .optin-subtext {
+        font-size: 1rem;
+        line-height: 1.4rem;
+        max-width: 35.625rem;
+      }
+      .optin-subtext br.mobile-only { display: none; }
+      .optin-footer {
+        font-size: 0.6875rem;
+        line-height: 1.1rem;
+        max-width: 40.1875rem;
+        margin-top: auto;
+        padding-top: 4rem;
+      }
+    }
+
+  </style>
+<style id="jm-s2-theme">
+/* Two-step revenue question (js/optin-shared.js revenueQuestion), styled to match this page.
+   Shared defaults were designed on this page; this block restores the original card padding,
+   the original inner 5px bar radius, and the 768+/<=345 margins the shared sheet changes.
+   Keep it pixel-identical to the pre-refactor design. */
+.optin-form-wrap.jm-s2-swap { padding-top: 2.125rem; padding-bottom: 1.625rem; }
+.jm-s2-progress { --s2-bar-radius: calc(0.375rem - 1px) calc(0.375rem - 1px) 0 0; }
+@media (min-width: 768px) {
+  .optin-form-wrap.jm-s2-swap { padding-top: 1.5rem; padding-bottom: 1rem; }
+  .jm-s2 .jm-s2-kicker { margin-bottom: 0.75rem; }
+  .jm-s2 .jm-s2-headline { margin-bottom: 1rem; }
+}
+@media (max-width: 345px) {
+  .optin-form-wrap.jm-s2-swap { padding-left: 1.125rem; padding-right: 1.125rem; }
+  .jm-s2 .jm-s2-kicker { margin-bottom: 0.875rem; }
+  .jm-s2 .jm-s2-headline { margin-bottom: 1.25rem; }
+  .jm-s2 .jm-s2-note { margin-top: 0.75rem; }
+}
+</style>
+</head>
+<body>
+
+  <!-- ============================================
+      SECTION 1: HERO
+      ============================================ -->
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="hero-kicker">Coaches, Consultants <span class="nowrap">&amp;&nbsp;Service Providers</span></p>
+
+      <h1 class="hero-heading">There&rsquo;s a reason<br>marketing feels <span class="gold"><em>heavy.</em></span></h1>
+
+      <h2 class="hero-subheading">It wasn&rsquo;t designed for you.</h2>
+
+      <p class="hero-body">Inside this free masterclass, you&rsquo;ll find a different way to attract clients &mdash; without performing, pretending, or burning out.</p>
+
+      <a class="hero-scroll-cue" href="#optin" aria-label="Scroll to opt-in">
+        <img class="hero-chevron" src="assets/images/chevron-down.png" srcset="assets/images/chevron-down.png 1x, assets/images/chevron-down@2x.png 2x" alt="" width="58" height="33">
+      </a>
+    </div>
+  </section>
+
+  <!-- ============================================
+      SECTION 2: OPT-IN
+      ============================================ -->
+  <section class="optin" id="optin">
+    <div class="optin-inner">
+      <p class="optin-kicker">INSIDE THIS MASTERCLASS</p>
+
+      <div class="benefits">
+        <div class="benefit">
+          <span class="benefit-number">01</span>
+          <div class="benefit-text">
+            <p class="benefit-headline">Feel creatively free again</p>
+            <p class="benefit-body">no more agonizing over every post, email, or caption wondering if it&rsquo;s going to &ldquo;land&rdquo;</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-number">02</span>
+          <div class="benefit-text">
+            <p class="benefit-headline">Attract clients who are genuinely meant to work with you</p>
+            <p class="benefit-body">not people comparing you to five others in their inbox</p>
+          </div>
+        </div>
+        <div class="benefit">
+          <span class="benefit-number">03</span>
+          <div class="benefit-text">
+            <p class="benefit-headline">Make marketing feel sustainable</p>
+            <p class="benefit-body">something you&nbsp;enjoy showing up for, instead&nbsp;of a performance you&rsquo;re tired of giving</p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="benefit-divider benefit-divider--outer">
+
+
+      <div class="testimonial">
+        <img class="testimonial-avatar" src="assets/images/testimonial-avatar.png" srcset="assets/images/testimonial-avatar.png 1x, assets/images/testimonial-avatar@2x.png 2x" alt="Anne S." width="77" height="77">
+        <div class="testimonial-content">
+          <p class="testimonial-quote"><em>&ldquo;When I watched, tears were streaming down my face. So pure and aligned.&rdquo;</em></p>
+          <p class="testimonial-author">Anne S.</p>
+        </div>
+      </div>
+      <div class="optin-form-wrap" id="optin-form">
+        <form class="optin-form email-form" novalidate>
+          <input type="text" name="First name" class="form-input" placeholder="First name" required aria-required="true">
+          <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
+          <!-- Honeypot: hidden from humans; bots fill it and get rejected server-side -->
+          <input type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+          <!-- Cloudflare Turnstile (renders once the site key is set) -->
+          <div id="cf-turnstile-box" style="margin:0 auto 12px;display:flex;justify-content:center;max-width:100%;"></div>
+          <button type="submit" class="form-btn">Watch the Masterclass Now</button>
+        </form>
+
+        <p class="optin-subtext"><strong>11,000+</strong> entrepreneurs signed up.<br class="mobile-only"> Instant access.</p>
+
+      </div>
+
+      <div class="optin-footer">
+        <p>&copy; Jason Moss LLC. All rights reserved</p>
+        <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+        <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+        <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+        <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+      </div>
+    </div>
+  </section>
+  <!-- Form JS: ZeroBounce validation + submit to Kit + email passthrough -->
+  <script src="/js/optin-shared.js"></script>
+<script>
+  (function() {
+    'use strict';
+
+    var form = document.querySelector('.email-form');
+    if (!form) return;
+
+    // Read ad/source UTM params from URL on page load (only used if present)
+    var urlParams = new URLSearchParams(window.location.search);
+    var latestAd = (urlParams.get('ad') || '').trim();
+    var latestSource = (urlParams.get('source') || '').trim();
+
+    JMOptin.init({
+      kitTagId: 20410092, // Kit: Resonance Masterclass (Cold Traffic)
+      extraPayload: function () {
+        var extra = {};
+        if (latestAd) extra.latest_ad = latestAd;
+        if (latestSource) extra.latest_source = latestSource;
+        return extra;
+      },
+      // Straight to the replay (no thank-you page in between); the revenue
+      // question fires the Meta Lead itself (js/optin-shared.js).
+      redirect: function (ctx) {
+        return '/resonance-masterclass-replay/?email=' + encodeURIComponent(ctx.email);
+      },
+      revenueQuestion: {
+        headline: 'One last question before your masterclass starts',
+        idle: 'Tap one to start your masterclass.',
+        going: 'Starting your masterclass\u2026'
+      }
+    });
+  })();
+  </script>
+
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onloadTurnstile&render=explicit" async defer></script>
+</body>
+</html>

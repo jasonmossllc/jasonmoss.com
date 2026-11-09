@@ -52,7 +52,7 @@
       z-index: 2;
       max-width: 25rem;
       margin: 0 auto;
-      padding: 6.5rem 1.25rem 5rem;
+      padding: 1.5rem 1.25rem 2.5rem;
       display: flex;
       flex-direction: column;
       align-items: center;
@@ -60,42 +60,34 @@
     }
     .hero-kicker {
       font-family: 'Raleway', sans-serif;
-      font-weight: 500;
-      font-size: 0.875rem;
-      line-height: 1.225rem;
-      color: #9A9791;
-      letter-spacing: 0.16em;
-      text-transform: uppercase;
-      margin: 0 0 3.75rem;
+      font-weight: 600;
+      font-size: clamp(0.8125rem, 3.6vw, 0.875rem);
+      line-height: 1.3125rem;
+      color: #C2A86C;
+      letter-spacing: 0.02em;
+      margin: 0 0 0.625rem;
+      text-wrap: balance;
     }
-    .hero-kicker .nowrap { white-space: nowrap; }
     .hero-heading {
       font-family: 'Libre Baskerville', serif;
       font-weight: 400;
-      font-size: 1.875rem;
-      line-height: 2.4375rem;
+      font-size: 1.75rem;
+      line-height: 2.25rem;
       color: #F8F6F2;
-      margin: 0 0 1.5rem;
+      margin: 0 0 1.25rem;
       max-width: 23.75rem;
+      text-wrap: balance;
     }
     .hero-heading em { font-style: italic; }
-    .hero-heading .gold { color: #C2A86C; }
-    .hero-subheading {
-      font-family: 'Libre Baskerville', serif;
-      font-weight: 400;
-      font-size: 1.375rem;
-      line-height: 2.0625rem;
-      color: #F8F6F2;
-      margin: 0 0 2.25rem;
-      max-width: 21.125rem;
-    }
+    .hero-heading .gold { color: #C2A86C; display: block; }
+    .hero-heading .nowrap { white-space: nowrap; }
     .hero-body {
       font-family: 'Raleway', sans-serif;
       font-weight: 400;
       font-size: 1.125rem;
       line-height: 1.5188rem;
       color: #D5D4D3;
-      margin: 0 0 3.25rem;
+      margin: 0 0 1.625rem;
       max-width: 21.9375rem;
       position: relative;
     }
@@ -105,30 +97,92 @@
       width: 3rem;
       height: 1px;
       background: rgba(194, 168, 108, 0.7);
-      margin: 0 auto 1.75rem;
+      margin: 0 auto 1.125rem;
     }
-    .hero-scroll-cue {
+    /* Host chip: Jason's face from the same shoot as the reel ad, so the page
+       reads at a glance as the person the visitor just tapped on. */
+    .hero-host {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      max-width: 100%;
+      margin: 0 0 1.5rem;
+      padding: 0.375rem 1.25rem 0.375rem 0.375rem;
+      border: 1px solid rgba(194, 168, 108, 0.4);
+      border-radius: 999px;
+      background: rgba(18, 26, 22, 0.58);
+      box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.3);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
+      text-align: left;
+    }
+    .hero-host-photo {
+      width: 4rem;
+      height: 4rem;
+      flex-shrink: 0;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 0 0 1px rgba(194, 168, 108, 0.75);
+    }
+    .hero-host-text {
+      margin: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.1875rem;
+      min-width: 0;
+    }
+    .hero-host-title {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: clamp(0.8125rem, 3.9vw, 0.9375rem);
+      line-height: 1.3;
+      color: #F8F6F2;
+      white-space: nowrap;
+    }
+    .hero-host-meta {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: clamp(0.75rem, 3.4vw, 0.8125rem);
+      line-height: 1.3;
+      letter-spacing: 0.02em;
+      color: #B9B6AE;
+      white-space: nowrap;
+    }
+    .hero-host-meta .dot { color: #C2A86C; padding: 0 0.3125rem; }
+
+    /* First-screen button: jumps straight to the form further down the page */
+    .hero-btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      max-width: 22.5rem;
+      height: 3.75rem;
+      background: #C2A86C;
+      color: #1D1F1E;
+      border-radius: 0.25rem;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 600;
+      font-size: clamp(0.9375rem, 4vw, 1.0625rem);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
       text-decoration: none;
-      padding: 0.625rem 1rem;
-      animation: chevron-breathe 2.9s cubic-bezier(0.45, 0, 0.55, 1) infinite;
-      transition: opacity 0.25s ease-out, transform 0.25s ease-out;
+      box-shadow: 0 0.75rem 1.75rem rgba(0, 0, 0, 0.35);
+      transition: background-color 0.25s ease-out, transform 0.25s ease-out;
     }
-    .hero-scroll-cue:hover {
-      opacity: 0.86;
+    .hero-btn:hover { background: #E0C68A; transform: translateY(-1px); }
+    .hero-btn:focus-visible { outline: 2px solid #F8F6F2; outline-offset: 3px; }
+    .hero-btn-note {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 500;
+      font-size: 0.8125rem;
+      line-height: 1.3;
+      letter-spacing: 0.04em;
+      color: #B9B6AE;
+      margin: 0.875rem 0 0;
     }
-    .hero-chevron {
-      width: 3rem;
-      height: auto;
-      display: inline-block;
-      filter: brightness(1.16) saturate(1.08);
-    }
-    @keyframes chevron-breathe {
-      0%, 100% { transform: translateY(0); opacity: 1; }
-      50% { transform: translateY(0.625rem); opacity: 0.74; }
-    }
+    .hero-btn-note .dot { color: #C2A86C; padding: 0 0.375rem; }
+    .hero-btn-note strong { font-weight: 600; color: #F8F6F2; }
 
     @media (min-width: 768px) {
       .hero {
@@ -136,36 +190,39 @@
       }
       .hero-inner {
         max-width: 60rem;
-        padding: 8.5rem 1.8125rem 6.25rem;
+        padding: 3.75rem 1.8125rem 4.5rem;
       }
+      .hero-host {
+        gap: 1rem;
+        margin-bottom: 2.75rem;
+        padding: 0.4375rem 1.625rem 0.4375rem 0.4375rem;
+      }
+      .hero-host-photo { width: 4.75rem; height: 4.75rem; }
+      .hero-host-title { font-size: 1.0625rem; }
+      .hero-host-meta { font-size: 0.9375rem; }
       .hero-kicker {
         font-size: 1.0625rem;
         line-height: 1.7rem;
-        margin-bottom: 4.25rem;
+        margin-bottom: 1rem;
       }
       .hero-heading {
         font-size: 2.8125rem;
         line-height: 3.375rem;
-        max-width: 42.875rem;
-        margin-bottom: 1.25rem;
-      }
-      .hero-subheading {
-        font-size: 1.875rem;
-        line-height: 2.4375rem;
-        max-width: 42.875rem;
-        margin-bottom: 4rem;
+        max-width: 44rem;
+        margin-bottom: 1.875rem;
       }
       .hero-body {
         font-size: 1.25rem;
         line-height: 1.75rem;
         max-width: 36.8125rem;
-        margin-bottom: 3.75rem;
+        margin-bottom: 2.5rem;
       }
       .hero-body::before {
         width: 4rem;
-        margin-bottom: 2.25rem;
+        margin-bottom: 1.625rem;
       }
-      .hero-chevron { width: 3.875rem; }
+      .hero-btn { max-width: 26rem; font-size: 1.125rem; }
+      .hero-btn-note { font-size: 0.875rem; margin-top: 1rem; }
     }
 
     /* =====================================
@@ -372,6 +429,20 @@
       color: #1D1F1E;
     }
 
+    /* One line above the fields: the reason for the ask comes before the ask */
+    .optin-form-lead {
+      font-family: 'Libre Baskerville', serif;
+      font-weight: 400;
+      font-size: 1.0625rem;
+      line-height: 1.6rem;
+      color: #2E3A2E;
+      margin: 0 0 0.375rem;
+      text-wrap: balance;
+    }
+    @media (min-width: 768px) {
+      .optin-form-lead { font-size: 1.1875rem; line-height: 1.75rem; margin-bottom: 0.25rem; }
+    }
+
     /* Footer */
     .optin-footer {
       font-family: 'Raleway', sans-serif;
@@ -481,17 +552,22 @@
       ============================================ -->
   <section class="hero">
     <div class="hero-inner">
-      <p class="hero-kicker">Coaches, Consultants <span class="nowrap">&amp;&nbsp;Service Providers</span></p>
+      <div class="hero-host">
+        <img class="hero-host-photo" src="assets/images/jason-reel.jpg" alt="Jason Moss" width="320" height="320">
+        <p class="hero-host-text">
+          <span class="hero-host-title">The Resonance Masterclass</span>
+          <span class="hero-host-meta">with Jason Moss<span class="dot" aria-hidden="true">&middot;</span>22 minutes</span>
+        </p>
+      </div>
 
-      <h1 class="hero-heading">There&rsquo;s a reason<br>marketing feels <span class="gold"><em>heavy.</em></span></h1>
+      <p class="hero-kicker">For coaches, consultants &amp; service providers</p>
 
-      <h2 class="hero-subheading">It wasn&rsquo;t designed for you.</h2>
+      <h1 class="hero-heading">How to market so the right people say, <span class="gold"><em>&ldquo;I can&rsquo;t believe <span class="nowrap">I found you.&rdquo;</span></em></span></h1>
 
-      <p class="hero-body">Inside this free masterclass, you&rsquo;ll find a different way to attract clients &mdash; without performing, pretending, or burning out.</p>
+      <p class="hero-body">In this free masterclass, I&rsquo;ll show you how to attract clients without performing, pretending, or burning out.</p>
 
-      <a class="hero-scroll-cue" href="#optin" aria-label="Scroll to opt-in">
-        <img class="hero-chevron" src="assets/images/chevron-down.png" srcset="assets/images/chevron-down.png 1x, assets/images/chevron-down@2x.png 2x" alt="" width="58" height="33">
-      </a>
+      <a class="hero-btn" id="hero-watch-btn" href="#optin-form">Watch the Masterclass Now</a>
+      <p class="hero-btn-note"><strong>11,000+</strong> entrepreneurs already in</p>
     </div>
   </section>
 
@@ -537,6 +613,7 @@
         </div>
       </div>
       <div class="optin-form-wrap" id="optin-form">
+        <p class="optin-form-lead">Enter your name and email to start watching.</p>
         <form class="optin-form email-form" novalidate>
           <input type="text" name="First name" class="form-input" placeholder="First name" required aria-required="true">
           <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
