@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
   <title>Resonance Masterclass Replay</title>
+  <!-- Video poster (the opening frame): loaded first so the player never shows black before autoplay. Update with the video. -->
+  <link rel="preload" as="image" fetchpriority="high" href="https://vz-9047a62b-75b.b-cdn.net/c4c00600-7899-4280-a7dc-f1110f875f64/thumbnail_264ef3e6.jpg">
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" href="/assets/images/favicon-32x32.png" sizes="32x32" type="image/png">
@@ -69,6 +71,10 @@
       box-shadow: 0 0 30px 0 rgba(194,168,108,.35);
     }
     .hero-bridge { font-family: 'Libre Baskerville', serif; font-size: .875rem; line-height: 1.5rem; color: #E9E2D3; max-width: 22rem; margin: 1.75rem 0 1.25rem; }
+
+    /* Let the poster behind the player show through until the first video frame paints */
+    .hero-video video.jm-player, .hero-video .plyr__video-wrapper, .hero-video .plyr--video { background: transparent !important; }
+    .hero-video .plyr__poster { background-color: transparent !important; transition: none !important; }
 
     /* Big centered sound pill (same as the Sales Bible page) */
     .jm-cfs { align-items: center !important; justify-content: center !important; }
@@ -170,8 +176,8 @@
       if (!(('ontouchstart' in window) || navigator.maxTouchPoints > 0)) document.getElementById('sound-verb').textContent = 'Click';
     </script>
 
-    <div class="hero-video">
-      <video class="jm-player" data-bunny-id="c4c00600-7899-4280-a7dc-f1110f875f64" data-video-id="zosvj2ru1y" data-autoplay="true" data-end-title="Ready to make this work in your business?" data-end-cta="Book Your Free Assessment" data-end-note="FREE · 20 MINUTES · 1-ON-1 WITH JASON" data-end-target=".page-cta" muted playsinline crossorigin="anonymous"></video>
+    <div class="hero-video" style="background:#22271f url('https://vz-9047a62b-75b.b-cdn.net/c4c00600-7899-4280-a7dc-f1110f875f64/thumbnail_264ef3e6.jpg') center/cover no-repeat">
+      <video class="jm-player" data-bunny-id="c4c00600-7899-4280-a7dc-f1110f875f64" data-video-id="zosvj2ru1y" data-autoplay="true" poster="https://vz-9047a62b-75b.b-cdn.net/c4c00600-7899-4280-a7dc-f1110f875f64/thumbnail_264ef3e6.jpg" data-end-title="Ready to make this work in your business?" data-end-cta="Book Your Free Assessment" data-end-note="FREE · 20 MINUTES · 1-ON-1 WITH JASON" data-end-target=".page-cta" muted playsinline crossorigin="anonymous"></video>
     </div>
 
     <p class="hero-bridge">How do you apply this to your business? Let&rsquo;s look at it together and find the one shift that would bring more clients in the door.</p>
