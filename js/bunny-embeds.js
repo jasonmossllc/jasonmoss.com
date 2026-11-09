@@ -158,13 +158,13 @@
       // serif headline, gold button. Sized in cqw so it fits a ~340px phone
       // player as well as a desktop one.
       '.jm-end{position:absolute;inset:0;z-index:20;display:flex;flex-direction:column;' +
-      'align-items:center;justify-content:center;gap:3.2cqw;padding:5cqw;text-align:center;' +
+      'align-items:center;justify-content:center;gap:0;padding:5cqw;text-align:center;' +
       // Blur the last frame so any on-screen text in it can't ghost through.
       'background:linear-gradient(180deg,rgba(18,26,22,.84),rgba(18,26,22,.93));' +
       '-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);' +
       'opacity:0;visibility:hidden;transition:opacity .45s,visibility 0s .45s;}' +
       '.jm-end.is-visible{opacity:1;visibility:visible;transition:opacity .45s;}' +
-      '.jm-end__title{margin:0;color:#fff;max-width:22em;' +
+      '.jm-end__title{margin:0 0 clamp(12px,4.4cqw,24px);color:#fff;max-width:22em;' +
       'font:400 clamp(15px,4.6cqw,34px)/1.25 "Libre Baskerville",Georgia,serif;}' +
       '.jm-plyr .jm-end__cta{display:inline-flex;align-items:center;justify-content:center;width:auto;margin:0;padding:.95em 1.7em;' +
       'border:0;border-radius:4px;background:#c2a86c;color:#1d1f1e;cursor:pointer;' +
@@ -172,11 +172,11 @@
       '"Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.02em;' +
       'box-shadow:0 4px 18px rgba(0,0,0,.35);transition:background .2s,transform .2s;}' +
       '.jm-plyr .jm-end__cta:hover{background:#A7915D;transform:translateY(-1px);}' +
-      '.jm-end__note{margin:0;color:rgba(255,255,255,.72);' +
+      '.jm-end__note{margin:clamp(8px,1.8cqw,12px) 0 0;color:rgba(255,255,255,.72);' +
       'font:500 clamp(10px,2.1cqw,14px)/1.3 Raleway,-apple-system,BlinkMacSystemFont,' +
       '"Segoe UI",Roboto,Helvetica,Arial,sans-serif;letter-spacing:.06em;}' +
       '.jm-plyr .jm-end__replay{display:inline-flex;align-items:center;gap:.4em;width:auto;' +
-      'margin:0;padding:.3em .5em;border:0;background:transparent;cursor:pointer;' +
+      'margin:clamp(4px,1.8cqw,12px) 0 0;padding:.3em .5em;border:0;background:transparent;cursor:pointer;' +
       'color:rgba(255,255,255,.62);text-decoration:underline;text-underline-offset:3px;' +
       'font:500 clamp(10px,2cqw,13px)/1.2 Raleway,-apple-system,BlinkMacSystemFont,' +
       '"Segoe UI",Roboto,Helvetica,Arial,sans-serif;}' +
@@ -188,7 +188,7 @@
       // Phone-size players: drop the note (the button carries it), tighten the
       // spacing, and give both buttons thumb-sized hit areas (44px / 32px).
       '@container (max-width:420px){.jm-end__note{display:none;}' +
-      '.jm-end{gap:2.2cqw;padding:3cqw;}' +
+      '.jm-end{padding:12px;}' +
       '.jm-plyr .jm-end__cta{min-height:44px;padding:0 1.4em;font-size:13px;}' +
       '.jm-plyr .jm-end__replay{min-height:32px;padding:0 1em;font-size:11px;}}' +
       // Any touch screen (incl. a landscape phone with a wide player) keeps

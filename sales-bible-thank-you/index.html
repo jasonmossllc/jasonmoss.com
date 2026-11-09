@@ -125,17 +125,47 @@ h1 em{color:var(--gold)}
 }
 /* Call section held until the first ask in the video; footer stays below the first screen */
 body{background:var(--night)!important}
-.band:has(.watch-cta.held){min-height:calc(100svh + 40px)}
-.held{display:none!important}
+.band:has(.watch-cta.held){min-height:calc(100lvh + 48px)}
+.next.held{display:none!important}
+.watch-cta.held,.fine.held{visibility:hidden}
+.copy-block,.video-block,.cta-block{position:relative;z-index:3;width:100%;display:flex;flex-direction:column;align-items:center}
 .reveal-in{animation:revealIn .7s ease both}
 @keyframes revealIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-.lost-top{position:relative;z-index:3;margin-top:20px;max-width:560px;font-size:13.5px;font-weight:500;line-height:1.6;color:rgba(255,255,255,.62);text-wrap:balance}
-.lost-top a{color:var(--gold);font-weight:700}
 .tapline{position:relative;z-index:3;margin-top:22px;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
 .tapline + .video{margin-top:12px}
-.assure{position:relative;z-index:3;margin-top:16px;max-width:520px;font-family:'Libre Baskerville',serif;font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:balance}
 .jm-cfs{align-items:center!important;justify-content:center!important}
 .jm-cfs__pill{margin:0!important;padding:.75em 1.15em!important;font-size:clamp(16px,5.2cqw,23px)!important;background:rgba(10,14,12,.8)!important;box-shadow:0 0 0 1px rgba(194,168,108,.75),0 8px 26px rgba(0,0,0,.45)!important}
+h1 em{display:block;margin-top:.12em}
+@media (min-width:861px){
+  /* Laptops: keep the headline, video and button together on one screen */
+  .in{padding-top:28px;padding-bottom:28px}
+  .status{margin-top:18px}
+  .band .label{margin-top:18px}
+  .tapline{margin-top:16px}
+  .video{max-width:max(420px,min(820px,calc((100svh - 470px)*16/9)))}
+  .watch-cta{margin-top:22px}
+  .fine{margin-top:10px}
+}
+@media (max-width:860px){
+  /* First screen is one composition: heights scale with the phone, leftover space is shared evenly,
+     and the button's place is reserved so nothing moves when it appears */
+  .in{min-height:100svh;justify-content:space-between;gap:8px;padding:clamp(14px,2.6svh,24px) 18px clamp(16px,2.6svh,26px)}
+  /* The video is the main event: it fills the frame edge to edge, so the frame lines become its sides */
+  .in{padding-left:0;padding-right:0}
+  .copy-block,.cta-block{padding-left:18px;padding-right:18px}
+  .video-block{padding-left:8px;padding-right:8px}
+  .video{box-shadow:none}
+  .logo{height:clamp(17px,3svh,23px)}
+  .status{margin-top:0;font-size:clamp(11px,1.65svh,12.5px)}
+  .band .label{margin-top:0}
+  h1{margin-top:clamp(6px,1.4svh,12px);font-size:min(7.6vw,clamp(23px,4.1svh,32px));line-height:1.14;letter-spacing:-.005em}
+  .sub{margin-top:clamp(6px,1.4svh,12px);font-size:clamp(13.5px,2.2svh,17px);line-height:1.45}
+  .tapline{margin-top:0;font-size:clamp(10.5px,1.6svh,12.5px)}
+  .tapline + .video{margin-top:clamp(7px,1.3svh,12px)}
+  .qualify{position:relative}
+  .watch-cta{margin-top:0;min-height:clamp(48px,7.4svh,58px);padding-top:10px;padding-bottom:10px}
+  .fine{margin-top:clamp(7px,1.3svh,12px)}
+}
 </style>
 </head>
 <body>
@@ -146,15 +176,21 @@ body{background:var(--night)!important}
   <div class="in">
     <img class="logo" src="/assets/images/logo-light.svg" width="140" height="31" alt="Jason Moss">
     <span class="status"><i aria-hidden="true"></i>Your book will be in your inbox shortly.</span>
+    <div class="copy-block">
     <span class="label c">While you wait</span>
     <h1>The book gives you the words. <em>This is why some people still won&rsquo;t buy.</em></h1>
     <p class="sub">After 800+ calls, I wish someone had told me this sooner.</p>
+    </div>
+    <div class="video-block">
     <p class="tapline">Tap the video to hear it</p>
     <div class="video">
       <video class="jm-player" data-bunny-id="2678b6f0-0028-4c5b-b65b-a37ed60e542b" data-video-id="2678b6f0-0028-4c5b-b65b-a37ed60e542b" data-autoplay="true" data-captions="off" data-end-title="Let&rsquo;s find what&rsquo;s costing you clients." data-end-cta="Book Your Free Assessment" data-end-note="FREE · 20 MINUTES · 1-ON-1 WITH JASON" data-end-target=".watch-cta" muted playsinline crossorigin="anonymous"></video>
     </div>
+    </div>
+    <div class="cta-block">
     <a class="buy watch-cta held" href="#book">Book my free assessment call</a>
     <span class="fine held">Free &middot; 20 minutes &middot; 1-on-1 with Jason</span>
+    </div>
   </div>
 </header>
 
@@ -214,9 +250,11 @@ body{background:var(--night)!important}
 
 /* Delayed reveal: video position, with a fallback when the video isn't playing */
 (function(){
-  var T=92, F=90, K='sb_call_revealed', start=Date.now(), done=false;
+  var T=62, F=90, K='sb_call_revealed', start=Date.now(), done=false;
   function store(v){try{if(v===undefined)return localStorage.getItem(K);if(v===null)localStorage.removeItem(K);else localStorage.setItem(K,v)}catch(e){return null}}
-  function show(animate){if(done)return;done=true;store('1');document.querySelectorAll('.held').forEach(function(e){e.classList.remove('held');if(animate)e.classList.add('reveal-in')});window.__revealedAt=Date.now()-start}
+  function show(animate){if(done)return;done=true;store('1');document.querySelectorAll('.held').forEach(function(e){e.classList.remove('held');if(animate)e.classList.add('reveal-in')});
+    /* Safety net: if the button still lands off screen on an unusual phone, bring it into view */
+    if(animate&&window.scrollY<20){var b=document.querySelector('.watch-cta').getBoundingClientRect(),h=(window.visualViewport&&visualViewport.height)||window.innerHeight;if(b.bottom>h-8)window.scrollBy({top:b.bottom-h+16,behavior:'smooth'})}}
   if(store()){show(false);return}
   var iv=setInterval(function(){if(done)return clearInterval(iv);var v=document.querySelector('video');var playing=v&&!v.paused&&!v.ended&&v.readyState>2;if(v&&v.currentTime>=T)return show(true);if(!playing&&(Date.now()-start)/1000>=F)return show(true)},250);
 })();
