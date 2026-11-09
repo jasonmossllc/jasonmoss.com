@@ -225,6 +225,31 @@
       .hero-btn-note { font-size: 0.875rem; margin-top: 1rem; }
     }
 
+    /* Phones only: looser, more deliberate spacing on the first screen. --air
+       grows with screen height, so tall phones get room to breathe and short
+       ones fall back to compact spacing that keeps the button on the first screen. */
+    @media (max-width: 767px) {
+      .hero-inner {
+        --air: clamp(0px, (100vh - 560px) * 0.5, 4rem);
+        padding: calc(1.5rem + var(--air) * 0.3) 1.25rem calc(2.5rem + var(--air) * 0.25);
+      }
+      .hero-host { margin-bottom: calc(1.5rem + var(--air) * 0.25); }
+      .hero-kicker { margin-bottom: calc(0.625rem + var(--air) * 0.06); }
+      .hero-heading {
+        font-size: clamp(1.75rem, 7.6vw, 1.9375rem);
+        line-height: 1.28;
+        margin-bottom: calc(1.25rem + var(--air) * 0.12);
+      }
+      .hero-body { line-height: 1.5; margin-bottom: calc(1.625rem + var(--air) * 0.17); text-wrap: balance; }
+      .hero-body::before { margin-bottom: calc(1.125rem + var(--air) * 0.1); }
+      .hero-btn-note { margin-top: calc(0.875rem + var(--air) * 0.06); }
+    }
+    @supports (height: 100svh) {
+      @media (max-width: 767px) {
+        .hero-inner { --air: clamp(0px, (100svh - 560px) * 0.5, 4rem); }
+      }
+    }
+
     /* =====================================
        SECTION 2: OPT-IN (BENEFITS + TESTIMONIAL + FORM + FOOTER)
        ===================================== */
