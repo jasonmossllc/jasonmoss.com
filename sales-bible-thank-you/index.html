@@ -149,12 +149,9 @@ h1 em{display:block;margin-top:.12em}
 @media (max-width:860px){
   /* First screen is one composition: heights scale with the phone, leftover space is shared evenly,
      and the button's place is reserved so nothing moves when it appears */
-  .in{min-height:100svh;justify-content:space-between;gap:8px;padding:clamp(14px,2.6svh,24px) 18px clamp(16px,2.6svh,26px)}
-  /* The video is the main event: it fills the frame edge to edge, so the frame lines become its sides */
-  .in{padding-left:0;padding-right:0}
-  .copy-block,.cta-block{padding-left:18px;padding-right:18px}
-  .video-block{padding-left:8px;padding-right:8px}
-  .video{box-shadow:none}
+  .in{min-height:100svh;justify-content:space-between;gap:8px;padding:clamp(14px,2.6svh,24px) 14px clamp(16px,2.6svh,26px)}
+  /* Phones: no outer frame, so the video is the one framed object on the screen */
+  .frame{display:none}
   .logo{height:clamp(17px,3svh,23px)}
   .status{margin-top:0;font-size:clamp(11px,1.65svh,12.5px)}
   .band .label{margin-top:0}
