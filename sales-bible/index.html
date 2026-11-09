@@ -66,7 +66,9 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
 .band h2{color:#fff}
 .stage{position:relative;isolation:isolate;margin:0 auto}
 .stage::before{content:"";z-index:-1;position:absolute;left:50%;top:46%;width:230%;height:120%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(232,204,146,.36),rgba(232,204,146,.12) 45%,rgba(232,204,146,0) 75%);pointer-events:none}
-.stage .bk{position:relative;z-index:2;filter:drop-shadow(0 34px 34px rgba(0,0,0,.75))}
+/* Soft shadow behind the book as a gradient: a CSS drop-shadow filter here showed a hard-edged box on iPhone */
+.stage::after{content:"";z-index:1;position:absolute;left:50%;top:calc(50% + 26px);width:136%;height:112%;transform:translate(-50%,-50%);background:radial-gradient(closest-side,rgba(0,0,0,.72),rgba(0,0,0,.5) 62%,rgba(0,0,0,0));pointer-events:none}
+.stage .bk{position:relative;z-index:2}
 .stage .floor{position:absolute;left:50%;bottom:4px;width:520px;max-width:96vw;height:1px;transform:translateX(-50%);background:linear-gradient(90deg,rgba(194,168,108,0),rgba(194,168,108,.6),rgba(194,168,108,0))}
 .stage .pool{position:absolute;left:50%;bottom:-22px;width:380px;max-width:80vw;height:56px;transform:translateX(-50%);background:radial-gradient(closest-side,rgba(232,206,150,.34),rgba(232,206,150,0))}
 .seal7{position:absolute;z-index:3;right:-58px;top:10%;width:88px;height:88px;border-radius:50%;border:1px solid rgba(194,168,108,.85);background:rgba(10,14,12,.88);display:flex;flex-direction:column;align-items:center;justify-content:center;color:var(--gold)}
