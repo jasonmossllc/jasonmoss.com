@@ -16,8 +16,6 @@
   <style>
     * { box-sizing: border-box; }
     html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-text-size-adjust: 100%; }
-    html { scroll-behavior: smooth; }
-    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     body { font-family: 'Raleway', sans-serif; font-weight: 400; color: #F8F6F2; background: #2C3F36; overflow-wrap: break-word; }
     img { max-width: 100%; display: block; }
     p, h1, h2, blockquote, ul { margin: 0; padding: 0; }
@@ -226,10 +224,27 @@
   </section>
 
   <script>
-    /* Email links land on #book: hold that position after web fonts settle the text above it */
-    if (location.hash === '#book' && document.fonts && document.fonts.ready) {
-      document.fonts.ready.then(function () { document.querySelector('#book').scrollIntoView({ behavior: 'instant', block: 'start' }); });
-    }
+    (function () {
+      /* Buttons on the page glide; arriving from an email jumps straight to #book */
+      var calm = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      document.addEventListener('click', function (e) {
+        var a = e.target.closest && e.target.closest('a[href^="#"]');
+        if (a && !calm) document.documentElement.style.scrollBehavior = 'smooth';
+      }, true);
+
+      /* Hold #book in place while fonts, the qualifier and the wall finish loading */
+      if (location.hash !== '#book') return;
+      var book = document.getElementById('book'), moved = false, ticks = 0;
+      function stop() { moved = true; }
+      ['wheel', 'touchmove', 'keydown', 'pointerdown'].forEach(function (ev) {
+        window.addEventListener(ev, stop, { passive: true, once: true });
+      });
+      var hold = setInterval(function () {
+        if (moved || ++ticks > 30) { clearInterval(hold); return; }
+        var top = book.getBoundingClientRect().top;
+        if (Math.abs(top) > 1) window.scrollTo(0, window.scrollY + top);
+      }, 100);
+    })();
     /* Shorter wall on phones */
     if (window.matchMedia('(max-width: 700px)').matches) document.querySelector('.jm-testimonials').setAttribute('data-height', '520');
   </script>
