@@ -63,6 +63,7 @@
     .hero h1 { font-family: 'Libre Baskerville', serif; font-weight: 400; font-style: italic; font-size: 1.875rem; line-height: 2.25rem; color: #C2A86C; margin-bottom: .5rem; }
     .hero-sound { font-family: 'Libre Baskerville', serif; font-weight: 700; font-size: .9375rem; line-height: 1.5625rem; color: #E9E2D3; margin-bottom: 1.25rem; }
     .hero-video {
+      position: relative;
       width: 100%;
       max-width: min(42.9375rem, max(20rem, calc((100svh - 8.75rem) * 16 / 9)));
       aspect-ratio: 16 / 9;
@@ -131,6 +132,8 @@
 
     /* Two columns once the qualifier has room next to the copy */
     @media (min-width: 1000px) {
+      /* Laptops: keep the headline, video and button on one screen */
+      .hero-video { max-width: min(42.9375rem, max(30rem, calc((100svh - 22.5rem) * 16 / 9))); }
       .book { padding: 6rem clamp(2.5rem, 8vw, 6.5rem); }
       .book-grid {
         max-width: 67rem;
@@ -141,7 +144,7 @@
         column-gap: clamp(2.5rem, 5.6vw, 4.5rem);
       }
       .book-copy { grid-area: copy; }
-      .qualifier-panel { grid-area: panel; align-self: start; border-radius: 1.25rem; padding: 2.5rem 2.25rem; box-shadow: 0 24px 50px -18px rgba(29,31,30,.45); }
+      .qualifier-panel { grid-area: panel; display: flex; flex-direction: column; justify-content: center; border-radius: 1.25rem; padding: 2.5rem 2.25rem; box-shadow: 0 24px 50px -18px rgba(29,31,30,.45); }
       .qualifier-panel > p { font-size: 1.25rem; line-height: 1.875rem; margin-bottom: 1.375rem; }
       .qualify-wrap { border-radius: .875rem; }
       .book h2 { font-size: 2.5rem; line-height: 3.1875rem; margin-bottom: 2.25rem; }
@@ -197,7 +200,7 @@
 
       <div id="qualifier" class="qualifier-panel jm-bg">
         <p>Two quick questions to make sure I can help.</p>
-        <div class="qualify-wrap"><div data-qualify-source="resonance"></div></div>
+        <div class="qualify-wrap"><div data-qualify-source="resonance" data-qualify-min-height="320"></div></div>
       </div>
 
       <blockquote class="quote">
@@ -223,13 +226,17 @@
   </section>
 
   <script>
+    /* Email links land on #book: hold that position after web fonts settle the text above it */
+    if (location.hash === '#book' && document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(function () { document.querySelector('#book').scrollIntoView({ behavior: 'instant', block: 'start' }); });
+    }
     /* Shorter wall on phones */
     if (window.matchMedia('(max-width: 700px)').matches) document.querySelector('.jm-testimonials').setAttribute('data-height', '520');
   </script>
   <!-- Bunny player (watch tracking comes from the Engagement Tracker script, js/jm.js) -->
   <script src="/js/bunny-embeds.js" defer></script>
   <!-- Call qualifier, then Calendly. Source lands on Kit (qualify_source) + Calendly utm_source. -->
-  <script src="https://jasonmoss.com/qualify/embed.js" async></script>
+  <script src="/qualify/embed.js" async></script>
   <script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>
