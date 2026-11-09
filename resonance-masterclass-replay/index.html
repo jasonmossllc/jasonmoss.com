@@ -4,7 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <link rel="preload" as="image" fetchpriority="high" href="assets/images/section-bg.webp">
   <title>Resonance Masterclass Replay</title>
   <!-- Favicon -->
   <link rel="icon" href="/favicon.ico" sizes="48x48">
@@ -16,330 +15,221 @@
   <link href="https://fonts.googleapis.com/css?family=Libre+Baskerville:400,400italic,700|Raleway:400,500,600,700,900&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
-    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
-    body {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 400;
-      color: #F8F6F2;
-      background: rgb(48, 59, 51);
-    }
+    html, body { margin: 0; padding: 0; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; -webkit-text-size-adjust: 100%; }
+    html { scroll-behavior: smooth; }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+    body { font-family: 'Raleway', sans-serif; font-weight: 400; color: #F8F6F2; background: #2C3F36; overflow-wrap: break-word; }
     img { max-width: 100%; display: block; }
+    p, h1, h2, blockquote, ul { margin: 0; padding: 0; }
 
-    /* =====================================
-       MAIN SECTION
-       ===================================== */
-    .page {
-      position: relative;
-      background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover;
-      padding: 1.75rem 1.25rem 3rem;
-      color: #F8F6F2;
-      overflow: visible;
+    /* Very subtle textures, shared with the rest of the site */
+    .jm-bg {
+      background-color: #2C3F36;
+      background-image: linear-gradient(180deg, rgba(44,63,54,.62), rgba(44,63,54,.7)), url('/assets/textures/tile-forest.jpg');
+      background-size: auto, 520px 520px;
+      background-repeat: no-repeat, repeat;
     }
-    .page::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: rgb(40, 54, 47);
-      opacity: 0.64;
-      pointer-events: none;
-    }
-    .page-inner {
-      position: relative;
-      max-width: 60rem;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
+    .jm-stone {
+      background-color: #E9E2D3;
+      background-image: url('/assets/textures/grain-light-soft.png'), linear-gradient(180deg, rgba(233,226,211,.68), rgba(233,226,211,.76)), url('/assets/textures/tile-warm.jpg');
+      background-size: 256px 256px, auto, 520px 520px;
+      background-repeat: repeat, no-repeat, repeat;
     }
 
-    /* -- Heading "You're In." -- */
-    .page-heading {
-      font-family: 'Libre Baskerville', serif;
-      font-weight: 400;
-      font-style: normal;
-      font-size: 1.875rem;
-      line-height: 2.25rem;
-      color: #F8F6F2;
-      margin: 0 0 1rem;
-    }
-    .page-heading em { font-style: italic; }
-    .page-heading .gold { color: #C2A86C; }
-
-    /* -- Description -- */
-    .page-desc {
-      font-family: 'Libre Baskerville', serif;
-      font-weight: 400;
-      font-size: 0.9375rem;
-      line-height: 1.5938rem;
-      color: #E9E2D3;
-      margin: 0 0 2rem;
-      max-width: 18.75rem;
-    }
-    .page-desc strong { font-weight: 700; }
-    .page-desc span { display: block; }
-
-    /* -- Training list (mobile card / desktop row) -- */
-    .training-label {
-      font-family: 'Raleway', sans-serif;
-      font-weight: 500;
-      font-size: 0.75rem;
-      line-height: 1.125rem;
-      color: #C2A86C;
-      margin: 0 0 0.75rem;
-      text-align: left;
-    }
-    .training {
-      width: 100%;
-      max-width: 21.5rem;
-      margin: -0.5rem 0 2rem;
-      padding: 1.25rem 2rem 1.5rem 1.75rem;
-      border: 1px solid rgb(78, 92, 78);
-      border-radius: 0.75rem;
-      background: rgb(56, 71, 62);
-    }
-    .training-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 0.5rem;
-      text-align: left;
-    }
-    .training-list li {
-      position: relative;
-      padding-left: 1.25rem;
-      font-family: 'Raleway', sans-serif;
-      font-size: 0.875rem;
-      line-height: 1.225rem;
-      font-weight: 400;
-      color: #E9E2D3;
-    }
-    .training-list li::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.25rem;
-      width: 0.75rem;
-      height: 0.75rem;
-      background-color: #C2A86C;
-      -webkit-mask: url('assets/images/arrow-gold.svg') no-repeat center/contain;
-              mask: url('assets/images/arrow-gold.svg') no-repeat center/contain;
-    }
-
-    /* -- Video -- */
-    .page-video {
-      width: 100%;
-      max-width: 22.5rem;
-      aspect-ratio: 16 / 9;
-      border: 0;
-      box-shadow: 0 0 30px 0 rgba(194, 168, 108, 0.35);
-      position: relative;
-      z-index: 2;
-      margin-top: 1rem;
-    }
-
-    /* -- Sub-headline below video -- */
-    .page-sub {
-      font-family: 'Libre Baskerville', serif;
-      font-weight: 400;
-      font-size: 0.9125rem;
-      line-height: 1.4625rem;
-      color: #E9E2D3;
-      margin: 2.5rem 0 2rem;
-      max-width: 21.8rem;
-    }
-    .page-sub em { font-style: italic; }
-
-    /* -- CTA -- */
-    .page-cta {
+    .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
+      width: 100%;
+      max-width: 19.5rem;
+      min-height: 3.75rem;
+      padding: .5rem .75rem;
       background: #C2A86C;
-      color: #000000;
+      color: #000;
       font-family: 'Raleway', sans-serif;
       font-weight: 600;
-      font-size: 0.975rem;
-      line-height: 120%;
-      letter-spacing: 0.02em;
-      width: 19.5rem;
-      height: 3.78rem;
-      border-radius: 0;
-      text-decoration: none;
-      transition: background 0.2s;
-      margin-bottom: 5rem;
-    }
-    .page-cta:hover {
-      background: #A7915D;
-    }
-
-    /* -- Footer -- */
-    .page-footer {
-      font-family: 'Raleway', sans-serif;
-      font-size: 0.6875rem;
-      line-height: 0.9625rem;
-      color: rgb(61, 75, 68);
+      font-size: .9375rem;
+      line-height: 1.2;
+      letter-spacing: .02em;
       text-align: center;
-    }
-    .page-footer p { margin: 0; }
-    .page-footer a {
-      color: rgb(61, 75, 68);
       text-decoration: none;
+      transition: background .2s;
     }
-    .page-footer a:hover { text-decoration: underline; }
+    .btn:hover { background: #A7915D; }
+    .eyebrow { font-weight: 600; font-size: .75rem; line-height: 1.0625rem; letter-spacing: .12em; }
+
+    /* -- Hero -- */
+    .hero { padding: 1.75rem 1.25rem 3rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .hero h1 { font-family: 'Libre Baskerville', serif; font-weight: 400; font-style: italic; font-size: 1.875rem; line-height: 2.25rem; color: #C2A86C; margin-bottom: .5rem; }
+    .hero-sound { font-family: 'Libre Baskerville', serif; font-weight: 700; font-size: .9375rem; line-height: 1.5625rem; color: #E9E2D3; margin-bottom: 1.25rem; }
+    .hero-video {
+      width: 100%;
+      max-width: min(42.9375rem, max(20rem, calc((100svh - 8.75rem) * 16 / 9)));
+      aspect-ratio: 16 / 9;
+      overflow: hidden;
+      box-shadow: 0 0 30px 0 rgba(194,168,108,.35);
+    }
+    .hero-bridge { font-family: 'Libre Baskerville', serif; font-size: .875rem; line-height: 1.5rem; color: #E9E2D3; max-width: 22rem; margin: 1.75rem 0 1.25rem; }
+
+    /* Big centered sound pill (same as the Sales Bible page) */
+    .jm-cfs { align-items: center !important; justify-content: center !important; }
+    .jm-cfs__pill { margin: 0 !important; padding: .75em 1.15em !important; font-size: clamp(16px, 5.2cqw, 23px) !important; background: rgba(10,14,12,.8) !important; box-shadow: 0 0 0 1px rgba(194,168,108,.75), 0 8px 26px rgba(0,0,0,.45) !important; }
+
+    /* -- Book -- */
+    .book { padding: 3.25rem 1.25rem 2.75rem; color: #1D1F1E; }
+    .book-grid { max-width: 37.5rem; margin: 0 auto; }
+    .book .eyebrow { color: #2C3F36; margin-bottom: .75rem; }
+    .book h2 { font-family: 'Libre Baskerville', serif; font-weight: 400; font-size: 1.625rem; line-height: 2.1875rem; color: #1D1F1E; margin-bottom: 1.625rem; text-wrap: balance; }
+    .book-lead { font-weight: 600; font-size: .9375rem; line-height: 1.375rem; color: #2C3F36; margin-bottom: .375rem; }
+    .checks { list-style: none; border-bottom: 1px solid #D2C9B7; }
+    .checks li { display: flex; align-items: center; gap: .75rem; padding: .75rem 0; border-top: 1px solid #D2C9B7; font-family: 'Libre Baskerville', serif; font-size: .9375rem; line-height: 1.5rem; }
+    .check { flex: 0 0 1.375rem; height: 1.375rem; border-radius: 50%; background: #2C3F36; display: flex; align-items: center; justify-content: center; }
+    .check svg { width: .75rem; height: .75rem; }
+    .note { display: flex; align-items: center; gap: .75rem; margin: 1.125rem 0 1.5rem; }
+    .note img { flex: 0 0 2.75rem; width: 2.75rem; height: 2.75rem; border-radius: 50%; object-fit: cover; border: 1px solid #C2A86C; }
+    .note p { font-size: .875rem; line-height: 1.375rem; color: #5B4B3F; }
+
+    .qualifier-panel { border-radius: 1.125rem; padding: 1.625rem .875rem .875rem; box-shadow: 0 20px 40px -18px rgba(29,31,30,.45); scroll-margin-top: 1rem; }
+    .qualifier-panel > p { font-family: 'Libre Baskerville', serif; font-size: 1.0625rem; line-height: 1.625rem; color: #F8F6F2; text-align: center; text-wrap: balance; margin-bottom: 1.125rem; }
+    .qualify-wrap { background: #F8F6F2; border-radius: .75rem; overflow: hidden; }
+
+    .quote { margin-top: 1.25rem; padding: 1.25rem; background: #F8F6F2; border-radius: .875rem; display: flex; flex-direction: column; gap: .75rem; }
+    .quote p { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: .9375rem; line-height: 1.5625rem; color: #1D1F1E; }
+    .quote div { display: flex; align-items: center; gap: .75rem; }
+    .quote img { width: 2.625rem; height: 2.625rem; border-radius: 50%; object-fit: cover; border: 1px solid #C2A86C; }
+    .quote cite { font-style: normal; font-weight: 500; font-size: .875rem; color: #5B4B3F; }
+
+    /* -- Wall -- */
+    .wall { padding: 3.5rem 1.25rem 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .wall .eyebrow { color: #C2A86C; margin-bottom: .625rem; }
+    .wall h2 { font-family: 'Libre Baskerville', serif; font-weight: 400; font-size: clamp(1.4375rem, 6.6vw, 1.625rem); line-height: 1.35; color: #F8F6F2; max-width: 50rem; margin-bottom: 1.75rem; text-wrap: balance; }
+    .wall h2 em { color: #C2A86C; white-space: nowrap; }
+    .jm-testimonials { display: block; width: 100%; max-width: 65rem; }
+    .wall .btn { margin-top: 2rem; }
+
+    /* -- Footer: a whisper -- */
+    .foot { margin-top: 2.5rem; font-size: .625rem; line-height: .9375rem; color: rgba(233,226,211,.34); }
+    .foot a { color: inherit; text-decoration: none; }
+    .foot a:hover { color: rgba(233,226,211,.6); }
 
     @media (min-width: 768px) {
-      .page {
-        background: url('assets/images/section-bg.webp') repeat rgb(44, 63, 54) 50% 50% / cover fixed;
-        padding: 2.375rem 1.8125rem 4rem;
+      .eyebrow { font-size: .8125rem; line-height: 1.125rem; letter-spacing: .14em; }
+      .btn { max-width: 25.3125rem; font-size: 1rem; }
+      .hero { padding: 2.375rem 1.8125rem 4.5rem; }
+      .hero h1 { font-size: 2.1875rem; line-height: 2.625rem; margin-bottom: .75rem; }
+      .hero-sound { font-size: 1.0625rem; line-height: 1.8125rem; margin-bottom: 1.5rem; }
+      .hero-bridge { font-size: 1rem; line-height: 1.6875rem; max-width: 30rem; margin: 2rem 0 1.5rem; }
+
+      .book { padding: 4.5rem 2rem; }
+      .book h2 { font-size: 2.125rem; line-height: 2.75rem; margin-bottom: 2rem; }
+
+      .wall { padding: 5rem 2rem 3rem; }
+      .wall h2 { font-size: 2.125rem; line-height: 2.875rem; margin-bottom: 2.5rem; }
+      .wall .btn { margin-top: 2.5rem; }
+      .foot { margin-top: 3.5rem; }
+    }
+
+    /* Two columns once the qualifier has room next to the copy */
+    @media (min-width: 1000px) {
+      .book { padding: 6rem clamp(2.5rem, 8vw, 6.5rem); }
+      .book-grid {
+        max-width: 67rem;
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(26rem, 31.25rem);
+        grid-template-rows: auto 1fr;
+        grid-template-areas: "copy panel" "quote panel";
+        column-gap: clamp(2.5rem, 5.6vw, 4.5rem);
       }
-      .page-heading {
-        font-size: 2.1875rem;
-        line-height: 2.625rem;
-        margin-bottom: 1.25rem;
-      }
-      .page-desc {
-        font-size: 1.0625rem;
-        line-height: 1.8063rem;
-        max-width: 23.9375rem;
-        margin-bottom: 2rem;
-      }
-      .training-label { display: none; }
-      .training {
-        width: 100%;
-        max-width: 44.5625rem;
-        padding: 1rem 0 1rem;
-        border: 0;
-        background: transparent;
-        margin: 0 auto 2rem;
-        border-top: 1px solid rgb(77, 88, 77);
-        border-bottom: 1px solid rgb(77, 88, 77);
-        border-radius: 0;
-      }
-      .training-list {
-        flex-direction: row;
-        justify-content: space-between;
-        gap: 2rem;
-        text-align: center;
-        counter-reset: training-item;
-      }
-      .training-list li {
-        flex: 1;
-        padding-left: 0;
-        padding-top: 1.5rem;
-        font-size: 0.8125rem;
-        line-height: 1.2rem;
-        color: #E9E2D3;
-        position: relative;
-      }
-      .training-list li + li::after {
-        content: "";
-        position: absolute;
-        left: -1rem;
-        top: 0.5rem;
-        width: 1px;
-        height: 5.8125rem;
-        background: rgb(77, 88, 77);
-      }
-      .training-list li::before {
-        content: counter(training-item, lower-roman);
-        counter-increment: training-item;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: auto;
-        height: auto;
-        background: none;
-        background-color: transparent;
-        -webkit-mask: none;
-                mask: none;
-        font-family: 'Libre Baskerville', serif;
-        font-style: italic;
-        font-weight: 400;
-        color: #C2A86C;
-        font-size: 0.6875rem;
-        line-height: 1.1rem;
-      }
-      .page-video {
-        max-width: 42.9375rem;
-        aspect-ratio: auto;
-        height: 23.8125rem;
-      }
-      .page-sub {
-        font-size: 1rem;
-        line-height: 1.7rem;
-        max-width: 28.875rem;
-        margin: 2rem 0 1.5rem;
-      }
-      .page-cta {
-        font-size: 1rem;
-        width: 25.3125rem;
-        margin-bottom: 6rem;
-      }
-      .page-footer {
-        max-width: 40.1875rem;
-        margin: 0 auto;
-      }
+      .book-copy { grid-area: copy; }
+      .qualifier-panel { grid-area: panel; align-self: start; border-radius: 1.25rem; padding: 2.5rem 2.25rem; box-shadow: 0 24px 50px -18px rgba(29,31,30,.45); }
+      .qualifier-panel > p { font-size: 1.25rem; line-height: 1.875rem; margin-bottom: 1.375rem; }
+      .qualify-wrap { border-radius: .875rem; }
+      .book h2 { font-size: 2.5rem; line-height: 3.1875rem; margin-bottom: 2.25rem; }
+      .book-lead { font-size: 1rem; line-height: 1.5rem; margin-bottom: .5rem; }
+      .checks li { gap: .875rem; padding: .9375rem 0; font-size: 1.0625rem; line-height: 1.625rem; }
+      .check { flex-basis: 1.5rem; height: 1.5rem; }
+      .note { gap: .875rem; margin: 1.375rem 0 2rem; }
+      .note img { flex-basis: 3rem; width: 3rem; height: 3rem; }
+      .note p { font-size: .9375rem; line-height: 1.4375rem; }
+      .quote { grid-area: quote; align-self: start; margin-top: 0; padding: 1.5rem 1.625rem; gap: .875rem; }
+      .quote p { font-size: 1.0625rem; line-height: 1.75rem; }
+
+      .wall { padding: 6rem clamp(2.5rem, 7vw, 7.5rem) 3rem; }
+      .wall h2 { font-size: 2.375rem; line-height: 3.125rem; margin-bottom: 3rem; }
     }
   </style>
 </head>
 <body>
 
-  <section class="page">
-    <div class="page-inner">
-      <h1 class="page-heading"><em><span class="gold">You're In.</span></em></h1>
-      <p class="page-desc"><span>You're about to see why marketing has felt so heavy &mdash; and how to shift it.</span><span><strong>Tap for sound to begin.</strong></span></p>
+  <section class="hero jm-bg">
+    <h1>You&rsquo;re in.</h1>
+    <p class="hero-sound"><span id="sound-verb">Tap</span> the video for sound.</p>
+    <script>
+      /* Same touch test the player uses for its "Tap/Click for sound" pill */
+      if (!(('ontouchstart' in window) || navigator.maxTouchPoints > 0)) document.getElementById('sound-verb').textContent = 'Click';
+    </script>
 
-      <div class="training">
-        <p class="training-label">INSIDE THIS TRAINING</p>
-        <ul class="training-list">
-          <li>Why marketing feels heavy &mdash; and why strategy isn&rsquo;t the problem</li>
-          <li>The analogy that reframes every marketing decision you make</li>
-          <li>Why repelling 99% of your audience is how you attract the right 1%</li>
-          <li>Two real marketing examples &mdash; before and after the shift</li>
-          <li>A closing that reframes what your business is actually for</li>
+    <div class="hero-video">
+      <video class="jm-player" data-bunny-id="f5f7f71d-cf20-49d0-91bb-31050a978973" data-video-id="zosvj2ru1y" data-autoplay="true" data-end-title="Ready to make this work in your business?" data-end-cta="Book Your Free Assessment" data-end-note="FREE · 20 MINUTES · 1-ON-1 WITH JASON" data-end-target=".page-cta" muted playsinline crossorigin="anonymous"></video>
+    </div>
+
+    <p class="hero-bridge">How do you apply this to your business? Let&rsquo;s look at it together and find the one shift that would bring more clients in the door.</p>
+
+    <a class="btn page-cta" href="#book">Book Your Free 20-Min Business Assessment</a>
+  </section>
+
+  <section id="book" class="book jm-stone">
+    <div class="book-grid">
+      <div class="book-copy">
+        <p class="eyebrow">FREE · 20 MINUTES · 1-ON-1 WITH JASON</p>
+        <h2>Let&rsquo;s find out what&rsquo;s been costing you clients.</h2>
+        <p class="book-lead">On this call, we&rsquo;ll:</p>
+        <ul class="checks">
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#E9E2D3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Look at how you&rsquo;re marketing today</span></li>
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#E9E2D3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Find what&rsquo;s most in the way</span></li>
+          <li><span class="check" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="#E9E2D3" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></span><span>Leave with your next step to more clients</span></li>
         </ul>
+        <div class="note">
+          <img src="assets/images/jason-avatar.jpg" alt="Jason Moss" width="240" height="240">
+          <p>This isn&rsquo;t a sales call. If I think I can help you on a deeper level, I&rsquo;ll let you know.</p>
+        </div>
       </div>
 
-      <div class="page-video" style="overflow:hidden;">
-        <video class="jm-player" data-bunny-id="f5f7f71d-cf20-49d0-91bb-31050a978973" data-video-id="zosvj2ru1y" data-autoplay="true" data-end-title="Ready to make this work in your business?" data-end-cta="Book Your Free Assessment" data-end-note="FREE · 20 MINUTES · 1-ON-1 WITH JASON" data-end-target=".page-cta" muted playsinline crossorigin="anonymous"></video>
+      <div id="qualifier" class="qualifier-panel jm-bg">
+        <p>Two quick questions to make sure I can help.</p>
+        <div class="qualify-wrap"><div data-qualify-source="resonance"></div></div>
       </div>
 
-      <p class="page-sub">The masterclass showed you what&rsquo;s in the way. <em>Mentorship with me</em> is where we shift it.</p>
-
-      <a class="page-cta" href="/resonance-next-step/" target="_blank" rel="noopener">Book Your Free 20-Min Business Assessment</a>
-
-      <div class="page-footer">
-        <p>&copy; Jason Moss LLC. All rights reserved</p>
-        <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
-        <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
-        <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
-        <p>Facebook is a trademark of Meta Platforms, Inc.</p>
-      </div>
+      <blockquote class="quote">
+        <p>&ldquo;[Jason] helped me grow my business more in six months than I did on my own in the six years before that.&rdquo;</p>
+        <div><img src="assets/images/matt-m.jpg" alt="Matt M." loading="lazy"><cite>Matt M., relationship coach</cite></div>
+      </blockquote>
     </div>
   </section>
 
-  <!-- Bunny player (watch tracking comes from the Engagement Tracker script, js/jm.js) -->
+  <section class="wall jm-bg">
+    <p class="eyebrow">WHAT CLIENTS HAVE CREATED</p>
+    <h2>Almost every one of these started with <em>a simple conversation.</em></h2>
+    <div class="jm-testimonials" data-layout="scroll" data-height="720" data-shadow="2A3A31"></div>
+    <a class="btn" href="#qualifier">Book Your Free 20-Min Business Assessment</a>
 
-  <!-- URL param passthrough for CTA -->
+    <div class="foot">
+      <p>&copy; Jason Moss LLC. All rights reserved</p>
+      <p><a href="/privacy/" target="_blank" rel="noopener">Privacy Policy</a> | <a href="/terms/" target="_blank" rel="noopener">Terms &amp; Conditions</a> | <a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings Disclaimer</a></p>
+      <p>This website is not a part of Facebook or Meta Platforms, Inc.</p>
+      <p>Additionally, this site is NOT endorsed by Facebook in any way.</p>
+      <p>Facebook is a trademark of Meta Platforms, Inc.</p>
+    </div>
+  </section>
+
   <script>
-    (function () {
-      const params = window.location.search;
-      if (!params) return;
-      document.querySelectorAll('a[href*="/apply"], a[href*="/resonance-next-step"]').forEach(a => {
-        try {
-          const url = new URL(a.href);
-          const existing = new URLSearchParams(url.search);
-          const incoming = new URLSearchParams(params);
-          incoming.forEach((v, k) => { if (!existing.has(k)) existing.set(k, v); });
-          url.search = existing.toString();
-          a.href = url.toString();
-        } catch (e) {}
-      });
-    })();
+    /* Shorter wall on phones */
+    if (window.matchMedia('(max-width: 700px)').matches) document.querySelector('.jm-testimonials').setAttribute('data-height', '520');
   </script>
+  <!-- Bunny player (watch tracking comes from the Engagement Tracker script, js/jm.js) -->
   <script src="/js/bunny-embeds.js" defer></script>
+  <!-- Call qualifier, then Calendly. Source lands on Kit (qualify_source) + Calendly utm_source. -->
+  <script src="https://jasonmoss.com/qualify/embed.js" async></script>
+  <script src="https://testimonials.jasonmoss.com/embed.js" defer></script>
 </body>
 </html>
