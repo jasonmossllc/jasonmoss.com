@@ -269,6 +269,42 @@ window.JM_BUNNY_CONFIG = {
         }
       ]
     },
+    "c4c00600-7899-4280-a7dc-f1110f875f64": {
+      "videoId": "c4c00600-7899-4280-a7dc-f1110f875f64",
+      "title": "Resonance Masterclass (2.3)",
+      "poster": "thumbnail_264ef3e6.jpg",
+      "captions": "en",
+      "chapters": [
+        {
+          "time": 0,
+          "label": "Intro"
+        },
+        {
+          "time": 52,
+          "label": "Before vs. after example"
+        },
+        {
+          "time": 205,
+          "label": "The two goals of marketing"
+        },
+        {
+          "time": 243,
+          "label": "Marketing as conversion"
+        },
+        {
+          "time": 531,
+          "label": "Marketing as resonance"
+        },
+        {
+          "time": 946,
+          "label": "Open coaching"
+        },
+        {
+          "time": 1302,
+          "label": "Invitation"
+        }
+      ]
+    },
     "12dca8f1-fbd5-4b44-9b7f-b450197677d7": {
       "videoId": "wt38b0yrda",
       "title": "Resonance Masterclass Clip 1 - 2 Goals Of Marketing",
