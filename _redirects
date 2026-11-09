@@ -28,6 +28,10 @@ http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                        
 /business-breakthrough-thank-you      /resonance-masterclass-optin/                            301
 /business-breakthrough-challenge-complete   /resonance-masterclass-optin/                      301
 
+# Nov 2026: Resonance booking now lives on the replay page (old page archived). Old email and text links land on the qualifier.
+/resonance-next-step      /resonance-masterclass-replay/#book      301
+/resonance-next-step/*    /resonance-masterclass-replay/#book      301
+
 # Oct 2026 archive: past masterclasses and retired pages moved to /archive/ (noindex).
 # Old email, text and paused-ad links land on the closest live page.
 /client-engine-masterclass                  /resonance-masterclass-optin/                      301

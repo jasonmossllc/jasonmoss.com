@@ -9,7 +9,8 @@
  * ends up on the Kit record (qualify_source) and on the Calendly booking as
  * utm_source, so every booking is attributable to the page it came from.
  *
- * Optional attributes: data-qualify-medium, data-qualify-campaign.
+ * Optional attributes: data-qualify-medium, data-qualify-campaign,
+ * data-qualify-min-height (px, default 520; lower it when the first question is short).
  * The iframe resizes itself as the person moves through the questions.
  */
 (function () {
@@ -23,6 +24,7 @@
     host.setAttribute('data-qualify-mounted', '1');
 
     var source = host.getAttribute('data-qualify-source') || 'embed';
+    var minHeight = parseInt(host.getAttribute('data-qualify-min-height'), 10) || MIN_HEIGHT;
     var qs = ['source=' + encodeURIComponent(source)];
     var medium = host.getAttribute('data-qualify-medium');
     var campaign = host.getAttribute('data-qualify-campaign');
@@ -60,8 +62,8 @@
     // throttled/backgrounded tab never advances it), which pins the frame at
     // its old value and clips the widget. Snapping is also less distracting.
     frame.style.cssText =
-      'width:100%;border:0;display:block;min-height:' + MIN_HEIGHT + 'px;' +
-      'height:' + MIN_HEIGHT + 'px;';
+      'width:100%;border:0;display:block;min-height:' + minHeight + 'px;' +
+      'height:' + minHeight + 'px;';
     host.appendChild(frame);
 
     var lastApplied = 0;
@@ -70,7 +72,7 @@
       if (e.source !== frame.contentWindow) return;
       if (e.origin !== new URL(BASE).origin) return;
       if (e.data.type === 'qualify:height') {
-        var h = Math.max(MIN_HEIGHT, Math.round(e.data.height) || MIN_HEIGHT);
+        var h = Math.max(minHeight, Math.round(e.data.height) || minHeight);
         // Never re-apply the same height: resizing the frame fires a resize
         // inside it, which reports again. Without this the pair can oscillate.
         if (h === lastApplied) return;
