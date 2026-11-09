@@ -640,8 +640,8 @@
       <div class="optin-form-wrap" id="optin-form">
         <p class="optin-form-lead">Enter your name and email to start watching.</p>
         <form class="optin-form email-form" novalidate>
-          <input type="text" name="First name" class="form-input" placeholder="First name" enterkeyhint="next" required aria-required="true">
-          <input type="email" name="E-mail" class="form-input" placeholder="E-mail" enterkeyhint="go" required aria-required="true">
+          <input type="text" name="First name" class="form-input" placeholder="First name" autocomplete="given-name" enterkeyhint="next" required aria-required="true">
+          <input type="email" name="E-mail" class="form-input" placeholder="E-mail" autocomplete="email" enterkeyhint="go" required aria-required="true">
           <!-- Honeypot: hidden from humans; bots fill it and get rejected server-side -->
           <input type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
           <!-- Cloudflare Turnstile (renders once the site key is set) -->
