@@ -82,11 +82,11 @@ h1 em{color:var(--gold)}
 .lost{max-width:620px;margin:56px auto 0;padding-top:28px;border-top:1px solid var(--rule);text-align:center;font-size:14.5px;font-weight:500;line-height:1.7;color:var(--ink2)}
 .lost a{color:var(--brass);font-weight:700}
 
-.ftr{background:var(--night);color:rgba(248,246,242,.55);padding:52px 0 44px;font-size:13px;line-height:1.7;text-align:center}
-.ftr img{height:26px;width:auto;margin:0 auto 16px}
-.ftr nav{display:flex;gap:4px 20px;justify-content:center;flex-wrap:wrap;margin:6px auto 18px}
-.ftr nav a{display:inline-block;padding:11px 4px;color:rgba(248,246,242,.8);text-decoration:none}
-.ftr p{max-width:820px;margin:0 auto 10px;font-style:italic}
+.ftr{background:var(--night);color:rgba(248,246,242,.34);padding:12px 0 20px;font-size:10px;line-height:1.5;text-align:center}
+.ftr .wrap>div{display:block}
+.ftr nav{display:flex;justify-content:center;flex-wrap:wrap;gap:0 14px;margin:2px 0 0}
+.ftr nav a{display:block;padding:3px 0;color:rgba(248,246,242,.34);text-decoration:none}
+.ftr p{max-width:720px;margin:2px auto 0;font-size:9.5px;line-height:1.45;color:rgba(248,246,242,.3)}
 
 @media (max-width:860px){
   .wrap{padding:0 22px}
@@ -112,8 +112,7 @@ h1 em{color:var(--gold)}
   .quotes{grid-template-columns:1fr;gap:18px;margin-top:52px}
   .qc{padding:26px 22px 20px}
   .qc p{font-size:17.5px}
-  .ftr nav{flex-direction:column;align-items:center;gap:0}
-  .ftr p{text-align:left;font-size:12.5px}
+  
 }
 @media (min-width:600px) and (max-width:860px){
   .quotes{grid-template-columns:1fr 1fr}
@@ -124,6 +123,19 @@ h1 em{color:var(--gold)}
 @media (max-width:480px){
   .band .label::before,.band .label::after{display:none}
 }
+/* Call section held until the first ask in the video; footer stays below the first screen */
+body{background:var(--night)!important}
+.band:has(.watch-cta.held){min-height:calc(100svh + 40px)}
+.held{display:none!important}
+.reveal-in{animation:revealIn .7s ease both}
+@keyframes revealIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.lost-top{position:relative;z-index:3;margin-top:20px;max-width:560px;font-size:13.5px;font-weight:500;line-height:1.6;color:rgba(255,255,255,.62);text-wrap:balance}
+.lost-top a{color:var(--gold);font-weight:700}
+.tapline{position:relative;z-index:3;margin-top:22px;font-size:12.5px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.tapline + .video{margin-top:12px}
+.assure{position:relative;z-index:3;margin-top:16px;max-width:520px;font-family:'Libre Baskerville',serif;font-size:15.5px;line-height:1.6;color:rgba(255,255,255,.8);text-wrap:balance}
+.jm-cfs{align-items:center!important;justify-content:center!important}
+.jm-cfs__pill{margin:0!important;padding:.75em 1.15em!important;font-size:clamp(16px,5.2cqw,23px)!important;background:rgba(10,14,12,.8)!important;box-shadow:0 0 0 1px rgba(194,168,108,.75),0 8px 26px rgba(0,0,0,.45)!important}
 </style>
 </head>
 <body>
@@ -133,20 +145,21 @@ h1 em{color:var(--gold)}
   <div class="cone"></div><div class="grain"></div><div class="frame"></div>
   <div class="in">
     <img class="logo" src="/assets/images/logo-light.svg" width="140" height="31" alt="Jason Moss">
-    <span class="status"><i aria-hidden="true"></i>The Sales Bible is on its way to your inbox</span>
-    <span class="label c">But one more thing&hellip;</span>
-    <h1>What if the problem <em>isn&rsquo;t</em> what you say on the call?</h1>
-    <p class="sub">What you say matters. But after 800+ calls, I&rsquo;ve learned something matters even more. <b>Tap it for sound.</b></p>
+    <span class="status"><i aria-hidden="true"></i>Your book will be in your inbox shortly.</span>
+    <span class="label c">While you wait</span>
+    <h1>The book gives you the words. <em>This is why some people still won&rsquo;t buy.</em></h1>
+    <p class="sub">After 800+ calls, I wish someone had told me this sooner.</p>
+    <p class="tapline">Tap the video to hear it</p>
     <div class="video">
-      <video class="jm-player" data-bunny-id="fe2a25f3-53af-4b63-8158-41ad56d10bff" data-video-id="fe2a25f3-53af-4b63-8158-41ad56d10bff" data-autoplay="true" data-captions="off" data-end-title="Let&rsquo;s find what&rsquo;s costing you clients." data-end-cta="Book Your Free Assessment" data-end-note="FREE · 20 MINUTES · 1-ON-1 WITH JASON" data-end-target=".watch-cta" muted playsinline crossorigin="anonymous"></video>
+      <video class="jm-player" data-bunny-id="2678b6f0-0028-4c5b-b65b-a37ed60e542b" data-video-id="2678b6f0-0028-4c5b-b65b-a37ed60e542b" data-autoplay="true" data-captions="off" data-end-title="Let&rsquo;s find what&rsquo;s costing you clients." data-end-cta="Book Your Free Assessment" data-end-note="FREE · 20 MINUTES · 1-ON-1 WITH JASON" data-end-target=".watch-cta" muted playsinline crossorigin="anonymous"></video>
     </div>
-    <a class="buy watch-cta" href="#book">Book my free assessment call</a>
-    <span class="fine">Free &middot; 20 minutes &middot; 1-on-1 with Jason</span>
+    <a class="buy watch-cta held" href="#book">Book my free assessment call</a>
+    <span class="fine held">Free &middot; 20 minutes &middot; 1-on-1 with Jason</span>
   </div>
 </header>
 
 <!-- 2 · The call + qualifier -->
-<section class="next" id="book">
+<section class="next held" id="book">
   <div class="wrap">
     <div class="grid">
       <div class="head">
@@ -180,13 +193,11 @@ h1 em{color:var(--gold)}
     </div>
     <p class="note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
 
-    <p class="lost">Can&rsquo;t find the email with your book? Check your spam or promotions folder, or <a href="/assets/docs/the-sales-bible-jason-moss.pdf" target="_blank" rel="noopener">open the book here</a>.</p>
   </div>
 </section>
 
 <footer class="ftr">
   <div class="wrap">
-    <img src="/assets/images/logo-light.svg" width="140" height="31" loading="lazy" alt="Jason Moss">
     <div>&copy; Jason Moss LLC</div>
     <nav><a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a><a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a><a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings disclaimer</a></nav>
     <p>This website is not a part of Facebook or Meta Platforms, Inc. Additionally, this site is NOT endorsed by Facebook in any way. Facebook is a trademark of Meta Platforms, Inc.</p>
@@ -197,5 +208,18 @@ h1 em{color:var(--gold)}
 <script src="/js/bunny-embeds.js" defer></script>
 <!-- Call qualifier: then Calendly (self-resizing iframe). Source lands on Kit (qualify_source) + Calendly utm_source. -->
 <script src="https://jasonmoss.com/qualify/embed.js" async></script>
+<script>
+/* Sound prompt wording: tap on touch screens, click elsewhere */
+(function(){var verb=matchMedia('(hover:none)').matches?'Tap':'Click',line=document.querySelector('.tapline');if(line)line.textContent=verb+' the video to hear it';(function t(){var p=document.querySelector('.jm-cfs__pill');if(!p)return setTimeout(t,150);var w=document.createTreeWalker(p,NodeFilter.SHOW_TEXT),n,l;while(n=w.nextNode()){if(n.nodeValue.trim())l=n}if(l)l.nodeValue=verb+' to hear this'})()})();
+
+/* Delayed reveal: video position, with a fallback when the video isn't playing */
+(function(){
+  var T=92, F=90, K='sb_call_revealed', start=Date.now(), done=false;
+  function store(v){try{if(v===undefined)return localStorage.getItem(K);if(v===null)localStorage.removeItem(K);else localStorage.setItem(K,v)}catch(e){return null}}
+  function show(animate){if(done)return;done=true;store('1');document.querySelectorAll('.held').forEach(function(e){e.classList.remove('held');if(animate)e.classList.add('reveal-in')});window.__revealedAt=Date.now()-start}
+  if(store()){show(false);return}
+  var iv=setInterval(function(){if(done)return clearInterval(iv);var v=document.querySelector('video');var playing=v&&!v.paused&&!v.ended&&v.readyState>2;if(v&&v.currentTime>=T)return show(true);if(!playing&&(Date.now()-start)/1000>=F)return show(true)},250);
+})();
+</script>
 </body>
 </html>

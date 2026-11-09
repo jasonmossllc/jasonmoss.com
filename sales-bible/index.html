@@ -201,11 +201,11 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
 
 /* ── wall + footer ── */
 .note{margin-top:12px;font-size:14px;font-weight:500;color:var(--ink2)}
-.ftr{background:var(--night);color:rgba(248,246,242,.55);padding:56px 0 110px;font-size:13px;line-height:1.7;text-align:center}
-.ftr img{height:28px;width:auto;margin:0 auto 18px}
-.ftr nav{display:flex;gap:4px 20px;justify-content:center;flex-wrap:wrap;margin:8px auto 22px;padding-bottom:18px;border-bottom:1px solid rgba(248,246,242,.1);max-width:820px}
-.ftr nav a{display:inline-block;padding:11px 4px;color:rgba(248,246,242,.8);text-decoration:none}
-.ftr p{max-width:820px;margin:0 auto 12px;font-style:italic}
+.ftr{background:var(--night);color:rgba(248,246,242,.34);padding:12px 0 24px;font-size:10px;line-height:1.5;text-align:center}
+.ftr .wrap>div{display:block}
+.ftr nav{display:flex;justify-content:center;flex-wrap:wrap;gap:0 14px;margin:2px 0 0}
+.ftr nav a{display:block;padding:3px 0;color:rgba(248,246,242,.34);text-decoration:none}
+.ftr p{max-width:720px;margin:2px auto 0;font-size:9.5px;line-height:1.45;color:rgba(248,246,242,.3)}
 
 /* ── sticky buy bar (phones) ── */
 .bar{position:fixed;left:0;right:0;bottom:0;z-index:50;display:none;align-items:center;gap:12px;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:rgba(10,14,12,.97);border-top:1px solid rgba(194,168,108,.4);transform:translateY(110%);transition:transform .25s ease}
@@ -279,8 +279,8 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
   .offer .card{padding:32px 22px 28px}
   .faq summary{font-size:17px}
   .faq .a{padding-right:0;font-size:16px}
-  .ftr nav{flex-direction:column;align-items:center;gap:0}
-  .ftr p{text-align:left;font-size:12.5px}
+  .ftr{padding-bottom:92px}
+  
   .bar{display:flex}
   .bar .buy{width:auto}
 }
@@ -538,7 +538,6 @@ h2{font-family:'Libre Baskerville',serif;font-weight:400;font-size:40px;line-hei
 
 <footer class="ftr">
   <div class="wrap">
-    <img src="/assets/images/logo-light.svg" width="140" height="31" loading="lazy" alt="Jason Moss">
     <div>&copy; Jason Moss LLC</div>
     <nav><a href="/privacy/" target="_blank" rel="noopener">Privacy policy</a><a href="/terms/" target="_blank" rel="noopener">Terms &amp; conditions</a><a href="/earnings-disclaimer/" target="_blank" rel="noopener">Earnings disclaimer</a></nav>
     <p>Results shared on this page come from past clients and aren&rsquo;t typical or guaranteed. Your results depend on your offer, your conversations and your follow-through.</p>
