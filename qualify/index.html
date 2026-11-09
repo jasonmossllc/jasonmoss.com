@@ -18,6 +18,7 @@
     --gold:#C2A86C;       /* decorative only: progress bar */
     --gold-deep:#8A6E28;  /* gold that is legible as text: 4.8:1 on sand */
     --sand:#F8F6F2;
+    --stone:#E9E2D3;
     --line:rgba(29,31,30,.22);
     --line-soft:rgba(29,31,30,.10);
     --serif:'Libre Baskerville', Georgia, serif;
@@ -225,7 +226,16 @@
     font-size:clamp(28px,6.6vw,38px);line-height:1.16;margin:0 0 22px;
     letter-spacing:-.01em;text-align:center;
   }
-  .book-note{margin:-12px 0 18px;text-align:center;color:var(--mocha);font-size:14px;line-height:1.5}
+  /* A key, not a sentence: a white dot on a stone ring is the open day exactly
+     as the calendar draws it (see CAL_THEME), so the two read as one thing. */
+  .book-note{
+    display:flex;align-items:center;justify-content:center;gap:12px;
+    margin:-10px 0 20px;color:var(--mocha);font-size:15px;line-height:1.4;font-weight:500;
+  }
+  .book-note i{
+    flex:none;width:18px;height:18px;border-radius:50%;
+    background:#F4F6F5;box-shadow:0 0 0 5px var(--stone);
+  }
   /* After the calendar, where an alternative to the listed times belongs. */
   .rebook{
     margin:0 0 20px;padding:12px 16px;border-radius:10px;
@@ -256,7 +266,26 @@
      the dead space under a short step and stops the taller booking-form step
      scrolling inside its own frame (that inner scroll swallows touch and makes
      the submit button unreachable on a phone). */
-  #cal{width:100%;height:760px;min-height:560px}
+  /* The calendar sits on a stone panel, and that is what makes open days
+     readable. Calendly paints an open day as its primary colour at 6% over
+     WHITE, whatever background it is given - so the circle is always near-white
+     (#f4f6f5 here). On sand (#f8f6f2) that is invisible; on stone it is a clear
+     white circle, the same white-on-warm language as the answer cards. Only a
+     light ground works this way: a dark one switches Calendly to a different
+     mix. The panel colour must match background_color in CAL_THEME so the
+     frame has no seam. */
+  #cal{
+    width:100%;height:760px;min-height:560px;
+    position:relative;isolation:isolate;
+    background:var(--stone);border-radius:14px;overflow:hidden;
+  }
+  /* Shown only while Calendly loads: it sits behind the iframe, which covers
+     it the moment the calendar paints. Without it the panel is an empty slab. */
+  #cal::after{
+    content:"Loading open times\2026";position:absolute;z-index:-1;
+    top:0;left:0;right:0;height:300px;display:grid;place-items:center;
+    color:var(--mocha);font-size:15px;
+  }
   /* No !important on height: fitCalendly writes an inline height on the
      iframe, and an author !important would silently beat it. */
   #cal iframe{width:100%!important;height:100%;border:0;display:block}
@@ -287,6 +316,15 @@
 
   var FN = '/.netlify/functions/submit-qualify';
   var CALENDLY = 'https://calendly.com/jasonmoss/business-assessment-call';
+  // Stone ground, forest accent (the same forest as .btn, so Calendly's Next
+  // and Schedule buttons match ours, hover included). The ground is what makes
+  // open days visible: Calendly always draws them near-white (see the #cal
+  // note in the styles), so do not set it back to sand or white, and do not go
+  // dark - the rest of the flow is light. text_color is pure black on
+  // purpose - Calendly lightens whatever it is given, and from obsidian its
+  // fine print (weekday names, the SMS consent line) lands at 2.2:1 on stone;
+  // from black it lands at #555, 5.7:1.
+  var CAL_THEME = 'background_color=E9E2D3&text_color=000000&primary_color=2C3F36';
   var LAUNCHPAD = 'https://jasonmoss.com/launchpad/';
   var TS_SITEKEY = '0x4AAAAAADlUEkeJ6kJ-_AML';
   var KEY = 'jm_qualify_v2';
@@ -750,13 +788,13 @@
         '<span><i class="nb">20 minutes</i> \u00b7 <i class="nb">on Zoom</i> \u00b7 <i class="nb">one-to-one with <b>Jason</b></i></span></p>'+
       '</div>'+
       '<h1 class="book-h">Pick a time below.</h1>'+
-      '<p class="book-note">Open days are highlighted.</p>'+
+      '<p class="book-note"><i aria-hidden="true"></i> Open days are circled in white.</p>'+
       '<div id="cal"></div>'+
       '<p class="cal-alt">Can\u2019t find a time that works for you? <a href="mailto:jason@jasonmoss.com?subject=Business%20assessment%20call%20-%20alternate%20time">Tap here to send me an email</a> and we\u2019ll arrange an alternate.</p>',
       5, false
     );
     var url = CALENDLY +
-      '?hide_gdpr_banner=1&hide_event_type_details=1&background_color=F8F6F2&text_color=1D1F1E&primary_color=0E6B5A' +
+      '?hide_gdpr_banner=1&hide_event_type_details=1&' + CAL_THEME +
       Object.keys(UTM).map(function(k){ return UTM[k] ? '&'+k+'='+encodeURIComponent(UTM[k]) : ''; }).join('');
     calH = 0;
     function init(){
