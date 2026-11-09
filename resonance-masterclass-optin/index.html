@@ -676,6 +676,21 @@
     var latestAd = (urlParams.get('ad') || '').trim();
     var latestSource = (urlParams.get('source') || '').trim();
 
+    // First-screen button: jump to the form and put the cursor in the name field,
+    // so the keyboard is already open when they get there. focus() has to run
+    // inside the tap itself, or phones won't open the keyboard.
+    var heroBtn = document.getElementById('hero-watch-btn');
+    var formWrap = document.getElementById('optin-form');
+    var firstField = form.querySelector('input[name="First name"]');
+    if (heroBtn && formWrap && firstField) {
+      heroBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        try { firstField.focus({ preventScroll: true }); } catch (err) { firstField.focus(); }
+        var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        formWrap.scrollIntoView({ behavior: calm ? 'auto' : 'smooth', block: 'start' });
+      });
+    }
+
     JMOptin.init({
       kitTagId: 20410092, // Kit: Resonance Masterclass (Cold Traffic)
       extraPayload: function () {
