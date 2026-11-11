@@ -137,12 +137,14 @@ body{background:var(--night)!important}
 .jm-cfs__pill{margin:0!important;padding:.75em 1.15em!important;font-size:clamp(16px,5.2cqw,23px)!important;background:rgba(10,14,12,.8)!important;box-shadow:0 0 0 1px rgba(194,168,108,.75),0 8px 26px rgba(0,0,0,.45)!important}
 h1 em{display:block;margin-top:.12em}
 @media (min-width:861px){
-  /* Laptops: keep the headline, video and button together on one screen */
-  .in{padding-top:28px;padding-bottom:28px}
-  .status{margin-top:18px}
-  .band .label{margin-top:18px}
-  .tapline{margin-top:16px}
-  .video{max-width:max(420px,min(820px,calc((100svh - 470px)*16/9)))}
+  /* Laptops: headline and the whole video on the first screen, video as big as the height allows.
+     The button is hidden until the first ask; when it appears, the reveal nudges it into view. */
+  .in{padding-top:22px;padding-bottom:28px}
+  .status{margin-top:14px}
+  .band .label{margin-top:16px}
+  h1{font-size:clamp(34px,5svh,44px)}
+  .tapline{margin-top:14px}
+  .video{max-width:max(640px,min(960px,calc((100svh - 345px)*16/9)))}
   .watch-cta{margin-top:22px}
   .fine{margin-top:10px}
 }
