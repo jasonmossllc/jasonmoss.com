@@ -792,8 +792,8 @@
           //  - a definite server rejection (4xx: expired token, bot guard)
           //    means the lead was NOT captured — faking success by redirecting
           //    to the thank-you page would strand a real visitor.
-          // Network errors / timeouts / 5xx still fail open to the redirect:
-          // never block a lead on our own infrastructure hiccups.
+          // Network errors / timeouts / 5xx show a retry prompt unless the server
+          // has confirmed the signup is saved or durably queued.
           var scRes = null;
           var scData = null;
           // fastRedirectMs: pages that don't need the Kit response (no Roezan
@@ -803,7 +803,7 @@
           // the server is slower than this, and rejections normally answer in
           // well under a second because they short-circuit before any Kit call.
           // (Off with the revenue question: it needs the response's answer_pass.)
-          var fastMs = (!rqStep && typeof config.fastRedirectMs === 'number' && config.fastRedirectMs > 0) ? config.fastRedirectMs : 0;
+          var fastMs = 0; // Every form now waits for a confirmed save or durable queue.
           var fastRedirect = false;
           var submitFetch = null;
           try {
@@ -846,6 +846,14 @@
             // click carries a fresh token, and let the visitor retry.
             try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (e) {}
             fail("That didn't go through — please click the button again.");
+            return;
+          }
+
+          // Continue only after Kit confirms the tag or the server durably queues it.
+          // A timeout may still finish server-side; a retry is safe and idempotent.
+          if (!optinConfirmed(scData)) {
+            try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (e) {}
+            fail("We couldn't confirm your signup. Please try again.");
             return;
           }
 
