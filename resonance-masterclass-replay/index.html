@@ -79,6 +79,12 @@
     /* Big centered sound pill (same as the Sales Bible page) */
     .jm-cfs { align-items: center !important; justify-content: center !important; }
     .jm-cfs__pill { margin: 0 !important; padding: .75em 1.15em !important; font-size: clamp(16px, 5.2cqw, 23px) !important; background: rgba(10,14,12,.8) !important; box-shadow: 0 0 0 1px rgba(194,168,108,.75), 0 8px 26px rgba(0,0,0,.45) !important; }
+    /* Subtle pulse: a gold ring that grows out of the pill and fades, every 2.4 s.
+       A separate ring (not the pill's own shadow, which is !important) so the pill never moves. */
+    .jm-cfs__pill { position: relative; }
+    .jm-cfs__pill::after { content: ''; position: absolute; inset: 0; border-radius: inherit; box-shadow: 0 0 0 1.5px rgba(194,168,108,.85); pointer-events: none; opacity: 0; animation: jm-cfs-pulse 2.4s ease-out .8s infinite; }
+    @keyframes jm-cfs-pulse { 0% { opacity: .9; transform: scale(1); } 70%, 100% { opacity: 0; transform: scale(1.08, 1.32); } }
+    @media (prefers-reduced-motion: reduce) { .jm-cfs__pill::after { animation: none; } }
 
     /* -- Book -- */
     .book { padding: 3.25rem 1.25rem 2.75rem; color: #1D1F1E; }
