@@ -36,6 +36,9 @@
  *                                                       // copy here and style it in the page's own <style>
  *                                                       // via the --s2-* variables / .jm-s2 rules. See the
  *                                                       // "Revenue question" section below.
+ *     prefetch: 'video-page',                            // optional: once the save answers, fetch the
+ *                                                       // destination's files in the background ('video-page'
+ *                                                       // = a replay page's player, or a list of paths)
  *   });
  *
  * The Cloudflare api.js tag must come AFTER this file:
@@ -464,6 +467,15 @@
         keepalive: true
       });
     }
+    // The browser delivers a beacon even after the page has moved on, so the
+    // visitor doesn't wait on the answer save. Same request body as saveAnswer
+    // (sent as text/plain; the function parses the body as JSON either way).
+    function beaconAnswer() {
+      try {
+        return !!(navigator.sendBeacon && navigator.sendBeacon('/.netlify/functions/submit-optin-answer',
+          JSON.stringify({ email: state.email, optin_revenue: state.answer, answer_pass: state.pass })));
+      } catch (e) { return false; }
+    }
 
     async function leave() {
       if (!state || state.leaving || !state.done) return;
@@ -474,8 +486,8 @@
       if (state.late) await Promise.race([state.late, new Promise(function (r) { setTimeout(r, 3000); })]);
       var url = state.redirectUrl;
       var waits = [];
-      if (state.answer && state.pass) {
-        // keepalive lets the save finish after we navigate; cap the wait.
+      if (state.answer && state.pass && !beaconAnswer()) {
+        // No beacon: keepalive lets the save finish after we navigate; cap the wait.
         waits.push(Promise.race([saveAnswer(), new Promise(function (r) { setTimeout(r, 1500); })]).catch(function (e) { console.error('Answer save error:', e); }));
       }
       if (state.confirmed) {
@@ -637,12 +649,39 @@
     };
   }
 
+  /* ── Warm the next page ─────────────────────────────────────────────────
+   * Once the save has answered, fetch the destination's static files in the
+   * background at the lowest priority, so the next page starts sooner. Never
+   * earlier: it must not compete with the save. A page opts in with
+   * prefetch: 'video-page' (a replay page's player) or a list of same-origin
+   * paths. Browsers with <link rel=prefetch> keep the files ready for the
+   * next page; the rest get them through the ordinary HTTP cache. */
+  var VIDEO_PAGE_ASSETS = ['/js/bunny-embeds.js', '/js/bunny-config.js', '/js/vendor/hls.min.js', '/js/vendor/plyr.min.js', '/js/vendor/plyr.css'];
+  var prefetched = {};
+  function prefetchNext(list) {
+    if (list === 'video-page') list = VIDEO_PAGE_ASSETS;
+    if (!list || !list.forEach) return;
+    list.forEach(function (u) {
+      if (prefetched[u]) return;
+      prefetched[u] = true;
+      try {
+        var l = document.createElement('link');
+        if (l.relList && l.relList.supports && l.relList.supports('prefetch')) {
+          l.rel = 'prefetch'; l.href = u; document.head.appendChild(l);
+        } else {
+          fetch(u, { credentials: 'same-origin', priority: 'low' }).catch(function () {});
+        }
+      } catch (e) {}
+    });
+  }
+
   /* ── Submit pipeline ──────────────────────────────────────────────────── */
   function init(config) {
     var rqStep = null; // the shared revenue question (on by default; see rqOn below)
     // Hands off to the revenue question or the page's onSuccess (two-step
     // forms), or redirects.
     function finish(ctx, response, late) {
+      if (config.prefetch) prefetchNext(config.prefetch);
       var url = config.redirect(ctx);
       if (rqStep) {
         rqStep.optedIn({ response: response || null, redirectUrl: url, late: late || null, email: ctx.email });
