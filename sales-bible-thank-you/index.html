@@ -34,7 +34,6 @@ a{color:inherit}
 .band::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(0,0,0,0) 55%,rgba(0,0,0,.5) 100%);pointer-events:none}
 .grain{position:absolute;inset:0;background:url(/assets/textures/grain-dark-soft.png);background-size:256px;opacity:.5;mix-blend-mode:overlay;pointer-events:none}
 .cone{position:absolute;left:50%;top:0;width:1100px;height:72%;transform:translateX(-50%);background:conic-gradient(from 180deg at 50% 0%,rgba(255,236,200,0) 166deg,rgba(255,236,200,.10) 180deg,rgba(255,236,200,0) 194deg);-webkit-mask-image:linear-gradient(180deg,#000 20%,transparent 100%);mask-image:linear-gradient(180deg,#000 20%,transparent 100%);pointer-events:none}
-.frame{position:absolute;inset:16px;border:1px solid rgba(194,168,108,.22);pointer-events:none;z-index:4}
 .in{position:relative;z-index:2;padding:48px 40px 68px;display:flex;flex-direction:column;align-items:center}
 .logo{height:26px;width:auto}
 .status{display:inline-flex;align-items:center;gap:10px;margin-top:30px;padding:8px 16px 8px 12px;border:1px solid rgba(194,168,108,.4);border-radius:999px;background:rgba(194,168,108,.08);font-size:12.5px;font-weight:600;color:rgba(255,255,255,.86)}
@@ -79,6 +78,10 @@ h1 em{color:var(--gold)}
 .qc cite b{display:block;color:var(--ink);font-weight:700}
 .qc cite .mono{flex:none;width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;border:2px solid #fff;box-shadow:0 0 0 1px rgba(194,168,108,.7);background:radial-gradient(circle at 35% 30%,#2a3d33,#14201a);font-family:'Libre Baskerville',serif;font-size:15px;letter-spacing:.04em;color:#E8CC92}
 .note{max-width:1060px;margin:18px auto 0;text-align:center;font-size:13px;font-weight:500;color:var(--ink2)}
+/* Second booking button, below the testimonials */
+.end-cta{display:flex;flex-direction:column;align-items:center;margin-top:48px}
+.end-cta .buy{min-width:380px}
+.end-fine{margin-top:14px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--ink2)}
 .lost{max-width:620px;margin:56px auto 0;padding-top:28px;border-top:1px solid var(--rule);text-align:center;font-size:14.5px;font-weight:500;line-height:1.7;color:var(--ink2)}
 .lost a{color:var(--brass);font-weight:700}
 
@@ -90,7 +93,6 @@ h1 em{color:var(--gold)}
 
 @media (max-width:860px){
   .wrap{padding:0 22px}
-  .frame{inset:8px}
   .in{padding:32px 18px 50px}
   .logo{height:22px}
   .status{margin-top:22px;font-size:12px}
@@ -110,6 +112,9 @@ h1 em{color:var(--gold)}
   .copy p{font-size:17px}
   .checks li{font-size:16px}
   .quotes{grid-template-columns:1fr;gap:18px;margin-top:52px}
+  .end-cta{margin-top:36px}
+  .end-cta .buy{width:100%;min-width:0;padding:18px 14px;min-height:58px;font-size:13.5px;letter-spacing:.1em}
+  .end-fine{font-size:10.5px;letter-spacing:.12em}
   .qc{padding:26px 22px 20px}
   .qc p{font-size:17.5px}
   
@@ -135,11 +140,10 @@ body{background:var(--night)!important}
 .tapline + .video{margin-top:12px}
 .jm-cfs{align-items:center!important;justify-content:center!important}
 .jm-cfs__pill{margin:0!important;padding:.75em 1.15em!important;font-size:clamp(16px,5.2cqw,23px)!important;background:rgba(10,14,12,.8)!important;box-shadow:0 0 0 1px rgba(194,168,108,.75),0 8px 26px rgba(0,0,0,.45)!important}
-/* Subtle pulse: a gold ring grows out of the pill and fades (separate ring, so the pill never moves) */
-.jm-cfs__pill{position:relative}
-.jm-cfs__pill::after{content:'';position:absolute;inset:0;border-radius:inherit;box-shadow:0 0 0 1.5px rgba(194,168,108,.85);pointer-events:none;opacity:0;animation:jm-cfs-pulse 2.4s ease-out .8s infinite}
-@keyframes jm-cfs-pulse{0%{opacity:.9;transform:scale(1)}70%,100%{opacity:0;transform:scale(1.08,1.32)}}
-@media (prefers-reduced-motion:reduce){.jm-cfs__pill::after{animation:none}}
+/* Subtle pulse: the sound pill gently grows and shrinks (off for reduced motion) */
+.jm-cfs__pill{animation:jm-cfs-pulse 2s ease-in-out .6s infinite}
+@keyframes jm-cfs-pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.06)}}
+@media (prefers-reduced-motion:reduce){.jm-cfs__pill{animation:none}}
 h1 em{display:block;margin-top:.12em}
 @media (min-width:861px){
   /* Laptops: the whole hero (headline, video, button, fine print) on the first screen,
@@ -161,8 +165,6 @@ h1 em{display:block;margin-top:.12em}
   /* First screen is one composition: heights scale with the phone, leftover space is shared evenly,
      and the button's place is reserved so nothing moves when it appears */
   .in{min-height:100svh;justify-content:space-between;gap:8px;padding:clamp(14px,2.6svh,24px) 14px clamp(16px,2.6svh,26px)}
-  /* Phones: no outer frame, so the video is the one framed object on the screen */
-  .frame{display:none}
   .logo{height:clamp(17px,3svh,23px)}
   .status{margin-top:0;font-size:clamp(11px,1.65svh,12.5px)}
   .band .label{margin-top:0}
@@ -170,7 +172,7 @@ h1 em{display:block;margin-top:.12em}
   .sub{margin-top:clamp(6px,1.4svh,12px);font-size:clamp(13.5px,2.2svh,17px);line-height:1.45}
   .tapline{margin-top:0;font-size:clamp(10.5px,1.6svh,12.5px)}
   .tapline + .video{margin-top:clamp(7px,1.3svh,12px)}
-  .qualify{position:relative}
+  .qualify{position:relative;top:0;margin-top:54px} /* no desktop sticky offset: it pushed the box onto the copy below; same space above as before */
   .watch-cta{margin-top:0;min-height:clamp(48px,7.4svh,58px);padding-top:10px;padding-bottom:10px}
   .fine{margin-top:clamp(7px,1.3svh,12px)}
 }
@@ -180,7 +182,7 @@ h1 em{display:block;margin-top:.12em}
 
 <!-- 1 · Watch -->
 <header class="band">
-  <div class="cone"></div><div class="grain"></div><div class="frame"></div>
+  <div class="cone"></div><div class="grain"></div>
   <div class="in">
     <img class="logo" src="/assets/images/logo-light.svg" width="140" height="31" alt="Jason Moss">
     <span class="status"><i aria-hidden="true"></i>Your book will be in your inbox shortly.</span>
@@ -236,6 +238,10 @@ h1 em{display:block;margin-top:.12em}
       <figure class="qc"><p>Working with Jason has single-handedly driven the most consistent results I&rsquo;ve seen in my business since I started 3 years ago.</p><cite><img src="/sales-bible-thank-you/assets/people/ariel.jpg" width="48" height="48" loading="lazy" alt="Ariel Naftali"><span><b>Ariel Naftali</b></span></cite></figure>
     </div>
     <p class="note">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
+    <div class="end-cta">
+      <a class="buy" href="#book">Book my free assessment call</a>
+      <span class="end-fine">Free &middot; 20 minutes &middot; 1-on-1 with Jason</span>
+    </div>
 
   </div>
 </section>
