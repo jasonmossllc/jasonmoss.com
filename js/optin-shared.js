@@ -36,9 +36,8 @@
  *                                                       // copy here and style it in the page's own <style>
  *                                                       // via the --s2-* variables / .jm-s2 rules. See the
  *                                                       // "Revenue question" section below.
- *     prefetch: 'video-page',                            // optional: once the save answers, fetch the
- *                                                       // destination's files in the background ('video-page'
- *                                                       // = a replay page's player, or a list of paths)
+ *     prefetch: false,                                   // optional: turn off warming the destination's video
+ *                                                       // player (automatic; see "Warm the next page")
  *   });
  *
  * The Cloudflare api.js tag must come AFTER this file:
@@ -650,17 +649,19 @@
   }
 
   /* ── Warm the next page ─────────────────────────────────────────────────
-   * Once the save has answered, fetch the destination's static files in the
-   * background at the lowest priority, so the next page starts sooner. Never
-   * earlier: it must not compete with the save. A page opts in with
-   * prefetch: 'video-page' (a replay page's player) or a list of same-origin
-   * paths. Browsers with <link rel=prefetch> keep the files ready for the
-   * next page; the rest get them through the ordinary HTTP cache. */
+   * Automatic on every opt-in. Once the save has answered (never earlier: it
+   * must not compete with the save), read the page the visitor is about to go
+   * to and, only if it loads the video player (/js/bunny-embeds.js), fetch the
+   * player's files in the background at the lowest priority, so the video is
+   * ready sooner. Swap or remove a video and nothing here needs changing.
+   * The check asks for the destination's path only (no ?email=...) and sends
+   * and stores no cookies, so the Engagement Tracker never sees or counts it.
+   * A page can turn it off with prefetch: false. Browsers with
+   * <link rel=prefetch> keep the files ready for the next page; the rest get
+   * them through the ordinary HTTP cache. */
   var VIDEO_PAGE_ASSETS = ['/js/bunny-embeds.js', '/js/bunny-config.js', '/js/vendor/hls.min.js', '/js/vendor/plyr.min.js', '/js/vendor/plyr.css'];
   var prefetched = {};
   function prefetchNext(list) {
-    if (list === 'video-page') list = VIDEO_PAGE_ASSETS;
-    if (!list || !list.forEach) return;
     list.forEach(function (u) {
       if (prefetched[u]) return;
       prefetched[u] = true;
@@ -674,6 +675,16 @@
       } catch (e) {}
     });
   }
+  function warmDestination(url) {
+    try {
+      var u = new URL(url, window.location.href);
+      if (u.origin !== window.location.origin || u.pathname === window.location.pathname) return;
+      fetch(u.pathname, { credentials: 'omit', priority: 'low', headers: { Accept: 'text/html' } })
+        .then(function (r) { return r.ok ? r.text() : ''; })
+        .then(function (html) { if (/\/js\/bunny-embeds\.js/.test(html)) prefetchNext(VIDEO_PAGE_ASSETS); })
+        .catch(function () {});
+    } catch (e) {}
+  }
 
   /* ── Submit pipeline ──────────────────────────────────────────────────── */
   function init(config) {
@@ -681,8 +692,8 @@
     // Hands off to the revenue question or the page's onSuccess (two-step
     // forms), or redirects.
     function finish(ctx, response, late) {
-      if (config.prefetch) prefetchNext(config.prefetch);
       var url = config.redirect(ctx);
+      if (config.prefetch !== false) warmDestination(url);
       if (rqStep) {
         rqStep.optedIn({ response: response || null, redirectUrl: url, late: late || null, email: ctx.email });
       } else if (config.onSuccess) {
