@@ -137,16 +137,20 @@ body{background:var(--night)!important}
 .jm-cfs__pill{margin:0!important;padding:.75em 1.15em!important;font-size:clamp(16px,5.2cqw,23px)!important;background:rgba(10,14,12,.8)!important;box-shadow:0 0 0 1px rgba(194,168,108,.75),0 8px 26px rgba(0,0,0,.45)!important}
 h1 em{display:block;margin-top:.12em}
 @media (min-width:861px){
-  /* Laptops: headline and the whole video on the first screen, video as big as the height allows.
-     The button is hidden until the first ask; when it appears, the reveal nudges it into view. */
-  .in{padding-top:22px;padding-bottom:28px}
-  .status{margin-top:14px}
-  .band .label{margin-top:16px}
-  h1{font-size:clamp(34px,5svh,44px)}
-  .tapline{margin-top:14px}
-  .video{max-width:max(640px,min(960px,calc((100svh - 345px)*16/9)))}
-  .watch-cta{margin-top:22px}
-  .fine{margin-top:10px}
+  /* Laptops: the whole hero (headline, video, button, fine print) on the first screen,
+     with the video taking every pixel of height the rest leaves over */
+  .in{padding-top:clamp(14px,2.2svh,24px);padding-bottom:clamp(16px,2.4svh,28px)}
+  .logo{height:clamp(20px,2.8svh,26px)}
+  .status{margin-top:clamp(8px,1.4svh,14px);padding-top:6px;padding-bottom:6px}
+  .band .label{margin-top:clamp(10px,1.6svh,16px)}
+  h1{margin-top:clamp(6px,1.1svh,12px);font-size:clamp(30px,4.6svh,44px);line-height:1.12}
+  .sub{margin-top:clamp(4px,.9svh,10px);font-size:clamp(15px,2svh,18px);line-height:1.5}
+  .tapline{margin-top:clamp(8px,1.3svh,14px)}
+  .tapline + .video{margin-top:clamp(8px,1.1svh,12px)}
+  /* Everything else in the hero measures ~30svh + 122px; video height = what's left, minus a small margin */
+  .video{max-width:max(540px,min(960px,calc((70svh - 142px)*16/9)))}
+  .watch-cta{margin-top:clamp(12px,1.8svh,20px);min-height:clamp(50px,6.4svh,60px);padding-top:12px;padding-bottom:12px}
+  .fine{margin-top:clamp(6px,1svh,10px)}
 }
 @media (max-width:860px){
   /* First screen is one composition: heights scale with the phone, leftover space is shared evenly,
