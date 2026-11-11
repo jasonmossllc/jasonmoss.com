@@ -514,6 +514,7 @@
           x.classList.remove('on'); x.setAttribute('aria-pressed','false');
         });
         b.classList.add('on'); b.setAttribute('aria-pressed','true');
+        loadCalendly();
         setTimeout(next, 160);
       });
     });
@@ -806,14 +807,26 @@
       });
       height();
     }
-    if (window.Calendly) init();
-    else {
-      var s = document.createElement('script');
-      s.src = 'https://assets.calendly.com/assets/external/widget.js';
-      s.async = true; s.onload = init;
-      document.head.appendChild(s);
-    }
+    loadCalendly(init);
     setTimeout(height, 900); setTimeout(height, 2400);
+  }
+
+  // Calendly's loader starts on the first answer instead of when the calendar
+  // is needed, so the calendar shows sooner for anyone who qualifies. The
+  // script only defines window.Calendly; nothing renders until renderBooking.
+  var calScript = null, calReady = [];
+  function loadCalendly(cb){
+    if (window.Calendly){ if (cb) cb(); return; }
+    if (cb) calReady = [cb]; // only the calendar currently on screen
+    if (calScript) return;
+    calScript = document.createElement('script');
+    calScript.src = 'https://assets.calendly.com/assets/external/widget.js';
+    calScript.async = true;
+    calScript.onload = function(){ var q = calReady; calReady = []; q.forEach(function(f){ f(); }); };
+    document.head.appendChild(calScript);
+    ['https://calendly.com', 'https://assets.calendly.com'].forEach(function(o){
+      var l = document.createElement('link'); l.rel = 'preconnect'; l.href = o; document.head.appendChild(l);
+    });
   }
 
   // Calendly's iframe defaults to a fixed height and scrolls its own content
