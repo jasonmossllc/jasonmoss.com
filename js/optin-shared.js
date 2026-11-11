@@ -796,15 +796,6 @@
           // has confirmed the signup is saved or durably queued.
           var scRes = null;
           var scData = null;
-          // fastRedirectMs: pages that don't need the Kit response (no Roezan
-          // pass, no attribution readback) can stop waiting after this many ms.
-          // By then the request has long been sent, so the function completes
-          // server-side regardless; only the 4xx retry prompt is forfeited when
-          // the server is slower than this, and rejections normally answer in
-          // well under a second because they short-circuit before any Kit call.
-          // (Off with the revenue question: it needs the response's answer_pass.)
-          var fastMs = 0; // Every form now waits for a confirmed save or durable queue.
-          var fastRedirect = false;
           var submitFetch = null;
           try {
             submitFetch = fetch('/.netlify/functions/submit-contact', {
@@ -817,22 +808,11 @@
               submitFetch,
               new Promise(function (resolve, reject) { setTimeout(function () { reject(new Error('submit-contact timeout')); }, 8000); })
             ];
-            if (fastMs) racers.push(new Promise(function (resolve) { setTimeout(function () { resolve('fast'); }, fastMs); }));
-            var raced = await Promise.race(racers);
-            if (raced === 'fast') {
-              fastRedirect = true;
-            } else {
-              scRes = raced;
-              try { scData = await scRes.json(); } catch (e) {}
-            }
+            scRes = await Promise.race(racers);
+            try { scData = await scRes.json(); } catch (e) {}
           } catch (err) {
             console.error('Kit submit error:', err);
           }
-          if (fastRedirect) {
-            finish({ firstName: firstName, email: email, form: form }, null);
-            return;
-          }
-
           if (scRes && scRes.status === 403 && scData && scData.error === 'verification_required') {
             // No token and the server's tokenless lane is closed (its daily
             // cap is full, e.g. during a bot flood). Ask for the challenge.
@@ -886,28 +866,7 @@
             }
           }
 
-          var late = (!scRes && submitFetch && (config.onSuccess || rqStep))
-            ? submitFetch.then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; })
-            : null;
-          if (late && config.roezanTagId) {
-            // The visitor is still on the question, so a late Kit reply can
-            // still carry the Roezan pass: sync the phone then.
-            late = late.then(function (data) {
-              var lp = data && data.roezan_pass;
-              if (lp) {
-                try {
-                  fetch('/.netlify/functions/submit-roezan-contact', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ email: email, first_name: firstName, phone: phone, tag_id: config.roezanTagId, roezan_pass: lp, website: honeypot }),
-                    keepalive: true
-                  }).catch(function (err) { console.error('Roezan submit error:', err); });
-                } catch (err) {}
-              }
-              return data;
-            });
-          }
-          finish({ firstName: firstName, email: email, form: form }, scData, late);
+          finish({ firstName: firstName, email: email, form: form }, scData);
         } catch (err) {
           console.error('Form submission error:', err);
           fail('Something went wrong. Please try again.');
