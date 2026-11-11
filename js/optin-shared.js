@@ -292,6 +292,17 @@
   var META_PIXEL_ID = '441869284373614';
   var QUALIFIED_ANSWERS = ['1k-10k', '10k-plus']; // answers that also fire the Meta "Qualified Lead"
 
+  function withParams(url, add) {
+    try {
+      var u = new URL(url, window.location.href);
+      Object.keys(add).forEach(function (k) { u.searchParams.set(k, add[k]); });
+      return u.origin === window.location.origin ? u.pathname + u.search + u.hash : u.toString();
+    } catch (e) {
+      return url + (url.indexOf('?') >= 0 ? '&' : '?') + Object.keys(add).map(function (k) { return k + '=' + encodeURIComponent(add[k]); }).join('&');
+    }
+  }
+  function withQualifiedFalse(url) { return withParams(url, { qualified: 'false' }); }
+
   function optinConfirmed(r) {
     return !!(r && r.success === true && (r.tagged === true || r.queued === true));
   }
@@ -437,16 +448,6 @@
         })();
       });
     }
-    function withParams(url, add) {
-      try {
-        var u = new URL(url, window.location.href);
-        Object.keys(add).forEach(function (k) { u.searchParams.set(k, add[k]); });
-        return u.origin === window.location.origin ? u.pathname + u.search + u.hash : u.toString();
-      } catch (e) {
-        return url + (url.indexOf('?') >= 0 ? '&' : '?') + Object.keys(add).map(function (k) { return k + '=' + encodeURIComponent(add[k]); }).join('&');
-      }
-    }
-    function withQualifiedFalse(url) { return withParams(url, { qualified: 'false' }); }
     function setButtons(disabled) { buttons.forEach(function (b) { b.disabled = disabled; }); }
     function markSelected(value) {
       buttons.forEach(function (b) {
@@ -650,7 +651,7 @@
         // (or null), so a two-step page that's still on screen can use it.
         config.onSuccess({ firstName: ctx.firstName, email: ctx.email, form: ctx.form, response: response || null, redirectUrl: url, late: late || null });
       } else {
-        window.location.href = url;
+        window.location.href = optinConfirmed(response) ? url : withQualifiedFalse(url);
       }
     }
 
@@ -792,24 +793,28 @@
           //  - a definite server rejection (4xx: expired token, bot guard)
           //    means the lead was NOT captured — faking success by redirecting
           //    to the thank-you page would strand a real visitor.
-          // Network errors / timeouts / 5xx show a retry prompt unless the server
-          // has confirmed the signup is saved or durably queued.
+          // If the server is unavailable or doesn't answer in time, let the
+          // visitor watch. Only confirmed saves or durable queue entries count.
           var scRes = null;
           var scData = null;
-          var submitFetch = null;
           try {
-            submitFetch = fetch('/.netlify/functions/submit-contact', {
+            var submitFetch = fetch('/.netlify/functions/submit-contact', {
               method: 'POST',
               headers: { 'Content-Type': 'application/json' },
               body: JSON.stringify(payload),
               keepalive: true
+            }).then(function (response) {
+              scRes = response;
+              if (response.ok || response.status === 403) {
+                return response.json().catch(function () { return null; });
+              }
+              return null;
             });
             var racers = [
               submitFetch,
               new Promise(function (resolve, reject) { setTimeout(function () { reject(new Error('submit-contact timeout')); }, 8000); })
             ];
-            scRes = await Promise.race(racers);
-            try { scData = await scRes.json(); } catch (e) {}
+            scData = await Promise.race(racers);
           } catch (err) {
             console.error('Kit submit error:', err);
           }
@@ -820,7 +825,7 @@
             fail("We couldn't verify your browser. Please complete the verification check if one appears, or try again in a few minutes.");
             return;
           }
-          if (scRes && scRes.status >= 400 && scRes.status < 500) {
+          if (scRes && scRes.status >= 400 && scRes.status < 500 && scRes.status !== 408) {
             // Rejected outright (most often an expired Turnstile token after
             // idling on the form). Re-run the invisible widget so the next
             // click carries a fresh token, and let the visitor retry.
@@ -829,9 +834,8 @@
             return;
           }
 
-          // Continue only after Kit confirms the tag or the server durably queues it.
-          // A timeout may still finish server-side; a retry is safe and idempotent.
-          if (!optinConfirmed(scData)) {
+          // A response can explicitly say that Kit declined to tag the contact.
+          if (scData && scData.tagged === false && !optinConfirmed(scData)) {
             try { if (window.turnstile && window.__tsWidgetId != null) window.turnstile.reset(window.__tsWidgetId); } catch (e) {}
             fail("We couldn't confirm your signup. Please try again.");
             return;
