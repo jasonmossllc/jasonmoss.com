@@ -121,13 +121,21 @@
     .foot a { color: inherit; text-decoration: none; }
     .foot a:hover { color: rgba(233,226,211,.6); }
 
+    /* Phones: the hero (video + button) fills the first screen; only a sliver of the
+       booking panel shows below it, as a cue to scroll. Extra height goes into the spacing. */
+    @media (max-width: 767px) {
+      .hero { min-height: calc(100svh - 3.5rem); justify-content: center; padding-bottom: 2.25rem; }
+      .hero-sound { margin-bottom: clamp(1.25rem, 3.5svh, 2rem); }
+      .hero-bridge { margin: clamp(1.75rem, 5svh, 2.75rem) 0 .75rem; } /* sits with the button it introduces */
+    }
+
     @media (min-width: 768px) {
       .eyebrow { font-size: .8125rem; line-height: 1.125rem; letter-spacing: .14em; }
       .btn { max-width: 25.3125rem; font-size: 1rem; }
       .hero { padding: 2.375rem 1.8125rem 4.5rem; }
       .hero h1 { font-size: 2.1875rem; line-height: 2.625rem; margin-bottom: .75rem; }
       .hero-sound { font-size: 1.0625rem; line-height: 1.8125rem; margin-bottom: 1.5rem; }
-      .hero-bridge { font-size: 1rem; line-height: 1.6875rem; max-width: 30rem; margin: 2rem 0 1.5rem; }
+      .hero-bridge { font-size: 1rem; line-height: 1.6875rem; max-width: 30rem; margin: 2rem 0 .875rem; }
 
       .book { padding: 4.5rem 2rem; }
       .book h2 { font-size: 2.125rem; line-height: 2.75rem; margin-bottom: 2rem; }
