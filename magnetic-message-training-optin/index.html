@@ -725,7 +725,7 @@
         <input type="text" name="First name" class="form-input" placeholder="First name" required aria-required="true" autocomplete="given-name">
         <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true" autocomplete="email">
         <!-- Honeypot: hidden from humans; bots fill it and get rejected server-side -->
-        <input type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+        <input hidden inert type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none!important">
         <!-- Cloudflare Turnstile (interaction-only: invisible unless a challenge is required) -->
         <div id="cf-turnstile-box" style="margin:0 auto 12px;display:flex;justify-content:center;max-width:100%;"></div>
         <button type="submit" class="form-btn">Watch the Training Now</button>

@@ -27,6 +27,7 @@ const {
   kitErrorSummary,
   syncContactToKit,
   checkTurnstile,
+  verifyTurnstile,
   originAllowed,
   looksLikeBotName,
   cleanString,
@@ -189,10 +190,16 @@ exports.handler = async (event) => {
       headerValue(event.headers, 'client-ip') ||
       (headerValue(event.headers, 'x-forwarded-for') || '').split(',')[0].trim();
 
-    // Honeypot — fake success so bots don't learn they were blocked.
+    // Autofill can populate the trap. Require positive browser verification
+    // before accepting that submission, and let a real visitor retry otherwise.
+    let honeypotVerified = false;
     if (data.website) {
-      console.log('Blocked: honeypot filled', { ip });
-      return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+      const verification = await verifyTurnstile(data.turnstile_token, ip);
+      honeypotVerified = verification.verified === true;
+      if (!honeypotVerified) {
+        console.log('Verification required: populated honeypot', { ip });
+        return { statusCode: 403, headers, body: JSON.stringify({ error: 'verification_required' }) };
+      }
     }
 
     if (!originAllowed(event)) {
@@ -285,7 +292,7 @@ exports.handler = async (event) => {
     const isTest = !!testParam;
     const trustedTest = !!TEST_KEY && testParam === TEST_KEY;
 
-    if (!trustedTest) {
+    if (!trustedTest && !honeypotVerified) {
       const ts = await checkTurnstile(data.turnstile_token, ip);
       if (ts.block) {
         return { statusCode: 403, headers, body: JSON.stringify({ error: ts.error }) };

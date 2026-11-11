@@ -16,7 +16,7 @@
 //
 // ── BOT PROTECTION ─────────────────────────────────────────────────────────
 // This endpoint is public, so it is the real gate against opt-in spam. Layered:
-//   1. Honeypot field ("website")     — silently drop if a bot fills it.
+//   1. Honeypot field ("website")     — require verified Turnstile if populated.
 //   2. Origin/Referer allowlist       — must come from a jasonmoss.com page.
 //   3. Email + first-name validation  — reject malformed / gibberish junk.
 //   4. Cloudflare Turnstile           — verify the token server-side (primary);
@@ -840,11 +840,16 @@ exports.handler = async (event) => {
       headerValue(event.headers, 'client-ip') ||
       (headerValue(event.headers, 'x-forwarded-for') || '').split(',')[0].trim();
 
-    // 1) Honeypot — a real user never fills the hidden "website" field.
-    //    Return a fake success so bots don't learn they were blocked.
+    // Autofill can populate the trap. Require positive browser verification
+    // before accepting that submission, and let a real visitor retry otherwise.
+    let honeypotVerified = false;
     if (data.website) {
-      console.log('Blocked: honeypot filled', { ip });
-      return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+      const verification = await verifyTurnstile(data.turnstile_token, ip);
+      honeypotVerified = verification.verified === true;
+      if (!honeypotVerified) {
+        console.log('Verification required: populated honeypot', { ip });
+        return { statusCode: 403, headers, body: JSON.stringify({ error: 'verification_required' }) };
+      }
     }
 
     // 2) Origin/Referer must be a jasonmoss.com page.
@@ -869,7 +874,7 @@ exports.handler = async (event) => {
     }
 
     // 5) Cloudflare Turnstile (see checkTurnstile).
-    const ts = await checkTurnstile(data.turnstile_token, ip);
+    const ts = honeypotVerified ? { block: false } : await checkTurnstile(data.turnstile_token, ip);
     if (ts.block) {
       return { statusCode: 403, headers, body: JSON.stringify({ error: ts.error }) };
     }

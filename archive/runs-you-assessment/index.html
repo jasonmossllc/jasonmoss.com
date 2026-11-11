@@ -755,7 +755,7 @@
           '<input type="text" id="qName" name="first_name" autocomplete="given-name" placeholder="Your first name" value="' + esc(state.name || '') + '">' +
           '<label for="qEmail">Email</label>' +
           '<input type="email" id="qEmail" name="email" autocomplete="email" placeholder="you@example.com" value="' + esc(state.email || '') + '">' +
-          '<div class="hp-field" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
+          '<div class="hp-field" aria-hidden="true"><label>Website<input hidden inert style="display:none!important" type="text" name="website" tabindex="-1" autocomplete="off"></label></div>' +
           '<div id="cf-turnstile-box"></div>' +
           '<p class="qerr" id="qErr"></p>' +
           '<button type="submit" class="btn" id="qSubmit">Show me my results<span class="arr">→</span></button>' +

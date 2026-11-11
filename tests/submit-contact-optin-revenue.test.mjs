@@ -60,5 +60,27 @@ for (const [code, label] of Object.entries(OPTIN_REVENUE)) {
   check('no answer: field untouched', !(KIT_OPTIN_REVENUE_FIELD in fieldsWritten()), JSON.stringify(writes));
 }
 
+
+process.env.TURNSTILE_SECRET_KEY = 'test-secret';
+const kitFetch = global.fetch;
+let verifications = 0;
+global.fetch = async (url, opts) => {
+  if (String(url).includes('/siteverify')) {
+    verifications++;
+    return { json: async () => ({ success: true }) };
+  }
+  return kitFetch(url, opts);
+};
+{
+  const res = await submit({ website: 'autofilled value', turnstile_token: 'verified-token' });
+  check('verified autofill reaches Kit', res.statusCode === 200 && JSON.parse(res.body).tagged === true && writes.length > 0);
+  check('single-use token verified only once', verifications === 1);
+}
+{
+  const res = await submit({ website: 'bot value' });
+  check('populated trap without verification requests retry', res.statusCode === 403 && writes.length === 0);
+}
+delete process.env.TURNSTILE_SECRET_KEY;
+
 if (failures) { console.error(`\n${failures} failure(s)`); process.exit(1); }
 console.log('\nall optin_revenue checks passed');

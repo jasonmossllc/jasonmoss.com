@@ -120,7 +120,7 @@ check('no Kit writes from any rejected request', writes.length === 0, JSON.strin
   const res = await quiet(() => contact.handler({ httpMethod: 'POST', headers: ORIGIN,
     body: JSON.stringify({ email: 'bot@example.org', first_name: 'Bot', tag_id: 20410092, website: 'http://spam' }) }));
   const body = JSON.parse(res.body);
-  check('honeypot fake success carries no answer_pass and no tagged flag', body.success === true && !body.answer_pass && body.tagged === undefined, res.body);
+  check('unverified honeypot requests a retry without confirming a save', res.statusCode === 403 && body.error === 'verification_required' && !body.answer_pass, res.body);
 }
 {
   writes = [];

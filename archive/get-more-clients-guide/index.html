@@ -447,7 +447,7 @@
             <input type="text" name="First Name" class="form-input" placeholder="First Name" required aria-required="true">
             <input type="email" name="E-mail" class="form-input" placeholder="E-mail" required aria-required="true">
             <!-- Honeypot: hidden from humans; bots fill it and get rejected server-side -->
-            <input type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
+            <input hidden inert type="text" name="website" class="optin-hp" tabindex="-1" autocomplete="off" aria-hidden="true" style="display:none!important">
             <!-- Cloudflare Turnstile (interaction-only): invisible unless a challenge is required -->
             <div id="cf-turnstile-box" style="margin:0 auto;display:flex;align-items:center;justify-content:center;max-width:100%;"></div>
             <button type="submit" class="form-btn">Download The Free Guide</button>

@@ -193,10 +193,18 @@ exports.handler = async (event) => {
       headerValue(event.headers, 'client-ip') ||
       (headerValue(event.headers, 'x-forwarded-for') || '').split(',')[0].trim();
 
-    // 1) Honeypot — a real user never fills the hidden "website" field.
+    // Autofill can populate the trap. Require positive browser verification
+    // before accepting that submission, and let a real visitor retry otherwise.
+    let honeypotVerified = false;
     if (data.website) {
-      console.log('Blocked: honeypot filled', { ip });
-      return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+      const trustedPass = verifyRoezanPass(data.roezan_pass,
+        String(data.email || '').trim().toLowerCase(), normalizePhone(data.phone) || '');
+      const verification = trustedPass ? { verified: true } : await verifyTurnstile(data.turnstile_token, ip);
+      honeypotVerified = verification.verified === true;
+      if (!honeypotVerified) {
+        console.log('Verification required: populated honeypot', { ip });
+        return { statusCode: 403, headers, body: JSON.stringify({ error: 'verification_required' }) };
+      }
     }
 
     // 2) Origin/Referer must be a jasonmoss.com page.
@@ -229,7 +237,7 @@ exports.handler = async (event) => {
     // The pass is bound to email + the normalized phone submit-contact saw,
     // so the phone sent here must match the phone sent there (optin-shared
     // sends the identical value to both calls).
-    if (!verifyRoezanPass(data.roezan_pass, email, normalizePhone(data.phone) || '')) {
+    if (!honeypotVerified && !verifyRoezanPass(data.roezan_pass, email, normalizePhone(data.phone) || '')) {
       const ts = await verifyTurnstile(data.turnstile_token, ip);
       if (ts.block) {
         console.log('Blocked: no valid roezan_pass or Turnstile token', { ip });
