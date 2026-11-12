@@ -7,6 +7,8 @@ https://go.jasonmoss.com/*  https://jasonmoss.com/:splat                        
 http://go.jasonmoss.com/*   https://jasonmoss.com/:splat                                     301!
 
 /zoom         https://us02web.zoom.us/j/5239082694                                            301
+# Live events room ("Live with Jason Moss", waiting room off, passcode embedded). 302 so it can be repointed.
+/live         https://us02web.zoom.us/j/81570030034?pwd=4VQpC0zrfu3CFkcEnLE7TlSH7oiaqr.1   302
 /go           /links                                                                           301
 /go/          /links                                                                           301
 /resonance    /resonance-masterclass-optin?source=YouTube_Organic                             301
