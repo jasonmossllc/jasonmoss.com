@@ -51,7 +51,9 @@
 .qlink:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
 .qlink[hidden],.js-join[hidden]{display:none}
 .inapp{font-size:13.5px;line-height:1.55;color:var(--taupe);text-wrap:pretty}
-.inapp[hidden]{display:none}
+.inapp[hidden],.js-escape[hidden]{display:none}
+.js-escape{align-self:stretch}
+.inapp strong{color:var(--obs);font-weight:600}
 .js-join{align-self:stretch}
 
 /* What happens next: the two asks + what's coming, in one calm list */
@@ -253,7 +255,9 @@ body{background:var(--obs)}
             <a class="btn btn-gold js-join" href="#" target="_blank" rel="noopener" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="1.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5"/></svg><span>Join on Zoom</span></a>
             <div class="addcal js-addcal"></div>
             <div class="addcal-done js-done" role="status" aria-live="polite"></div>
-            <p class="inapp js-inapp" hidden>Calendar buttons can stall inside Instagram and Facebook. The invite in your inbox works anywhere, or tap <b>•••</b> and open this page in your browser.</p>
+            <a class="btn btn-gold js-escape" href="#" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Open in Safari to add it</span></a>
+            <p class="inapp js-inapp" hidden>Calendar buttons don’t work inside this app, so this opens the page in Safari, where they do.</p>
+            <p class="inapp js-inapp-help" hidden><strong>Didn’t open?</strong> Tap <b>•••</b> at the top of the screen, then <b>Open in browser</b>.</p>
           </div>
           <div class="quick">
             <a class="qlink js-zoom" href="#" target="_blank" rel="noopener" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="1.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5"/></svg>Zoom link</a>
@@ -455,9 +459,28 @@ body{background:var(--obs)}
   var CHEVRON = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
   // iPhone and iPad (iPadOS reports as Macintosh with touch): Apple Calendar goes first.
   var APPLE_TOUCH = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
-  // Instagram / Facebook in-app browsers often can't open calendar files or Google sign-in.
-  var IN_APP = /Instagram|FBAN|FBAV|FB_IAB|FBIOS/i.test(navigator.userAgent);
+  // Instagram / Facebook / Messenger in-app browsers on iPhone can't hand a calendar file to
+  // Calendar, and Google opens signed out. So there we send them to Safari (each app's own
+  // working route; see the escape() notes) and lean on the invite in their inbox.
+  var UA = navigator.userAgent;
+  var IN_APP = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Messenger/i.test(UA);
   var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Hand this page to Safari. Instagram honours its own extbrowser route; Facebook, Messenger
+  // and Threads honour x-safari-https (2026 reports; Instagram dropped it). If we're still
+  // here a moment later, it didn't work: show the manual ••• route.
+  function escapeToSafari(){
+    var url = location.href;
+    var target = /Instagram/i.test(UA)
+      ? 'instagram://extbrowser/?url=' + encodeURIComponent(url)
+      : 'x-safari-' + url;
+    var t = setTimeout(function(){
+      if (document.visibilityState === 'visible') document.querySelector('.js-inapp-help').hidden = false;
+    }, 1500);
+    document.addEventListener('visibilitychange', function(){ if (document.visibilityState === 'hidden') clearTimeout(t); }, { once:true });
+    try { if (!/Instagram/i.test(UA)) { var w = window.open(target); if (w) return; } } catch (e) {}
+    location.href = target;
+  }
 
   function mountAddCal(host, done, n){
     var id = 'addcal-menu-' + n;
@@ -579,10 +602,17 @@ body{background:var(--obs)}
         document.querySelector('.js-said').hidden = false;
       }
     }
-    if (IN_APP && !live) document.querySelector('.js-inapp').hidden = false;
+    var inAppIOS = IN_APP && APPLE_TOUCH && !live;
+    if (inAppIOS){
+      var esc = document.querySelector('.js-escape');
+      esc.hidden = false; document.querySelector('.js-inapp').hidden = false;
+      esc.addEventListener('click', function(ev){ ev.preventDefault(); escapeToSafari(); });
+      $('.cb-note[data-show="active"]').forEach(function(el){ el.innerHTML = 'Not on your calendar yet? <span class="nw">Tap Yes on the invite</span> in your inbox.'; });
+    }
     if (!document.querySelector('.js-addcal button')){
       $('.js-addcal').forEach(function(el, n){ mountAddCal(el, null, n); });
       if (live) document.querySelector('.ticket .js-addcal').hidden = true;
+      if (inAppIOS) $('.js-addcal').forEach(function(el){ el.hidden = true; });
     }
     setState('active');
   }
