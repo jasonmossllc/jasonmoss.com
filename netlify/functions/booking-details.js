@@ -94,12 +94,11 @@ function buildIcs(d, uid) {
   // then why the call is worth showing up for.
   const description = [
     d.join_url ? `Join on Zoom: ${d.join_url}` : 'Your Zoom link is in your confirmation email.',
-    '20 minutes, just you and me.',
-    "We'll look at where your business really is right now... how clients find you, what's working, and where it's getting stuck.",
-    "You'll walk away with:\n- A clear read on what's really going on, and why\n- The one shift that would bring more clients in the door\n- A direction you can start moving towards right away, whether we work together on a deeper level or not",
-    'To get the most out of it:\n- Join from somewhere quiet\n- Be there a minute or two early. Twenty minutes goes quickly.\n- Know your rough monthly revenue, and where your clients come from',
+    "20 minutes, just you and me. We'll look at where your business is right now: how clients find you, what's working, and where it's getting stuck.",
+    "You'll walk away with a clear read on what's going on, and the one shift that would bring more clients in the door.",
+    "Join from somewhere quiet.",
+    "PS - this isn't a sales call. If I think I can help you on a deeper level, I'll let you know at the end. No pitch, no pressure.",
     d.reschedule_url ? `If something comes up, reschedule rather than skip: ${d.reschedule_url}` : '',
-    'Talk soon,\nJason',
   ].filter(Boolean).join('\n\n');
   const lines = [
     'BEGIN:VCALENDAR',
