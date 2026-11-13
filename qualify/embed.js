@@ -28,7 +28,7 @@
   // Name and email for the widget's Launchpad contact screen and the Calendly
   // booking form, so people we already know don't type them again. Sources,
   // newest wins:
-  //   1. this page's URL: ?email= (opt-in pages pass it) and ?name= /
+  //   1. this page's URL: ?email= and ?name= /
   //      ?first_name= (Kit email links can carry them via Liquid);
   //   2. a Kit email link's ?ck_subscriber_id=, looked up server-side
   //      (netlify/functions/qualify-prefill.js returns first name + email);
