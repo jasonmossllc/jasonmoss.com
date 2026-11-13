@@ -692,6 +692,12 @@
     // Hands off to the revenue question or the page's onSuccess (two-step
     // forms), or redirects.
     function finish(ctx, response, late) {
+      // Remember who just opted in, so the qualifier's forms (Calendly, the
+      // Launchpad screen) open filled in. Same record qualify/embed.js reads.
+      try {
+        localStorage.setItem('jm_prefill', JSON.stringify({ v: 1, email: String(ctx.email || '').trim().toLowerCase(),
+          first_name: String(ctx.firstName || '').trim().slice(0, 60), last_name: '', kid: '', t: Date.now() }));
+      } catch (e) {}
       var url = config.redirect(ctx);
       if (config.prefetch !== false) warmDestination(url);
       if (rqStep) {

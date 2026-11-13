@@ -343,6 +343,52 @@
   };
   var TEST = p('test'), FORCE = p('force'), FORCE_REASON = p('reason') || 'early';
 
+  // Prefill: name + email we already know, so the Launchpad contact screen and
+  // the Calendly form arrive filled in. The host page's embed.js resolves it
+  // (page URL, a Kit email link's subscriber id looked up server-side, or what
+  // this browser gave before) and posts it here; this page also reads the same
+  // localStorage record itself, for direct visits. Same key and shape as
+  // embed.js and js/optin-shared.js. Never put any of it in a URL of ours.
+  var PREFILL_KEY = 'jm_prefill';
+  var PREFILL_TTL = 30 * 24 * 3600 * 1000;
+  var EMAIL_OK = /^[^\s@<>()[\]\\,;:"]{1,64}@[^\s@<>]+\.[^\s@<>]{2,}$/;
+  function pfEmail(v){
+    var e = String(v == null ? '' : v).replace(/\s/g, '').toLowerCase();
+    return e.length <= 254 && EMAIL_OK.test(e) ? e : '';
+  }
+  function pfName(v){
+    var s = String(v == null ? '' : v).replace(/[\u0000-\u001f\u007f]/g, '').replace(/\s+/g, ' ').trim();
+    if (!s || s.length > 60 || /[<>{}%@\\]|https?:/i.test(s)) return '';
+    return s;
+  }
+  function pfClean(d){
+    if (!d || typeof d !== 'object') return null;
+    var o = { email: pfEmail(d.email), first_name: pfName(d.first_name), last_name: pfName(d.last_name) };
+    return o.email ? o : null;
+  }
+  var PREFILL = (function(){
+    try {
+      var d = JSON.parse(localStorage.getItem(PREFILL_KEY) || 'null');
+      if (d && Date.now() - (d.t || 0) < PREFILL_TTL) return pfClean(d);
+    } catch(e){}
+    return null;
+  })();
+  var prefillPending = false;   // the host is still looking someone up
+  var prefillWaiter = null;     // a calendar waiting on that lookup
+  // Someone typed their details into the contact screen: remember them for the
+  // next form (the calendar on a later visit, another page with the widget).
+  function rememberContact(fn, em){
+    em = pfEmail(em); fn = pfName(fn);
+    if (!em) return;
+    try {
+      var old = JSON.parse(localStorage.getItem(PREFILL_KEY) || 'null') || {};
+      var same = pfEmail(old.email) === em;
+      localStorage.setItem(PREFILL_KEY, JSON.stringify({ v:1, email:em, first_name:fn,
+        last_name: same ? pfName(old.last_name) : '', kid: same && old.kid ? String(old.kid) : '', t:Date.now() }));
+    } catch(e){}
+    PREFILL = { email:em, first_name:fn, last_name: (PREFILL && PREFILL.email === em) ? PREFILL.last_name : '' };
+  }
+
   var state = { revenue:null, fulltime:null, afford:null,
                 first_name:'', email:'', decided:null, reason:null };
   var idx = 0, locked = false, keyHandler = null;
@@ -575,6 +621,12 @@
 
   // Only reached on the decline path now.
   function renderContact(){
+    var pf = PREFILL || {};
+    var fnVal = state.first_name || pf.first_name || '';
+    var emVal = state.email || pf.email || '';
+    // Both already filled in: put focus on Continue, not in a field (on a
+    // phone a focused field throws up the keyboard over a finished form).
+    var ready = !!(fnVal && emVal);
     paint(
       // They have answered the questions expecting a calendar next. This has
       // to prime that a tailored recommendation is coming — without promising
@@ -583,18 +635,18 @@
       '<p class="sub">Then I’ll show you the best next step for where you are.</p>'+
       '<div class="field">'+
         '<label class="f" for="fn">First name</label>'+
-        '<input type="text" id="fn" data-focus autocomplete="given-name" value="'+esc(state.first_name)+'">'+
+        '<input type="text" id="fn"'+(ready ? '' : ' data-focus')+' autocomplete="given-name" value="'+esc(fnVal)+'">'+
       '</div>'+
       '<div class="field">'+
         '<label class="f" for="em">Email</label>'+
-        '<input type="email" id="em" autocomplete="email" inputmode="email" value="'+esc(state.email)+'">'+
+        '<input type="email" id="em" autocomplete="email" inputmode="email" value="'+esc(emVal)+'">'+
       '</div>'+
       '<div class="sr" aria-hidden="true"><label for="contact_notes">Leave this empty</label>'+
       '<input hidden inert type="text" id="contact_notes" name="contact_notes" tabindex="-1" autocomplete="one-time-code"></div>'+
       '<div class="ts-slot" id="ts-slot"></div>'+
       '<p class="err" id="err" role="alert"></p>'+
       '<div class="actions">'+
-        '<button type="button" class="btn" id="go">Continue</button>'+
+        '<button type="button" class="btn" id="go"'+(ready ? ' data-focus' : '')+'>Continue</button>'+
         '<button type="button" class="back" id="back"><span aria-hidden="true">&larr;</span> Back</button>'+
       '</div>'+
       '<p class="hint">I’ll also send you emails to help you get more clients. Unsubscribe anytime.</p>',
@@ -715,6 +767,7 @@
     }
     err.textContent = '';
     state.first_name = fn; state.email = em;
+    if (!TEST) rememberContact(fn, em);
     btn.disabled = true; btn.textContent = 'One moment…';
 
     ensureToken(function(tok){
@@ -800,16 +853,61 @@
     calH = 0;
     function init(){
       if (!window.Calendly) return;
-      window.Calendly.initInlineWidget({
-        url: url,
-        parentElement: document.getElementById('cal'),
-        utm: utmObject()
-      });
+      var cal = document.getElementById('cal');
+      // One calendar per render: the prefill wait below and the script load
+      // can both end up here.
+      if (!cal || cal.getAttribute('data-init')) return;
+      cal.setAttribute('data-init', '1');
+      var opts = { url: url, parentElement: cal, utm: utmObject() };
+      var pf = calendlyPrefill();
+      if (pf) opts.prefill = pf;
+      window.Calendly.initInlineWidget(opts);
       height();
     }
-    loadCalendly(init);
+    loadCalendly(function(){ whenPrefillSettles(init); });
     setTimeout(height, 900); setTimeout(height, 2400);
   }
+
+  // Name + email for Calendly's form, from what we already know. Only PREFILL:
+  // on the booking path nothing in state is real (test mode seeds a preview
+  // name there, which must never reach a real booking form).
+  function calendlyPrefill(){
+    var pf = PREFILL;
+    if (!pf || !pf.email) return null;
+    var out = { email: pf.email };
+    var name = ((pf.first_name || '') + ' ' + (pf.last_name || '')).trim();
+    if (name) out.name = name;
+    return out;
+  }
+  // A Kit lookup still on its way: hold the calendar briefly so it opens
+  // filled in, but never for long. Calendly's form keeps whatever it opened
+  // with, so this is the one chance to hand it over.
+  var PREFILL_WAIT_MS = 1500;
+  function whenPrefillSettles(cb){
+    if (!prefillPending) return cb();
+    var fired = false;
+    function go(){ if (fired) return; fired = true; if (prefillWaiter === go) prefillWaiter = null; cb(); }
+    prefillWaiter = go;
+    setTimeout(go, PREFILL_WAIT_MS);
+  }
+  function fillContactFields(){
+    if (!PREFILL) return;
+    var fn = document.getElementById('fn'), em = document.getElementById('em');
+    if (fn && !fn.value && PREFILL.first_name) fn.value = PREFILL.first_name;
+    if (em && !em.value) em.value = PREFILL.email;
+  }
+  window.addEventListener('message', function(e){
+    if (!FRAMED || e.source !== window.parent) return;
+    var d = e.data;
+    if (!d || typeof d !== 'object' || d.type !== 'qualify:prefill') return;
+    prefillPending = !!d.pending;
+    var c = pfClean(d.data);
+    if (c){ PREFILL = c; fillContactFields(); }
+    if (!prefillPending && prefillWaiter) prefillWaiter();
+  });
+  // Ask the host page for what it knows (embed.js answers; an older cached
+  // embed.js just ignores this, and the widget runs as before).
+  if (FRAMED){ try { parent.postMessage({ type:'qualify:hello' }, '*'); } catch(e){} }
 
   // Calendly's loader starts on the first answer instead of when the calendar
   // is needed, so the calendar shows sooner for anyone who qualifies. The
