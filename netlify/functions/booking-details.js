@@ -190,6 +190,9 @@ exports.handler = async (event) => {
     // Only whether they gave a text number (never the number): the page says
     // "I'll text you" or "I'll email you" to match what will really happen.
     has_phone: Boolean(String(invitee.text_reminder_number || '').trim()),
+    // When they booked (the current booking, after any reschedule): the page only promises
+    // "I'll text you personally" in the first hours, not to someone returning days later.
+    booked_at: invitee.created_at || null,
   };
 
   if (q.format === 'ics') {

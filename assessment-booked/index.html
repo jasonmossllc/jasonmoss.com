@@ -61,7 +61,7 @@
 .next-h{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
 .next ol{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--line)}
 .next li{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:16px;line-height:1.55;color:var(--ink-soft);text-wrap:pretty}
-.next li[hidden]{display:none}
+.next li[hidden],.next[hidden],.next span[hidden]{display:none}
 .next li b{font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);padding-top:4px}
 .next li strong{font-weight:600;color:var(--obs)}
 .nopitch{margin-top:28px!important;padding:22px 26px;background:var(--sand);border-left:2px solid var(--gold);font-size:16px}
@@ -270,9 +270,9 @@ body{background:var(--obs)}
           <div class="next-h">What happens next</div>
           <ol>
             <li><b>Now</b><span><strong>Tap Yes on the calendar invite</strong> in your inbox so it’s locked in.</span></li>
-            <li class="js-phone"><b>Soon</b><span><strong>I’ll text you personally.</strong> A quick reply lets me know it reached you.</span></li>
-            <li class="js-nophone" hidden><b>Soon</b><span><strong>I’ll email you personally.</strong> A quick reply lets me know it reached you.</span></li>
-            <li><b>Before</b><span>A reminder the day before<span class="js-phone">, and a text an hour before with your Zoom link</span>.</span></li>
+            <li class="js-phone js-soon"><b>Soon</b><span><strong>I’ll text you personally.</strong> A quick reply lets me know it reached you.</span></li>
+            <li class="js-nophone js-soon" hidden><b>Soon</b><span><strong>I’ll email you personally.</strong> A quick reply lets me know it reached you.</span></li>
+            <li class="js-before"><b>Before</b><span class="js-before-dayof">A reminder the day before<span class="js-phone">, and a text an hour before with your Zoom link</span>.</span><span class="js-before-sameday" hidden>A text an hour before with your Zoom link.</span></li>
           </ol>
         </div>
 
@@ -318,6 +318,8 @@ body{background:var(--obs)}
         <li>A direction you can start moving towards right away</li>
       </ul>
 
+      <p class="nopitch">PS — This isn’t a sales call. If I think I can help you on a deeper level, I’ll let you know at the end. <strong>No pitch, no pressure.</strong></p>
+
       <div class="prep">
         <h3>To get the most out of it</h3>
         <ul>
@@ -328,7 +330,6 @@ body{background:var(--obs)}
       </div>
 
       <p class="sig">— Jason</p>
-      <p class="nopitch">PS — This isn’t a sales call. If I think I can help you on a deeper level, I’ll let you know at the end. <strong>No pitch, no pressure.</strong></p>
     </div>
   </div>
 </section>
@@ -546,6 +547,8 @@ body{background:var(--obs)}
   function paint(d){
     data = d;
     if (d.status !== 'active'){ setState(d.status === 'canceled' || d.status === 'past' ? d.status : 'generic'); return; }
+    // The function keeps a booking "active" until an hour after it ends; once it has ended, say so.
+    if (Date.parse(d.end) < Date.now()){ setState('past'); return; }
     var tz = tzOf(d);
     // "Dr. Jane Smith" arrives as first_name "Dr." — drop honorifics rather than greet someone by one.
     var first = /^(dr|mr|mrs|ms|miss|mx|prof|rev)\.?$/i.test(d.first_name || '') ? '' : (d.first_name || '');
@@ -578,7 +581,18 @@ body{background:var(--obs)}
     var now = Date.now(), st = Date.parse(d.start), en = Date.parse(d.end);
     var live = d.join_url && now >= st - 15 * 60000 && now <= en;
     var join = document.querySelector('.js-join');
+    // Keep "What happens next" true to the moment: the personal text/email only in the first
+    // 12 hours after booking; no "day before" reminder when the call is less than a day away;
+    // and nothing to do but join once it's live.
+    var bookedAt = Date.parse(d.booked_at || '');
+    if (!isNaN(bookedAt) && now - bookedAt > 12 * 3600000) $('.js-soon').forEach(function(el){ el.hidden = true; });
+    if (st - now < 24 * 3600000){
+      document.querySelector('.js-before-dayof').hidden = true;
+      var sameDay = document.querySelector('.js-before-sameday');
+      if (phone) sameDay.hidden = false; else document.querySelector('.js-before').hidden = true;
+    }
     if (live){
+      document.querySelector('.next').hidden = true;
       join.href = d.join_url; join.hidden = false; zoom.hidden = true;
       $('.js-when').forEach(function(el){ el.textContent = now < st ? 'Starting soon' : 'Happening now'; });
       document.body.classList.add('is-live');
@@ -633,7 +647,7 @@ body{background:var(--obs)}
       first_name: PREVIEW === 'noname' ? '' : 'Sarah',
       start: start.toISOString(), end: new Date(start.getTime() + 20 * 60000).toISOString(),
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
-      join_url: 'https://us02web.zoom.us/j/0000000000', reschedule_url: 'https://calendly.com/',
+      join_url: 'https://us02web.zoom.us/j/0000000000', reschedule_url: 'https://calendly.com/jasonmoss/business-assessment-call',
       has_phone: PREVIEW !== 'noname',
       challenge: PREVIEW === 'noname' ? '' : 'I get plenty of interest and good conversations, but people say they need to think about it... and then they go quiet.'
     });
@@ -642,7 +656,8 @@ body{background:var(--obs)}
 
   if (!/^[A-Za-z0-9-]{8,64}$/.test(E) || !/^[A-Za-z0-9-]{8,64}$/.test(I)) return setState('generic');
 
-  function load(isRetry){
+  function load(attempt){
+    var isRetry = attempt > 0;
     // A slow lookup must not leave the page blank: after 8 seconds show the fallback.
     var ctl = window.AbortController ? new AbortController() : null;
     var timer = ctl ? setTimeout(function(){ ctl.abort(); }, 8000) : null;
@@ -655,11 +670,11 @@ body{background:var(--obs)}
         // Calendly creates the Zoom meeting a beat after the booking, so a
         // very fresh booking can arrive without a link. One quiet retry fills
         // it in for the calendar entries.
-        if (d.status === 'active' && !d.join_url && !isRetry) setTimeout(function(){ load(true); }, 3000);
+        if (d.status === 'active' && !d.join_url && attempt < 3) setTimeout(function(){ load(attempt + 1); }, 3000 * Math.pow(2, attempt));
       })
       .catch(function(){ clearTimeout(timer); if (!isRetry) setState('generic'); });
   }
-  load(false);
+  load(0);
 })();
 </script>
 <script>
