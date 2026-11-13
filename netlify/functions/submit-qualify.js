@@ -60,8 +60,8 @@ const TAG_LAUNCHPAD_DOWNSELL = 20410106;
 const TAG_RESCUED = 22757768; // existing downsell tag
 
 // Kit sequence "Launchpad Downsell (Qualifier)" — 5 emails over 7 days for
-// everyone we decline. Its emails stay unpublished until Jason approves them,
-// so enrolling someone here sends nothing before then.
+// everyone we decline. Kit starts it from the TAG_DECLINED tag (visual
+// automation 2249813); this id is only used to take a rescued booker out.
 const DOWNSELL_SEQUENCE_ID = 2872972;
 
 // ── Test mode ───────────────────────────────────────────────────────────────
@@ -365,7 +365,9 @@ exports.handler = async (event) => {
       email,
       firstName,
       tagIds,
-      ...(qualified ? {} : { sequenceId: DOWNSELL_SEQUENCE_ID }),
+      // No direct sequence add: the "Qualifier Declined" tag starts the Kit
+      // visual automation "Launchpad Downsell (Qualifier)" (2249813), which
+      // stops the emails when they book a call or buy Launchpad.
       // Preserved (set only when blank): original attribution, plus booked so a
       // retake never resets an already-booked lead back to "No".
       mappedFields: {
