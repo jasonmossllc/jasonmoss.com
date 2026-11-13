@@ -22,6 +22,15 @@ const ID_RE = /^[A-Za-z0-9-]{8,64}$/;
 const EVENT_NAME_MATCH = 'business assessment';
 const GRACE_AFTER_END_MS = 60 * 60 * 1000;
 const TITLE = 'Business Assessment Call with Jason Moss';
+const MAX_RESCHEDULE_HOPS = 5;
+const INVITEE_URI_RE = /^https:\/\/api\.calendly\.com\/scheduled_events\/([A-Za-z0-9-]{8,64})\/invitees\/([A-Za-z0-9-]{8,64})$/;
+
+// Only Calendly's own invitee URIs are followed, so a crafted payload can't
+// point this function anywhere else.
+function parseInviteeUri(uri) {
+  const m = INVITEE_URI_RE.exec(String(uri || ''));
+  return m ? { e: m[1], i: m[2] } : null;
+}
 
 const JSON_HEADERS = {
   'Content-Type': 'application/json',
@@ -129,11 +138,28 @@ exports.handler = async (event) => {
 
   let scheduled;
   let invitee;
+  let currentInviteeId = i;
   try {
     [scheduled, invitee] = await Promise.all([
       calendly(`/scheduled_events/${e}`),
       calendly(`/scheduled_events/${e}/invitees/${i}`),
     ]);
+    // A reschedule cancels the old booking and makes a new one, with the old
+    // invitee pointing at it (new_invitee). Follow that chain so a link saved
+    // before the reschedule (the "You're in" email, a bookmark) always shows
+    // the current time instead of "canceled".
+    for (let hop = 0; hop < MAX_RESCHEDULE_HOPS && invitee && invitee.rescheduled; hop++) {
+      const next = parseInviteeUri(invitee.new_invitee);
+      if (!next) break;
+      const [nextScheduled, nextInvitee] = await Promise.all([
+        calendly(`/scheduled_events/${next.e}`),
+        calendly(`/scheduled_events/${next.e}/invitees/${next.i}`),
+      ]);
+      if (!nextScheduled || !nextInvitee) break;
+      scheduled = nextScheduled;
+      invitee = nextInvitee;
+      currentInviteeId = next.i;
+    }
   } catch (error) {
     console.error('booking-details lookup failed', { error: error.message });
     return reply(502, { error: 'Lookup failed' });
@@ -172,11 +198,11 @@ exports.handler = async (event) => {
         'Cache-Control': 'private, no-store',
         'X-Robots-Tag': 'noindex',
       },
-      body: buildIcs(details, i),
+      body: buildIcs(details, currentInviteeId),
     };
   }
 
   return reply(200, details);
 };
 
-module.exports.__internal = { buildIcs, firstName, fold };
+module.exports.__internal = { buildIcs, firstName, fold, parseInviteeUri };
