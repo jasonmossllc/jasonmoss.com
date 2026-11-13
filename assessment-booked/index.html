@@ -54,6 +54,9 @@
 .inapp[hidden],.js-escape[hidden]{display:none}
 .js-escape{align-self:stretch}
 .inapp strong{color:var(--obs);font-weight:600}
+.inapp-ig{padding:16px 18px;background:var(--sand);border-left:2px solid var(--gold);font-size:14.5px;line-height:1.55;color:var(--ink-soft);text-wrap:pretty}
+.inapp-ig[hidden]{display:none}
+.inapp-ig strong{display:block;color:var(--obs);font-weight:600;margin-bottom:2px}
 .js-join{align-self:stretch}
 
 /* What happens next: the two asks + what's coming, in one calm list */
@@ -257,7 +260,8 @@ body{background:var(--obs)}
             <div class="addcal-done js-done" role="status" aria-live="polite"></div>
             <a class="btn btn-gold js-escape" href="#" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span>Open in Safari</span></a>
             <p class="inapp js-inapp" hidden>Adding to a calendar rarely works inside this app. In Safari it takes one tap.</p>
-            <p class="inapp js-inapp-help" hidden><strong>Didn’t open?</strong> Tap <b>•••</b> at the top of the screen, then <b>Open in browser</b>.</p>
+            <p class="inapp js-inapp-help" hidden><strong>Didn’t open?</strong> Tap <b>•••</b> at the top of the screen, then <b>Open in external browser</b>.</p>
+            <div class="inapp-ig js-inapp-ig" hidden><strong>Add it from your inbox.</strong> Calendar buttons don’t work inside Instagram, so tap <b>Yes</b> on the calendar invite in your email. Or tap <b>•••</b> at the top and choose <b>Open in external browser</b>.</div>
           </div>
           <div class="quick">
             <a class="qlink js-zoom" href="#" target="_blank" rel="noopener" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="1.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5"/></svg>Zoom link</a>
@@ -621,7 +625,14 @@ body{background:var(--obs)}
       }
     }
     var inAppIOS = IN_APP && APPLE_TOUCH && !live;
-    if (inAppIOS){
+    // Tested on a real iPhone (Nov 2026): inside Instagram the calendar buttons and both
+    // "open in Safari" routes do nothing, so Instagram gets a plain note (invite in the inbox,
+    // or ••• › Open in external browser). Facebook/Messenger keep the x-safari button.
+    var instagram = /Instagram/i.test(UA) && TESTQ.get('escape') !== 'xsafari';
+    if (inAppIOS && instagram){
+      document.querySelector('.js-inapp-ig').hidden = false;
+      $('.cb-note[data-show="active"]').forEach(function(el){ el.innerHTML = 'Not on your calendar yet? <span class="nw">Tap Yes on the invite</span> in your inbox.'; });
+    } else if (inAppIOS){
       var esc = document.querySelector('.js-escape');
       esc.hidden = false; document.querySelector('.js-inapp').hidden = false;
       esc.addEventListener('click', function(ev){ ev.preventDefault(); escapeToSafari(); });
