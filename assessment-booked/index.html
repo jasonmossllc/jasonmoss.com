@@ -43,9 +43,31 @@
 /* Raleway defaults to old-style figures; the booking data reads cleaner in lining ones */
 .ticket .when,.ticket .time,.ticket .meta,.ticket .fine,.cb-when,.addcal-menu,.addcal-done{font-variant-numeric:lining-nums}
 
+/* Zoom link + Reschedule: always one tap away, quieter than the main button */
+.ticket .quick{display:flex;flex-wrap:wrap;gap:10px;margin-top:14px}
+.ticket .quick:not(:has(a:not([hidden]))){display:none}
+.qlink{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 16px;background:#fff;border:1px solid var(--line);font-size:14px;font-weight:500;letter-spacing:.01em;color:var(--mocha)}
+.qlink:hover{border-color:var(--gold);color:var(--obs)}
+.qlink:focus-visible{outline:2px solid var(--gold);outline-offset:2px}
+.qlink[hidden],.js-join[hidden]{display:none}
+.inapp{font-size:13.5px;line-height:1.55;color:var(--taupe);text-wrap:pretty}
+.inapp[hidden]{display:none}
+.js-join{align-self:stretch}
+
+/* What happens next: the two asks + what's coming, in one calm list */
+.next{margin-top:30px}
+.next-h{font-size:12px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brass)}
+.next ol{list-style:none;margin:14px 0 0;padding:0;border-top:1px solid var(--line)}
+.next li{display:grid;grid-template-columns:78px 1fr;gap:14px;padding:15px 0;border-bottom:1px solid var(--line);font-size:16px;line-height:1.55;color:var(--ink-soft);text-wrap:pretty}
+.next li[hidden]{display:none}
+.next li b{font-size:11.5px;font-weight:600;letter-spacing:.18em;text-transform:uppercase;color:var(--brass);padding-top:4px}
+.next li strong{font-weight:600;color:var(--obs)}
+.nopitch{margin-top:28px!important;padding:22px 26px;background:var(--sand);border-left:2px solid var(--gold);font-size:16px}
+.nopitch strong{color:var(--obs)}
+
 /* Add to calendar */
 .addcal{position:relative;display:inline-block}
-.addcal:empty{display:none}
+.addcal:empty,.addcal[hidden]{display:none!important}
 .addcal .btn svg:last-child{transition:transform .25s ease}
 .addcal.open .btn svg:last-child{transform:rotate(180deg)}
 .addcal-menu{position:absolute;left:0;top:calc(100% + 8px);min-width:100%;width:290px;background:#fff;border:1px solid var(--line);box-shadow:0 24px 48px -20px rgba(29,31,30,.35);z-index:20;padding:6px 0;text-align:left}
@@ -147,6 +169,9 @@ body{background:var(--obs)}
   .ticket .date{font-size:26px}
   .ticket .time{font-size:17px}
   .ticket .actions{align-items:stretch}
+  .ticket .quick .qlink{flex:1}
+  .next li{grid-template-columns:64px 1fr;gap:12px;font-size:15.5px}
+  .nopitch{padding:18px 20px;font-size:15px}
   .addcal{display:block}
   .addcal-menu{width:100%}
   .letter-sec{padding-top:96px}
@@ -218,7 +243,6 @@ body{background:var(--obs)}
           <div class="eyebrow">Business assessment call</div>
         </div>
         <h1 class="h1" data-show="active generic"><span class="nw">You’re booked</span><span class="js-name"></span>.</h1>
-        <p class="lede" data-show="active">Last step… <strong>add it to your calendar now.</strong></p>
         <p class="lede" data-show="generic">Your confirmation email is on its way.</p>
 
         <div class="ticket" data-show="active">
@@ -226,17 +250,32 @@ body{background:var(--obs)}
           <div class="date js-date">&nbsp;</div>
           <div class="time js-time">&nbsp;</div>
           <div class="actions">
+            <a class="btn btn-gold js-join" href="#" target="_blank" rel="noopener" hidden><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="1.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5"/></svg><span>Join on Zoom</span></a>
             <div class="addcal js-addcal"></div>
             <div class="addcal-done js-done" role="status" aria-live="polite"></div>
+            <p class="inapp js-inapp" hidden>Calendar buttons can stall inside Instagram and Facebook. The invite in your inbox works anywhere, or tap <b>•••</b> and open this page in your browser.</p>
+          </div>
+          <div class="quick">
+            <a class="qlink js-zoom" href="#" target="_blank" rel="noopener" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="1.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5"/></svg>Zoom link</a>
+            <a class="qlink js-resched" href="#" target="_blank" rel="noopener" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11a8 8 0 1 0-2.3 5.7"/><path d="M20 4v7h-7"/></svg>Reschedule</a>
           </div>
           <div class="meta"><img src="/qualify/jason.jpg" alt="" width="34" height="34"><span>20&nbsp;minutes&nbsp;· on&nbsp;Zoom<span class="sep">&nbsp;· </span><span class="nw">one-to-one with Jason</span></span></div>
-          <p class="fine">Your Zoom link is in your confirmation email<span class="js-zoomcal"> and goes into the calendar entry when you add it</span>.<span class="js-resched"> If something comes up, <a href="#" target="_blank" rel="noopener">reschedule</a> rather than skip.</span></p>
+        </div>
+
+        <div class="next" data-show="active">
+          <div class="next-h">What happens next</div>
+          <ol>
+            <li><b>Now</b><span><strong>Tap Yes on the calendar invite</strong> in your inbox so it’s locked in.</span></li>
+            <li class="js-phone"><b>Soon</b><span><strong>I’ll text you personally.</strong> A quick reply lets me know it reached you.</span></li>
+            <li class="js-nophone" hidden><b>Soon</b><span><strong>I’ll email you personally.</strong> A quick reply lets me know it reached you.</span></li>
+            <li><b>Before</b><span>A reminder the day before<span class="js-phone">, and a text an hour before with your Zoom link</span>.</span></li>
+          </ol>
         </div>
 
         <div class="ticket generic" data-show="generic">
           <div class="when">One last step</div>
-          <div class="date">Add the call to your calendar from that email.</div>
-          <p class="fine">It has your call time and Zoom link. Not there in a few minutes? Check your spam or promotions folder.</p>
+          <div class="date">Tap Yes on the calendar invite in your inbox.</div>
+          <p class="fine">It has your call time and Zoom link, and locks the time in. Not there in a few minutes? Check your spam or promotions folder.</p>
         </div>
 
         <div data-show="canceled"><div class="eyebrow">Booking cancelled</div></div>
@@ -267,24 +306,21 @@ body{background:var(--obs)}
         <p class="after">That’s where we’ll start.</p>
       </div>
 
-      <p>I keep these calls simple.</p>
       <p>We’ll look at where your business is right now… how clients find you, what’s working, and where it’s getting stuck.</p>
-      <p>Most of the people I talk to aren’t short on effort. They just can’t see what’s holding things back… they’re standing too <span class="nw">close to it.</span></p>
-      <p>That’s what this call is for. You’ll walk away with:</p>
+      <p>You’ll walk away with:</p>
       <ul>
         <li>A clear read on what’s really going on, and why</li>
         <li><strong>The one shift that would bring more clients in the door</strong></li>
-        <li>A direction you can start moving towards right away, whether we work together on a deeper&nbsp;level&nbsp;or&nbsp;not</li>
+        <li>A direction you can start moving towards right away, whether we work together on a deeper level or not</li>
       </ul>
-      <p>If it looks like I can help you beyond this call, I’ll tell you what that would involve… and you can decide from there.</p>
+      <p class="nopitch">This isn’t a sales call. If I think I can help you on a deeper level, I’ll let you know at the end. <strong>No pitch, no pressure.</strong></p>
 
       <div class="prep">
         <h3>To get the most out of it</h3>
         <ul>
           <li>Join from somewhere quiet.</li>
-          <li>Be there a minute or two early. Twenty minutes goes quickly.</li>
+          <li>Be there a minute or two early.</li>
           <li>Know your rough monthly revenue, and where your clients come from.</li>
-          <li>Come honest. The more real you are with me, the more useful this will be.</li>
         </ul>
       </div>
 
@@ -312,7 +348,7 @@ body{background:var(--obs)}
     <div class="eyebrow center">Before you go</div>
     <h2 class="h2">I’ll see you <span class="gold-it js-day">on the call</span>.</h2>
     <p class="cb-when" data-show="active"><span class="js-time"></span></p>
-    <p class="cb-note" data-show="active">If it isn’t on your calendar yet, <span class="nw">add it now…</span> and protect the time.</p>
+    <p class="cb-note" data-show="active">Not on your calendar yet? <span class="nw">Add it now.</span></p>
     <p class="cb-note" data-show="generic">Add it to your calendar from your confirmation email… and protect the time.</p>
     <div class="addcal js-addcal"></div>
     <div class="addcal-done js-done" role="status" aria-live="polite"></div>
@@ -336,7 +372,7 @@ body{background:var(--obs)}
 
   function $(sel){ return Array.prototype.slice.call(document.querySelectorAll(sel)); }
   function setState(s){
-    document.body.className = 's-' + s;
+    document.body.className = 's-' + s + (document.body.classList.contains('is-live') ? ' is-live' : '');
     document.title = s === 'canceled' ? 'Booking Cancelled — Jason Moss' : s === 'past' ? 'Book a New Time — Jason Moss' : BASE_TITLE;
   }
 
@@ -419,6 +455,8 @@ body{background:var(--obs)}
   var CHEVRON = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>';
   // iPhone and iPad (iPadOS reports as Macintosh with touch): Apple Calendar goes first.
   var APPLE_TOUCH = /iPhone|iPad|iPod/.test(navigator.userAgent) || (/Macintosh/.test(navigator.userAgent) && navigator.maxTouchPoints > 1);
+  // Instagram / Facebook in-app browsers often can't open calendar files or Google sign-in.
+  var IN_APP = /Instagram|FBAN|FBAV|FB_IAB|FBIOS/i.test(navigator.userAgent);
   var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function mountAddCal(host, done, n){
@@ -505,9 +543,23 @@ body{background:var(--obs)}
       el.textContent = n === 0 ? 'today' : n === 1 ? 'tomorrow'
         : n < 7 ? fmt(d.start, tz, { weekday:'long' }) : 'on ' + fmt(d.start, tz, { month:'long', day:'numeric' }).replace(' ', ' ');
     });
-    $('.js-zoomcal').forEach(function(el){ el.hidden = !d.join_url; });
-    var resched = document.querySelector('.js-resched');
-    if (resched){ if (d.reschedule_url){ resched.querySelector('a').href = d.reschedule_url; } else { resched.remove(); } }
+    // Zoom link and reschedule, always one tap away (this page is also the "See your call details" link in the You're in email).
+    var zoom = document.querySelector('.js-zoom'), rs = document.querySelector('.js-resched');
+    if (d.join_url){ zoom.href = d.join_url; zoom.hidden = false; }
+    if (d.reschedule_url){ rs.href = d.reschedule_url; rs.hidden = false; }
+    // "I'll text you" only when they gave a number; otherwise Jason's personal note goes by email.
+    var phone = d.has_phone !== false;
+    $('.js-phone').forEach(function(el){ el.hidden = !phone; });
+    $('.js-nophone').forEach(function(el){ el.hidden = phone; });
+    // From 15 minutes before until the end, the one thing to do is join.
+    var now = Date.now(), st = Date.parse(d.start), en = Date.parse(d.end);
+    var live = d.join_url && now >= st - 15 * 60000 && now <= en;
+    var join = document.querySelector('.js-join');
+    if (live){
+      join.href = d.join_url; join.hidden = false; zoom.hidden = true;
+      $('.js-when').forEach(function(el){ el.textContent = now < st ? 'Starting soon' : 'Happening now'; });
+      document.body.classList.add('is-live');
+    }
     if (d.challenge){
       // Tidy the echo: one-per-line answers read as a list, no wrapping quotes, a capital "I",
       // no mid-word cut-off, and skip non-answers like "n/a" or "not sure yet".
@@ -527,8 +579,10 @@ body{background:var(--obs)}
         document.querySelector('.js-said').hidden = false;
       }
     }
+    if (IN_APP && !live) document.querySelector('.js-inapp').hidden = false;
     if (!document.querySelector('.js-addcal button')){
       $('.js-addcal').forEach(function(el, n){ mountAddCal(el, null, n); });
+      if (live) document.querySelector('.ticket .js-addcal').hidden = true;
     }
     setState('active');
   }
@@ -539,16 +593,18 @@ body{background:var(--obs)}
     tb.hidden = false; tb.className = 'testbar';
     tb.innerHTML = '<b>Preview</b> · sample booking, nothing is real. States: ' +
       '<a href="?preview=1">booked</a><a href="?preview=noname">no name or challenge</a>' +
-      '<a href="?preview=generic">no booking data</a><a href="?preview=canceled">cancelled</a>';
+      '<a href="?preview=live">starting soon</a><a href="?preview=generic">no booking data</a><a href="?preview=canceled">cancelled</a>';
     if (PREVIEW === 'generic') return setState('generic');
     if (PREVIEW === 'canceled') return setState('canceled');
     var start = new Date(); start.setDate(start.getDate() + 4); start.setUTCHours(16, 0, 0, 0);
+    if (PREVIEW === 'live') start = new Date(Date.now() + 8 * 60000);
     paint({
       status:'active',
       first_name: PREVIEW === 'noname' ? '' : 'Sarah',
       start: start.toISOString(), end: new Date(start.getTime() + 20 * 60000).toISOString(),
       timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
       join_url: 'https://us02web.zoom.us/j/0000000000', reschedule_url: 'https://calendly.com/',
+      has_phone: PREVIEW !== 'noname',
       challenge: PREVIEW === 'noname' ? '' : 'I get plenty of interest and good conversations, but people say they need to think about it... and then they go quiet.'
     });
     return;

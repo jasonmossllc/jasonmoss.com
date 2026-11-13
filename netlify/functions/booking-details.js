@@ -187,6 +187,9 @@ exports.handler = async (event) => {
     join_url: /^https:\/\/[\w.-]*zoom\.us\//.test(location.join_url || '') ? location.join_url : null,
     reschedule_url: /^https:\/\/calendly\.com\//.test(invitee.reschedule_url || '') ? invitee.reschedule_url : null,
     challenge: String((qa[0] || {}).answer || '').trim().slice(0, 600),
+    // Only whether they gave a text number (never the number): the page says
+    // "I'll text you" or "I'll email you" to match what will really happen.
+    has_phone: Boolean(String(invitee.text_reminder_number || '').trim()),
   };
 
   if (q.format === 'ics') {
