@@ -111,8 +111,10 @@
     /* -- Wall -- */
     .wall { padding: 3.5rem 1.25rem 2rem; display: flex; flex-direction: column; align-items: center; text-align: center; }
     .wall .eyebrow { color: #C2A86C; margin-bottom: .625rem; }
-    .wall h2 { font-family: 'Libre Baskerville', serif; font-weight: 400; font-size: clamp(1.4375rem, 6.6vw, 1.625rem); line-height: 1.35; color: #F8F6F2; max-width: 50rem; margin-bottom: 1.75rem; text-wrap: balance; }
+    .wall h2 { font-family: 'Libre Baskerville', serif; font-weight: 400; font-size: clamp(1.4375rem, 6.6vw, 1.625rem); line-height: 1.35; color: #F8F6F2; max-width: 50rem; margin-bottom: .875rem; text-wrap: balance; }
     .wall h2 em { color: #C2A86C; white-space: nowrap; }
+    /* Income claims sit right below, so the disclaimer goes above them (seen first), styled like /apply/'s. */
+    .wall .disclaimer { font-family: 'Libre Baskerville', serif; font-style: italic; font-size: .8125rem; line-height: 1.25rem; color: rgba(248,246,242,.72); max-width: 34rem; margin-bottom: 1.75rem; text-wrap: balance; }
     .jm-testimonials { display: block; width: 100%; max-width: 65rem; }
     .wall .btn { margin-top: 2rem; }
 
@@ -141,7 +143,8 @@
       .book h2 { font-size: 2.125rem; line-height: 2.75rem; margin-bottom: 2rem; }
 
       .wall { padding: 5rem 2rem 3rem; }
-      .wall h2 { font-size: 2.125rem; line-height: 2.875rem; margin-bottom: 2.5rem; }
+      .wall h2 { font-size: 2.125rem; line-height: 2.875rem; margin-bottom: 1rem; }
+      .wall .disclaimer { margin-bottom: 2.5rem; }
       .wall .btn { margin-top: 2.5rem; }
       .foot { margin-top: 3.5rem; }
     }
@@ -174,7 +177,8 @@
       .quote p { font-size: 1.0625rem; line-height: 1.75rem; }
 
       .wall { padding: 6rem clamp(2.5rem, 7vw, 7.5rem) 3rem; }
-      .wall h2 { font-size: 2.375rem; line-height: 3.125rem; margin-bottom: 3rem; }
+      .wall h2 { font-size: 2.375rem; line-height: 3.125rem; margin-bottom: 1rem; }
+      .wall .disclaimer { margin-bottom: 3rem; }
     }
   </style>
 </head>
@@ -229,6 +233,7 @@
   <section class="wall jm-bg">
     <p class="eyebrow">WHAT CLIENTS HAVE CREATED</p>
     <h2>Almost every one of these started with <em>a simple conversation.</em></h2>
+    <p class="disclaimer">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p>
     <div class="jm-testimonials" data-layout="scroll" data-height="720" data-shadow="2A3A31"></div>
     <a class="btn" href="#qualifier">Book Your Free 20-Min Business Assessment</a>
 
