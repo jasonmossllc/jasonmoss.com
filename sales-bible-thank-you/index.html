@@ -257,7 +257,7 @@ h1 em{display:block;margin-top:.12em}
 <!-- Bunny player (watch tracking comes from the Engagement Tracker script, js/jm.js) -->
 <script src="/js/bunny-embeds.js" defer></script>
 <!-- Call qualifier: then Calendly (self-resizing iframe). Source lands on Kit (qualify_source) + Calendly utm_source. -->
-<script src="https://jasonmoss.com/qualify/embed.js" async></script>
+<script src="/qualify/embed.js" async></script>
 <script>
 /* Sound prompt wording: tap on touch screens, click elsewhere */
 (function(){var verb=matchMedia('(hover:none)').matches?'Tap':'Click',line=document.querySelector('.tapline');if(line)line.textContent=verb+' the video to hear it';(function t(){var p=document.querySelector('.jm-cfs__pill');if(!p)return setTimeout(t,150);var w=document.createTreeWalker(p,NodeFilter.SHOW_TEXT),n,l;while(n=w.nextNode()){if(n.nodeValue.trim())l=n}if(l)l.nodeValue=verb+' to hear this'})()})();
