@@ -858,10 +858,12 @@
       // can both end up here.
       if (!cal || cal.getAttribute('data-init')) return;
       cal.setAttribute('data-init', '1');
-      var opts = { url: url, parentElement: cal, utm: utmObject() };
+      // name/email go on the calendar URL itself: Calendly's embed script no
+      // longer forwards its `prefill` option (checked Nov 2026), but its
+      // booking form still reads these two URL parameters.
       var pf = calendlyPrefill();
-      if (pf) opts.prefill = pf;
-      window.Calendly.initInlineWidget(opts);
+      var calUrl = url + (pf ? Object.keys(pf).map(function(k){ return '&'+k+'='+encodeURIComponent(pf[k]); }).join('') : '');
+      window.Calendly.initInlineWidget({ url: calUrl, parentElement: cal, utm: utmObject() });
       height();
     }
     loadCalendly(function(){ whenPrefillSettles(init); });
