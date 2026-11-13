@@ -107,6 +107,11 @@ function buildIcs(d, uid) {
     'PRODID:-//Jason Moss//Booking//EN',
     'CALSCALE:GREGORIAN',
     'METHOD:PUBLISH',
+    // Name + refresh for the webcal:// subscription the page offers inside Instagram and
+    // other in-app browsers (where a one-off calendar file can't reach Calendar).
+    'X-WR-CALNAME:Call with Jason Moss',
+    'REFRESH-INTERVAL;VALUE=DURATION:PT6H',
+    'X-PUBLISHED-TTL:PT6H',
     'BEGIN:VEVENT',
     `UID:${uid}@jasonmoss.com`,
     `DTSTAMP:${icsStamp(new Date().toISOString())}`,
@@ -127,12 +132,36 @@ function buildIcs(d, uid) {
   return lines.map(fold).join('\r\n') + '\r\n';
 }
 
+function emptyIcs(){
+  return ['BEGIN:VCALENDAR', 'VERSION:2.0', 'PRODID:-//Jason Moss//Booking//EN', 'CALSCALE:GREGORIAN', 'METHOD:PUBLISH',
+    'X-WR-CALNAME:Call with Jason Moss', 'END:VCALENDAR'].join('\r\n') + '\r\n';
+}
+
+function icsReply(body){
+  return {
+    statusCode: 200,
+    headers: {
+      'Content-Type': 'text/calendar; charset=utf-8',
+      'Content-Disposition': 'attachment; filename="call-with-jason-moss.ics"',
+      'Cache-Control': 'private, no-store',
+      'X-Robots-Tag': 'noindex',
+    },
+    body,
+  };
+}
+
 exports.handler = async (event) => {
   if (event.httpMethod !== 'GET') return reply(405, { error: 'Method not allowed' });
 
   const q = event.queryStringParameters || {};
   const e = String(q.e || '');
   const i = String(q.i || '');
+  // Preview sample for the page's ?preview=1 (no real booking behind it).
+  if (q.format === 'ics' && q.preview === '1'){
+    const start = new Date(Date.now() + 4 * 86400000); start.setUTCHours(16, 0, 0, 0);
+    return icsReply(buildIcs({ start: start.toISOString(), end: new Date(start.getTime() + 20 * 60000).toISOString(),
+      join_url: 'https://us02web.zoom.us/j/0000000000', reschedule_url: null }, 'preview'));
+  }
   if (!ID_RE.test(e) || !ID_RE.test(i)) return reply(400, { error: 'Invalid booking reference' });
   if (!process.env.CALENDLY_PAT) return reply(503, { error: 'Unavailable' });
 
@@ -170,10 +199,11 @@ exports.handler = async (event) => {
     return reply(404, { status: 'not_found' });
   }
   if (scheduled.status === 'canceled' || invitee.status === 'canceled') {
-    return reply(200, { status: 'canceled' });
+    // A subscribed calendar empties itself instead of keeping a cancelled call.
+    return q.format === 'ics' ? icsReply(emptyIcs()) : reply(200, { status: 'canceled' });
   }
   if (Date.parse(scheduled.end_time) + GRACE_AFTER_END_MS < Date.now()) {
-    return reply(200, { status: 'past' });
+    return q.format === 'ics' ? icsReply(emptyIcs()) : reply(200, { status: 'past' });
   }
 
   const qa = Array.isArray(invitee.questions_and_answers) ? invitee.questions_and_answers : [];

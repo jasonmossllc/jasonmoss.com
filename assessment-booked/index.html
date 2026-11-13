@@ -55,7 +55,8 @@
 .js-escape{align-self:stretch}
 .inapp strong{color:var(--obs);font-weight:600}
 .inapp-ig{padding:16px 18px;background:var(--sand);border-left:2px solid var(--gold);font-size:14.5px;line-height:1.55;color:var(--ink-soft);text-wrap:pretty}
-.inapp-ig[hidden]{display:none}
+.inapp-ig[hidden],.js-webcal[hidden]{display:none}
+.js-webcal{align-self:stretch;white-space:nowrap;padding-left:16px;padding-right:16px;letter-spacing:.08em}
 .inapp-ig strong{display:block;color:var(--obs);font-weight:600;margin-bottom:2px}
 .js-join{align-self:stretch}
 
@@ -261,7 +262,8 @@ body{background:var(--obs)}
             <a class="btn btn-gold js-escape" href="#" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/></svg><span class="js-escape-label">Open in Safari</span></a>
             <p class="inapp js-inapp" hidden>Adding to a calendar rarely works inside this app. In Safari it takes one tap.</p>
             <p class="inapp js-inapp-help" hidden><strong>Didn’t open?</strong> Tap <b>•••</b> at the top of the screen, then <b>Open in external browser</b>.</p>
-            <div class="inapp-ig js-inapp-ig" hidden><strong>Add it from your inbox.</strong> Calendar buttons don’t work inside <span class="js-app-name">Instagram</span>, so tap <b>Yes</b> on the calendar invite in your email. Or tap <b>•••</b> at the top and choose <b>Open in external browser</b>.</div>
+            <a class="btn btn-gold js-webcal" href="#" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15.5"/><path d="M3.5 10h17M8 3v4M16 3v4"/></svg><span>Add to Apple Calendar</span></a>
+            <div class="inapp-ig js-inapp-ig" hidden>Tap <b>Subscribe</b> when your iPhone asks. Use Google Calendar? Tap <b>Yes</b> on the calendar invite in your email.</div>
           </div>
           <div class="quick">
             <a class="qlink js-zoom" href="#" target="_blank" rel="noopener" hidden><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2.5" y="6" width="13" height="12" rx="1.5"/><path d="M15.5 10.5l6-3.5v10l-6-3.5"/></svg>Zoom link</a>
@@ -644,8 +646,13 @@ body{background:var(--obs)}
     // on iPhone and every Android in-app browser get a button that hands the page over.
     var instagram = !ANDROID && !/^(Facebook|Messenger)$/.test(APP_NAME) && TESTQ.get('escape') !== 'xsafari';
     if (inAppIOS && instagram){
+      // AddCal's approach, tested in Instagram on a real iPhone: a webcal:// link hands the
+      // calendar to iOS (Subscribe), where a one-off .ics can't leave the in-app browser.
+      // Our feed follows reschedules and empties once the call is over or cancelled.
+      var wc = document.querySelector('.js-webcal');
+      wc.href = 'webcal://' + location.host + FN + '?' + (PREVIEW ? 'preview=1' : 'e=' + encodeURIComponent(E) + '&i=' + encodeURIComponent(I)) + '&format=ics';
+      wc.hidden = false;
       document.querySelector('.js-inapp-ig').hidden = false;
-      document.querySelector('.js-app-name').textContent = APP_NAME;
       $('.cb-note[data-show="active"]').forEach(function(el){ el.innerHTML = 'Not on your calendar yet? <span class="nw">Tap Yes on the invite</span> in your inbox.'; });
     } else if (inAppIOS){
       var esc = document.querySelector('.js-escape');
