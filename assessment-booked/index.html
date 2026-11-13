@@ -465,6 +465,10 @@ body{background:var(--obs)}
   // working route; see the escape() notes) and lean on the invite in their inbox.
   var UA = navigator.userAgent;
   var IN_APP = /Instagram|FBAN|FBAV|FB_IAB|FBIOS|Messenger/i.test(UA);
+  // Testing only: ?preview=1&inapp=off shows the normal calendar menu in an in-app browser;
+  // &escape=xsafari forces the x-safari route (to compare routes on a real phone).
+  var TESTQ = new URLSearchParams(location.search);
+  if (TESTQ.get('preview') && TESTQ.get('inapp') === 'off') IN_APP = false;
   var REDUCED = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   // Hand this page to Safari. Instagram honours its own extbrowser route; Facebook, Messenger
@@ -472,7 +476,7 @@ body{background:var(--obs)}
   // here a moment later, it didn't work: show the manual ••• route.
   function escapeToSafari(){
     var url = location.href;
-    var target = /Instagram/i.test(UA)
+    var target = /Instagram/i.test(UA) && TESTQ.get('escape') !== 'xsafari'
       ? 'instagram://extbrowser/?url=' + encodeURIComponent(url)
       : 'x-safari-' + url;
     var t = setTimeout(function(){
