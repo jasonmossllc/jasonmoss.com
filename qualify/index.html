@@ -49,14 +49,19 @@
   html.framed .shell{min-height:0}
   @media (max-width:600px){ .shell{padding:20px 18px 36px} }
 
-  .bar{height:3px;background:var(--line-soft);border-radius:3px;overflow:hidden;flex:none}
-  .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .4s var(--ease)}
+  .bar{height:2px;background:var(--line-soft);overflow:hidden;flex:none}
+  .bar i{display:block;position:relative;height:100%;width:0;background:var(--gold);transition:width .9s var(--ease)}
+  /* Each time the bar advances, one soft highlight travels along the filled part. */
+  .bar i::after{content:"";position:absolute;top:0;bottom:0;left:0;width:38%;opacity:0;
+    background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,250,235,.95),rgba(255,255,255,0))}
+  .bar i.sheen::after{animation:sheen 1.25s .15s ease-out 1}
+  @keyframes sheen{0%{transform:translateX(-100%);opacity:0}25%{opacity:1}100%{transform:translateX(265%);opacity:0}}
   /* Collapse it, don't just hide it - it was reserving space on the
      booking and decline screens, which have no progress to show. */
   .bar.hide{display:none}
   .steplabel{
-    font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--taupe);
-    margin:10px 0 0;min-height:15px;font-weight:600;
+    font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-deep);
+    margin:14px 0 0;min-height:15px;font-weight:600;
   }
   .steplabel:empty{display:none;margin:0;min-height:0}
 
@@ -74,43 +79,45 @@
   @media (prefers-reduced-motion:reduce){
     .screen{animation:none}
     .bar i{transition:none}
+    .bar i.sheen::after{animation:none}
   }
 
   h1{
     font-family:var(--serif);font-weight:400;
-    font-size:clamp(22px,5vw,29px);line-height:1.32;
+    font-size:clamp(23px,5.2vw,31px);line-height:1.28;
     margin:0 0 10px;letter-spacing:-.01em;text-wrap:balance;
   }
-  .sub{color:var(--mocha);font-size:15px;line-height:1.55;margin:0 0 24px;text-wrap:pretty}
+  .sub{color:var(--mocha);font-size:15.5px;line-height:1.55;margin:6px 0 24px;text-wrap:pretty}
   /* The questions have titles of different lengths and only the first has a
      subtitle, so the options started at a different height on each one and the
      tap targets moved under your thumb. qhead is locked to the tallest of the
      three (measured at runtime, so it stays right at every width). */
-  .qhead{min-height:var(--qhead-h,auto)}
+  /* The 24px gap to the options is padding, so it holds even when the measured height comes up short. */
+  .qhead{min-height:var(--qhead-h,auto);padding-bottom:24px}
   .qhead h1{margin-bottom:0}
   .qhead .sub{margin-bottom:0}
 
-  .opts{display:flex;flex-direction:column;gap:8px;margin:0;padding:0;list-style:none}
+  .opts{display:flex;flex-direction:column;gap:10px;margin:0;padding:0;list-style:none}
   .opt{
     display:flex;align-items:center;gap:12px;width:100%;text-align:left;
-    background:#fff;border:1px solid var(--line);border-radius:10px;
-    padding:14px 16px;min-height:56px;
+    background:#fff;border:1px solid rgba(91,75,63,.2);border-radius:2px;
+    padding:14px 18px;min-height:58px;
     font-family:var(--sans);font-size:16px;line-height:1.35;color:var(--obsidian);
-    cursor:pointer;transition:border-color .15s,box-shadow .15s;
+    cursor:pointer;transition:border-color .2s,box-shadow .2s,transform .2s;
   }
   /* Hover only where a pointer can actually hover. On touch, :hover sticks
      after a tap, and because the hover state is styled identically to .on the
      previously tapped option kept looking selected next to the real answer
      when you went back a question. */
   @media (hover:hover) and (pointer:fine){
-    .opt:hover{border-color:var(--forest);box-shadow:0 2px 10px -4px rgba(29,31,30,.25)}
+    .opt:hover{border-color:var(--gold);box-shadow:0 12px 24px -16px rgba(91,75,63,.55);transform:translateY(-1px)}
     .opt:hover .k{background:var(--forest);border-color:var(--forest);color:#fff}
   }
   .opt.on{border-color:var(--forest);box-shadow:inset 0 0 0 1px var(--forest)}
   .opt .k{
-    flex:none;width:26px;height:26px;border-radius:6px;
-    border:1px solid var(--line);display:grid;place-items:center;
-    font-size:11px;color:var(--taupe);font-weight:600;
+    flex:none;width:28px;height:28px;border-radius:2px;
+    border:1px solid rgba(194,168,108,.7);display:grid;place-items:center;
+    font-size:11px;color:var(--gold-deep);font-weight:600;letter-spacing:.04em;
     transition:background .15s,color .15s,border-color .15s;
   }
   .opt.on .k{background:var(--forest);border-color:var(--forest);color:#fff}
@@ -121,7 +128,7 @@
     color:var(--taupe);margin:0 0 6px;font-weight:600;
   }
   input[type=text],input[type=email]{
-    width:100%;background:#fff;border:1px solid var(--line);border-radius:10px;
+    width:100%;background:#fff;border:1px solid rgba(91,75,63,.2);border-radius:2px;
     padding:14px 16px;font-family:var(--sans);font-size:16px;color:var(--obsidian);
     transition:border-color .15s,box-shadow .15s;
   }
@@ -136,9 +143,9 @@
 
   .btn{
     display:inline-flex;align-items:center;justify-content:center;
-    background:var(--forest);color:#fff;border:none;border-radius:999px;
-    padding:0 32px;min-height:52px;
-    font-family:var(--sans);font-size:16px;font-weight:600;
+    background:var(--forest);color:#fff;border:none;border-radius:0;
+    padding:0 34px;min-height:54px;
+    font-family:var(--sans);font-size:13.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;
     cursor:pointer;transition:background .18s;text-decoration:none;
   }
   .btn:hover{background:var(--forest-deep)}
@@ -179,7 +186,7 @@
   .fit{
     position:relative;overflow:hidden;text-align:center;
     background:linear-gradient(158deg,#FFFFFF 0%,#FCFAF6 55%,#F7F3EA 100%);
-    border:1px solid var(--line-soft);border-radius:14px;
+    border:1px solid var(--line-soft);border-radius:2px;
     padding:32px 26px 24px;margin:0 0 32px;
     box-shadow:0 1px 2px rgba(29,31,30,.04),0 16px 34px -26px rgba(29,31,30,.45);
   }
@@ -191,7 +198,7 @@
   @media (max-width:600px){ .fit{padding:26px 20px 20px} }
   .fit-badge{
     display:inline-flex;align-items:center;gap:9px;
-    background:var(--forest);color:#fff;border-radius:999px;
+    background:var(--forest);color:#fff;border-radius:2px;
     padding:9px 20px 9px 16px;margin:0 0 18px;
     font-size:12.5px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;
     box-shadow:0 6px 16px -8px rgba(20,49,40,.6);
@@ -238,7 +245,7 @@
   }
   /* After the calendar, where an alternative to the listed times belongs. */
   .rebook{
-    margin:0 0 20px;padding:12px 16px;border-radius:10px;
+    margin:0 0 20px;padding:12px 16px;border-radius:2px;
     border:1px solid var(--line-soft);background:#fff;
     color:var(--mocha);font-size:14px;line-height:1.5;text-align:center;
   }
@@ -248,13 +255,13 @@
   }
   .cal-alt{
     margin:26px 0 0;padding:16px 18px;text-align:center;
-    border:1px solid var(--line-soft);border-radius:10px;background:rgba(255,255,255,.55);
+    border:1px solid var(--line-soft);border-radius:2px;background:rgba(255,255,255,.55);
     color:var(--mocha);font-size:14px;line-height:1.55;text-wrap:pretty;
   }
   .cal-alt a{color:var(--forest);font-weight:600;text-decoration:underline;text-underline-offset:2px}
   .cal-alt a:hover{color:var(--obsidian)}
 
-  .card{background:#fff;border:1px solid var(--line-soft);border-radius:14px;padding:32px 28px}
+  .card{background:#fff;border:1px solid var(--line-soft);border-radius:2px;padding:32px 28px}
   @media (max-width:600px){ .card{padding:24px 20px} }
   .card h1{margin-bottom:16px}
   .card p{color:var(--mocha);font-size:16px;line-height:1.62;margin:0 0 16px}
@@ -498,7 +505,9 @@
     bar.classList.toggle('hide', !show);
     var t = total();
     var pct = label ? 100 : Math.round((Math.min(step,t)/t)*100);
-    barfill.style.width = show ? pct+'%' : '0%';
+    var nextW = show ? pct+'%' : '0%';
+    if (show && barfill.style.width !== nextW){ barfill.classList.remove('sheen'); void barfill.offsetWidth; barfill.classList.add('sheen'); }
+    barfill.style.width = nextW;
     steplabel.textContent = show ? (label || ('Step ' + Math.min(step,t) + ' of ' + t)) : '';
   }
   function paint(html, step, showProgress, label){
@@ -531,7 +540,7 @@
       }
     } catch(e){}
     document.body.removeChild(probe);
-    if (max > 0) document.documentElement.style.setProperty('--qhead-h', (max + 24) + 'px');
+    if (max > 0) document.documentElement.style.setProperty('--qhead-h', max + 'px');
   }
 
   function renderQuestion(){
