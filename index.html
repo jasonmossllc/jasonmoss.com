@@ -32,7 +32,7 @@
 <meta name="twitter:image" content="https://jasonmoss.com/assets/images/featured.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="preload" as="image" type="image/avif" fetchpriority="high" href="/assets/images/hero/hero-1600.avif" media="(max-width:700px)">
 <link rel="preload" as="image" type="image/avif" fetchpriority="high" href="/assets/images/hero/hero-2400.avif" media="(min-width:701px) and (max-width:1099px), (min-width:1100px) and (max-width:1599px) and (max-resolution:1.49dppx)">
 <link rel="preload" as="image" type="image/avif" fetchpriority="high" href="/assets/images/hero/hero-3200.avif" media="(min-width:1600px), (min-width:1100px) and (min-resolution:1.5dppx)">
@@ -228,32 +228,110 @@ L.forEach(function(l){var m=matchMedia(l.media);m.addEventListener?m.addEventLis
 .bg-tex-forest{background-color:#2C3F36;background-image:url(/assets/textures/grain-dark-soft.png),linear-gradient(180deg,rgba(44,63,54,0.25),rgba(44,63,54,0.35)),url(/assets/textures/tile-forest.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
 .bg-forest-bg{background-image:url(/assets/images/graded/forest-bg.jpg)}
 </style>
+<link rel="stylesheet" href="/css/site-elevate.css">
+<script>/* reveal-on-scroll is opt-in: if the script below never runs, everything simply shows */document.documentElement.className+=" js";setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove("js")},3500)</script>
+<style>
+
+/* ===== mockup B ===== */
+.recb{text-align:center}
+.recb .big{font-family:'Libre Baskerville',serif;font-size:52px;line-height:1.25;color:var(--obs);max-width:880px;margin:30px auto 0}
+.recb .big em{color:var(--brass)}
+.beats{display:grid;grid-template-columns:repeat(3,1fr);gap:48px;margin-top:72px;text-align:left}
+.beat{border-top:1px solid var(--gold);padding-top:26px;font-size:18px;color:var(--ink-soft)}
+.beat strong{color:var(--obs);font-weight:600}
+.recb .closing{font-family:'Libre Baskerville',serif;font-style:italic;font-size:26px;color:var(--obs);margin-top:64px}
+/* proof on dark */
+.proofb{background:#1D1F1E url(/assets/textures/grain-dark-soft.png) 0 0/256px 256px repeat;padding:140px 0}
+.proofb .proof-head{flex-direction:column;align-items:center;text-align:center;gap:22px}
+.proofb .card{background:#262927;border:1px solid rgba(194,168,108,.22)}
+.proofb .stat{color:var(--gold);font-size:52px}
+.proofb .stat-l{color:rgba(248,246,242,.6)}
+.proofb .pc-body .quote{color:rgba(248,246,242,.82);border-top-color:rgba(248,246,242,.14)}
+.proofb .pc-body .name{color:var(--sand)}
+.proofb .proof-foot{flex-direction:column;align-items:center;text-align:center;gap:28px;margin-top:56px}
+.proofb .disclaimer{color:rgba(248,246,242,.5)}
+.proofb .swipe{color:rgba(248,246,242,.5)}.proofb .swipe i{background:rgba(248,246,242,.16)}
+/* method on light, pillars as a row */
+.mb-top{display:grid;grid-template-columns:6fr 5fr;gap:96px;align-items:center}
+.mb-copy{display:flex;flex-direction:column;gap:28px}
+.mb-img{width:100%;aspect-ratio:5/4;object-fit:cover;object-position:62% 35%}
+.pillars3{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:96px}
+.p3{background:#FBFAF7;border:1px solid var(--line);border-top:2px solid var(--gold);padding:36px 34px 38px;box-shadow:0 24px 48px -32px rgba(91,75,63,.35)}
+.p3 .n{font-family:'Libre Baskerville',serif;font-style:italic;color:var(--brass);font-size:20px}
+.p3 h3{font-size:25px;margin:14px 0 10px}
+.p3 p{color:var(--ink-soft);font-size:16.5px}
+/* story: full-bleed split on forest */
+.storyb{display:grid;grid-template-columns:1fr 1fr}
+.storyb-img{position:relative;min-height:760px}
+.storyb-img img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:48% 40%}
+.storyb-copy{padding:120px clamp(56px,7vw,120px);display:flex;flex-direction:column;justify-content:center;gap:22px;font-size:18px}
+.storyb-copy>*{max-width:540px}
+.storyb-copy strong{color:var(--sand);font-weight:600}
+.storyb-copy .sig{color:var(--gold)}
+/* closer: Jason looking out, copy on the right */
+.closerb{position:relative;color:var(--sand);background:#1B1D1A;overflow:hidden}
+.closerb-img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:0 40%}
+.closerb::before{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,rgba(24,22,18,0) 18%,rgba(24,22,18,.1) 30%,rgba(24,22,18,.34) 40%,rgba(24,22,18,.62) 50%,rgba(24,22,18,.8) 60%,rgba(24,22,18,.9) 76%,rgba(24,22,18,.94) 100%),linear-gradient(0deg,rgba(24,24,20,.5),rgba(24,24,20,0) 40%)}
+.closerb .wrap{position:relative;z-index:2;display:flex;justify-content:flex-end;padding-top:190px;padding-bottom:190px}
+.closerb-copy{width:46%;display:flex;flex-direction:column;align-items:flex-start;gap:30px}
+.closerb .h2{font-size:54px;color:var(--sand)}
+.closerb .note{font-size:14px;color:rgba(248,246,242,.65);letter-spacing:.04em;margin-top:-10px}
+@media (max-width:900px){
+  .recb{text-align:left}
+  .recb .eyebrow.center{justify-content:flex-start}.recb .eyebrow.center::after{content:none}
+  .recb .big{font-size:31px;margin-top:26px}
+  .beats{grid-template-columns:1fr;gap:0;margin-top:40px}
+  .beat{padding:22px 0;font-size:17px}
+  .recb .closing{font-size:22px;margin-top:28px}
+  .proofb{padding:88px 0}
+  .proofb .proof-head{align-items:flex-start;text-align:left}
+  .proofb .proof-head .eyebrow.center{justify-content:flex-start}.proofb .proof-head .eyebrow.center::after{content:none}
+  .proofb .stat{font-size:42px}
+  .proofb .proof-foot{margin-top:32px;align-items:stretch;text-align:left}
+  .mb-top{grid-template-columns:1fr;gap:40px}
+  .mb-top .frame{order:-1}
+  .pillars3{grid-template-columns:1fr;gap:14px;margin-top:44px}
+  .p3{padding:24px 24px 26px;display:grid;grid-template-columns:40px 1fr;column-gap:8px}
+  .p3 .n{grid-row:1/3;padding-top:4px}
+  .p3 h3{font-size:21px;margin:0 0 6px}
+  .p3 p{font-size:15.5px}
+  .storyb{grid-template-columns:1fr}
+  .storyb-img{min-height:0;aspect-ratio:5/4}
+  .storyb-img img{object-position:48% 20%}
+  .storyb-copy{padding:56px 22px 80px;font-size:17px}
+  .closerb-img{position:relative;height:auto;aspect-ratio:4/3;object-position:12% 40%}
+  .closerb::before{bottom:auto;height:75vw;background:linear-gradient(180deg,rgba(27,29,26,0) 55%,#1B1D1A 100%)}
+  .closerb .wrap{padding-top:8px;padding-bottom:64px}
+  .closerb-copy{width:100%;gap:24px}
+  .closerb .h2{font-size:34px}
+}
+@media (min-width:601px) and (max-width:900px){.pillars3{grid-template-columns:repeat(3,1fr)}.p3{display:block;padding:22px 18px}.p3 h3{margin:10px 0 6px;font-size:19px}}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
-
 <div class="jm">
-
+<div class="stick" id="stick"><div class="stick-in"><a href="/" aria-label="Jason Moss home"><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="121" height="26"></a><div class="stick-r"><nav class="nav" aria-label="Sticky"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission/">Podcast</a><a href="/testimonials/">Breakthroughs</a></nav><a class="btn btn-gold" href="/apply/">Work together</a></div></div></div>
 <main id="main">
 <header class="hero">
+ <div class="hero-top">
   <div class="hero-bg"></div>
   <div class="hero-shade"></div>
   <div class="hdr"><a href="/" aria-label="Jason Moss home"><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="140" height="31"></a><nav class="nav" aria-label="Main"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission/">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply/">Work together</a></nav><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button></div>
-<div class="mobile-menu" id="mobileMenu" hidden>
-  <button class="menu-close" id="menuClose" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
-  <nav aria-label="Mobile"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission/">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply/">Work together</a></nav>
-</div>
+  <div class="mobile-menu" id="mobileMenu" hidden>
+   <button class="menu-close" id="menuClose" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+   <nav aria-label="Mobile"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission/">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply/">Work together</a></nav>
+  </div>
   <div class="hero-body">
     <div class="hero-copy">
       <div class="eyebrow light">Business mentor for coaches, consultants &amp; service‑based founders</div>
       <h1 class="h1"><span class="ln">Helping entrepreneurs</span> <span class="ln">grow from <span class="gold-it">peace,</span></span> <span class="ln gold-it">not pressure.</span></h1>
       <p class="lede">After 20 years of growing businesses… and supporting 1,000+ entrepreneurs… I’ve learned that sustainable growth begins on the inside.</p>
-      <div class="hero-ctas">
-        <a class="btn btn-gold" href="/apply/">Explore working together</a>
-      </div>
+      <div class="hero-ctas"><a class="btn btn-gold" href="/apply/">Explore working together</a></div>
     </div>
   </div>
-  <div class="hero-press">
+ </div>
+ <div class="hero-press">
     <span class="label">As seen in</span>
     <div class="press press-light">
       <img src="/assets/logo-forbes-scotland.png" alt="Forbes">
@@ -262,101 +340,100 @@ L.forEach(function(l){var m=matchMedia(l.media);m.addEventListener?m.addEventLis
       <img src="/assets/logo-entrepreneur.png" alt="Entrepreneur">
       <img src="/assets/logo-fast-company-sa.png" alt="Fast Company">
     </div>
-  </div>
+ </div>
 </header>
 
-<section class="bg-tex-sand section paper">
-  <div class="wrap recog">
-    <div>
-      <div class="eyebrow">Who this is for</div>
+<section class="bg-tex-sand section paper recb">
+  <div class="wrap">
+    <div class="rv">
+      <div class="eyebrow center">Who this is for</div>
       <p class="big">You’re a deeper kind of entrepreneur… <em>ready for a truer kind of business.</em></p>
     </div>
-    <div class="recog-body">
-      <p>You’re not just here to scale.<br>You want alignment. Ease.<br>A business that actually feels like you.</p>
-      <p>You’ve outgrown the hustle.<br>You’re tired of building in ways that don’t feel true.</p>
-      <p><strong>You’re ready for a new chapter.</strong> One that honors your intuition, respects your nervous system, and allows your business to grow…</p>
-      <p class="closing">Without losing yourself along the way.</p>
+    <div class="beats">
+      <div class="beat rv"><p>You’re not just here to scale. You want alignment. Ease. A business that actually feels like you.</p></div>
+      <div class="beat rv d1"><p>You’ve outgrown the hustle. You’re tired of building in ways that don’t feel true.</p></div>
+      <div class="beat rv d2"><p><strong>You’re ready for a new chapter.</strong> One that honors your intuition, respects your nervous system, and allows your business to grow…</p></div>
+    </div>
+    <p class="closing rv">Without losing yourself along the way.</p>
+  </div>
+</section>
+
+<section class="proofb on-dark">
+  <div class="wrap">
+    <div class="proof-head rv">
+      <div class="eyebrow center">Client breakthroughs</div>
+      <h2 class="h2">What sustainable growth <span class="gold-it">looks like.</span></h2>
+    </div>
+    <div class="proof"><div class="card rv "><div class="vid vid-player"><video class="jm-player" data-bunny-id="5a38c245-f511-48e5-8ffb-b4efd1e4168d" data-video-id="g8055phors" data-autoplay="false" playsinline crossorigin="anonymous"></video></div><div class="pc-body"><div class="stat">$260k+</div><div class="stat-l">in sales</div><p class="quote">“$260k+ in sales… and cut her hours in half.”</p><span class="name">Meaghan Long</span></div></div><div class="card rv d1"><div class="vid vid-player"><video class="jm-player" data-bunny-id="f79f0527-5dd3-4950-9c44-73829f09b7ed" data-video-id="hlntpnigew" data-autoplay="false" playsinline crossorigin="anonymous"></video></div><div class="pc-body"><div class="stat">$160k</div><div class="stat-l">in one year</div><p class="quote">“Made $160k and 4X’d my business in only a year.”</p><span class="name">Zach Bloom</span></div></div><div class="card rv d2"><div class="vid vid-player"><video class="jm-player" data-bunny-id="98ad4391-4cb4-4e8b-8a1f-3a8adfacddd2" data-video-id="x0tlj5qthd" data-autoplay="false" playsinline crossorigin="anonymous"></video></div><div class="pc-body"><div class="stat">$16k</div><div class="stat-l">in a single month</div><p class="quote">“My first 16k month… and it was easy.”</p><span class="name">Federica Prayer</span></div></div></div>
+    <div class="swipe"><span>Swipe for more</span><i></i></div>
+    <div class="proof-foot"><a class="btn btn-ghost-light" href="/testimonials/">See all stories</a><p class="disclaimer">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p></div>
+  </div>
+</section>
+
+<section class="bg-tex-warm section">
+  <div class="wrap">
+    <div class="mb-top">
+      <div class="mb-copy rv">
+        <div class="eyebrow">The approach</div>
+        <h2 class="h2">Growth begins where <span class="brass-it">effort ends.</span></h2>
+        <p class="lede">My mentorship, programs, and teaching help you release the pressure, overthinking, and patterns that pull you out of yourself.</p>
+      </div>
+      <div class="frame rv d1"><img class="mb-img" loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-4.jpg" alt="Jason Moss in the mountains at golden hour"></div>
+    </div>
+    <div class="pillars3">
+      <div class="p3 rv"><span class="n">i.</span><h3>Intuitive Leadership</h3><p>Lead with clearer intuition, not more pressure.</p></div>
+      <div class="p3 rv d1"><span class="n">ii.</span><h3>Aligned Profitability</h3><p>Build with grounded strategy that your life can actually hold.</p></div>
+      <div class="p3 rv d2"><span class="n">iii.</span><h3>Resonance Marketing</h3><p>Attract the right clients in a way that feels like you.</p></div>
     </div>
   </div>
 </section>
 
-<section class="bg-tex-forest method on-dark paper">
-  <div class="wrap method-grid">
-  <div class="frame"><img class="method-img" loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-4.jpg" alt="Jason Moss in the mountains at golden hour"></div>
-  <div class="method-copy">
-    <div class="eyebrow">The approach</div>
-    <h2 class="h2">Growth begins where <span class="gold-it">effort ends.</span></h2>
-    <p style="font-size:18px">My mentorship, programs, and teaching help you release the pressure, overthinking, and patterns that pull you out of yourself.</p>
-    <div class="pillars">
-      <div class="pillar"><span class="n">i.</span><div><h3>Intuitive Leadership</h3><p>Lead with clearer intuition, not more pressure.</p></div></div>
-      <div class="pillar"><span class="n">ii.</span><div><h3>Aligned Profitability</h3><p>Build with grounded strategy that your life can actually hold.</p></div></div>
-      <div class="pillar"><span class="n">iii.</span><div><h3>Resonance Marketing</h3><p>Attract the right clients in a way that feels like you.</p></div></div>
-    </div>
-  </div>
+<section class="storyb bg-tex-forest on-dark">
+  <div class="storyb-img"><img loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-1.jpg" alt="Jason Moss in the mountains"></div>
+  <div class="storyb-copy rv">
+    <div class="eyebrow">My story</div>
+    <h2 class="h2" style="margin-bottom:8px">Business is one of the most <span class="gold-it">honest mirrors</span> we have.</h2>
+    <p>I’m Jason Moss… and I help entrepreneurs grow with more revenue, clarity, and peace.</p>
+    <p>Business shows us where we’re forcing. Where we’re overworking. Where we’re out of alignment with ourselves.</p>
+    <p>My mission isn’t just to help people make more money. <strong>It’s to help them build in a way their nervous system — and their life — can actually hold.</strong></p>
+    <p>If this resonates… I’m glad you’re here. And I’m with you.</p>
+    <p class="sig">Jason Moss</p>
   </div>
 </section>
 
 <section class="bg-tex-sand section paper">
   <div class="wrap">
-    <div class="proof-head">
-      <div style="display:flex;flex-direction:column;gap:22px">
-        <div class="eyebrow">Client breakthroughs</div>
-        <h2 class="h2">What sustainable growth <span class="brass-it">looks like.</span></h2>
-      </div>
-      <a class="tlink" href="/testimonials/" style="color:var(--brass)">See all stories <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
-    </div>
-    <div class="proof">
-      <div class="card"><div class="vid vid-player"><video class="jm-player" data-bunny-id="5a38c245-f511-48e5-8ffb-b4efd1e4168d" data-video-id="g8055phors" data-autoplay="false" playsinline crossorigin="anonymous"></video></div><div class="pc-body"><p class="quote">“$260k+ in sales… and cut her hours in half.”</p><span class="name">Meaghan Long</span></div></div>
-      <div class="card"><div class="vid vid-player"><video class="jm-player" data-bunny-id="f79f0527-5dd3-4950-9c44-73829f09b7ed" data-video-id="hlntpnigew" data-autoplay="false" playsinline crossorigin="anonymous"></video></div><div class="pc-body"><p class="quote">“Made $160k and 4X’d my business in only a year.”</p><span class="name">Zach Bloom</span></div></div>
-      <div class="card"><div class="vid vid-player"><video class="jm-player" data-bunny-id="98ad4391-4cb4-4e8b-8a1f-3a8adfacddd2" data-video-id="x0tlj5qthd" data-autoplay="false" playsinline crossorigin="anonymous"></video></div><div class="pc-body"><p class="quote">“My first 16k month… and it was easy.”</p><span class="name">Federica Prayer</span></div></div>
-    </div>
-    <div class="proof-foot"><p class="disclaimer">These are individual client experiences. Results vary and no specific outcome is guaranteed.</p></div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="wrap story">
-    <div class="frame"><img class="story-img" loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-1.jpg" alt="Jason Moss in the mountains"></div>
-    <div class="story-copy">
-      <div class="eyebrow">My story</div>
-      <h2 class="h2" style="margin-bottom:8px">Business is one of the most <span class="brass-it">honest mirrors</span> we have.</h2>
-      <p>I’m Jason Moss… and I help entrepreneurs grow with more revenue, clarity, and peace.</p>
-      <p>Business shows us where we’re forcing. Where we’re overworking. Where we’re out of alignment with ourselves.</p>
-      <p>My mission isn’t just to help people make more money. <strong>It’s to help them build in a way their nervous system — and their life — can actually hold.</strong></p>
-      <p>If this resonates… I’m glad you’re here. And I’m with you.</p>
-      <p class="sig">— Jason Moss</p>
-    </div>
-  </div>
-</section>
-
-<section class="bg-tex-sand section paper" style="padding-top:120px">
-  <div class="wrap">
-    <div style="display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center">
+    <div class="rv" style="display:flex;flex-direction:column;align-items:center;gap:22px;text-align:center">
       <div class="eyebrow center">Where to begin</div>
       <h2 class="h2">Three ways to go deeper.</h2>
     </div>
-    <div class="paths">
-      <a class="path" href="/resonance-masterclass-optin/?source=Website">
-        <div class="path-img"><img loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-2.jpg" alt=""></div>
-        <div class="path-body"><h3 class="h3">The Resonance Masterclass</h3><p class="muted">A free training on growing a business that feels like you.</p><span class="tlink">Watch now</span></div>
+    <div class="paths2">
+      <a class="feat bg-tex-forest rv" href="/apply/">
+        <div class="feat-img"><img loading="lazy" decoding="async" src="/assets/images/graded/featured.jpg" alt="Jason Moss"></div>
+        <div class="feat-body"><div class="feat-txt"><div class="eyebrow light">One‑on‑one</div><h3>Work together</h3><p>Start with a free 20-minute business assessment, one-on-one with me.</p></div><span class="btn btn-gold">Book your call</span></div>
       </a>
-      <a class="path" href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer">
-        <div class="path-img"><img loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-3.jpg" alt="" style="object-position:18% 50%"></div>
-        <div class="path-body"><h3 class="h3">YouTube channel</h3><p class="muted">Free videos on attracting clients and growing a sustainable business.</p><span class="tlink">Watch on YouTube</span></div>
-      </a>
-      <a class="path" href="/apply/">
-        <div class="path-img"><img loading="lazy" decoding="async" src="/assets/images/graded/featured.jpg" alt="" style="object-position:47% 30%"></div>
-        <div class="path-body"><h3 class="h3">Work together</h3><p class="muted">Start with a free 20-minute business assessment, one-on-one with me.</p><span class="tlink">Book your call</span></div>
-      </a>
+      <div class="side">
+        <a class="mini rv d1" href="/resonance-masterclass-optin/?source=Website">
+          <div class="mini-img"><img loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-2.jpg" alt="" style="object-position:38% 50%"></div>
+          <div class="mini-body"><span class="mini-tag">Free training</span><h3>The Resonance Masterclass</h3><p>A free training on growing a business that feels like you.</p><span class="tlink">Watch now</span></div>
+        </a>
+        <a class="mini rv d2" href="https://www.youtube.com/@jasonmossofficial" target="_blank" rel="noopener noreferrer">
+          <div class="mini-img"><img loading="lazy" decoding="async" src="/assets/images/hero-mountain.jpg" alt="" style="object-position:64% 60%"></div>
+          <div class="mini-body"><span class="mini-tag">Free videos</span><h3>YouTube channel</h3><p>Free videos on attracting clients and growing a sustainable business.</p><span class="tlink">Watch on YouTube</span></div>
+        </a>
+      </div>
     </div>
   </div>
 </section>
 
-<section class="bg-forest-bg closer on-dark">
-  <div class="wrap inner">
-    <div class="eyebrow center light">Your next chapter</div>
-    <h2 class="h2" style="max-width:720px">Discover the path to growth&nbsp;<span class="gold-it">with ease.</span></h2>
-    <a class="btn btn-gold" href="/apply/">Explore working together</a>
+<section class="closerb">
+  <img class="closerb-img" loading="lazy" decoding="async" src="/assets/images/graded/lifestyle-3.jpg" alt="Jason Moss looking out over the mountains">
+  <div class="wrap">
+    <div class="closerb-copy">
+      <div class="eyebrow light">Your next chapter</div>
+      <h2 class="h2">Discover the path to growth <span class="gold-it">with ease.</span></h2>
+      <a class="btn btn-gold" href="/apply/">Explore working together</a>
+    </div>
   </div>
 </section>
 
@@ -375,5 +452,6 @@ L.forEach(function(l){var m=matchMedia(l.media);m.addEventListener?m.addEventLis
 </div>
 <script src="/js/site.js" defer></script>
 <script src="/js/bunny-embeds.js" defer></script>
+<script src="/js/site-elevate.js" defer></script>
 </body>
 </html>
