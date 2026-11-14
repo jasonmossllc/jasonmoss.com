@@ -50,22 +50,8 @@
   @media (max-width:600px){ .shell{padding:20px 18px 36px} }
 
   .bar{height:2px;background:var(--line-soft);overflow:hidden;flex:none}
-  /* A fine gold rule, like the gold lines used across the site. Its job is to show how short this
-     is and to acknowledge each answer, so it is a clean, still line while you read. Each time it
-     advances, soft slanted bands of lighter gold drift forward along it (light moving over brass:
-     the calm cousin of a barber pole) and fade back to the plain rule. No hard stripes, and no
-     constant motion, which would read as "loading" and pull the eye from the question. */
-  .bar i{display:block;position:relative;height:100%;width:0;background:var(--gold);transition:width 1s var(--ease)}
-  .bar i::after{content:"";position:absolute;inset:0;opacity:0;
-    background:repeating-linear-gradient(110deg,rgba(255,248,228,0) 0,rgba(255,248,228,.85) 22px,rgba(255,248,228,0) 44px)}
-  /* One band is 44px across = 46.82px along the bar; three whole bands of travel, so it never jumps. */
-  .bar i.go::after{animation:drift 2.2s cubic-bezier(.25,.6,.3,1) 1}
-  @keyframes drift{
-    0%{opacity:0;background-position:0 0}
-    18%{opacity:1}
-    70%{opacity:1}
-    100%{opacity:0;background-position:140.46px 0}
-  }
+  /* A fine gold rule, like the gold lines used across the site. It simply fills as you advance. */
+  .bar i{display:block;height:100%;width:0;background:var(--gold);transition:width .4s var(--ease)}
   /* Collapse it, don't just hide it - it was reserving space on the
      booking and decline screens, which have no progress to show. */
   .bar.hide{display:none}
@@ -89,7 +75,6 @@
   @media (prefers-reduced-motion:reduce){
     .screen{animation:none}
     .bar i{transition:none}
-    .bar i.go::after{animation:none}
   }
 
   h1{
@@ -517,10 +502,7 @@
     bar.classList.toggle('hide', !show);
     var t = total();
     var pct = label ? 100 : Math.round((Math.min(step,t)/t)*100);
-    var nextW = show ? pct+'%' : '0%';
-    // Restart the drift of light each time the bar actually moves.
-    if (show && barfill.style.width !== nextW){ barfill.classList.remove('go'); void barfill.offsetWidth; barfill.classList.add('go'); }
-    barfill.style.width = nextW;
+    barfill.style.width = show ? pct+'%' : '0%';
     steplabel.textContent = show ? (label || ('Step ' + Math.min(step,t) + ' of ' + t)) : '';
   }
   function paint(html, step, showProgress, label){
