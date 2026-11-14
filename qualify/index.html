@@ -49,13 +49,17 @@
   html.framed .shell{min-height:0}
   @media (max-width:600px){ .shell{padding:20px 18px 36px} }
 
-  .bar{height:2px;background:var(--line-soft);overflow:hidden;flex:none}
-  .bar i{display:block;position:relative;height:100%;width:0;background:var(--gold);transition:width .9s var(--ease)}
-  /* Each time the bar advances, one soft highlight travels along the filled part. */
-  .bar i::after{content:"";position:absolute;top:0;bottom:0;left:0;width:38%;opacity:0;
-    background:linear-gradient(90deg,rgba(255,255,255,0),rgba(255,250,235,.95),rgba(255,255,255,0))}
-  .bar i.sheen::after{animation:sheen 1.25s .15s ease-out 1}
-  @keyframes sheen{0%{transform:translateX(-100%);opacity:0}25%{opacity:1}100%{transform:translateX(265%);opacity:0}}
+  .bar{height:3px;background:var(--line-soft);overflow:hidden;flex:none}
+  /* The bar's job is to show how short this is and to acknowledge each answer. So the fill is a
+     quiet barber-pole (two golds close in tone) that is still while you read: it only drifts
+     forward for a moment as the bar advances, then comes to rest. Constant motion would read
+     as "loading" and pull the eye from the question. */
+  .bar i{display:block;height:100%;width:0;transition:width .9s var(--ease);
+    background:repeating-linear-gradient(115deg,var(--gold) 0 6px,#D3BC86 6px 12px)}
+  /* One stripe pair is 12px across the stripes = 13.24px along the bar, so each cycle ends
+     exactly where it began and the stop is seamless. Eases out over three cycles. */
+  .bar i.go{animation:pole 1.5s cubic-bezier(.2,.6,.3,1) 1}
+  @keyframes pole{from{background-position:0 0}to{background-position:39.72px 0}}
   /* Collapse it, don't just hide it - it was reserving space on the
      booking and decline screens, which have no progress to show. */
   .bar.hide{display:none}
@@ -79,7 +83,7 @@
   @media (prefers-reduced-motion:reduce){
     .screen{animation:none}
     .bar i{transition:none}
-    .bar i.sheen::after{animation:none}
+    .bar i.go{animation:none}
   }
 
   h1{
@@ -506,7 +510,8 @@
     var t = total();
     var pct = label ? 100 : Math.round((Math.min(step,t)/t)*100);
     var nextW = show ? pct+'%' : '0%';
-    if (show && barfill.style.width !== nextW){ barfill.classList.remove('sheen'); void barfill.offsetWidth; barfill.classList.add('sheen'); }
+    // Restart the stripe drift each time the bar actually moves.
+    if (show && barfill.style.width !== nextW){ barfill.classList.remove('go'); void barfill.offsetWidth; barfill.classList.add('go'); }
     barfill.style.width = nextW;
     steplabel.textContent = show ? (label || ('Step ' + Math.min(step,t) + ' of ' + t)) : '';
   }
