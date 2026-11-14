@@ -11,7 +11,7 @@
 <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
 <style>
 .cb-top{display:flex;padding:0 0 48px}
@@ -108,7 +108,8 @@
 .prep ul{counter-reset:prep}
 .prep li{counter-increment:prep;align-items:baseline}
 .prep li::before{content:counter(prep,decimal-leading-zero);font-family:'Raleway',sans-serif;font-size:12px;font-weight:600;letter-spacing:.06em;font-variant-numeric:lining-nums;color:var(--brass)}
-.sig{font-family:'Caveat',cursive;font-size:36px;color:var(--mocha);margin-top:32px;line-height:1}
+.letter p.sig{display:block;width:232px;aspect-ratio:1068/479;margin:32px 0 0 -4px;font-size:0;line-height:0;color:var(--mocha);background:currentColor;-webkit-mask:url(/assets/images/jason-signature.svg) no-repeat left center/contain;mask:url(/assets/images/jason-signature.svg) no-repeat left center/contain}
+@media (max-width:900px){.letter p.sig{width:204px}}
 
 /* Testimonial wall */
 .wall{padding:130px 0 120px}
@@ -335,7 +336,7 @@ body{background:var(--obs)}
         </ul>
       </div>
 
-      <p class="sig">— Jason</p>
+      <p class="sig">Jason Moss</p>
     </div>
   </div>
 </section>

@@ -30,7 +30,7 @@
 <meta name="twitter:image" content="https://jasonmoss.com/assets/images/featured.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Raleway:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="/css/site.css">
 <style>
 
@@ -64,10 +64,37 @@
 
 .bg-tex-sand{background-color:#F4F1EA;background-image:url(/assets/textures/grain-light-soft.png),linear-gradient(180deg,rgba(248,246,242,0.22),rgba(248,246,242,0.3)),url(/assets/textures/tile-pale.jpg);background-size:256px 256px,auto,520px 520px;background-repeat:repeat,no-repeat,repeat;background-position:0 0,0 0,0 0}
 </style>
+<link rel="stylesheet" href="/css/site-elevate.css">
+<script>/* reveal-on-scroll is opt-in: if the script below never runs, everything simply shows */document.documentElement.className+=" js";setTimeout(function(){if(!window.__rv)document.documentElement.classList.remove("js")},3500)</script>
+<style>
+
+/* ===== legal: contents rail ===== */
+.legal h2{scroll-margin-top:96px}
+.toc,.toc-m{display:none}
+.toc-h{font-size:11.5px;font-weight:600;letter-spacing:.22em;text-transform:uppercase;color:var(--brass);margin:0 0 16px}
+.toc a{display:block;padding:7px 0 7px 16px;border-left:1px solid var(--line);font-size:13.5px;line-height:1.45;color:var(--taupe)}
+.toc a:hover{color:var(--obs)}
+.toc a.on{color:var(--obs);border-left-color:var(--gold);font-weight:600}
+@media (min-width:1400px){
+  .legal-body.has-toc{display:grid;grid-template-columns:1fr minmax(0,820px) 1fr;align-items:start}
+  .legal-body.has-toc .legal{margin:0;grid-column:2}
+  .legal-body.has-toc .toc{display:block;grid-column:1;grid-row:1;justify-self:stretch;margin-right:44px;position:sticky;top:96px;max-height:calc(100vh - 130px);overflow:auto;padding:6px 0}
+}
+@media (max-width:1399px){
+  .has-toc .toc-m{display:block;margin:0 0 36px;border:1px solid var(--line);background:#F6F3EC}
+  .toc-m summary{cursor:pointer;list-style:none;padding:16px 20px;font-size:12px;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--brass);display:flex;justify-content:space-between;align-items:center}
+  .toc-m summary::-webkit-details-marker{display:none}
+  .toc-m summary::after{content:"+";font-size:18px;letter-spacing:0;font-weight:400}
+  .toc-m[open] summary::after{content:"–"}
+  .toc-m nav{padding:0 20px 16px;display:flex;flex-direction:column}
+  .legal .toc-m a{padding:9px 0;font-size:15px;line-height:1.4;color:var(--ink-soft);text-decoration:none;border-top:1px solid var(--line)}
+}
+</style>
 </head>
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="jm">
+<div class="stick" id="stick"><div class="stick-in"><a href="/" aria-label="Jason Moss home"><img class="logo" src="/assets/images/logo-light.svg" alt="Jason Moss" width="121" height="26"></a><div class="stick-r"><nav class="nav" aria-label="Sticky"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission/">Podcast</a><a href="/testimonials/">Breakthroughs</a></nav><a class="btn btn-gold" href="/apply/">Work together</a></div></div></div>
 <div class="hdr-solid-wrap"><div class="hdr"><a href="/" aria-label="Jason Moss home"><img class="logo" src="/assets/images/logo.svg" alt="Jason Moss" width="140" height="31"></a><nav class="nav" aria-label="Main"><a href="/resonance-masterclass-optin/?source=Website">Masterclass</a><a href="/transmission">Podcast</a><a href="/testimonials/">Breakthroughs</a><a class="btn btn-gold" href="/apply">Work together</a></nav><button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button></div></div>
 <div class="mobile-menu" id="mobileMenu" hidden>
   <button class="menu-close" id="menuClose" aria-label="Close menu"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
@@ -189,5 +216,28 @@
 </div></footer>
 </div>
 <script src="/js/site.js" defer></script>
+<script src="/js/site-elevate.js" defer></script><script>
+(function(){
+  function go(){
+    var sheet=document.querySelector('.legal'),body=document.querySelector('.legal-body');
+    if(!sheet||!body)return;
+    var hs=[].slice.call(sheet.querySelectorAll('h2'));
+    if(hs.length<3)return;
+    var links=hs.map(function(h,i){if(!h.id)h.id='s'+(i+1);return '<a href="#'+h.id+'">'+h.textContent+'</a>'}).join('');
+    var aside=document.createElement('aside');aside.className='toc';aside.setAttribute('aria-label','On this page');
+    aside.innerHTML='<p class="toc-h">On this page</p><nav>'+links+'</nav>';
+    body.insertBefore(aside,sheet);body.classList.add('has-toc');
+    var det=document.createElement('details');det.className='toc-m';
+    det.innerHTML='<summary>On this page</summary><nav>'+links+'</nav>';
+    sheet.insertBefore(det,sheet.firstChild);
+    det.addEventListener('click',function(e){if(e.target.tagName==='A')det.open=false});
+    var as=[].slice.call(aside.querySelectorAll('a'));
+    function mark(){var y=window.scrollY+140,k=-1;hs.forEach(function(h,i){if(h.getBoundingClientRect().top+window.scrollY<=y)k=i});
+      as.forEach(function(a,i){a.classList.toggle('on',i===k)})}
+    window.addEventListener('scroll',mark,{passive:true});mark();
+  }
+  if(document.readyState!=='loading')go();else document.addEventListener('DOMContentLoaded',go);
+})();
+</script>
 </body>
 </html>
