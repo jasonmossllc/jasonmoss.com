@@ -36,7 +36,9 @@ test("feed down: the last good list is served, marked stale", async () => {
 });
 
 test("feed down and nothing saved: nothing to serve", async () => {
-  assert.equal(await loadEpisodes({ fetchImpl: down, store: memStore(), apiKey: "" }), null);
+  const r = await loadEpisodes({ fetchImpl: down, store: memStore(), apiKey: "" });
+  assert.equal(r.episodes, null);
+  assert.equal(r.why.length, 2);
 });
 
 test("the second user agent is tried when the first is refused", async () => {

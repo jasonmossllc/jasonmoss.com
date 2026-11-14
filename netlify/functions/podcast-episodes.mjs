@@ -119,8 +119,9 @@ async function readPlaylistPage(fetchImpl, store) {
   const res = await fetchImpl(PLAYLIST_URL, { headers: BROWSER_HEADERS });
   if (!res.ok) throw new Error(`playlist page ${res.status}`);
   // The playlist lists newest first; a little headroom in case one video's date can't be read.
-  const items = parsePlaylistPage(await res.text()).slice(0, MAX_EPISODES + 3);
-  if (!items.length) throw new Error("playlist page had no episodes");
+  const html = await res.text();
+  const items = parsePlaylistPage(html).slice(0, MAX_EPISODES + 3);
+  if (!items.length) throw new Error(`playlist page had no episodes (${res.url || ""}, ${html.length} bytes, consent=${/consent\.youtube|before you continue/i.test(html)}, initialData=${html.includes("ytInitialData")})`);
   let dates = {};
   try { dates = (await store?.get(DATES_KEY, { type: "json" })) || {}; } catch (e) { console.error("podcast-episodes: read dates failed", e?.message); }
   let learned = false;
@@ -145,19 +146,20 @@ export async function loadEpisodes({ fetchImpl = fetch, store, apiKey = process.
     ["feed", () => readFeed(fetchImpl)],
     ["playlist page", () => readPlaylistPage(fetchImpl, store)],
   ];
+  const why = [];
   for (const [name, read] of sources) {
     try {
       const episodes = await read();
       try { await store?.setJSON(STORE_KEY, { episodes, source: name, savedAt: new Date().toISOString() }); }
       catch (e) { console.error("podcast-episodes: save failed", e?.message); }
       return { episodes, stale: false, source: name };
-    } catch (e) { console.error(`podcast-episodes: ${name} failed`, e?.message); }
+    } catch (e) { why.push(`${name}: ${e?.message}`); console.error(`podcast-episodes: ${name} failed`, e?.message); }
   }
   try {
     const saved = await store?.get(STORE_KEY, { type: "json" });
     if (saved?.episodes?.length) return { episodes: saved.episodes, stale: true, source: "saved" };
   } catch (e) { console.error("podcast-episodes: read saved failed", e?.message); }
-  return null;
+  return { episodes: null, why };
 }
 
 const json = (status, body, cache) =>
@@ -167,7 +169,7 @@ export default async () => {
   let store;
   try { store = getStore({ name: "podcast-episodes" }); } catch (e) { console.error("podcast-episodes: no store", e?.message); }
   const r = await loadEpisodes({ store });
-  if (!r) return json(502, { error: "feed unavailable" }, { "Cache-Control": "no-store" });
+  if (!r.episodes) return json(502, { error: "feed unavailable", why: r.why }, { "Cache-Control": "no-store" });
   if (r.stale) {
     // Saved list while YouTube's feed is down: check again sooner than usual.
     return json(200, { episodes: r.episodes, stale: true }, {
