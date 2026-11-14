@@ -1,7 +1,7 @@
 // Podcast episode feed: parsing, and serving the last good list when YouTube's feed is down.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { parseFeed, loadEpisodes, parsePlaylistPage, parsePublishDate } from "../netlify/functions/podcast-episodes.mjs";
+import { parseFeed, loadEpisodes, parsePlaylistPage, dateFromAge } from "../netlify/functions/podcast-episodes.mjs";
 
 const entry = (id, title, published) =>
   `<entry><yt:videoId>${id}</yt:videoId><title>${title}</title><published>${published}</published></entry>`;
@@ -57,38 +57,43 @@ test("a storage failure never breaks a good feed read", async () => {
 
 // The playlist page as YouTube serves it: data embedded as JSON, in two item shapes seen over time.
 const page = (items) => `<html><script>var ytInitialData = ${JSON.stringify({ contents: { deep: [{ list: items }] } })};</script></html>`;
-const lockup = (id, title) => ({ lockupViewModel: { contentId: id, contentType: "LOCKUP_CONTENT_TYPE_VIDEO", metadata: { lockupMetadataViewModel: { title: { content: title } } } } });
-const legacy = (id, title) => ({ playlistVideoRenderer: { videoId: id, title: { runs: [{ text: title }] } } });
-const watch = (date) => `<meta itemprop="datePublished" content="${date}">`;
+const lockup = (id, title, age) => ({ lockupViewModel: { contentId: id, contentType: "LOCKUP_CONTENT_TYPE_VIDEO", metadata: { lockupMetadataViewModel: { title: { content: title },
+  metadata: { contentMetadataViewModel: { metadataRows: [{ metadataParts: [{ text: { content: "Jason Moss" } }] }, { metadataParts: [{ text: { content: "462" } }, { text: { content: age } }] }] } } } } } });
+const legacy = (id, title, age) => ({ playlistVideoRenderer: { videoId: id, title: { runs: [{ text: title }] }, videoInfo: { runs: [{ text: "300 views" }, { text: " • " }, { text: age }] } } });
+const NOW = Date.parse("2026-12-01T12:00:00Z");
 
-test("playlist page: both item shapes are read, in order, without duplicates", () => {
-  const items = parsePlaylistPage(page([lockup("n1", "Newest"), legacy("o1", "Older"), lockup("n1", "Newest")]));
-  assert.deepEqual(items, [{ id: "n1", title: "Newest" }, { id: "o1", title: "Older" }]);
+test("playlist page: both item shapes are read, in order, without duplicates, with their age", () => {
+  const items = parsePlaylistPage(page([lockup("n1", "Newest", "3h ago"), legacy("o1", "Older", "2 weeks ago"), lockup("n1", "Newest", "3h ago")]));
+  assert.deepEqual(items, [{ id: "n1", title: "Newest", age: "3h ago" }, { id: "o1", title: "Older", age: "2 weeks ago" }]);
   assert.deepEqual(parsePlaylistPage("<html>consent wall</html>"), []);
 });
 
-test("publish date is read from a video page", () => {
-  assert.equal(parsePublishDate(watch("2026-11-02T10:12:37-08:00")), "2026-11-02T10:12:37-08:00");
-  assert.equal(parsePublishDate("<html></html>"), null);
+test("an age becomes a date that far back", () => {
+  assert.equal(dateFromAge("3h ago", NOW), "2026-12-01T09:00:00.000Z");
+  assert.equal(dateFromAge("11d ago", NOW), "2026-11-20T12:00:00.000Z");
+  assert.equal(dateFromAge("45 minutes ago", NOW), "2026-12-01T11:15:00.000Z");
+  assert.equal(dateFromAge("5m ago", NOW), "2026-12-01T11:55:00.000Z");
+  assert.equal(dateFromAge("1mo ago", NOW).slice(0, 10), "2026-11-01");
+  assert.equal(dateFromAge("Streamed 2 weeks ago", NOW).slice(0, 10), "2026-11-17");
+  assert.equal(dateFromAge("462", NOW), null);
 });
 
-test("feed down: episodes come from the playlist page, and dates are only looked up once", async () => {
+test("feed down: episodes come from the playlist page; a new one is dated once and remembered", async () => {
   const store = memStore();
-  const calls = [];
+  let age = "3h ago";
   const fetchImpl = async (url) => {
-    calls.push(url);
     if (url.includes("/feeds/")) return { ok: false, status: 404, text: async () => "" };
-    if (url.includes("/playlist?")) return { ok: true, status: 200, text: async () => page([lockup("n1", "Newest"), lockup("o1", "Older")]) };
-    return { ok: true, status: 200, text: async () => watch(url.includes("n1") ? "2026-11-02T10:00:00-08:00" : "2026-09-29T10:00:00-07:00") };
+    return { ok: true, status: 200, text: async () => page([lockup("new1", "Brand new", age), lockup("qD-iUoxKDlM", "I Built a $500K Business.", "1mo ago")]) };
   };
-  const r = await loadEpisodes({ fetchImpl, store, apiKey: "" });
+  const r = await loadEpisodes({ fetchImpl, store, apiKey: "", now: NOW });
   assert.equal(r.source, "playlist page");
-  assert.deepEqual(r.episodes.map((e) => e.id), ["n1", "o1"]);
-  assert.equal(r.episodes[0].published, "2026-11-02T10:00:00-08:00");
-  const watchCalls = () => calls.filter((u) => u.includes("/watch?")).length;
-  assert.equal(watchCalls(), 2);
-  await loadEpisodes({ fetchImpl, store, apiKey: "" });
-  assert.equal(watchCalls(), 2);
+  assert.deepEqual(r.episodes.map((e) => e.id), ["new1", "qD-iUoxKDlM"]);
+  assert.equal(r.episodes[0].published, "2026-12-01T09:00:00.000Z");
+  assert.equal(r.episodes[1].published, "2026-11-02T18:12:37Z"); // exact, not worked out from "1mo ago"
+  // Weeks later the page only says "3w ago": the remembered date is kept, not re-derived.
+  age = "3w ago";
+  const later = await loadEpisodes({ fetchImpl, store, apiKey: "", now: NOW + 21 * 864e5 });
+  assert.equal(later.episodes[0].published, "2026-12-01T09:00:00.000Z");
 });
 
 test("an API key, when set, is used first", async () => {
